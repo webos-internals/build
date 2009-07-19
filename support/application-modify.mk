@@ -1,4 +1,4 @@
-# Makefile for PreWare applications
+# Makefile for PreWare applications that need to be modified
 #
 # Copyright (C) 2009 by Rod Whitby <rod@whitby.id.au>
 #
@@ -17,7 +17,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-.PHONY: package clobber
+.PHONY: unpack build package clobber
 
 PREWARE_SANITY =
 ifndef DL_DIR
@@ -35,12 +35,17 @@ endif
 
 ifdef SRC_IPKG
 
-package: ipkgs/${APP_ID}_${VERSION}_${PLATFORM}.ipk
+unpack: build/CONTROL
 
-ipkgs/${APP_ID}_${VERSION}_${PLATFORM}.ipk: ${DL_DIR}/${APP_ID}_${VERSION}_${PLATFORM}.ipk
+build/CONTROL: ${DL_DIR}/${APP_ID}_${VERSION}_${PLATFORM}.ipk
 	$(call PREWARE_SANITY)
-	mkdir -p ipkgs
-	rsync -ai ${DL_DIR}/${APP_ID}_${VERSION}_${PLATFORM}.ipk ipkgs/
+	rm -rf build
+	TAR_OPTIONS=--wildcards \
+	../../toolchain/ipkg-utils/build/ipkg-utils/ipkg-unbuild $<
+	mv ${APP_ID}_${VERSION}_${PLATFORM} build
+	touch $@
+
+package: unpack ipkgs/${APP_ID}_${VERSION}_${PLATFORM}.ipk
 
 endif
 

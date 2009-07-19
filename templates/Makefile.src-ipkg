@@ -1,4 +1,4 @@
-# Makefile for PreWare ipkg-utils toolchain
+# Makefile for PreWare application repackaging from an existing ipkg file.
 #
 # Copyright (C) 2009 by Rod Whitby <rod@whitby.id.au>
 #
@@ -17,25 +17,13 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-NAME     = ipkg-utils
-VERSION  = 1.7
-HOMEPAGE = http://handhelds.org/packages/ipkg-utils/
+NAME     = <NAME>
+APP_ID   = org.preware.${NAME}
+VERSION  = 0.1
+PLATFORM = all
+HOMEPAGE = http://www.preware.org/wiki/Application:${NAME}
 
-SRC_TGZ  = http://nslu.sourceforge.net/downloads/${NAME}-${VERSION}.tar.gz
+SRC_IPKG = http://<SITE_URL>/${NAME}/${APP_ID}_${VERSION}_${PLATFORM}.ipk
 include ../../support/download.mk
 
-.PHONY: build
-build: build/${NAME}/ipkg-make-index
-
-.PHONY: unpack
-unpack: build/${NAME}/ipkg-make-index
-
-build/${NAME}/ipkg-make-index: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	rm -rf build
-	mkdir -p build
-	cd build ; tar zxf ../${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	mv build/${NAME}-${VERSION} build/${NAME}
-	touch $@
-
-clobber::
-	rm -rf build
+include ../../support/application.mk

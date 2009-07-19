@@ -17,6 +17,8 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
+SUBDIRS = apps
+
 .PHONY: index package toolchain upload clobber clean
 
 index: package
@@ -28,9 +30,9 @@ index: package
 
 package: toolchain
 	mkdir -p ipkgs/all
-	find apps mods plugins -type d -depth 1 -print | \
+	find ${SUBDIRS} -type d -depth 1 -print | \
 	xargs -I % ${MAKE} -C % package
-	find apps mods plugins -type d -name ipkgs -print | \
+	find ${SUBDIRS} -type d -name ipkgs -print | \
 	xargs -I % find % -name "*_all.ipk" -print | \
 	xargs -I % rsync -i -a % ipkgs/all
 
@@ -43,7 +45,7 @@ upload:
 	rsync -avr ipkgs/ ipkg.preware.org:htdocs/ipkg/feeds/preware/
 
 clobber:
-	find apps mods plugins toolchain -type d -depth 1 -print | \
+	find ${SUBDIRS} toolchain -type d -depth 1 -print | \
 	xargs -I % ${MAKE} -C % clobber
 	rm -rf ipkgs
 
