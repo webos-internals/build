@@ -1,4 +1,4 @@
-# Makefile for PreWare applications that need to be modified
+# Makefile for PreWare application unpacking
 #
 # Copyright (C) 2009 by Rod Whitby <rod@whitby.id.au>
 #
@@ -17,9 +17,8 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-.PHONY: unpack build package clobber
+.PHONY: unpack clobber
 
-PREWARE_SANITY =
 ifndef DL_DIR
 PREWARE_SANITY += $(error "Please include ../../support/download.mk in your Makefile")
 endif
@@ -32,24 +31,29 @@ endif
 ifndef PLATFORM
 PREWARE_SANITY += $(error "Please define PLATFORM in your Makefile")
 endif
+ifndef NAME
+PREWARE_SANITY += $(error "Please define NAME in your Makefile")
+endif
 
 ifdef SRC_IPKG
 
-unpack: build/CONTROL
+unpack: build/.unpacked
 
-build/CONTROL: ${DL_DIR}/${APP_ID}_${VERSION}_${PLATFORM}.ipk
+build/.unpacked: ${DL_DIR}/${APP_ID}_${VERSION}_${PLATFORM}.ipk
 	$(call PREWARE_SANITY)
 	rm -rf build
-	TAR_OPTIONS=--wildcards \
-	../../toolchain/ipkg-utils/build/ipkg-utils/ipkg-unbuild $<
-	mv ${APP_ID}_${VERSION}_${PLATFORM} build
+	mkdir -p build
+	( cd build ; \
+	  TAR_OPTIONS=--wildcards \
+	  ../../../toolchain/ipkg-utils/build/ipkg-utils/ipkg-unbuild ../$< )
+	mv build/${APP_ID}_${VERSION}_${PLATFORM} build/${NAME}
+	sed -ire 's|^Package:.*|Package: ${APP_ID}|' build/${NAME}/CONTROL/control
+	echo "Source: ${SRC_IPKG}" >> build/${NAME}/CONTROL/control
 	touch $@
-
-package: unpack ipkgs/${APP_ID}_${VERSION}_${PLATFORM}.ipk
 
 endif
 
 clobber::
 	$(call PREWARE_SANITY)
-	rm -rf ipkgs
+	rm -rf build
 

@@ -50,4 +50,3 @@ endif
 clobber::
 	$(call PREWARE_SANITY)
 	rm -rf ipkgs
-

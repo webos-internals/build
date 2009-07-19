@@ -30,7 +30,7 @@ index: package
 
 package: toolchain
 	mkdir -p ipkgs/all
-	find ${SUBDIRS} -type d -depth 1 -print | \
+	find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % package
 	find ${SUBDIRS} -type d -name ipkgs -print | \
 	xargs -I % find % -name "*_all.ipk" -print | \
