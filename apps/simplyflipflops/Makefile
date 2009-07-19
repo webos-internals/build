@@ -13,6 +13,3 @@ build/.built: build/.unpacked
 	touch $@
 
 include ../../support/application-package.mk
-
-clobber::
-	rm -rf build

@@ -26,4 +26,4 @@ HOMEPAGE = http://www.preware.org/wiki/Application:${NAME}
 SRC_IPKG = http://<SITE_URL>/${NAME}/${APP_ID}_${VERSION}_${PLATFORM}.ipk
 include ../../support/download.mk
 
-include ../../support/application.mk
+include ../../support/application-copy.mk

@@ -42,10 +42,10 @@ toolchain/ipkg-utils/build/ipkg-utils/ipkg-make-index:
 	${MAKE} -C toolchain/ipkg-utils build
 
 upload:
-	rsync -avr ipkgs/ ipkg.preware.org:htdocs/ipkg/feeds/preware/
+	rsync -avr ipkgs/ ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/preware/
 
 clobber:
-	find ${SUBDIRS} toolchain -type d -depth 1 -print | \
+	find ${SUBDIRS} toolchain -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
 	rm -rf ipkgs
 
