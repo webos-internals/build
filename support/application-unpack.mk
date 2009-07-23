@@ -35,9 +35,9 @@ ifndef NAME
 PREWARE_SANITY += $(error "Please define NAME in your Makefile")
 endif
 
-ifdef SRC_IPKG
-
 unpack: build/.unpacked
+
+ifdef SRC_IPKG
 
 build/.unpacked: ${DL_DIR}/${APP_ID}_${VERSION}_${PLATFORM}.ipk
 	$(call PREWARE_SANITY)
