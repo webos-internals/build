@@ -13,5 +13,6 @@ build/.built build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.zip
 	( cd build ; \
 	  unzip ../$< ; \
 	  mv Translate ${NAME}/usr/palm/applications/${APP_ID} )
+	touch $@
 
 include ../../support/application-package.mk
