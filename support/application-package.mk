@@ -26,6 +26,8 @@ endif
 package: ipkgs/${APP_ID}_${VERSION}_${PLATFORM}.ipk
 
 ipkgs/${APP_ID}_${VERSION}_${PLATFORM}.ipk: build/.built
+	rm -f build/${NAME}/CONTROL/control
+	${MAKE} build/${NAME}/CONTROL/control
 	rm -f $@
 	mkdir -p ipkgs
 	( cd build ; \
@@ -33,7 +35,53 @@ ipkgs/${APP_ID}_${VERSION}_${PLATFORM}.ipk: build/.built
 	  ../../../toolchain/ipkg-utils/build/ipkg-utils/ipkg-build -o 0 -g 0 ${NAME} )
 	mv build/${APP_ID}_${VERSION}_${PLATFORM}.ipk $@
 
+build/${NAME}/CONTROL/control: build/${NAME}/usr/palm/applications/${APP_ID}/appinfo.json
+	rm -f $@
+	echo "Package: ${APP_ID}" > $@
+	echo -n "Version: " >> $@
+ifdef VERSION
+	echo "${VERSION}" >> $@
+else
+	sed -nre 's|^\s*"version":\s*"(.*)",\s*$$|\1|p' $< >> $@
+endif
+	echo "Architecture: all" >> $@
+	echo -n "Maintainer: " >> $@
+ifdef MAINTAINER
+	echo "${MAINTAINER}" >> $@
+else
+	sed -nre 's|^\s*"vendor":\s*"(.*)",\s*|\1|p' $< | tr -d '\n' >> $@
+	echo -n " <" >> $@
+	sed -nre 's|^\s*"vendor_email":\s*"(.*)",\s*|\1|p' $< | tr -d '\n' >> $@
+	echo ">" >> $@
+endif
+	echo -n "Description: " >> $@
+ifdef DESCRIPTION
+	echo "${DESCRIPTION}" >> $@
+else
+	sed -nre 's|^\s*"title":\s*"(.*)",\s*$$|\1|p' $< >> $@
+endif
+	echo -n "Section: " >> $@
+ifdef SECTION
+	echo "${SECTION}" >> $@
+else
+	sed -nre 's|^\s*"type":\s*"(.*)",\s*$$|\1|p' $< >> $@
+endif
+ifdef PRIORITY
+	echo "${PRIORITY}" >> $@
+else
+	echo "Priority: optional" >> $@
+endif
+	echo -n "Source: " >> $@
+ifdef SOURCE
+	echo "${SOURCE}" >> $@
+else
+ifdef SRC_IPKG
+	echo "${SRC_IPKG}" >> $@
+endif
+endif
+	touch $@
+
 clobber::
 	$(call PREWARE_SANITY)
-	rm -rf build
+	rm -rf ipkgs
 

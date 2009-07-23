@@ -47,8 +47,6 @@ build/.unpacked: ${DL_DIR}/${APP_ID}_${VERSION}_${PLATFORM}.ipk
 	  TAR_OPTIONS=--wildcards \
 	  ../../../toolchain/ipkg-utils/build/ipkg-utils/ipkg-unbuild ../$< )
 	mv build/${APP_ID}_${VERSION}_${PLATFORM} build/${NAME}
-	sed -ire 's|^Package:.*|Package: ${APP_ID}|' build/${NAME}/CONTROL/control
-	echo "Source: ${SRC_IPKG}" >> build/${NAME}/CONTROL/control
 	touch $@
 
 endif

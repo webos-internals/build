@@ -1,5 +1,5 @@
 NAME     = reversi
-APP_ID   = org.preware.${NAME}
+APP_ID   = com.boatrights.${NAME}
 VERSION  = 1.0
 PLATFORM = all
 HOMEPAGE = http://www.preware.org/wiki/Application:${NAME}

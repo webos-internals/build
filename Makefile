@@ -30,11 +30,12 @@ index: package
 
 package: toolchain
 	mkdir -p ipkgs/all
-	find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print | \
-	xargs -I % ${MAKE} -C % package
-	find ${SUBDIRS} -type d -name ipkgs -print | \
-	xargs -I % find % -name "*_all.ipk" -print | \
-	xargs -I % rsync -i -a % ipkgs/all
+	for f in `find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print` ; do \
+	  ${MAKE} -C $$f package || exit ; \
+	done
+	( find ${SUBDIRS} -type d -name ipkgs -print | \
+	  xargs -I % find % -name "*_all.ipk" -print | \
+	  xargs -I % rsync -i -a % ipkgs/all )
 
 toolchain: toolchain/ipkg-utils/build/ipkg-utils/ipkg-make-index
 
