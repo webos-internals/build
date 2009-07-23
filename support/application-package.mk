@@ -37,6 +37,7 @@ ipkgs/${APP_ID}_${VERSION}_${PLATFORM}.ipk: build/.built
 
 build/${NAME}/CONTROL/control: build/${NAME}/usr/palm/applications/${APP_ID}/appinfo.json
 	rm -f $@
+	mkdir -p build/${NAME}/CONTROL
 	echo "Package: ${APP_ID}" > $@
 	echo -n "Version: " >> $@
 ifdef VERSION
@@ -77,6 +78,12 @@ ifdef SOURCE
 else
 ifdef SRC_IPKG
 	echo "${SRC_IPKG}" >> $@
+endif
+ifdef SRC_TGZ
+	echo "${SRC_TGZ}" >> $@
+endif
+ifdef SRC_ZIP
+	echo "${SRC_ZIP}" >> $@
 endif
 endif
 	touch $@

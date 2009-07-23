@@ -41,6 +41,21 @@ ${DL_DIR}/${NAME}-${VERSION}.tar.gz:
 
 endif
 
+ifdef SRC_ZIP
+
+ifndef NAME
+PREWARE_SANITY += $(error "Please define NAME in your Makefile")
+endif
+
+download: ${DL_DIR}/${NAME}-${VERSION}.zip
+
+${DL_DIR}/${NAME}-${VERSION}.zip:
+	$(call PREWARE_SANITY)
+	mkdir -p ${DL_DIR}
+	curl -L -o ${DL_DIR}/${NAME}-${VERSION}.zip ${SRC_ZIP}
+
+endif
+
 ifdef SRC_IPKG
 
 ifndef APP_ID
