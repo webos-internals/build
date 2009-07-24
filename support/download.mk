@@ -41,6 +41,21 @@ ${DL_DIR}/${NAME}-${VERSION}.tar.gz:
 
 endif
 
+ifdef SRC_BZ2
+
+ifndef NAME
+PREWARE_SANITY += $(error "Please define NAME in your Makefile")
+endif
+
+download: ${DL_DIR}/${NAME}-${VERSION}.tar.bz2
+
+${DL_DIR}/${NAME}-${VERSION}.tar.bz2:
+	$(call PREWARE_SANITY)
+	mkdir -p ${DL_DIR}
+	curl -L -o ${DL_DIR}/${NAME}-${VERSION}.tar.bz2 ${SRC_BZ2}
+
+endif
+
 ifdef SRC_ZIP
 
 ifndef NAME

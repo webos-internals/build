@@ -23,8 +23,7 @@ ifndef NAME
 PREWARE_SANITY += $(error "Please define NAME in your Makefile")
 endif
 
-# package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
-package: ipkgs/${APP_ID}_${VERSION}_i686.ipk
+package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
 
 ipkgs/${APP_ID}_${VERSION}_%.ipk: build/%/.built
 	rm -f build/$*/CONTROL/control

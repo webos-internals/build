@@ -33,7 +33,8 @@ build/i686/.built: build/.unpacked
 
 build/armv7/.built: build/.unpacked
 	rm -rf build/armv7
-	${MAKE} -C build/src
+	mkdir -p build/src/pre-out
+	${MAKE} -C build/src PRE_DEV_DIR=`pwd`/../../toolchain/cs08q1armel/build/arm-2008q1 pre-out/termplugin.so
 	mkdir -p build/armv7/usr/lib/Plugins/
 	install -m 644 build/src/pre-out/termplugin.so build/armv7/usr/lib/Plugins/
 	touch $@
