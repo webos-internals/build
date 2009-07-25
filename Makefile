@@ -51,8 +51,12 @@ toolchain/cs08q1armel/build/arm-2008q1:
 upload:
 	rsync -avr ipkgs/ ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/preware/
 
-clobber:
-	find ${SUBDIRS} toolchain -mindepth 1 -maxdepth 1 -type d -print | \
+distclean: clobber
+	find toolchain -mindepth 1 -maxdepth 1 -type d -print | \
+	xargs -I % ${MAKE} -C % clobber
+
+clobber: clean
+	find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
 	rm -rf ipkgs
 

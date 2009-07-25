@@ -29,11 +29,21 @@ ipkgs/${APP_ID}_${VERSION}_${PLATFORM}.ipk: build/.built
 	rm -f ipkgs/${APP_ID}_*_${PLATFORM}.ipk
 	rm -f build/${NAME}/CONTROL/control
 	${MAKE} build/${NAME}/CONTROL/control
+	rm -f build/${NAME}/CONTROL/postinst
+	${MAKE} build/${NAME}/CONTROL/postinst
 	mkdir -p ipkgs
 	( cd build ; \
 	  TAR_OPTIONS=--wildcards \
 	  ../../../toolchain/ipkg-utils/build/ipkg-utils/ipkg-build -o 0 -g 0 ${NAME} )
 	mv build/${APP_ID}_${VERSION}_${PLATFORM}.ipk $@
+
+build/${NAME}/CONTROL/postinst:
+	rm -f $@
+	mkdir -p build/${NAME}/CONTROL
+	echo "#!/bin/sh" > $@
+	echo "/usr/bin/luna-send palm://com.palm.applicationManager/rescan {}" >> $@
+	echo "exit 0" >> $@
+	chmod ugo+x $@
 
 build/${NAME}/CONTROL/control: build/${NAME}/usr/palm/applications/${APP_ID}/appinfo.json
 	rm -f $@
