@@ -21,22 +21,22 @@ build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build.tmp
 	touch $@
 
-build/.built: build/armv7/.built build/i686/.built
+build/.built: build/armv7.built build/i686.built
 	touch $@
 
-build/i686/.built: build/.unpacked
+build/i686.built: build/.unpacked
 	rm -rf build/i686
 	${MAKE} -C build/src
-	mkdir -p build/i686/usr/lib/Plugins/
-	install -m 644 build/src/termplugin.so build/i686/usr/lib/Plugins/
+	mkdir -p build/i686/usr/lib/BrowserPlugins/
+	install -m 644 build/src/termplugin.so build/i686/usr/lib/BrowserPlugins/
 	touch $@
 
-build/armv7/.built: build/.unpacked
+build/armv7.built: build/.unpacked
 	rm -rf build/armv7
 	mkdir -p build/src/pre-out
 	${MAKE} -C build/src PRE_DEV_DIR=`pwd`/../../toolchain/cs08q1armel/build/arm-2008q1 pre-out/termplugin.so
-	mkdir -p build/armv7/usr/lib/Plugins/
-	install -m 644 build/src/pre-out/termplugin.so build/armv7/usr/lib/Plugins/
+	mkdir -p build/armv7/usr/lib/BrowserPlugins/
+	install -m 644 build/src/pre-out/termplugin.so build/armv7/usr/lib/BrowserPlugins/
 	touch $@
 
 include ../../support/plugin-package.mk
