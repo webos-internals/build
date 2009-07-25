@@ -24,6 +24,7 @@ SUBDIRS = apps plugins
 index: ipkgs/all/Packages ipkgs/i686/Packages ipkgs/armv7/Packages
 
 ipkgs/%/Packages: package
+	rm -rf ipkgs/$*
 	mkdir -p ipkgs/$*
 	( find ${SUBDIRS} -type d -name ipkgs -print | \
 	  xargs -I % find % -name "*_$*.ipk" -print | \

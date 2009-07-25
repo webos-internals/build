@@ -26,9 +26,9 @@ endif
 package: ipkgs/${APP_ID}_${VERSION}_${PLATFORM}.ipk
 
 ipkgs/${APP_ID}_${VERSION}_${PLATFORM}.ipk: build/.built
+	rm -f ipkgs/${APP_ID}_*_${PLATFORM}.ipk
 	rm -f build/${NAME}/CONTROL/control
 	${MAKE} build/${NAME}/CONTROL/control
-	rm -f $@
 	mkdir -p ipkgs
 	( cd build ; \
 	  TAR_OPTIONS=--wildcards \
