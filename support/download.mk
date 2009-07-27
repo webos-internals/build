@@ -88,3 +88,22 @@ ${DL_DIR}/${APP_ID}_${VERSION}_all.ipk:
 	curl -L -o ${DL_DIR}/${APP_ID}_${VERSION}_${PLATFORM}.ipk ${SRC_IPKG}
 
 endif
+
+ifdef SRC_GIT
+
+ifndef NAME
+PREWARE_SANITY += $(error "Please define NAME in your Makefile")
+endif
+
+download: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+
+${DL_DIR}/${NAME}-${VERSION}.tar.gz:
+	$(call PREWARE_SANITY)
+	rm -rf build
+	mkdir build
+	( cd build ; git clone ${SRC_GIT} )
+	mkdir -p ${DL_DIR}
+	tar -C build/`basename ${SRC_GIT} .git` -zcf $@ .
+
+endif
+

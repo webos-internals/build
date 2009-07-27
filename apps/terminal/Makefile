@@ -3,7 +3,7 @@ APP_ID   = org.webosinternals.${NAME}
 VERSION  = 0.1.4
 PLATFORM = all
 
-SRC_TGZ = http://gitorious.org/webos-internals/applications/archive-tarball/master
+SRC_GIT = git://gitorious.org/webos-internals/applications.git
 include ../../support/download.mk
 
 build/.built build/.unpack: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
