@@ -74,6 +74,9 @@ endif
 ifdef SRC_ZIP
 	echo "${SRC_ZIP}" >> $@
 endif
+ifdef SRC_GIT
+	echo "${SRC_GIT}" >> $@
+endif
 endif
 	touch $@
 
