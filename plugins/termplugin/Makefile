@@ -6,7 +6,7 @@ MAINTAINER = WebOS Internals <support@webos-internal.org>
 DESCRIPTION = Terminal Service Plugin
 SECTION = libs
 
-SRC_TGZ = git://gitorious.org/webos-internals/applications.git
+SRC_GIT = git://gitorious.org/webos-internals/applications.git
 include ../../support/download.mk
 
 .PHONY: unpack
