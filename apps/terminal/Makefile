@@ -1,6 +1,6 @@
 NAME     = terminal
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.1.3
+VERSION  = 0.1.4
 PLATFORM = all
 
 SRC_TGZ = http://gitorious.org/webos-internals/applications/archive-tarball/master
