@@ -1,6 +1,6 @@
 NAME     = terminal
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.1.5
+VERSION  = 0.1.6
 PLATFORM = all
 
 SRC_GIT = git://gitorious.org/webos-internals/applications.git
