@@ -29,11 +29,21 @@ ipkgs/${APP_ID}_${VERSION}_%.ipk: build/.built
 	rm -f ipkgs/${APP_ID}_*_$*.ipk
 	rm -f build/$*/CONTROL/control
 	${MAKE} build/$*/CONTROL/control
+	rm -f build/$*/CONTROL/postinst
+	${MAKE} build/$*/CONTROL/postinst
+	rm -f build/$*/CONTROL/prerm
+	${MAKE} build/$*/CONTROL/prerm
 	mkdir -p ipkgs
 	( cd build ; \
 	  TAR_OPTIONS=--wildcards \
 	  ../../../toolchain/ipkg-utils/build/ipkg-utils/ipkg-build -o 0 -g 0 $* )
 	mv build/${APP_ID}_${VERSION}_$*.ipk $@
+
+build/%/CONTROL/postinst:
+	true
+
+build/%/CONTROL/prerm:
+	true
 
 build/%/CONTROL/control:
 	rm -f $@
@@ -60,6 +70,12 @@ ifdef PRIORITY
 	echo "${PRIORITY}" >> $@
 else
 	echo "Priority: optional" >> $@
+endif
+ifdef DEPENDS
+	echo "Depends: ${DEPENDS}" >> $@
+endif
+ifdef CONFLICTS
+	echo "Conficts: ${CONFLICTS}" >> $@
 endif
 	echo -n "Source: " >> $@
 ifdef SOURCE

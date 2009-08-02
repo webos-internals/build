@@ -37,7 +37,7 @@ ipkgs/${APP_ID}_${VERSION}_${PLATFORM}.ipk: build/.built
 	  ../../../toolchain/ipkg-utils/build/ipkg-utils/ipkg-build -o 0 -g 0 ${NAME} )
 	mv build/${APP_ID}_${VERSION}_${PLATFORM}.ipk $@
 
-build/${NAME}/CONTROL/postinst:
+build/%/CONTROL/postinst:
 	rm -f $@
 	mkdir -p build/${NAME}/CONTROL
 	echo "#!/bin/sh" > $@
@@ -81,6 +81,12 @@ ifdef PRIORITY
 	echo "${PRIORITY}" >> $@
 else
 	echo "Priority: optional" >> $@
+endif
+ifdef DEPENDS
+	echo "Depends: ${DEPENDS}" >> $@
+endif
+ifdef CONFLICTS
+	echo "Conficts: ${CONFLICTS}" >> $@
 endif
 	echo -n "Source: " >> $@
 ifdef SOURCE

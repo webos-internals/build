@@ -39,6 +39,24 @@ build/armv7.built: build/.unpacked
 	install -m 644 build/src/pre-out/termplugin.so build/armv7/usr/lib/BrowserPlugins/
 	touch $@
 
+build/armv7/CONTROL/postinst:
+	rm -f $@
+	mkdir -p build/armv7/CONTROL
+	echo "#!/bin/sh" > $@
+	echo "rm -f /usr/lib/BrowserPlugins/termplugin.so" >> $@
+	echo "ln -s /var/usr/lib/BrowserPlugins/termplugin.so /usr/lib/BrowserPlugins/termplugin.so" >> $@
+	echo "exit 0" >> $@
+	chmod ugo+x $@
+
+build/i686/CONTROL/postinst:
+	rm -f $@
+	mkdir -p build/${NAME}/CONTROL
+	echo "#!/bin/sh" > $@
+	echo "rm -f /usr/lib/BrowserPlugins/termplugin.so" >> $@
+	echo "ln -s /var/usr/lib/BrowserPlugins/termplugin.so /usr/lib/BrowserPlugins/termplugin.so" >> $@
+	echo "exit 0" >> $@
+	chmod ugo+x $@
+
 include ../../support/plugin-package.mk
 
 clobber::
