@@ -1,7 +1,7 @@
 NAME     = accelservice
 CLASS    = AccelService
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.1
+VERSION  = 0.0.1
 PLATFORM = all
 HOMEPAGE = http://www.preware.org/wiki/Application:${CLASS}
 MAINTAINER = egaudet <emoney_33@yahoo.com>
@@ -51,6 +51,17 @@ build/.built: build/src/${NAME}.java
 	mkdir -p build/${NAME}/usr/share/dbus-1/system-services
 	install -m 644 ${SERVICEFILES} build/${NAME}/usr/share/dbus-1/system-services/
 	touch $@
+
+build/${NAME}/CONTROL/postinst:
+	rm -f $@
+	mkdir -p build/${NAME}/CONTROL
+	echo "#!/bin/sh" > $@
+	echo "rm -f /usr/lib/luna/java/${APP_ID}.jar" >> $@
+	echo "ln -s /var/usr/lib/luna/java/${APP_ID}.jar /usr/lib/luna/java/${APP_ID}.jar" >> $@
+	echo "rm -f /usr/share/dbus-1/system-services/${APP_ID}.service" >> $@
+	echo "ln -s /var/usr/share/dbus-1/system-services/${APP_ID}.service /usr/share/dbus-1/system-services/${APP_ID}.service" >> $@
+	echo "exit 0" >> $@
+	chmod ugo+x $@
 
 include ../../support/service-package.mk
 
