@@ -2,8 +2,9 @@ NAME     = accelexample
 APP_ID   = org.webosinternals.${NAME}
 VERSION  = 0.0.1
 PLATFORM = all
-HOMEPAGE = http://www.preware.org/wiki/Application:${NAME}
+HOMEPAGE = http://www.preware.org/wiki/Application:AccelService
 MAINTAINER = egaudet <emoney_33@yahoo.com>
+DEPENDS = org.webosinternals.accelservice
 
 SRC_GIT = git://gitorious.org/webos-internals/applications.git
 include ../../support/download.mk
