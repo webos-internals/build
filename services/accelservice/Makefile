@@ -43,20 +43,14 @@ LUNAPATH = usr/lib/luna/java
 .PHONY: build
 build: build/.built
 
-build/.built: build/.unpacked build/${NAME}/${LUNAPATH}/${APP_ID}.jar
-	mkdir -p build/${NAME}/usr/share/dbus-1/system-services
-	install -m 644 ${SERVICEFILES} build/${NAME}/usr/share/dbus-1/system-services/
-	touch $@
-
-.PHONY: jar
-jar: build/${NAME}/${LUNAPATH}/${APP_ID}.jar
-
-.PRECIOUS: build/${NAME}/${LUNAPATH}/${APP_ID}.jar
-build/${NAME}/${LUNAPATH}/${APP_ID}.jar: build/src/${NAME}.java
+build/.built: build/src/${NAME}.java
 	rm -f $@
 	( cd build/src ; ant build jar )
 	mkdir -p build/${NAME}/${LUNAPATH}
 	install -m 644 build/src/${APP_ID}.jar $@
+	mkdir -p build/${NAME}/usr/share/dbus-1/system-services
+	install -m 644 ${SERVICEFILES} build/${NAME}/usr/share/dbus-1/system-services/
+	touch $@
 
 include ../../support/service-package.mk
 
