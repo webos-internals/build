@@ -5,7 +5,7 @@ jars: ${JARFILES}
 ${JARFILES}: ${DL_DIR}/webosdoctorp100ewwsprint.jar
 	rm -rf build/java
 	unzip -p $< resources/webOS.tar | \
-	tar -O -x -f - nova-cust-image-castle.rootfs.tar.gz | \
+	tar -O -x -f - ./nova-cust-image-castle.rootfs.tar.gz | \
 	tar -C build --strip-components=4 -m -z -x -f - ./usr/lib/luna/java
 	touch $@
 
