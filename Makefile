@@ -22,7 +22,7 @@ SUBDIRS = apps plugins services
 .PHONY: index package toolchain upload clobber clean
 
 index:  ipkgs/preware/all/Packages ipkgs/preware/i686/Packages ipkgs/preware/armv7/Packages \
-	ipkgs/precentral/Packages
+	ipkgs/precentral/Packages ipkgs/pimpmypre/Packages
 
 ipkgs/preware/%/Packages: package
 	rm -rf ipkgs/preware/$*

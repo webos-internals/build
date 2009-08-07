@@ -1,89 +1,30 @@
 #!/usr/bin/python
 
-from xml.sax.handler import ContentHandler
-from xml.sax import make_parser
+import os
 import sys
 import re
+import urllib
+import fileinput
 
-class PackageHandler(ContentHandler):
-    printContent = 0
-    getName = 0
-    name = ""
 
-    def startElement(self, name, attrs):
-        if (name == "title") :
-            sys.stdout.write( "Description: " )
-            self.printContent = 1
-        elif (name == "url") :
-            sys.stdout.write( "Source: " )
-            self.printContent = 1
-            self.getName = 1
-        elif (name == "size") :
-            sys.stdout.write( "Size: " )
-            self.printContent = 1
-        elif (name == "author") :
-            sys.stdout.write( "Maintainer: " )
-            self.printContent = 1
-        elif (name == "version") :
-            sys.stdout.write( "Version: " )
-            self.printContent = 1
-        elif (name == "link") :
-            sys.stdout.write( "Homepage: " )
-            self.printContent = 1
-        return
-            
-    def endElement(self,name):
-        if (self.printContent) :
-            print
+for line in fileinput.input([sys.argv[1]]) :
 
-        self.printContent = 0
-        self.getName = 0
+    regexp = re.compile('"url"')
+    m = regexp.search(line)
+    if (not m) :
+        continue
 
-        if (name == "application") :
-            print "Architecture: all"
-            print "Section: web"
-            regexp = re.compile("^(.*)/([^/]+).ipk")
-            m = regexp.match(self.name)
-            self.name = m.group(2)
+    regexp = re.compile('.+"url":"(http://[^"]+\.ipk)".+')
+    m = regexp.search(line)
+    if (m) :
+        url = m.group(1)
 
-            sys.stdout.write("Filename: ")
-            sys.stdout.write(self.name)
-            sys.stdout.write(".ipk\n")
+        regexp = re.compile("^(.*)/([^/]+.ipk)")
+        m = regexp.match(url)
+        if (m) :
+            name = m.group(2)
 
-            sys.stdout.write("Package: ")
+            print "Filename: " + name
 
-            regexp = re.compile("_(\.)")
-            self.name = regexp.sub(".", self.name)
-
-            regexp = re.compile("_all")
-            self.name = regexp.sub("", self.name)
-
-            regexp = re.compile("_rev[0-9._]+")
-            self.name = regexp.sub("", self.name)
-
-            regexp = re.compile("(-|_)[0-9.]+")
-            self.name = regexp.sub("", self.name)
-
-            regexp = re.compile("_all")
-            self.name = regexp.sub("", self.name)
-
-            print self.name
-            print
-
-        return
-
-    def characters (self, ch): 
-        if (self.getName) :
-            self.name = ch
-
-        if (self.printContent) :
-            sys.stdout.write( ch )
-
-        return
-
-feedprint = PackageHandler()
-saxparser = make_parser()
-saxparser.setContentHandler(feedprint)
-                        
-datasource = open(sys.argv[1] + "/" + sys.argv[2],"r")
-saxparser.parse(datasource)
+            if (not os.path.exists(sys.argv[2] + "/" + name)) :
+                urllib.urlretrieve(url, sys.argv[2] + "/" + name)
