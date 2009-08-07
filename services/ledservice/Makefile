@@ -47,7 +47,7 @@ build/.built: build/src/${NAME}.java
 	rm -f $@
 	( cd build/src ; ant build jar )
 	mkdir -p build/${NAME}/${LUNAPATH}
-	install -m 644 build/src/${APP_ID}.jar $@
+	install -m 644 build/src/${APP_ID}.jar build/${NAME}/${LUNAPATH}/
 	mkdir -p build/${NAME}/usr/share/dbus-1/system-services
 	install -m 644 ${SERVICEFILES} build/${NAME}/usr/share/dbus-1/system-services/
 	touch $@
