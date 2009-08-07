@@ -1,7 +1,7 @@
 NAME     = accelservice
 CLASS    = AccelService
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.0.1
+VERSION  = 0.0.2
 PLATFORM = all
 HOMEPAGE = http://www.preware.org/wiki/Application:${CLASS}
 MAINTAINER = egaudet <emoney_33@yahoo.com>
