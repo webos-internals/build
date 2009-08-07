@@ -20,7 +20,7 @@
 NAME     = precentral
 HOMEPAGE = http://www.precentral.net/homebrew-apps/
 
-SRC_XML = http://www.precentral.net/precentral-homebrew-filecoaster.xml
+SRC_XML = http://www.precentral.net/preware-ipkg.xml
 include ../../support/download.mk
 
 .PHONY: unpack
