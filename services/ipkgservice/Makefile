@@ -27,7 +27,7 @@ include ../../support/service-jars.mk
 .PHONY: unpack
 unpack: build/.unpacked
 
-build/.unpacked build/src/${NAME}.java: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+build/.unpacked build/src/${PACKAGEPATH}/${CLASS}.java: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build build.tmp
 	mkdir -p build.tmp
 	tar -C build.tmp -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
@@ -43,7 +43,7 @@ LUNAPATH = usr/lib/luna/java
 .PHONY: build
 build: build/.built
 
-build/.built: build/src/${NAME}.java
+build/.built: build/src/${PACKAGEPATH}/${CLASS}.java
 	rm -f $@
 	( cd build/src ; ant build jar )
 	mkdir -p build/${NAME}/${LUNAPATH}
