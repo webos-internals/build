@@ -26,6 +26,17 @@ ifndef VERSION
 PREWARE_SANITY += $(error "Please define VERSION in your Makefile")
 endif
 
+ifdef SRC_XML
+
+download: ${DL_DIR}/${NAME}-feed.xml
+
+${DL_DIR}/${NAME}-feed.xml:
+	rm -f $@
+	mkdir -p ${DL_DIR}
+	curl -L -o ${DL_DIR}/${NAME}-feed.xml ${SRC_XML}
+
+endif
+
 ifdef SRC_TGZ
 
 ifndef NAME

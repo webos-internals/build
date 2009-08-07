@@ -17,11 +17,12 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-SUBDIRS = apps plugins services
+SUBDIRS = apps plugins services feeds
 
 .PHONY: index package toolchain upload clobber clean
 
-index: ipkgs/preware/all/Packages ipkgs/preware/i686/Packages ipkgs/preware/armv7/Packages
+index:  ipkgs/preware/all/Packages ipkgs/preware/i686/Packages ipkgs/preware/armv7/Packages \
+	ipkgs/precentral/Packages
 
 ipkgs/preware/%/Packages: package
 	rm -rf ipkgs/preware/$*
@@ -33,6 +34,14 @@ ipkgs/preware/%/Packages: package
 	toolchain/ipkg-utils/build/ipkg-utils/ipkg-make-index \
 		-v -l ipkgs/preware/$*/Packages.filelist -p ipkgs/preware/$*/Packages ipkgs/preware/$*
 	gzip -c ipkgs/preware/$*/Packages > ipkgs/preware/$*/Packages.gz
+
+ipkgs/%/Packages: package
+	rm -rf ipkgs/$*
+	mkdir -p ipkgs/$*
+	( find feeds/$* -type d -name ipkgs -print | \
+	  xargs -I % find % -name "Packages" -print | \
+	  xargs -I % rsync -i -a % ipkgs/$*/ )
+	gzip -c ipkgs/$*/Packages > ipkgs/$*/Packages.gz
 
 package: toolchain
 	for f in `find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print` ; do \
@@ -49,7 +58,7 @@ toolchain/cs08q1armel/build/arm-2008q1:
 	${MAKE} -C toolchain/cs08q1armel unpack
 
 upload:
-	rsync -avr ipkgs/preware/ ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/preware/
+	rsync -avr ipkgs/ ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/
 
 distclean: clobber
 	find toolchain -mindepth 1 -maxdepth 1 -type d -print | \
