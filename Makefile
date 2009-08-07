@@ -21,18 +21,18 @@ SUBDIRS = apps plugins services
 
 .PHONY: index package toolchain upload clobber clean
 
-index: ipkgs/all/Packages ipkgs/i686/Packages ipkgs/armv7/Packages
+index: ipkgs/preware/all/Packages ipkgs/preware/i686/Packages ipkgs/preware/armv7/Packages
 
-ipkgs/%/Packages: package
-	rm -rf ipkgs/$*
-	mkdir -p ipkgs/$*
+ipkgs/preware/%/Packages: package
+	rm -rf ipkgs/preware/$*
+	mkdir -p ipkgs/preware/$*
 	( find ${SUBDIRS} -type d -name ipkgs -print | \
 	  xargs -I % find % -name "*_$*.ipk" -print | \
-	  xargs -I % rsync -i -a % ipkgs/$* )
+	  xargs -I % rsync -i -a % ipkgs/preware/$* )
 	TAR_OPTIONS=--wildcards \
 	toolchain/ipkg-utils/build/ipkg-utils/ipkg-make-index \
-		-v -l ipkgs/$*/Packages.filelist -p ipkgs/$*/Packages ipkgs/$*
-	gzip -c ipkgs/$*/Packages > ipkgs/$*/Packages.gz
+		-v -l ipkgs/preware/$*/Packages.filelist -p ipkgs/preware/$*/Packages ipkgs/preware/$*
+	gzip -c ipkgs/preware/$*/Packages > ipkgs/preware/$*/Packages.gz
 
 package: toolchain
 	for f in `find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print` ; do \
@@ -49,7 +49,7 @@ toolchain/cs08q1armel/build/arm-2008q1:
 	${MAKE} -C toolchain/cs08q1armel unpack
 
 upload:
-	rsync -avr ipkgs/ ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/preware/
+	rsync -avr ipkgs/preware/ ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/preware/
 
 distclean: clobber
 	find toolchain -mindepth 1 -maxdepth 1 -type d -print | \
