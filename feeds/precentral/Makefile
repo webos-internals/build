@@ -26,19 +26,14 @@ include ../../support/download.mk
 .PHONY: unpack
 unpack: build/.unpacked
 
-build/.unpacked build/Packages: ${DL_DIR}/${NAME}-feed.xml
-	rm -f $@
-	mkdir -p build
-	../../scripts/precentral-homebrew-scraper.py ${DL_DIR} ${NAME}-feed.xml > build/Packages
-	touch $@
-
 .PHONY: package
-package: ipkgs/Packages
+package: build/.built
 
-ipkgs/Packages: build/Packages
-	rm -rf ipkgs
-	mkdir -p ipkgs
-	install -m 644 $< $@
+build/.unpacked build/.built: ${DL_DIR}/${NAME}-feed.xml
+	rm -f $@
+	mkdir -p build ipkgs
+	../../scripts/precentral-scraper.py ${DL_DIR}/${NAME}-feed.xml ipkgs
+	touch $@
 
 clobber::
 	rm -rf build

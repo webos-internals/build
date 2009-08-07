@@ -17,7 +17,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-SUBDIRS = apps plugins services feeds
+SUBDIRS = apps plugins services
 
 .PHONY: index package toolchain upload clobber clean
 
@@ -39,12 +39,18 @@ ipkgs/%/Packages: package
 	rm -rf ipkgs/$*
 	mkdir -p ipkgs/$*
 	( find feeds/$* -type d -name ipkgs -print | \
-	  xargs -I % find % -name "Packages" -print | \
-	  xargs -I % rsync -i -a % ipkgs/$*/ )
+	  xargs -I % find % -name "*.ipk" -print | \
+	  xargs -I % rsync -i -a % ipkgs/$* )
+	TAR_OPTIONS=--wildcards \
+	toolchain/ipkg-utils/build/ipkg-utils/ipkg-make-index \
+		-v -l ipkgs/$*/Packages.filelist -p ipkgs/$*/Packages ipkgs/$*
 	gzip -c ipkgs/$*/Packages > ipkgs/$*/Packages.gz
 
 package: toolchain
 	for f in `find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print` ; do \
+	  ${MAKE} -C $$f package || exit ; \
+	done
+	for f in `find feeds -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  ${MAKE} -C $$f package || exit ; \
 	done
 
