@@ -12,7 +12,7 @@ build/.built build/.unpack: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mkdir -p build.tmp
 	tar -C build.tmp -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mkdir -p build/${NAME}/usr/palm/applications/
-	mv build.tmp/${APP_ID} build/${NAME}/usr/palm/applications/${APP_ID}
+	mv build.tmp/${NAME} build/${NAME}/usr/palm/applications/${APP_ID}
 	rm -rf build.tmp
 	touch $@
 

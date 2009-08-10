@@ -32,7 +32,7 @@ build/.unpacked build/src/${PACKAGEPATH}/${CLASS}.java: ${DL_DIR}/${NAME}-${VERS
 	mkdir -p build.tmp
 	tar -C build.tmp -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mkdir -p build
-	cp -r build.tmp/${APP_ID} build/src
+	cp -r build.tmp/${NAME} build/src
 	rm -rf build.tmp
 	${MAKE} ${JARFILES}
 	install -m 644 ${JARFILES} build/src/
