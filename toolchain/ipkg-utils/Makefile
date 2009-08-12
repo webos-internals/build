@@ -18,11 +18,20 @@
 #
 
 NAME     = ipkg-utils
-VERSION  = 1.7
+VERSION  = 20050404
 HOMEPAGE = http://handhelds.org/packages/ipkg-utils/
 
-SRC_TGZ  = http://nslu.sourceforge.net/downloads/${NAME}-${VERSION}.tar.gz
+SRC_TGZ  = http://sources.nslu2-linux.org/sources/${NAME}_anoncvs.handhelds.org__${VERSION}.tar.gz
 include ../../support/download.mk
+
+PATCHES =  ipkg-utils-fix.patch \
+           ipkg-py-sane-vercompare.patch \
+           ipkg-py-tarfile.patch \
+           arfile_even_alignment.patch \
+           ipkg-make-index-track-stamps.patch \
+           fields_tweaks.patch \
+           ipkg-env.patch \
+	   ipkg-membername-suffix.patch
 
 .PHONY: build
 build: build/${NAME}/ipkg-make-index
@@ -34,7 +43,7 @@ build/${NAME}/ipkg-make-index: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build
 	cd build ; tar zxf ../${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	mv build/${NAME}-${VERSION} build/${NAME}
+	cd patches ; cat ${PATCHES} | patch -d ../build/${NAME} -p1
 	touch $@
 
 clobber::
