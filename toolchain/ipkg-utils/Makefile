@@ -29,7 +29,6 @@ PATCHES =  ipkg-utils-fix.patch \
            ipkg-py-tarfile.patch \
            arfile_even_alignment.patch \
            ipkg-make-index-track-stamps.patch \
-           fields_tweaks.patch \
            ipkg-env.patch \
 	   ipkg-membername-suffix.patch
 
