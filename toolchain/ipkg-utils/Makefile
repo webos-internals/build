@@ -30,7 +30,8 @@ PATCHES =  ipkg-utils-fix.patch \
            arfile_even_alignment.patch \
            ipkg-make-index-track-stamps.patch \
            ipkg-env.patch \
-	   ipkg-membername-suffix.patch
+	   ipkg-membername-suffix.patch \
+	   ipkg-darwin.patch
 
 .PHONY: build
 build: build/${NAME}/ipkg-make-index

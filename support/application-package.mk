@@ -53,29 +53,29 @@ build/${NAME}/CONTROL/control: build/${NAME}/usr/palm/applications/${APP_ID}/app
 ifdef VERSION
 	echo "${VERSION}" >> $@
 else
-	sed -nre 's|^\s*"version":\s*"(.*)",\s*$$|\1|p' $< >> $@
+	sed -ne 's|^[[:space:]]*"version":[[:space:]]*"\(.*\)",[[:space:]]*$$|\1|p' $< >> $@
 endif
 	echo "Architecture: all" >> $@
 	echo -n "Maintainer: " >> $@
 ifdef MAINTAINER
 	echo "${MAINTAINER}" >> $@
 else
-	sed -nre 's|^\s*"vendor":\s*"(.*)",\s*|\1|p' $< | tr -d '\n' >> $@
+	sed -ne 's|^[[:space:]]*"vendor":[[:space:]]*"\(.*\)",[[:space:]]*|\1|p' $< | tr -d '\n' >> $@
 	echo -n " <" >> $@
-	sed -nre 's|^\s*"vendor_email":\s*"(.*)",\s*|\1|p' $< | tr -d '\n' >> $@
+	sed -ne 's|^[[:space:]]*"vendor_email":[[:space:]]*"\(.*\)",[[:space:]]*|\1|p' $< | tr -d '\n' >> $@
 	echo ">" >> $@
 endif
 	echo -n "Description: " >> $@
 ifdef DESCRIPTION
 	echo "${DESCRIPTION}" >> $@
 else
-	sed -nre 's|^\s*"title":\s*"(.*)",\s*$$|\1|p' $< >> $@
+	sed -ne 's|^[[:space:]]*"title":[[:space:]]*"\(.*\)",[[:space:]]*$$|\1|p' $< >> $@
 endif
 	echo -n "Section: " >> $@
 ifdef SECTION
 	echo "${SECTION}" >> $@
 else
-	sed -nre 's|^\s*"type":\s*"(.*)",\s*$$|\1|p' $< >> $@
+	sed -ne 's|^[[:space:]]*"type":[[:space:]]*"\(.*\)",[[:space:]]*$$|\1|p' $< >> $@
 endif
 ifdef PRIORITY
 	echo "${PRIORITY}" >> $@
