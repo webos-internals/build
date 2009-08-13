@@ -57,6 +57,22 @@ build/i686/CONTROL/postinst:
 	echo "exit 0" >> $@
 	chmod ugo+x $@
 
+build/armv7/CONTROL/prerm:
+	rm -f $@
+	mkdir -p build/armv7/CONTROL
+	echo "#!/bin/sh" > $@
+	echo "rm -f /usr/lib/BrowserPlugins/termplugin.so" >> $@
+	echo "exit 0" >> $@
+	chmod ugo+x $@
+
+build/i686/CONTROL/prerm:
+	rm -f $@
+	mkdir -p build/${NAME}/CONTROL
+	echo "#!/bin/sh" > $@
+	echo "rm -f /usr/lib/BrowserPlugins/termplugin.so" >> $@
+	echo "exit 0" >> $@
+	chmod ugo+x $@
+
 include ../../support/plugin-package.mk
 
 clobber::

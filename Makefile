@@ -17,7 +17,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-SUBDIRS = apps plugins services
+SUBDIRS = apps services plugins
 
 .PHONY: index package toolchain upload clobber clean
 
@@ -31,7 +31,7 @@ ipkgs/preware/%/Packages: package
 	  xargs -I % find % -name "*_$*.ipk" -print | \
 	  xargs -I % rsync -i -a % ipkgs/preware/$* )
 	TAR_OPTIONS=--wildcards \
-	toolchain/ipkg-utils/build/ipkg-utils/ipkg-make-index \
+	toolchain/ipkg-utils/ipkg-make-index \
 		-v -l ipkgs/preware/$*/Packages.filelist -p ipkgs/preware/$*/Packages ipkgs/preware/$*
 	gzip -c ipkgs/preware/$*/Packages > ipkgs/preware/$*/Packages.gz
 
@@ -42,7 +42,7 @@ ipkgs/%/Packages: package
 	  xargs -I % find % -name "*.ipk" -print | \
 	  xargs -I % rsync -i -a % ipkgs/$* )
 	TAR_OPTIONS=--wildcards \
-	toolchain/ipkg-utils/build/ipkg-utils/ipkg-make-index \
+	toolchain/ipkg-utils/ipkg-make-index \
 		-v -l ipkgs/$*/Packages.filelist -p ipkgs/$*/Packages ipkgs/$*
 	gzip -c ipkgs/$*/Packages > ipkgs/$*/Packages.gz
 
@@ -54,11 +54,8 @@ package: toolchain
 	  ${MAKE} -C $$f package || exit ; \
 	done
 
-toolchain: toolchain/ipkg-utils/build/ipkg-utils/ipkg-make-index \
+toolchain: toolchain/ipkg-utils/ipkg-make-index \
 	   toolchain/cs08q1armel/build/arm-2008q1
-
-toolchain/ipkg-utils/build/ipkg-utils/ipkg-make-index:
-	${MAKE} -C toolchain/ipkg-utils build
 
 toolchain/cs08q1armel/build/arm-2008q1:
 	${MAKE} -C toolchain/cs08q1armel unpack

@@ -43,9 +43,13 @@ build/.unpacked: ${DL_DIR}/${APP_ID}_${VERSION}_${PLATFORM}.ipk
 	$(call PREWARE_SANITY)
 	rm -rf build
 	mkdir -p build
+	ln -s ../$< build/${APP_ID}_${VERSION}_${PLATFORM}.ipk
 	( cd build ; \
 	  TAR_OPTIONS=--wildcards \
-	  ../../../toolchain/ipkg-utils/build/ipkg-utils/ipkg-unbuild ../$< )
+	  ../../../toolchain/ipkg-utils/ipkg-unbuild \
+	    ${APP_ID}_${VERSION}_${PLATFORM}.ipk )
+	[ -f build/${APP_ID}_${VERSION}_${PLATFORM}/CONTROL/control ]
+	rm -f build/${APP_ID}_${VERSION}_${PLATFORM}.ipk
 	mv build/${APP_ID}_${VERSION}_${PLATFORM} build/${NAME}
 	touch $@
 

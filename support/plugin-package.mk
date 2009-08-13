@@ -36,7 +36,7 @@ ipkgs/${APP_ID}_${VERSION}_%.ipk: build/.built
 	mkdir -p ipkgs
 	( cd build ; \
 	  TAR_OPTIONS=--wildcards \
-	  ../../../toolchain/ipkg-utils/build/ipkg-utils/ipkg-build -o 0 -g 0 $* )
+	  ../../../toolchain/ipkg-utils/ipkg-build -o 0 -g 0 $* )
 	mv build/${APP_ID}_${VERSION}_$*.ipk $@
 
 build/%/CONTROL/postinst:
