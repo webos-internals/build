@@ -63,6 +63,15 @@ build/${NAME}/CONTROL/postinst:
 	echo "exit 0" >> $@
 	chmod ugo+x $@
 
+build/${NAME}/CONTROL/prerm:
+	rm -f $@
+	mkdir -p build/${NAME}/CONTROL
+	echo "#!/bin/sh" > $@
+	echo "rm -f /usr/lib/luna/java/${APP_ID}.jar" >> $@
+	echo "rm -f /usr/share/dbus-1/system-services/${APP_ID}.service" >> $@
+	echo "exit 0" >> $@
+	chmod ugo+x $@
+
 include ../../support/service-package.mk
 
 clobber::
