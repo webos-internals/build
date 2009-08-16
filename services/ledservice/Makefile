@@ -50,6 +50,12 @@ build/.built: build/src/${NAME}.java
 	install -m 644 build/src/${APP_ID}.jar build/${NAME}/${LUNAPATH}/
 	mkdir -p build/${NAME}/usr/share/dbus-1/system-services
 	install -m 644 ${SERVICEFILES} build/${NAME}/usr/share/dbus-1/system-services/
+	mkdir -p build/${NAME}/etc/event.d
+	echo "start on started java-serviceboot" > build/${NAME}/etc/event.d/${APP_ID}
+	echo "script" >> build/${NAME}/etc/event.d/${APP_ID}
+	echo "/usr/bin/luna-helper 'luna://com.palm.vm/launch' '{\"serviceName\":\"${APP_ID}\",\"className\":\"${APP_ID}.${CLASS}\"}'" >> build/${NAME}/etc/event.d/${APP_ID}
+	echo "end script" >> build/${NAME}/etc/event.d/${APP_ID}
+	echo "respawn" >> build/${NAME}/etc/event.d/${APP_ID}
 	touch $@
 
 build/${NAME}/CONTROL/postinst:
@@ -60,6 +66,10 @@ build/${NAME}/CONTROL/postinst:
 	echo "ln -s /var/usr/lib/luna/java/${APP_ID}.jar /usr/lib/luna/java/${APP_ID}.jar" >> $@
 	echo "rm -f /usr/share/dbus-1/system-services/${APP_ID}.service" >> $@
 	echo "ln -s /var/usr/share/dbus-1/system-services/${APP_ID}.service /usr/share/dbus-1/system-services/${APP_ID}.service" >> $@
+	echo "/sbin/initctl stop java-serviceboot" >> $@
+	echo "rm -f /etc/event.d/${APP_ID}" >> $@
+	echo "ln -s /var/etc/event.d/${APP_ID} /etc/event.d/${APP_ID}" >> $@
+	echo "/sbin/initctl start java-serviceboot" >> $@
 	echo "exit 0" >> $@
 	chmod ugo+x $@
 
@@ -69,6 +79,9 @@ build/${NAME}/CONTROL/prerm:
 	echo "#!/bin/sh" > $@
 	echo "rm -f /usr/lib/luna/java/${APP_ID}.jar" >> $@
 	echo "rm -f /usr/share/dbus-1/system-services/${APP_ID}.service" >> $@
+	echo "/sbin/initctl stop java-serviceboot" >> $@
+	echo "rm -f /etc/event.d/${APP_ID}" >> $@
+	echo "/sbin/initctl start java-serviceboot" >> $@
 	echo "exit 0" >> $@
 	chmod ugo+x $@
 
