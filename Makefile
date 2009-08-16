@@ -43,7 +43,8 @@ ipkgs/%/Packages: package
 	  xargs -I % rsync -i -a % ipkgs/$* )
 	TAR_OPTIONS=--wildcards \
 	toolchain/ipkg-utils/ipkg-make-index \
-		-v -p ipkgs/$*/Packages ipkgs/$*
+		-v -p ipkgs/$*/Packages.new ipkgs/$*
+	scripts/merge-metadata.py feeds/$*/build/Metadata ipkgs/$*/Packages.new > ipkgs/$*/Packages
 	gzip -c ipkgs/$*/Packages > ipkgs/$*/Packages.gz
 
 package: toolchain

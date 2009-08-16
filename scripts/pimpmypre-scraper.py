@@ -15,7 +15,7 @@ for line in fileinput.input([sys.argv[1]]) :
     if (m) :
         appid = m.group(1)
         json += "\"appid\":\"%s\" }" % appid
-        print "Source: " + json
+#        print "Source: " + json
         print
 
     regexp = re.compile('.+"title":"([^"]+)".+')
