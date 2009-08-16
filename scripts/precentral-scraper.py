@@ -29,7 +29,7 @@ class PackageHandler(ContentHandler):
             self.json += "\"Icon\":\"%s\", " % self.data
 
         if (name == "link") :
-            self.json += "\"Homepage\":\"%s\", " % self.data
+            self.json += "\"Homepage\":\"%s\", " % self.data.replace("homebrew-apps/homebrew-apps","homebrew-apps")
 
         if (name == "url") :
             self.url = self.data
