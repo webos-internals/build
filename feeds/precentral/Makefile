@@ -20,7 +20,8 @@
 NAME     = precentral
 HOMEPAGE = http://www.precentral.net/homebrew-apps/
 
-SRC_XML = http://www.precentral.net/preware-ipkg.xml
+# SRC_XML = http://www.precentral.net/preware-ipkg.xml
+SRC_XML = http://www.precentral.net/precentral-homebrew-filecoaster.xml
 include ../../support/download.mk
 
 .PHONY: unpack
@@ -32,7 +33,7 @@ package: build/.built
 build/.unpacked build/.built: ${DL_DIR}/${NAME}-feed.xml
 	rm -f $@
 	mkdir -p build ipkgs
-	../../scripts/precentral-scraper.py ${DL_DIR}/${NAME}-feed.xml ipkgs
+	../../scripts/precentral-scraper.py ${DL_DIR}/${NAME}-feed.xml ipkgs > build/Metadata
 	touch $@
 
 clobber::

@@ -32,7 +32,7 @@ ipkgs/preware/%/Packages: package
 	  xargs -I % rsync -i -a % ipkgs/preware/$* )
 	TAR_OPTIONS=--wildcards \
 	toolchain/ipkg-utils/ipkg-make-index \
-		-v -l ipkgs/preware/$*/Packages.filelist -p ipkgs/preware/$*/Packages ipkgs/preware/$*
+		-v -p ipkgs/preware/$*/Packages ipkgs/preware/$*
 	gzip -c ipkgs/preware/$*/Packages > ipkgs/preware/$*/Packages.gz
 
 ipkgs/%/Packages: package
@@ -43,7 +43,7 @@ ipkgs/%/Packages: package
 	  xargs -I % rsync -i -a % ipkgs/$* )
 	TAR_OPTIONS=--wildcards \
 	toolchain/ipkg-utils/ipkg-make-index \
-		-v -l ipkgs/$*/Packages.filelist -p ipkgs/$*/Packages ipkgs/$*
+		-v -p ipkgs/$*/Packages ipkgs/$*
 	gzip -c ipkgs/$*/Packages > ipkgs/$*/Packages.gz
 
 package: toolchain
