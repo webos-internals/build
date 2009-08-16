@@ -22,9 +22,6 @@ class PackageHandler(ContentHandler):
     def endElement(self,name):
         self.getData = 0
 
-        if (name == "title") :
-            self.json += "\"Name\":\"%s\", " % self.data
-
         if (name == "lastupdate") :
             self.json += "\"Last-Updated\":\"%s\", " % self.data
 
