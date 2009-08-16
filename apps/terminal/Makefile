@@ -1,6 +1,6 @@
 NAME     = terminal
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.1.7
+VERSION  = 0.1.8
 PLATFORM = all
 DEPENDS = org.webosinternals.termplugin
 
