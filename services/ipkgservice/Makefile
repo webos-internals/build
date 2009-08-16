@@ -5,7 +5,7 @@ VERSION  = 0.0.3
 PLATFORM = all
 HOMEPAGE = http://www.preware.org/wiki/Application:IPKG_Service
 MAINTAINER = WebOS Internals <service@webos-internals.org>
-DESCRIPTION = IPKG Service
+DESCRIPTION = Package Manager Service
 SECTION = libs
 
 SERVICEFILES = build/src/${APP_ID}.service
