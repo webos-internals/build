@@ -39,7 +39,7 @@ def to_locale(filename, locale):
 
 old_filename = None
 packages_filename = None
-filelist_filename = "Packages.filelist"
+filelist_filename = None
 stamplist_filename = "Packages.stamps"
 opt_s = 0
 opt_m = 0
@@ -177,19 +177,19 @@ if packages_filename:
      os.rename(tmp_packages_filename, packages_filename)
      os.rename(tmp_gzip_filename, gzip_filename)
 
-if verbose:	
-     sys.stderr.write("Generate Packages.filelist file\n")
-files = {}
-names = packages.packages.keys()
-names.sort()
-for name in names:
-     for fn in packages[name].get_file_list():
-          (h,t) = os.path.split(fn)
-          if not t: continue
-          if not files.has_key(t): files[t] = name+':'+fn
-          else: files[t] = files[t] + ',' + name+':'+fn
-
 if filelist_filename:
+     if verbose:	
+          sys.stderr.write("Generate Packages.filelist file\n")
+     files = {}
+     names = packages.packages.keys()
+     names.sort()
+     for name in names:
+          for fn in packages[name].get_file_list():
+               (h,t) = os.path.split(fn)
+               if not t: continue
+               if not files.has_key(t): files[t] = name+':'+fn
+               else: files[t] = files[t] + ',' + name+':'+fn
+
      tmp_filelist_filename = ("%s.%d" % (filelist_filename, os.getpid()))
      sys.stdout = open(tmp_filelist_filename, "w")
      names = files.keys()
