@@ -1,6 +1,6 @@
 NAME     = termplugin
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.1.8
+VERSION  = 0.1.9
 HOMEPAGE = http://www.preware.org/wiki/Application:Terminal
 MAINTAINER = WebOS Internals <support@webos-internal.org>
 DESCRIPTION = Terminal Service Plugin
