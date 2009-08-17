@@ -21,19 +21,19 @@ SUBDIRS = apps services plugins
 
 .PHONY: index package toolchain upload clobber clean
 
-index:  ipkgs/preware/all/Packages ipkgs/preware/i686/Packages ipkgs/preware/armv7/Packages \
+index:  ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv7/Packages \
 	ipkgs/precentral/Packages ipkgs/pimpmypre/Packages
 
-ipkgs/preware/%/Packages: package
-	rm -rf ipkgs/preware/$*
-	mkdir -p ipkgs/preware/$*
+ipkgs/webos-internals/%/Packages: package
+	rm -rf ipkgs/webos-internals/$*
+	mkdir -p ipkgs/webos-internals/$*
 	( find ${SUBDIRS} -type d -name ipkgs -print | \
 	  xargs -I % find % -name "*_$*.ipk" -print | \
-	  xargs -I % rsync -i -a % ipkgs/preware/$* )
+	  xargs -I % rsync -i -a % ipkgs/webos-internals/$* )
 	TAR_OPTIONS=--wildcards \
 	toolchain/ipkg-utils/ipkg-make-index \
-		-v -p ipkgs/preware/$*/Packages ipkgs/preware/$*
-	gzip -c ipkgs/preware/$*/Packages > ipkgs/preware/$*/Packages.gz
+		-v -p ipkgs/webos-internals/$*/Packages ipkgs/webos-internals/$*
+	gzip -c ipkgs/webos-internals/$*/Packages > ipkgs/webos-internals/$*/Packages.gz
 
 ipkgs/%/Packages: package
 	rm -rf ipkgs/$*
