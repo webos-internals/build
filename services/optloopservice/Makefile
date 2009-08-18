@@ -1,7 +1,7 @@
 NAME     = optloopservice
 CLASS    = OptLoopService
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.0.1
+VERSION  = 0.0.2
 PLATFORM = all
 HOMEPAGE = http://www.preware.org/wiki/Application:${CLASS}
 MAINTAINER = WebOS Internals <support@webos-internals.org>
@@ -68,7 +68,7 @@ build/${NAME}/CONTROL/postinst:
 	echo "ln -s /var/usr/share/dbus-1/system-services/${APP_ID}.service /usr/share/dbus-1/system-services/${APP_ID}.service" >> $@
 	echo "/sbin/initctl stop java-serviceboot" >> $@
 	echo "rm -f /etc/event.d/${APP_ID}" >> $@
-	echo "ln -s /var/etc/event.d/${APP_ID} /etc/event.d/${APP_ID}" >> $@
+	echo "cp /var/etc/event.d/${APP_ID} /etc/event.d/${APP_ID}" >> $@
 	echo "/sbin/initctl start java-serviceboot" >> $@
 	echo "exit 0" >> $@
 	chmod ugo+x $@

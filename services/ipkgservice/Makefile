@@ -1,7 +1,7 @@
 NAME     = ipkgservice
 CLASS    = IPKGService
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.5.0
+VERSION  = 0.5.1
 PLATFORM = all
 HOMEPAGE = http://www.preware.org/wiki/Application:IPKG_Service
 MAINTAINER = WebOS Internals <service@webos-internals.org>
@@ -70,7 +70,7 @@ build/${NAME}/CONTROL/postinst:
 	echo "ln -s /var/usr/share/dbus-1/system-services/${APP_ID}.service /usr/share/dbus-1/system-services/${APP_ID}.service" >> $@
 	echo "/sbin/initctl stop java-serviceboot" >> $@
 	echo "rm -f /etc/event.d/${APP_ID}" >> $@
-	echo "ln -s /var/etc/event.d/${APP_ID} /etc/event.d/${APP_ID}" >> $@
+	echo "cp /var/etc/event.d/${APP_ID} /etc/event.d/${APP_ID}" >> $@
 	echo "/sbin/initctl start java-serviceboot" >> $@
 	echo "sed -i -e 's|arch|`/bin/uname -m`|g' /var/etc/ipkg/webos-internals.conf" >> $@
 	echo "sed -i -e 's|armv7l|armv7|g' /var/etc/ipkg/webos-internals.conf" >> $@
