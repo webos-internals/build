@@ -93,16 +93,16 @@ ifdef SOURCE
 	echo "${SOURCE}" >> $@
 else
 ifdef SRC_IPKG
-	echo "${SRC_IPKG}" >> $@
+	echo "{ \"Source\":\"${SRC_IPKG}\", \"Last-Updated\":\""`date +%s`"\" }" >> $@
 endif
 ifdef SRC_TGZ
-	echo "${SRC_TGZ}" >> $@
+	echo "{ \"Source\":\"${SRC_TGZ}\", \"Last-Updated\":\""`date +%s`"\" }" >> $@
 endif
 ifdef SRC_ZIP
-	echo "${SRC_ZIP}" >> $@
+	echo "{ \"Source\":\"${SRC_ZIP}\", \"Last-Updated\":\""`date +%s`"\" }" >> $@
 endif
 ifdef SRC_GIT
-	echo "${SRC_GIT}" >> $@
+	echo "{ \"Source\":\"${SRC_GIT}\", \"Last-Updated\":\""`date +%s`"\" }" >> $@
 endif
 endif
 	touch $@

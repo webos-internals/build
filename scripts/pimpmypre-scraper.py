@@ -2,6 +2,7 @@
 
 import os
 import sys
+import time
 import re
 import urllib
 import fileinput
@@ -14,21 +15,24 @@ for line in fileinput.input([sys.argv[1]]) :
     m = regexp.search(line)
     if (m) :
         appid = m.group(1)
-        json += "\"appid\":\"%s\" }" % appid
-#        print "Source: " + json
+#        json += "\"appid\":\"%s\" }" % appid
+
+        json = json[:-2]
+        json += " }"
+        print "Source: " + json
         print
 
     regexp = re.compile('.+"title":"([^"]+)".+')
     m = regexp.search(line)
     if (m) :
         title = m.group(1)
-        json += "\"title\":\"%s\", " % title
+#        json += "\"title\":\"%s\", " % title
 
     regexp = re.compile('.+"content":"([^"]+)".+')
     m = regexp.search(line)
     if (m) :
         description = m.group(1)
-        json += "\"description\":\"%s\", " % description
+#        json += "\"description\":\"%s\", " % description
 
     regexp = re.compile('.+"url":"(http://[^"]+\.ipk)".+')
     m = regexp.search(line)
@@ -43,5 +47,10 @@ for line in fileinput.input([sys.argv[1]]) :
             json = "{ "
             print "Filename: " + name
 
-            if (not os.path.exists(sys.argv[2] + "/" + name)) :
-                urllib.urlretrieve(url, sys.argv[2] + "/" + name)
+            pathname = sys.argv[2] + "/" + name
+
+            if (not os.path.exists(pathname)) :
+                urllib.urlretrieve(url, pathname)
+
+            (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) = os.stat(pathname)
+            json += "\"Last-Updated\":\"%d\", " % ctime
