@@ -1,7 +1,6 @@
 NAME     = terminal
 APP_ID   = org.webosinternals.${NAME}
 VERSION  = 0.1.9
-PLATFORM = all
 DEPENDS = org.webosinternals.termplugin
 
 SRC_GIT = git://gitorious.org/webos-internals/applications.git

@@ -1,7 +1,6 @@
 NAME     = timer
 APP_ID   = com.webonastick.${NAME}
 VERSION  = 0.1.0
-PLATFORM = all
 HOMEPAGE = http://webonastick.com/webos/timer/
 DESCRIPTION = A simple timer application.
 MAINTAINER = Darren Embry <dse@webonastick.com>

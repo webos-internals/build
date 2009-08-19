@@ -1,7 +1,6 @@
 NAME     = daliclock
 APP_ID   = org.jwz.${NAME}
 VERSION  = 2.29.0
-PLATFORM = all
 HOMEPAGE = http://www.jwz.org/${NAME}/
 
 SRC_IPKG = http://www.jwz.org/xdaliclock/${NAME}-229.ipk

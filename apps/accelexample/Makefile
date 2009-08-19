@@ -1,7 +1,6 @@
 NAME     = accelexample
 APP_ID   = org.webosinternals.${NAME}
 VERSION  = 0.0.1
-PLATFORM = all
 HOMEPAGE = http://www.preware.org/wiki/Application:AccelService
 MAINTAINER = egaudet <emoney_33@yahoo.com>
 DEPENDS = org.webosinternals.accelservice
