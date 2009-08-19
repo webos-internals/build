@@ -22,11 +22,17 @@
 ifndef NAME
 PREWARE_SANITY += $(error "Please define NAME in your Makefile")
 endif
+ifndef VERSION
+PREWARE_SANITY += $(error "Please define VERSION in your Makefile")
+endif
+ifndef APP_ID
+PREWARE_SANITY += $(error "Please define APP_ID in your Makefile")
+endif
 
-package: ipkgs/${APP_ID}_${VERSION}_${PLATFORM}.ipk
+package: ipkgs/${APP_ID}_${VERSION}_all.ipk
 
-ipkgs/${APP_ID}_${VERSION}_${PLATFORM}.ipk: build/.built
-	rm -f ipkgs/${APP_ID}_*_${PLATFORM}.ipk
+ipkgs/${APP_ID}_${VERSION}_all.ipk: build/.built
+	rm -f ipkgs/${APP_ID}_*_all.ipk
 	rm -f build/${NAME}/CONTROL/control
 	${MAKE} build/${NAME}/CONTROL/control
 	rm -f build/${NAME}/CONTROL/postinst
@@ -37,7 +43,7 @@ ipkgs/${APP_ID}_${VERSION}_${PLATFORM}.ipk: build/.built
 	( cd build ; \
 	  TAR_OPTIONS=--wildcards \
 	  ../../../toolchain/ipkg-utils/ipkg-build -o 0 -g 0 ${NAME} )
-	mv build/${APP_ID}_${VERSION}_${PLATFORM}.ipk $@
+	mv build/${APP_ID}_${VERSION}_all.ipk $@
 
 build/%/CONTROL/postinst:
 	true

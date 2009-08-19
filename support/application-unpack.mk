@@ -28,9 +28,6 @@ endif
 ifndef VERSION
 PREWARE_SANITY += $(error "Please define VERSION in your Makefile")
 endif
-ifndef PLATFORM
-PREWARE_SANITY += $(error "Please define PLATFORM in your Makefile")
-endif
 ifndef NAME
 PREWARE_SANITY += $(error "Please define NAME in your Makefile")
 endif
@@ -39,18 +36,18 @@ unpack: build/.unpacked
 
 ifdef SRC_IPKG
 
-build/.unpacked: ${DL_DIR}/${APP_ID}_${VERSION}_${PLATFORM}.ipk
+build/.unpacked: ${DL_DIR}/${APP_ID}_${VERSION}_all.ipk
 	$(call PREWARE_SANITY)
 	rm -rf build
 	mkdir -p build
-	ln -s ../$< build/${APP_ID}_${VERSION}_${PLATFORM}.ipk
+	ln -s ../$< build/${APP_ID}_${VERSION}_all.ipk
 	( cd build ; \
 	  TAR_OPTIONS=--wildcards \
 	  ../../../toolchain/ipkg-utils/ipkg-unbuild \
-	    ${APP_ID}_${VERSION}_${PLATFORM}.ipk )
-	[ -f build/${APP_ID}_${VERSION}_${PLATFORM}/CONTROL/control ]
-	rm -f build/${APP_ID}_${VERSION}_${PLATFORM}.ipk
-	mv build/${APP_ID}_${VERSION}_${PLATFORM} build/${NAME}
+	    ${APP_ID}_${VERSION}_all.ipk )
+	[ -f build/${APP_ID}_${VERSION}_all/CONTROL/control ]
+	rm -f build/${APP_ID}_${VERSION}_all.ipk
+	mv build/${APP_ID}_${VERSION}_all build/${NAME}
 	touch $@
 
 endif
