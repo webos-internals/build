@@ -76,7 +76,7 @@ build/${NAME}/CONTROL/postinst:
 	echo "cp /var/etc/event.d/${APP_ID} /etc/event.d/${APP_ID}" >> $@
 	echo "/sbin/initctl start java-serviceboot" >> $@
 	echo "echo \"src/gz all http://ipkg.preware.org/feeds/webos-internals/all\" > /var/etc/ipkg/webos-internals.conf" >> $@
-	echo "echo \"src/gz \`/bin/uname -m\` http://ipkg.preware.org/feeds/webos-internals/\`/bin/uname -a\`\" >> /var/etc/ipkg/webos-internals.conf" >> $@
+	echo "echo \"src/gz \`/bin/uname -m\` http://ipkg.preware.org/feeds/webos-internals/\`/bin/uname -m\`\" >> /var/etc/ipkg/webos-internals.conf" >> $@
 	echo "sed -i -e 's|armv7l|armv7|g' /var/etc/ipkg/webos-internals.conf" >> $@
 	echo "exit 0" >> $@
 	chmod ugo+x $@
