@@ -1,8 +1,7 @@
 NAME     = ipkgservice
 CLASS    = IPKGService
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.5.1
-PLATFORM = all
+VERSION  = 0.6.0
 HOMEPAGE = http://www.preware.org/wiki/Application:IPKG_Service
 MAINTAINER = WebOS Internals <service@webos-internals.org>
 DESCRIPTION = Package Manager Service
@@ -36,6 +35,10 @@ build/.unpacked build/src/${PACKAGEPATH}/${CLASS}.java: ${DL_DIR}/${NAME}-${VERS
 	rm -rf build.tmp
 	${MAKE} ${JARFILES}
 	install -m 644 ${JARFILES} build/src/
+	mkdir -p build/${NAME}/usr/palm/applications/${APP_ID}
+	mv build/src/LICENSE build/src/app build/src/appinfo.json \
+	   build/src/images build/src/index.html build/src/sources.json \
+	   build/src/stylesheets build/${NAME}/usr/palm/applications/${APP_ID}/
 	touch $@
 
 LUNAPATH = usr/lib/luna/java
@@ -72,7 +75,8 @@ build/${NAME}/CONTROL/postinst:
 	echo "rm -f /etc/event.d/${APP_ID}" >> $@
 	echo "cp /var/etc/event.d/${APP_ID} /etc/event.d/${APP_ID}" >> $@
 	echo "/sbin/initctl start java-serviceboot" >> $@
-	echo "sed -i -e 's|arch|`/bin/uname -m`|g' /var/etc/ipkg/webos-internals.conf" >> $@
+	echo "echo \"src/gz all http://ipkg.preware.org/feeds/webos-internals/all\" > /var/etc/ipkg/webos-internals.conf" >> $@
+	echo "echo \"src/gz \`/bin/uname -m\` http://ipkg.preware.org/feeds/webos-internals/\`/bin/uname -a\`\" >> /var/etc/ipkg/webos-internals.conf" >> $@
 	echo "sed -i -e 's|armv7l|armv7|g' /var/etc/ipkg/webos-internals.conf" >> $@
 	echo "exit 0" >> $@
 	chmod ugo+x $@
@@ -89,7 +93,7 @@ build/${NAME}/CONTROL/prerm:
 	echo "exit 0" >> $@
 	chmod ugo+x $@
 
-include ../../support/service-package.mk
+include ../../support/application-package.mk
 
 clobber::
 	rm -rf build

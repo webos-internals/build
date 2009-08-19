@@ -2,7 +2,6 @@ NAME     = accelservice
 CLASS    = AccelService
 APP_ID   = org.webosinternals.${NAME}
 VERSION  = 0.0.4
-PLATFORM = all
 HOMEPAGE = http://www.preware.org/wiki/Application:${CLASS}
 MAINTAINER = egaudet <emoney_33@yahoo.com>
 DESCRIPTION = Accelerometer Service

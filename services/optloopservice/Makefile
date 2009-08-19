@@ -2,7 +2,6 @@ NAME     = optloopservice
 CLASS    = OptLoopService
 APP_ID   = org.webosinternals.${NAME}
 VERSION  = 0.0.2
-PLATFORM = all
 HOMEPAGE = http://www.preware.org/wiki/Application:${CLASS}
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DESCRIPTION = Optware Loopback Mount/UnMount Service
