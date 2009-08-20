@@ -29,8 +29,7 @@ class PackageHandler(ContentHandler):
             self.json += "\"Icon\":\"%s\", " % self.data
 
         if (name == "tags") :
-            regexp = re.compile(".*([A-Z][^,]+).*")
-            m = regexp.match(self.data)
+            m = re.search(".*([A-Z][^,]+).*", self.data)
             if (m):
                 self.data = m.group(1)
             self.json += "\"Category\":\"%s\", " % self.data
