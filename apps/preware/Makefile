@@ -1,6 +1,6 @@
 NAME     = preware
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.6.2
+VERSION  = 0.6.3
 DEPENDS = org.webosinternals.ipkgservice
 
 SRC_GIT = git://git.webos-internals.org/applications/preware.git
