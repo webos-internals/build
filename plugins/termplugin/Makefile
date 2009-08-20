@@ -1,24 +1,21 @@
 NAME     = termplugin
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.1.9
+VERSION  = 0.2.0
 HOMEPAGE = http://www.preware.org/wiki/Application:Terminal
 MAINTAINER = WebOS Internals <support@webos-internal.org>
 DESCRIPTION = Terminal Service Plugin
-SECTION = libs
+SECTION = Services and Plugins
 
-SRC_GIT = git://gitorious.org/webos-internals/applications.git
+SRC_GIT = git://git.webos-internals.org/plugins/termplugin.git
 include ../../support/download.mk
 
 .PHONY: unpack
 unpack: build/.unpacked
 
 build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	rm -rf build build.tmp
-	mkdir -p build.tmp
-	tar -C build.tmp -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	mkdir -p build/armv7 build/i686
-	cp -r build.tmp/${NAME} build/src
-	rm -rf build.tmp
+	rm -rf build
+	mkdir -p build/src build/armv7 build/i686
+	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	touch $@
 
 build/.built: build/armv7.built build/i686.built

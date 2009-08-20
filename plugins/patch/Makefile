@@ -4,7 +4,7 @@ VERSION  = 2.5.9
 HOMEPAGE = http://www.preware.org/wiki/Application:Patch
 MAINTAINER = WebOS Internals <support@webos-internal.org>
 DESCRIPTION = Preware Patch Utility
-SECTION = libs
+SECTION = Services and Plugins
 
 SRC_TGZ = http://ftp.debian.org/debian/pool/main/p/patch/patch_$(VERSION).orig.tar.gz
 include ../../support/download.mk
