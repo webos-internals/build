@@ -1,6 +1,6 @@
 NAME     = preware
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.6.0
+VERSION  = 0.6.1
 DEPENDS = org.webosinternals.ipkgservice
 
 SRC_GIT = git://gitorious.org/webos-internals/applications.git
