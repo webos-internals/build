@@ -42,8 +42,8 @@ for line in fileinput.input([sys.argv[2]]) :
         key = m.group(1)
         if key in metadata:
             packagedata += "Source: " + metadata[key] + "\n"
-        if key in section:
-            packagedata += "Section: " + section[key] + "\n"
+#        if key in section:
+#            packagedata += "Section: " + section[key] + "\n"
 
     regexp = re.compile('^Description: (.*)$')
     m = regexp.match(line)
