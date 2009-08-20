@@ -1,18 +1,18 @@
 NAME     = ipkgservice
 CLASS    = IPKGService
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.6.0
-HOMEPAGE = http://www.preware.org/wiki/Application:IPKG_Service
+VERSION  = 0.6.4
+HOMEPAGE = http://www.preware.org/wiki/Application:Preware
 MAINTAINER = WebOS Internals <service@webos-internals.org>
 DESCRIPTION = Package Manager Service
-SECTION = libs
+SECTION = Services and Plugins
 
 SERVICEFILES = build/src/${APP_ID}.service
 PACKAGEPATH := $(subst .,/,${APP_ID})
 CLASSFILES := $(addsuffix .class,$(addprefix ${PACKAGEPATH}/,${CLASSES}))
 
 
-SRC_GIT = git://gitorious.org/webos-internals/applications.git
+SRC_GIT = git://git.webos-internals.org/services/ipkgservice.git
 include ../../support/download.mk
 
 JARFILES = \
@@ -27,12 +27,9 @@ include ../../support/service-jars.mk
 unpack: build/.unpacked
 
 build/.unpacked build/src/${PACKAGEPATH}/${CLASS}.java: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	rm -rf build build.tmp
-	mkdir -p build.tmp
-	tar -C build.tmp -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	mkdir -p build
-	cp -r build.tmp/${NAME} build/src
-	rm -rf build.tmp
+	rm -rf build
+	mkdir -p build/src
+	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	${MAKE} ${JARFILES}
 	install -m 644 ${JARFILES} build/src/
 	mkdir -p build/${NAME}/usr/palm/applications/${APP_ID}

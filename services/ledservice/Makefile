@@ -1,18 +1,18 @@
 NAME     = ledservice
 CLASS    = LEDService
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.0.2
+VERSION  = 0.1.0
 HOMEPAGE = http://www.preware.org/wiki/Application:${CLASS}
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DESCRIPTION = LED Service
-SECTION = libs
+SECTION = Services and Plugins
 
 SERVICEFILES = build/src/${APP_ID}.service
 PACKAGEPATH := $(subst .,/,${APP_ID})
 CLASSFILES := $(addsuffix .class,$(addprefix ${PACKAGEPATH}/,${CLASSES}))
 
 
-SRC_GIT = git://gitorious.org/webos-internals/applications.git
+SRC_GIT = git://git.webos-internals.org/services/ledservice.git
 include ../../support/download.mk
 
 JARFILES = \
@@ -27,12 +27,9 @@ include ../../support/service-jars.mk
 unpack: build/.unpacked
 
 build/.unpacked build/src/${NAME}.java: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	rm -rf build build.tmp
-	mkdir -p build.tmp
-	tar -C build.tmp -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	mkdir -p build
-	cp -r build.tmp/${NAME} build/src
-	rm -rf build.tmp
+	rm -rf build
+	mkdir -p build/src
+	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	${MAKE} ${JARFILES}
 	install -m 644 ${JARFILES} build/src/
 	touch $@
