@@ -28,6 +28,13 @@ class PackageHandler(ContentHandler):
         if (name == "icon") :
             self.json += "\"Icon\":\"%s\", " % self.data
 
+        if (name == "tags") :
+            regexp = re.compile(".*([A-Z][^,]+).*")
+            m = regexp.match(self.data)
+            if (m):
+                self.data = m.group(1)
+            self.json += "\"Category\":\"%s\", " % self.data
+
         if (name == "link") :
             self.json += "\"Homepage\":\"%s\", " % self.data.replace("homebrew-apps/homebrew-apps","homebrew-apps")
 
