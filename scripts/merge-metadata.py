@@ -7,6 +7,7 @@ import fileinput
 
 key = ""
 metadata = {}
+section = {}
 
 for line in fileinput.input([sys.argv[1]]) :
 
@@ -20,6 +21,11 @@ for line in fileinput.input([sys.argv[1]]) :
     m = regexp.match(line)
     if (m):
         metadata[key] = m.group(1)
+
+    regexp = re.compile('^Section: (.*)$')
+    m = regexp.match(line)
+    if (m):
+        section[key] = m.group(1)
 
 packagedata = ""
 
@@ -36,6 +42,8 @@ for line in fileinput.input([sys.argv[2]]) :
         key = m.group(1)
         if key in metadata:
             packagedata += "Source: " + metadata[key] + "\n"
+        if key in section:
+            packagedata += "Section: " + section[key] + "\n"
 
     regexp = re.compile('^Description: (.*)$')
     m = regexp.match(line)

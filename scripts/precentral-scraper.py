@@ -12,10 +12,12 @@ class PackageHandler(ContentHandler):
     url = ""
     filename = ""
     json = ""
+    section = ""
 
     def startElement(self, name, attrs):
         if (name == "application") :
             self.json = "{ "
+            self.section = ""
 
         self.getData = 1
             
@@ -29,7 +31,7 @@ class PackageHandler(ContentHandler):
             self.json += "\"Icon\":\"%s\", " % self.data
 
         if (name == "categories") :
-            self.json += "\"Categories\":\"%s\", " % self.data
+            self.section = self.data
 
         if (name == "link") :
             self.json += "\"Homepage\":\"%s\", " % self.data.replace("homebrew-apps/homebrew-apps","homebrew-apps")
@@ -48,6 +50,8 @@ class PackageHandler(ContentHandler):
                 self.json += " }"
                 print "Filename: " + self.filename
                 print "Source: " + self.json
+                if (self.section):
+                    print "Section: " + self.section
 
                 if (not os.path.exists(sys.argv[2] + "/" + self.filename)) :
                     urllib.urlretrieve(self.url, sys.argv[2] + "/" + self.filename)
