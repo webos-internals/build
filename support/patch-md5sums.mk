@@ -1,13 +1,13 @@
-.PHONY: jars
-jars: ${JARFILES}
+.PHONY: md5sums
+md5sums: build/md5sums
 
-.PRECIOUS: ${JARFILES}
-${JARFILES}: ${DL_DIR}/webosdoctorp100ewwsprint.jar
-	rm -rf build/java
+.PRECIOUS: build/md5sums
+build/md5sums: ${DL_DIR}/webosdoctorp100ewwsprint.jar
+	rm -rf build/md5sums
 	mkdir -p build
 	unzip -p $< resources/webOS.tar | \
 	tar -O -x -f - ./nova-cust-image-castle.rootfs.tar.gz | \
-	tar -C build --strip-components=4 -m -z -x -f - ./usr/lib/luna/java
+	tar -C build -m -z -x -f - ./md5sums
 	touch $@
 
 ${DL_DIR}/webosdoctorp100ewwsprint.jar :

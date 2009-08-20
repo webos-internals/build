@@ -1,0 +1,70 @@
+NAME     = virtual-keyboard
+APP_ID   = org.webosinternals.${NAME}
+VERSION  = 0.0.1
+HOMEPAGE = http://www.preware.org/wiki/On_Screen_Keyboard
+MAINTAINER = WebOS Internals <support@webos-internal.org>
+DESCRIPTION = Virtual Keyboard
+SECTION = WebOS Patches
+DEPENDS = org.webosinternal.patch
+
+PATCHES = add-onscreen-keyboard.patch
+FILES = /usr/palm/frameworks/mojo/builtins/palmInitFramework191_15.js \
+	/usr/palm/frameworks/mojo/submissions/191.15/stylesheets/global.css
+
+SRC_GIT = git://git.webos-internals.org/webos/modifications.git
+include ../../support/download.mk
+
+include ../../support/patch-md5sums.mk
+
+.PHONY: unpack
+unpack: build/.unpacked
+
+build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	rm -rf build build.tmp
+	mkdir -p build.tmp
+	tar -C build.tmp -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	mkdir -p build
+	cp -r build.tmp/frameworks build/src
+	rm -rf build.tmp
+	touch $@
+
+.PHONY: build
+build: build/.built
+
+build/.built: build/.unpacked build/md5sums
+	rm -rf build/${NAME}
+	rm -rf build.tmp
+	mkdir -p build.tmp
+	tar -C build.tmp -xvf build/src/kb_themes.tar
+	mkdir -p build/${NAME}/usr/palm/applications/${APP_ID}
+	mv build.tmp/usr/palm/frameworks/mojo/submissions/191.15/images/virt_kb \
+	   build/${NAME}/usr/palm/applications/${APP_ID}/images
+	rm -rf build.tmp
+	mkdir -p build/${NAME}/usr/palm/applications/${APP_ID}/patches
+	install -m 644 build/src/${PATCHES} build/${NAME}/usr/palm/applications/${APP_ID}/patches/
+	for f in ${FILES} ; do \
+	  grep $$f build/md5sums >> build/${NAME}/usr/palm/applications/${APP_ID}/md5sums ; \
+	done
+	touch $@
+
+build/${NAME}/CONTROL/postinst:
+	rm -f $@
+	mkdir -p build/${NAME}/CONTROL
+	echo "#!/bin/sh" > $@
+	echo "rm -rf /usr/palm/frameworks/mojo/submissions/191.15/images/virt_kb" >> $@
+	echo "ln -s /var/usr/palm/applications/${APP_ID}/images /usr/palm/frameworks/mojo/submissions/191.15/images/virt_kb" >> $@
+	echo "exit 0" >> $@
+	chmod ugo+x $@
+
+build/${NAME}/CONTROL/prerm:
+	rm -f $@
+	mkdir -p build/${NAME}/CONTROL
+	echo "#!/bin/sh" > $@
+	echo "rm -rf /usr/palm/frameworks/mojo/submissions/191.15/images/virt_kb" >> $@
+	echo "exit 0" >> $@
+	chmod ugo+x $@
+
+include ../../support/service-package.mk
+
+clobber::
+	rm -rf build
