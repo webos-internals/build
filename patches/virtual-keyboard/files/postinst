@@ -1,0 +1,10 @@
+#!/bin/sh
+if [ "`/bin/uname -m`" == "i686" ] ; then
+  rm -rf /usr/palm/frameworks/mojo/submissions/191.14/images/virt_kb
+  ln -s /var/usr/palm/applications/org.webosinternals.virtual-keyboard/images /usr/palm/frameworks/mojo/submissions/191.14/images/virt_kb
+  sed -i -e 's/191\.15/191.14/g' -e 's/191_15/191_14/g' /var/usr/palm/applications/org.webosinternals.virtual-keyboard/patches/add-onscreen-keyboard.patch
+else
+  rm -rf /usr/palm/frameworks/mojo/submissions/191.15/images/virt_kb
+  ln -s /var/usr/palm/applications/org.webosinternals.virtual-keyboard/images /usr/palm/frameworks/mojo/submissions/191.15/images/virt_kb
+fi
+exit 0

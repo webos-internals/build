@@ -47,21 +47,10 @@ build/.built: build/.unpacked build/md5sums
 	done
 	touch $@
 
-build/${NAME}/CONTROL/postinst:
+build/${NAME}/CONTROL/%: files/%
 	rm -f $@
 	mkdir -p build/${NAME}/CONTROL
-	echo "#!/bin/sh" > $@
-	echo "rm -rf /usr/palm/frameworks/mojo/submissions/191.15/images/virt_kb" >> $@
-	echo "ln -s /var/usr/palm/applications/${APP_ID}/images /usr/palm/frameworks/mojo/submissions/191.15/images/virt_kb" >> $@
-	echo "exit 0" >> $@
-	chmod ugo+x $@
-
-build/${NAME}/CONTROL/prerm:
-	rm -f $@
-	mkdir -p build/${NAME}/CONTROL
-	echo "#!/bin/sh" > $@
-	echo "rm -rf /usr/palm/frameworks/mojo/submissions/191.15/images/virt_kb" >> $@
-	echo "exit 0" >> $@
+	install files/$* build/${NAME}/CONTROL
 	chmod ugo+x $@
 
 include ../../support/service-package.mk
