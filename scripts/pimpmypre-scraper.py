@@ -17,6 +17,8 @@ for line in fileinput.input([sys.argv[1]]) :
         appid = m.group(1)
 #        json += "\"appid\":\"%s\" }" % appid
 
+        json += "\"Category\":\"Unsorted\", "
+
         json = json[:-2]
         json += " }"
         print "Source: " + json

@@ -2,6 +2,7 @@ NAME     = tipcalculator
 APP_ID   = org.jwz.${NAME}
 VERSION  = 1.0.6
 HOMEPAGE = http://www.jwz.org/${NAME}/
+SECTION = Finance
 
 SRC_IPKG = http://www.jwz.org/${NAME}/${APP_ID}_${VERSION}_${PLATFORM}.ipk
 include ../../support/download.mk

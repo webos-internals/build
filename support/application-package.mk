@@ -95,21 +95,22 @@ ifdef CONFLICTS
 	echo "Conficts: ${CONFLICTS}" >> $@
 endif
 	echo -n "Source: " >> $@
-ifdef SOURCE
-	echo "${SOURCE}" >> $@
-else
 ifdef SRC_IPKG
-	echo "{ \"Source\":\"${SRC_IPKG}\", \"Last-Updated\":\""`date +%s`"\" }" >> $@
+	echo -n "{ \"Source\":\"${SRC_IPKG}\", \"Last-Updated\":\""`date +%s`"\", \"Category\":\"" >> $@
 endif
 ifdef SRC_TGZ
-	echo "{ \"Source\":\"${SRC_TGZ}\", \"Last-Updated\":\""`date +%s`"\" }" >> $@
+	echo -n "{ \"Source\":\"${SRC_TGZ}\", \"Last-Updated\":\""`date +%s`"\", \"Category\":\"" >> $@
 endif
 ifdef SRC_ZIP
-	echo "{ \"Source\":\"${SRC_ZIP}\", \"Last-Updated\":\""`date +%s`"\" }" >> $@
+	echo -n "{ \"Source\":\"${SRC_ZIP}\", \"Last-Updated\":\""`date +%s`"\", \"Category\":\"" >> $@
 endif
 ifdef SRC_GIT
-	echo "{ \"Source\":\"${SRC_GIT}\", \"Last-Updated\":\""`date +%s`"\" }" >> $@
+	echo -n "{ \"Source\":\"${SRC_GIT}\", \"Last-Updated\":\""`date +%s`"\", \"Category\":\"" >> $@
 endif
+ifdef SECTION
+	echo "${SECTION}\" }" >> $@
+else
+	sed -ne 's|^[[:space:]]*"type":[[:space:]]*"\(.*\)",[[:space:]]*$$|\1\" }|p' $< >> $@
 endif
 	touch $@
 

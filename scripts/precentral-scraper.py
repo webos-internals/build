@@ -31,6 +31,7 @@ class PackageHandler(ContentHandler):
             self.json += "\"Icon\":\"%s\", " % self.data
 
         if (name == "categories") :
+            self.json += "\"Category\":\"%s\", " % self.data
             self.section = self.data
 
         if (name == "link") :
