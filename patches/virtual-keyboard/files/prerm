@@ -1,7 +1,2 @@
 #!/bin/sh
-if [ "`/bin/uname -m`" == "i686" ] ; then
-  rm -rf /usr/palm/frameworks/mojo/submissions/191.14/images/virt_kb
-else
-  rm -rf /usr/palm/frameworks/mojo/submissions/191.15/images/virt_kb
-fi
-exit 0
+rm -rf /media/internal/virtual-keyboard

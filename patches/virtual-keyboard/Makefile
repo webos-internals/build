@@ -35,10 +35,10 @@ build/.built: build/.unpacked build/md5sums
 	rm -rf build/${NAME}
 	rm -rf build.tmp
 	mkdir -p build.tmp
-	tar -C build.tmp -xvf build/src/kb_themes.tar
+	tar -C build.tmp -xvf build/src/virtual-keyboard-themes.tar.gz
 	mkdir -p build/${NAME}/usr/palm/applications/${APP_ID}
-	mv build.tmp/usr/palm/frameworks/mojo/submissions/191.15/images/virt_kb \
-	   build/${NAME}/usr/palm/applications/${APP_ID}/images
+	mv build.tmp/media/internal/virtual-keyboard
+	   build/${NAME}/usr/palm/applications/${APP_ID}/
 	rm -rf build.tmp
 	mkdir -p build/${NAME}/usr/palm/applications/${APP_ID}/patches
 	install -m 644 build/src/${PATCHES} build/${NAME}/usr/palm/applications/${APP_ID}/patches/
