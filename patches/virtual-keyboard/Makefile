@@ -1,6 +1,6 @@
 NAME     = virtual-keyboard
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.0.1
+VERSION  = 0.0.2
 HOMEPAGE = http://www.preware.org/wiki/On_Screen_Keyboard
 MAINTAINER = WebOS Internals <support@webos-internal.org>
 DESCRIPTION = Virtual Keyboard
@@ -11,7 +11,8 @@ PATCHES = add-onscreen-keyboard.patch
 FILES = /usr/palm/frameworks/mojo/builtins/palmInitFramework191_15.js \
 	/usr/palm/frameworks/mojo/submissions/191.15/stylesheets/global.css
 
-SRC_GIT = git://git.webos-internals.org/webos/modifications.git
+# SRC_GIT = git://git.webos-internals.org/webos/modifications.git
+SRC_GIT = git://gitorious.org/webos-internals/modifications.git
 include ../../support/download.mk
 
 include ../../support/patch-md5sums.mk
@@ -35,10 +36,10 @@ build/.built: build/.unpacked build/md5sums
 	rm -rf build/${NAME}
 	rm -rf build.tmp
 	mkdir -p build.tmp
-	tar -C build.tmp -xvf build/src/kb_themes.tar
-	mkdir -p build/${NAME}/usr/palm/applications/${APP_ID}
-	mv build.tmp/usr/palm/frameworks/mojo/submissions/191.15/images/virt_kb \
-	   build/${NAME}/usr/palm/applications/${APP_ID}/images
+	tar -C build.tmp -zxvf build/src/virtual-keyboard-themes.tar.gz
+	mkdir -p build/${NAME}/media/internal
+	mv build.tmp/media/internal/virtual-keyboard \
+	   build/${NAME}/media/internal/virtual-keyboard
 	rm -rf build.tmp
 	mkdir -p build/${NAME}/usr/palm/applications/${APP_ID}/patches
 	install -m 644 build/src/${PATCHES} build/${NAME}/usr/palm/applications/${APP_ID}/patches/
