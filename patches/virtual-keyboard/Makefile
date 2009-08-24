@@ -38,7 +38,7 @@ build/.built: build/.unpacked build/md5sums
 	mkdir -p build.tmp
 	tar -C build.tmp -xvf build/src/virtual-keyboard-themes.tar.gz
 	mkdir -p build/${NAME}/usr/palm/applications/${APP_ID}
-	mv build.tmp/media/internal/virtual-keyboard
+	mv build.tmp/media/internal/virtual-keyboard \
 	   build/${NAME}/usr/palm/applications/${APP_ID}/
 	rm -rf build.tmp
 	mkdir -p build/${NAME}/usr/palm/applications/${APP_ID}/patches
