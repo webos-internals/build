@@ -29,7 +29,7 @@ build/i686.built: build/.unpacked
 	rm -rf build/i686
 	( cd build/src ; ./configure ; ${MAKE} )
 	mkdir -p build/i686/usr/bin
-	install -m 644 build/src/${NAME} build/i686/usr/bin
+	install -m 755 build/src/${NAME} build/i686/usr/bin
 	touch $@
 
 build/armv7.built: build/.unpacked
@@ -39,7 +39,7 @@ build/armv7.built: build/.unpacked
 	  ./configure --host=arm-none-linux-gnueabi; \
 	  ${MAKE} )
 	mkdir -p build/armv7/usr/bin
-	install -m 644 build/src/${NAME} build/armv7/usr/bin
+	install -m 755 build/src/${NAME} build/armv7/usr/bin
 	touch $@
 
 include ../../support/plugin-package.mk
