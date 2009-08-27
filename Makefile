@@ -17,7 +17,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-SUBDIRS = apps services plugins
+SUBDIRS = apps services plugins patches
 
 .PHONY: index package toolchain upload clobber clean
 
