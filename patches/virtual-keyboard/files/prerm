@@ -3,7 +3,7 @@ MEDIA_BASE=/media/internal/virtual-keyboard
 THEMES="themes/remix_ice themes/remix_classic themes/remix_glossy"
 SOUNDS=sounds/click1.wav
 
-cd / && /var/usr/bin/patch -p1 -R < /var/usr/palm/applications/org.webosinternals.virtual-keyboard/patches/add-onscreen-keyboard.patch
+cd / && mount -o rw,remount / && /var/usr/bin/patch -p1 -R < /var/usr/palm/applications/org.webosinternals.virtual-keyboard/patches/add-onscreen-keyboard.patch
 
 for i in ${THEMES}
 do
@@ -14,5 +14,7 @@ for i in ${SOUNDS}
 do
   rm -rf ${MEDIA_BASE}/$i
 done
+
+mount -o ro,remount /
 
 exit 0
