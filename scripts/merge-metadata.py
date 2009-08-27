@@ -34,7 +34,10 @@ for line in fileinput.input([sys.argv[2]]) :
     if line == "\n":
         continue
 
-    packagedata += line
+    regexp = re.compile('^Source: (.*)$')
+    m = regexp.match(line)
+    if (not m):
+        packagedata += line
 
     regexp = re.compile('^Filename: (.*)$')
     m = regexp.match(line)
