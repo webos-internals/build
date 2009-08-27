@@ -1,6 +1,6 @@
 NAME     = terminal
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.2.1
+VERSION  = 0.2.2
 DEPENDS = org.webosinternals.termplugin
 
 SRC_GIT = git://git.webos-internals.org/applications/terminal.git
