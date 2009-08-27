@@ -21,7 +21,7 @@ do
   fi
 done < ${APP_DIR}/md5sums
 
-cd / && mount -o rw,remount / && /var/usr/bin/patch -p1 < ${APP_DIR}/patches/add-onscreen-keyboard.patch
+cd / && /var/usr/bin/patch -p1 < ${APP_DIR}/patches/add-onscreen-keyboard.patch
 if [ $? -ne 0 ]
 then
   exit 1
@@ -63,6 +63,5 @@ else
   fi
 fi
 
-mount -o ro,remount /
 stop LunaSysMgr && start LunaSysMgr
 exit 0
