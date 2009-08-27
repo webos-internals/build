@@ -1,2 +1,18 @@
 #!/bin/sh
-rm -rf /media/internal/virtual-keyboard
+MEDIA_BASE=/media/internal/virtual-keyboard
+THEMES="themes/remix_ice themes/remix_classic themes/remix_glossy"
+SOUNDS=sounds/click1.wav
+
+cd / && /var/usr/bin/patch -p1 -R < /var/usr/palm/applications/org.webosinternals.virtual-keyboard/patches/add-onscreen-keyboard.patch
+
+for i in ${THEMES}
+do
+  rm -rf ${MEDIA_BASE}/$i
+done
+
+for i in ${SOUNDS}
+do
+  rm -rf ${MEDIA_BASE}/$i
+done
+
+exit 0
