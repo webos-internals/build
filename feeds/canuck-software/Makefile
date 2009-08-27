@@ -20,9 +20,8 @@
 NAME     = canuck-software
 HOMEPAGE = http://www.canuck-software.ca/
 
-PACKAGES = package-list.txt
-
-download:
+SRC_XML = http://www.fileden.com/files/2009/1/22/2279233/canucksoftware-ipkg.xml
+include ../../support/download.mk
 
 .PHONY: unpack
 unpack: build/.unpacked
@@ -30,10 +29,10 @@ unpack: build/.unpacked
 .PHONY: package
 package: build/.built
 
-build/.unpacked build/.built: ${PACKAGES}
+build/.unpacked build/.built: ${DL_DIR}/${NAME}-feed.xml
 	rm -f $@
 	mkdir -p build ipkgs
-	../../scripts/ipkg-scraper.py ${PACKAGES} ipkgs > build/Metadata
+	../../scripts/precentral-scraper.py ${DL_DIR}/${NAME}-feed.xml ipkgs > build/Metadata
 	touch $@
 
 clobber::
