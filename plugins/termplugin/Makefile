@@ -1,6 +1,6 @@
 NAME     = termplugin
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.2.1
+VERSION  = 0.2.2
 HOMEPAGE = http://www.preware.org/wiki/Application:Terminal
 MAINTAINER = WebOS Internals <support@webos-internal.org>
 DESCRIPTION = Terminal Service Plugin
@@ -40,10 +40,8 @@ build/armv7/CONTROL/postinst:
 	rm -f $@
 	mkdir -p build/armv7/CONTROL
 	echo "#!/bin/sh" > $@
-	echo "mount -o remount,rw /" >> $@
 	echo "rm -f /usr/lib/BrowserPlugins/${NAME}.so" >> $@
 	echo "ln -s /var/usr/lib/BrowserPlugins/${NAME}.so /usr/lib/BrowserPlugins/${NAME}.so" >> $@
-	echo "mount -o remount,ro /" >> $@
 	echo "exit 0" >> $@
 	chmod ugo+x $@
 
@@ -60,9 +58,7 @@ build/armv7/CONTROL/prerm:
 	rm -f $@
 	mkdir -p build/armv7/CONTROL
 	echo "#!/bin/sh" > $@
-	echo "mount -o remount,rw /" >> $@
 	echo "rm -f /usr/lib/BrowserPlugins/${NAME}.so" >> $@
-	echo "mount -o remount,ro /" >> $@
 	echo "exit 0" >> $@
 	chmod ugo+x $@
 
