@@ -28,13 +28,13 @@ for line in fileinput.input([sys.argv[1]]) :
     m = regexp.search(line)
     if (m) :
         title = m.group(1)
-#        json += "\"title\":\"%s\", " % title
+        json += "\"Title\":\"%s\", " % title
 
     regexp = re.compile('.+"content":"([^"]+)".+')
     m = regexp.search(line)
     if (m) :
         description = m.group(1)
-#        json += "\"description\":\"%s\", " % description
+        json += "\"FullDescription\":\"%s\", " % description
 
     regexp = re.compile('.+"url":"(http://[^"]+\.ipk)".+')
     m = regexp.search(line)
