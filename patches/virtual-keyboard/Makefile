@@ -1,11 +1,11 @@
 NAME     = virtual-keyboard
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.0.2
+VERSION  = 0.1.0
 HOMEPAGE = http://www.preware.org/wiki/On_Screen_Keyboard
 MAINTAINER = WebOS Internals <support@webos-internal.org>
 DESCRIPTION = Virtual Keyboard
 SECTION = WebOS Patches
-DEPENDS = org.webosinternal.patch
+DEPENDS = org.webosinternals.patch
 
 PATCHES = add-onscreen-keyboard.patch
 FILES = /usr/palm/frameworks/mojo/builtins/palmInitFramework191_15.js \

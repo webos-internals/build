@@ -53,4 +53,6 @@ else
     mv ${APP_DIR}/virtual-keyboard/kb_config.json ${MEDIA_BASE}/kb_config.json
   fi
 fi
+
+stop LunaSysMgr && start LunaSysMgr
 exit 0
