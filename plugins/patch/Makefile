@@ -1,9 +1,9 @@
 NAME     = patch
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 2.5.9.1
+VERSION  = 2.5.9.2
 HOMEPAGE = http://www.preware.org/wiki/Application:Patch
 MAINTAINER = WebOS Internals <support@webos-internal.org>
-DESCRIPTION = Preware Patch Utility
+DESCRIPTION = GNU Patch Binary
 SECTION = Services and Plugins
 
 SRC_TGZ = http://ftp.debian.org/debian/pool/main/p/patch/patch_2.5.9.orig.tar.gz
