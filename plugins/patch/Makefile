@@ -1,6 +1,6 @@
 NAME     = patch
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 2.5.9
+VERSION  = 2.5.9.1
 HOMEPAGE = http://www.preware.org/wiki/Application:Patch
 MAINTAINER = WebOS Internals <support@webos-internal.org>
 DESCRIPTION = Preware Patch Utility
