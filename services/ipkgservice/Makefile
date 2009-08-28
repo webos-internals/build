@@ -1,7 +1,7 @@
 NAME     = ipkgservice
 CLASS    = IPKGService
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.7.5
+VERSION  = 0.7.7
 HOMEPAGE = http://www.preware.org/wiki/Application:Preware
 MAINTAINER = WebOS Internals <service@webos-internals.org>
 DESCRIPTION = Package Manager Service
@@ -75,6 +75,8 @@ build/${NAME}/CONTROL/postinst:
 	echo "echo \"src/gz all http://ipkg.preware.org/feeds/webos-internals/all\" > /var/etc/ipkg/webos-internals.conf" >> $@
 	echo "echo \"src/gz \`/bin/uname -m\` http://ipkg.preware.org/feeds/webos-internals/\`/bin/uname -m\`\" >> /var/etc/ipkg/webos-internals.conf" >> $@
 	echo "sed -i -e 's|armv7l|armv7|g' /var/etc/ipkg/webos-internals.conf" >> $@
+	echo "rm -f /var/etc/ipkg/arch.conf" >> $@
+	echo "ln -s /etc/ipkg/arch.conf /var/etc/ipkg/arch.conf" >> $@
 	echo "exit 0" >> $@
 	chmod ugo+x $@
 
