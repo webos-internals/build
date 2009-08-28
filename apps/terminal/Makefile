@@ -2,6 +2,7 @@ NAME     = terminal
 APP_ID   = org.webosinternals.${NAME}
 VERSION  = 0.2.2
 DEPENDS = org.webosinternals.termplugin
+SECTION = System Utilities
 
 SRC_GIT = git://git.webos-internals.org/applications/terminal.git
 include ../../support/download.mk

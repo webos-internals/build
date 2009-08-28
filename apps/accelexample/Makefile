@@ -4,6 +4,7 @@ VERSION  = 0.1.0
 HOMEPAGE = http://www.preware.org/wiki/Application:AccelService
 MAINTAINER = Eric J. Gaudet <emoney_33@yahoo.com>
 DEPENDS = org.webosinternals.accelservice
+SECTION = System Utilities
 
 SRC_GIT = git://git.webos-internals.org/applications/accelexample.git
 include ../../support/download.mk
