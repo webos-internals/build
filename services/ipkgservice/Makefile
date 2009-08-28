@@ -1,7 +1,7 @@
 NAME     = ipkgservice
 CLASS    = IPKGService
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.7.4
+VERSION  = 0.7.5
 HOMEPAGE = http://www.preware.org/wiki/Application:Preware
 MAINTAINER = WebOS Internals <service@webos-internals.org>
 DESCRIPTION = Package Manager Service
