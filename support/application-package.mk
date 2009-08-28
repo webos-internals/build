@@ -96,17 +96,18 @@ ifdef CONFLICTS
 endif
 	echo -n "Source: " >> $@
 ifdef SRC_IPKG
-	echo -n "{ \"Source\":\"${SRC_IPKG}\", \"Last-Updated\":\""`date +%s`"\", \"Category\":\"" >> $@
+	echo -n "{ \"Source\":\"${SRC_IPKG}\"">> $@
 endif
 ifdef SRC_TGZ
-	echo -n "{ \"Source\":\"${SRC_TGZ}\", \"Last-Updated\":\""`date +%s`"\", \"Category\":\"" >> $@
+	echo -n "{ \"Source\":\"${SRC_TGZ}\"" >> $@
 endif
 ifdef SRC_ZIP
-	echo -n "{ \"Source\":\"${SRC_ZIP}\", \"Last-Updated\":\""`date +%s`"\", \"Category\":\"" >> $@
+	echo -n "{ \"Source\":\"${SRC_ZIP}\"" >> $@
 endif
 ifdef SRC_GIT
-	echo -n "{ \"Source\":\"${SRC_GIT}\", \"Last-Updated\":\""`date +%s`"\", \"Category\":\"" >> $@
+	echo -n "{ \"Source\":\"${SRC_GIT}\"" >> $@
 endif
+	echo -n ", \"Last-Updated\":\""`date +%s`"\", \"LastUpdated\":\""`date +%s`"\", \"Feed\":\"WebOS Internals\", \"Category\":\"" >> $@
 ifdef SECTION
 	echo "${SECTION}\" }" >> $@
 else

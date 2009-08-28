@@ -78,22 +78,19 @@ ifdef CONFLICTS
 	echo "Conficts: ${CONFLICTS}" >> $@
 endif
 	echo -n "Source: " >> $@
-ifdef SOURCE
-	echo "${SOURCE}" >> $@
-else
 ifdef SRC_IPKG
-	echo "{ \"Source\":\"${SRC_IPKG}\", \"Last-Updated\":\""`date +%s`"\", \"Category\":\"${SECTION}\" }" >> $@
+	echo -n "{ \"Source\":\"${SRC_IPKG}\"">> $@
 endif
 ifdef SRC_TGZ
-	echo "{ \"Source\":\"${SRC_TGZ}\", \"Last-Updated\":\""`date +%s`"\", \"Category\":\"${SECTION}\" }" >> $@
+	echo -n "{ \"Source\":\"${SRC_TGZ}\"" >> $@
 endif
 ifdef SRC_ZIP
-	echo "{ \"Source\":\"${SRC_ZIP}\", \"Last-Updated\":\""`date +%s`"\", \"Category\":\"${SECTION}\" }" >> $@
+	echo -n "{ \"Source\":\"${SRC_ZIP}\"" >> $@
 endif
 ifdef SRC_GIT
-	echo "{ \"Source\":\"${SRC_GIT}\", \"Last-Updated\":\""`date +%s`"\", \"Category\":\"${SECTION}\" }" >> $@
+	echo -n "{ \"Source\":\"${SRC_GIT}\"" >> $@
 endif
-endif
+	echo ", \"Last-Updated\":\""`date +%s`"\", \"LastUpdated\":\""`date +%s`"\", \"Feed\":\"WebOS Internals\", \"Category\":\"${SECTION}\" }" >> $@
 	touch $@
 
 clobber::
