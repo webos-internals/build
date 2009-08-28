@@ -6,7 +6,7 @@ MAINTAINER = WebOS Internals <support@webos-internal.org>
 DESCRIPTION = Preware Patch Utility
 SECTION = Services and Plugins
 
-SRC_TGZ = http://ftp.debian.org/debian/pool/main/p/patch/patch_$(VERSION).orig.tar.gz
+SRC_TGZ = http://ftp.debian.org/debian/pool/main/p/patch/patch_2.5.9.orig.tar.gz
 include ../../support/download.mk
 
 .PHONY: unpack
@@ -16,7 +16,7 @@ build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/armv7 build/i686
 	tar -C build -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	mv build/${NAME}-${VERSION} build/src
+	mv build/${NAME}-2.5.9 build/src
 	touch $@
 
 .PHONY: build
