@@ -32,7 +32,7 @@ package: build/.built
 build/.unpacked build/.built: ${DL_DIR}/${NAME}-feed.xml
 	rm -f $@
 	mkdir -p build ipkgs
-	../../scripts/precentral-scraper.py ${DL_DIR}/${NAME}-feed.xml ipkgs > build/Metadata
+	../../scripts/canuck-software-scraper.py ${DL_DIR}/${NAME}-feed.xml ipkgs > build/Metadata
 	touch $@
 
 clobber::

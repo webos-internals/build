@@ -38,7 +38,7 @@ class PackageHandler(ContentHandler):
             self.section = self.data
 
         if (name == "link") :
-            self.json += "\"Homepage\":\"%s\", " % self.data.replace("homebrew-apps/homebrew-apps","homebrew-apps")
+            self.json += "\"Homepage\":\"%s\", " % self.data
 
         if (name == "url") :
             self.url = self.data
@@ -50,7 +50,7 @@ class PackageHandler(ContentHandler):
             if (m):
                 self.filename = m.group(2)
 
-                self.json += "\"Feed\":\"PreCentral\" }"
+                self.json += "\"Feed\":\"Canuck Software\" }"
 
                 print "Filename: " + self.filename
                 print "Source: " + self.json

@@ -19,8 +19,8 @@ for line in fileinput.input([sys.argv[1]]) :
 
         json += "\"Category\":\"Unsorted\", "
 
-        json = json[:-2]
-        json += " }"
+        json += "\"Feed\":\"PimpMyPre\" }"
+
         print "Source: " + json
         print
 
