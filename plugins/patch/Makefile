@@ -4,6 +4,7 @@ VERSION  = 2.5.9.2
 HOMEPAGE = http://www.preware.org/wiki/Application:Patch
 MAINTAINER = WebOS Internals <support@webos-internal.org>
 DESCRIPTION = GNU Patch Binary
+TYPE = Plugin
 SECTION = Services and Plugins
 
 SRC_TGZ = http://ftp.debian.org/debian/pool/main/p/patch/patch_2.5.9.orig.tar.gz

@@ -107,7 +107,13 @@ endif
 ifdef SRC_GIT
 	echo -n "{ \"Source\":\"${SRC_GIT}\"" >> $@
 endif
-	echo -n ", \"Last-Updated\":\""`date +%s`"\", \"LastUpdated\":\""`date +%s`"\", \"Feed\":\"WebOS Internals\", \"Category\":\"" >> $@
+	echo -n ", \"Last-Updated\":\""`date +%s`"\", \"LastUpdated\":\""`date +%s`"\", \"Feed\":\"WebOS Internals\"" >> $@
+ifdef TYPE
+	echo -n ", \"Type\":\"${TYPE}\"" >> $@
+else
+	echo -n ", \"Type\":\"Application\"" >> $@
+endif
+	echo -n ", \"Category\":\"" >> $@
 ifdef SECTION
 	echo "${SECTION}\" }" >> $@
 else

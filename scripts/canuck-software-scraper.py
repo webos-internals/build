@@ -35,6 +35,11 @@ class PackageHandler(ContentHandler):
             self.json += "\"Icon\":\"%s\", " % self.data
 
         if (name == "categories") :
+            if (self.data == "Services and Plugins"):
+                self.json += "\"Type\":\"Service\", "
+            else:
+                self.json += "\"Type\":\"Application\", "
+
             self.json += "\"Category\":\"%s\", " % self.data
             self.section = self.data
 

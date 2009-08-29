@@ -90,7 +90,13 @@ endif
 ifdef SRC_GIT
 	echo -n "{ \"Source\":\"${SRC_GIT}\"" >> $@
 endif
-	echo ", \"Last-Updated\":\""`date +%s`"\", \"LastUpdated\":\""`date +%s`"\", \"Feed\":\"WebOS Internals\", \"Category\":\"${SECTION}\" }" >> $@
+	echo -n ", \"Last-Updated\":\""`date +%s`"\", \"LastUpdated\":\""`date +%s`"\", \"Feed\":\"WebOS Internals\"" >> $@
+ifdef TYPE
+	echo -n ", \"Type\":\"${TYPE}\"" >> $@
+else
+	echo -n ", \"Type\":\"Plugin\"" >> $@
+endif
+	echo ", \"Category\":\"${SECTION}\" }" >> $@
 	touch $@
 
 clobber::
