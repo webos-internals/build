@@ -5,6 +5,7 @@ VERSION  = 0.7.7
 HOMEPAGE = http://www.preware.org/wiki/Application:Preware
 MAINTAINER = WebOS Internals <service@webos-internals.org>
 DESCRIPTION = Package Manager Service
+TYPE = Service
 SECTION = Services and Plugins
 
 SERVICEFILES = build/src/${APP_ID}.service
