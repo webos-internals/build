@@ -4,6 +4,7 @@ VERSION  = 0.1.2
 HOMEPAGE = http://www.preware.org/wiki/On_Screen_Keyboard
 MAINTAINER = WebOS Internals <support@webos-internal.org>
 DESCRIPTION = Virtual Keyboard
+TYPE = Patch
 SECTION = WebOS Patches
 DEPENDS = org.webosinternals.patch
 
