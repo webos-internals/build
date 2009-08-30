@@ -47,7 +47,7 @@ build/.unpacked: ${DL_DIR}/${APP_ID}_${VERSION}_all.ipk
 	    ${APP_ID}_${VERSION}_all.ipk )
 	[ -f build/${APP_ID}_${VERSION}_all/CONTROL/control ]
 	rm -f build/${APP_ID}_${VERSION}_all.ipk
-	mv build/${APP_ID}_${VERSION}_all build/${NAME}
+	mv build/${APP_ID}_${VERSION}_all build/all
 	touch $@
 
 endif

@@ -1,4 +1,4 @@
-# Makefile for PreWare application packaging
+# Makefile for PreWare plugin packaging
 #
 # Copyright (C) 2009 by Rod Whitby <rod@whitby.id.au>
 #
@@ -17,10 +17,11 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-.PHONY: package clobber
-
 ifndef NAME
 PREWARE_SANITY += $(error "Please define NAME in your Makefile")
+endif
+ifndef TITLE
+PREWARE_SANITY += $(error "Please define TITLE in your Makefile")
 endif
 ifndef VERSION
 PREWARE_SANITY += $(error "Please define VERSION in your Makefile")
@@ -28,22 +29,26 @@ endif
 ifndef APP_ID
 PREWARE_SANITY += $(error "Please define APP_ID in your Makefile")
 endif
+ifndef TYPE
+PREWARE_SANITY += $(error "Please define TYPE in your Makefile")
+endif
+ifndef CATEGORY
+PREWARE_SANITY += $(error "Please define CATEGORY in your Makefile")
+endif
 
-package: ipkgs/${APP_ID}_${VERSION}_all.ipk
-
-ipkgs/${APP_ID}_${VERSION}_all.ipk: build/.built
-	rm -f ipkgs/${APP_ID}_*_all.ipk
-	rm -f build/${NAME}/CONTROL/control
-	${MAKE} build/${NAME}/CONTROL/control
-	rm -f build/${NAME}/CONTROL/postinst
-	${MAKE} build/${NAME}/CONTROL/postinst
-	rm -f build/${NAME}/CONTROL/prerm
-	${MAKE} build/${NAME}/CONTROL/prerm
+ipkgs/${APP_ID}_${VERSION}_%.ipk: build/.built
+	rm -f ipkgs/${APP_ID}_*_$*.ipk
+	rm -f build/$*/CONTROL/control
+	${MAKE} build/$*/CONTROL/control
+	rm -f build/$*/CONTROL/postinst
+	${MAKE} build/$*/CONTROL/postinst
+	rm -f build/$*/CONTROL/prerm
+	${MAKE} build/$*/CONTROL/prerm
 	mkdir -p ipkgs
 	( cd build ; \
 	  TAR_OPTIONS=--wildcards \
-	  ../../../toolchain/ipkg-utils/ipkg-build -o 0 -g 0 ${NAME} )
-	mv build/${APP_ID}_${VERSION}_all.ipk $@
+	  ../../../toolchain/ipkg-utils/ipkg-build -o 0 -g 0 $* )
+	mv build/${APP_ID}_${VERSION}_$*.ipk $@
 
 build/%/CONTROL/postinst:
 	true
@@ -51,9 +56,14 @@ build/%/CONTROL/postinst:
 build/%/CONTROL/prerm:
 	true
 
-build/${NAME}/CONTROL/control: build/${NAME}/usr/palm/applications/${APP_ID}/appinfo.json
+ifeq ("${TYPE}", "Application")
+build/%/CONTROL/control: build/%/usr/palm/applications/${APP_ID}/appinfo.json
+else
+build/%/CONTROL/control: /dev/null
+endif
+	$(call PREWARE_SANITY)
 	rm -f $@
-	mkdir -p build/${NAME}/CONTROL
+	mkdir -p build/$*/CONTROL
 	echo "Package: ${APP_ID}" > $@
 	echo -n "Version: " >> $@
 ifdef VERSION
@@ -61,7 +71,7 @@ ifdef VERSION
 else
 	sed -ne 's|^[[:space:]]*"version":[[:space:]]*"\(.*\)",[[:space:]]*$$|\1|p' $< >> $@
 endif
-	echo "Architecture: all" >> $@
+	echo "Architecture: $*" >> $@
 	echo -n "Maintainer: " >> $@
 ifdef MAINTAINER
 	echo "${MAINTAINER}" >> $@
@@ -72,19 +82,18 @@ else
 	echo ">" >> $@
 endif
 	echo -n "Description: " >> $@
-ifdef DESCRIPTION
-	echo "${DESCRIPTION}" >> $@
+ifdef TITLE
+	echo "${TITLE}" >> $@
 else
 	sed -ne 's|^[[:space:]]*"title":[[:space:]]*"\(.*\)",[[:space:]]*$$|\1|p' $< >> $@
 endif
-	echo -n "Section: " >> $@
-ifdef SECTION
-	echo "${SECTION}" >> $@
+ifdef CATEGORY
+	echo "Section: ${CATEGORY}" >> $@
 else
-	sed -ne 's|^[[:space:]]*"type":[[:space:]]*"\(.*\)",[[:space:]]*$$|\1|p' $< >> $@
+	echo "Section: Unsorted" >> $@
 endif
 ifdef PRIORITY
-	echo "${PRIORITY}" >> $@
+	echo "Priority: ${PRIORITY}" >> $@
 else
 	echo "Priority: optional" >> $@
 endif
@@ -107,20 +116,33 @@ endif
 ifdef SRC_GIT
 	echo -n "{ \"Source\":\"${SRC_GIT}\"" >> $@
 endif
-	echo -n ", \"Last-Updated\":\""`date +%s`"\", \"LastUpdated\":\""`date +%s`"\", \"Feed\":\"WebOS Internals\"" >> $@
+	echo -n ", \"Feed\":\"WebOS Internals\"" >> $@
 ifdef TYPE
 	echo -n ", \"Type\":\"${TYPE}\"" >> $@
-else
-	echo -n ", \"Type\":\"Application\"" >> $@
 endif
-	echo -n ", \"Category\":\"" >> $@
-ifdef SECTION
-	echo "${SECTION}\" }" >> $@
-else
-	sed -ne 's|^[[:space:]]*"type":[[:space:]]*"\(.*\)",[[:space:]]*$$|\1\" }|p' $< >> $@
+ifdef CATEGORY
+	echo -n ", \"Category\":\"${CATEGORY}\"" >> $@
 endif
+	echo -n ", \"LastUpdated\":\""`date +%s`"\", \"Last-Updated\":\""`date +%s`"\"" >> $@
+ifdef TITLE
+	echo -n ", \"Title\":\"${TITLE}\"" >> $@
+endif
+ifdef DESCRIPTION
+	echo -n ", \"FullDescription\":\"${DESCRIPTION}\"" >> $@
+endif
+ifdef HOMEPAGE
+	echo -n ", \"Homepage\":\"${HOMEPAGE}\"" >> $@
+endif
+ifdef ICON
+	echo -n ", \"Icon\":\"${ICON}\"" >> $@
+endif
+ifdef SCREENSHOTS
+	echo -n ", \"Screenshots\":${SCREENSHOTS}" >> $@
+endif
+	echo " }" >> $@
 	touch $@
 
+.PHONY: clobber
 clobber::
 	$(call PREWARE_SANITY)
 	rm -rf ipkgs

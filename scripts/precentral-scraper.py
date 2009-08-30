@@ -13,11 +13,13 @@ class PackageHandler(ContentHandler):
     filename = ""
     json = ""
     section = ""
+    screenshots = []
 
     def startElement(self, name, attrs):
         if (name == "application") :
             self.json = "{ "
             self.section = ""
+            self.screenshots = []
 
         self.getData = 1
             
@@ -25,25 +27,31 @@ class PackageHandler(ContentHandler):
         self.getData = 0
 
         if (name == "title") :
-            self.json += "\"Title\":\"%s\", " % self.data
+            self.json += "\"Title\":\"%s\", " % self.data.replace('"', '\\"')
 
         if (name == "lastupdate") :
             self.json += "\"Last-Updated\":\"%s\", " % self.data
             self.json += "\"LastUpdated\":\"%s\", " % self.data
 
         if (name == "icon") :
-            self.json += "\"Icon\":\"%s\", " % self.data
+            self.json += "\"Icon\":\"%s\", " % self.data.replace('"', '\\"')
+
+        if (name == "description") :
+            self.json += "\"FullDescription\":\"%s\", " % self.data.replace('"', '\\"')
 
         if (name == "categories") :
             self.json += "\"Type\":\"Application\", "
-            self.json += "\"Category\":\"%s\", " % self.data
+            self.json += "\"Category\":\"%s\", " % self.data.replace('"', '\\"')
             self.section = self.data
 
         if (name == "link") :
-            self.json += "\"Homepage\":\"%s\", " % self.data.replace("homebrew-apps/homebrew-apps","homebrew-apps")
+            self.json += "\"Homepage\":\"%s\", " % self.data.replace("homebrew-apps/homebrew-apps","homebrew-apps").replace('"', '\\"')
 
         if (name == "url") :
             self.url = self.data
+
+        if (name == "screenshot") :
+            self.screenshots.append('"' + self.data.replace('"', '\\"') + '"')
 
         if (name == "application") :
 
@@ -51,6 +59,9 @@ class PackageHandler(ContentHandler):
             m = regexp.match(self.url)
             if (m):
                 self.filename = m.group(2)
+
+                if (len(self.screenshots)):
+                    self.json += "\"Screenshots\":[" + ','.join(self.screenshots) + "], "
 
                 self.json += "\"Feed\":\"PreCentral\" }"
 
@@ -68,7 +79,7 @@ class PackageHandler(ContentHandler):
 
     def characters (self, ch): 
         if (self.getData) :
-            self.data = ch
+            self.data = ch.encode('utf-8')
 
         return
 

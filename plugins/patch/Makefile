@@ -1,13 +1,20 @@
 NAME     = patch
+TITLE    = GNU Patch
 APP_ID   = org.webosinternals.${NAME}
 VERSION  = 2.5.9.2
-HOMEPAGE = http://www.preware.org/wiki/Application:Patch
+HOMEPAGE = http://savannah.gnu.org/projects/patch
 MAINTAINER = WebOS Internals <support@webos-internal.org>
-DESCRIPTION = GNU Patch Binary
-TYPE = Plugin
-SECTION = Services and Plugins
+DESCRIPTION = This package is simply the GNU Patch utility, cross-compiled and packaged up in a form such that it can be used in the installation scripts of other packages.
+TYPE	 = Plugin
+CATEGORY = Services and Plugins
+ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
 
 SRC_TGZ = http://ftp.debian.org/debian/pool/main/p/patch/patch_2.5.9.orig.tar.gz
+
+.PHONY: package
+package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
+include ../../support/package.mk
+
 include ../../support/download.mk
 
 .PHONY: unpack
@@ -42,8 +49,6 @@ build/armv7.built: build/.unpacked
 	mkdir -p build/armv7/usr/bin
 	install -m 755 build/src/${NAME} build/armv7/usr/bin
 	touch $@
-
-include ../../support/plugin-package.mk
 
 clobber::
 	rm -rf build

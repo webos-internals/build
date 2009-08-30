@@ -25,14 +25,17 @@ class PackageHandler(ContentHandler):
         self.getData = 0
 
         if (name == "title") :
-            self.json += "\"Title\":\"%s\", " % self.data
+            self.json += "\"Title\":\"%s\", " % self.data.replace('"', '\\"')
 
         if (name == "lastupdate") :
             self.json += "\"Last-Updated\":\"%s\", " % self.data
             self.json += "\"LastUpdated\":\"%s\", " % self.data
 
         if (name == "icon") :
-            self.json += "\"Icon\":\"%s\", " % self.data
+            self.json += "\"Icon\":\"%s\", " % self.data.replace('"', '\\"')
+
+        if (name == "description") :
+            self.json += "\"FullDescription\":\"%s\", " % self.data.replace('"', '\\"')
 
         if (name == "categories") :
             if (self.data == "Services and Plugins"):
@@ -40,11 +43,11 @@ class PackageHandler(ContentHandler):
             else:
                 self.json += "\"Type\":\"Application\", "
 
-            self.json += "\"Category\":\"%s\", " % self.data
+            self.json += "\"Category\":\"%s\", " % self.data.replace('"', '\\"')
             self.section = self.data
 
         if (name == "link") :
-            self.json += "\"Homepage\":\"%s\", " % self.data
+            self.json += "\"Homepage\":\"%s\", " % self.data.replace('"', '\\"')
 
         if (name == "url") :
             self.url = self.data
@@ -72,7 +75,7 @@ class PackageHandler(ContentHandler):
 
     def characters (self, ch): 
         if (self.getData) :
-            self.data = ch
+            self.data = ch.encode('utf-8')
 
         return
 

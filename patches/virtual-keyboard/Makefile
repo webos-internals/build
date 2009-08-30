@@ -3,17 +3,24 @@ APP_ID   = org.webosinternals.${NAME}
 VERSION  = 0.1.2
 HOMEPAGE = http://www.preware.org/wiki/On_Screen_Keyboard
 MAINTAINER = WebOS Internals <support@webos-internal.org>
-DESCRIPTION = Virtual Keyboard
+TITLE = Virtual Keyboard
 TYPE = Patch
 SECTION = WebOS Patches
 DEPENDS = org.webosinternals.patch
+ICON	= http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
+DESCRIPTION = Double-tapping the gesture area (near the round silver button) will bring up the on-screen keyboard if you are in a text input field. Tap with two fingers separated or Double-tap quickly.  In the Emulator, tap PageUp twice.
+SCREENSHOTS = [\"http://www.webos-internals.org/images/e/ed/Messaging_2009-22-08_000708.png\"]
 
 PATCHES = add-onscreen-keyboard.patch
 FILES = /usr/palm/frameworks/mojo/builtins/palmInitFramework191_15.js \
 	/usr/palm/frameworks/mojo/submissions/191.15/stylesheets/global.css
 
-# SRC_GIT = git://git.webos-internals.org/webos/modifications.git
-SRC_GIT = git://gitorious.org/webos-internals/modifications.git
+SRC_GIT = git://git.webos-internals.org/webos/modifications.git
+
+.PHONY: package
+package: ipkgs/${APP_ID}_${VERSION}_all.ipk
+include ../../support/package.mk
+
 include ../../support/download.mk
 
 include ../../support/patch-md5sums.mk
@@ -34,28 +41,27 @@ build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 build: build/.built
 
 build/.built: build/.unpacked build/md5sums
-	rm -rf build/${NAME}
+	rm -rf build/all
 	rm -rf build.tmp
 	mkdir -p build.tmp
 	tar -C build.tmp -xvf build/src/virtual-keyboard-themes.tar.gz
-	mkdir -p build/${NAME}/usr/palm/applications/${APP_ID}
+	mkdir -p build/all/usr/palm/applications/${APP_ID}
 	mv build.tmp/media/internal/virtual-keyboard \
-	   build/${NAME}/usr/palm/applications/${APP_ID}/
+	   build/all/usr/palm/applications/${APP_ID}/
 	rm -rf build.tmp
-	mkdir -p build/${NAME}/usr/palm/applications/${APP_ID}/patches
-	install -m 644 build/src/${PATCHES} build/${NAME}/usr/palm/applications/${APP_ID}/patches/
+	mkdir -p build/all/usr/palm/applications/${APP_ID}/patches
+	install -m 644 build/src/${PATCHES} build/all/usr/palm/applications/${APP_ID}/patches/
 	for f in ${FILES} ; do \
-	  grep $$f build/md5sums >> build/${NAME}/usr/palm/applications/${APP_ID}/md5sums ; \
+	  grep $$f build/md5sums >> build/all/usr/palm/applications/${APP_ID}/md5sums ; \
 	done
 	touch $@
 
-build/${NAME}/CONTROL/%: files/%
+build/all/CONTROL/%: files/%
 	rm -f $@
-	mkdir -p build/${NAME}/CONTROL
-	install files/$* build/${NAME}/CONTROL
+	mkdir -p build/all/CONTROL
+	install files/$* build/all/CONTROL
 	chmod ugo+x $@
 
-include ../../support/service-package.mk
-
+.PHONY: clobber
 clobber::
 	rm -rf build

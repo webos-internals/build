@@ -4,15 +4,22 @@ APP_ID   = org.webosinternals.${NAME}
 VERSION  = 0.1.0
 HOMEPAGE = http://www.preware.org/wiki/Application:${CLASS}
 MAINTAINER = Eric J. Gaudet <emoney_33@yahoo.com>
-DESCRIPTION = Accelerometer Service
-SECTION = Services and Plugins
+TITLE	 = Accelerometer Service
+DESCRIPTION = This service provides access to the accelerometer driver\'s poll_interval parameter. As of webOS 1.1.0, this interval is not accessible from application development and is set to 250ms. This makes most accelerometer driven applications choppy and slow. With this service, the poll_interval can be changed dynamically by the application.
+TYPE = Service
+CATEGORY = Services and Plugins
+ICON	= http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
 
 SERVICEFILES = build/src/${APP_ID}.service
 PACKAGEPATH := $(subst .,/,${APP_ID})
 CLASSFILES := $(addsuffix .class,$(addprefix ${PACKAGEPATH}/,${CLASSES}))
 
-
 SRC_GIT = git://git.webos-internals.org/services/accelservice.git
+
+.PHONY: package
+package: ipkgs/${APP_ID}_${VERSION}_all.ipk
+include ../../support/package.mk
+
 include ../../support/download.mk
 
 JARFILES = \
@@ -42,21 +49,21 @@ build: build/.built
 build/.built: build/src/${NAME}.java
 	rm -f $@
 	( cd build/src ; ant build jar )
-	mkdir -p build/${NAME}/${LUNAPATH}
-	install -m 644 build/src/${APP_ID}.jar build/${NAME}/${LUNAPATH}/
-	mkdir -p build/${NAME}/usr/share/dbus-1/system-services
-	install -m 644 ${SERVICEFILES} build/${NAME}/usr/share/dbus-1/system-services/
-	mkdir -p build/${NAME}/etc/event.d
-	echo "start on started java-serviceboot" > build/${NAME}/etc/event.d/${APP_ID}
-	echo "script" >> build/${NAME}/etc/event.d/${APP_ID}
-	echo "/usr/bin/luna-helper 'luna://com.palm.vm/launch' '{\"serviceName\":\"${APP_ID}\",\"className\":\"${APP_ID}.${CLASS}\"}'" >> build/${NAME}/etc/event.d/${APP_ID}
-	echo "end script" >> build/${NAME}/etc/event.d/${APP_ID}
-	echo "respawn" >> build/${NAME}/etc/event.d/${APP_ID}
+	mkdir -p build/all/${LUNAPATH}
+	install -m 644 build/src/${APP_ID}.jar build/all/${LUNAPATH}/
+	mkdir -p build/all/usr/share/dbus-1/system-services
+	install -m 644 ${SERVICEFILES} build/all/usr/share/dbus-1/system-services/
+	mkdir -p build/all/etc/event.d
+	echo "start on started java-serviceboot" > build/all/etc/event.d/${APP_ID}
+	echo "script" >> build/all/etc/event.d/${APP_ID}
+	echo "/usr/bin/luna-helper 'luna://com.palm.vm/launch' '{\"serviceName\":\"${APP_ID}\",\"className\":\"${APP_ID}.${CLASS}\"}'" >> build/all/etc/event.d/${APP_ID}
+	echo "end script" >> build/all/etc/event.d/${APP_ID}
+	echo "respawn" >> build/all/etc/event.d/${APP_ID}
 	touch $@
 
-build/${NAME}/CONTROL/postinst:
+build/all/CONTROL/postinst:
 	rm -f $@
-	mkdir -p build/${NAME}/CONTROL
+	mkdir -p build/all/CONTROL
 	echo "#!/bin/sh" > $@
 	echo "rm -f /usr/lib/luna/java/${APP_ID}.jar" >> $@
 	echo "ln -s /var/usr/lib/luna/java/${APP_ID}.jar /usr/lib/luna/java/${APP_ID}.jar" >> $@
@@ -69,9 +76,9 @@ build/${NAME}/CONTROL/postinst:
 	echo "exit 0" >> $@
 	chmod ugo+x $@
 
-build/${NAME}/CONTROL/prerm:
+build/all/CONTROL/prerm:
 	rm -f $@
-	mkdir -p build/${NAME}/CONTROL
+	mkdir -p build/all/CONTROL
 	echo "#!/bin/sh" > $@
 	echo "rm -f /usr/lib/luna/java/${APP_ID}.jar" >> $@
 	echo "rm -f /usr/share/dbus-1/system-services/${APP_ID}.service" >> $@
@@ -80,8 +87,6 @@ build/${NAME}/CONTROL/prerm:
 	echo "/sbin/initctl start java-serviceboot" >> $@
 	echo "exit 0" >> $@
 	chmod ugo+x $@
-
-include ../../support/service-package.mk
 
 clobber::
 	rm -rf build

@@ -3,10 +3,18 @@ APP_ID   = org.webosinternals.${NAME}
 VERSION  = 0.2.2
 HOMEPAGE = http://www.preware.org/wiki/Application:Terminal
 MAINTAINER = WebOS Internals <support@webos-internal.org>
-DESCRIPTION = Terminal Service Plugin
-SECTION = Services and Plugins
+TITLE = Terminal Service Plugin
+TYPE = Plugin
+CATEGORY = Services and Plugins
+DESCRIPTION = The Terminal Service Plugin is a back-end binary browser plugin providing the core of the Terminal application.  It does not have an icon, and cannot be launched - it can only be used by another application.
+ICON	 = http://www.webos-internals.org/images/7/74/Icon_WebOSInternals_Terminal.png
 
 SRC_GIT = git://git.webos-internals.org/plugins/termplugin.git
+
+.PHONY: package
+package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
+include ../../support/package.mk
+
 include ../../support/download.mk
 
 .PHONY: unpack
@@ -69,8 +77,6 @@ build/i686/CONTROL/prerm:
 	echo "rm -f /usr/lib/BrowserPlugins/${NAME}.so" >> $@
 	echo "exit 0" >> $@
 	chmod ugo+x $@
-
-include ../../support/plugin-package.mk
 
 clobber::
 	rm -rf build

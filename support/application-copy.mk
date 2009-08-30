@@ -22,4 +22,3 @@ include ../../support/application-unpack.mk
 %/.built : %/.unpacked
 	touch $@
 
-include ../../support/application-package.mk

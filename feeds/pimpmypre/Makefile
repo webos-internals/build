@@ -21,13 +21,14 @@ NAME     = pimpmypre
 HOMEPAGE = http://pimpmypre.com/
 
 SRC_XML = http://pimpmypre.com/data/repo2.get.php?cat=applications
+
+.PHONY: package
+package: build/.built
+
 include ../../support/download.mk
 
 .PHONY: unpack
 unpack: build/.unpacked
-
-.PHONY: package
-package: build/.built
 
 build/.unpacked build/.built: ${DL_DIR}/${NAME}-feed.xml
 	rm -f $@
@@ -35,5 +36,6 @@ build/.unpacked build/.built: ${DL_DIR}/${NAME}-feed.xml
 	../../scripts/pimpmypre-scraper.py ${DL_DIR}/${NAME}-feed.xml ipkgs > build/Metadata
 	touch $@
 
+.PHONY: clobber
 clobber::
 	rm -rf build
