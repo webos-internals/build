@@ -36,8 +36,8 @@ class PackageHandler(ContentHandler):
         if (name == "icon") :
             self.json += "\"Icon\":\"%s\", " % self.data.replace('"', '\\"')
 
-        if (name == "description") :
-            self.json += "\"FullDescription\":\"%s\", " % self.data.replace('"', '\\"')
+#        if (name == "description") :
+#            self.json += "\"FullDescription\":\"%s\", " % self.data.replace('"', '\\"')
 
         if (name == "categories") :
             self.json += "\"Type\":\"Application\", "
