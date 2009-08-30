@@ -56,10 +56,16 @@ build/.built: build/.unpacked build/md5sums
 	done
 	touch $@
 
-build/all/CONTROL/%: files/%
+build/all/CONTROL/prerm: files/prerm
 	rm -f $@
 	mkdir -p build/all/CONTROL
-	install files/$* build/all/CONTROL
+	install files/prerm build/all/CONTROL
+	chmod ugo+x $@
+
+build/all/CONTROL/postinst: files/postinst
+	rm -f $@
+	mkdir -p build/all/CONTROL
+	install files/postinst build/all/CONTROL
 	chmod ugo+x $@
 
 .PHONY: clobber
