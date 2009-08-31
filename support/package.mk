@@ -139,6 +139,9 @@ endif
 ifdef SCREENSHOTS
 	echo -n ", \"Screenshots\":${SCREENSHOTS}" >> $@
 endif
+ifdef LICENSE
+	echo -n ", \"License\":\"${LICENSE}\"" >> $@
+endif
 	echo " }" >> $@
 	touch $@
 

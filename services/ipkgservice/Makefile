@@ -9,6 +9,7 @@ DESCRIPTION = The Package Manager Service is a back-end interface to the ipkg co
 TYPE	 = Service
 CATEGORY = Services and Plugins
 ICON	= http://www.webos-internals.org/images/e/e4/Icon_Preware.png
+LICENSE = GPL v2 Open Source
 
 SERVICEFILES = build/src/${APP_ID}.service
 PACKAGEPATH := $(subst .,/,${APP_ID})

@@ -8,6 +8,7 @@ TYPE	= Application
 DESCRIPTION = An example of how to use the Accelerometer Service (org.webosinternals.accelservice).
 CATEGORY = System Utilities
 ICON	= http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
+LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/applications/accelexample.git
 

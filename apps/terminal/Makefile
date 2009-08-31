@@ -9,6 +9,7 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Application:Terminal
 ICON	 = http://www.webos-internals.org/images/7/74/Icon_WebOSInternals_Terminal.png
 DESCRIPTION = Description for Terminal
 SCREENSHOTS = [\"http://www.webos-internals.org/images/b/bd/Application_Terminal.jpg\"]
+LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/applications/terminal.git
 

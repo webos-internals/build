@@ -9,6 +9,7 @@ DESCRIPTION = This service provides access to the accelerometer driver\'s poll_i
 TYPE = Service
 CATEGORY = Services and Plugins
 ICON	= http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
+LICENSE = GPL v2 Open Source
 
 SERVICEFILES = build/src/${APP_ID}.service
 PACKAGEPATH := $(subst .,/,${APP_ID})

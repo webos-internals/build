@@ -8,6 +8,7 @@ TYPE = Plugin
 CATEGORY = Services and Plugins
 DESCRIPTION = The Terminal Service Plugin is a back-end binary browser plugin providing the core of the Terminal application.  It does not have an icon, and cannot be launched - it can only be used by another application.
 ICON	 = http://www.webos-internals.org/images/7/74/Icon_WebOSInternals_Terminal.png
+LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/plugins/termplugin.git
 

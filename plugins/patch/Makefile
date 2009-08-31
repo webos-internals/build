@@ -8,6 +8,7 @@ DESCRIPTION = This package is simply the GNU Patch utility, cross-compiled and p
 TYPE	 = Plugin
 CATEGORY = Services and Plugins
 ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
+LICENSE  = GPL v2 Open Source
 
 SRC_TGZ = http://ftp.debian.org/debian/pool/main/p/patch/patch_2.5.9.orig.tar.gz
 
