@@ -15,7 +15,7 @@ PATCHES = add-onscreen-keyboard.patch
 FILES = /usr/palm/frameworks/mojo/builtins/palmInitFramework191_15.js \
 	/usr/palm/frameworks/mojo/submissions/191.15/stylesheets/global.css
 
-SRC_GIT = git://git.webos-internals.org/webos/modifications.git
+SRC_GIT = git://git.webos-internals.org/patches/virtual-keyboard.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
@@ -29,12 +29,9 @@ include ../../support/patch-md5sums.mk
 unpack: build/.unpacked
 
 build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	rm -rf build build.tmp
-	mkdir -p build.tmp
-	tar -C build.tmp -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	mkdir -p build
-	cp -r build.tmp/frameworks build/src
-	rm -rf build.tmp
+	rm -rf build
+	mkdir -p build/src
+	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	touch $@
 
 .PHONY: build
