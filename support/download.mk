@@ -109,7 +109,7 @@ ${DL_DIR}/${NAME}-${VERSION}.tar.gz:
 	$(call PREWARE_SANITY)
 	rm -rf build
 	mkdir build
-	( cd build ; git clone ${SRC_GIT} )
+	( cd build ; git clone -n ${SRC_GIT} ; cd `basename ${SRC_GIT} .git` ; git checkout v${VERSION} )
 	mkdir -p ${DL_DIR}
 	tar -C build/`basename ${SRC_GIT} .git` -zcf $@ .
 
