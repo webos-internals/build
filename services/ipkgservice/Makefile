@@ -8,7 +8,7 @@ TITLE	 = Package Manager Service
 DESCRIPTION = The Package Manager Service is a back-end interface to the ipkg command line application which manages all packages that are installed on the Pre.  It cannot be launched from the launcher screen - it can only be used by another application.  If you do see an icon for it in the launcher, just reboot and the icon will disappear.  Do not delete the icon.
 TYPE	 = Service
 CATEGORY = Services and Plugins
-ICON	= http://www.webos-internals.org/images/e/e4/Icon_Preware.png
+ICON	= http://www.webos-internals.org/images/7/77/Icon_WebOSInternals_PackageManager.png
 LICENSE = GPL v2 Open Source
 
 SERVICEFILES = build/src/${APP_ID}.service
