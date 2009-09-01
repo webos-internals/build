@@ -39,8 +39,8 @@ class PackageHandler(ContentHandler):
         if (name == "license") :
             self.json += "\"License\":\"%s\", " % self.data
 
-        if (name == "description") :
-            self.json += "\"FullDescription\":\"%s\", " % self.data
+#        if (name == "description") :
+#            self.json += "\"FullDescription\":\"%s\", " % self.data
 
         if (name == "categories") :
             self.json += "\"Type\":\"Application\", "
