@@ -27,34 +27,34 @@ class PackageHandler(ContentHandler):
         self.getData = 0
 
         if (name == "title") :
-            self.json += "\"Title\":\"%s\", " % self.data.replace('"', '\\"')
+            self.json += "\"Title\":\"%s\", " % self.data
 
         if (name == "lastupdate") :
             self.json += "\"Last-Updated\":\"%s\", " % self.data
             self.json += "\"LastUpdated\":\"%s\", " % self.data
 
         if (name == "icon") :
-            self.json += "\"Icon\":\"%s\", " % self.data.replace('"', '\\"')
+            self.json += "\"Icon\":\"%s\", " % self.data
 
         if (name == "license") :
-            self.json += "\"License\":\"%s\", " % self.data.replace('"', '\\"')
+            self.json += "\"License\":\"%s\", " % self.data
 
-#        if (name == "description") :
-#            self.json += "\"FullDescription\":\"%s\", " % self.data.replace('"', '\\"')
+        if (name == "description") :
+            self.json += "\"FullDescription\":\"%s\", " % self.data
 
         if (name == "categories") :
             self.json += "\"Type\":\"Application\", "
-            self.json += "\"Category\":\"%s\", " % self.data.replace('"', '\\"')
+            self.json += "\"Category\":\"%s\", " % self.data
             self.section = self.data
 
         if (name == "link") :
-            self.json += "\"Homepage\":\"%s\", " % self.data.replace("homebrew-apps/homebrew-apps","homebrew-apps").replace('"', '\\"')
+            self.json += "\"Homepage\":\"%s\", " % self.data.replace("homebrew-apps/homebrew-apps","homebrew-apps")
 
         if (name == "url") :
             self.url = self.data
 
         if (name == "screenshot") :
-            self.screenshots.append('"' + self.data.replace('"', '\\"') + '"')
+            self.screenshots.append('"' + self.data + '"')
 
         if (name == "application") :
 
@@ -82,7 +82,7 @@ class PackageHandler(ContentHandler):
 
     def characters (self, ch): 
         if (self.getData) :
-            self.data = ch.encode('utf-8')
+            self.data = ch.encode('utf-8').replace('"', '\\"').replace(':', '&#58;')
 
         return
 
