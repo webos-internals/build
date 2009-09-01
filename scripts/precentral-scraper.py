@@ -39,8 +39,8 @@ class PackageHandler(ContentHandler):
         if (name == "license") :
             self.json += "\"License\":\"%s\", " % self.data
 
-#        if (name == "description") :
-#            self.json += "\"FullDescription\":\"%s\", " % self.data
+        if (name == "description") :
+            self.json += "\"FullDescription\":\"%s\", " % self.data
 
         if (name == "categories") :
             self.json += "\"Type\":\"Application\", "
@@ -82,7 +82,7 @@ class PackageHandler(ContentHandler):
 
     def characters (self, ch): 
         if (self.getData) :
-            self.data = ch.encode('utf-8').replace('"', '\\"').replace(':', '&#58;')
+            self.data = ch.encode('utf-8').replace('"', '\\"').replace(': ', '&#58; ').replace('\n', '')
 
         return
 
