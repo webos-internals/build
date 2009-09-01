@@ -8,7 +8,13 @@ CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
 ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications.
-SCREENSHOTS = [\"http://www.webos-internals.org/images/d/df/Application_Preware_List.png\"]
+SCREENSHOTS = [\
+\"http://www.webos-internals.org/images/7/7f/Preware_ss1.jpg\",\
+\"http://www.webos-internals.org/images/4/41/Preware_ss2.jpg\",\
+\"http://www.webos-internals.org/images/3/3b/Preware_ss3.jpg\",\
+\"http://www.webos-internals.org/images/4/49/Preware_ss4.jpg\",\
+\"http://www.webos-internals.org/images/4/4b/Preware_ss5.jpg\",\
+\"http://www.webos-internals.org/images/6/6a/Preware_ss6.jpg\" ]
 LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/applications/preware.git
