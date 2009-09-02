@@ -66,6 +66,9 @@ toolchain/cs08q1armel/build/arm-2008q1:
 upload:
 	rsync -avr ipkgs/ ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/
 
+testing:
+	rsync -avr ipkgs/webos-internals/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/testing/
+
 distclean: clobber
 	find toolchain -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
