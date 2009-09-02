@@ -1,7 +1,7 @@
 NAME     = preware
 TITLE	 = Preware
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.7.7
+VERSION  = 0.8.0
 DEPENDS	 = org.webosinternals.ipkgservice
 TYPE	 = Application
 CATEGORY = System Utilities
