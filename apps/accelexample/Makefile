@@ -3,7 +3,7 @@ APP_ID   = org.webosinternals.${NAME}
 VERSION  = 0.1.0
 HOMEPAGE = http://www.preware.org/wiki/Application:AccelService
 MAINTAINER = Eric J. Gaudet <emoney_33@yahoo.com>
-DEPENDS = org.webosinternals.accelservice
+DEPENDS = org.webosinternals.accelservice (>= 0.1.0)
 TYPE	= Application
 DESCRIPTION = An example of how to use the Accelerometer Service (org.webosinternals.accelservice).
 CATEGORY = System Utilities
