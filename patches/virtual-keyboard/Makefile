@@ -53,13 +53,13 @@ build/.built: build/.unpacked build/md5sums
 	done
 	touch $@
 
-build/all/CONTROL/prerm: files/prerm
+build/all/CONTROL/prerm: build/.unpacked
 	rm -f $@
 	mkdir -p build/all/CONTROL
 	install -m 0775 build/src/prerm build/all/CONTROL
 	chmod ugo+x $@
 
-build/all/CONTROL/postinst: files/postinst
+build/all/CONTROL/postinst: build/.unpacked
 	rm -f $@
 	mkdir -p build/all/CONTROL
 	install -m 0775 build/src/postinst build/all/CONTROL
