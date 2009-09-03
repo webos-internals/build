@@ -1,9 +1,30 @@
 #!/bin/sh
+APP_DIR=/var/usr/palm/applications/org.webosinternals.virtual-keyboard
 MEDIA_BASE=/media/internal/virtual-keyboard
 THEMES="themes/remix_ice themes/remix_classic themes/remix_glossy"
 SOUNDS=sounds/click1.wav
 
-cd / && /var/usr/bin/patch -p1 -R < /var/usr/palm/applications/org.webosinternals.virtual-keyboard/patches/add-onscreen-keyboard.patch
+if [ ! -e ${APP_DIR}/md5sums.patched ]
+then
+  echo "ERROR: No md5sums.patched file!?"
+  exit 1
+fi
+
+while read i
+do
+  file=`echo $i | awk '{print $2}'`
+  expected=`echo $i | awk '{print $1}'`
+  calculated=`md5sum $file | awk '{print $1}'`
+  if [ "$expected" = "$calculated" ] && [ -e $file.orig ]
+  then
+    rm -f $file
+    mv $file.orig $file
+    if [ ! -s $file ]
+    then
+      rm -f $file
+    fi
+  fi
+done < ${APP_DIR}/md5sums.patched
 
 for i in ${THEMES}
 do
@@ -15,4 +36,5 @@ do
   rm -rf ${MEDIA_BASE}/$i
 done
 
+rm -rf ${APP_DIR}/*
 exit 0

@@ -21,11 +21,19 @@ do
   fi
 done < ${APP_DIR}/md5sums
 
-cd / && /var/usr/bin/patch -p1 < ${APP_DIR}/patches/add-onscreen-keyboard.patch
+cd / && /var/usr/bin/patch -b -p1 < ${APP_DIR}/patches/add-onscreen-keyboard.patch
 if [ $? -ne 0 ]
 then
   exit 1
 fi
+
+# create md5sums of all patched files, for future removal verifications
+rm -f ${APP_DIR}/md5sums.patched
+touch ${APP_DIR}/md5sums.patched
+for i in `grep diff ${APP_DIR}/patches/add-onscreen-keyboard.patch | awk '{print $3}' | sed -e 's/.//'`
+do
+  md5sum $i >> ${APP_DIR}/md5sums.patched
+done
 
 # Default themes, sounds and config
 if [ ! -d ${MEDIA_BASE} ]
