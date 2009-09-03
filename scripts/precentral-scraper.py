@@ -7,6 +7,8 @@ import re
 import urllib
 import os
 
+files = {}
+
 class PackageHandler(ContentHandler):
     getData = 0
     url = ""
@@ -76,6 +78,8 @@ class PackageHandler(ContentHandler):
                 if (not os.path.exists(sys.argv[2] + "/" + self.filename)) :
                     urllib.urlretrieve(self.url, sys.argv[2] + "/" + self.filename)
 
+                files[self.filename] = 1
+
                 print
 
         return
@@ -92,3 +96,8 @@ saxparser.setContentHandler(feedprint)
                         
 datasource = open(sys.argv[1],"r")
 saxparser.parse(datasource)
+
+for f in os.listdir(sys.argv[2]):
+    if (not files.has_key(f)):
+        sys.stderr.write(sys.argv[2] + "/" + f + "\n")
+        os.remove(sys.argv[2] + "/" + f)
