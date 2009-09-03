@@ -56,7 +56,8 @@ for line in fileinput.input([sys.argv[1]]) :
             pathname = sys.argv[2] + "/" + name
 
             if (not os.path.exists(pathname)) :
-                urllib.urlretrieve(url, pathname)
+                sys.stderr.write("Fetching: " + name + "\n")
+                os.system("curl -R -L -o " + pathname + " " + url)
 
             files[name] = 1
 
