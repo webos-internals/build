@@ -6,7 +6,7 @@ HOMEPAGE = http://savannah.gnu.org/projects/patch
 MAINTAINER = WebOS Internals <support@webos-internal.org>
 DESCRIPTION = This package is simply the GNU Patch utility, cross-compiled and packaged up in a form such that it can be used in the installation scripts of other packages.
 TYPE	 = LinuxBinary
-CATEGORY = Services and Plugins
+CATEGORY = System Utilities
 ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
 LICENSE  = GPL v2 Open Source
 
