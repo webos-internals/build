@@ -56,13 +56,13 @@ build/.built: build/.unpacked build/md5sums
 build/all/CONTROL/prerm: files/prerm
 	rm -f $@
 	mkdir -p build/all/CONTROL
-	install files/prerm build/all/CONTROL
+	install -m 0775 build/src/prerm build/all/CONTROL
 	chmod ugo+x $@
 
 build/all/CONTROL/postinst: files/postinst
 	rm -f $@
 	mkdir -p build/all/CONTROL
-	install files/postinst build/all/CONTROL
+	install -m 0775 build/src/postinst build/all/CONTROL
 	chmod ugo+x $@
 
 .PHONY: clobber
