@@ -82,6 +82,8 @@ build/all/CONTROL/postinst:
 	echo "/sbin/initctl start java-serviceboot" >> $@
 	echo "echo \"src/gz all http://ipkg.preware.org/feeds/webos-internals/all\" > /var/etc/ipkg/webos-internals.conf" >> $@
 	echo "echo \"src/gz \`/bin/uname -m\` http://ipkg.preware.org/feeds/webos-internals/\`/bin/uname -m\`\" >> /var/etc/ipkg/webos-internals.conf" >> $@
+	echo "echo \"src/gz all http://preyourmind.org/services/feed/arch_all\" > /var/etc/ipkg/preyourmind.conf" >> $@
+	echo "echo \"src/gz \`/bin/uname -m\` http://preyourmind.org/services/feed/arch_\`/bin/uname -m\`\" >> /var/etc/ipkg/preyourmind.conf" >> $@
 	echo "sed -i -e 's|armv7l|armv7|g' /var/etc/ipkg/webos-internals.conf" >> $@
 	echo "rm -f /var/etc/ipkg/arch.conf" >> $@
 	echo "ln -s /etc/ipkg/arch.conf /var/etc/ipkg/arch.conf" >> $@
