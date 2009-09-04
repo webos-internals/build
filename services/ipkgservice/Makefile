@@ -1,11 +1,12 @@
 NAME     = ipkgservice
 CLASS    = IPKGService
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.8.0
+VERSION  = 0.8.2
 HOMEPAGE = http://www.preware.org/wiki/Application:Preware
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 TITLE	 = Package Manager Service
-DESCRIPTION = The Package Manager Service is a back-end interface to the ipkg command line application which manages all packages that are installed on the Pre.  It cannot be launched from the launcher screen - it can only be used by another application.  If you do see an icon for it in the launcher, just reboot and the icon will disappear.  Do not delete the icon.
+DESCRIPTION = The Package Manager Service is a back-end interface to the ipkg command line application which manages all packages that are installed on the Pre.  It is required for advanced homebrew installers like Preware.
+DESCRIPTION += <br>Changelog:<br>0.8.2: Revamped the service startup, and added the PreYourMind.org feed.
 TYPE	 = Service
 CATEGORY = Services and Plugins
 ICON	= http://www.webos-internals.org/images/7/77/Icon_WebOSInternals_PackageManager.png
@@ -59,11 +60,7 @@ build/.built: build/src/${PACKAGEPATH}/${CLASS}.java
 	mkdir -p build/all/usr/share/dbus-1/system-services
 	install -m 644 ${SERVICEFILES} build/all/usr/share/dbus-1/system-services/
 	mkdir -p build/all/etc/event.d
-	echo "start on started java-serviceboot" > build/all/etc/event.d/${APP_ID}
-	echo "script" >> build/all/etc/event.d/${APP_ID}
-	echo "/usr/bin/luna-helper 'luna://com.palm.vm/launch' '{\"serviceName\":\"${APP_ID}\",\"className\":\"${APP_ID}.${CLASS}\"}'" >> build/all/etc/event.d/${APP_ID}
-	echo "end script" >> build/all/etc/event.d/${APP_ID}
-	echo "respawn" >> build/all/etc/event.d/${APP_ID}
+	install -m 644 build/src/upstart/${APP_ID} build/all/etc/event.d/${APP_ID}
 	mkdir -p build/all/etc/ipkg
 	install -m 644 feeds/*.conf build/all/etc/ipkg/
 	touch $@
@@ -71,57 +68,13 @@ build/.built: build/src/${PACKAGEPATH}/${CLASS}.java
 build/all/CONTROL/postinst:
 	rm -f $@
 	mkdir -p build/all/CONTROL
-	echo "#!/bin/sh" > $@
-	echo "" >> $@
-	echo "# Install the java dbus service" >> $@
-	echo "rm -f /usr/lib/luna/java/${APP_ID}.jar" >> $@
-	echo "ln -s /var/usr/lib/luna/java/${APP_ID}.jar /usr/lib/luna/java/${APP_ID}.jar" >> $@
-	echo "rm -f /usr/share/dbus-1/system-services/${APP_ID}.service" >> $@
-	echo "ln -s /var/usr/share/dbus-1/system-services/${APP_ID}.service /usr/share/dbus-1/system-services/${APP_ID}.service" >> $@
-	echo "" >> $@
-	echo "# Install the upstart script" >> $@
-	echo "rm -f /etc/event.d/${APP_ID}" >> $@
-	echo "cp /var/etc/event.d/${APP_ID} /etc/event.d/${APP_ID}" >> $@
-	echo "" >> $@
-	echo "# Set up the architecture configuration file" >> $@
-	echo "rm -f /var/etc/ipkg/arch.conf" >> $@
-	echo "ln -s /etc/ipkg/arch.conf /var/etc/ipkg/arch.conf" >> $@
-	echo "" >> $@
-	echo "# Install webosinternals feeds" >> $@
-	echo "echo \"src/gz webosinternals http://ipkg.preware.org/feeds/webos-internals/all\" > /var/etc/ipkg/webos-internals.conf" >> $@
-	echo "echo \"src/gz webosinternals-\`/bin/uname -m\` http://ipkg.preware.org/feeds/webos-internals/\`/bin/uname -m\`\" >> /var/etc/ipkg/webos-internals.conf" >> $@
-	echo "sed -i -e 's|armv7l|armv7|g' /var/etc/ipkg/webos-internals.conf" >> $@
-	echo "" >> $@
-	echo "# Install preyourmind feeds" >> $@
-	echo "echo \"src preyourmind http://preyourmind.org/services/feed/arch_all\" > /var/etc/ipkg/preyourmind.conf" >> $@
-	echo "echo \"src preyourmind-\`/bin/uname -m\` http://preyourmind.org/services/feed/arch_\`/bin/uname -m\`\" >> /var/etc/ipkg/preyourmind.conf" >> $@
-	echo "sed -i -e 's|armv7l|armv7|g' /var/etc/ipkg/preyourmind.conf" >> $@
-	echo "" >> $@
-	echo "# Remove obsolete lists" >> $@
-	echo "rm -f /var/usr/lib/ipkg/lists/all /var/usr/lib/ipkg/lists/armv7 /var/usr/lib/ipkg/lists/i686" >> $@
-	echo "" >> $@
-	echo "# Restart the service" >> $@
-	echo "/sbin/initctl stop java-serviceboot" >> $@
-	echo "/sbin/initctl start java-serviceboot" >> $@
-	echo "exit 0" >> $@
+	install -m 0775 build/src/control/postinst build/all/CONTROL
 	chmod ugo+x $@
 
 build/all/CONTROL/prerm:
 	rm -f $@
 	mkdir -p build/all/CONTROL
-	echo "#!/bin/sh" > $@
-	echo "" >> $@
-	echo "# Remove the java dbus service" >> $@
-	echo "rm -f /usr/lib/luna/java/${APP_ID}.jar" >> $@
-	echo "rm -f /usr/share/dbus-1/system-services/${APP_ID}.service" >> $@
-	echo "" >> $@
-	echo "# Remove the upstart script" >> $@
-	echo "rm -f /etc/event.d/${APP_ID}" >> $@
-	echo "" >> $@
-	echo "# Restart the service" >> $@
-	echo "/sbin/initctl stop java-serviceboot" >> $@
-	echo "/sbin/initctl start java-serviceboot" >> $@
-	echo "exit 0" >> $@
+	install -m 0775 build/src/control/prerm build/all/CONTROL
 	chmod ugo+x $@
 
 clobber::
