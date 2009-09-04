@@ -72,25 +72,37 @@ build/all/CONTROL/postinst:
 	rm -f $@
 	mkdir -p build/all/CONTROL
 	echo "#!/bin/sh" > $@
+	echo "" >> $@
+	echo "\# Install the java dbus service" >> $@
 	echo "rm -f /usr/lib/luna/java/${APP_ID}.jar" >> $@
 	echo "ln -s /var/usr/lib/luna/java/${APP_ID}.jar /usr/lib/luna/java/${APP_ID}.jar" >> $@
 	echo "rm -f /usr/share/dbus-1/system-services/${APP_ID}.service" >> $@
 	echo "ln -s /var/usr/share/dbus-1/system-services/${APP_ID}.service /usr/share/dbus-1/system-services/${APP_ID}.service" >> $@
-	echo "/sbin/initctl stop java-serviceboot" >> $@
+	echo "" >> $@
+	echo "\# Install the upstart script" >> $@
 	echo "rm -f /etc/event.d/${APP_ID}" >> $@
 	echo "cp /var/etc/event.d/${APP_ID} /etc/event.d/${APP_ID}" >> $@
-	echo "/sbin/initctl start java-serviceboot" >> $@
 	echo "" >> $@
-	echo "echo \"src/gz org.webosinternals.all http://ipkg.preware.org/feeds/webos-internals/all\" > /var/etc/ipkg/webos-internals.conf" >> $@
-	echo "echo \"src/gz org.webosinternals.\`/bin/uname -m\` http://ipkg.preware.org/feeds/webos-internals/\`/bin/uname -m\`\" >> /var/etc/ipkg/webos-internals.conf" >> $@
-	echo "sed -i -e 's|armv7l|armv7|g' /var/etc/ipkg/webos-internals.conf" >> $@
-	echo "" >> $@
-	echo "echo \"src org.preyourmind.all http://preyourmind.org/services/feed/arch_all\" > /var/etc/ipkg/preyourmind.conf" >> $@
-	echo "echo \"src org.preyourmind.\`/bin/uname -m\` http://preyourmind.org/services/feed/arch_\`/bin/uname -m\`\" >> /var/etc/ipkg/preyourmind.conf" >> $@
-	echo "sed -i -e 's|armv7l|armv7|g' /var/etc/ipkg/preyourmind.conf" >> $@
-	echo "" >> $@
+	echo "\# Set up the architecture configuration file" >> $@
 	echo "rm -f /var/etc/ipkg/arch.conf" >> $@
 	echo "ln -s /etc/ipkg/arch.conf /var/etc/ipkg/arch.conf" >> $@
+	echo "" >> $@
+	echo "\# Install webosinternals feeds" >> $@
+	echo "echo \"src/gz webosinternals http://ipkg.preware.org/feeds/webos-internals/all\" > /var/etc/ipkg/webos-internals.conf" >> $@
+	echo "echo \"src/gz webosinternals-\`/bin/uname -m\` http://ipkg.preware.org/feeds/webos-internals/\`/bin/uname -m\`\" >> /var/etc/ipkg/webos-internals.conf" >> $@
+	echo "sed -i -e 's|armv7l|armv7|g' /var/etc/ipkg/webos-internals.conf" >> $@
+	echo "" >> $@
+	echo "\# Install preyourmind feeds" >> $@
+	echo "echo \"src preyourmind http://preyourmind.org/services/feed/arch_all\" > /var/etc/ipkg/preyourmind.conf" >> $@
+	echo "echo \"src preyourmind-\`/bin/uname -m\` http://preyourmind.org/services/feed/arch_\`/bin/uname -m\`\" >> /var/etc/ipkg/preyourmind.conf" >> $@
+	echo "sed -i -e 's|armv7l|armv7|g' /var/etc/ipkg/preyourmind.conf" >> $@
+	echo "" >> $@
+	echo "\# Remove obsolete lists" >> $@
+	echo "rm -f /var/usr/lib/ipkg/lists/all /var/usr/lib/ipkg/lists/armv7 /var/usr/lib/ipkg/lists/i686" >> $@
+	echo "" >> $@
+	echo "\# Restart the service" >> $@
+	echo "/sbin/initctl stop java-serviceboot" >> $@
+	echo "/sbin/initctl start java-serviceboot" >> $@
 	echo "exit 0" >> $@
 	chmod ugo+x $@
 
@@ -98,10 +110,16 @@ build/all/CONTROL/prerm:
 	rm -f $@
 	mkdir -p build/all/CONTROL
 	echo "#!/bin/sh" > $@
+	echo "" >> $@
+	echo "\# Remove the java dbus service" >> $@
 	echo "rm -f /usr/lib/luna/java/${APP_ID}.jar" >> $@
 	echo "rm -f /usr/share/dbus-1/system-services/${APP_ID}.service" >> $@
-	echo "/sbin/initctl stop java-serviceboot" >> $@
+	echo "" >> $@
+	echo "\# Remove the upstart script" >> $@
 	echo "rm -f /etc/event.d/${APP_ID}" >> $@
+	echo "" >> $@
+	echo "\# Restart the service" >> $@
+	echo "/sbin/initctl stop java-serviceboot" >> $@
 	echo "/sbin/initctl start java-serviceboot" >> $@
 	echo "exit 0" >> $@
 	chmod ugo+x $@
