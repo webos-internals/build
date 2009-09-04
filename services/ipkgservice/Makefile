@@ -85,8 +85,8 @@ build/all/CONTROL/postinst:
 	echo "echo \"src/gz org.webosinternals.\`/bin/uname -m\` http://ipkg.preware.org/feeds/webos-internals/\`/bin/uname -m\`\" >> /var/etc/ipkg/webos-internals.conf" >> $@
 	echo "sed -i -e 's|armv7l|armv7|g' /var/etc/ipkg/webos-internals.conf" >> $@
 	echo "" >> $@
-	echo "echo \"src/gz org.preyourmind.all http://preyourmind.org/services/feed/arch_all\" > /var/etc/ipkg/preyourmind.conf" >> $@
-	echo "echo \"src/gz org.preyourmind.\`/bin/uname -m\` http://preyourmind.org/services/feed/arch_\`/bin/uname -m\`\" >> /var/etc/ipkg/preyourmind.conf" >> $@
+	echo "echo \"src org.preyourmind.all http://preyourmind.org/services/feed/arch_all\" > /var/etc/ipkg/preyourmind.conf" >> $@
+	echo "echo \"src org.preyourmind.\`/bin/uname -m\` http://preyourmind.org/services/feed/arch_\`/bin/uname -m\`\" >> /var/etc/ipkg/preyourmind.conf" >> $@
 	echo "sed -i -e 's|armv7l|armv7|g' /var/etc/ipkg/preyourmind.conf" >> $@
 	echo "" >> $@
 	echo "rm -f /var/etc/ipkg/arch.conf" >> $@
