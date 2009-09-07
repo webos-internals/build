@@ -1,13 +1,13 @@
 NAME     = termplugin
 APP_ID   = org.webosinternals.${NAME}
 VERSION  = 0.2.2
-HOMEPAGE = http://www.preware.org/wiki/Application:Terminal
+HOMEPAGE = http://www.webos-internals.org/wiki/Application:Terminal
 MAINTAINER = WebOS Internals <support@webos-internal.org>
 TITLE = Terminal Service Plugin
 TYPE = Plugin
 CATEGORY = Services and Plugins
 DESCRIPTION = The Terminal Service Plugin is a back-end binary browser plugin providing the core of the Terminal application.  It does not have an icon, and cannot be launched - it can only be used by another application.
-ICON	 = http://www.webos-internals.org/images/7/74/Icon_WebOSInternals_Terminal.png
+ICON	 = http://www.webos-internals.org/images/6/68/Icon_WebOSInternals_TerminalService.png
 LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/plugins/termplugin.git
