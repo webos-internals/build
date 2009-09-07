@@ -8,7 +8,7 @@ TITLE	 = Accelerometer Service
 DESCRIPTION = This service provides access to the accelerometer driver\'s poll_interval parameter. As of webOS 1.1.0, this interval is not accessible from application development and is set to 250ms. This makes most accelerometer driven applications choppy and slow. With this service, the poll_interval can be changed dynamically by the application.
 TYPE = Service
 CATEGORY = Services and Plugins
-ICON	= http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
+ICON	= http://www.webos-internals.org/images/d/de/Icon_WebOSInternals_AccelerometerService.png
 LICENSE = GPL v2 Open Source
 
 SERVICEFILES = build/src/${APP_ID}.service
