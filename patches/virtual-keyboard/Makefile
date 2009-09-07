@@ -1,7 +1,7 @@
 NAME     = virtual-keyboard
 APP_ID   = org.webosinternals.${NAME}
 VERSION  = 0.1.3
-HOMEPAGE = http://www.preware.org/wiki/On_Screen_Keyboard
+HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard
 MAINTAINER = WebOS Internals <support@webos-internal.org>
 TITLE = Virtual Keyboard
 TYPE = Patch
