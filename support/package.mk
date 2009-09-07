@@ -123,7 +123,26 @@ endif
 ifdef CATEGORY
 	echo -n ", \"Category\":\"${CATEGORY}\"" >> $@
 endif
-	echo -n ", \"LastUpdated\":\""`date +%s`"\", \"Last-Updated\":\""`date +%s`"\"" >> $@
+ifdef SRC_IPKG
+	echo -n ", \"LastUpdated\":\"" >> $@
+	../../scripts/timestamp.py ${DL_DIR}/${APP_ID}_${VERSION}_all.ipk >> $@
+	echo -n "\"" >> $@
+endif
+ifdef SRC_TGZ
+	echo -n ", \"LastUpdated\":\"" >> $@
+	../../scripts/timestamp.py ${DL_DIR}/${NAME}-${VERSION}.tar.gz >> $@
+	echo -n "\"" >> $@
+endif
+ifdef SRC_ZIP
+	echo -n ", \"LastUpdated\":\"" >> $@
+	../../scripts/timestamp.py ${DL_DIR}/${NAME}-${VERSION}.zip >> $@
+	echo -n "\"" >> $@
+endif
+ifdef SRC_GIT
+	echo -n ", \"LastUpdated\":\"" >> $@
+	../../scripts/timestamp.py ${DL_DIR}/${NAME}-${VERSION}.tar.gz >> $@
+	echo -n "\"" >> $@
+endif
 ifdef TITLE
 	echo -n ", \"Title\":\"${TITLE}\"" >> $@
 endif
