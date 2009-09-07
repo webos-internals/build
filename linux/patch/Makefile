@@ -7,7 +7,7 @@ MAINTAINER = WebOS Internals <support@webos-internal.org>
 DESCRIPTION = This package is simply the GNU Patch utility, cross-compiled and packaged up in a form such that it can be used in the installation scripts of other packages.
 TYPE	 = LinuxBinary
 CATEGORY = System Utilities
-ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
+ICON	 = http://www.webos-internals.org/images/a/ae/Icon_WebOSInternals_Base_Patch.png
 LICENSE  = GPL v2 Open Source
 
 SRC_TGZ = http://ftp.debian.org/debian/pool/main/p/patch/patch_2.5.9.orig.tar.gz
