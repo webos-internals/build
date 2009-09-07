@@ -32,7 +32,6 @@ class PackageHandler(ContentHandler):
             self.json += "\"Title\":\"%s\", " % self.data
 
         if (name == "lastupdate") :
-            self.json += "\"Last-Updated\":\"%s\", " % self.data
             self.json += "\"LastUpdated\":\"%s\", " % self.data
 
         if (name == "icon") :

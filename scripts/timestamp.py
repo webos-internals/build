@@ -5,4 +5,4 @@ import sys
 import time
 
 (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) = os.stat(sys.argv[1])
-sys.stdout.write("%d" % ctime);
+sys.stdout.write("%d" % mtime);

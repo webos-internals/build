@@ -62,8 +62,7 @@ for line in fileinput.input([sys.argv[1]]) :
             files[name] = 1
 
             (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) = os.stat(pathname)
-            json += "\"Last-Updated\":\"%d\", " % ctime
-            json += "\"LastUpdated\":\"%d\", " % ctime
+            json += "\"LastUpdated\":\"%d\", " % mtime
 
 for f in os.listdir(sys.argv[2]):
     if (not files.has_key(f)):
