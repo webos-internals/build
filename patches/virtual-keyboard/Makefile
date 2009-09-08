@@ -10,6 +10,8 @@ DEPENDS = org.webosinternals.patch
 ICON	= http://www.webos-internals.org/images/0/0f/Icon_WebOSInternals_Keyboard.png
 DESCRIPTION = Double-tapping the gesture area (near the round silver button) will bring up the on-screen keyboard if you are in a text input field. Tap with two fingers separated or Double-tap quickly.  In the Emulator, tap PageUp twice.
 SCREENSHOTS = [\"http://www.webos-internals.org/images/e/ed/Messaging_2009-22-08_000708.png\"]
+POSTINSTALLFLAGS = RestartLuna
+POSTREMOVEFLAGS  = RestartLuna
 
 PATCHES = add-onscreen-keyboard.patch
 FILES = /usr/palm/frameworks/mojo/builtins/palmInitFramework191_15.js \
