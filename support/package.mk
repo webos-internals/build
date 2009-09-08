@@ -161,6 +161,12 @@ endif
 ifdef LICENSE
 	echo -n ", \"License\":\"${LICENSE}\"" >> $@
 endif
+ifdef POSTINSTALLFLAGS
+	echo -n ", \"PostInstallFlags\":\"${POSTINSTALLFLAGS}\"" >> $@
+endif
+ifdef POSTREMOVEFLAGS
+	echo -n ", \"PostRemoveFlags\":\"${POSTREMOVEFLAGS}\"" >> $@
+endif
 	echo " }" >> $@
 	touch $@
 

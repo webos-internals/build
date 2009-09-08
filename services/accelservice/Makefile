@@ -1,7 +1,7 @@
 NAME     = accelservice
 CLASS    = AccelService
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.1.0
+VERSION  = 0.2.0
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:${CLASS}
 MAINTAINER = Eric J. Gaudet <emoney_33@yahoo.com>
 TITLE	 = Accelerometer Service
@@ -10,6 +10,8 @@ TYPE = Service
 CATEGORY = Services and Plugins
 ICON	= http://www.webos-internals.org/images/d/de/Icon_WebOSInternals_AccelerometerService.png
 LICENSE = GPL v2 Open Source
+POSTINSTALLFLAGS = RestartJava
+POSTREMOVEFLAGS  = RestartJava
 
 SERVICEFILES = build/src/${APP_ID}.service
 PACKAGEPATH := $(subst .,/,${APP_ID})
@@ -55,38 +57,19 @@ build/.built: build/src/${NAME}.java
 	mkdir -p build/all/usr/share/dbus-1/system-services
 	install -m 644 ${SERVICEFILES} build/all/usr/share/dbus-1/system-services/
 	mkdir -p build/all/etc/event.d
-	echo "start on started java-serviceboot" > build/all/etc/event.d/${APP_ID}
-	echo "script" >> build/all/etc/event.d/${APP_ID}
-	echo "/usr/bin/luna-helper 'luna://com.palm.vm/launch' '{\"serviceName\":\"${APP_ID}\",\"className\":\"${APP_ID}.${CLASS}\"}'" >> build/all/etc/event.d/${APP_ID}
-	echo "end script" >> build/all/etc/event.d/${APP_ID}
-	echo "respawn" >> build/all/etc/event.d/${APP_ID}
+	install -m 644 build/src/upstart/${APP_ID} build/all/etc/event.d/${APP_ID}
 	touch $@
 
 build/all/CONTROL/postinst:
 	rm -f $@
 	mkdir -p build/all/CONTROL
-	echo "#!/bin/sh" > $@
-	echo "rm -f /usr/lib/luna/java/${APP_ID}.jar" >> $@
-	echo "ln -s /var/usr/lib/luna/java/${APP_ID}.jar /usr/lib/luna/java/${APP_ID}.jar" >> $@
-	echo "rm -f /usr/share/dbus-1/system-services/${APP_ID}.service" >> $@
-	echo "ln -s /var/usr/share/dbus-1/system-services/${APP_ID}.service /usr/share/dbus-1/system-services/${APP_ID}.service" >> $@
-	echo "/sbin/initctl stop java-serviceboot" >> $@
-	echo "rm -f /etc/event.d/${APP_ID}" >> $@
-	echo "cp /var/etc/event.d/${APP_ID} /etc/event.d/${APP_ID}" >> $@
-	echo "/sbin/initctl start java-serviceboot" >> $@
-	echo "exit 0" >> $@
+	install -m 0775 build/src/control/postinst build/all/CONTROL
 	chmod ugo+x $@
 
 build/all/CONTROL/prerm:
 	rm -f $@
 	mkdir -p build/all/CONTROL
-	echo "#!/bin/sh" > $@
-	echo "rm -f /usr/lib/luna/java/${APP_ID}.jar" >> $@
-	echo "rm -f /usr/share/dbus-1/system-services/${APP_ID}.service" >> $@
-	echo "/sbin/initctl stop java-serviceboot" >> $@
-	echo "rm -f /etc/event.d/${APP_ID}" >> $@
-	echo "/sbin/initctl start java-serviceboot" >> $@
-	echo "exit 0" >> $@
+	install -m 0775 build/src/control/prerm build/all/CONTROL
 	chmod ugo+x $@
 
 clobber::
