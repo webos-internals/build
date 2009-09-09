@@ -1,12 +1,12 @@
 NAME     = lunamanager
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.0.1
+VERSION  = 0.0.2
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:LunaManager
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DEPENDS = org.webosinternals.ipkgservice (>= 0.8.6)
 TYPE	= Application
 DESCRIPTION = A utility to control various aspects of the Luna system.
-DESCRIPTION += <br>Changelog:<br>0.0.1: Requires Package Manager Service 0.8.6 or later.
+DESCRIPTION += <br>Changelog:<br>0.0.2: Added ipkgservice version check and a new icon.
 CATEGORY = System Utilities
 ICON	= http://www.webos-internals.org/images/b/bd/Icon_WebOSInternals_StopLight.png
 LICENSE  = GPL v2 Open Source
