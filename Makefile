@@ -44,9 +44,9 @@ ipkgs/%/Packages: package
 	TAR_OPTIONS=--wildcards \
 	toolchain/ipkg-utils/ipkg-make-index \
 		-v -p ipkgs/$*/Packages ipkgs/$*
-	mv ipkgs/$*/Packages ipkgs/$*/Packages.new
-	scripts/merge-metadata.py feeds/$*/build/Metadata ipkgs/$*/Packages.new > ipkgs/$*/Packages
-	rm -f ipkgs/$*/Packages.new*
+	mv ipkgs/$*/Packages ipkgs/$*/Packages.orig
+	scripts/merge-metadata.py feeds/$*/build/Metadata ipkgs/$*/Packages.orig > ipkgs/$*/Packages
+	rm -f ipkgs/$*/Packages.orig*
 	gzip -c ipkgs/$*/Packages > ipkgs/$*/Packages.gz
 
 package: toolchain

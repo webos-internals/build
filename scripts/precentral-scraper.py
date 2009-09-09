@@ -14,13 +14,13 @@ class PackageHandler(ContentHandler):
     url = ""
     filename = ""
     json = ""
-    section = ""
+    author = ""
     screenshots = []
 
     def startElement(self, name, attrs):
         if (name == "application") :
             self.json = "{ "
-            self.section = ""
+            self.author = ""
             self.screenshots = []
 
         self.getData = 1
@@ -46,7 +46,9 @@ class PackageHandler(ContentHandler):
         if (name == "categories") :
             self.json += "\"Type\":\"Application\", "
             self.json += "\"Category\":\"%s\", " % self.data
-            self.section = self.data
+
+        if (name == "author") :
+            self.author = self.data
 
         if (name == "link") :
             self.json += "\"Homepage\":\"%s\", " % self.data.replace("homebrew-apps/homebrew-apps","homebrew-apps")
@@ -71,8 +73,8 @@ class PackageHandler(ContentHandler):
 
                 print "Filename: " + self.filename
                 print "Source: " + self.json
-                if (self.section):
-                    print "Section: " + self.section
+                if (self.author):
+                    print "MaintainerURL: " + "http://forums.precentral.net/members/" + urllib.quote(self.author) + ".html"
 
                 if (not os.path.exists(sys.argv[2] + "/" + self.filename)) :
                     sys.stderr.write("Fetching: " + self.filename + "\n")

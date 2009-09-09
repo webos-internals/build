@@ -14,12 +14,10 @@ class PackageHandler(ContentHandler):
     url = ""
     filename = ""
     json = ""
-    section = ""
 
     def startElement(self, name, attrs):
         if (name == "application") :
             self.json = "{ "
-            self.section = ""
 
         self.getData = 1
             
@@ -45,7 +43,6 @@ class PackageHandler(ContentHandler):
                 self.json += "\"Type\":\"Application\", "
 
             self.json += "\"Category\":\"%s\", " % self.data.replace('"', '\\"')
-            self.section = self.data
 
         if (name == "link") :
             self.json += "\"Homepage\":\"%s\", " % self.data.replace('"', '\\"')
@@ -64,8 +61,6 @@ class PackageHandler(ContentHandler):
 
                 print "Filename: " + self.filename
                 print "Source: " + self.json
-                if (self.section):
-                    print "Section: " + self.section
 
                 if (not os.path.exists(sys.argv[2] + "/" + self.filename)) :
                     sys.stderr.write("Fetching: " + self.filename + "\n")
