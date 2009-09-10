@@ -1,0 +1,26 @@
+#!/bin/sh
+
+update-alternatives --install /opt/bin/scp scp /opt/bin/openssh-scp 80
+update-alternatives --install /opt/bin/ssh ssh /opt/bin/openssh-ssh 80
+
+echo
+
+# Check for the SSH1 RSA key
+if [ ! -f /opt/etc/openssh/ssh_host_key ]; then
+    echo Generating RSA Key...
+    /opt/bin/ssh-keygen -t rsa1 -f /opt/etc/openssh/ssh_host_key -C '' -N ''
+fi
+
+# Check for the SSH2 RSA key
+if [ ! -f /opt/etc/openssh/ssh_host_rsa_key ]; then
+    echo Generating RSA Key...
+    /opt/bin/ssh-keygen -t rsa -f /opt/etc/openssh/ssh_host_rsa_key -C '' -N ''
+fi
+
+# Check for the SSH2 DSA key
+if [ ! -f /opt/etc/openssh/ssh_host_dsa_key ]; then
+    echo Generating DSA Key...
+    /opt/bin/ssh-keygen -t dsa -f /opt/etc/openssh/ssh_host_dsa_key -C '' -N ''
+fi
+                
+# /opt/etc/init.d/S40sshd
