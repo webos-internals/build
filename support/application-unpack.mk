@@ -52,6 +52,27 @@ build/.unpacked: ${DL_DIR}/${APP_ID}_${VERSION}_all.ipk
 
 endif
 
+ifdef SRC_OPTWARE
+
+build/.unpacked: build/armv7.unpacked build/i686.unpacked
+
+build/%.unpacked: ${DL_DIR}/${SRC_OPTWARE}_%.ipk
+	$(call PREWARE_SANITY)
+	rm -rf build/$* build/${SRC_OPTWARE}_$*.ipk
+	mkdir -p build
+	ln -s ../$< build/${SRC_OPTWARE}_$*.ipk
+	( cd build ; \
+	  TAR_OPTIONS=--wildcards \
+	  ../../../toolchain/ipkg-utils/ipkg-unbuild \
+	    ${SRC_OPTWARE}_$*.ipk )
+	[ -f build/${SRC_OPTWARE}_$*/CONTROL/control ]
+	rm -f build/${SRC_OPTWARE}_$*.ipk
+	mv build/${SRC_OPTWARE}_$* build/$*
+	cp build/$*/CONTROL/control build/$*.control
+	touch $@
+
+endif
+
 clobber::
 	$(call PREWARE_SANITY)
 	rm -rf build

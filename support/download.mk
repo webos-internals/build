@@ -26,6 +26,24 @@ ifndef VERSION
 PREWARE_SANITY += $(error "Please define VERSION in your Makefile")
 endif
 
+ifdef SRC_OPTWARE
+
+download: ${DL_DIR}/${SRC_OPTWARE}_armv7.ipk ${DL_DIR}/${SRC_OPTWARE}_i686.ipk
+
+${DL_DIR}/${SRC_OPTWARE}_armv7.ipk:
+	$(call PREWARE_SANITY)
+	mkdir -p ${DL_DIR}
+	curl -R -L -o $@ \
+		http://ipkg.nslu2-linux.org/feeds/optware/cs08q1armel/cross/unstable/${SRC_OPTWARE}_arm.ipk
+
+${DL_DIR}/${SRC_OPTWARE}_i686.ipk:
+	$(call PREWARE_SANITY)
+	mkdir -p ${DL_DIR}
+	curl -R -L -o $@ \
+		http://ipkg.nslu2-linux.org/feeds/optware/i686g25/cross/unstable/${SRC_OPTWARE}_i686.ipk
+
+endif
+
 ifdef SRC_XML
 
 download: ${DL_DIR}/${NAME}-feed.xml

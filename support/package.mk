@@ -58,6 +58,8 @@ build/%/CONTROL/prerm:
 
 ifeq ("${TYPE}", "Application")
 build/%/CONTROL/control: build/%/usr/palm/applications/${APP_ID}/appinfo.json
+else ifdef SRC_OPTWARE
+build/%/CONTROL/control: build/%.control
 else
 build/%/CONTROL/control: /dev/null
 endif
@@ -68,24 +70,30 @@ endif
 	echo -n "Version: " >> $@
 ifdef VERSION
 	echo "${VERSION}" >> $@
-else
+else ifeq ("${TYPE}", "Application")
 	sed -ne 's|^[[:space:]]*"version":[[:space:]]*"\(.*\)",[[:space:]]*$$|\1|p' $< >> $@
+else
+	echo "0.0.0" >> $@
 endif
 	echo "Architecture: $*" >> $@
 	echo -n "Maintainer: " >> $@
 ifdef MAINTAINER
 	echo "${MAINTAINER}" >> $@
-else
+else ifeq ("${TYPE}", "Application")
 	sed -ne 's|^[[:space:]]*"vendor":[[:space:]]*"\(.*\)",[[:space:]]*|\1|p' $< | tr -d '\n' >> $@
 	echo -n " <" >> $@
 	sed -ne 's|^[[:space:]]*"vendor_email":[[:space:]]*"\(.*\)",[[:space:]]*|\1|p' $< | tr -d '\n' >> $@
 	echo ">" >> $@
+else
+	echo "WebOS Internals <support@webos-internals.org>" >> $@
 endif
 	echo -n "Description: " >> $@
 ifdef TITLE
 	echo "${TITLE}" >> $@
-else
+else ifeq ("${TYPE}", "Application")
 	sed -ne 's|^[[:space:]]*"title":[[:space:]]*"\(.*\)",[[:space:]]*$$|\1|p' $< >> $@
+else
+	echo "${NAME}" >> $@
 endif
 ifdef CATEGORY
 	echo "Section: ${CATEGORY}" >> $@
@@ -103,23 +111,23 @@ endif
 ifdef CONFLICTS
 	echo "Conficts: ${CONFLICTS}" >> $@
 endif
-	echo -n "Source: " >> $@
-ifdef SRC_IPKG
-	echo -n "{ \"Source\":\"${SRC_IPKG}\"">> $@
-endif
-ifdef SRC_TGZ
-	echo -n "{ \"Source\":\"${SRC_TGZ}\"" >> $@
-endif
-ifdef SRC_ZIP
-	echo -n "{ \"Source\":\"${SRC_ZIP}\"" >> $@
-endif
-ifdef SRC_GIT
-	echo -n "{ \"Source\":\"${SRC_GIT}\"" >> $@
-endif
+	echo -n "Source: { " >> $@
 ifdef SOURCE
-	echo -n "{ \"Source\":\"${SOURCE}\"" >> $@
+	echo -n "\"Source\":\"${SOURCE}\", " >> $@
+else ifdef SRC_IPKG
+	echo -n "\"Source\":\"${SRC_IPKG}\", ">> $@
+else ifdef SRC_TGZ
+	echo -n "\"Source\":\"${SRC_TGZ}\", " >> $@
+else ifdef SRC_ZIP
+	echo -n "\"Source\":\"${SRC_ZIP}\", " >> $@
+else ifdef SRC_GIT
+	echo -n "\"Source\":\"${SRC_GIT}\", " >> $@
+else ifdef SRC_OPTWARE
+	echo -n "\"Source\":\"`sed -n -e 's|Source: \(.*\)|\1|p' build/$*.control`, http://trac.nslu2-linux.org/optware\", ">> $@
+else
+	true
 endif
-	echo -n ", \"Feed\":\"WebOS Internals\"" >> $@
+	echo -n "\"Feed\":\"WebOS Internals\"" >> $@
 ifdef TYPE
 	echo -n ", \"Type\":\"${TYPE}\"" >> $@
 endif
@@ -130,28 +138,38 @@ ifdef SRC_IPKG
 	echo -n ", \"LastUpdated\":\"" >> $@
 	../../scripts/timestamp.py ${DL_DIR}/${APP_ID}_${VERSION}_all.ipk >> $@
 	echo -n "\"" >> $@
-endif
-ifdef SRC_TGZ
+else ifdef SRC_TGZ
 	echo -n ", \"LastUpdated\":\"" >> $@
 	../../scripts/timestamp.py ${DL_DIR}/${NAME}-${VERSION}.tar.gz >> $@
 	echo -n "\"" >> $@
-endif
-ifdef SRC_ZIP
+else ifdef SRC_ZIP
 	echo -n ", \"LastUpdated\":\"" >> $@
 	../../scripts/timestamp.py ${DL_DIR}/${NAME}-${VERSION}.zip >> $@
 	echo -n "\"" >> $@
-endif
-ifdef SRC_GIT
+else ifdef SRC_GIT
 	echo -n ", \"LastUpdated\":\"" >> $@
 	../../scripts/timestamp.py ${DL_DIR}/${NAME}-${VERSION}.tar.gz >> $@
+	echo -n "\"" >> $@
+else ifdef SRC_OPTWARE
+	echo -n ", \"LastUpdated\":\"" >> $@
+	../../scripts/timestamp.py ${DL_DIR}/${SRC_OPTWARE}_$*.ipk >> $@
 	echo -n "\"" >> $@
 endif
 ifdef TITLE
 	echo -n ", \"Title\":\"${TITLE}\"" >> $@
 endif
+	echo -n ", \"FullDescription\":\"" >> $@
 ifdef DESCRIPTION
-	echo -n ", \"FullDescription\":\"${DESCRIPTION}\"" >> $@
+	echo -n "${DESCRIPTION}" >> $@
+else ifdef SRC_OPTWARE
+	echo -n "`sed -n -e 's|Description: \(.*\)|\1|p' build/$*.control`" >> $@
+else ifdef TITLE
+	echo -n "${TITLE}" >> $@
 endif
+ifdef CHANGELOG
+	echo -n "<br>Changelog:<br>${CHANGELOG}" >> $@
+endif
+	echo -n "\"" >> $@
 ifdef HOMEPAGE
 	echo -n ", \"Homepage\":\"${HOMEPAGE}\"" >> $@
 endif
