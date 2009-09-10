@@ -164,6 +164,10 @@ else ifdef SRC_OPTWARE
 	echo -n ", \"LastUpdated\":\"" >> $@
 	../../scripts/timestamp.py ${DL_DIR}/${SRC_OPTWARE}_$*.ipk Makefile >> $@
 	echo -n "\"" >> $@
+else
+	echo -n ", \"LastUpdated\":\"" >> $@
+	../../scripts/timestamp.py Makefile >> $@
+	echo -n "\"" >> $@
 endif
 ifdef TITLE
 	echo -n ", \"Title\":\"${TITLE}\"" >> $@
