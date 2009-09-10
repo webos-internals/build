@@ -1,15 +1,17 @@
 NAME     = virtual-keyboard
 APP_ID   = org.webosinternals.${NAME}
 VERSION  = 0.1.3
-HOMEPAGE = http://www.preware.org/wiki/On_Screen_Keyboard
+HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard
 MAINTAINER = WebOS Internals <support@webos-internal.org>
 TITLE = Virtual Keyboard
 TYPE = Patch
 CATEGORY = WebOS Patches
 DEPENDS = org.webosinternals.patch
-ICON	= http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
+ICON	= http://www.webos-internals.org/images/0/0f/Icon_WebOSInternals_Keyboard.png
 DESCRIPTION = Double-tapping the gesture area (near the round silver button) will bring up the on-screen keyboard if you are in a text input field. Tap with two fingers separated or Double-tap quickly.  In the Emulator, tap PageUp twice.
 SCREENSHOTS = [\"http://www.webos-internals.org/images/e/ed/Messaging_2009-22-08_000708.png\"]
+POSTINSTALLFLAGS = RestartLuna
+POSTREMOVEFLAGS  = RestartLuna
 
 PATCHES = add-onscreen-keyboard.patch
 FILES = /usr/palm/frameworks/mojo/builtins/palmInitFramework191_15.js \
@@ -53,13 +55,13 @@ build/.built: build/.unpacked build/md5sums
 	done
 	touch $@
 
-build/all/CONTROL/prerm: files/prerm
+build/all/CONTROL/prerm: build/.unpacked
 	rm -f $@
 	mkdir -p build/all/CONTROL
 	install -m 0775 build/src/prerm build/all/CONTROL
 	chmod ugo+x $@
 
-build/all/CONTROL/postinst: files/postinst
+build/all/CONTROL/postinst: build/.unpacked
 	rm -f $@
 	mkdir -p build/all/CONTROL
 	install -m 0775 build/src/postinst build/all/CONTROL

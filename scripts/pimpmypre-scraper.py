@@ -9,6 +9,8 @@ import fileinput
 
 json = ""
 
+files = {}
+
 for line in fileinput.input([sys.argv[1]]) :
 
     regexp = re.compile('.+"appid":"([^"]+)".+')
@@ -54,8 +56,15 @@ for line in fileinput.input([sys.argv[1]]) :
             pathname = sys.argv[2] + "/" + name
 
             if (not os.path.exists(pathname)) :
-                urllib.urlretrieve(url, pathname)
+                sys.stderr.write("Fetching: " + name + "\n")
+                os.system("curl -R -L -o " + pathname + " " + url)
+
+            files[name] = 1
 
             (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) = os.stat(pathname)
-            json += "\"Last-Updated\":\"%d\", " % ctime
-            json += "\"LastUpdated\":\"%d\", " % ctime
+            json += "\"LastUpdated\":\"%d\", " % mtime
+
+for f in os.listdir(sys.argv[2]):
+    if (not files.has_key(f)):
+        sys.stderr.write(sys.argv[2] + "/" + f + "\n")
+        os.remove(sys.argv[2] + "/" + f)

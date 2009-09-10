@@ -1,13 +1,13 @@
 NAME     = accelexample
 APP_ID   = org.webosinternals.${NAME}
 VERSION  = 0.1.0
-HOMEPAGE = http://www.preware.org/wiki/Application:AccelService
+HOMEPAGE = http://www.webos-internals.org/wiki/Application:AccelService
 MAINTAINER = Eric J. Gaudet <emoney_33@yahoo.com>
-DEPENDS = org.webosinternals.accelservice (>= 0.1.0)
+DEPENDS = org.webosinternals.accelservice
 TYPE	= Application
 DESCRIPTION = An example of how to use the Accelerometer Service (org.webosinternals.accelservice).
 CATEGORY = System Utilities
-ICON	= http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
+ICON	= http://www.webos-internals.org/images/d/de/Icon_WebOSInternals_AccelerometerService.png
 LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/applications/accelexample.git

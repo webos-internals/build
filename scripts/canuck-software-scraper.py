@@ -7,17 +7,17 @@ import re
 import urllib
 import os
 
+files = {}
+
 class PackageHandler(ContentHandler):
     getData = 0
     url = ""
     filename = ""
     json = ""
-    section = ""
 
     def startElement(self, name, attrs):
         if (name == "application") :
             self.json = "{ "
-            self.section = ""
 
         self.getData = 1
             
@@ -28,7 +28,6 @@ class PackageHandler(ContentHandler):
             self.json += "\"Title\":\"%s\", " % self.data.replace('"', '\\"')
 
         if (name == "lastupdate") :
-            self.json += "\"Last-Updated\":\"%s\", " % self.data
             self.json += "\"LastUpdated\":\"%s\", " % self.data
 
         if (name == "icon") :
@@ -44,7 +43,6 @@ class PackageHandler(ContentHandler):
                 self.json += "\"Type\":\"Application\", "
 
             self.json += "\"Category\":\"%s\", " % self.data.replace('"', '\\"')
-            self.section = self.data
 
         if (name == "link") :
             self.json += "\"Homepage\":\"%s\", " % self.data.replace('"', '\\"')
@@ -63,11 +61,12 @@ class PackageHandler(ContentHandler):
 
                 print "Filename: " + self.filename
                 print "Source: " + self.json
-                if (self.section):
-                    print "Section: " + self.section
 
                 if (not os.path.exists(sys.argv[2] + "/" + self.filename)) :
-                    urllib.urlretrieve(self.url, sys.argv[2] + "/" + self.filename)
+                    sys.stderr.write("Fetching: " + self.filename + "\n")
+                    os.system("curl -R -L -o " + sys.argv[2] + "/" + self.filename + " " + self.url)
+
+                files[self.filename] = 1
 
                 print
 
@@ -85,3 +84,8 @@ saxparser.setContentHandler(feedprint)
                         
 datasource = open(sys.argv[1],"r")
 saxparser.parse(datasource)
+
+for f in os.listdir(sys.argv[2]):
+    if (not files.has_key(f)):
+        sys.stderr.write(sys.argv[2] + "/" + f + "\n")
+        os.remove(sys.argv[2] + "/" + f)

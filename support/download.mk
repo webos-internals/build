@@ -33,7 +33,7 @@ download: ${DL_DIR}/${NAME}-feed.xml
 ${DL_DIR}/${NAME}-feed.xml:
 	rm -f $@
 	mkdir -p ${DL_DIR}
-	curl -L -o ${DL_DIR}/${NAME}-feed.xml ${SRC_XML}
+	curl -R -L -o ${DL_DIR}/${NAME}-feed.xml ${SRC_XML}
 
 endif
 
@@ -48,7 +48,7 @@ download: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 ${DL_DIR}/${NAME}-${VERSION}.tar.gz:
 	$(call PREWARE_SANITY)
 	mkdir -p ${DL_DIR}
-	curl -L -o ${DL_DIR}/${NAME}-${VERSION}.tar.gz ${SRC_TGZ}
+	curl -R -L -o ${DL_DIR}/${NAME}-${VERSION}.tar.gz ${SRC_TGZ}
 
 endif
 
@@ -63,7 +63,7 @@ download: ${DL_DIR}/${NAME}-${VERSION}.tar.bz2
 ${DL_DIR}/${NAME}-${VERSION}.tar.bz2:
 	$(call PREWARE_SANITY)
 	mkdir -p ${DL_DIR}
-	curl -L -o ${DL_DIR}/${NAME}-${VERSION}.tar.bz2 ${SRC_BZ2}
+	curl -R -L -o ${DL_DIR}/${NAME}-${VERSION}.tar.bz2 ${SRC_BZ2}
 
 endif
 
@@ -78,7 +78,7 @@ download: ${DL_DIR}/${NAME}-${VERSION}.zip
 ${DL_DIR}/${NAME}-${VERSION}.zip:
 	$(call PREWARE_SANITY)
 	mkdir -p ${DL_DIR}
-	curl -L -o ${DL_DIR}/${NAME}-${VERSION}.zip ${SRC_ZIP}
+	curl -R -L -o ${DL_DIR}/${NAME}-${VERSION}.zip ${SRC_ZIP}
 
 endif
 
@@ -93,7 +93,7 @@ download: ${DL_DIR}/${APP_ID}_${VERSION}_all.ipk
 ${DL_DIR}/${APP_ID}_${VERSION}_all.ipk:
 	$(call PREWARE_SANITY)
 	mkdir -p ${DL_DIR}
-	curl -L -o ${DL_DIR}/${APP_ID}_${VERSION}_all.ipk ${SRC_IPKG}
+	curl -R -L -o ${DL_DIR}/${APP_ID}_${VERSION}_all.ipk ${SRC_IPKG}
 
 endif
 
@@ -112,6 +112,7 @@ ${DL_DIR}/${NAME}-${VERSION}.tar.gz:
 	( cd build ; git clone -n ${SRC_GIT} ; cd `basename ${SRC_GIT} .git` ; git checkout v${VERSION} )
 	mkdir -p ${DL_DIR}
 	tar -C build/`basename ${SRC_GIT} .git` -zcf $@ .
-
+	( cd build/`basename ${SRC_GIT} .git` ; git log --pretty="format:%ct" -n 1 v${VERSION} ) | \
+	python -c 'import os,sys; time = int(sys.stdin.read()); os.utime("$@",(time,time));'
 endif
 
