@@ -30,7 +30,7 @@ for filename in sys.argv[1:]:
             of.write(stream.read())
             of.close()
     else:
-        os.system('cd %s; tar zxf ../%s >& /dev/null' % (pkg, filename, filename))
+        os.system('cd %s; tar zxf ../%s >& /dev/null' % (pkg, filename))
 
     os.system('tar xzf %s/data.tar.gz -C %s' % (pkg, pkg))
     os.system('tar xzf %s/control.tar.gz -C %s/CONTROL' % (pkg, pkg))
