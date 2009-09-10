@@ -6,7 +6,7 @@ HOMEPAGE = http://matt.ucc.asn.au/${NAME}/
 TYPE	 = Optware
 CHANGELOG = ${VERSION}: Initial version - binaries only, no configuration yet.
 CATEGORY = System Utilities
-ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
+ICON	 = http://www.webos-internals.org/images/7/76/Icon_WebOSInternals_DropBear.png
 
 # SRC_OPTWARE = ${NAME}_${VERSION}
 SRC_OPTWARE = ${NAME}_0.52-5
