@@ -116,6 +116,9 @@ endif
 ifdef SRC_GIT
 	echo -n "{ \"Source\":\"${SRC_GIT}\"" >> $@
 endif
+ifdef SOURCE
+	echo -n "{ \"Source\":\"${SOURCE}\"" >> $@
+endif
 	echo -n ", \"Feed\":\"WebOS Internals\"" >> $@
 ifdef TYPE
 	echo -n ", \"Type\":\"${TYPE}\"" >> $@
