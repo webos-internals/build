@@ -152,7 +152,7 @@ else ifdef SRC_GIT
 	echo -n "\"" >> $@
 else ifdef SRC_OPTWARE
 	echo -n ", \"LastUpdated\":\"" >> $@
-	../../scripts/timestamp.py ${DL_DIR}/${SRC_OPTWARE}_$*.ipk >> $@
+	../../scripts/timestamp.py ${DL_DIR}/${SRC_OPTWARE}_$*.ipk Makefile >> $@
 	echo -n "\"" >> $@
 endif
 ifdef TITLE

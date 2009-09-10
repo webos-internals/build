@@ -4,5 +4,10 @@ import os
 import sys
 import time
 
-(mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) = os.stat(sys.argv[1])
-sys.stdout.write("%d" % mtime);
+maxtime = 0
+for file in sys.argv[1:]:
+    (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) = os.stat(file)
+    if (mtime > maxtime):
+        maxtime = mtime
+
+sys.stdout.write("%d" % maxtime);
