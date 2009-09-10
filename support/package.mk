@@ -169,6 +169,9 @@ ifdef TITLE
 	echo -n ", \"Title\":\"${TITLE}\"" >> $@
 endif
 	echo -n ", \"FullDescription\":\"" >> $@
+ifdef SRC_OPTWARE
+	echo -n "<bold>You must install Optware Bootstrap first!</bold><br>" >> $@
+endif
 ifdef DESCRIPTION
 	echo -n "${DESCRIPTION}" >> $@
 else ifdef SRC_OPTWARE
