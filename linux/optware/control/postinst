@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Stop org.webosinternals.optware
+/sbin/stop org.webosinternals.optware
+
+# Install the upstart script
+rm -f /etc/event.d/org.webosinternals.optware
+cp /var/etc/event.d/org.webosinternals.optware /etc/event.d/org.webosinternals.optware
+
+# Start org.webosinternals.optware
+/sbin/start org.webosinternals.optware
+
+exit 0

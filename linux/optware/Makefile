@@ -1,16 +1,20 @@
 NAME     = optware
 TITLE    = Optware Bootstrap
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.0.1
+VERSION  = 0.0.3
 HOMEPAGE = http://www.webos-internals.org/wiki/Optware
 MAINTAINER = WebOS Internals <support@webos-internal.org>
 DESCRIPTION = This package can be used to bootstrap the installation of packages from the Optware feed.
-DESCRIPTION += <br>Changelog:<br>0.0.1: Initial version, zero functionality.  I wonder who will still install it and post on PreCentral to ask what it does ...
+CHANGELOG = 0.0.3: Unmount /opt on removal.  Do not install or remove this package if you already have optware installed via the bootstrap script.
+CHANGELOG += <br>0.0.2: Create /var/opt, and bind mount it to /opt - will add more checking for pre-existing mounts later.  Do not install this if you already have optware installed via the bootstrap script.
+CHANGELOG += <br>0.0.1: Initial version, zero functionality.  I wonder who will still install it and post on PreCentral to ask what it does ...
 TYPE	 = Linux Application
 CATEGORY = System Utilities
 ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
 LICENSE  = GPL v2 Open Source
 SOURCE	 = git://git.webos-internals.org/preware/build.git
+POSTINSTALLFLAGS = 
+POSTREMOVEFLAGS  = 
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
@@ -28,7 +32,19 @@ build/.unpacked:
 build: build/.built
 
 build/.built: build/.unpacked
+	mkdir -p build/all/etc/event.d
+	install -m 644 upstart/${APP_ID} build/all/etc/event.d/${APP_ID}
 	touch $@
+
+build/all/CONTROL/postinst: control/postinst
+	rm -f $@
+	mkdir -p build/all/CONTROL
+	install -m 755 $< $@
+
+build/all/CONTROL/prerm: control/prerm
+	rm -f $@
+	mkdir -p build/all/CONTROL
+	install -m 755 $< $@
 
 clobber::
 	rm -rf build
