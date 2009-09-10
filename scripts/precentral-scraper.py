@@ -24,6 +24,7 @@ class PackageHandler(ContentHandler):
             self.screenshots = []
 
         self.getData = 1
+        self.data = ""
             
     def endElement(self,name):
         self.getData = 0
@@ -88,7 +89,7 @@ class PackageHandler(ContentHandler):
 
     def characters (self, ch): 
         if (self.getData) :
-            self.data = ch.encode('utf-8').replace('"', '\\"').replace(': ', '&#58; ').replace('\n', '')
+            self.data += ch.encode('utf-8').replace('"', '\\"').replace(': ', '&#58; ').replace('\r', '').replace('\n', '')
 
         return
 
