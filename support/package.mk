@@ -51,9 +51,19 @@ ipkgs/${APP_ID}_${VERSION}_%.ipk: build/.built
 	mv build/${APP_ID}_${VERSION}_$*.ipk $@
 
 build/%/CONTROL/postinst:
+ifdef SRC_OPTWARE
+	if [ -e control/postinst ] ; then \
+	  install -m 755 control/postinst $@ ; \
+	fi
+endif
 	true
 
 build/%/CONTROL/prerm:
+ifdef SRC_OPTWARE
+	if [ -e control/prerm ] ; then \
+	  install -m 755 control/prerm $@ ; \
+	fi
+endif
 	true
 
 ifeq ("${TYPE}", "Application")

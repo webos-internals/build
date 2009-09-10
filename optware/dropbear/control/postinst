@@ -1,0 +1,18 @@
+#!/bin/sh
+
+update-alternatives --install /opt/bin/scp scp /opt/sbin/dropbearmulti 50
+update-alternatives --install /opt/bin/ssh ssh /opt/sbin/dropbearmulti 50
+
+echo
+
+mkdir -p /opt/etc/dropbear
+
+if [ ! -f /opt/etc/dropbear/dropbear_rsa_host_key ]; then
+    /opt/sbin/dropbearkey -t rsa -f /opt/etc/dropbear/dropbear_rsa_host_key
+fi
+
+if [ ! -f /opt/etc/dropbear/dropbear_dss_host_key ]; then
+    /opt/sbin/dropbearkey -t dss -f /opt/etc/dropbear/dropbear_dss_host_key
+fi
+
+# /opt/etc/init.d/S51dropbear
