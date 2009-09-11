@@ -1,5 +1,5 @@
 NAME     = nano
-TITLE	 = A pico like editor
+TITLE	 = Nano
 APP_ID   = org.webosinternals.${NAME}
 VERSION  = 2.1.10-1
 HOMEPAGE = http://www.nano-editor.org/
