@@ -6,7 +6,7 @@ HOMEPAGE = http://www.openssh.com/
 TYPE	 = Optware
 CHANGELOG = ${VERSION}: Initial version - binaries only, no configuration yet.
 CATEGORY = System Utilities
-ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
+ICON	 = http://www.webos-internals.org/images/8/86/Icon_WebOSInternals_OpenSSH.png
 
 SRC_OPTWARE = ${NAME}_5.2p1-2
 
