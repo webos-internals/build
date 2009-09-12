@@ -6,7 +6,7 @@ HOMEPAGE = http://www.nano-editor.org/
 TYPE	 = Optware
 CHANGELOG = ${VERSION}: Initial version - binaries only, no configuration yet.
 CATEGORY = System Utilities
-ICON	 = http://www.webos-internals.org/images/5/5f/Icon_WebOSInternals_Base_Optware.png
+ICON	 = http://www.webos-internals.org/images/c/c0/Icon_WebOSInternals_Nano.png
 
 SRC_OPTWARE = ${NAME}_${VERSION}
 
