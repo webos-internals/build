@@ -118,7 +118,13 @@ ifdef PRIORITY
 else
 	echo "Priority: optional" >> $@
 endif
+ifdef SRC_OPTWARE
 ifdef DEPENDS
+	echo "Depends: org.webosinternals.optware, ${DEPENDS}" >> $@
+else
+	echo "Depends: org.webosinternals.optware" >> $@
+endif
+else
 	echo "Depends: ${DEPENDS}" >> $@
 endif
 ifdef CONFLICTS
