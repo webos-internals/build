@@ -1,12 +1,12 @@
 NAME     = ipkgservice
 CLASS    = IPKGService
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.8.6
+VERSION  = 0.8.7
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 TITLE	 = Package Manager Service
 DESCRIPTION = The Package Manager Service is a back-end interface to the ipkg command line application which manages all packages that are installed on the Pre.  It is required for advanced homebrew installers like Preware.
-CHANGELOG = 0.8.6: Added restartluna and restartjava methods.
+CHANGELOG = 0.8.7: Changed rawlist method to reduce the number of memory reallocations performed.
 TYPE	 = Service
 CATEGORY = Services and Plugins
 ICON	= http://www.webos-internals.org/images/7/77/Icon_WebOSInternals_PackageManager.png
