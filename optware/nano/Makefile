@@ -1,0 +1,19 @@
+NAME     = nano
+TITLE	 = Nano
+APP_ID   = org.webosinternals.${NAME}
+VERSION  = 2.1.10-1
+HOMEPAGE = http://www.nano-editor.org/
+TYPE	 = Optware
+CHANGELOG = ${VERSION}: Initial version - binaries only, no configuration yet.
+CATEGORY = System Utilities
+ICON	 = http://www.webos-internals.org/images/c/c0/Icon_WebOSInternals_Nano.png
+
+SRC_OPTWARE = ${NAME}_${VERSION}
+
+.PHONY: package
+package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
+include ../../support/package.mk
+
+include ../../support/download.mk
+
+include ../../support/optware.mk

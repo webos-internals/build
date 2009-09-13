@@ -1,0 +1,5 @@
+PATH=$PATH:/opt/bin
+if [ "`id -u`" -eq 0 ]; then
+  PATH=$PATH:/opt/sbin
+fi
+

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# The emulator already has an ssh server running, so no need to start another.
+if [ "`uname -m`" != "i686" ]; then
+    /sbin/stop org.webosinternals.openssh
+    rm -f /etc/event.d/org.webosinternals.openssh
+fi
+
+update-alternatives --remove scp /opt/bin/openssh-scp
+update-alternatives --remove ssh /opt/bin/openssh-ssh
+
+# We intentionally do not remove the host keys.
+
+exit 0
