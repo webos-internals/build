@@ -1,18 +1,14 @@
 #!/bin/sh
 
+# The emulator already has an ssh server running, so no need to start another.
+if [ "`uname -m`" != "i686" ]; then
+    /sbin/stop org.webosinternals.openssh
+    rm -f /etc/event.d/org.webosinternals.openssh
+fi
+
 update-alternatives --remove scp /opt/bin/openssh-scp
 update-alternatives --remove ssh /opt/bin/openssh-ssh
 
-[ -e /opt/etc/default/openssh ] && . /opt/etc/default/openssh
+# We intentionally do not remove the host keys.
 
-if [ -f /opt/var/run/sshd.pid ] ; then
-  kill `cat /opt/var/run/sshd.pid`
-else
-  if [ -n "$SSHD_NO_PID_KILLALL" ] ; then
-    killall $SSHD_NO_PID_KILLALL
-  else
-    killall /opt/sbin/sshd
-  fi
-fi
-
-rm -f /opt/var/run/sshd.pid
+exit 0

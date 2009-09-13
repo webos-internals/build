@@ -1,7 +1,13 @@
 #!/bin/sh
 
 # Stop org.webosinternals.optware
-/sbin/stop org.webosinternals.optware
+if [ -f /etc/event.d/org.webosinternals.optware ]; then
+    /sbin/stop org.webosinternals.optware
+fi
+
+# Install the profile script
+rm -f /etc/profile.d/org.webosinternals.optware
+ln -s /var/etc/profile.d/org.webosinternals.optware /etc/profile.d/org.webosinternals.optware
 
 # Install the upstart script
 rm -f /etc/event.d/org.webosinternals.optware

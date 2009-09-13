@@ -1,10 +1,14 @@
 #!/bin/sh
 
+# The emulator already has an ssh server running, so no need to start another.
+if [ "`uname -m`" != "i686" ]; then
+    /sbin/stop org.webosinternals.dropbear
+    rm -f /etc/event.d/org.webosinternals.dropbear
+fi
+
 update-alternatives --remove scp /opt/sbin/dropbearmulti
 update-alternatives --remove ssh /opt/sbin/dropbearmulti
 
-killall /opt/sbin/dropbear
+# We intentionally do not remove the host keys.
 
-/bin/rm -f /opt/etc/dropbear/dropbear_rsa_host_key
-/bin/rm -f /opt/etc/dropbear/dropbear_dss_host_key
-/bin/rmdir /opt/etc/dropbear
+exit 0

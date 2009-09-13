@@ -38,12 +38,16 @@ endif
 
 ipkgs/${APP_ID}_${VERSION}_%.ipk: build/.built
 	rm -f ipkgs/${APP_ID}_*_$*.ipk
+	rm -f build/$*/CONTROL/conffiles
+	${MAKE} build/$*/CONTROL/conffiles
 	rm -f build/$*/CONTROL/control
 	${MAKE} build/$*/CONTROL/control
 	rm -f build/$*/CONTROL/postinst
 	${MAKE} build/$*/CONTROL/postinst
 	rm -f build/$*/CONTROL/prerm
 	${MAKE} build/$*/CONTROL/prerm
+	rm -f build/$*/CONTROL/conffiles
+	${MAKE} build/$*/CONTROL/conffiles
 	mkdir -p ipkgs
 	( cd build ; \
 	  TAR_OPTIONS=--wildcards \
@@ -51,20 +55,19 @@ ipkgs/${APP_ID}_${VERSION}_%.ipk: build/.built
 	mv build/${APP_ID}_${VERSION}_$*.ipk $@
 
 build/%/CONTROL/postinst:
-ifdef SRC_OPTWARE
 	if [ -e control/postinst ] ; then \
 	  install -m 755 control/postinst $@ ; \
 	fi
-endif
-	true
 
 build/%/CONTROL/prerm:
-ifdef SRC_OPTWARE
 	if [ -e control/prerm ] ; then \
 	  install -m 755 control/prerm $@ ; \
 	fi
-endif
-	true
+
+build/%/CONTROL/conffiles:
+	if [ -e control/conffiles ] ; then \
+	  install -m 755 control/conffiles $@ ; \
+	fi
 
 ifeq ("${TYPE}", "Application")
 build/%/CONTROL/control: build/%/usr/palm/applications/${APP_ID}/appinfo.json

@@ -1,9 +1,15 @@
 #!/bin/sh
 
+# Disable any legacy openssh server that was installed manually
+if [ -f /etc/event.d/optware-openssh ]; then
+    /sbin/stop optware-openssh
+    rm -f /etc/event.d/optware-openssh
+fi
+
 update-alternatives --install /opt/bin/scp scp /opt/bin/openssh-scp 80
 update-alternatives --install /opt/bin/ssh ssh /opt/bin/openssh-ssh 80
 
-echo
+mkdir -p /opt/etc/openssh
 
 # Check for the SSH1 RSA key
 if [ ! -f /opt/etc/openssh/ssh_host_key ]; then
@@ -22,5 +28,12 @@ if [ ! -f /opt/etc/openssh/ssh_host_dsa_key ]; then
     echo Generating DSA Key...
     /opt/bin/ssh-keygen -t dsa -f /opt/etc/openssh/ssh_host_dsa_key -C '' -N ''
 fi
-                
-# /opt/etc/init.d/S40sshd
+
+# The emulator already has an ssh server running, so no need to start another.
+if [ "`uname -m`" != "i686" ]; then
+    rm -f /etc/event.d/org.webosinternals.openssh
+    cp /var/etc/event.d/org.webosinternals.openssh /etc/event.d/org.webosinternals.openssh
+    /sbin/start org.webosinternals.openssh
+fi
+
+exit 0

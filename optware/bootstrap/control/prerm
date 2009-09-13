@@ -1,10 +1,15 @@
 #!/bin/sh
 
 # Stop org.webosinternals.optware
-/sbin/stop org.webosinternals.optware
+if [ -f /etc/event.d/org.webosinternals.optware ]; then
+    /sbin/stop org.webosinternals.optware
+fi
 
 # Remove the upstart script
 rm -f /etc/event.d/org.webosinternals.optware
+
+# Remove the profile script
+rm -f /etc/profile.d/org.webosinternals.optware
 
 # Unmount /opt
 umount /opt
