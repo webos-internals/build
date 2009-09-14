@@ -7,10 +7,12 @@ fi
 
 # Install the profile script
 rm -f /etc/profile.d/org.webosinternals.optware
+mkdir -p /etc/profile.d/
 ln -s /var/etc/profile.d/org.webosinternals.optware /etc/profile.d/org.webosinternals.optware
 
 # Install the upstart script
 rm -f /etc/event.d/org.webosinternals.optware
+mkdir -p /etc/event.d/
 cp /var/etc/event.d/org.webosinternals.optware /etc/event.d/org.webosinternals.optware
 
 # Start org.webosinternals.optware

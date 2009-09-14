@@ -1,11 +1,11 @@
 NAME     = optware
 TITLE    = Optware Bootstrap
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.0.5
+VERSION  = 0.0.6
 HOMEPAGE = http://www.webos-internals.org/wiki/Optware
 MAINTAINER = WebOS Internals <support@webos-internal.org>
 DESCRIPTION = This package can be used to bootstrap the installation of packages from the Optware feed.
-CHANGELOG = 0.0.5: Added default profile to set up the path.  Do not install or remove this package if you already have optware installed via the bootstrap script.
+CHANGELOG = 0.0.6: Added default profile to set up the path.  Do not install or remove this package if you already have optware installed via the bootstrap script.
 CHANGELOG += <br>0.0.3: Unmount /opt on removal.
 CHANGELOG += <br>0.0.2: Create /var/opt, and bind mount it to /opt - will add more checking for pre-existing mounts later.
 CHANGELOG += <br>0.0.1: Initial version, zero functionality.  I wonder who will still install it and post on PreCentral to ask what it does ...
