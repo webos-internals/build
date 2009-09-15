@@ -1,11 +1,10 @@
 NAME     = openssl
 TITLE	 = OpenSSL
-APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.9.8.11-1
+APP_ID   = mobi.optware.${NAME}
+VERSION  = 0.9.8k-1
 HOMEPAGE = http://www.openssl.org/
 TYPE	 = Optware
-CHANGELOG = ${VERSION}: Initial version - binaries only, no configuration yet.
-CATEGORY = System Utilities
+CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
 
 SRC_OPTWARE = ${NAME}_0.9.8k-1

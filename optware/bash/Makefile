@@ -1,13 +1,12 @@
 NAME     = bash
 TITLE	 = Bourne Again SHell
-APP_ID   = org.webosinternals.${NAME}
+APP_ID   = mobi.optware.${NAME}
 VERSION  = 3.2.49-1
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Bash
 TYPE	 = Optware
-CHANGELOG = ${VERSION}: Initial version - binaries only, no configuration yet.
-CATEGORY = System Utilities
+CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
-DEPENDS  = org.webosinternals.readline
+DEPENDS  = mobi.optware.readline
 
 SRC_OPTWARE = ${NAME}_${VERSION}
 

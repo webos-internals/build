@@ -1,13 +1,13 @@
 NAME     = openssh
 TITLE	 = OpenSSH
-APP_ID   = org.webosinternals.${NAME}
+APP_ID   = mobi.optware.${NAME}
 VERSION  = 5.2.1-5
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:OpenSSH
 TYPE	 = Optware
 CHANGELOG = 5.2.1-5: Access available via wifi only, on port 22, with key authentication only.
-CATEGORY = System Utilities
+CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/8/86/Icon_WebOSInternals_OpenSSH.png
-DEPENDS  = org.webosinternals.openssl, org.webosinternals.zlib
+DEPENDS  = mobi.optware.openssl, mobi.optware.zlib
 
 SRC_OPTWARE = ${NAME}_5.2p1-2
 

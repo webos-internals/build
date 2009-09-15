@@ -1,11 +1,10 @@
 NAME     = nano
 TITLE	 = Nano
-APP_ID   = org.webosinternals.${NAME}
+APP_ID   = mobi.optware.${NAME}
 VERSION  = 2.1.10-1
 HOMEPAGE = http://www.nano-editor.org/
 TYPE	 = Optware
-CHANGELOG = ${VERSION}: Initial version - binaries only, no configuration yet.
-CATEGORY = System Utilities
+CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/c/c0/Icon_WebOSInternals_Nano.png
 
 SRC_OPTWARE = ${NAME}_${VERSION}

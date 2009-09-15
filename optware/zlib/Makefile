@@ -1,11 +1,10 @@
 NAME     = zlib
 TITLE	 = zlib
-APP_ID   = org.webosinternals.${NAME}
+APP_ID   = mobi.optware.${NAME}
 VERSION  = 1.2.3-3
 HOMEPAGE = http://www.zlib.net/
 TYPE	 = Optware
-CHANGELOG = ${VERSION}: Initial version - binaries only, no configuration yet.
-CATEGORY = System Utilities
+CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
 
 SRC_OPTWARE = ${NAME}_${VERSION}

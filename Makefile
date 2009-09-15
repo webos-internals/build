@@ -17,11 +17,12 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-SUBDIRS = apps services plugins patches linux optware
+SUBDIRS = apps services plugins patches linux
 
 .PHONY: index package toolchain upload clobber clean
 
 index:  ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv7/Packages \
+	ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv7/Packages \
 	ipkgs/precentral/Packages ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages
 
 ipkgs/webos-internals/%/Packages: package
@@ -34,6 +35,17 @@ ipkgs/webos-internals/%/Packages: package
 	toolchain/ipkg-utils/ipkg-make-index \
 		-v -p ipkgs/webos-internals/$*/Packages ipkgs/webos-internals/$*
 	gzip -c ipkgs/webos-internals/$*/Packages > ipkgs/webos-internals/$*/Packages.gz
+
+ipkgs/optware/%/Packages: package
+	rm -rf ipkgs/optware/$*
+	mkdir -p ipkgs/optware/$*
+	( find optware -type d -name ipkgs -print | \
+	  xargs -I % find % -name "*_$*.ipk" -print | \
+	  xargs -I % rsync -i -a % ipkgs/optware/$* )
+	TAR_OPTIONS=--wildcards \
+	toolchain/ipkg-utils/ipkg-make-index \
+		-v -p ipkgs/optware/$*/Packages ipkgs/optware/$*
+	gzip -c ipkgs/optware/$*/Packages > ipkgs/optware/$*/Packages.gz
 
 ipkgs/%/Packages: package
 	rm -rf ipkgs/$*
@@ -51,6 +63,9 @@ ipkgs/%/Packages: package
 
 package: toolchain
 	for f in `find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print` ; do \
+	  ${MAKE} -C $$f package || exit ; \
+	done
+	for f in `find optware -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  ${MAKE} -C $$f package || exit ; \
 	done
 	for f in `find feeds -mindepth 1 -maxdepth 1 -type d -print` ; do \
@@ -74,7 +89,7 @@ distclean: clobber
 	xargs -I % ${MAKE} -C % clobber
 
 clobber: clean
-	find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print | \
+	find ${SUBDIRS} feeds optware -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
 	rm -rf ipkgs
 

@@ -1,11 +1,10 @@
 NAME     = readline
 TITLE	 = GNU Readline Library
-APP_ID   = org.webosinternals.${NAME}
+APP_ID   = mobi.optware.${NAME}
 VERSION  = 6.0-1
 HOMEPAGE = http://directory.fsf.org/project/readline/
 TYPE	 = Optware
-CHANGELOG = ${VERSION}: Initial version - binaries only, no configuration yet.
-CATEGORY = System Utilities
+CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
 
 SRC_OPTWARE = ${NAME}_${VERSION}

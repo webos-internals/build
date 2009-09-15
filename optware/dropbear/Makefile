@@ -1,12 +1,12 @@
 NAME     = dropbear
 TITLE	 = Dropbear
-APP_ID   = org.webosinternals.${NAME}
+APP_ID   = mobi.optware.${NAME}
 VERSION  = 0.52-8
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Dropbear
 TYPE	 = Optware
 CHANGELOG = 0.52-8: Access available via wifi only, on port 22, with key authentication only.
 
-CATEGORY = System Utilities
+CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/7/76/Icon_WebOSInternals_DropBear.png
 
 SRC_OPTWARE = ${NAME}_0.52-5
