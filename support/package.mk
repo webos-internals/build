@@ -146,7 +146,13 @@ else ifdef SRC_OPTWARE
 else
 	true
 endif
+ifdef FEED
+	/bin/echo -n "\"Feed\":\"${FEED}\"" >> $@
+else ifdef SRC_OPTWARE
+	/bin/echo -n "\"Feed\":\"Optware\"" >> $@
+else
 	/bin/echo -n "\"Feed\":\"WebOS Internals\"" >> $@
+endif
 ifdef TYPE
 	/bin/echo -n ", \"Type\":\"${TYPE}\"" >> $@
 endif
