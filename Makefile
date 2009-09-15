@@ -81,8 +81,13 @@ toolchain/cs08q1armel/build/arm-2008q1:
 upload:
 	rsync -avr ipkgs/ ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/
 
-testing: ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv7/Packages 
-	rsync -avr ipkgs/webos-internals/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/testing/
+testing: webos-internals-testing optware-testing
+
+webos-internals-testing: ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv7/Packages 
+	rsync -avr ipkgs/webos-internals/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
+
+optware-testing: ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv7/Packages 
+	rsync -avr ipkgs/optware/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/optware/testing/
 
 distclean: clobber
 	find toolchain -mindepth 1 -maxdepth 1 -type d -print | \
