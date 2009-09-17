@@ -5,7 +5,7 @@ VERSION  = 2.04-1
 HOMEPAGE = http://pwgen.sourceforge.net/
 TYPE	 = Optware
 CATEGORY = Utilities
-ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
+ICON	 = http://www.webos-internals.org/images/c/c9/Icon_WebOSInternals_Password.png
 
 SRC_OPTWARE = ${NAME}_${VERSION}
 

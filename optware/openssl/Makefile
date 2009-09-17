@@ -5,7 +5,7 @@ VERSION  = 0.9.8k-1
 HOMEPAGE = http://www.openssl.org/
 TYPE	 = Optware
 CATEGORY = Utilities
-ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
+ICON	 = http://www.webos-internals.org/images/a/ae/Icon_WebOSInternals_OpenSSL.png
 
 SRC_OPTWARE = ${NAME}_0.9.8k-1
 
