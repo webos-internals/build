@@ -5,7 +5,7 @@ VERSION  = 6.0-1
 HOMEPAGE = http://directory.fsf.org/project/readline/
 TYPE	 = Optware
 CATEGORY = Utilities
-ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
+ICON	 = http://www.webos-internals.org/images/f/f3/Icon_WebOSInternals_GNUReadlineLib.png
 
 SRC_OPTWARE = ${NAME}_${VERSION}
 

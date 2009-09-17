@@ -5,7 +5,7 @@ VERSION  = 1.2.3-3
 HOMEPAGE = http://www.zlib.net/
 TYPE	 = Optware
 CATEGORY = Utilities
-ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
+ICON	 = http://www.webos-internals.org/images/d/d9/Icon_WebOSInternals_ZLib.png
 
 SRC_OPTWARE = ${NAME}_${VERSION}
 
