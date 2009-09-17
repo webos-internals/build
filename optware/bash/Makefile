@@ -1,5 +1,5 @@
 NAME     = bash
-TITLE	 = Bourne Again SHell
+TITLE	 = Bourne Again Shell
 APP_ID   = mobi.optware.${NAME}
 VERSION  = 3.2.49-1
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Bash
