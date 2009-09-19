@@ -1,11 +1,11 @@
-NAME     = nano
-TITLE	 = Nano
+NAME     = readline
+TITLE	 = GNU Readline Library
 APP_ID   = mobi.optware.${NAME}
-VERSION  = 2.1.10-1
-HOMEPAGE = http://www.nano-editor.org/
+VERSION  = 6.0-1
+HOMEPAGE = http://directory.fsf.org/project/readline/
 TYPE	 = Optware
 CATEGORY = Utilities
-ICON	 = http://www.webos-internals.org/images/c/c0/Icon_WebOSInternals_Nano.png
+ICON	 = http://www.webos-internals.org/images/f/f3/Icon_WebOSInternals_GNUReadlineLib.png
 
 SRC_OPTWARE = ${NAME}_${VERSION}
 
@@ -16,3 +16,7 @@ include ../../support/package.mk
 include ../../support/download.mk
 
 include ../../support/optware.mk
+
+build/%.built : build/%.unpacked
+	rm -rf build/$*/opt/share build/$*/opt/include
+	touch $@

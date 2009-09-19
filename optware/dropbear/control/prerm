@@ -2,8 +2,8 @@
 
 # The emulator already has an ssh server running, so no need to start another.
 if [ "`uname -m`" != "i686" ]; then
-    /sbin/stop org.webosinternals.dropbear
-    rm -f /etc/event.d/org.webosinternals.dropbear
+    /sbin/stop mobi.optware.dropbear
+    rm -f /etc/event.d/mobi.optware.dropbear
 fi
 
 update-alternatives --remove scp /opt/sbin/dropbearmulti

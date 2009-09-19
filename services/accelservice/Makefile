@@ -1,7 +1,7 @@
 NAME     = accelservice
 CLASS    = AccelService
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.2.0
+VERSION  = 0.3.0
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:${CLASS}
 MAINTAINER = Eric J. Gaudet <emoney_33@yahoo.com>
 TITLE	 = Accelerometer Service

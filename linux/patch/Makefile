@@ -3,10 +3,10 @@ TITLE    = GNU Patch
 APP_ID   = org.webosinternals.${NAME}
 VERSION  = 2.5.9-3
 HOMEPAGE = http://savannah.gnu.org/projects/patch
-MAINTAINER = WebOS Internals <support@webos-internal.org>
+MAINTAINER = WebOS Internals <support@webos-internals.org>
 DESCRIPTION = This package is simply the GNU Patch utility, cross-compiled and packaged up in a form such that it can be used in the installation scripts of other packages.
 TYPE	 = Linux Application
-CATEGORY = System Utilities
+CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/a/ae/Icon_WebOSInternals_Base_Patch.png
 LICENSE  = GPL v2 Open Source
 

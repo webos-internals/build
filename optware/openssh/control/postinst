@@ -31,9 +31,10 @@ fi
 
 # The emulator already has an ssh server running, so no need to start another.
 if [ "`uname -m`" != "i686" ]; then
-    rm -f /etc/event.d/org.webosinternals.openssh
-    cp /var/etc/event.d/org.webosinternals.openssh /etc/event.d/org.webosinternals.openssh
-    /sbin/start org.webosinternals.openssh
+    rm -f /etc/event.d/mobi.optware.openssh
+    mkdir -p /etc/event.d/
+    cp /var/etc/event.d/mobi.optware.openssh /etc/event.d/mobi.optware.openssh
+    /sbin/start mobi.optware.openssh
 fi
 
 exit 0

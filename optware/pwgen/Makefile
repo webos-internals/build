@@ -1,11 +1,11 @@
-NAME     = nano
-TITLE	 = Nano
+NAME     = pwgen
+TITLE	 = Password Generator
 APP_ID   = mobi.optware.${NAME}
-VERSION  = 2.1.10-1
-HOMEPAGE = http://www.nano-editor.org/
+VERSION  = 2.04-1
+HOMEPAGE = http://pwgen.sourceforge.net/
 TYPE	 = Optware
 CATEGORY = Utilities
-ICON	 = http://www.webos-internals.org/images/c/c0/Icon_WebOSInternals_Nano.png
+ICON	 = http://www.webos-internals.org/images/c/c9/Icon_WebOSInternals_Password.png
 
 SRC_OPTWARE = ${NAME}_${VERSION}
 

@@ -1,11 +1,12 @@
-NAME     = nano
-TITLE	 = Nano
+NAME     = irssi
+TITLE	 = Irssi IRC Client
 APP_ID   = mobi.optware.${NAME}
-VERSION  = 2.1.10-1
-HOMEPAGE = http://www.nano-editor.org/
+VERSION  = 0.8.14-1
+HOMEPAGE = http://www.irssi.org/
 TYPE	 = Optware
+CHANGELOG = ${VERSION}: Initial version - binaries only, no configuration yet.
 CATEGORY = Utilities
-ICON	 = http://www.webos-internals.org/images/c/c0/Icon_WebOSInternals_Nano.png
+ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
 
 SRC_OPTWARE = ${NAME}_${VERSION}
 

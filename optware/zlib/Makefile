@@ -1,11 +1,11 @@
-NAME     = nano
-TITLE	 = Nano
+NAME     = zlib
+TITLE	 = zlib
 APP_ID   = mobi.optware.${NAME}
-VERSION  = 2.1.10-1
-HOMEPAGE = http://www.nano-editor.org/
+VERSION  = 1.2.3-3
+HOMEPAGE = http://www.zlib.net/
 TYPE	 = Optware
 CATEGORY = Utilities
-ICON	 = http://www.webos-internals.org/images/c/c0/Icon_WebOSInternals_Nano.png
+ICON	 = http://www.webos-internals.org/images/d/d9/Icon_WebOSInternals_ZLib.png
 
 SRC_OPTWARE = ${NAME}_${VERSION}
 
