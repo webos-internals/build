@@ -13,14 +13,18 @@ class PackageHandler(ContentHandler):
     getData = 0
     url = ""
     filename = ""
+    title = ""
     json = ""
     author = ""
+    version = ""
     screenshots = []
 
     def startElement(self, name, attrs):
-        if (name == "application") :
+        if ((name == "application") or (name == "theme")) :
+            self.title = ""
             self.json = "{ "
             self.author = ""
+            self.version = ""
             self.screenshots = []
 
         self.getData = 1
@@ -30,7 +34,11 @@ class PackageHandler(ContentHandler):
         self.getData = 0
 
         if (name == "title") :
+            self.title = self.data
             self.json += "\"Title\":\"%s\", " % self.data
+
+        if (name == "version") :
+            self.version = self.data
 
         if (name == "lastupdate") :
             self.json += "\"LastUpdated\":\"%s\", " % self.data
@@ -45,7 +53,6 @@ class PackageHandler(ContentHandler):
             self.json += "\"FullDescription\":\"%s\", " % self.data
 
         if (name == "categories") :
-            self.json += "\"Type\":\"Application\", "
             self.json += "\"Category\":\"%s\", " % self.data
 
         if (name == "author") :
@@ -56,13 +63,19 @@ class PackageHandler(ContentHandler):
 
         if (name == "url") :
             self.url = self.data
+            self.type = "Application"
+
+        if (name == "themezip") :
+            self.url = self.data
+            self.type = "Theme"
+            self.json += "\"Category\":\"Themes\", "
 
         if (name == "screenshot") :
             self.screenshots.append('"' + self.data + '"')
 
-        if (name == "application") :
+        if ((name == "application") or (name == "theme")):
 
-            regexp = re.compile("^(.*)/([^/]+.ipk)")
+            regexp = re.compile("^(.*)/([^/]+(.ipk|.zip))")
             m = regexp.match(self.url)
             if (m):
                 self.filename = m.group(2)
@@ -70,12 +83,22 @@ class PackageHandler(ContentHandler):
                 if (len(self.screenshots)):
                     self.json += "\"Screenshots\":[" + ','.join(self.screenshots) + "], "
 
+                self.json += "\"Source\":\"%s\", " % self.url
+
+                self.json += "\"Type\":\"%s\", " % self.type
+
                 self.json += "\"Feed\":\"PreCentral\" }"
 
-                print "Filename: " + self.filename
+                if (name == "theme"):
+                    id = "net.precentral.themes." + self.title.strip().lower().replace("&#58; ","-").replace("_quick_install_2.0","").replace("_","-").replace(": ","-").replace("  "," ").replace(" ","-").replace(".","") + "_" + self.version + "_all"
+                    print "Filename: " + id + ".ipk"
+                    self.filename = id + ".zip"
+                else:
+                    print "Filename: " + self.filename
                 print "Source: " + self.json
-                if (self.author):
-                    print "MaintainerURL: " + "http://forums.precentral.net/members/" + urllib.quote(self.author) + ".html"
+                if (name == "application"):
+                    if (self.author):
+                        print "MaintainerURL: " + "http://forums.precentral.net/members/" + urllib.quote(self.author) + ".html"
 
                 if (not os.path.exists(sys.argv[2] + "/" + self.filename)) :
                     sys.stderr.write("Fetching: " + self.filename + "\n")
