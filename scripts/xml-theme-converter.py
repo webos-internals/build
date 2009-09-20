@@ -57,6 +57,11 @@ class PackageHandler(ContentHandler):
             print >>self.control,  "Section: Themes"
             print >>self.control,  "Priority: optional"
             print >>self.control,  "Source: unknown"
+            print >>self.postinst, ""
+            print >>self.postinst, "mkdir -p /var/usr/lib/webos-quick-install/"
+            print >>self.postinst, "cp /var/net.precentral.themes/theme.xml /var/usr/lib/webos-quick-install/theme.xml"
+            print >>self.prerm,    ""
+            print >>self.prerm,    "rm -f /var/usr/lib/webos-quick-install/theme.xml"
 
         if (name == "image") :
             if (self.section == "wallpaper"):
@@ -107,11 +112,8 @@ class PackageHandler(ContentHandler):
                 print >>self.prerm,    "fi"
 
         if (name == "themelist"):
-                print >>self.postinst, ""
-                print >>self.postinst, "mkdir -p /var/usr/lib/webos-quick-install/"
-                print >>self.postinst, "cp /var/net.precentral.themes/theme.xml /var/usr/lib/webos-quick-install/theme.xml"
-                print >>self.prerm,    ""
-                print >>self.prerm,    "rm -f /var/usr/lib/webos-quick-install/theme.xml"
+            print >>self.prerm, ""
+            print >>self.prerm, "rm -f /var/usr/lib/webos-quick-install/theme.xml"
 
     def characters (self, ch): 
         if (self.getData) :
