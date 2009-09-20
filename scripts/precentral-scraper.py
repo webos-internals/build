@@ -87,6 +87,10 @@ class PackageHandler(ContentHandler):
 
                 self.json += "\"Type\":\"%s\", " % self.type
 
+                if (name == "theme"):
+                    self.json += "\"PostInstallFlags\":\"RestartLuna\", "
+                    self.json += "\"PostRemoveFlags\":\"RestartLuna\", "
+
                 self.json += "\"Feed\":\"PreCentral\" }"
 
                 if (name == "theme"):
