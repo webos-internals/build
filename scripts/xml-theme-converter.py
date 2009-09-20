@@ -72,12 +72,12 @@ class PackageHandler(ContentHandler):
                 print >>self.postinst, "rm -f /media/internal/wallpapers/%s" % os.path.basename(self.data)
                 print >>self.postinst, "cp /var/net.precentral.themes/%s /media/internal/wallpapers/%s" % (self.data, os.path.basename(self.data))
                 print >>self.postinst, ""
-                print >>self.postinst, "luna-send -n 1 palm://com.palm.systemservice/wallpaper/importWallpaper '{ \"target\": \"/media/internal/wallpapers/%s\" }'" % os.path.basename(self.data)
-                print >>self.postinst, "luna-send -n 1 palm://com.palm.systemservice/setPreferences '{ \"wallpaper\": { \"wallpaperName\": \"%s\", \"wallpaperFile\": \"/media/internal/wallpapers/%s\" } }'" % (os.path.basename(self.data), os.path.basename(self.data))
-
-                # %%% Need to set the default wallpaper back %%%
+                print >>self.postinst, "luna-send -n 1 palm://com.palm.systemservice/wallpaper/importWallpaper '{ \"target\":\"/media/internal/wallpapers/%s\" }'" % os.path.basename(self.data)
+                print >>self.postinst, "luna-send -n 1 palm://com.palm.systemservice/setPreferences '{ \"wallpaper\": { \"wallpaperName\":\"%s\", \"wallpaperFile\":\"/media/internal/wallpapers/%s\" } }'" % (os.path.basename(self.data), os.path.basename(self.data))
                 print >>self.prerm,    ""
                 print >>self.prerm,    "rm -f /media/internal/wallpapers/%s" % self.data
+                print >>self.prerm,    ""
+                print >>self.prerm,    "luna-send -n 1 palm://com.palm.systemservice/setPreferences '{ \"wallpaper\": { \"wallpaperName\":\"01.jpg\", \"wallpaperFile\":\"/media/internal/wallpapers/01.jpg\" } }'"
 
         if (name == "filename") :
             if (self.section == "file"):
