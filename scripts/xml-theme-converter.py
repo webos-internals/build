@@ -21,6 +21,8 @@ class PackageHandler(ContentHandler):
             self.version = ""
             print >>self.postinst, "#!/bin/sh"
             print >>self.postinst, ""
+            print >>self.prerm,    "#!/bin/sh"
+            print >>self.prerm,    ""
 
         if ((name == "wallpaper") or (name == "file") or (name == "icon")):
             self.section = name
@@ -112,8 +114,12 @@ class PackageHandler(ContentHandler):
                 print >>self.prerm,    "fi"
 
         if (name == "themelist"):
-            print >>self.prerm, ""
-            print >>self.prerm, "rm -f /var/usr/lib/webos-quick-install/theme.xml"
+            print >>self.postinst, ""
+            print >>self.postinst, "exit 0"
+            print >>self.prerm,    ""
+            print >>self.prerm,    "rm -f /var/usr/lib/webos-quick-install/theme.xml"
+            print >>self.prerm,    ""
+            print >>self.prerm,    "exit 0"
 
     def characters (self, ch): 
         if (self.getData) :
