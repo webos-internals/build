@@ -23,7 +23,8 @@ SUBDIRS = apps services plugins patches linux
 
 index:  ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv7/Packages \
 	ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv7/Packages \
-	ipkgs/precentral/Packages ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages
+	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
+	ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages
 
 ipkgs/webos-internals/%/Packages: package
 	rm -rf ipkgs/webos-internals/$*
