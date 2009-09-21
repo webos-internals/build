@@ -1,6 +1,6 @@
 NAME     = virtual-keyboard
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.2.5
+VERSION  = 0.2.6
 HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 TITLE = Virtual Keyboard
