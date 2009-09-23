@@ -47,8 +47,8 @@ build/.built: build/.unpacked
 	    mkdir -p build/`basename $$f .zip`/CONTROL ; \
 	    ../../scripts/xml-theme-converter.py \
 	      build/`basename $$f .zip`/net.precentral.themes/theme.xml \
-	      build/`basename $$f .zip` `basename $$f .zip` ; \
-	    chmod ugo+x build/`basename $$f .zip`/CONTROL/postinst build/`basename $$f .zip`/CONTROL/prerm ; \
+	      build/`basename $$f .zip` `basename $$f .zip` && \
+	    chmod ugo+x build/`basename $$f .zip`/CONTROL/postinst build/`basename $$f .zip`/CONTROL/prerm && \
 	    ( cd ipkgs ; ../../../toolchain/ipkg-utils/ipkg-build ../build/`basename $$f .zip` ) ; \
 	  fi ; \
 	done
