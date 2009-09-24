@@ -1,12 +1,12 @@
 NAME     = virtual-keyboard
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.2.6
+VERSION  = 0.3.2
 HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 TITLE = Virtual Keyboard
 TYPE = Patch
 CATEGORY = WebOS Patches
-DEPENDS = org.webosinternals.patch
+DEPENDS = org.webosinternals.patch, org.webosinternals.diffstat
 ICON	= http://www.webos-internals.org/images/0/0f/Icon_WebOSInternals_Keyboard.png
 DESCRIPTION = Double-tapping the gesture area (near the round silver button) will bring up the on-screen keyboard if you are in a text input field. Tap with two fingers separated or Double-tap quickly.  In the Emulator, tap PageUp twice.
 CHANGELOG = ${VERSION}: Expanded and optimized keyboard theming and user interface. Now using default theme made by un_designer.
@@ -49,8 +49,7 @@ build/.built: build/.unpacked build/md5sums
 	mv build.tmp/media/internal/virtual-keyboard \
 	   build/all/usr/palm/applications/${APP_ID}/
 	rm -rf build.tmp
-	mkdir -p build/all/usr/palm/applications/${APP_ID}/patches
-	install -m 644 build/src/${PATCHES} build/all/usr/palm/applications/${APP_ID}/patches/
+	install -m 644 build/src/${PATCHES} build/all/usr/palm/applications/${APP_ID}/
 	for f in ${FILES} ; do \
 	  grep $$f build/md5sums >> build/all/usr/palm/applications/${APP_ID}/md5sums ; \
 	done
