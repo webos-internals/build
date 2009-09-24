@@ -23,6 +23,7 @@ SUBDIRS = apps services plugins patches linux
 
 index:  ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv7/Packages \
 	ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv7/Packages \
+	ipkgs/autopatch/all/Packages \
 	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
 	ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages
 
@@ -48,6 +49,17 @@ ipkgs/optware/%/Packages: package
 		-v -p ipkgs/optware/$*/Packages ipkgs/optware/$*
 	gzip -c ipkgs/optware/$*/Packages > ipkgs/optware/$*/Packages.gz
 
+ipkgs/autopatch/%/Packages: package
+	rm -rf ipkgs/autopatch/$*
+	mkdir -p ipkgs/autopatch/$*
+	( find autopatch -type d -name ipkgs -print | \
+	  xargs -I % find % -name "*_$*.ipk" -print | \
+	  xargs -I % rsync -i -a % ipkgs/autopatch/$* )
+	TAR_OPTIONS=--wildcards \
+	toolchain/ipkg-utils/ipkg-make-index \
+		-v -p ipkgs/autopatch/$*/Packages ipkgs/autopatch/$*
+	gzip -c ipkgs/autopatch/$*/Packages > ipkgs/autopatch/$*/Packages.gz
+
 ipkgs/%/Packages: package
 	rm -rf ipkgs/$*
 	mkdir -p ipkgs/$*
@@ -69,6 +81,9 @@ package: toolchain
 	for f in `find optware -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  ${MAKE} -C $$f package || exit ; \
 	done
+	for f in `find autopatch -mindepth 1 -maxdepth 1 -type d -print` ; do \
+	  ${MAKE} -C $$f package || exit ; \
+	done
 	for f in `find feeds -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  ${MAKE} -C $$f package || exit ; \
 	done
@@ -82,7 +97,7 @@ toolchain/cs08q1armel/build/arm-2008q1:
 upload:
 	rsync -avr ipkgs/ ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/
 
-testing: webos-internals-testing optware-testing
+testing: webos-internals-testing optware-testing autopatch-testing
 
 webos-internals-testing: ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv7/Packages 
 	rsync -avr ipkgs/webos-internals/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
@@ -90,12 +105,15 @@ webos-internals-testing: ipkgs/webos-internals/all/Packages ipkgs/webos-internal
 optware-testing: ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv7/Packages 
 	rsync -avr ipkgs/optware/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/optware/testing/
 
+autopatch-testing: ipkgs/autopatch/all/Packages
+	rsync -avr ipkgs/autopatch/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/autopatch/testing/
+
 distclean: clobber
 	find toolchain -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
 
 clobber: clean
-	find ${SUBDIRS} feeds optware -mindepth 1 -maxdepth 1 -type d -print | \
+	find ${SUBDIRS} feeds optware autopatch -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
 	rm -rf ipkgs
 
