@@ -1,15 +1,12 @@
 #!/bin/sh
+PACKAGE=org.webosinternals.emergency-patch-recovery
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
-
-epr_done() {
-  ipkg -o /var remove org.webosinternals.emergency-patch-recovery
-  exit 0
-}
 
 if [ ! -d $PATCH_CONTROL_DIR ]
 then
   echo "NOTE: No patches found!"
-  epr_done
+  ipkg -o /var remove $PACKAGE
+  exit 1
 fi
 
 if [ -e $PATCH_CONTROL_DIR/packages ]
@@ -31,4 +28,6 @@ fi
 
 echo "DONE"
 rm -rf $PATCH_CONTROL_DIR
-epr_done
+
+ipkg -o /var remove $PACKAGE
+exit 0
