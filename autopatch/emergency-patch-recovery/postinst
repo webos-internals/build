@@ -1,6 +1,7 @@
 #!/bin/sh
 PACKAGE=org.webosinternals.emergency-patch-recovery
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
+IPKG_INFO_DIR=/usr/lib/ipkg/info
 
 if [ ! -d $PATCH_CONTROL_DIR ]
 then
@@ -21,8 +22,19 @@ if [ -e $PATCH_CONTROL_DIR/backups ]
 then
   for i in `cat $PATCH_CONTROL_DIR/backups`
   do
-    echo "Recovering original file $i..."
-    mv $i.webosinternals.orig $i
+    palm_md5sum=`grep -h $i $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`
+    file_md5sum=`md5sum $i | awk '{print $1}'`
+    #echo "palm: $palm_md5sum"
+    #echo "file: $file_md5sum"
+    if [ "$palm_md5sum" = "$file_md5sum" ]
+    then
+      echo "Existing file matches Palm md5sum (maybe due to OTA update)"
+      echo "Removing original file..."
+      rm -f $i.webosinternals.orig
+    else
+      echo "Recovering original file $i..."
+      mv $i.webosinternals.orig $i
+    fi
   done
 fi
 

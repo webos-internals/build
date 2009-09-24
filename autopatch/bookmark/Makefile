@@ -1,6 +1,6 @@
 NAME = bookmark
 PATCH = /musicplayer/${NAME}.patch
-VERSION = 0.1.2
+VERSION = 0.1.3
 TITLE = musicplayer patch
 DESCRIPTION = ???
 #POSTINSTALLFLAGS = RestartLuna

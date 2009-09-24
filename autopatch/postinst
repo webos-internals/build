@@ -36,61 +36,61 @@ fi
 rm -f $PATCH_CONTROL_DIR/tmp
 touch $PATCH_CONTROL_DIR/tmp || do_failure
 
-for i in $FILE_LIST
-do
-  file=/$i
-  if [ `grep -l $file $IPKG_INFO_DIR/*.md5sums | wc -l` -gt 1 ]
-  then
-    echo "ERROR: File found in multiple packages: $file"
-    do_failure
-  fi
+#for i in $FILE_LIST
+#do
+  #file=/$i
+  #if [ `grep -l $file $IPKG_INFO_DIR/*.md5sums | wc -l` -gt 1 ]
+  #then
+    #echo "ERROR: File found in multiple packages: $file"
+    #do_failure
+  #fi
   
-  in_list="no"
-  for j in `cat $PATCH_CONTROL_DIR/backups`
-  do
-    if [ "$file" = "$j" ]
-    then
-      in_list="yes"
-      break
-    fi
-  done
+  #in_list="no"
+  #for j in `cat $PATCH_CONTROL_DIR/backups`
+  #do
+    #if [ "$file" = "$j" ]
+    #then
+      #in_list="yes"
+      #break
+    #fi
+  #done
 
-  if [ "$in_list" = "yes" ]
-  then
-    echo "VERIFY BACKUP"
-  else
-    expected=`grep -h $file $IPKG_INFO_DIR/*.md5sums | awk '{print $1}'`
-    echo "file $file"
-    if [ "$expected" != "" ]
-    then
-      calculated=`md5sum $file | awk '{print $1}'`
-      if [ "$expected" != "$calculated" ]
-      then
-        echo "ERROR: MD5SUMS do not match"
-        echo "       expected: $expected"
-        echo "       calculated: $calculated"
-        do_failure
-      else
-        echo "NOTE: Palm md5sum found: $expected $file"
-      fi
-    fi
+  #if [ "$in_list" = "yes" ]
+  #then
+    #echo "VERIFY BACKUP"
+  #else
+    #expected=`grep -h $file $IPKG_INFO_DIR/*.md5sums | awk '{print $1}'`
+    #echo "file $file"
+    #if [ "$expected" != "" ]
+    #then
+    #  calculated=`md5sum $file | awk '{print $1}'`
+    #  if [ "$expected" != "$calculated" ]
+    #  then
+    #    echo "ERROR: MD5SUMS do not match"
+    #    echo "       expected: $expected"
+    #    echo "       calculated: $calculated"
+    #    do_failure
+    #  else
+    #    echo "NOTE: Palm md5sum found: $expected $file"
+    #  fi
+    #fi
 
-    if [ -e $file.webosinternals.orig ]
-    then
-      orig_md5sum=`md5sum $file.webosinternals.orig | awk '{print $1}'`
-      file_md5sum=`md5sum $file | awk '{print $1}'`
-      if [ "$orig_md5sum" != "$file_md5sum" ]
-      then
-        echo "ERROR: Existing backup file not in list, but md5sums do not match"
-        echo "       backup md5sum: $orig_md5sum"
-        echo "       current md5sum: $file_md5sum"
-        do_failure
-      fi
-    fi
+    #if [ -e $file.webosinternals.orig ]
+    #then
+      #orig_md5sum=`md5sum $file.webosinternals.orig | awk '{print $1}'`
+      #file_md5sum=`md5sum $file | awk '{print $1}'`
+      #if [ "$orig_md5sum" != "$file_md5sum" ]
+      #then
+        #echo "ERROR: Existing backup file not in list, but md5sums do not match"
+        #echo "       backup md5sum: $orig_md5sum"
+        #echo "       current md5sum: $file_md5sum"
+        #do_failure
+      #fi
+    #fi
 
-    echo $file >> $PATCH_CONTROL_DIR/tmp
-  fi
-done
+    #echo $file >> $PATCH_CONTROL_DIR/tmp
+  #fi
+#done
 
 if [ -e $PATCH_CONTROL_DIR/$PATCH_NAME ]
 then
@@ -98,18 +98,29 @@ then
   do_failure
 fi
 
-for i in `cat $PATCH_CONTROL_DIR/tmp`
+#for i in `cat $PATCH_CONTROL_DIR/tmp`
+for i in $FILE_LIST
 do
-  if [ ! -e $i ]
+  file=/$i
+
+  if [ ! -e $file.webosinternals.orig ]
   then
-    touch $i.webosinternals.orig
-  else
-    cp $i $i.webosinternals.orig
+    if [ ! -e $file ]
+    then
+      #touch $i.webosinternals.orig
+      touch $file.webosinternals.orig
+    else
+      #cp $i $i.webosinternals.orig
+      cp $file $file.webosinternals.orig
+    fi
   fi
 
-  echo $i >> $PATCH_CONTROL_DIR/backups
+  tmpvar=`echo $file | tr '/' '.'`
+  sed -i -e /$tmpvar/d $PATCH_CONTROL_DIR/backups
+  echo $file >> $PATCH_CONTROL_DIR/backups
 done
 
+sed -i -e /`basename $APP_DIR`/d $PATCH_CONTROL_DIR/packages
 basename $APP_DIR >> $PATCH_CONTROL_DIR/packages
 
 cp $APP_DIR/$PATCH_NAME $PATCH_CONTROL_DIR/$PATCH_NAME

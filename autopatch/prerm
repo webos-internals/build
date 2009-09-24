@@ -31,14 +31,9 @@ do
 
   if [ ! -e $file ] && [ ! -s $file.webosinternals.orig ] || [ "$orig_md5sum" = "$file_md5sum" ]
   then
-    rm -f $file.webosinternals.orig
     tmpvar=`echo $file | tr '/' '.'`
-    sed -i -e /$tmpvar/d $PATCH_CONTROL_DIR/backups
-  fi
-
-  if [ ! -e $file ] && [ ! -s $file.webosinternals.orig ]
-  then
     rm -f $file.webosinternals.orig
+    sed -i -e /$tmpvar/d $PATCH_CONTROL_DIR/backups
   fi
 done
 

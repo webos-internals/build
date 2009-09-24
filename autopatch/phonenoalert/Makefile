@@ -1,6 +1,6 @@
 NAME = phonenoalert
 PATCH = /phone/${NAME}.patch
-VERSION = 0.1.2
+VERSION = 0.1.3
 TITLE = phone no alert patch
 DESCRIPTION = ???
 #POSTINSTALLFLAGS = RestartLuna

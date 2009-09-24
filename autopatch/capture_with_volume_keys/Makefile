@@ -1,6 +1,6 @@
 NAME = capture-with-volume-keys
 PATCH = /camera/capture_with_volume_keys.patch
-VERSION = 0.1.2
+VERSION = 0.1.3
 TITLE = Camera Capture with Volume Keys
 DESCRIPTION = Use volume keys to capture pictures in camera app
 #POSTINSTALLFLAGS = RestartLuna
