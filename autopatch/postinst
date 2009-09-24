@@ -6,7 +6,7 @@ IPKG_INFO_DIR=/usr/lib/ipkg/info
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
 
 do_failure() {
-  ipkg -o /var remove $PATCH_NAME
+  ipkg -o /var remove `basename $APP_DIR`
   exit 1
 }
 

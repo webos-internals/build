@@ -14,15 +14,15 @@ unpack: build/.unpacked
 build/all/CONTROL/prerm: build/.unpacked
 	mkdir -p build/all/CONTROL
 	cp ../prerm build/all/CONTROL/prerm
-	sed -i -e s/PATCH_NAME=/PATCH_NAME=${NAME}.patch/ build/all/CONTROL/prerm
-	sed -i -e s/APP_DIR=/APP_DIR=\\/var\\/usr\\/palm\\/applications\\/org.webosinternals.${NAME}/ build/all/CONTROL/prerm
+	sed -i -e 's|PATCH_NAME=|PATCH_NAME=${NAME}.patch|' build/all/CONTROL/prerm
+	sed -i -e 's|APP_DIR=|APP_DIR=/var/usr/palm/applications/${APP_ID}|' build/all/CONTROL/prerm
 	chmod ugo+x $@
 
 build/all/CONTROL/postinst: build/.unpacked
 	mkdir -p build/all/CONTROL
 	cp ../postinst build/all/CONTROL/postinst
-	sed -i -e s/PATCH_NAME=/PATCH_NAME=${NAME}.patch/ build/all/CONTROL/postinst
-	sed -i -e s/APP_DIR=/APP_DIR=\\/var\\/usr\\/palm\\/applications\\/org.webosinternals.${NAME}/ build/all/CONTROL/postinst
+	sed -i -e 's|PATCH_NAME=|PATCH_NAME=${NAME}.patch|' build/all/CONTROL/postinst
+	sed -i -e 's|APP_DIR=|APP_DIR=/var/usr/palm/applications/${APP_ID}|' build/all/CONTROL/postinst
 	chmod ugo+x $@
 
 .PHONY: build
