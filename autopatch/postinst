@@ -1,14 +1,12 @@
 #!/bin/sh
 APP_DIR=
 PATCH_NAME=
-DBG_ECHO=echo
-PACKAGE_REMOVE='ipkg -o /var remove $PATCH_NAME'
 FILE_LIST=`/var/usr/bin/diffstat -p1 -l $APP_DIR/$PATCH_NAME`
 IPKG_INFO_DIR=/usr/lib/ipkg/info
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
 
 do_failure() {
-  $DBG_ECHO $PACKAGE_REMOVE
+  ipkg -o /var remove $PATCH_NAME
   exit 1
 }
 

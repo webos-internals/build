@@ -3,7 +3,7 @@ APP_ID = org.webosinternals.patches.${NAME}
 HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 CATEGORY = WebOS Patches
-DEPENDS = org.webosinternals.patch org.webosinternals.diffstat
+DEPENDS = org.webosinternals.patch, org.webosinternals.diffstat
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
