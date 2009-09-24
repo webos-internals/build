@@ -1,6 +1,6 @@
 NAME = quiet-powerd-messages
 PATCH = /luna/${NAME}.patch
-VERSION = 0.1.1
+VERSION = 0.1.2
 TITLE = Quiet powerd messages patch
 DESCRIPTION = ???
 #POSTINSTALLFLAGS = RestartLuna

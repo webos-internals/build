@@ -1,6 +1,6 @@
 NAME = more-icons-per-row
 PATCH = /luna/more_icons_per_row.patch
-VERSION = 0.1.1
+VERSION = 0.1.2
 TITLE = More Icons Per Row
 DESCRIPTION = ???
 #POSTINSTALLFLAGS = RestartLuna

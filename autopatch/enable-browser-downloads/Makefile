@@ -1,6 +1,6 @@
 NAME = enable-browser-downloads
 PATCH = browser/${NAME}.patch
-VERSION = 0.1.1
+VERSION = 0.1.2
 TITLE = Enable Browser Downloads
 DESCRIPTION = Enable downloads in browser and more
 #POSTINSTALLFLAGS = RestartLuna

@@ -1,6 +1,6 @@
 NAME = messagelandscape
 PATCH = /messaging/${NAME}.patch
-VERSION = 0.1.1
+VERSION = 0.1.2
 TITLE = Messaging Landscape
 DESCRIPTION = Adds landscape mode for messaging app
 #POSTINSTALLFLAGS = RestartLuna
