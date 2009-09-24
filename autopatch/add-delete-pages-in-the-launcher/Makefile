@@ -1,6 +1,6 @@
 NAME = add-delete-pages-in-the-launcher
 PATCH = applauncher/${NAME}.patch
-VERSION = 0.1.0
+VERSION = 0.1.1
 TITLE = Add/Delete Pages in App Launcher
 DESCRIPTION = Add and Remove pages from the app menu in the App Launcher
 #POSTINSTALLFLAGS = RestartLuna

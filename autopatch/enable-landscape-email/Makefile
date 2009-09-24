@@ -1,6 +1,6 @@
 NAME = enable-landscape-email
 PATCH = /email/${NAME}.patch
-VERSION = 0.1.0
+VERSION = 0.1.1
 TITLE = Enable Landscape Email
 DESCRIPTION = Enable landscape mode in email app
 #POSTINSTALLFLAGS = RestartLuna

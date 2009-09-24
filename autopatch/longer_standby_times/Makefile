@@ -1,6 +1,6 @@
 NAME = longer-standby-times
 PATCH = /screenlock/longer_standby_times.patch
-VERSION = 0.1.0
+VERSION = 0.1.1
 TITLE = longer standby times patch
 DESCRIPTION = ???
 #POSTINSTALLFLAGS = RestartLuna
