@@ -1,0 +1,34 @@
+#!/bin/sh
+PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
+
+epr_done() {
+  ipkg -o /var remove org.webosinternals.emergency-patch-recovery
+  exit 0
+}
+
+if [ ! -d $PATCH_CONTROL_DIR ]
+then
+  echo "NOTE: No patches found!"
+  epr_done
+fi
+
+if [ -e $PATCH_CONTROL_DIR/packages ]
+then
+  for i in `cat $PATCH_CONTROL_DIR/packages`
+  do
+    ipkg -o /var remove $i
+  done
+fi
+
+if [ -e $PATCH_CONTROL_DIR/backups ]
+then
+  for i in `cat $PATCH_CONTROL_DIR/backups`
+  do
+    echo "Recovering original file $i..."
+    mv $i.webosinternals.orig $i
+  done
+fi
+
+echo "DONE"
+rm -rf $PATCH_CONTROL_DIR
+epr_done

@@ -1,0 +1,59 @@
+#!/bin/sh
+APP_DIR=
+PATCH_NAME=
+FILE_LIST=`/var/usr/bin/diffstat -p1 -l $APP_DIR/$PATCH_NAME`
+PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
+
+do_failure() {
+  exit 1
+}
+
+if [ "$APP_DIR" = "" ] || [ "$PATCH_NAME" = "" ]
+then
+  echo "ERROR: APP_DIR and PATCH_NAME both must be set in postinst"
+  do_failure
+fi
+
+/var/usr/bin/patch -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME || do_failure
+
+/var/usr/bin/patch -R -p1 -d / < ${APP_DIR}/$PATCH_NAME
+
+for i in $FILE_LIST
+do
+  file=/$i
+  orig_md5sum=`md5sum $file.webosinternals.orig | awk '{print $1}'`
+  file_md5sum=""
+
+  if [ -e $file ]
+  then
+    file_md5sum=`md5sum $file | awk '{print $1}'`
+  fi
+
+  if [ ! -e $file ] && [ ! -s $file.webosinternals.orig ] || [ "$orig_md5sum" = "$file_md5sum" ]
+  then
+    rm -f $file.webosinternals.orig
+    tmpvar=`echo $file | tr '/' '.'`
+    sed -i -e /$tmpvar/d $PATCH_CONTROL_DIR/backups
+  fi
+
+  if [ ! -e $file ] && [ ! -s $file.webosinternals.orig ]
+  then
+    rm -f $file.webosinternals.orig
+  fi
+done
+
+rm -f $PATCH_CONTROL_DIR/$PATCH_NAME
+sed -i -e /`basename $APP_DIR`/d $PATCH_CONTROL_DIR/packages
+echo "SUCCESS"
+
+# Restart Luna
+if [ -z "$IPKG_OFFLINE_ROOT" ]; then # Defined by recent installers that also support flags.
+    /sbin/stop LunaSysMgr
+    /sbin/start LunaSysMgr
+fi
+
+rm -rf ${APP_DIR}/*
+
+echo "SUCCESS"
+
+exit 0
