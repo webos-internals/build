@@ -1,5 +1,5 @@
 TYPE = Patch
-APP_ID = org.webosinternals.${NAME}
+APP_ID = org.webosinternals.patches.${NAME}
 HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 CATEGORY = WebOS Patches
