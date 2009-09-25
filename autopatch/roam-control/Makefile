@@ -1,8 +1,9 @@
 NAME = roam-control
 PATCH = /phoneprefs/${NAME}.patch
-VERSION = 0.1.3
+VERSION = 0.1.5
 TITLE = roam control patch
 DESCRIPTION = ???
+CATEGORY = Phone Preferences
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

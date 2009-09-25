@@ -1,8 +1,9 @@
 NAME = state
 PATCH = /phone/${NAME}.patch
-VERSION = 0.1.3
+VERSION = 0.1.5
 TITLE = state patch
 DESCRIPTION = ???
+CATEGORY = Phone
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

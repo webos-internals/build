@@ -1,8 +1,9 @@
 NAME = hidden-clock
 PATCH = /clock/${NAME}.patch
-VERSION = 0.1.3
+VERSION = 0.1.5
 TITLE = hidden clock patch
 DESCRIPTION = ???
+CATEGORY = Clock
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

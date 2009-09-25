@@ -1,8 +1,9 @@
 NAME = message-tone-sounds-and-alerts
 PATCH = /soundsandalerts/${NAME}.patch
-VERSION = 0.1.3
+VERSION = 0.1.5
 TITLE = message tone sounds and alerts patch
 DESCRIPTION = ???
+CATEGORY = Sounds and Alerts
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

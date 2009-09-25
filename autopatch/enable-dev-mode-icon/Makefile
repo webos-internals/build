@@ -1,8 +1,9 @@
 NAME = enable-dev-mode-icon
 PATCH = /luna/${NAME}.patch
-VERSION = 0.1.3
+VERSION = 0.1.5
 TITLE = Enable Dev Mode Icon
 DESCRIPTION = Enable Dev Mode Icon
+CATEGORY = Luna
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 
