@@ -3,7 +3,13 @@ APP_ID = org.webosinternals.patches.${NAME}
 HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DEPENDS = org.webosinternals.patch, org.webosinternals.diffstat
-VERSION = 0.1.5
+MAIN_VERSION = 0.1.5
+
+ifdef PATCH_VERSION
+VERSION = ${MAIN_VERSION}-${PATCH_VERSION}
+else
+VERSION = ${MAIN_VERSION}
+endif
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
