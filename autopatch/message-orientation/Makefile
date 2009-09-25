@@ -1,8 +1,8 @@
-NAME = messagelandscape
+NAME = message-orientation
 PATCH = /messaging/${NAME}.patch
 VERSION = 0.1.4
-TITLE = (not working) Messaging Landscape
-DESCRIPTION = ERROR not working for me, use message-orientation patch
+TITLE = Messaging in Landscape Orientation
+DESCRIPTION = Adds ability for Landscape mode in messaging app
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 
