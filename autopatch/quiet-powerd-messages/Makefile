@@ -1,6 +1,6 @@
 NAME = quiet-powerd-messages
 PATCH = /luna/${NAME}.patch
-VERSION = 0.1.5
+VERSION = 0.1.4
 TITLE = Quiet powerd messages patch
 DESCRIPTION = ???
 CATEGORY = Luna

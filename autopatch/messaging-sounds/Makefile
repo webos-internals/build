@@ -1,6 +1,6 @@
 NAME = messaging-sounds
 PATCH = /messaging/${NAME}.patch
-VERSION = 0.1.5
+VERSION = 0.1.4
 TITLE = messaging sounds patch
 DESCRIPTION = ???
 CATEGORY = Messaging

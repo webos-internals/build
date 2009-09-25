@@ -1,6 +1,6 @@
 NAME = bookmark
 PATCH = /musicplayer/${NAME}.patch
-VERSION = 0.1.5
+VERSION = 0.1.4
 TITLE = musicplayer patch
 DESCRIPTION = ???
 CATEGORY = Music Player

@@ -1,6 +1,6 @@
 NAME = contacttone
 PATCH = /contacts/${NAME}.patch
-VERSION = 0.1.5
+VERSION = 0.1.4
 TITLE = contact tone patch
 DESCRIPTION = ???
 CATEGORY = Contacts
