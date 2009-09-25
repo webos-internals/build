@@ -1,6 +1,5 @@
 NAME = hidden-clock
 PATCH = /clock/${NAME}.patch
-VERSION = 0.1.4
 TITLE = hidden clock patch
 DESCRIPTION = ???
 CATEGORY = Clock

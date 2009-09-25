@@ -1,6 +1,5 @@
 NAME = longer-standby-times
 PATCH = /screenlock/longer_standby_times.patch
-VERSION = 0.1.4
 TITLE = longer standby times patch
 DESCRIPTION = ???
 CATEGORY = Screen Lock
