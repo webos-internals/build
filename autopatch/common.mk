@@ -2,9 +2,8 @@ TYPE = Patch
 APP_ID = org.webosinternals.patches.${NAME}
 HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS
 MAINTAINER = WebOS Internals <support@webos-internals.org>
-CATEGORY = WebOS Patches
 DEPENDS = org.webosinternals.patch, org.webosinternals.diffstat
-VERSION = 0.1.4
+VERSION = 0.1.5
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
