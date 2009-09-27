@@ -49,6 +49,4 @@ fi
 
 rm -rf ${APP_DIR}/*
 
-echo "SUCCESS"
-
 exit 0

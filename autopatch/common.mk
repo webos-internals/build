@@ -3,7 +3,7 @@ APP_ID = org.webosinternals.patches.${NAME}
 HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DEPENDS = org.webosinternals.patch, org.webosinternals.diffstat
-MAIN_VERSION = 0.1.5
+MAIN_VERSION = 0.1.6
 
 ifdef PATCH_VERSION
 VERSION = ${MAIN_VERSION}-${PATCH_VERSION}
