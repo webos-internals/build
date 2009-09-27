@@ -3,6 +3,7 @@ PATCH = /screenlock/longer_standby_times.patch
 TITLE = longer standby times patch
 DESCRIPTION = ???
 CATEGORY = Screen Lock
+ICON = http://www.webos-internals.org/images/f/fa/Icon_WebOSInternals_Patches_Screenlock.png
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

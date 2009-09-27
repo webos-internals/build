@@ -3,6 +3,7 @@ PATCH = /calendar/${NAME}.patch
 TITLE = All-Day Events Month View
 DESCRIPTION = Show all-day events in the calendar month view
 CATEGORY = Calendar
+ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Calendar.png
 
 include ../common.mk
 include ../modifications.mk

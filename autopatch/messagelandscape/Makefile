@@ -3,6 +3,7 @@ PATCH = /messaging/${NAME}.patch
 TITLE = obsolete Messaging Landscape
 DESCRIPTION = ERROR not working for me, use message-orientation patch
 CATEGORY = Messaging
+ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

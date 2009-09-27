@@ -3,6 +3,7 @@ PATCH = /messaging/${NAME}.patch
 TITLE = messaging sounds patch
 DESCRIPTION = ???
 CATEGORY = Messaging
+ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 
