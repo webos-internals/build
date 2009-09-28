@@ -4,12 +4,14 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DEPENDS = org.webosinternals.patch, org.webosinternals.diffstat
 FEED = Autopatch
-MAIN_VERSION = 0.1.10
+MODS_VERSION = 0.1.11
 
-ifdef PATCH_VERSION
-VERSION = ${MAIN_VERSION}-${PATCH_VERSION}
-else
-VERSION = ${MAIN_VERSION}
+ifndef VERSION
+  ifdef MODS_EXTRA_VERSION
+    VERSION = ${MODS_VERSION}-${MODS_EXTRA_VERSION}
+  else
+    VERSION = ${MODS_VERSION}
+  endif
 endif
 
 .PHONY: package

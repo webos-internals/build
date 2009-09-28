@@ -67,6 +67,13 @@ basename $APP_DIR >> $PATCH_CONTROL_DIR/packages
 cp $APP_DIR/$PATCH_NAME $PATCH_CONTROL_DIR/$PATCH_NAME
 /var/usr/bin/patch -d / -p1 < ${APP_DIR}/$PATCH_NAME || do_failure
 
+
+if [ -e $APP_DIR/postinst_extra ]
+then
+  export APP_DIR
+  /bin/sh $APP_DIR/postinst_extra
+fi
+
 echo "SUCCESS"
 
 # Restart Luna
