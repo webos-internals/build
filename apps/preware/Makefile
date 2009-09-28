@@ -1,14 +1,14 @@
 NAME     = preware
 TITLE	 = Preware
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.9.0
+VERSION  = 0.9.1
 DEPENDS	 = org.webosinternals.ipkgservice
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
 ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications.
-CHANGELOG = 0.9.0: Added Theme support
+CHANGELOG = 0.9.1: A bunch of misc fixes and updates
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/7/7f/Preware_ss1.jpg\",\
 \"http://www.webos-internals.org/images/4/41/Preware_ss2.jpg\",\
