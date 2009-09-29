@@ -1,6 +1,6 @@
 NAME     = virtual-keyboard
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.3.5
+VERSION  = 0.4.0
 HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 TITLE = Virtual Keyboard
@@ -9,7 +9,7 @@ CATEGORY = WebOS Patches
 DEPENDS = org.webosinternals.patch, org.webosinternals.diffstat
 ICON	= http://www.webos-internals.org/images/0/0f/Icon_WebOSInternals_Keyboard.png
 DESCRIPTION = Double-tapping the gesture area (near the round silver button) will bring up the on-screen keyboard if you are in a text input field. Tap with two fingers separated or Double-tap quickly.  In the Emulator, tap PageUp twice.
-CHANGELOG = ${VERSION}: Expanded and optimized keyboard theming and user interface. Now using default theme made by un_designer.
+CHANGELOG = ${VERSION}: Ported to webOS 1.2.0.  Will only work with webOS 1.2.0
 SCREENSHOTS = [\"http://www.webos-internals.org/images/e/ed/Messaging_2009-22-08_000708.png\"]
 POSTINSTALLFLAGS = RestartLuna
 POSTREMOVEFLAGS  = RestartLuna
