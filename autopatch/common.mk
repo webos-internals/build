@@ -4,7 +4,7 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DEPENDS = org.webosinternals.patch, org.webosinternals.diffstat
 FEED = Autopatch
-MODS_VERSION = 0.1.12
+MODS_VERSION = 0.1.13
 
 ifndef VERSION
   ifdef MODS_EXTRA_VERSION
