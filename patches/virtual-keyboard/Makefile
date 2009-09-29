@@ -26,7 +26,7 @@ include ../../support/package.mk
 
 include ../../support/download.mk
 
-include ../../support/patch-md5sums.mk
+#include ../../support/patch-md5sums.mk
 
 .PHONY: unpack
 unpack: build/.unpacked
@@ -40,7 +40,8 @@ build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 .PHONY: build
 build: build/.built
 
-build/.built: build/.unpacked build/md5sums
+#build/.built: build/.unpacked build/md5sums
+build/.built: build/.unpacked
 	rm -rf build/all
 	rm -rf build.tmp
 	mkdir -p build.tmp
@@ -51,7 +52,7 @@ build/.built: build/.unpacked build/md5sums
 	rm -rf build.tmp
 	install -m 644 build/src/${PATCHES} build/all/usr/palm/applications/${APP_ID}/
 	for f in ${FILES} ; do \
-	  grep $$f build/md5sums >> build/all/usr/palm/applications/${APP_ID}/md5sums ; \
+	  grep $$f md5sums >> build/all/usr/palm/applications/${APP_ID}/md5sums ; \
 	done
 	touch $@
 
