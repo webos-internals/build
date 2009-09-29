@@ -1,6 +1,6 @@
 NAME     = virtual-keyboard
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.3.2
+VERSION  = 0.3.5
 HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 TITLE = Virtual Keyboard
@@ -15,8 +15,8 @@ POSTINSTALLFLAGS = RestartLuna
 POSTREMOVEFLAGS  = RestartLuna
 
 PATCHES = add-onscreen-keyboard.patch
-FILES = /usr/palm/frameworks/mojo/builtins/palmInitFramework191_15.js \
-	/usr/palm/frameworks/mojo/submissions/191.15/stylesheets/global.css
+FILES = /usr/palm/frameworks/mojo/builtins/palmInitFramework200_18.js \
+	/usr/palm/frameworks/mojo/submissions/200.18/stylesheets/global.css
 
 SRC_GIT = git://git.webos-internals.org/patches/virtual-keyboard.git
 

@@ -12,4 +12,5 @@ build/md5sums: ${DL_DIR}/webosdoctorp100ewwsprint.jar
 
 ${DL_DIR}/webosdoctorp100ewwsprint.jar :
 	mkdir -p ${DL_DIR}
-	curl -L -o $@ http://palm.cdnetworks.net/rom/pre_p100eww/webosdoctorp100ewwsprint.jar
+	#curl -L -o $@ http://palm.cdnetworks.net/rom/pre_p100eww/webosdoctorp100ewwsprint.jar
+	curl -L -o $@ http://palm.cdnetworks.net/rom/ash994djslspam356z/s2x56ydt/webosdoctorp100ewwsprint.jar
