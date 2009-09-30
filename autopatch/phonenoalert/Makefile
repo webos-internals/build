@@ -3,6 +3,7 @@ PATCH = /phone/${NAME}.patch
 TITLE = phone no alert patch
 DESCRIPTION = ???
 CATEGORY = Phone
+VERSION = 0.1.16
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna

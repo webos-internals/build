@@ -1,0 +1,75 @@
+#!/bin/sh
+
+echo -n "Name: "
+read name
+if [ "$name" = "" ]
+then
+  echo "Requires name"
+  exit 1
+fi
+
+echo -n "Modifications dir: "
+read dir
+echo -n "Title: "
+read title
+echo -n "Description: "
+read desc
+echo -n "Category: "
+read cat
+echo -n "Version: "
+read ver
+echo -n "Icon: "
+read icon
+
+echo ""
+echo "Enter multiple screenshots, blank newline to end list"
+ehco -n "Screenshots? (y/[n]): "
+read inp
+if [ "$inp" = "y" ]
+then
+  until [ "$inp" = "" ]
+  do
+    echo -n "Screenshot: "
+    read inp
+
+    if [ "$inp" = "" ]
+      break
+    fi
+
+    if [ "$screenshots" = "" ]
+    then
+      screenshots="["
+    else
+      screenshots="$screenshots,"
+    fi
+
+    screenshots="$screenshots\\\"$inp\\\""
+  done
+fi
+
+if [ "$screenshots" != "" ]
+then
+  screenshots="$screenshots]"
+fi
+
+if [ -e $name ]
+then
+  echo "$name already exists!"
+  exit 1
+fi
+
+mkdir $name
+touch $name/Makefile
+echo "NAME = $name" >> $name/Makefile
+echo "PATCH = /$dir/\${NAME}.patch" >> $name/Makefile
+echo "TITLE = $title" >> $name/Makefile
+echo "DESCRIPTION = $desc" >> $name/Makefile
+echo "CATEGORY = $cat" >> $name/Makefile
+echo "VERSION = $ver" >> $name/Makefile
+echo "ICON = $icon" >> $name/Makefile
+echo "SCREENSHOTS = $screenshots" >> $name/Makefile
+#echo "POSTINSTALLFLAGS = RestartLuna" >> $name/Makefile
+#echo "POSTREMOVEFLAGS = RestartLuna" >> $name/Makefile
+echo "" >> $name/Makefile
+echo "include ../common.mk" >> $name/Makefile
+echo "include ../modifications.mk" >> $name/Makefile

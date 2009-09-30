@@ -4,15 +4,8 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DEPENDS = org.webosinternals.patch, org.webosinternals.diffstat
 FEED = Autopatch
-MODS_VERSION = 0.1.16
-
-ifndef VERSION
-  ifdef MODS_EXTRA_VERSION
-    VERSION = ${MODS_VERSION}-${MODS_EXTRA_VERSION}
-  else
-    VERSION = ${MODS_VERSION}
-  endif
-endif
+#POSTINSTALLFLAGS = RestartLuna
+#POSTREMOVEFLAGS = RestartLuna
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
