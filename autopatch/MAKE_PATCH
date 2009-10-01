@@ -8,6 +8,12 @@ then
   exit 1
 fi
 
+if [ -e $name ]
+then
+  echo "$name already exists!"
+  exit 1
+fi
+
 echo -n "Modifications dir: "
 read dir
 echo -n "Title: "
@@ -22,8 +28,8 @@ echo -n "Icon: "
 read icon
 
 echo ""
-echo "Enter multiple screenshots, blank newline to end list"
-ehco -n "Screenshots? (y/[n]): "
+echo "Enter multiple screenshots (blank entry to end list)"
+echo -n "Screenshots? (y/[n]): "
 read inp
 if [ "$inp" = "y" ]
 then
@@ -33,6 +39,7 @@ then
     read inp
 
     if [ "$inp" = "" ]
+    then
       break
     fi
 

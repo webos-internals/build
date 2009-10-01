@@ -1,0 +1,4 @@
+#!/bin/sh
+
+mv ${APP_DIR}/list-icon-keytoss.png /usr/lib/luna/system/luna-applauncher/images/search-keytoss.png
+mv ${APP_DIR}/search-keytoss.png /usr/palm/applications/com.palm.app.browser/images/list-icon-keytoss.png
