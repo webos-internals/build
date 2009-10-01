@@ -3,7 +3,7 @@ PATCH = /luna/${NAME}.patch
 TITLE = KeyToss Keyword Global Search
 DESCRIPTION = Modifies search to use keytoss keyword
 CATEGORY = Luna
-VERSION = 0.2.1
+VERSION = 0.2.2
 ICON = 
 SCREENSHOTS = 
 

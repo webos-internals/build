@@ -1,13 +1,12 @@
 TYPE = System Utilities
 NAME = emergency-patch-recovery
-VERSION = 1.1.0-2
+VERSION = 1.1.0-3
 TITLE = Emergency Patch Recovery 1.1.0
 DESCRIPTION = Perform EPR on your Pre to restore all backed up files from any patch ipk installations.  WebOS 1.1.0 only!
 APP_ID = org.webosinternals.${NAME}
 HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 CATEGORY = System Utilities
-VERSION = 0.1.16
 DEPENDS = org.webosinternals.patch org.webosinternals.diffstat
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna

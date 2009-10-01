@@ -39,7 +39,6 @@ done
 
 rm -f $PATCH_CONTROL_DIR/$PATCH_NAME
 sed -i -e /`basename $APP_DIR`/d $PATCH_CONTROL_DIR/packages
-rm -rf ${APP_DIR}
 
 if [ -e $APP_DIR/prerm_extra ]
 then
@@ -47,6 +46,7 @@ then
   /bin/sh $APP_DIR/prerm_extra
 fi
 
+rm -rf ${APP_DIR}
 echo "SUCCESS"
 
 # Restart Luna
