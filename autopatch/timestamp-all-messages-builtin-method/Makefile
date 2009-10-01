@@ -1,4 +1,4 @@
-NAME = timestamp-all-messages-builtin-method.patch
+NAME = timestamp-all-messages-builtin-method
 PATCH = /messaging/${NAME}.patch
 TITLE = Builting Timestamp Messaging always
 DESCRIPTION = Always use builtin timestamps for messaging app that usually only are used for messages that show up late
