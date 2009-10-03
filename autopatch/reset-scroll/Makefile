@@ -1,9 +1,10 @@
 NAME = reset-scroll
 PATCH = /luna/${NAME}.patch
-TITLE = Reset Scroll Applauncher
-DESCRIPTION = Resets the scroll position back to the top of the page when a page is changed rather than remembering the scroll position
-CATEGORY = Luna
-VERSION = 0.1.16
+TITLE = Reset Scroll App Launcher
+DESCRIPTION = This will reset the scroll position back to the top of the page rather than remembering the scroll position when leaving the App Launcher.
+CATEGORY = App Launcher
+VERSION = 0.4.0
+ICON = http://www.webos-internals.org/images/b/b1/Icon_WebOSInternals_Patches_Applauncher.png
 
 include ../common.mk
 include ../modifications.mk

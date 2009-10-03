@@ -1,9 +1,9 @@
 NAME = messaging-sounds
 PATCH = /messaging/${NAME}.patch
-TITLE = messaging sounds patch
-DESCRIPTION = ???
+TITLE = Message Tone Notifications
+DESCRIPTION = This will play a specified message tone for notifications.
 CATEGORY = Messaging
-VERSION = 0.3.4
+VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna

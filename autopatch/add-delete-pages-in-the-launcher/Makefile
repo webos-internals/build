@@ -1,9 +1,9 @@
 NAME = add-delete-pages-in-the-launcher
 PATCH = applauncher/${NAME}.patch
-TITLE = Add/Delete Pages in App Launcher
-DESCRIPTION = Add and Remove pages from the app menu in the App Launcher
+TITLE = Add/Delete Pages in Launcher
+DESCRIPTION = Adds the ability to add and remove launcher pages. Access these from the App Menu of the App Launcher.
 CATEGORY = App Launcher
-VERSION = 0.2.1
+VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/b/b1/Icon_WebOSInternals_Patches_Applauncher.png
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna

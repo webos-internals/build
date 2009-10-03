@@ -1,9 +1,9 @@
 NAME = clean-timestamp
 PATCH = /messaging/${NAME}.patch
-TITLE = Clean Messaging Timestamp
-DESCRIPTION = Add clean timestamps to messaging app
+TITLE = Messaging Timestamps - Clean
+DESCRIPTION =  This will add timestamps to messages in the Messaging application. The format of the timestamps are MM/DD/YY 00:00 AM and are black with no spacing between them and the message.
 CATEGORY = Messaging
-VERSION = 0.2.1
+VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 SCREENSHOTS = 
 

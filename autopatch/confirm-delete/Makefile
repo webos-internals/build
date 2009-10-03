@@ -1,9 +1,9 @@
 NAME = confirm-delete
 PATCH = /email/${NAME}.patch
 TITLE = Confirm Delete Email
-DESCRIPTION = Adds confirmation when swipe deleting emails
+DESCRIPTION = Adds a confirmation prompt after swipe-to-deleting an email.
 CATEGORY = Email
-VERSION = 0.1.16
+VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/2/29/Icon_WebOSInternals_Patches_Email.png
 
 include ../common.mk

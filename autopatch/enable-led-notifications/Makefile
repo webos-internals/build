@@ -1,9 +1,9 @@
 NAME = enable-led-notifications
 PATCH = /screenlock/${NAME}.patch
-TITLE = Enables LED Notifications
-DESCRIPTION = Enable the LED behind the gesture button to light up when notifications are received
+TITLE = Enable LED Notifications
+DESCRIPTION = This will uncomment the code necessary for the gesture area to light up for notifications. You must still make sure LED Notifications is enabled in the Screen & Lock application.
 CATEGORY = Screen Lock
-VERSION = 0.2.4
+VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/f/fa/Icon_WebOSInternals_Patches_Screenlock.png
 SCREENSHOTS = [\"http://www.precentral.net/sites/precentral.net/files/articleimages/Dieter%20Bohn/2009/09/palm-pre-blink-notifications.png\"]
 

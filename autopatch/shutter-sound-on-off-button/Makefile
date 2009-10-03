@@ -1,9 +1,9 @@
 NAME = shutter-sound-on-off-button
 PATCH = /camera/${NAME}.patch
-TITLE = Add shutter sound on/off button
-DESCRIPTION = Adds shutter sound on/off button to camera app
+TITLE = Shutter Sound On/Off Button
+DESCRIPTION = This will add a button in the Camera application that will allow you to turn the shutter sound On and Off.
 CATEGORY = Camera
-VERSION = 0.2.5
+VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/c/c5/Icon_WebOSInternals_Patches_Camera.png
 
 include ../common.mk

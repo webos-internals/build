@@ -1,9 +1,9 @@
 NAME = forcesendoffline
 PATCH = /messaging/${NAME}.patch
 TITLE = Force Send Offline
-DESCRIPTION = Force send offline in messaging app
+DESCRIPTION = This will enable the force sending while offline in the Messaging application.
 CATEGORY = Messaging
-VERSION = 0.3.2
+VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 SCREENSHOTS = 
 

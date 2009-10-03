@@ -1,9 +1,9 @@
 NAME = phonenoalert
 PATCH = /phone/${NAME}.patch
-TITLE = phone no alert patch
-DESCRIPTION = ???
+TITLE = No Alert During Call
+DESCRIPTION = This will disable alerts during a call and re-enable them when you hang up.
 CATEGORY = Phone
-VERSION = 0.2.1
+VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna

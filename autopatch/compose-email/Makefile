@@ -1,9 +1,9 @@
 NAME = compose-email
 PATCH = /messaging/${NAME}.patch
-TITLE = Messaging Compose Email
-DESCRIPTION = Adds ability to messaging app to compse email
+TITLE = Message Compose to Email
+DESCRIPTION = Adds email addresses of contacts to the list of available destinations in the Messaging Application.
 CATEGORY = Messaging
-VERSION = 0.3.3
+VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 SCREENSHOTS = 
 

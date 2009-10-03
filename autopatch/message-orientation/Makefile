@@ -1,9 +1,9 @@
 NAME = message-orientation
 PATCH = /messaging/${NAME}.patch
-TITLE = Messaging in Landscape Orientation
-DESCRIPTION = Adds ability for Landscape mode in messaging app
+TITLE = Enable Landscape Messaging
+DESCRIPTION = This will enable landscape mode in the Messaging application. It uses accelerometer to detect orientation.
 CATEGORY = Messaging
-VERSION = 0.1.16
+VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna

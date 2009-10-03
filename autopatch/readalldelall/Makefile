@@ -1,9 +1,9 @@
 NAME = readalldelall
 PATCH = /email/${NAME}.patch
-TITLE = read all del all patch
-DESCRIPTION = ???
+TITLE = Read/Delete All Email
+DESCRIPTION = This will give you the ability to mark all messages as read or even delete all messages in the Email application. 
 CATEGORY = Email
-VERSION = 0.1.16
+VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/2/29/Icon_WebOSInternals_Patches_Email.png
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna

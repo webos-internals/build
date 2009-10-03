@@ -1,9 +1,9 @@
 NAME = battery-percent-and-icon
 PATCH = /luna/${NAME}.patch
-TITLE = Battery Percent and Icon
-DESCRIPTION = Battery percent and icon in top bar with default percent
+TITLE = Battery Icon and Percent
+DESCRIPTION = This will add a color-coded percent number with the battery icon in the top bar. Charging = Teal. 100%-70% = Green. 69%-45% = Yellow. = 44%-20% = Orange. 19%-0% = Red.
 CATEGORY = Luna
-VERSION = 0.3.1
+VERSION = 0.4.0
 ICON = 
 SCREENSHOTS = 
 
