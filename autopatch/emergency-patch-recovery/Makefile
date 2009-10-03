@@ -1,12 +1,12 @@
-TYPE = System Utilities
+TYPE = Patch
 NAME = emergency-patch-recovery
-VERSION = 1.1.1
-TITLE = Emergency Patch Recovery 1.1.0
-DESCRIPTION = Perform EPR on your Pre to restore all backed up files from any patch ipk installations.  WARNING: OTA update compatible, but run this BEFORE you touch any files after an update!
+VERSION = 1.1.2
+TITLE = Emergency Patch Recovery
+DESCRIPTION = Perform 'EPR' on your Pre to restore all backed up files from any patch ipk installations.  Installing this just runs a script to do the patch removals and then removes itself.  WARNING: This is OTA update compatible, but you should run this directly before or directly after you update.
 APP_ID = org.webosinternals.${NAME}
 HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS
 MAINTAINER = WebOS Internals <support@webos-internals.org>
-CATEGORY = System Utilities
+CATEGORY = Recovery
 DEPENDS = org.webosinternals.patch org.webosinternals.diffstat
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna

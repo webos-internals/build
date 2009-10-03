@@ -10,7 +10,7 @@ do_failure() {
 
 if [ "$APP_DIR" = "" ] || [ "$PATCH_NAME" = "" ]
 then
-  echo "ERROR: APP_DIR and PATCH_NAME both must be set in postinst"
+  echo "ERROR: APP_DIR and PATCH_NAME both must be set in prerm"
   do_failure
 fi
 
