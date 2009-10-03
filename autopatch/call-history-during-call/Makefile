@@ -1,0 +1,11 @@
+NAME = call-history-during-call
+PATCH = /phone/${NAME}.patch
+TITLE = Call History During Call
+DESCRIPTION = Adds ability to go into app menu and show the call history while you are on a call.
+CATEGORY = Phone
+VERSION = 0.4.1
+ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
+SCREENSHOTS = 
+
+include ../common.mk
+include ../modifications.mk
