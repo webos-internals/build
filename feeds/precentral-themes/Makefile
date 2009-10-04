@@ -33,7 +33,7 @@ unpack: build/.unpacked
 build/.unpacked: ${DL_DIR}/${NAME}-feed.xml
 	rm -f $@
 	mkdir -p build zips
-	../../scripts/precentral-scraper.py ${DL_DIR}/${NAME}-feed.xml zips > build/Metadata
+	#../../scripts/precentral-scraper.py ${DL_DIR}/${NAME}-feed.xml zips > build/Metadata
 	touch $@
 
 build/.built: build/.unpacked
