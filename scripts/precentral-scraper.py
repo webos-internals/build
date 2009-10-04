@@ -94,7 +94,7 @@ class PackageHandler(ContentHandler):
                 self.json += "\"Feed\":\"PreCentral\" }"
 
                 if (name == "theme"):
-                    id = "net.precentral.themes." + self.title.strip().lower().replace("&#58; ","-").replace("_quick_install_2.0","").replace("_","-").replace(": ","-").replace("  "," ").replace(" ","-").replace(".","") + "_" + self.version + "_all"
+                    id = "net.precentral.themes." + self.title.strip().lower().replace("&#58; ","-").replace("_quick_install_2.0","").replace("_","-").replace(": ","-").replace("  "," ").replace(" ","-").replace(".","").replace("+","").replace("!","").replace("/","").rstrip("-") + "_" + self.version + "_all"
                     print "Filename: " + id + ".ipk"
                     self.filename = id + ".zip"
                     if (id == "net.precentral.themes.elf-at-night_1_all"): return

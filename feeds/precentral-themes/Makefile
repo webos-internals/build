@@ -45,10 +45,10 @@ build/.built: build/.unpacked
 	    mkdir -p build/`basename $$f .zip`/net.precentral.themes ; \
 	    unzip -q -d build/`basename $$f .zip`/net.precentral.themes $$f ; \
 			t=`basename $$f .zip`; \
-			rm -f `find $t -name \*.css`; \
-			rm -f `find $t -name \*.js`; \
-			rm -f `find $t -name \*.html`; \
-			rm -f `find $t -name \*.json`; \
+			rm -f `find build/$$t -name \*.css`; \
+			rm -f `find build/$$t -name \*.js`; \
+			rm -f `find build/$$t -name \*.html`; \
+			rm -f `find build/$$t -name \*.json`; \
 	    mkdir -p build/`basename $$f .zip`/CONTROL ; \
 	    ../../scripts/xml-theme-converter.py \
 	      build/`basename $$f .zip`/net.precentral.themes/theme.xml \
