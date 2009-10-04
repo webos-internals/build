@@ -1,9 +1,9 @@
 NAME = contact-multitone
 PATCH = /messaging/${NAME}.patch
 TITLE = contact multitone patch
-DESCRIPTION = Not functioning properly.
+DESCRIPTION = Obsolete - Use SMS Tone per Contact
 CATEGORY = Messaging
-VERSION = 0.2.7
+VERSION = 0.2.8
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
