@@ -30,28 +30,39 @@ include ../../support/download.mk
 .PHONY: unpack
 unpack: build/.unpacked
 
+#build/.unpacked: ${DL_DIR}/${NAME}-feed.xml
+	#rm -f $@
+	#mkdir -p build zips
+	#../../scripts/precentral-scraper.py ${DL_DIR}/${NAME}-feed.xml zips > build/Metadata
+	#touch $@
+
+#build/.built: build/.unpacked
+	#rm -f $@
+	#mkdir -p ipkgs
+	#for f in zips/*.zip ; do \
+	  #if [ ! -e ipkgs/`basename $$f .zip`.ipk ] ; then \
+	    #rm -rf build/`basename $$f .zip` ; \
+	    #mkdir -p build/`basename $$f .zip`/net.precentral.themes ; \
+	    #unzip -q -d build/`basename $$f .zip`/net.precentral.themes $$f ; \
+	    #mkdir -p build/`basename $$f .zip`/CONTROL ; \
+	    #../../scripts/xml-theme-converter.py \
+	      #build/`basename $$f .zip`/net.precentral.themes/theme.xml \
+	      #build/`basename $$f .zip` `basename $$f .zip` && \
+	    #chmod ugo+x build/`basename $$f .zip`/CONTROL/postinst build/`basename $$f .zip`/CONTROL/prerm && \
+	    #( cd ipkgs ; ../../../toolchain/ipkg-utils/ipkg-build ../build/`basename $$f .zip` ) ; \
+	  #fi ; \
+	#done
+	#touch $@
+
 build/.unpacked: ${DL_DIR}/${NAME}-feed.xml
 	rm -f $@
 	mkdir -p build zips
-	#../../scripts/precentral-scraper.py ${DL_DIR}/${NAME}-feed.xml zips > build/Metadata
+	touch build/Metadata
 	touch $@
 
 build/.built: build/.unpacked
 	rm -f $@
 	mkdir -p ipkgs
-	for f in zips/*.zip ; do \
-	  if [ ! -e ipkgs/`basename $$f .zip`.ipk ] ; then \
-	    rm -rf build/`basename $$f .zip` ; \
-	    mkdir -p build/`basename $$f .zip`/net.precentral.themes ; \
-	    unzip -q -d build/`basename $$f .zip`/net.precentral.themes $$f ; \
-	    mkdir -p build/`basename $$f .zip`/CONTROL ; \
-	    ../../scripts/xml-theme-converter.py \
-	      build/`basename $$f .zip`/net.precentral.themes/theme.xml \
-	      build/`basename $$f .zip` `basename $$f .zip` && \
-	    chmod ugo+x build/`basename $$f .zip`/CONTROL/postinst build/`basename $$f .zip`/CONTROL/prerm && \
-	    ( cd ipkgs ; ../../../toolchain/ipkg-utils/ipkg-build ../build/`basename $$f .zip` ) ; \
-	  fi ; \
-	done
 	touch $@
 
 .PHONY: clobber
