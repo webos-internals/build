@@ -32,8 +32,18 @@ then
       echo "Removing original file..."
       rm -f $i.webosinternals.orig
     else
-      echo "Recovering original file $i..."
-      mv $i.webosinternals.orig $i
+      if [ ! -e $i.webosinternals.orig ]
+      then
+        echo "WARNING: Could not find backup for $i"
+      elif [ ! -s $i.webosinternals.orig ]
+      then
+        echo "Removing created file $i"
+        rm -f $i
+        rm -f $i.webosinternals.orig
+      else
+        echo "Recovering original file $i..."
+        mv $i.webosinternals.orig $i
+      fi
     fi
   done
 fi
