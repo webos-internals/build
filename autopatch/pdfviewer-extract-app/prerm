@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cd /usr/palm/applications
+rm -rf com.palm.app.pdfviewer/*
+
+exit 0

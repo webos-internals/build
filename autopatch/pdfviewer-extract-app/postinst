@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cd /usr/palm/applications
+tar -xvzf com.palm.app.pdfviewer.tar.gz
+
+exit 0
