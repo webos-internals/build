@@ -16,7 +16,10 @@ unpack: build/.unpacked
 .PHONY: build
 build: build/.built
 
-build/.built: build/.unpacked
+build/.meta-${META_VERSION}:
+	touch $@
+
+build/.built: build/.unpacked build/.meta-${META_VERSION}
 	rm -rf build/all
 	mkdir -p build/all/usr/palm/applications/${APP_ID}
 	install -m 644 build/src/${PATCH} build/all/usr/palm/applications/${APP_ID}/
