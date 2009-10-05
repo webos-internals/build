@@ -5,7 +5,7 @@ DESCRIPTION = Adds ability to go into app menu and show the call history while y
 CATEGORY = Phone
 VERSION = 0.4.1
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
-SCREENSHOTS = 
+SCREENSHOTS = [\"http://www.webos-internals.org/images/2/20/Call-history-during-call.png\"]
 
 include ../common.mk
 include ../modifications.mk
