@@ -82,7 +82,9 @@ package: toolchain
 	  ${MAKE} -C $$f package || exit ; \
 	done
 	for f in `find autopatch -mindepth 1 -maxdepth 1 -type d -print` ; do \
-	  ${MAKE} -C $$f package || exit ; \
+		if [ -e $$f/Makefile ]; then \
+		  ${MAKE} -C $$f package || exit ; \
+		fi; \
 	done
 	for f in `find feeds -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  ${MAKE} -C $$f package || exit ; \
