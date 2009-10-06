@@ -6,6 +6,7 @@ CATEGORY = Phone
 VERSION = 0.4.1
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/2/20/Call-history-during-call.png\"]
+META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk

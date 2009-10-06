@@ -6,6 +6,7 @@ CATEGORY = Messaging
 VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/8/88/Clean-timestamp.png\"]
+META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk

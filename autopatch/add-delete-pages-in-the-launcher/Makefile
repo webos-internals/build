@@ -6,6 +6,7 @@ CATEGORY = App Launcher
 VERSION = 0.4.1
 ICON = http://www.webos-internals.org/images/b/b1/Icon_WebOSInternals_Patches_Applauncher.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/d/dc/Add_delete_pages_app_launcher.png\"]
+META_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 
