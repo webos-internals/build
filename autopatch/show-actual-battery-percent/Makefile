@@ -6,6 +6,7 @@ CATEGORY = Luna
 VERSION = 0.4.0
 ICON =
 SCREENSHOTS = [\"http://www.webos-internals.org/images/9/9a/Show-actual-battery-percent.png\"]
+META_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 
