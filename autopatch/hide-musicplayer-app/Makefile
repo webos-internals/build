@@ -6,6 +6,7 @@ CATEGORY = App Launcher
 VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/d/df/Icon_WebOSInternals_Patches_Musicplayer.png
 SCREENSHOTS = 
+META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk

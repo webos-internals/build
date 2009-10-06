@@ -5,7 +5,8 @@ DESCRIPTION = This will modify the App launcher to display 4x4 icons rather than
 CATEGORY = App Launcher
 VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/b/b1/Icon_WebOSInternals_Patches_Applauncher.png
-SCREENSHOTS = 
+SCREENSHOTS = [\"http://www.webos-internals.org/images/a/a8/Launcher-icons-4x4-jason.png\"]
+META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk

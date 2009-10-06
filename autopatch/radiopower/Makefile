@@ -5,6 +5,8 @@ DESCRIPTION = This will add the ability to turn the Phone Radio On and Off in th
 CATEGORY = Phone
 VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
+SCREENSHOTS = [\"http://www.webos-internals.org/images/4/4b/Radiopower.png\"]
+META_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

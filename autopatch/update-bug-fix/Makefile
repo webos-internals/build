@@ -6,6 +6,7 @@ CATEGORY = Email
 VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/2/29/Icon_WebOSInternals_Patches_Email.png
 SCREENSHOTS = 
+META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk

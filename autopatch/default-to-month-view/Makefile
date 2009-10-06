@@ -5,6 +5,8 @@ DESCRIPTION = This will set the default view of the Calendar application to Mont
 CATEGORY = Calendar
 VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Calendar.png
+SCREENSHOTS = [\"http://www.webos-internals.org/images/b/b2/Default-to-month-view.png\"]
+META_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

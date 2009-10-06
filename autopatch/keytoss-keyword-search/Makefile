@@ -5,7 +5,8 @@ DESCRIPTION = This will install KeyToss keyword-powered search tool to Universal
 CATEGORY = Luna
 VERSION = 0.4.0
 ICON = 
-SCREENSHOTS = 
+SCREENSHOTS = [\"http://www.webos-internals.org/images/b/bc/Keytoss-keyword-search.png\"]
+META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk

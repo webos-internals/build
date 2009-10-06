@@ -5,6 +5,8 @@ DESCRIPTION = This will add the ability to capture images with the volume keys i
 CATEGORY = Camera
 VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/c/c5/Icon_WebOSInternals_Patches_Camera.png
+SCREENSHOTS =
+META_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

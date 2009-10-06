@@ -5,7 +5,8 @@ DESCRIPTION = This will replace the battery icon in the top bar with a color-cod
 CATEGORY = Luna
 VERSION = 0.4.2
 ICON = 
-SCREENSHOTS = 
+SCREENSHOTS = [\"http://www.webos-internals.org/images/7/76/Battery-percent.png\"]
+META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk

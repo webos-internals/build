@@ -10,6 +10,7 @@ MAINTAINER = WebOS Internals <support@webos-internals.org>
 CATEGORY = Recovery
 DEPENDS = org.webosinternals.patch org.webosinternals.diffstat
 ICON = http://www.webos-internals.org/images/4/4f/Epr.png
+META_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

@@ -5,6 +5,8 @@ DESCRIPTION = This will cause the enter button to insert a newline instead of se
 CATEGORY = Messaging
 VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
+SCREENSHOTS =
+META_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

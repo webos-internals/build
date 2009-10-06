@@ -5,6 +5,7 @@ DESCRIPTION = This will enable a roam only option in the Phone Preferences.
 CATEGORY = Phone Preferences
 VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/c/c8/Icon_WebOSInternals_Patches_Phonepreferences.png
+SCREENSHOTS = [\"http://www.webos-internals.org/images/d/d2/Roam-control.png\"]
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

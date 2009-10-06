@@ -4,10 +4,10 @@ TITLE = PdfViewer Enable Landscape
 DESCRIPTION = Enables landscape mode in the PdfViewer Application.  Requires the 'Extract PdfViewer App' package be installed first.
 CATEGORY = PDF Viewer
 VERSION = 0.4.4
-META_VERSION = 1
 DEPENDS = org.webosinternals.pdfviewer-extract-app
 ICON = 
 SCREENSHOTS = 
+META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk

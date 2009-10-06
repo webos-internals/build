@@ -5,7 +5,8 @@ DESCRIPTION = This will add a button in the Camera application that will allow y
 CATEGORY = Camera
 VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/c/c5/Icon_WebOSInternals_Patches_Camera.png
-
+SCREENSHOTS = [\"http://www.webos-internals.org/images/1/13/Shutter-sound-on-off-button.png\"]
+META_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 

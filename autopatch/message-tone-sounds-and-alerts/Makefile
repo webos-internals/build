@@ -5,6 +5,8 @@ DESCRIPTION = This will give you the ability to change the Alert tone and Notifi
 CATEGORY = Sounds and Alerts
 VERSION = 0.4.3
 ICON = http://www.webos-internals.org/images/f/ff/Icon_WebOSInternals_Patches_Soundsandalerts.png
+SCREENSHOTS = [\"http://www.webos-internals.org/images/d/d3/Message-tone-sounds-and-alerts.png\"]
+META_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

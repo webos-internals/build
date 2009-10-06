@@ -5,6 +5,8 @@ DESCRIPTION = This will cause the Phone application to display the State a call 
 CATEGORY = Phone
 VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
+SCREENSHOTS = [\"http://www.webos-internals.org/images/1/13/State.png\"]
+META_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

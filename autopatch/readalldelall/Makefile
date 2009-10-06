@@ -5,6 +5,11 @@ DESCRIPTION = This will give you the ability to mark all messages as read or eve
 CATEGORY = Email
 VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/2/29/Icon_WebOSInternals_Patches_Email.png
+SCREENSHOTS = [\
+\"http://www.webos-internals.org/images/b/b4/Readalldelall-1.png\",\
+\"http://www.webos-internals.org/images/7/7b/Readalldelall-2.png\",\
+\"http://www.webos-internals.org/images/d/dd/Readalldelall-3.png\"]
+META_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

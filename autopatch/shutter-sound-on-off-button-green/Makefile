@@ -5,7 +5,10 @@ DESCRIPTION = This will add a green button in the Camera application that will a
 CATEGORY = Camera
 VERSION = 0.4.0
 ICON = http://www.webos-internals.org/images/c/c5/Icon_WebOSInternals_Patches_Camera.png
-
+SCREENSHOTS = [\
+\"http://www.webos-internals.org/images/9/96/Shutter-sound-on-off-button-green-1.png\",\
+\"http://www.webos-internals.org/wiki/Image:Shutter-sound-on-off-button-green-2.png\"]
+META_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
