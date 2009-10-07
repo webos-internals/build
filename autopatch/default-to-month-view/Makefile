@@ -1,9 +1,9 @@
-NAME = default-to-month-view
+NAME = $(shell basename ${PWD})
 PATCH = calendar/${NAME}.patch
-TITLE = Calendar Month View Default
+TITLE = Default to Month View
 DESCRIPTION = This will set the default view of the Calendar application to Month view.
 CATEGORY = Calendar
-VERSION = 0.4.0
+VERSION = 0.5.0
 ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Calendar.png
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna

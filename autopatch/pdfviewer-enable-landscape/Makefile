@@ -1,10 +1,10 @@
-NAME = pdfviewer-enable-landscape
+NAME = $(shell basename ${PWD})
 PATCH = /pdfviewer/${NAME}.patch
-TITLE = PdfViewer Enable Landscape
-DESCRIPTION = Enables landscape mode in the PdfViewer Application.  Requires the 'Extract PdfViewer App' package be installed first.
+TITLE = Enable Landscape PDF Viewer
+DESCRIPTION = Enables landscape mode in the PDF Viewer Application.  Requires the 'Extract PDF Viewer Application' package be installed first.
 CATEGORY = PDF Viewer
-VERSION = 0.4.4
-META_VERSION = 1
+VERSION = 0.5.0
+META_VERSION = 0.5.0
 DEPENDS = org.webosinternals.pdfviewer-extract-app
 ICON = 
 SCREENSHOTS = 

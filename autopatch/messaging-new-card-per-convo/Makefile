@@ -1,9 +1,9 @@
-NAME = messaging-new-card-per-convo
+NAME = $(shell basename ${PWD})
 PATCH = /messaging/${NAME}.patch
-TITLE = New Card Per Convo
+TITLE = New Card per Convo
 DESCRIPTION = This will create a new card per conversation in the Messaging application.
 CATEGORY = Messaging
-VERSION = 0.4.0
+VERSION = 0.5.0
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 
 include ../common.mk

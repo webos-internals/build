@@ -1,9 +1,9 @@
-NAME = msg-avatar
+NAME = $(shell basename ${PWD})
 PATCH = /messaging/${NAME}.patch
-TITLE = Add Avatar to Messaging
+TITLE = Enable Personal Avatar
 DESCRIPTION = This will enable your own avatar in the messaging application. To add your own personal avatar, name it my-avatar.png and place it in /usr/palm/applications/com.palm.app.messaging/images/
 CATEGORY = Messaging
-VERSION = 0.4.0
+VERSION = 0.5.0
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 SCREENSHOTS = 
 

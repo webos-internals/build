@@ -1,8 +1,8 @@
 TYPE = Patch
-NAME = pdfviewer-extract-app
-VERSION = 1.0.0
-TITLE = Extract PdfViewer App
-DESCRIPTION = Extracts the PdfViewer Application so that it can be patched.
+NAME = $(shell basename ${PWD})
+VERSION = 0.5.0
+TITLE = Extract PDF Viewer Application
+DESCRIPTION = Extracts the PDF Viewer Application so that it can be patched.
 APP_ID = org.webosinternals.${NAME}
 HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS
 MAINTAINER = WebOS Internals <support@webos-internals.org>

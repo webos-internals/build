@@ -1,9 +1,9 @@
-NAME = messaging-enter-newline
+NAME = $(shell basename ${PWD})
 PATCH = /messaging/${NAME}.patch
-TITLE = Messaging Newline on Enter
+TITLE = Enter Key for New Line
 DESCRIPTION = This will cause the enter button to insert a newline instead of sending the message in the Messaging application.
 CATEGORY = Messaging
-VERSION = 0.4.0
+VERSION = 0.5.0
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna

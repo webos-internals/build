@@ -1,9 +1,9 @@
-NAME = roam-control
+NAME = $(shell basename ${PWD})
 PATCH = /phoneprefs/${NAME}.patch
-TITLE = Enable Roam Only Option
+TITLE = Add Roam Control to Prefs
 DESCRIPTION = This will enable a roam only option in the Phone Preferences.
-CATEGORY = Phone Preferences
-VERSION = 0.4.0
+CATEGORY = Phone
+VERSION = 0.5.0
 ICON = http://www.webos-internals.org/images/c/c8/Icon_WebOSInternals_Patches_Phonepreferences.png
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
