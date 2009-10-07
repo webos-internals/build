@@ -5,7 +5,8 @@ DESCRIPTION = This will add a color-coded percent number with the battery icon i
 CATEGORY = Luna
 VERSION = 0.5.0
 ICON = 
-SCREENSHOTS = 
+SCREENSHOTS = [\"http://www.webos-internals.org/images/1/16/Battery-percent-and-icon.png\"]
+META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk

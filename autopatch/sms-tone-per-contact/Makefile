@@ -5,7 +5,10 @@ DESCRIPTION = This patch adds a message tone field to all of your contacts.  Onc
 CATEGORY = Messaging
 VERSION = 0.5.0
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
-SCREENSHOTS = 
+SCREENSHOTS = [\
+\"http://www.webos-internals.org/images/a/a5/Sms-tone-per-contact-1.png\",\
+\"http://www.webos-internals.org/images/e/e4/Sms-tone-per-contact-2.png\"]
+META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk

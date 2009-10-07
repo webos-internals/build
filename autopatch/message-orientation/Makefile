@@ -5,6 +5,8 @@ DESCRIPTION = This will enable landscape mode in the Messaging application. It u
 CATEGORY = Messaging
 VERSION = 0.5.0
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
+SCREENSHOTS = [\"http://www.webos-internals.org/images/7/72/Message-orientation.png\"]
+META_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

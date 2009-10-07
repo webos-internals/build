@@ -5,7 +5,8 @@ DESCRIPTION = This will cause the Messaging application use the builtin timestam
 CATEGORY = Messaging
 VERSION = 0.5.0
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
-SCREENSHOTS = 
+SCREENSHOTS = [\"http://www.webos-internals.org/wiki/Image:Timestamp-all-messages-builtin-method.png\"]
+META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk

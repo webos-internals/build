@@ -5,6 +5,8 @@ DESCRIPTION = This will disable alerts during a call and re-enable them when you
 CATEGORY = Phone
 VERSION = 0.5.0
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
+SCREENSHOTS =
+META_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

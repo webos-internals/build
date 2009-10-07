@@ -5,7 +5,8 @@ DESCRIPTION = This will enable your own avatar in the messaging application. To 
 CATEGORY = Messaging
 VERSION = 0.5.0
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
-SCREENSHOTS = 
+SCREENSHOTS = [\"http://www.webos-internals.org/images/0/00/Msg-avatar.png\"]
+META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk

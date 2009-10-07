@@ -5,7 +5,8 @@ DESCRIPTION = This will uncomment the code necessary for the gesture area to lig
 CATEGORY = Screen Lock
 VERSION = 0.5.0
 ICON = http://www.webos-internals.org/images/f/fa/Icon_WebOSInternals_Patches_Screenlock.png
-SCREENSHOTS = [\"http://www.precentral.net/sites/precentral.net/files/articleimages/Dieter%20Bohn/2009/09/palm-pre-blink-notifications.png\"]
+SCREENSHOTS = [\"http://www.webos-internals.org/images/8/86/Enable-led-notifications.png\"]
+META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk

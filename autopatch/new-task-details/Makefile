@@ -5,6 +5,9 @@ DESCRIPTION = This is a small modification that changes how new tasks are handle
 CATEGORY = Tasks
 VERSION = 0.5.0
 ICON = http://www.webos-internals.org/images/8/83/Icon_WebOSInternals_Patches_Tasks.png
+SCREENSHOTS =
+META_VERSION = 1
+
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

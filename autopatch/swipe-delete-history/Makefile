@@ -5,6 +5,8 @@ DESCRIPTION = This will add the ability to swipe delete items in the browser his
 CATEGORY = Browser
 VERSION = 0.5.0
 ICON = http://www.webos-internals.org/images/4/4a/Icon_WebOSInternals_Patches_Browser.png
+SCREENSHOTS =
+META_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

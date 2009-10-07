@@ -75,6 +75,7 @@ echo "CATEGORY = $cat" >> $name/Makefile
 echo "VERSION = $ver" >> $name/Makefile
 echo "ICON = $icon" >> $name/Makefile
 echo "SCREENSHOTS = $screenshots" >> $name/Makefile
+echo "META_VERSION = 1" >> $name/Makefile
 #echo "POSTINSTALLFLAGS = RestartLuna" >> $name/Makefile
 #echo "POSTREMOVEFLAGS = RestartLuna" >> $name/Makefile
 echo "" >> $name/Makefile

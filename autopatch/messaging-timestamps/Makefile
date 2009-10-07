@@ -5,6 +5,8 @@ DESCRIPTION =  This will add timestamps to messages in the Messaging application
 CATEGORY = Messaging
 VERSION = 0.5.0
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
+SCREENSHOTS = [\"http://www.webos-internals.org/images/a/a1/Messaging-timestamps.png\"]
+META_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 
