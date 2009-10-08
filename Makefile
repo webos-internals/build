@@ -17,13 +17,13 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-SUBDIRS = apps services plugins patches linux
+SUBDIRS = apps services plugins linux
 
 .PHONY: index package toolchain upload clobber clean
 
-#	ipkgs/autopatch/all/Packages \
 
 index:  ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv7/Packages \
+	ipkgs/webos-patches/all/Packages \
 	ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv7/Packages \
 	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
 	ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages
@@ -39,6 +39,17 @@ ipkgs/webos-internals/%/Packages: package
 		-v -p ipkgs/webos-internals/$*/Packages ipkgs/webos-internals/$*
 	gzip -c ipkgs/webos-internals/$*/Packages > ipkgs/webos-internals/$*/Packages.gz
 
+ipkgs/webos-patches/%/Packages: package
+	rm -rf ipkgs/webos-patches/$*
+	mkdir -p ipkgs/webos-patches/$*
+	( find autopatch -type d -name ipkgs -print | \
+	  xargs -I % find % -name "*_$*.ipk" -print | \
+	  xargs -I % rsync -i -a % ipkgs/webos-patches/$* )
+	TAR_OPTIONS=--wildcards \
+	toolchain/ipkg-utils/ipkg-make-index \
+		-v -p ipkgs/webos-patches/$*/Packages ipkgs/webos-patches/$*
+	gzip -c ipkgs/webos-patches/$*/Packages > ipkgs/webos-patches/$*/Packages.gz
+
 ipkgs/optware/%/Packages: package
 	rm -rf ipkgs/optware/$*
 	mkdir -p ipkgs/optware/$*
@@ -49,17 +60,6 @@ ipkgs/optware/%/Packages: package
 	toolchain/ipkg-utils/ipkg-make-index \
 		-v -p ipkgs/optware/$*/Packages ipkgs/optware/$*
 	gzip -c ipkgs/optware/$*/Packages > ipkgs/optware/$*/Packages.gz
-
-ipkgs/autopatch/%/Packages: package
-	rm -rf ipkgs/autopatch/$*
-	mkdir -p ipkgs/autopatch/$*
-	( find autopatch -type d -name ipkgs -print | \
-	  xargs -I % find % -name "*_$*.ipk" -print | \
-	  xargs -I % rsync -i -a % ipkgs/autopatch/$* )
-	TAR_OPTIONS=--wildcards \
-	toolchain/ipkg-utils/ipkg-make-index \
-		-v -p ipkgs/autopatch/$*/Packages ipkgs/autopatch/$*
-	gzip -c ipkgs/autopatch/$*/Packages > ipkgs/autopatch/$*/Packages.gz
 
 ipkgs/%/Packages: package
 	rm -rf ipkgs/$*
@@ -81,16 +81,16 @@ package: toolchain
 	    ${MAKE} -C $$f package || exit ; \
 	  fi; \
 	done
+	for f in `find autopatch -mindepth 1 -maxdepth 1 -type d -print` ; do \
+	  if [ -e $$f/Makefile ]; then \
+	    ${MAKE} -C $$f package || exit ; \
+	  fi; \
+	done
 	for f in `find optware -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package || exit ; \
 	  fi; \
 	done
-#	for f in `find autopatch -mindepth 1 -maxdepth 1 -type d -print` ; do \
-#	  if [ -e $$f/Makefile ]; then \
-#	    ${MAKE} -C $$f package || exit ; \
-#	  fi; \
-#	done
 	for f in `find feeds -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package || exit ; \
@@ -106,16 +106,16 @@ toolchain/cs08q1armel/build/arm-2008q1:
 upload:
 	rsync -avr ipkgs/ ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/
 
-testing: webos-internals-testing optware-testing autopatch-testing
+testing: webos-internals-testing webos-patches-testing optware-testing
 
-webos-internals-testing: ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv7/Packages 
+webos-internals-testing: ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv7/Packages
 	rsync -avr ipkgs/webos-internals/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
+
+webos-patches-testing: ipkgs/webos-patches/all/Packages
+	rsync -avr ipkgs/webos-patches/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 
 optware-testing: ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv7/Packages 
 	rsync -avr ipkgs/optware/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/optware/testing/
-
-autopatch-testing: ipkgs/autopatch/all/Packages
-	rsync -avr ipkgs/autopatch/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/autopatch/testing/
 
 distclean: clobber
 	find toolchain -mindepth 1 -maxdepth 1 -type d -print | \
