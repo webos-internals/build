@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = /camera/${NAME}.patch
-TITLE = Shutter Sound On/Off Button
-DESCRIPTION = This will add a button in the Camera application that will allow you to turn the shutter sound On and Off.
+TITLE = Sound Toggle - Grey
+DESCRIPTION = This will add a grey button in the Camera application that will allow you to turn the shutter sound On and Off.
 CATEGORY = Camera
 VERSION = 1.2.1-0
 ICON = http://www.webos-internals.org/images/c/c5/Icon_WebOSInternals_Patches_Camera.png

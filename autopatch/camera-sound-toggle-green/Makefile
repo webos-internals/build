@@ -1,6 +1,6 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = /camera/$(shell basename ${NAME} -green).patch
-TITLE = Shutter Sound On/Off Button (Green)
+TITLE = Sound Toggle - Green
 DESCRIPTION = This will add a green button in the Camera application that will allow you to turn the shutter sound On and Off.
 CATEGORY = Camera
 VERSION = 1.2.1-0

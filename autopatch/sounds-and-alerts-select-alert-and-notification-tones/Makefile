@@ -1,6 +1,6 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = /sounds-and-alerts/${NAME}.patch
-TITLE = Message Tone Options
+TITLE = Select Alert and Notification Tones
 DESCRIPTION = This will give you the ability to change the Alert tone and Notification tone in the Sounds & Alerts application.  NOTE that the SMS Tone per Contact patch includes this exact functionality so this is not needed and will not install if that patch is installed.
 CATEGORY = Sounds and Alerts
 VERSION = 1.2.1-0
