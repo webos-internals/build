@@ -7,6 +7,7 @@ import fileinput
 
 key = ""
 metadata = {}
+title = {}
 maintainerurl = {}
 
 for line in fileinput.input([sys.argv[1]]) :
@@ -15,6 +16,11 @@ for line in fileinput.input([sys.argv[1]]) :
     m = regexp.match(line)
     if (m):
         key = m.group(1)
+
+    regexp = re.compile('^Title: (.*)$')
+    m = regexp.match(line)
+    if (m):
+        title[key] = m.group(1)
 
     regexp = re.compile('^Source: (.*)$')
     m = regexp.match(line)
@@ -28,6 +34,7 @@ for line in fileinput.input([sys.argv[1]]) :
 
 packagedata = ""
 maintainer = ""
+description = ""
 
 for line in fileinput.input([sys.argv[2]]) :
 
@@ -42,6 +49,7 @@ for line in fileinput.input([sys.argv[2]]) :
     if (m):
         packagedata = ""
         maintainer = ""
+        description = ""
 
     # Elide Source: lines
     regexp = re.compile('^Source: (.*)$')
@@ -56,6 +64,13 @@ for line in fileinput.input([sys.argv[2]]) :
         maintainer = m.group(1)
         keepline = 0
 
+    # Save Description: lines for later processing
+    regexp = re.compile('^Description: (.*)$')
+    m = regexp.match(line)
+    if (m):
+        description = m.group(1)
+        keepline = 0
+
     if (keepline):
         packagedata += line
 
@@ -63,6 +78,10 @@ for line in fileinput.input([sys.argv[2]]) :
     m = regexp.match(line)
     if (m):
         key = m.group(1)
+        if key in title:
+            packagedata += "Description: " + title[key] + "\n"
+        else:
+            packagedata += "Description: " + description + "\n"
         if key in metadata:
             packagedata += "Source: " + metadata[key] + "\n"
         if maintainer:
