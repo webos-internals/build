@@ -1,6 +1,6 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = /top-bar/${NAME}.patch
-TITLE = Add Date to Top Bar
+TITLE = Add Date - MM/DD/YY
 DESCRIPTION = Add the date to the left of the time in the top bar in MM/DD/YY format.
 CATEGORY = Top Bar
 VERSION = 0.5.0
