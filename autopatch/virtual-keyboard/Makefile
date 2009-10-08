@@ -1,5 +1,5 @@
 NAME     = add-onscreen-keyboard
-VERSION  = 0.4.3
+VERSION  = 0.5.0
 HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard
 TITLE = Virtual Keyboard
 CATEGORY = Frameworks

@@ -1,0 +1,13 @@
+NAME = $(shell basename $(shell pwd))
+PATCH = /luna/${NAME}.patch
+TITLE = Show Actual Battery Percent
+DESCRIPTION = Shows the actual battery percent in the top bar rather than the gui percent mapping.  
+CATEGORY = Luna
+VERSION = 0.5.0
+SCREENSHOTS = [\"http://www.webos-internals.org/images/9/9a/Show-actual-battery-percent.png\"]
+META_VERSION = 1
+#POSTINSTALLFLAGS = RestartLuna
+#POSTREMOVEFLAGS = RestartLuna
+
+include ../common.mk
+include ../modifications.mk
