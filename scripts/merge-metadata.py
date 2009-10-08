@@ -80,8 +80,6 @@ for line in fileinput.input([sys.argv[2]]) :
         key = m.group(1)
         if key in title:
             packagedata += "Description: " + title[key] + "\n"
-        else:
-            packagedata += "Description: " + description + "\n"
         if key in metadata:
             packagedata += "Source: " + metadata[key] + "\n"
         if maintainer:
@@ -106,6 +104,8 @@ for line in fileinput.input([sys.argv[2]]) :
     regexp = re.compile('^Description: (.*)$')
     m = regexp.match(line)
     if (m):
+        if not key in title:
+            packagedata += "Description: " + description + "\n"
         if key in metadata:
             print packagedata
             print
