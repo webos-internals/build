@@ -21,9 +21,10 @@ SUBDIRS = apps services plugins patches linux
 
 .PHONY: index package toolchain upload clobber clean
 
+#	ipkgs/autopatch/all/Packages \
+
 index:  ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv7/Packages \
 	ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv7/Packages \
-	ipkgs/autopatch/all/Packages \
 	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
 	ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages
 
@@ -76,18 +77,24 @@ ipkgs/%/Packages: package
 
 package: toolchain
 	for f in `find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print` ; do \
-	  ${MAKE} -C $$f package || exit ; \
+	  if [ -e $$f/Makefile ]; then \
+	    ${MAKE} -C $$f package || exit ; \
+	  fi; \
 	done
 	for f in `find optware -mindepth 1 -maxdepth 1 -type d -print` ; do \
-	  ${MAKE} -C $$f package || exit ; \
+	  if [ -e $$f/Makefile ]; then \
+	    ${MAKE} -C $$f package || exit ; \
+	  fi; \
 	done
-	for f in `find autopatch -mindepth 1 -maxdepth 1 -type d -print` ; do \
-		if [ -e $$f/Makefile ]; then \
-		  ${MAKE} -C $$f package || exit ; \
-		fi; \
-	done
+#	for f in `find autopatch -mindepth 1 -maxdepth 1 -type d -print` ; do \
+#	  if [ -e $$f/Makefile ]; then \
+#	    ${MAKE} -C $$f package || exit ; \
+#	  fi; \
+#	done
 	for f in `find feeds -mindepth 1 -maxdepth 1 -type d -print` ; do \
-	  ${MAKE} -C $$f package || exit ; \
+	  if [ -e $$f/Makefile ]; then \
+	    ${MAKE} -C $$f package || exit ; \
+	  fi; \
 	done
 
 toolchain: toolchain/ipkg-utils/ipkg-make-index \
