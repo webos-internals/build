@@ -33,6 +33,7 @@ unpack: build/.unpacked
 build/.unpacked build/.built: ${DL_DIR}/${NAME}-feed.xml
 	rm -f $@
 	mkdir -p build ipkgs
+	sed -i.orig -e 's/& /\&amp; /g' ${DL_DIR}/${NAME}-feed.xml
 	../../scripts/precentral-scraper.py ${DL_DIR}/${NAME}-feed.xml ipkgs > build/Metadata
 	touch $@
 
