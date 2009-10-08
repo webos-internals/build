@@ -1,6 +1,6 @@
 TYPE = Patch
 NAME = $(shell basename $(shell pwd))
-VERSION = 0.5.0
+VERSION = 1.2.1-0
 TITLE = Extract PDF Viewer Application
 DESCRIPTION = Extracts the PDF Viewer Application so that it can be patched.
 APP_ID = org.webosinternals.${NAME}
