@@ -86,7 +86,17 @@ for line in fileinput.input([sys.argv[2]]) :
             regexp = re.compile('^(.*\S)\s*<(.*)>$')
             m = regexp.match(maintainer)
             if m:
-                if (m.group(2) == "palm@palm.com"):
+                if (m.group(2) == "nobody@example.com"):
+                    if (key in maintainerurl):
+                        regexp = re.compile('.*/([^/]+)\.html')
+                        m = regexp.match(maintainerurl[key])
+                        if m:
+                            packagedata += "Maintainer: " + m.group(1) + " <" + maintainerurl[key] + ">" + "\n"
+                        else:
+                            packagedata += "Maintainer: <" + maintainerurl[key] + ">" + "\n"
+                    else:
+                        packagedata += "Maintainer: " + m.group(1) + "\n"
+                elif (m.group(2) == "palm@palm.com"):
                     if (key in maintainerurl):
                         packagedata += "Maintainer: " + m.group(1) + " <" + maintainerurl[key] + ">" + "\n"
                     else:
