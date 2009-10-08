@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /camera/${NAME}.patch
+PATCH = /camera/$(shell basename ${NAME} -grey).patch
 TITLE = Sound Toggle - Grey
 DESCRIPTION = This will add a grey button in the Camera application that will allow you to turn the shutter sound On and Off.
 CATEGORY = Camera
