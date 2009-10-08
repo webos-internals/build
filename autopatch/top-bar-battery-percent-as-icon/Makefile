@@ -1,10 +1,10 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /luna/${NAME}.patch
+PATCH = /top-bar/${NAME}.patch
 TITLE = Battery Icon as Percent
 DESCRIPTION = This will replace the battery icon in the top bar with a color-coded percent number. Charging = Teal. 100%-70% = Green. 69%-45% = Yellow. = 44%-20% = Orange. 19%-0% = Red.
-CATEGORY = Luna
+CATEGORY = Top Bar
 VERSION = 0.5.0
-ICON = 
+ICON = http://www.webos-internals.org/images/a/a2/Icon_WebOSInternals_Patches_Percent.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/7/76/Battery-percent.png\"]
 META_VERSION = 1
 

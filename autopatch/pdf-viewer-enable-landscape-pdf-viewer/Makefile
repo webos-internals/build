@@ -5,7 +5,7 @@ DESCRIPTION = Enables landscape mode in the PDF Viewer Application.  Requires th
 CATEGORY = PDF Viewer
 VERSION = 0.5.0
 DEPENDS = org.webosinternals.pdfviewer-extract-app
-ICON = 
+ICON = http://www.webos-internals.org/images/7/71/Icon_WebOSInternals_Patches_Pdfviewer.png
 SCREENSHOTS = 
 META_VERSION = 1
 

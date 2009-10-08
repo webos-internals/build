@@ -1,8 +1,8 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /luna/${NAME}.patch
+PATCH = /universal-search/${NAME}.patch
 TITLE = KeyToss Keyword Search
-DESCRIPTION = This will install KeyToss keyword-powered search tool to Universal Search and to the browser URL search. Search the internet for keytoss keyword-powered search use.
-CATEGORY = Luna
+DESCRIPTION = This will install KeyToss keyword-powered search tool to Universal Search and to the browser URL search. Type "k list" for a list of keywords.
+CATEGORY = Universal Search
 VERSION = 0.5.0
 ICON = 
 SCREENSHOTS = [\"http://www.webos-internals.org/images/b/bc/Keytoss-keyword-search.png\"]
