@@ -4,6 +4,7 @@ from xml.sax.handler import ContentHandler
 from xml.sax import make_parser
 import sys
 import re
+import urllib
 import os
 
 class PackageHandler(ContentHandler):
@@ -50,7 +51,7 @@ class PackageHandler(ContentHandler):
                 sys.stderr.write(self.filename + ": Version mismatch between feed and theme.xml\n")
 
         if (name == "creator") :
-            print >>self.control,  "Maintainer: %s" % self.data
+            print >>self.control,  "Maintainer: %s <http://forums.precentral.net/members/%s.html>" % (self.data, urllib.quote(self.data))
             print >>self.postinst, "# Author: %s" % self.data
             print >>self.prerm,    "# Author: %s" % self.data
 

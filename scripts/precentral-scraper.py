@@ -100,6 +100,7 @@ class PackageHandler(ContentHandler):
                     if (id == "net.precentral.themes.elf-at-night_1_all"): return
                 else:
                     print "Filename: " + self.filename
+                print "Title: " + self.title
                 print "Source: " + self.json
                 if (name == "application"):
                     if (self.author):
