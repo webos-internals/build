@@ -16,5 +16,4 @@ META_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = Mark Klein <mdklein@gmail.com> drnull <jdhatfield@gmail.com> hmagoo
-HOMEPAGE = http://forums.precentral.net/web-os-development/206908-autopatch-browser-multi-patch.html
+MAINTAINER = Mark Klein <mdklein@gmail.com>, drnull <jdhatfield@gmail.com>, fritos1406, Jason Robitaille <robitaille88@gmail.com>
