@@ -13,4 +13,5 @@ META_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = ???
+MAINTAINER = Wtgreen
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Browser_Delete_Individual_History_Items

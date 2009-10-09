@@ -11,5 +11,5 @@ META_VERSION = 1.2.1-0
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = ???
+MAINTAINER = jhoff80
 HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Email_Confirm_Deletion
