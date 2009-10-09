@@ -1,12 +1,12 @@
 NAME     = ipkgservice
 CLASS    = IPKGService
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.9.4
+VERSION  = 0.9.7
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 TITLE	 = Package Manager Service
 DESCRIPTION = The Package Manager Service is a back-end interface to the ipkg command line application which manages all packages that are installed on the Pre.  It is required for advanced homebrew installers like Preware.
-CHANGELOG = 0.9.4: Added the PreCentral Themes feed.
+CHANGELOG = 0.9.7: Enabled feed management and added the webos-patches feed.  If you have previously installed Patches from the autopatch feed or the online repository, you should run the Emergency Patch Recovery application before using this first public release of the webos-patches feed.
 TYPE	 = Service
 CATEGORY = Services and Plugins
 ICON	= http://www.webos-internals.org/images/7/77/Icon_WebOSInternals_PackageManager.png
