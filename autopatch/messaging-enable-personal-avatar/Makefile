@@ -11,5 +11,5 @@ META_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = optik678
+MAINTAINER = optik678, Jason Robitaille <robitaille88@gmail.com>
 HOMEPAGE = http://www.webos-internals.org/wiki/Myavatar_In_Messaging_App
