@@ -1,5 +1,5 @@
 NAME     = add-onscreen-keyboard
-VERSION  = 1.2.1-0
+VERSION  = 1.2.1-1
 HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard
 TITLE = Virtual Keyboard
 CATEGORY = Mojo
