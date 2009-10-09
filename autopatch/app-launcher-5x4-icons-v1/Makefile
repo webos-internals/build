@@ -13,5 +13,5 @@ META_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = Decimation
+MAINTAINER = Mitchell <hax-da-hax0rz@hotmail.com>
 HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Launcher_To_Allow_More_Icons_Per_Row
