@@ -15,3 +15,5 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = ??? Mark Klein <mdklein@gmail.com> ??? drnull <jdhatfield@gmail.com>
