@@ -10,3 +10,6 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = icederror
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_webOS_Turning_Off_Dialpad_Noise

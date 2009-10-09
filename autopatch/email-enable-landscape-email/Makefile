@@ -12,3 +12,6 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = NetWhiz
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Email_Enable_Landscape_Viewing

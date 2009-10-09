@@ -12,3 +12,6 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = a2ny <A2NY.Sinister@gmail.com>
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_webOS_Show_Actual_Battery_Percentage

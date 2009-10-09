@@ -10,3 +10,6 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = StoneRyno
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Messaging_Adding_Timestamps_to_All_Received_Messages

@@ -18,3 +18,6 @@ build/.built: build/.unpacked
 	install -m 644 *.png build/all/usr/palm/applications/${APP_ID}/
 	install -m 644 *_extra build/all/usr/palm/applications/${APP_ID}/
 	touch $@
+
+MAINTAINER = Sam Kim <info@keytoss.com>
+HOMEPAGE = http://keytoss.com/pre

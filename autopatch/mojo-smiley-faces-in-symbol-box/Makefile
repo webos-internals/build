@@ -12,3 +12,6 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = Sarah Peterman
+HOMEPAGE = http://forums.precentral.net/web-os-development/195013-how-get-smilies-symbol-box.html

@@ -9,3 +9,6 @@ SCREENSHOTS =
 META_VERSION = 1
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = Bsiegel
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Launcher_Reset_Scroll_on_Page_Change

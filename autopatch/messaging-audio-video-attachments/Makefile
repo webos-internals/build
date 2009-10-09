@@ -13,3 +13,5 @@ META_VERSION = 1.2.1-0
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = fritos1406

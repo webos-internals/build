@@ -12,3 +12,6 @@ META_VERSION = 1.2.1-0
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = Rod Whitby <rod@whitby.id.au>
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Launcher_Add_or_Delete_Pages

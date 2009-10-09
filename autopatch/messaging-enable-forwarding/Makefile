@@ -14,3 +14,6 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = jjvcuyler <jack@unixgeeks.biz>
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Messaging_Forward_Messages

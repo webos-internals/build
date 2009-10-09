@@ -12,3 +12,6 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = jcrawford <info@josephcrawford.com>
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_webOS_Changing_the_%22Turn_off_after_X%22_time

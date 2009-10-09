@@ -12,3 +12,6 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = Jauder Ho <jauderho+git@gmail.com>
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Launcher_Unhide_the_DeveloperMode_App

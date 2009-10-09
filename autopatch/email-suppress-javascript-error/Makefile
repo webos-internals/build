@@ -10,3 +10,5 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>

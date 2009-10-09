@@ -10,3 +10,5 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = Leslie Michael Orchard <l.m.orchard@pobox.com>

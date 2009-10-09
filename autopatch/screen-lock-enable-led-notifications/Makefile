@@ -10,3 +10,6 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = Jhoff80
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Enable_LED_Notifications

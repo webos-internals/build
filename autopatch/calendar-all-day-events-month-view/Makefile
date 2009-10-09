@@ -10,3 +10,6 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = Hopspitfire
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Calendar_Show_All-Day_Events_in_Month_View

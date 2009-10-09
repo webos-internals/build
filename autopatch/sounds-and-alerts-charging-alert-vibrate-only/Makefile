@@ -10,3 +10,5 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = a2ny <A2NY.Sinister@gmail.com>

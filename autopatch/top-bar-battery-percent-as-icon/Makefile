@@ -10,3 +10,6 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = ???
+HOMEPAGE = http://forums.precentral.net/web-os-development/194029-battery-place-icon-working-1-1-0-color.html

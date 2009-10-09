@@ -10,3 +10,6 @@ META_VERSION = 1.2.1-0
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = skp
+HOMEPAGE = http://forums.precentral.net/web-os-development/203837-how-view-call-history-during-call.html

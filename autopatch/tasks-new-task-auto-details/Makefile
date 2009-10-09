@@ -13,3 +13,6 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = Tuckmobile
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Tasks_Always_Show_Details_of_New_Tasks

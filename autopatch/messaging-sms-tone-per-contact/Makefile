@@ -12,3 +12,6 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = Ikyo <jody.r.owens@sprint.com>
+HOMEPAGE = http://forums.precentral.net/web-os-development/200441-seperate-sms-tones-each-contact.html

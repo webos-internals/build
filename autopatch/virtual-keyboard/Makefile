@@ -69,3 +69,6 @@ build/.built: build/.unpacked
 #.PHONY: clobber
 #clobber::
 	#rm -rf build
+
+MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>
+HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard

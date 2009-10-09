@@ -14,3 +14,6 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = frankos72
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Clock_Enabling_the_Hidden_Theme

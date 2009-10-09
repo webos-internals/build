@@ -12,3 +12,6 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = jcrawford <info@josephcrawford.com>
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Camera_Using_Volume_Buttons_to_Take_a_Picture

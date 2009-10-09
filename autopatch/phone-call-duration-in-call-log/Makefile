@@ -10,3 +10,6 @@ META_VERSION = 1.2.1-0
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = Jauder Ho <jauderho+git@gmail.com>
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Phone_Show_Call_Duration_in_the_Call_Log

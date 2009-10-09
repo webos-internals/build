@@ -12,3 +12,6 @@ META_VERSION = 1.2.1-0
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = HattCzech
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Messaging_Character_Counter

@@ -10,3 +10,5 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = Jason Robitaille <robitaille88@gmail.com>

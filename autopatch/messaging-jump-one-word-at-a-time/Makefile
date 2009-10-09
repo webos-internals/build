@@ -10,3 +10,6 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = ???
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Messaging_Jump_Forward%2C_Backward_One_Word_at_a_Time

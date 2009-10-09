@@ -9,3 +9,6 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = tk102
+HOMEPAGE = http://forums.precentral.net/web-os-development/200039-add-date-time-top.html

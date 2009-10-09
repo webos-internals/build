@@ -10,3 +10,6 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = jdoelger
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Email_Change_Default_Font_for_Replies-Forwards_from_Navy_to_Black

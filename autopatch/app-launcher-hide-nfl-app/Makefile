@@ -10,3 +10,6 @@ META_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = noir
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Launcher_Hide-Delete_The_NASCAR_App

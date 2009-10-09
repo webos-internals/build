@@ -10,3 +10,6 @@ META_VERSIOn = 1
 
 include ../common.mk
 include ../modifications.mk
+
+MAINTAINER = Hopspitfire
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_webOS_Brightness
