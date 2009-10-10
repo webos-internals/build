@@ -6,7 +6,7 @@ CATEGORY = Screen Lock
 VERSION = 1.2.1-0
 ICON = http://www.webos-internals.org/images/f/fa/Icon_WebOSInternals_Patches_Screenlock.png
 SCREENSHOTS = 
-META_VERSIOn = 1
+META_SUB_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk

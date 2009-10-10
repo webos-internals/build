@@ -6,7 +6,7 @@ CATEGORY = Messaging
 VERSION = 1.2.1-0
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/0/00/Msg-avatar.png\"]
-META_VERSION = 1
+META_SUB_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk

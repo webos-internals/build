@@ -6,7 +6,7 @@ CATEGORY = Browser
 VERSION = 1.2.1-0
 ICON = http://www.webos-internals.org/images/4/4a/Icon_WebOSInternals_Patches_Browser.png
 SCREENSHOTS =
-META_VERSION = 1
+META_SUB_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

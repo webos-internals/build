@@ -6,7 +6,7 @@ CATEGORY = Phone
 VERSION = 1.2.1-0
 ICON = http://www.webos-internals.org/images/c/c8/Icon_WebOSInternals_Patches_Phonepreferences.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/d/d2/Roam-control.png\"]
-META_VERSION = 1
+META_SUB_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

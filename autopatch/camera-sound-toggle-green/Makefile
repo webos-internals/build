@@ -8,7 +8,7 @@ ICON = http://www.webos-internals.org/images/c/c5/Icon_WebOSInternals_Patches_Ca
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/9/96/Shutter-sound-on-off-button-green-1.png\",\
 \"http://www.webos-internals.org/wiki/Image:Shutter-sound-on-off-button-green-2.png\"]
-META_VERSION = 1
+META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 

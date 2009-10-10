@@ -6,7 +6,7 @@ CATEGORY = Camera
 VERSION = 1.2.1-0
 ICON = http://www.webos-internals.org/images/c/c5/Icon_WebOSInternals_Patches_Camera.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/1/13/Shutter-sound-on-off-button.png\"]
-META_VERSION = 1
+META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 

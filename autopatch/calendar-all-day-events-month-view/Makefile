@@ -6,7 +6,7 @@ CATEGORY = Calendar
 VERSION = 1.2.1-0
 ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Calendar.png
 SCREENSHOTS =
-META_VERSION = 1
+META_SUB_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk

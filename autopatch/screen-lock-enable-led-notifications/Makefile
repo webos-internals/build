@@ -6,7 +6,7 @@ CATEGORY = Screen Lock
 VERSION = 1.2.1-0
 ICON = http://www.webos-internals.org/images/f/fa/Icon_WebOSInternals_Patches_Screenlock.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/8/86/Enable-led-notifications.png\"]
-META_VERSION = 1
+META_SUB_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk

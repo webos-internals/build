@@ -6,7 +6,7 @@ CATEGORY = App Launcher
 VERSION = 1.2.1-0
 ICON = http://www.webos-internals.org/images/b/b1/Icon_WebOSInternals_Patches_Applauncher.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/9/94/More_icons_per_row_4x4_1.2.png\"]
-META_VERSION = 1
+META_SUB_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk

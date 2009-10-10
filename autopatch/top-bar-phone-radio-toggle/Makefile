@@ -6,7 +6,7 @@ CATEGORY = Top Bar
 VERSION = 1.2.1-0
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/4/4b/Radiopower.png\"]
-META_VERSION = 1
+META_SUB_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

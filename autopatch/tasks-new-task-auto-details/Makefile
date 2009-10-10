@@ -6,7 +6,7 @@ CATEGORY = Tasks
 VERSION = 1.2.1-0
 ICON = http://www.webos-internals.org/images/8/83/Icon_WebOSInternals_Patches_Tasks.png
 SCREENSHOTS =
-META_VERSION = 1
+META_SUB_VERSION = 1
 
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna

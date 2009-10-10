@@ -6,7 +6,7 @@ CATEGORY = Sounds and Alerts
 VERSION = 1.2.1-0
 ICON = http://www.webos-internals.org/images/f/ff/Icon_WebOSInternals_Patches_Soundsandalerts.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/d/d3/Message-tone-sounds-and-alerts.png\"]
-META_VERSION = 1
+META_SUB_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

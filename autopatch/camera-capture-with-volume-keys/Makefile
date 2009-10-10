@@ -6,7 +6,7 @@ CATEGORY = Camera
 VERSION = 1.2.1-0
 ICON = http://www.webos-internals.org/images/c/c5/Icon_WebOSInternals_Patches_Camera.png
 SCREENSHOTS =
-META_VERSION = 1
+META_SUB_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

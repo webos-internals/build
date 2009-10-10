@@ -4,7 +4,7 @@ TITLE = Quiet powerd Messages
 DESCRIPTION = This will silence the powerd messages. The powerd messages are the sleep/wake messages sent to ssh/terminal when the device sleeps or wakes.
 CATEGORY = Misc
 VERSION = 1.2.1-0
-META_VERSION = 1
+META_SUB_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 

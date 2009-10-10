@@ -6,7 +6,7 @@ CATEGORY = Top Bar
 VERSION = 1.2.1-0
 ICON = http://www.webos-internals.org/images/a/a2/Icon_WebOSInternals_Patches_Percent.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/7/76/Battery-percent.png\"]
-META_VERSION = 1
+META_SUB_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk

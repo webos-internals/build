@@ -8,7 +8,7 @@ ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Me
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/a/a5/Sms-tone-per-contact-1.png\",\
 \"http://www.webos-internals.org/images/e/e4/Sms-tone-per-contact-2.png\"]
-META_VERSION = 1
+META_SUB_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk

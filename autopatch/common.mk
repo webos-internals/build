@@ -3,9 +3,16 @@ APP_ID = org.webosinternals.patches.${NAME}
 HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DEPENDS = org.webosinternals.patch, org.webosinternals.diffstat
-FEED = Autopatch
+FEED = WebOS Patches
+META_GLOBAL_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
+ifneq ("${META_SUB_VERSION}","")
+META_VERSION = ${META_GLOBAL_VERSION}-${META_SUB_VERSION}
+else
+META_VERSION = ${META_GLOBAL_VERSION}
+endif
+
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
