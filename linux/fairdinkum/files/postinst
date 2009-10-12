@@ -1,0 +1,9 @@
+#!/bin/sh
+
+rm -f /usr/local/bin/du
+ln -s /var/usr/palm/applications/org.webosinternals.fairdinkum/du /usr/local/bin/du
+
+rm -f /usr/local/bin/ipkg
+ln -s /var/usr/palm/applications/org.webosinternals.fairdinkum/ipkg /usr/local/bin/ipkg
+
+exit 0

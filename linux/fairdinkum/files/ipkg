@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ "$3" == "list" ] ; then
+  /usr/bin/ipkg $1 $2 list_installed
+else
+  /usr/bin/ipkg $*
+fi
