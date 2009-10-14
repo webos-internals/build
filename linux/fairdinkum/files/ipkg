@@ -1,6 +1,20 @@
 #!/bin/sh
-if [ "$3" == "list" ] ; then
-  /usr/bin/ipkg $1 $2 list_installed
+# Copyright (c) 2009 Rod Whitby <rod@whitby.id.au>
+# Copyright (c) 2009 Carl E. Thompson <devel-webos@carlthompson.net>
+# Licensed GPLv2
+
+PARENT=$(ps -o comm --no-heading -p $PPID)
+
+#echo >> /tmp/ipkg-called
+#echo "CMDLINE: $*" >> /tmp/ipkg-called
+#echo "PARENT: $PARENT[$PPID]" >> /tmp/ipkg-called
+
+if [ "$PARENT" = "LunaSysMgr" -a "$*" = "-o /var list" ] ; then
+  # This is not necessary
+  #exec /usr/bin/ipkg -o /var list_installed
+
+  # just do nothing instead
+  exit
 else
-  /usr/bin/ipkg $*
+  exec /usr/bin/ipkg "$@"
 fi

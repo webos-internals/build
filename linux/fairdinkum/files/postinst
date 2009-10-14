@@ -1,7 +1,8 @@
 #!/bin/sh
 
+# Remove obsolete scripts
 rm -f /usr/local/bin/du
-ln -s /var/usr/palm/applications/org.webosinternals.fairdinkum/du /usr/local/bin/du
+rm -f /var/usr/palm/applications/org.webosinternals.fairdinkum/du
 
 rm -f /usr/local/bin/ipkg
 ln -s /var/usr/palm/applications/org.webosinternals.fairdinkum/ipkg /usr/local/bin/ipkg
