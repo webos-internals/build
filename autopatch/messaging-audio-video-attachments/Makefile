@@ -3,7 +3,8 @@ PATCH = /messaging/${NAME}.patch
 TITLE = Audio/Video Attachments
 DESCRIPTION = Adds ability to attach (send) audio and video files in the Messaging application.
 CATEGORY = Messaging
-VERSION = 1.2.1-0
+WEBOS_VERSION = 1.2.1
+IPKG_VERSION = 0
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/1/14/All-attachments-1.png\",\

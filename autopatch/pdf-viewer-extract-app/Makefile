@@ -1,6 +1,8 @@
 TYPE = Patch
 NAME = $(shell basename $(shell pwd))
-VERSION = 1.2.1-0
+WEBOS_VERSION = 1.2.1
+IPKG_VERSION = 0
+VERSION = ${WEBOS_VERSION}-${IPKG_VERSION}
 TITLE = Extract PDF Viewer Application
 DESCRIPTION = Extracts the PDF Viewer Application so that it can be patched.
 APP_ID = org.webosinternals.${NAME}
