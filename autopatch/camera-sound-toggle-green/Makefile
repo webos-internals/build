@@ -3,7 +3,7 @@ PATCH = camera/$(shell basename ${NAME} -green).patch
 TITLE = Sound Toggle - Green
 DESCRIPTION = This will add a green button in the Camera application that will allow you to turn the shutter sound On and Off.
 CATEGORY = Camera
-VERSION = 1.2.1-0
+VERSIONS = 1.2.1-0 1.1.3-0
 ICON = http://www.webos-internals.org/images/c/c5/Icon_WebOSInternals_Patches_Camera.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/9/96/Shutter-sound-on-off-button-green-1.png\",\
