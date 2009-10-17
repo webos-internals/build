@@ -29,7 +29,7 @@ build/.meta-${META_VERSION}:
 build/.built: build/.unpacked build/.meta-${META_VERSION}
 	rm -rf build/all
 	mkdir -p build/all/usr/palm/applications/${APP_ID}
-	install -m 644 build/src/${PATCH} build/all/usr/palm/applications/${APP_ID}/
+	install -m 644 build/src-${VERSION}/${PATCH} build/all/usr/palm/applications/${APP_ID}/
 	touch $@
 
 build/all/CONTROL/prerm: build/.unpacked
