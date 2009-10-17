@@ -4,7 +4,7 @@ TITLE = 4x4 Icons v3
 DESCRIPTION = This will modify the App launcher to display 4x4 icons rather than 3x4. This version has larger icons and closer spacing. It is a very slick version of the 4x4 patch.
 CATEGORY = App Launcher
 WEBOS_VERSION = 1.2.1
-IPKG_VERSION = 2
+IPKG_VERSION = 3
 ICON = http://www.webos-internals.org/images/b/b1/Icon_WebOSInternals_Patches_Applauncher.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/5/5c/App-launcher-4x4-icons-v3-1.png\",\
