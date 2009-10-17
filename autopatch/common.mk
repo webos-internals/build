@@ -4,6 +4,7 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DEPENDS = org.webosinternals.patch, org.webosinternals.diffstat
 FEED = WebOS Patches
+LICENSE = MIT License Open Source
 VERSION = ${WEBOS_VERSION}-${IPKG_VERSION}
 META_GLOBAL_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
