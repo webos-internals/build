@@ -45,7 +45,7 @@ ipkgs/webos-patches/all/Packages: package
 	rm -rf ipkgs/webos-patches/all
 	mkdir -p ipkgs/webos-patches/all
 	( find autopatch -type d -name ipkgs -print | \
-	  xargs -I % find % -name "*_${WEBOS_VERSION}-*_all.ipk" -print | \
+	  xargs -I % find % -name "*_*_all.ipk" -print | \
 	  xargs -I % rsync -i -a % ipkgs/webos-patches/all )
 	TAR_OPTIONS=--wildcards \
 	toolchain/ipkg-utils/ipkg-make-index \
