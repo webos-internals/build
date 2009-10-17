@@ -3,8 +3,7 @@ PATCH = calendar/${NAME}.patch
 TITLE = Repeat Reminder Notifys
 DESCRIPTION = This patch will repeat the reminder notification every 2 minutes until you either dismiss or snooze the reminder.
 CATEGORY = Calendar
-WEBOS_VERSION = 1.2.1
-IPKG_VERSION = 2
+VERSION = 1.2.1-2
 ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Calendar.png
 http://www.webos-internals.org/images/2/29/Icon_WebOSInternals_Patches_Email.png
 SCREENSHOTS = [\

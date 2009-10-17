@@ -3,8 +3,7 @@ PATCH = top-bar/${NAME}.patch
 TITLE = Battery Icon and Percent
 DESCRIPTION = This will add a color-coded percent number with the battery icon in the top bar. Charging = Teal. 100%-70% = Green. 69%-45% = Yellow. = 44%-20% = Orange. 19%-0% = Red.
 CATEGORY = Top Bar
-WEBOS_VERSION = 1.2.1
-IPKG_VERSION = 0
+VERSION = 1.2.1-0
 ICON = http://www.webos-internals.org/images/a/a2/Icon_WebOSInternals_Patches_Percent.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/1/16/Battery-percent-and-icon.png\"]
 META_SUB_VERSION = 1

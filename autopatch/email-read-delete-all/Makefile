@@ -3,8 +3,7 @@ PATCH = email/${NAME}.patch
 TITLE = Read/Delete All Email
 DESCRIPTION = This will give you the ability to mark all messages as read or even delete all messages in the Email application. 
 CATEGORY = Email
-WEBOS_VERSION = 1.2.1
-IPKG_VERSION = 1
+VERSION = 1.2.1-1
 ICON = http://www.webos-internals.org/images/2/29/Icon_WebOSInternals_Patches_Email.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/b/b4/Readalldelall-1.png\",\
