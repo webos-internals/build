@@ -17,13 +17,15 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
+WEBOS_VERSION = 1.2.1
+
 SUBDIRS = apps services plugins linux
 
 .PHONY: index package toolchain upload clobber clean
 
 
 index:  ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv7/Packages \
-	ipkgs/webos-patches/all/Packages \
+	ipkgs/webos-patches/1.1.3/Packages ipkgs/webos-patches/1.2.1/Packages ipkgs/webos-patches/all/Packages \
 	ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv7/Packages \
 	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
 	ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages
@@ -39,11 +41,22 @@ ipkgs/webos-internals/%/Packages: package
 		-v -p ipkgs/webos-internals/$*/Packages ipkgs/webos-internals/$*
 	gzip -c ipkgs/webos-internals/$*/Packages > ipkgs/webos-internals/$*/Packages.gz
 
+ipkgs/webos-patches/all/Packages: package
+	rm -rf ipkgs/webos-patches/all
+	mkdir -p ipkgs/webos-patches/all
+	( find autopatch -type d -name ipkgs -print | \
+	  xargs -I % find % -name "*_${WEBOS_VERSION}-*_all.ipk" -print | \
+	  xargs -I % rsync -i -a % ipkgs/webos-patches/all )
+	TAR_OPTIONS=--wildcards \
+	toolchain/ipkg-utils/ipkg-make-index \
+		-v -p ipkgs/webos-patches/all/Packages ipkgs/webos-patches/all
+	gzip -c ipkgs/webos-patches/all/Packages > ipkgs/webos-patches/all/Packages.gz
+
 ipkgs/webos-patches/%/Packages: package
 	rm -rf ipkgs/webos-patches/$*
 	mkdir -p ipkgs/webos-patches/$*
 	( find autopatch -type d -name ipkgs -print | \
-	  xargs -I % find % -name "*_$*.ipk" -print | \
+	  xargs -I % find % -name "*_$*-*_all.ipk" -print | \
 	  xargs -I % rsync -i -a % ipkgs/webos-patches/$* )
 	TAR_OPTIONS=--wildcards \
 	toolchain/ipkg-utils/ipkg-make-index \

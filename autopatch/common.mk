@@ -5,7 +5,6 @@ MAINTAINER = WebOS Internals <support@webos-internals.org>
 DEPENDS = org.webosinternals.patch, org.webosinternals.diffstat
 FEED = WebOS Patches
 LICENSE = MIT License Open Source
-VERSION = ${WEBOS_VERSION}-${IPKG_VERSION}
 META_GLOBAL_VERSION = 1
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
@@ -16,7 +15,14 @@ META_VERSION = ${META_GLOBAL_VERSION}
 endif
 
 .PHONY: package
+ifneq ("${VERSIONS}", "")
+package:
+	for v in ${VERSIONS} ; do \
+	  ${MAKE} VERSIONS= VERSION=$${v} package ; \
+	done
+else
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
+endif
 
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
