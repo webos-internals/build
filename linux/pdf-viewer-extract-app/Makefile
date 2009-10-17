@@ -1,16 +1,12 @@
-TYPE = Patch
+TYPE = Linux Application
 NAME = $(shell basename $(shell pwd))
 VERSION = 1.2.1-0
 TITLE = Extract PDF Viewer Application
 DESCRIPTION = Extracts the PDF Viewer Application so that it can be patched.
 APP_ID = org.webosinternals.${NAME}
-HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS
 MAINTAINER = WebOS Internals <support@webos-internals.org>
-CATEGORY = PDF Viewer
-META_SUB_VERSION = 1
+CATEGORY = Utilities
 ICON = http://www.webos-internals.org/images/7/71/Icon_WebOSInternals_Patches_Pdfviewer.png
-#POSTINSTALLFLAGS = RestartLuna
-#POSTREMOVEFLAGS = RestartLuna
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
