@@ -6,7 +6,7 @@ CATEGORY = Top Bar
 VERSION = 1.2.1-0
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/6/61/Add_date_to_top_bar.png\"]
-META_SUB_VERSION = 1
+META_SUB_VERSION = 2
 
 include ../common.mk
 include ../modifications.mk
