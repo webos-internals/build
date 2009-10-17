@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = email/${NAME}.patch
+PATCH = calendar/${NAME}.patch
 TITLE = Snooze Duration Selection
 DESCRIPTION = Adds a snooze duration selection to the reminder notification. Currently it the list will not scroll so the snooze duration options are limited to only four durations.
 CATEGORY = Calendar

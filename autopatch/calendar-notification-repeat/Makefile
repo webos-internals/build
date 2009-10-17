@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = email/${NAME}.patch
+PATCH = calendar/${NAME}.patch
 TITLE = Repeat Reminder Notifys
 DESCRIPTION = This patch will repeat the reminder notification every 2 minutes until you either dismiss or snooze the reminder.
 CATEGORY = Calendar
