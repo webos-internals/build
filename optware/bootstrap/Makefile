@@ -29,9 +29,9 @@ build/.unpacked:
 	touch $@
 
 .PHONY: build
-build: build/.built
+build: build/.built-${VERSION}
 
-build/.built: build/.unpacked
+build/.built-${VERSION}: build/.unpacked
 	mkdir -p build/all/etc/event.d
 	install -m 644 upstart/${APP_ID} build/all/etc/event.d/${APP_ID}
 	mkdir -p build/all/etc/profile.d

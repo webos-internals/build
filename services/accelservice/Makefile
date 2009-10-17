@@ -47,9 +47,9 @@ build/.unpacked build/src/${NAME}.java: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 LUNAPATH = usr/lib/luna/java
 
 .PHONY: build
-build: build/.built
+build: build/.built-${VERSION}
 
-build/.built: build/src/${NAME}.java
+build/.built-${VERSION}: build/src/${NAME}.java
 	rm -f $@
 	( cd build/src ; ant build jar )
 	mkdir -p build/all/${LUNAPATH}

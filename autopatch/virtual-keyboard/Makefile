@@ -17,9 +17,6 @@ FILES = /usr/palm/frameworks/mojo/builtins/palmInitFramework191_15.js \
 
 SRC_GIT = git://git.webos-internals.org/patches/virtual-keyboard.git
 
-#.PHONY: package
-#package: ipkgs/${APP_ID}_${VERSION}_all.ipk
-#include ../../support/package.mk
 include ../common.mk
 
 include ../../support/download.mk
@@ -27,49 +24,33 @@ include ../../support/download.mk
 #include ../../support/patch-md5sums.mk
 
 .PHONY: unpack
-unpack: build/.unpacked
+unpack: build/.unpacked-${VERSION}
 
-build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
-	mkdir -p build/src
-	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	mkdir -p build/src-${VERSION}
+	tar -C build/src-${VERSION} -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	touch $@
 
 .PHONY: build
-build: build/.built
+build: build/.built-${VERSION}
 
-build/.built: build/.unpacked
+build/.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/all
 	rm -rf build.tmp
 	mkdir -p build.tmp
-	tar -C build.tmp -xvf build/src/virtual-keyboard-themes.tar.gz
+	tar -C build.tmp -xvf build/src-${VERSION}/virtual-keyboard-themes.tar.gz
 	mkdir -p build/all/usr/palm/applications/${APP_ID}
 	mv build.tmp/media/internal/virtual-keyboard \
 	   build/all/usr/palm/applications/${APP_ID}/
 	rm -rf build.tmp
-	install -m 644 build/src/${PATCH} build/all/usr/palm/applications/${APP_ID}/
-	install -m 644 build/src/postinst_extra build/all/usr/palm/applications/${APP_ID}/
-	install -m 644 build/src/prerm_extra build/all/usr/palm/applications/${APP_ID}/
+	install -m 644 build/src-${VERSION}/${PATCH} build/all/usr/palm/applications/${APP_ID}/
+	install -m 644 build/src-${VERSION}/postinst_extra build/all/usr/palm/applications/${APP_ID}/
+	install -m 644 build/src-${VERSION}/prerm_extra build/all/usr/palm/applications/${APP_ID}/
 	#for f in ${FILES} ; do \
 	  #grep $$f build/md5sums >> build/all/usr/palm/applications/${APP_ID}/md5sums ; \
 	#done
 	touch $@
-
-#build/all/CONTROL/prerm: build/.unpacked
-	#rm -f $@
-	#mkdir -p build/all/CONTROL
-	#install -m 0775 build/src/prerm build/all/CONTROL
-	#chmod ugo+x $@
-
-#build/all/CONTROL/postinst: build/.unpacked
-	#rm -f $@
-	#mkdir -p build/all/CONTROL
-	#install -m 0775 build/src/postinst build/all/CONTROL
-	#chmod ugo+x $@
-
-#.PHONY: clobber
-#clobber::
-	#rm -rf build
 
 MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>
 HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard

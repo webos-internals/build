@@ -39,9 +39,9 @@ build/all/CONTROL/prerm: build/.unpacked
 	chmod ugo+x $@
 
 .PHONY: build
-build: build/.built
+build: build/.built-${VERSION}
 
-build/.built: build/.unpacked
+build/.built-${VERSION}: build/.unpacked
 	rm -rf build/all
 	mkdir -p build/all/usr/palm/applications/${APP_ID}
 	touch $@

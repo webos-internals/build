@@ -18,28 +18,28 @@ endif
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
 
 .PHONY: unpack
-unpack: build/.unpacked
+unpack: build/.unpacked-${VERSION}
 
 .PHONY: build
-build: build/.built
+build: build/.built-${VERSION}
 
 build/.meta-${META_VERSION}:
 	touch $@
 
-build/.built: build/.unpacked build/.meta-${META_VERSION}
+build/.built-${VERSION}: build/.unpacked-${VERSION} build/.meta-${META_VERSION}
 	rm -rf build/all
 	mkdir -p build/all/usr/palm/applications/${APP_ID}
 	install -m 644 build/src-${VERSION}/${PATCH} build/all/usr/palm/applications/${APP_ID}/
 	touch $@
 
-build/all/CONTROL/prerm: build/.unpacked
+build/all/CONTROL/prerm: build/.unpacked-${VERSION}
 	mkdir -p build/all/CONTROL
 	cp ../prerm build/all/CONTROL/prerm
 	sed -i -e 's|PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' build/all/CONTROL/prerm
 	sed -i -e 's|APP_DIR=|APP_DIR=/var/usr/palm/applications/${APP_ID}|' build/all/CONTROL/prerm
 	chmod ugo+x $@
 
-build/all/CONTROL/postinst: build/.unpacked
+build/all/CONTROL/postinst: build/.unpacked-${VERSION}
 	mkdir -p build/all/CONTROL
 	cp ../postinst build/all/CONTROL/postinst
 	sed -i -e 's|PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' build/all/CONTROL/postinst

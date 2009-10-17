@@ -29,9 +29,9 @@ build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	touch $@
 
 .PHONY: build
-build: build/.built
+build: build/.built-${VERSION}
 
-build/.built: build/armv7.built build/i686.built
+build/.built-${VERSION}: build/armv7.built build/i686.built
 	touch $@
 
 build/i686.built: build/.unpacked

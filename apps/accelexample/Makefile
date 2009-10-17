@@ -18,7 +18,7 @@ include ../../support/package.mk
 
 include ../../support/download.mk
 
-build/.built build/.unpack: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+build/.built-${VERSION} build/.unpack: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/all/usr/palm/applications/${APP_ID}
 	tar -C build/all/usr/palm/applications/${APP_ID} -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz

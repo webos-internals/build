@@ -30,9 +30,9 @@ build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	touch $@
 
 .PHONY: build
-build: build/.built
+build: build/.built-${VERSION}
 
-build/.built: build/.unpacked
+build/.built-${VERSION}: build/.unpacked
 	rm -rf build/all
 	mkdir -p build/all/usr/palm/applications/${APP_ID}
 	install -m 755 build/src/mvapp build/all/usr/palm/applications/${APP_ID}/

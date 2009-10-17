@@ -52,9 +52,9 @@ build/.unpacked build/src/${PACKAGEPATH}/${CLASS}.java: ${DL_DIR}/${NAME}-${VERS
 LUNAPATH = usr/lib/luna/java
 
 .PHONY: build
-build: build/.built
+build: build/.built-${VERSION}
 
-build/.built: build/src/${PACKAGEPATH}/${CLASS}.java
+build/.built-${VERSION}: build/src/${PACKAGEPATH}/${CLASS}.java
 	rm -f $@
 	( cd build/src ; ant build jar )
 	mkdir -p build/all/${LUNAPATH}

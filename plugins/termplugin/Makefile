@@ -29,7 +29,7 @@ build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	touch $@
 
-build/.built: build/armv7.built build/i686.built
+build/.built-${VERSION}: build/armv7.built build/i686.built
 	touch $@
 
 build/i686.built: build/.unpacked

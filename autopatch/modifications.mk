@@ -1,7 +1,7 @@
 SRC_GIT = git://gitorious.org/webos-internals/modifications.git
 DL_DIR = ../../downloads
 
-build/.unpacked: ${DL_DIR}/modifications-${VERSION}.tar.gz
+build/.unpacked-${VERSION}: ${DL_DIR}/modifications-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src-${VERSION}
 	tar -C build/src-${VERSION} -xf ${DL_DIR}/modifications-${VERSION}.tar.gz
