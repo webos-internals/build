@@ -1,11 +1,11 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = email/${NAME}.patch
-TITLE = Read/Delete All Email
-DESCRIPTION = This will give you the ability to mark all messages as read or even delete all messages in the Email application. 
-CATEGORY = Email
+TITLE = Snooze Duration Selection
+DESCRIPTION = Adds a snooze duration selection to the reminder notification. Currently it the list will not scroll so the snooze duration options are limited to only four durations.
+CATEGORY = Calendar
 WEBOS_VERSION = 1.2.1
-IPKG_VERSION = 1
-ICON = http://www.webos-internals.org/images/2/29/Icon_WebOSInternals_Patches_Email.png
+IPKG_VERSION = 2
+ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Calendar.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/b/b4/Readalldelall-1.png\",\
 \"http://www.webos-internals.org/images/7/7b/Readalldelall-2.png\",\
@@ -18,4 +18,4 @@ include ../common.mk
 include ../modifications.mk
 
 MAINTAINER = Lclarkjr
-HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Email_DeleteAll
+HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Calendar_Snooze_Duration_Selection
