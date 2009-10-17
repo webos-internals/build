@@ -37,7 +37,7 @@ PREWARE_SANITY += $(error "Please define CATEGORY in your Makefile")
 endif
 
 ipkgs/${APP_ID}_${VERSION}_%.ipk: build/.built-${VERSION}
-	rm -f ipkgs/${APP_ID}_*_$*.ipk
+	rm -f ipkgs/${APP_ID}_${VERSION}_$*.ipk
 	rm -f build/$*/CONTROL/conffiles
 	${MAKE} build/$*/CONTROL/conffiles
 	rm -f build/$*/CONTROL/control
