@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /pdf-viewer/${NAME}.patch
+PATCH = pdf-viewer/${NAME}.patch
 TITLE = Enable Landscape PDF Viewer
 DESCRIPTION = Enables landscape mode in the PDF Viewer Application.  Requires the 'Extract PDF Viewer Application' package be installed first.
 CATEGORY = PDF Viewer

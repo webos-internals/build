@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /app-launcher/${NAME}.patch
+PATCH = app-launcher/${NAME}.patch
 TITLE = 4x4 Icons v1
 DESCRIPTION = This will modify the App launcher to display 4x4 icons rather than 3x4. Does not word wrap.
 CATEGORY = App Launcher

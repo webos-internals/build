@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /email/${NAME}.patch
+PATCH = email/${NAME}.patch
 TITLE = Confirm Delete
 DESCRIPTION = Adds a confirmation prompt after swipe-to-deleting an email.
 CATEGORY = Email

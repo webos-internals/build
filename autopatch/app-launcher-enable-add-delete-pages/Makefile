@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /app-launcher/${NAME}.patch
+PATCH = app-launcher/${NAME}.patch
 TITLE = Enable Add/Delete Pages
 DESCRIPTION = Adds the ability to add and remove launcher pages. Access these from the App Menu of the App Launcher.
 CATEGORY = App Launcher

@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /app-launcher/${NAME}.patch
+PATCH = app-launcher/${NAME}.patch
 TITLE = Hide NFL App
 DESCRIPTION = This will hide the NFL application in the App Launcher.
 CATEGORY = App Launcher

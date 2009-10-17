@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /messaging/${NAME}.patch
+PATCH = messaging/${NAME}.patch
 TITLE = Enable Landscape Messaging
 DESCRIPTION = This will enable landscape mode in the Messaging application. It uses accelerometer to detect orientation.
 CATEGORY = Messaging

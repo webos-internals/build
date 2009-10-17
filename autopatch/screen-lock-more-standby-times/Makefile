@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /screen-lock/${NAME}.patch
+PATCH = screen-lock/${NAME}.patch
 TITLE = More Standby Times
 DESCRIPTION = This will add more standby times to the Screen & Lock application. New settings will be 15 seconds, 3 minutes, 5 minutes and never. This will not change your standby time automatically. You will have to select the length you desire in the Screen & Lock application.
 CATEGORY = Screen Lock

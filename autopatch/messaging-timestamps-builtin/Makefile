@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /messaging/${NAME}.patch
+PATCH = messaging/${NAME}.patch
 TITLE = Timestamp - Builtin
 DESCRIPTION = This will cause the Messaging application use the builtin timestamps for all messages instead of just messages that show up late.
 CATEGORY = Messaging

@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /messaging/${NAME}.patch
+PATCH = messaging/${NAME}.patch
 TITLE = Compose to Email
 DESCRIPTION = Adds email addresses of contacts to the list of available destinations in the Messaging application.
 CATEGORY = Messaging

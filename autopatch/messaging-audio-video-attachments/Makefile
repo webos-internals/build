@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /messaging/${NAME}.patch
+PATCH = messaging/${NAME}.patch
 TITLE = Audio/Video Attachments
 DESCRIPTION = Adds ability to attach (send) audio and video files in the Messaging application.
 CATEGORY = Messaging

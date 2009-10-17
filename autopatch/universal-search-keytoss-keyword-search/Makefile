@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /universal-search/${NAME}.patch
+PATCH = universal-search/${NAME}.patch
 TITLE = KeyToss Keyword Search
 DESCRIPTION = This will install KeyToss keyword-powered search tool to Universal Search and to the browser URL search. Type 'k list' for a list of keywords.
 CATEGORY = Universal Search

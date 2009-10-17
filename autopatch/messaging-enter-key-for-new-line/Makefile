@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /messaging/${NAME}.patch
+PATCH = messaging/${NAME}.patch
 TITLE = Enter Key for New Line
 DESCRIPTION = This will cause the enter button to insert a newline instead of sending the message in the Messaging application.
 CATEGORY = Messaging

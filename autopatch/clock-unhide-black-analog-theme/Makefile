@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /clock/${NAME}.patch
+PATCH = clock/${NAME}.patch
 TITLE = Enable Hidden Clock
 DESCRIPTION = This will enable the hidden clock theme. It is an analog clock instead of the digital one. You can select it in the Clock application preferences.
 CATEGORY = Clock

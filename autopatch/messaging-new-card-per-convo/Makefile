@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /messaging/${NAME}.patch
+PATCH = messaging/${NAME}.patch
 TITLE = New Card per Convo
 DESCRIPTION = This will create a new card per conversation in the Messaging application.
 CATEGORY = Messaging

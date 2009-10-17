@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /screen-lock/${NAME}.patch
+PATCH = screen-lock/${NAME}.patch
 TITLE = Enable LED Notifications
 DESCRIPTION = This will uncomment the code necessary for the gesture area to light up for notifications. You must still make sure LED Notifications is enabled in the Screen & Lock application.
 CATEGORY = Screen Lock

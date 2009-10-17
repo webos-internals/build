@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /phone/${NAME}.patch
+PATCH = phone/${NAME}.patch
 TITLE = Add Roam Control to Prefs
 DESCRIPTION = This will enable a roam only option in the Phone Preferences.
 CATEGORY = Phone

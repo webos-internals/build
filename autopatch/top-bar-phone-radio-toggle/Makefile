@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /top-bar/${NAME}.patch
+PATCH = top-bar/${NAME}.patch
 TITLE = Phone Radio Toggle
 DESCRIPTION = This will add the ability to turn the Phone Radio On and Off in the Device Menu. This will only turn off the Phone Radio.
 CATEGORY = Top Bar

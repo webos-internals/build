@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /messaging/${NAME}.patch
+PATCH = messaging/${NAME}.patch
 TITLE = Enable Forwarding
 DESCRIPTION = This will add the ability to forward messages in the Messaging application. Touch a message to use this feature.
 CATEGORY = Messaging

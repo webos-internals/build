@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /phone/${NAME}.patch
+PATCH = phone/${NAME}.patch
 TITLE = Call Duration in Call Log
 DESCRIPTION = This will enable the viewing of call durations in the call log.
 CATEGORY = Phone

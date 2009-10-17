@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /phone/${NAME}.patch
+PATCH = phone/${NAME}.patch
 TITLE = Enable Dialpad Vibration
 DESCRIPTION = This will enable haptic feedback and silence the dialpad in the phone application.
 CATEGORY = Phone

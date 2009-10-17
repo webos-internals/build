@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /mojo/${NAME}.patch
+PATCH = mojo/${NAME}.patch
 TITLE = Smiley Faces in Symbol Box
 CATEGORY = Mojo
 WEBOS_VERSION = 1.2.1

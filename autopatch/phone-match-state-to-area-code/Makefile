@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /phone/${NAME}.patch
+PATCH = phone/${NAME}.patch
 TITLE = Match State to Area Code
 DESCRIPTION = This will cause the Phone application to display the State a call is coming from for numbers that do not match a Contact entry.
 CATEGORY = Phone

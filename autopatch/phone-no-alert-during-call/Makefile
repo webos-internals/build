@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /phone/${NAME}.patch
+PATCH = phone/${NAME}.patch
 TITLE = No Alert During Call
 DESCRIPTION = This will disable alerts during a call and re-enable them when you hang up.
 CATEGORY = Phone

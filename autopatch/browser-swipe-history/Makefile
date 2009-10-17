@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /browser/${NAME}.patch
+PATCH = browser/${NAME}.patch
 TITLE = Swipe History
 DESCRIPTION = This will add the ability to swipe delete items in the browser history with a confirmation dialog.
 CATEGORY = Browser

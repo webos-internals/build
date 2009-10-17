@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /app-launcher/${NAME}.patch
+PATCH = app-launcher/${NAME}.patch
 TITLE = Unhide Dev Mode Icon
 DESCRIPTION = This will show the Developer Mode Icon in the App Launcher.
 CATEGORY = App Launcher

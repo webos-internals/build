@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /sounds-and-alerts/${NAME}.patch
+PATCH = sounds-and-alerts/${NAME}.patch
 TITLE = Disable Charging Alert Sound
 DESCRIPTION = This will prevent the alert sound from being played when the device starts to charge.
 CATEGORY = Sounds and Alerts

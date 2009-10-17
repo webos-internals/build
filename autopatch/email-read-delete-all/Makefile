@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /email/${NAME}.patch
+PATCH = email/${NAME}.patch
 TITLE = Read/Delete All Email
 DESCRIPTION = This will give you the ability to mark all messages as read or even delete all messages in the Email application. 
 CATEGORY = Email

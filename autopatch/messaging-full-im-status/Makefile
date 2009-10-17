@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /messaging/${NAME}.patch
+PATCH = messaging/${NAME}.patch
 TITLE = Full IM Status
 DESCRIPTION = This will show the full buddy list IM status instead of a truncated one.
 CATEGORY = Messaging

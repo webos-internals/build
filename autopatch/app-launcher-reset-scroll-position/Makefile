@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /app-launcher/${NAME}.patch
+PATCH = app-launcher/${NAME}.patch
 TITLE = Reset Scroll Position
 DESCRIPTION = This will reset the scroll position back to the top of the page rather than remembering the scroll position when switching pages in the App Launcher.
 CATEGORY = App Launcher

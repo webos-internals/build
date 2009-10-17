@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /email/${NAME}.patch
+PATCH = email/${NAME}.patch
 TITLE = Replies/Forwards Black Font
 DESCRIPTION = This will change the font color for replies and forwards to black instead of navy blue.
 CATEGORY = Email

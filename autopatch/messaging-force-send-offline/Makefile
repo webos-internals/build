@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /messaging/${NAME}.patch
+PATCH = messaging/${NAME}.patch
 TITLE = Force Send Offline
 DESCRIPTION = This will enable the force sending while offline in the Messaging application.
 CATEGORY = Messaging

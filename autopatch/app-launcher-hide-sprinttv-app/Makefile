@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /app-launcher/${NAME}.patch
+PATCH = app-launcher/${NAME}.patch
 TITLE = Hide SprintTV App
 DESCRIPTION = This will hide the SprintTV app in the App Launcher.
 CATEGORY = App Launcher

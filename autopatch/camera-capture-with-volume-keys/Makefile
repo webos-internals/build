@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /camera/${NAME}.patch
+PATCH = camera/${NAME}.patch
 TITLE = Capture with Volume Keys
 DESCRIPTION = This will add the ability to capture images with the volume keys in the camera applications.
 CATEGORY = Camera

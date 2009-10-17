@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = /messaging/${NAME}.patch
+PATCH = messaging/${NAME}.patch
 TITLE = Timestamps - Clean
 DESCRIPTION =  This will add timestamps to messages in the Messaging application. The format of the timestamps are MM/DD/YY 00:00 AM and are black with no spacing between them and the message.
 CATEGORY = Messaging
