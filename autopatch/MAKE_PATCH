@@ -26,6 +26,10 @@ echo -n "Version: "
 read ver
 echo -n "Icon: "
 read icon
+echo -n "Maintainer: "
+read maintainer
+echo -n "Homepage: "
+read homepage
 
 echo ""
 echo "Enter multiple screenshots (blank entry to end list)"
@@ -68,7 +72,7 @@ fi
 mkdir $name
 touch $name/Makefile
 echo "NAME = $name" >> $name/Makefile
-echo "PATCH = /$dir/\${NAME}.patch" >> $name/Makefile
+echo "PATCH = $dir/\${NAME}.patch" >> $name/Makefile
 echo "TITLE = $title" >> $name/Makefile
 echo "DESCRIPTION = $desc" >> $name/Makefile
 echo "CATEGORY = $cat" >> $name/Makefile
@@ -81,3 +85,6 @@ echo "META_SUB_VERSION = 1" >> $name/Makefile
 echo "" >> $name/Makefile
 echo "include ../common.mk" >> $name/Makefile
 echo "include ../modifications.mk" >> $name/Makefile
+echo "" >> $name/Makefile
+echo "MAINTAINER = $maintainer" >> $name/Makefile
+echo "HOMEPAGE = $homepage" >> $name/Makefile
