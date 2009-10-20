@@ -6,10 +6,9 @@ CATEGORY = Calendar
 VERSION = 1.2.1-2
 ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Calendar.png
 SCREENSHOTS = [\
-\"http://www.webos-internals.org/images/b/b4/Readalldelall-1.png\",\
-\"http://www.webos-internals.org/images/7/7b/Readalldelall-2.png\",\
-\"http://www.webos-internals.org/images/d/dd/Readalldelall-3.png\"]
-META_SUB_VERSION = 1
+\"http://www.webos-internals.org/images/2/2e/CalendarSnoozeDurationSelecton_1.png\",\
+\"http://www.webos-internals.org/images/6/67/CalendarSnoozeDurationSelecton_2.png\"]
+META_SUB_VERSION = 2
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 
