@@ -1,14 +1,14 @@
 NAME     = preware
 TITLE	 = Preware
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.9.4
+VERSION  = 0.9.5
 DEPENDS	 = org.webosinternals.ipkgservice
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
 ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications.
-CHANGELOG = 0.9.4: Added support for package dependencies.<br>0.9.3: Enabled feed management and added the webos-patches feed.  If you have previously installed Patches from the autopatch feed or the online repository, you should run the Emergency Patch Recovery application before using this first public release of the webos-patches feed.
+CHANGELOG = 0.9.5: Better error reporting, and more verbose status messages giving indications of how long it is reasonable to wait.<br>0.9.4: Added support for package dependencies.<br>0.9.3: Enabled feed management and added the webos-patches feed.  If you have previously installed Patches from the autopatch feed or the online repository, you should run the Emergency Patch Recovery application before using this first public release of the webos-patches feed.
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/7/7f/Preware_ss1.jpg\",\
 \"http://www.webos-internals.org/images/4/41/Preware_ss2.jpg\",\
