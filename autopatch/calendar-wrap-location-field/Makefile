@@ -6,10 +6,10 @@ CATEGORY = Calendar
 VERSION = 1.2.1-6
 ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Calendar.png
 SCREENSHOTS =
-META_SUB_VERSION = 1
+META_SUB_VERSION = 2
 
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = lordbah <jeff.vanepps@gmail.com>
+MAINTAINER = lordbah 
 HOMEPAGE =
