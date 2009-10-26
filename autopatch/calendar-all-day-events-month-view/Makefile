@@ -1,15 +1,18 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = calendar/${NAME}.patch
 TITLE = All-Day Events in Month View
-DESCRIPTION = Does not work properly in 1.2.0+ at this time. -- This will enable showing of all-day events while in the Month View of the Calendar application.
+DESCRIPTION = This will enable showing of all-day events while in the Month View of the Calendar application.
 CATEGORY = Calendar
-VERSION = 1.2.1-0
+VERSION = 1.2.1-8
 ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Calendar.png
-SCREENSHOTS =
+SCREENSHOTS = [\
+\"http://www.webos-internals.org/images/7/70/Calendar-all-day-events-month-view-1.jpg\",\
+\"http://www.webos-internals.org/images/9/90/Calendar-all-day-events-month-view-2.jpg\",\
+\"http://www.webos-internals.org/images/2/26/Calendar-all-day-events-month-view-3.jpg\"]
 META_SUB_VERSION = 1
 
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = Hopspitfire
+MAINTAINER = daventx, d2globalinc, Hopspitfire
 HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Calendar_Show_All-Day_Events_in_Month_View

@@ -1,0 +1,16 @@
+NAME = phone-call-reject
+PATCH = phone/phone-call-reject.patch
+TITLE = Call Block/Rejecter
+DESCRIPTION = This will auto reject any call from a number listed for the contact name: 'Do Not Answer' (no quotes though). The call will still show up in the call history, but no notification will happen.
+CATEGORY = Phone
+VERSION = 1.2.1-8
+ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png	
+SCREENSHOTS =
+META_SUB_VERSION = 1
+
+include ../common.mk
+include ../modifications.mk
+
+MAINTAINER = Elryon <elryon@hotmail.com>
+HOMEPAGE = http://forums.precentral.net/webos-patches/211255-call-rejecter-patch.html
+
