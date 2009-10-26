@@ -1,0 +1,15 @@
+NAME = misc-unthrottle-download-manager
+PATCH = misc/misc-unthrottle-download-manager.patch
+TITLE = Unthrottle download manager
+DESCRIPTION = This patch significantly speeds up downloads, especially over wifi. The Pre comes stock limited to 64kb/sec downloads (noticible especially in DrPodder/etc) - this patch unthrottles it.
+CATEGORY = Misc
+VERSION = 1.2.1-10
+ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
+SCREENSHOTS =
+META_SUB_VERSION = 1
+
+include ../common.mk
+include ../modifications.mk
+
+MAINTAINER = diomark
+HOMEPAGE = http://forums.precentral.net/webos-patches/210774-patch-unthrottle-download-manager.html
