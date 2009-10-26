@@ -11,5 +11,5 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = Jhoff80
+MAINTAINER = jhoff80
 HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Enable_LED_Notifications
