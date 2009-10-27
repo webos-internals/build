@@ -1,5 +1,5 @@
-NAME = music-player-book-resume
-PATCH = music-player/music-player-book-resume.patch
+NAME = $(shell basename $(shell pwd))
+PATCH = music-player/${NAME}.patch
 TITLE = Resume Play for Books
 DESCRIPTION = Adds resume play support for the 'Books' and 'Books and Spoken' genres.
 CATEGORY = Music Player

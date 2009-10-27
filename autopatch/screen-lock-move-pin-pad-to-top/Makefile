@@ -1,5 +1,5 @@
-NAME = screen-lock-move-pin-pad-to-top
-PATCH = screen-lock/screen-lock-move-pin-pad-to-top.patch
+NAME = $(shell basename $(shell pwd))
+PATCH = screen-lock/${NAME}.patch
 TITLE = Move PIN Pad to Top
 DESCRIPTION = Ever accidentally placed an emergency call while trying to unlock your phone? This patch moves the PIN pad away from the 'Emergency Call' button.
 CATEGORY = Screen Lock

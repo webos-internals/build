@@ -1,5 +1,5 @@
-NAME = misc-unthrottle-download-manager
-PATCH = misc/misc-unthrottle-download-manager.patch
+NAME = $(shell basename $(shell pwd))
+PATCH = misc/${NAME}.patch
 TITLE = Unthrottle download manager
 DESCRIPTION = This patch significantly speeds up downloads, especially over wifi. The Pre comes stock limited to 64kb/sec downloads (noticible especially in DrPodder/etc) - this patch unthrottles it.
 CATEGORY = Misc

@@ -1,5 +1,5 @@
-NAME = phone-close-on-hangup
-PATCH = phone/phone-close-on-hangup.patch
+NAME = $(shell basename $(shell pwd))
+PATCH = phone/${NAME}.patch
 TITLE = Close on hangup
 DESCRIPTION = This patch causes the Phone app to close automatically when all calls end, regardless of whether the last call was incoming or outgoing.
 CATEGORY = Phone

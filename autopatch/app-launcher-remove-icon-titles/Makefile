@@ -1,5 +1,5 @@
-NAME = app-launcher-remove-icon-titles
-PATCH = app-launcher/app-launcher-remove-icon-titles.patch
+NAME = $(shell basename $(shell pwd))
+PATCH = app-launcher/${NAME}.patch
 TITLE = Remove Icon Titles
 DESCRIPTION = This will remove the titles from under the icons. Recommended: The 4x4-Icons-v3 for the larger icons.
 CATEGORY = App Launcher

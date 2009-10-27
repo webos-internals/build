@@ -1,5 +1,5 @@
-NAME = misc-lower-swap-threshold
-PATCH = misc/misc-lower-swap-threshold.patch
+NAME = $(shell basename $(shell pwd))
+PATCH = misc/${NAME}.patch
 TITLE = Lower Swap Threshold
 DESCRIPTION = Changes the luna.conf line FreeSwapThreshold=64 to be FreeSwapThreshold=32 (giving apps an extra 32mb of ram - or roughly 2-3 apps more).
 CATEGORY = Misc

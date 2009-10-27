@@ -1,5 +1,5 @@
-NAME = camera-simple-shutter-sound-off
-PATCH = camera/camera-simple-shutter-sound-off.patch
+NAME = $(shell basename $(shell pwd))
+PATCH = camera/${NAME}.patch
 TITLE = Simple Shutter Sound Off
 DESCRIPTION = This will permanently disable the shutter sound for the camera.
 CATEGORY = Camera

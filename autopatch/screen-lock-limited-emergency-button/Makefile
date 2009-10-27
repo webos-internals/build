@@ -1,5 +1,5 @@
-NAME = screen-lock-limited-emergency-button
-PATCH = screen-lock/screen-lock-limited-emergency-button.patch
+NAME = $(shell basename $(shell pwd))
+PATCH = screen-lock/${NAME}.patch
 TITLE = Limited Emergency Button
 DESCRIPTION = This will reduce the chance of accidentally calling 911. It removes the prepopulated number that appears in the dialpad once you select the Emergency Call button on the PIN screen, forcing the user to manually input the emergency number.
 CATEGORY = Screen Lock

@@ -1,5 +1,5 @@
-NAME = phone-call-reject
-PATCH = phone/phone-call-reject.patch
+NAME = $(shell basename $(shell pwd))
+PATCH = phone/${NAME}.patch
 TITLE = Call Block/Rejecter
 DESCRIPTION = This will auto reject any call from a number listed for the contact name: 'Do Not Answer' (no quotes though). The call will still show up in the call history, but no notification will happen.
 CATEGORY = Phone

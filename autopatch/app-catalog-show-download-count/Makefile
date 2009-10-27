@@ -1,5 +1,5 @@
-NAME = app-catalog-show-download-count
-PATCH = app-catalog/app-catalog-show-download-count.patch
+NAME = $(shell basename $(shell pwd))
+PATCH = app-catalog/${NAME}.patch
 TITLE = Show Download Count
 DESCRIPTION = This will enable the viewing of the download count of packages in the 'Palm App Catalog'.
 CATEGORY = App Catalog

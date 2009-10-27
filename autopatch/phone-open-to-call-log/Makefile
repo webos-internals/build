@@ -1,5 +1,5 @@
-NAME = phone-open-to-call-log
-PATCH = phone/phone-open-to-call-log.patch
+NAME = $(shell basename $(shell pwd))
+PATCH = phone/${NAME}.patch
 TITLE = Open to call log
 DESCRIPTION = This will cause the Phone app to open directly to the call log. Useful if you often find yourself initiating calls from the log.
 CATEGORY = Phone

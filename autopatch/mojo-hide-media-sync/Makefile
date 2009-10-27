@@ -1,5 +1,5 @@
-NAME = mojo-hide-media-sync
-PATCH = mojo/mojo-hide-media-sync.patch
+NAME = $(shell basename $(shell pwd))
+PATCH = mojo/${NAME}.patch
 TITLE = Hide Media Sync
 DESCRIPTION = This will hide the 'Media Sync' option when you connect to a computer via USB.
 CATEGORY = Mojo

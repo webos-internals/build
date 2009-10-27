@@ -1,5 +1,5 @@
-NAME = calendar-wrap-location-field
-PATCH = calendar/calendar-wrap-location-field.patch
+NAME = $(shell basename $(shell pwd))
+PATCH = calendar/${NAME}.patch
 TITLE = Wrap Location Field
 DESCRIPTION = This will let the Location field wrap onto multiple lines.
 CATEGORY = Calendar

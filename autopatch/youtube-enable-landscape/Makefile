@@ -1,5 +1,5 @@
-NAME = youtube-enable-landscape
-PATCH = youtube/youtube-enable-landscape.patch
+NAME = $(shell basename $(shell pwd))
+PATCH = youtube/${NAME}.patch
 TITLE = Enable Landscape YouTube
 DESCRIPTION = This will enable landscape mode. It uses accelerometer to detect orientation. You also need a 400x400 background or it looks odd.
 CATEGORY = YouTube

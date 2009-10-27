@@ -1,5 +1,5 @@
-NAME = calendar-more-reminder-alarm-times
-PATCH = calendar/calendar-more-reminder-alarm-times.patch
+NAME = $(shell basename $(shell pwd))
+PATCH = calendar/${NAME}.patch
 TITLE = More Reminder Alarm Times
 DESCRIPTION = Adds 45, 90, amd 120 minutes to reminder alarm time choices.
 CATEGORY = Calendar

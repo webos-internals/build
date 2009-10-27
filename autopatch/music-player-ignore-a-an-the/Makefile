@@ -1,5 +1,5 @@
-NAME = music-player-ignore-a-an-the
-PATCH = music-player/music-player-ignore-a-an-the.patch
+NAME = $(shell basename $(shell pwd))
+PATCH = music-player/${NAME}.patch
 TITLE = Ignore A, An, The
 DESCRIPTION = Removes 'A', 'An' and 'The' from the beginning of Artists and Albums so everything sorts properly.
 CATEGORY = Music Player
