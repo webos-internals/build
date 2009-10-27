@@ -9,7 +9,7 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/d/d9/Music-player-ignore-a-an-the-1.png\",\
 \"http://www.webos-internals.org/images/1/11/Music-player-ignore-a-an-the-2.png\",\
 \"http://www.webos-internals.org/images/9/97/Music-player-ignore-a-an-the-3.png\"]
-META_SUB_VERSION = 1
+META_SUB_VERSION = 2
 
 include ../common.mk
 include ../modifications.mk

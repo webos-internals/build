@@ -6,7 +6,7 @@ CATEGORY = Mojo
 VERSION = 1.2.1-8
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/c/c7/Mojo-hide-media-sync-1.png\"]
-META_SUB_VERSION = 1
+META_SUB_VERSION = 2
 
 include ../common.mk
 include ../modifications.mk
