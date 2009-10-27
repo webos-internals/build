@@ -4,12 +4,12 @@ TITLE = Multi Mod
 DESCRIPTION = This will gives the option to download or stream streamable files. It will also enable the display of the URL bar in landscape mode. Finally, it adds hotkey for page up/down and page bottom/top.
 CATEGORY = Browser
 VERSION = 1.2.1-10
-CHANGELOG = ${VERSION}: Added Download URL to \"Orange + Click\"
+CHANGELOG = ${VERSION}: Added Download URL to 'Orange + Click'
 ICON = http://www.webos-internals.org/images/4/4a/Icon_WebOSInternals_Patches_Browser.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/0/0d/Enable-browser-downloads-1.png\",\
 \"http://www.webos-internals.org/images/0/02/Enable-browser-downloads-2.png\"]
-META_SUB_VERSION = 2
+META_SUB_VERSION = 3
 
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
