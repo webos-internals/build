@@ -1,13 +1,14 @@
 NAME     = terminal
 TITLE	 = Terminal
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.2.2
+VERSION  = 0.2.3
 DEPENDS  = org.webosinternals.termplugin
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Terminal
 ICON	 = http://www.webos-internals.org/images/7/74/Icon_WebOSInternals_Terminal.png
 DESCRIPTION = Description for Terminal
+CHANGELOG = 0.2.3: Added help page for key mappings and detection of the termplugin.
 SCREENSHOTS = [\"http://www.webos-internals.org/images/b/bd/Application_Terminal.jpg\"]
 LICENSE  = GPL v2 Open Source
 
