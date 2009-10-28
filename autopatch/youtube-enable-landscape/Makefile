@@ -4,9 +4,9 @@ TITLE = Enable Landscape YouTube
 DESCRIPTION = This will enable landscape mode. It uses accelerometer to detect orientation. You also need a 400x400 background or it looks odd.
 CATEGORY = YouTube
 VERSION = 1.2.1-8
-ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
+ICON = http://www.webos-internals.org/images/8/8b/Icon_WebOSInternals_Patches_Youtube.png
 SCREENSHOTS =
-META_SUB_VERSION = 2
+META_SUB_VERSION = 3
 
 include ../common.mk
 include ../modifications.mk

@@ -4,9 +4,9 @@ TITLE = Show Wifi SSID
 DESCRIPTION = Shows the wifi SSID instead of the cellular carrier string.
 CATEGORY = Top Bar
 VERSION = 1.2.1-5
-ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
+ICON = http://www.webos-internals.org/images/1/1f/Icon_WebOSInternals_Patches_Wifi.png
 # SCREENSHOTS = [...]
-META_SUB_VERSION = 1
+META_SUB_VERSION = 2
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 
