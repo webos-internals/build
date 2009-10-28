@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = top-bar/${NAME}.patch
 TITLE = Show Actual Battery Percent
-DESCRIPTION = Shows the actual battery percent in the top bar rather than the gui percent mapping.  
+DESCRIPTION = Shows the actual battery percent in the top bar rather than the gui percent mapping. Now compatible with other Battery Icon patches.
 CATEGORY = Top Bar
-VERSION = 1.2.1-0
+VERSION = 1.2.1-17
 ICON = http://www.webos-internals.org/images/3/35/Icon_WebOSInternals_Patches_Actualpercent.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/9/9a/Show-actual-battery-percent.png\"]
 META_SUB_VERSION = 1
