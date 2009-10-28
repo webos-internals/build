@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-PATCH = other/${NAME}.patch
+PATCH = calculator/${NAME}.patch
 TITLE = Enable Vibration
 DESCRIPTION = Adds haptic (vibration) feedback to screen presses and keyboard input.
 CATEGORY = Calculator
