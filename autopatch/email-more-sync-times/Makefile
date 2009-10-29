@@ -1,0 +1,17 @@
+NAME = $(shell basename $(shell pwd))
+PATCH = email/${NAME}.patch
+TITLE = More Sync Times
+DESCRIPTION = Allows you to sync email at any one-hour increment between 1 and 12. Original sync times are still available as well.
+CATEGORY = Email
+VERSION = 1.2.1-18
+ICON = http://www.webos-internals.org/images/2/29/Icon_WebOSInternals_Patches_Email.png
+SCREENSHOTS = [\
+\"http://www.webos-internals.org/images/b/be/Email-more-sync-times-1.png\",\
+\"http://www.webos-internals.org/images/6/61/Email-more-sync-times-2.png\"]
+META_SUB_VERSION = 1
+
+include ../common.mk
+include ../modifications.mk
+
+MAINTAINER = dallashigh <karl@webosnerd.com>
+HOMEPAGE = http://webosnerd.com
