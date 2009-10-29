@@ -9,7 +9,7 @@ SCREENSHOTS = [\"http://www.webos-internals.org/images/4/47/Universal-search-usc
 META_SUB_VERSION = 2
 
 include ../common.mk
-DEPENDS := ${DEPENDS}, org.webosinternals.pdf-viewer-extract-app
+DEPENDS := ${DEPENDS}, org.webosinternals.patches.universal-search-command-line
 include ../modifications.mk
 
 MAINTAINER = dsevil <dse@webonastick.com>
