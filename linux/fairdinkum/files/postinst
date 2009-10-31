@@ -5,6 +5,7 @@ rm -f /usr/local/bin/du
 rm -f /var/usr/palm/applications/org.webosinternals.fairdinkum/du
 
 rm -f /usr/local/bin/ipkg
+mkdir -p /usr/local/bin
 ln -s /var/usr/palm/applications/org.webosinternals.fairdinkum/ipkg /usr/local/bin/ipkg
 
 exit 0
