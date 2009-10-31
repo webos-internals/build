@@ -1,7 +1,11 @@
 #!/bin/sh
 
-rm -f /usr/local/bin/du
+if [ "`readlink /usr/local/bin/du`" = "/var/usr/palm/applications/org.webosinternals.fairdinkum/du" ] ; then
+  rm -f /usr/local/bin/du
+fi
 
-rm -f /usr/local/bin/ipkg
+if [ "`readlink /usr/local/bin/ipkg`" = "/var/usr/palm/applications/org.webosinternals.fairdinkum/ipkg" ] ; then
+  rm -f /usr/local/bin/ipkg
+fi
 
 exit 0
