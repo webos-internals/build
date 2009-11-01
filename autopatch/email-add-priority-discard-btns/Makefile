@@ -3,7 +3,7 @@ PATCH = email/${NAME}.patch
 TITLE = Add Priority Discard Btns
 DESCRIPTION = This will place a high priority icon and a discard message icon at the bottom of your email you are composing.
 CATEGORY = Email
-VERSION = 1.2.1-19
+VERSIONS = 1.2.1-19 1.3.1-0
 ICON = http://www.webos-internals.org/images/2/29/Icon_WebOSInternals_Patches_Email.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/6/60/Email-add-priority-discard-btns-1.jpg\",\
