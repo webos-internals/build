@@ -25,7 +25,8 @@ SUBDIRS = apps services plugins linux
 
 
 index:  ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv7/Packages \
-	ipkgs/webos-patches/1.1.3/Packages ipkgs/webos-patches/1.2.1/Packages ipkgs/webos-patches/all/Packages \
+	ipkgs/webos-patches/1.1.3/Packages ipkgs/webos-patches/1.2.1/Packages ipkgs/webos-patches/1.3.1/Packages \
+	ipkgs/webos-patches/all/Packages \
 	ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv7/Packages \
 	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
 	ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages
