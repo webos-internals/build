@@ -1,12 +1,12 @@
 NAME     = ipkgservice
 CLASS    = IPKGService
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.9.15
+VERSION  = 0.9.16
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 TITLE	 = Package Manager Service
 DESCRIPTION = The Package Manager Service is a back-end interface to the ipkg command line application which manages all packages that are installed on the Pre.  It is required for advanced homebrew installers like Preware.
-CHANGELOG = 0.9.15: Update version-specific webos-patches feed on each boot.<br>0.9.14: Added support for version specific feeds.<br>0.9.13: Fixes the problem when you can install apps when Package Manager is not installed, but can not install apps when it is installed.<br>0.9.12: Fixed the permissions of the ipkg wrapper script.<br>0.9.11: Incorporated the functionality of the Fair Dinkum App Limit application into this service.<br>0.9.10: Fixed the icon.<br>0.9.9: Retains the status of disabled feeds.<br>0.9.8: Removes the package if the post-install script fails or the user cancels the installation.  Provides better reporting in the IPKG Log screen.<br>0.9.7: Enabled feed management and added the webos-patches feed.  If you have previously installed Patches from the autopatch feed or the online repository, you should run the Emergency Patch Recovery application before using this first public release of the webos-patches feed.
+CHANGELOG = 0.9.16: Made the ipkg wrapper handle both the less than 64MiB installed and greater than 64MiB installed scenarios.<br>0.9.15: Update version-specific webos-patches feed on each boot.<br>0.9.14: Added support for version specific feeds.<br>0.9.13: Fixes the problem when you can install apps when Package Manager is not installed, but can not install apps when it is installed.<br>0.9.12: Fixed the permissions of the ipkg wrapper script.<br>0.9.11: Incorporated the functionality of the Fair Dinkum App Limit application into this service.<br>0.9.10: Fixed the icon.<br>0.9.9: Retains the status of disabled feeds.<br>0.9.8: Removes the package if the post-install script fails or the user cancels the installation.  Provides better reporting in the IPKG Log screen.<br>0.9.7: Enabled feed management and added the webos-patches feed.  If you have previously installed Patches from the autopatch feed or the online repository, you should run the Emergency Patch Recovery application before using this first public release of the webos-patches feed.
 TYPE	 = Service
 CATEGORY = Luna
 ICON	= http://www.webos-internals.org/images/7/77/Icon_WebOSInternals_PackageManager.png
