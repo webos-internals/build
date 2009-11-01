@@ -10,11 +10,7 @@ PARENT=$(ps -o comm --no-heading -p $PPID)
 #echo "PARENT: $PARENT[$PPID]" >> /tmp/ipkg-called
 
 if [ "$PARENT" = "LunaSysMgr" -a "$*" = "-o /var list" ] ; then
-  # This is not necessary
-  #exec /usr/bin/ipkg -o /var list_installed
-
-  # just do nothing instead
-  exit
+  exec /usr/bin/ipkg -o /var list_installed
 else
   exec /usr/bin/ipkg "$@"
 fi
