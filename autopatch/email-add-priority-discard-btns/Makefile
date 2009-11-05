@@ -1,9 +1,10 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = email/${NAME}.patch
 TITLE = Add Priority Discard Btns
-DESCRIPTION = This will place a high priority icon and a discard message icon at the bottom of your email you are composing.
+DESCRIPTION = This will place a high priority icon and a discard message icon at the bottom of the  email you are composing. This update incorporates Tibfib's discard confirmation as well as removing the options from the menu. Special thanks to Tibfib for his work in adding the discard confirmation option.
 CATEGORY = Email
-VERSIONS = 1.2.1-19 1.3.1-0
+# NEW VERSION NEEDS 1.3.1 FIXED.
+VERSIONS = 1.2.1-21 1.3.1-0
 ICON = http://www.webos-internals.org/images/2/29/Icon_WebOSInternals_Patches_Email.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/6/60/Email-add-priority-discard-btns-1.jpg\",\
