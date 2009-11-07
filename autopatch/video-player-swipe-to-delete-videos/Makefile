@@ -3,7 +3,7 @@ PATCH = video-player/${NAME}.patch
 TITLE = Swipe to Delete Videos
 DESCRIPTION = This will add the ability to swipe to delete videos.
 CATEGORY = Video Player
-VERSION = 1.2.1-19
+VERSIONS = 1.2.1-19 1.3.1-5
 ICON = http://www.webos-internals.org/images/f/ff/Icon_WebOSInternals_Patches_Videoplayer.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
@@ -11,5 +11,5 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = Jason Robitaille
+MAINTAINER = Jason Robitaille, Rod Whitby
 HOMEPAGE = http://forums.precentral.net/webos-patches/206806-patch-video-swipe-delete.html
