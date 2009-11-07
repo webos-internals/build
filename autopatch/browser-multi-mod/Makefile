@@ -17,5 +17,5 @@ META_SUB_VERSION = 3
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = daventx, Mark Klein <mdklein@gmail.com>, drnull <jdhatfield@gmail.com>, fritos1406, Jason Robitaille <robitaille88@gmail.com>
+MAINTAINER = daventx, Mark Klein <mdklein@gmail.com>, drnull <jdhatfield@gmail.com>, fritos1406, Jason Robitaille
 HOMEPAGE = http://forums.precentral.net/web-os-development/206908-autopatch-browser-multi-patch.html

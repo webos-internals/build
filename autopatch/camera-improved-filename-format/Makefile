@@ -11,5 +11,5 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = Jason Robitaille <robitaille88@gmail.com>
+MAINTAINER = Jason Robitaille
 HOMEPAGE = http://forums.precentral.net/web-os-development/210711-camera-image-filenames.html

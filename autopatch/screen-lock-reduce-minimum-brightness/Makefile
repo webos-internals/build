@@ -11,5 +11,5 @@ META_SUB_VERSION = 2
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = Hopspitfire, Jason Robitaille <robitaille88@gmail.com>
+MAINTAINER = Hopspitfire, Jason Robitaille
 HOMEPAGE = http://www.webos-internals.org/wiki/Patch_webOS_Brightness
