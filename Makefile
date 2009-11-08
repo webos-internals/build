@@ -29,8 +29,7 @@ index:  ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages i
 	ipkgs/webos-patches/all/Packages \
 	ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv7/Packages \
 	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
-	ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages ipkgs/prethemer/Packages \
-	ipkgs/preyourmind/all/Packages
+	ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages ipkgs/prethemer/Packages
 
 ipkgs/webos-internals/%/Packages: package
 	rm -rf ipkgs/webos-internals/$*
@@ -75,20 +74,6 @@ ipkgs/optware/%/Packages: package
 	toolchain/ipkg-utils/ipkg-make-index \
 		-v -p ipkgs/optware/$*/Packages ipkgs/optware/$*
 	gzip -c ipkgs/optware/$*/Packages > ipkgs/optware/$*/Packages.gz
-
-ipkgs/preyourmind/%/Packages: package
-	rm -rf ipkgs/preyourmind/$*
-	mkdir -p ipkgs/preyourmind/$*
-	( find feeds/preyourmind -type d -name ipkgs -print | \
-	  xargs -I % find % -name "*_$*.ipk" -print | \
-	  xargs -I % rsync -i -a % ipkgs/preyourmind/$* )
-	TAR_OPTIONS=--wildcards \
-	toolchain/ipkg-utils/ipkg-make-index \
-		-v -p ipkgs/preyourmind/$*/Packages ipkgs/preyourmind/$*
-	mv ipkgs/preyourmind/$*/Packages ipkgs/preyourmind/$*/Packages.orig
-	scripts/merge-metadata.py feeds/preyourmind/build/Metadata ipkgs/preyourmind/$*/Packages.orig > ipkgs/preyourmind/$*/Packages
-	rm -f ipkgs/preyourmind/$*/Packages.orig*
-	gzip -c ipkgs/preyourmind/$*/Packages > ipkgs/preyourmind/$*/Packages.gz
 
 ipkgs/%/Packages: package
 	rm -rf ipkgs/$*
