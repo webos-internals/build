@@ -31,16 +31,20 @@ ifdef SRC_OPTWARE
 download: ${DL_DIR}/${SRC_OPTWARE}_armv7.ipk ${DL_DIR}/${SRC_OPTWARE}_i686.ipk
 
 ${DL_DIR}/${SRC_OPTWARE}_armv7.ipk:
+	rm -f $@ $@.tmp
 	$(call PREWARE_SANITY)
 	mkdir -p ${DL_DIR}
-	curl -R -L -o $@ \
+	curl -f -R -L -o $@.tmp \
 		http://ipkg.nslu2-linux.org/feeds/optware/cs08q1armel/cross/unstable/${SRC_OPTWARE}_arm.ipk
+	mv $@.tmp $@
 
 ${DL_DIR}/${SRC_OPTWARE}_i686.ipk:
+	rm -f $@ $@.tmp
 	$(call PREWARE_SANITY)
 	mkdir -p ${DL_DIR}
-	curl -R -L -o $@ \
+	curl -f -R -L -o $@.tmp \
 		http://ipkg.nslu2-linux.org/feeds/optware/i686g25/cross/unstable/${SRC_OPTWARE}_i686.ipk
+	mv $@.tmp $@
 
 endif
 
@@ -49,9 +53,11 @@ ifdef SRC_XML
 download: ${DL_DIR}/${NAME}-feed.xml
 
 ${DL_DIR}/${NAME}-feed.xml:
-	rm -f $@
+	rm -f $@ $@.tmp
 	mkdir -p ${DL_DIR}
-	curl -R -L -o ${DL_DIR}/${NAME}-feed.xml ${SRC_XML}
+	touch $@.tmp
+	curl -f -R -L -o $@.tmp ${SRC_XML}
+	mv $@.tmp $@
 
 endif
 
@@ -64,9 +70,11 @@ endif
 download: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 
 ${DL_DIR}/${NAME}-${VERSION}.tar.gz:
+	rm -f $@ $@.tmp
 	$(call PREWARE_SANITY)
 	mkdir -p ${DL_DIR}
-	curl -R -L -o ${DL_DIR}/${NAME}-${VERSION}.tar.gz ${SRC_TGZ}
+	curl -f -R -L -o $@.tmp ${SRC_TGZ}
+	mv $@.tmp $@
 
 endif
 
@@ -79,9 +87,11 @@ endif
 download: ${DL_DIR}/${NAME}-${VERSION}.tar.bz2
 
 ${DL_DIR}/${NAME}-${VERSION}.tar.bz2:
+	rm -f $@ $@.tmp
 	$(call PREWARE_SANITY)
 	mkdir -p ${DL_DIR}
-	curl -R -L -o ${DL_DIR}/${NAME}-${VERSION}.tar.bz2 ${SRC_BZ2}
+	curl -f -R -L -o $@.tmp ${SRC_BZ2}
+	mv $@.tmp $@
 
 endif
 
@@ -94,9 +104,11 @@ endif
 download: ${DL_DIR}/${NAME}-${VERSION}.zip
 
 ${DL_DIR}/${NAME}-${VERSION}.zip:
+	rm -f $@ $@.tmp
 	$(call PREWARE_SANITY)
 	mkdir -p ${DL_DIR}
-	curl -R -L -o ${DL_DIR}/${NAME}-${VERSION}.zip ${SRC_ZIP}
+	curl -f -R -L -o $@.tmp ${SRC_ZIP}
+	mv $@.tmp $@
 
 endif
 
@@ -109,9 +121,11 @@ endif
 download: ${DL_DIR}/${APP_ID}_${VERSION}_all.ipk
 
 ${DL_DIR}/${APP_ID}_${VERSION}_all.ipk:
+	rm -f $@ $@.tmp
 	$(call PREWARE_SANITY)
 	mkdir -p ${DL_DIR}
-	curl -R -L -o ${DL_DIR}/${APP_ID}_${VERSION}_all.ipk ${SRC_IPKG}
+	curl -f -R -L -o $@.tmp ${SRC_IPKG}
+	mv $@.tmp $@
 
 endif
 
@@ -124,6 +138,7 @@ endif
 download: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 
 ${DL_DIR}/${NAME}-${VERSION}.tar.gz:
+	rm -f $@
 	$(call PREWARE_SANITY)
 	rm -rf build
 	mkdir build
