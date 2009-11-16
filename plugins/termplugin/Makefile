@@ -15,7 +15,7 @@ POSTREMOVEFLAGS  = RestartLuna
 SRC_GIT = git://git.webos-internals.org/plugins/termplugin.git
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
+package: ipkgs/${APP_ID}_${VERSION}_armv6.ipk ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
 include ../../support/package.mk
 
 include ../../support/download.mk
@@ -25,11 +25,11 @@ unpack: build/.unpacked
 
 build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
-	mkdir -p build/src build/armv7 build/i686
+	mkdir -p build/src build/armv7 build/armv6 build/i686
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	touch $@
 
-build/.built-${VERSION}: build/armv7.built build/i686.built
+build/.built-${VERSION}: build/armv7.built build/armv6.built build/i686.built
 	touch $@
 
 build/i686.built: build/.unpacked
@@ -47,9 +47,26 @@ build/armv7.built: build/.unpacked
 	install -m 644 build/src/pre-out/${NAME}.so build/armv7/usr/lib/BrowserPlugins/
 	touch $@
 
+build/armv6.built: build/.unpacked
+	rm -rf build/armv6
+	mkdir -p build/src/pre-out
+	${MAKE} -C build/src PRE_DEV_DIR=`pwd`/../../toolchain/cs08q1armel/build/arm-2008q1 pre-out/${NAME}.so
+	mkdir -p build/armv6/usr/lib/BrowserPlugins/
+	install -m 644 build/src/pre-out/${NAME}.so build/armv6/usr/lib/BrowserPlugins/
+	touch $@
+
 build/armv7/CONTROL/postinst:
 	rm -f $@
 	mkdir -p build/armv7/CONTROL
+	echo "#!/bin/sh" > $@
+	echo "rm -f /usr/lib/BrowserPlugins/${NAME}.so" >> $@
+	echo "ln -s /var/usr/lib/BrowserPlugins/${NAME}.so /usr/lib/BrowserPlugins/${NAME}.so" >> $@
+	echo "exit 0" >> $@
+	chmod ugo+x $@
+
+build/armv6/CONTROL/postinst:
+	rm -f $@
+	mkdir -p build/armv6/CONTROL
 	echo "#!/bin/sh" > $@
 	echo "rm -f /usr/lib/BrowserPlugins/${NAME}.so" >> $@
 	echo "ln -s /var/usr/lib/BrowserPlugins/${NAME}.so /usr/lib/BrowserPlugins/${NAME}.so" >> $@
