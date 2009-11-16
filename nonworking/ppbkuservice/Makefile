@@ -1,24 +1,25 @@
-NAME     = ipkgservice
-CLASS    = IPKGService
-APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.9.19
-HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
+NAME     = ppbkuservice
+CLASS    = PPBkuService
+APP_ID   = com.tntservices.${NAME}
+VERSION  = 0.1.1
+HOMEPAGE = http://www.webos-internals.org/wiki/Application:Backup
 MAINTAINER = WebOS Internals <support@webos-internals.org>
-TITLE	 = Package Manager Service
-DESCRIPTION = The Package Manager Service is a back-end interface to the ipkg command line application which manages all packages that are installed on the Pre.  It is required for advanced homebrew installers like Preware.
-CHANGELOG = 0.9.19: Added support for Pixi binaries. PreThemer feed now using a faster non-mirrored feed.<br>0.9.18: Added methods for enabling and disabling the ipkg wrapper.<br>0.9.17: Removed PreYourMind.org feed at the request of the owner of that site (it is shutting down). PreThemer feed now uses the PreThemer.com mirror on preware.org to fix evdo access errors to that site.<br>0.9.16: Made the ipkg wrapper handle both the less than 64MiB installed and greater than 64MiB installed scenarios.<br>0.9.15: Update version-specific webos-patches feed on each boot.<br>0.9.14: Added support for version specific feeds.
+TITLE	 = Backup Utility Service
+DESCRIPTION = 
+CHANGELOG = 
 TYPE	 = Service
 CATEGORY = Luna
-ICON	= http://www.webos-internals.org/images/7/77/Icon_WebOSInternals_PackageManager.png
+ICON	= http://www.webos-internals.org/images/f/fe/Icon_WebOSInternals_Base_Service.png
 LICENSE = GPL v2 Open Source
 POSTINSTALLFLAGS = RestartJava
 POSTREMOVEFLAGS  = RestartJava
+DEPENDS = org.webosinternals.optware, mobi.optware.tar
 
 SERVICEFILES = build/src/${APP_ID}.service
 PACKAGEPATH := $(subst .,/,${APP_ID})
 CLASSFILES := $(addsuffix .class,$(addprefix ${PACKAGEPATH}/,${CLASSES}))
 
-SRC_GIT = git://git.webos-internals.org/services/ipkgservice.git
+SRC_GIT = git://git.webos-internals.org/services/ppbkuservice.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
@@ -44,10 +45,7 @@ build/.unpacked build/src/${PACKAGEPATH}/${CLASS}.java: ${DL_DIR}/${NAME}-${VERS
 	${MAKE} ${JARFILES}
 	install -m 644 ${JARFILES} build/src/
 	mkdir -p build/all/usr/palm/applications/${APP_ID}
-	mv build/src/LICENSE build/src/app build/src/appinfo.json build/src/icon.png \
-	   build/src/images build/src/index.html build/src/sources.json \
-	   build/src/stylesheets build/src/files \
-	   build/all/usr/palm/applications/${APP_ID}/
+	mv build/src/LICENSE build/all/usr/palm/applications/${APP_ID}/
 	touch $@
 
 LUNAPATH = usr/lib/luna/java
@@ -64,8 +62,10 @@ build/.built-${VERSION}: build/src/${PACKAGEPATH}/${CLASS}.java
 	install -m 644 ${SERVICEFILES} build/all/usr/share/dbus-1/system-services/
 	mkdir -p build/all/etc/event.d
 	install -m 644 build/src/upstart/${APP_ID} build/all/etc/event.d/${APP_ID}
-	mkdir -p build/all/etc/ipkg
-	install -m 644 feeds/*.conf build/all/etc/ipkg/
+	mkdir -p build/all/opt/bin
+	install -m 755 build/src/scripts/ppbku build/all/opt/bin/
+	install -m 755 build/src/scripts/bldExList build/all/opt/bin/
+	install -m 755 build/src/scripts/bldIncList build/all/opt/bin/
 	touch $@
 
 build/all/CONTROL/postinst:

@@ -1,6 +1,6 @@
 NAME     = wircd
 APP_ID   = us.ryanhope.${NAME}
-VERSION  = 0.0.3
+VERSION  = 0.0.4
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WIRC
 MAINTAINER = Ryan Hope <rmh3093@gmail.com>
 TITLE	 = wIRCd - WebOS IRC Service
