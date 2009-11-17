@@ -6,11 +6,11 @@ CATEGORY = Phone
 VERSIONS = 1.2.1-8 1.3.1-0
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png	
 SCREENSHOTS =
-META_SUB_VERSION = 1
+META_SUB_VERSION = 2
 
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = Elryon <elryon@hotmail.com>
+MAINTAINER = Elryon <elryon@gmail.com>
 HOMEPAGE = http://forums.precentral.net/webos-patches/211255-call-rejecter-patch.html
 

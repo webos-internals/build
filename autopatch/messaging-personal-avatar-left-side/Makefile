@@ -6,10 +6,10 @@ CATEGORY = Messaging
 VERSIONS = 1.2.1-14 1.3.1-0
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/d/d0/Messaging-left-side-personal-avatar-1.png\"]
-META_SUB_VERSION = 1
+META_SUB_VERSION = 2
 
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = Elryon <elryon@hotmail.com>
+MAINTAINER = Elryon <elryon@gmail.com>
 HOMEPAGE = http://forums.precentral.net/webos-patches/211028-personal-avatar-left-patch.html
