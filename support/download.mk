@@ -28,9 +28,17 @@ endif
 
 ifdef SRC_OPTWARE
 
-download: ${DL_DIR}/${SRC_OPTWARE}_armv7.ipk ${DL_DIR}/${SRC_OPTWARE}_i686.ipk
+download: ${DL_DIR}/${SRC_OPTWARE}_armv7.ipk ${DL_DIR}/${SRC_OPTWARE}_armv6.ipk ${DL_DIR}/${SRC_OPTWARE}_i686.ipk
 
 ${DL_DIR}/${SRC_OPTWARE}_armv7.ipk:
+	rm -f $@ $@.tmp
+	$(call PREWARE_SANITY)
+	mkdir -p ${DL_DIR}
+	curl -f -R -L -o $@.tmp \
+		http://ipkg.nslu2-linux.org/feeds/optware/cs08q1armel/cross/unstable/${SRC_OPTWARE}_arm.ipk
+	mv $@.tmp $@
+
+${DL_DIR}/${SRC_OPTWARE}_armv6.ipk:
 	rm -f $@ $@.tmp
 	$(call PREWARE_SANITY)
 	mkdir -p ${DL_DIR}
