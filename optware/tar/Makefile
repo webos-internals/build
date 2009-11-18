@@ -1,11 +1,11 @@
-NAME     = readline
-TITLE	 = GNU Readline Library
+NAME     = tar
+TITLE	 = GNU Tar
 APP_ID   = mobi.optware.${NAME}
-VERSION  = 6.0-1
-HOMEPAGE = http://directory.fsf.org/project/readline/
+VERSION  = 1.22-2
+HOMEPAGE = http://www.gnu.org/software/tar/
 TYPE	 = Optware
 CATEGORY = Utilities
-ICON	 = http://www.webos-internals.org/images/f/f3/Icon_WebOSInternals_GNUReadlineLib.png
+ICON	 = http://www.webos-internals.org/images/5/5f/Icon_WebOSInternals_Base_Optware.png
 
 SRC_OPTWARE = ${NAME}_${VERSION}
 
@@ -16,7 +16,3 @@ include ../../support/package.mk
 include ../../support/download.mk
 
 include ../../support/optware.mk
-
-build/%.built : build/%.unpacked
-	rm -rf build/$*/opt/share build/$*/opt/include
-	touch $@

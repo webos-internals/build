@@ -19,7 +19,7 @@
 
 include ../../support/application-unpack.mk
 
-build/.built-${VERSION}: build/armv7.built build/i686.built
+build/.built-${VERSION}: build/armv7.built build/armv6.built build/i686.built
 	touch $@
 
 build/%.built : build/%.unpacked
