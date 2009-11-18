@@ -68,7 +68,6 @@ class PackageHandler(ContentHandler):
         if (name == "themezip") :
             self.url = self.data
             self.type = "Theme"
-            self.json += "\"Category\":\"Themes\", "
 
         if (name == "screenshot") :
             self.screenshots.append('"' + self.data + '"')
