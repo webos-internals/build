@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = universal-search/${NAME}.patch
 TITLE = USCL Memos Patch
-DESCRIPTION = This will allow the Universal Search Command Line's '.memo' command to work. You must have the main 'Universal Search Command Line' patch installed in order for this to take effect. Preware should automatically install USCL if needed.
+DESCRIPTION = This will allow the Universal Search Command Line's '.memo' command to work. You must have the main 'Universal Search Command Line' patch installed in order for this to take effect. Preware should automatically install USCL if needed. Changelog:<br />2009-11-18: webOS 1.3.1 compatible.<br />2009-11-12: New notes created via USCL have timestamps appended
 CATEGORY = Universal Search
-VERSION = 1.2.1-18
+VERSIONS = 1.2.1-18 1.3.1-13
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/4/47/Universal-search-uscl-memos-patch-1.png\"]
 META_SUB_VERSION = 3
