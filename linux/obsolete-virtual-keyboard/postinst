@@ -4,6 +4,9 @@ PACKAGE=org.webosinternals.virtual-keyboard
 rm -rf /usr/palm/frameworks/mojo/submissions/200.18/templates/kbselector
 rm -rf /usr/palm/frameworks/mojo/submissions/200.18/resources/*/kbchars*
 rm -f /usr/palm/frameworks/mojo/submissions/200.18/stylesheets/webos-internals-virtual-keyboard.css
+rm -rf /usr/palm/frameworks/mojo/submissions/200.47/templates/kbselector
+rm -rf /usr/palm/frameworks/mojo/submissions/200.47/resources/*/kbchars*
+rm -f /usr/palm/frameworks/mojo/submissions/200.47/stylesheets/webos-internals-virtual-keyboard.css
 
 ipkg -o /var remove $PACKAGE
 exit 0
