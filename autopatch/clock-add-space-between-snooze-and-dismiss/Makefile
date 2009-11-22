@@ -6,10 +6,10 @@ CATEGORY = Clock
 VERSIONS = 1.2.1-4 1.3.1-13
 ICON = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_Patches_Clock.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/1/18/ClockAddSpaceBetweenSnoozeAndDismiss.png\"]
-META_SUB_VERSION = 1
+META_SUB_VERSION = 2
 
 include ../common.mk
 include ../modifications.mk
 
 MAINTAINER = lclarkjr
-HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Clock_Add_space_between_Snooze_and_Dismiss_buttons
+HOMEPAGE = http://forums.precentral.net/showthread.php?p=2041500#post2041500

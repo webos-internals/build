@@ -7,7 +7,7 @@ VERSIONS = 1.2.1-2 1.3.1-13
 ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Calendar.png
 http://www.webos-internals.org/images/2/29/Icon_WebOSInternals_Patches_Email.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/a/ab/CalendarRepeatNotification.png\"]
-META_SUB_VERSION = 2
+META_SUB_VERSION = 3
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 
@@ -15,4 +15,4 @@ include ../common.mk
 include ../modifications.mk
 
 MAINTAINER = Lclarkjr
-HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Calendar_Notification_Repeat
+HOMEPAGE = http://forums.precentral.net/showthread.php?p=2041448#post2041448
