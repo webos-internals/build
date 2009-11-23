@@ -8,7 +8,7 @@ ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Ca
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/2/2e/CalendarSnoozeDurationSelecton_1.png\",\
 \"http://www.webos-internals.org/images/6/67/CalendarSnoozeDurationSelecton_2.png\"]
-META_SUB_VERSION = 2
+META_SUB_VERSION = 3
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 
@@ -16,4 +16,4 @@ include ../common.mk
 include ../modifications.mk
 
 MAINTAINER = Lclarkjr
-HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Calendar_Snooze_Duration_Selection
+HOMEPAGE = http://forums.precentral.net/showthread.php?p=2041492#post2041492

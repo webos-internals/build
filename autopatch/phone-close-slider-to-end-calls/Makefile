@@ -1,4 +1,4 @@
-NAME = phone-close-slider-to-end-calls
+NAME = $(shell basename $(shell pwd))
 PATCH = phone/${NAME}.patch
 TITLE = Close Slider to End Calls
 DESCRIPTION = This will allow you to end your phone calls by closing the slider on your Pre. Developed by KeyToss.com.

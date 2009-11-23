@@ -9,7 +9,7 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/b/b4/Readalldelall-1.png\",\
 \"http://www.webos-internals.org/images/7/7b/Readalldelall-2.png\",\
 \"http://www.webos-internals.org/images/d/dd/Readalldelall-3.png\"]
-META_SUB_VERSION = 1
+META_SUB_VERSION = 2
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 
@@ -17,4 +17,4 @@ include ../common.mk
 include ../modifications.mk
 
 MAINTAINER = lclarkjr
-HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Email_DeleteAll
+HOMEPAGE = http://forums.precentral.net/showthread.php?p=2041573#post2041573
