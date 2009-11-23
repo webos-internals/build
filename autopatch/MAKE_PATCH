@@ -71,7 +71,7 @@ fi
 
 mkdir $name
 touch $name/Makefile
-echo "NAME = $name" >> $name/Makefile
+echo "NAME = \$(shell basename \$(shell pwd))" >> $name/Makefile
 echo "PATCH = $dir/\${NAME}.patch" >> $name/Makefile
 echo "TITLE = $title" >> $name/Makefile
 echo "DESCRIPTION = $desc" >> $name/Makefile

@@ -1,4 +1,4 @@
-NAME = clock-add-space-between-snooze-and-dismiss
+NAME = $(shell basename $(shell pwd))
 PATCH = clock/${NAME}.patch
 TITLE = Add Space Between Snooze and Dismiss
 DESCRIPTION = This will add space between the snooze and dismiss buttons during Clock alarms.

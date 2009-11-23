@@ -1,11 +1,12 @@
-NAME = misc-powersave-cpu-scaling
+NAME = $(shell basename $(shell pwd))
 PATCH = misc/${NAME}.patch
 TITLE = Powersave CPU Scaling
-DESCRIPTION = OBSOLETE
+DESCRIPTION = This package is OBSOLETE. Please remove it. It is now known as 'Dangerous: Powersave CPU Scaling 500/600 MHz'.
 CATEGORY = Obsolete
-VERSION = 1.3.1-17
+VERSION = 1.3.1-18
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 APP_ID=org.webosinternals.patches.${NAME}
+TYPE = Patch
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
