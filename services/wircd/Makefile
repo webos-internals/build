@@ -16,7 +16,7 @@ POSTREMOVEFLAGS  =
 SRC_GIT = git://git.webos-internals.org/services/wIRCd.git
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_i686.ipk ipkgs/${APP_ID}_${VERSION}_armv7.ipk
+package: ipkgs/${APP_ID}_${VERSION}_i686.ipk ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_armv6.ipk
 include ../../support/package.mk
 
 include ../../support/download.mk
@@ -30,7 +30,7 @@ build/.unpacked build/src/Makefile: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	touch $@
 
-build/.built-${VERSION}: build/armv7.built build/i686.built
+build/.built-${VERSION}: build/armv6.built build/armv7.built build/i686.built
 	touch $@
 
 build/%.built: build/.unpacked
