@@ -124,7 +124,8 @@ upload:
 
 testing: webos-internals-testing webos-patches-testing optware-testing
 
-webos-internals-testing: ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv6/Packages ipkgs/webos-internals/armv7/Packages
+webos-internals-testing:
+	${MAKE} SUBDIRS="unreleased" ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv6/Packages ipkgs/webos-internals/armv7/Packages
 	rsync -avr ipkgs/webos-internals/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
 
 webos-patches-testing: ipkgs/webos-patches/all/Packages
