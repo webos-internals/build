@@ -108,7 +108,7 @@ toolchain/cs08q1armel/build/arm-2008q1:
 	${MAKE} -C toolchain/cs08q1armel unpack
 
 upload:
-	rsync -avr ipkgs/ ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/
+	rsync -avr ipkgs/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/
 
 testing: webos-internals-testing webos-patches-testing optware-testing
 
