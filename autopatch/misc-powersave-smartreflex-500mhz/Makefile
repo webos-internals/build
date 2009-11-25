@@ -1,10 +1,10 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = misc/${NAME}.patch
 TITLE = Powersave Smartreflex 500MHz
-DESCRIPTION = This package is OBSOLETE. Please remove it. It is now known as 'Dangerous: Powersave Smartreflex 500/600 MHz'.
+DESCRIPTION = This package is OBSOLETE. Please remove it. It is now known as 'Dangerous: Powersave Smartreflex 500 MHz'.
 CATEGORY = Obsolete
-VERSION = 1.3.1-19
-ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
+VERSION = 1.3.1-99
+ICON = http://www.webos-internals.org/images/f/f6/Icon_Patch_Deadly.png
 APP_ID=org.webosinternals.patches.${NAME}
 TYPE = Patch
 
