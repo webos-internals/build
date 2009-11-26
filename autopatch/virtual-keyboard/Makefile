@@ -27,7 +27,6 @@ include ../../support/download.mk
 unpack: build/.unpacked-${VERSION}
 
 build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	rm -rf build
 	mkdir -p build/src-${VERSION}
 	tar -C build/src-${VERSION} -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	touch $@
