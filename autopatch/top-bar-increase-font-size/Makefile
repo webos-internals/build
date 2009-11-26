@@ -1,17 +1,43 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = top-bar/${NAME}.patch
 TITLE = Increase Font Size
-DESCRIPTION = Increases the font of the top bar to size 18 for the carrier string, date/time, battery icon percent (if have Battery Icon as Percent patch installed), and to size 16 for the app name when an app is open.  It makes the clock much easier to read and uses up more of the available space.  Thanks to 2sslow for the idea!
-CATEGORY = Top Bar
-VERSION = 1.3.1-18
+DESCRIPTION = Obsolete. Please uninstall this one and choose a new one to install.
+CATEGORY = Obsolete
+VERSION = 1.3.1-19
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
-SCREENSHOTS = [\
-\"http://www.webos-internals.org/images/0/06/Top-bar-increase-top-bar-font-size-1.jpg\",\
-\"http://www.webos-internals.org/images/4/4a/Top-bar-increase-top-bar-font-size-2.jpg\"]
+SCREENSHOTS =
 META_SUB_VERSION = 1
+APP_ID=org.webosinternals.patches.${NAME}
+TYPE = Patch
 
-include ../common.mk
-include ../modifications.mk
+.PHONY: package
+package: ipkgs/${APP_ID}_${VERSION}_all.ipk
+include ../../support/package.mk
+include ../../support/download.mk
 
-MAINTAINER = jmartino2011 <jmartino2011@gmail.com>
-HOMEPAGE = http://forums.precentral.net/showthread.php?p=2055028#post2055028
+
+.PHONY: unpack
+unpack: build/.unpacked
+
+build/.unpacked:
+	rm -rf build
+	mkdir -p build
+	touch $@
+
+build/all/CONTROL/postinst: build/.unpacked
+	mkdir -p build/all/CONTROL
+	cp postinst build/all/CONTROL/postinst
+
+	chmod ugo+x $@
+
+.PHONY: build
+build: build/.built-${VERSION}
+
+build/.built-${VERSION}: build/.unpacked
+	rm -rf build/all
+	mkdir -p build/all/usr/palm/applications/${APP_ID}
+	touch $@
+
+.PHONY: clobber
+clobber::
+	rm -rf build
