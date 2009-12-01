@@ -1,13 +1,13 @@
 NAME     = precorder
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.3.0
+VERSION  = 0.3.1
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Precorder
 MAINTAINER = Zsoc <precorder.webosinternals@gmail.com>, Roy Sutton, Rod Whitby
 TITLE   = Precorder
 DEPENDS = org.webosinternals.gstservice
 TYPE	= Application
 DESCRIPTION = Video Recorder application. This is the very first public alpha release.
-CHANGELOG = 0.3.0: Added launch functionality.<br>0.2.3: Updated version number in the app.<br>0.2.2: Added the icon.<br>0.2.1: Fixed the app stylesheet.<br>0.2.0: First public alpha test version.
+CHANGELOG = 0.3.1: Correctly terminate recording on app closure.<br>0.3.0: Added launch functionality.<br>0.2.3: Updated version number in the app.<br>0.2.2: Added the icon.<br>0.2.1: Fixed the app stylesheet.<br>0.2.0: First public alpha test version.
 CATEGORY = Multimedia
 ICON	= http://www.webos-internals.org/images/a/ac/Icon_WebOSInternals_Camera.png
 LICENSE  = GPL v2 Open Source
