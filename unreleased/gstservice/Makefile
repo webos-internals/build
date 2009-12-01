@@ -1,12 +1,12 @@
 NAME     = gstservice
 CLASS    = GstService
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.3.1
+VERSION  = 0.3.2
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Precorder
 MAINTAINER = Zsoc <precorder.webosinternals@gmail.com>, Jason Robitaille, Rod Whitby
 TITLE	 = GStreamer Service
 DESCRIPTION = The GStreamer Service is a back-end interface for the Precorder application.  It is not an application in itself and does not appear in the launcher when installed.
-CHANGELOG = 0.3.1: Now supports determining the last video recorded.<br>0.3.0: Now support multi-level flash intensity.
+CHANGELOG = 0.3.2: Now supports determining the last video recorded.<br>0.3.0: Now support multi-level flash intensity.
 TYPE	 = Service
 CATEGORY = Luna
 ICON	= http://www.webos-internals.org/images/a/ac/Icon_WebOSInternals_Camera.png
