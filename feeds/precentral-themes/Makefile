@@ -41,7 +41,7 @@ build/.built: build/.unpacked
 	rm -f $@
 	mkdir -p ipkgs
 	for f in zips/*.zip ; do \
-	  if [ ! -e ipkgs/`basename $$f .zip`.ipk ] ; then \
+	  if [ -e $f -a ! -e ipkgs/`basename $$f .zip`.ipk ] ; then \
 	    rm -rf build/`basename $$f .zip` ; \
 	    mkdir -p build/`basename $$f .zip`/net.precentral.themes ; \
 	    unzip -q -d build/`basename $$f .zip`/net.precentral.themes $$f ; \
