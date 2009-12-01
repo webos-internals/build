@@ -2,15 +2,15 @@ NAME     = jstop
 APP_ID   = biz.sketchyplace.${NAME}
 VERSION  = 0.0.1
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:JsTop
-MAINTAINER = Daniel Freedman (azakus)
-TITLE   = Javascript Resource Monitor
+MAINTAINER = Daniel Freedman (azakus) <dfreedm2@uiuc.edu>
+TITLE   = JsTop
 TYPE	= Application
-DESCRIPTION = Javascript Resource Monitor application. This is the very first public alpha release.
+DESCRIPTION = An on-phone resource monitor for javascript applications.
 CHANGELOG = 0.0.1: First public alpha test version.
 CATEGORY = System Utilities
-ICON	= 
-LICENSE  = NCSA/UofI Open Source
-# SCREENSHOTS = [\"\",\"\"]
+ICON	= http://www.webos-internals.org/images/2/28/Icon_WebOSInternals_Base.png
+LICENSE  = BSD (NCSA/UofI) Open Source
+SCREENSHOTS = [\"http://www.webos-internals.org/images/3/32/Jstop.png\"]
 
 SRC_GIT = git://git.webos-internals.org/applications/jstop.git
 
