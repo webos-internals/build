@@ -1,5 +1,5 @@
 NAME     = jstop
-APP_ID   = biz.sketchyplace.${NAME}
+APP_ID   = com.palm.biz.sketchyplace.${NAME}
 VERSION  = 0.0.1
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:JsTop
 MAINTAINER = Daniel Freedman (azakus) <dfreedm2@uiuc.edu>
