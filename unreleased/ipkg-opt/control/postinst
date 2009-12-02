@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Install optware feeds
+echo "src/gz optware-`/bin/uname -m` http://ipkg.nslu2-linux.org/feeds/optware/`/bin/uname -m`/unstable" > $APPS/etc/ipkg/optware.conf
+sed -i -e 's|armv7l|cs08q1armel|g' $APPS/etc/ipkg/optware.conf
+sed -i -e 's|armv6l|cs08q1armel|g' $APPS/etc/ipkg/optware.conf
+sed -i -e 's|i686|i686g25|g'       $APPS/etc/ipkg/optware.conf
+
+exit 0
