@@ -18,3 +18,7 @@ include ../../support/package.mk
 include ../../support/download.mk
 
 include ../../support/optware.mk
+
+build/%.built : build/%.unpacked
+	rm -rf build/$*/opt/etc
+	touch $@
