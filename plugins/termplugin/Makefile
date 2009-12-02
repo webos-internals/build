@@ -1,12 +1,13 @@
 NAME     = termplugin
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.2.2
+VERSION  = 0.2.3
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Terminal
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 TITLE = Terminal Service Plugin
 TYPE = Plugin
 CATEGORY = Browser
 DESCRIPTION = The Terminal Service Plugin is a back-end binary browser plugin providing the core of the Terminal application.  It does not have an icon, and cannot be launched - it can only be used by another application.
+CHANGELOG = 0.2.3: Updated for the transition to webOS 1.3.5
 ICON	 = http://www.webos-internals.org/images/6/68/Icon_WebOSInternals_TerminalService.png
 LICENSE  = GPL v2 Open Source
 POSTINSTALLFLAGS = RestartLuna
@@ -55,44 +56,18 @@ build/armv6.built: build/.unpacked
 	install -m 644 build/src/pre-out/${NAME}.so build/armv6/usr/lib/BrowserPlugins/
 	touch $@
 
-build/armv7/CONTROL/postinst:
+build/%/CONTROL/postinst:
 	rm -f $@
-	mkdir -p build/armv7/CONTROL
+	mkdir -p build/$*/CONTROL
 	echo "#!/bin/sh" > $@
 	echo "rm -f /usr/lib/BrowserPlugins/${NAME}.so" >> $@
-	echo "ln -s /var/usr/lib/BrowserPlugins/${NAME}.so /usr/lib/BrowserPlugins/${NAME}.so" >> $@
+	echo "cp "'$$'"IPKG_OFFLINE_ROOT/usr/lib/BrowserPlugins/${NAME}.so /usr/lib/BrowserPlugins/${NAME}.so" >> $@
 	echo "exit 0" >> $@
 	chmod ugo+x $@
 
-build/armv6/CONTROL/postinst:
+build/%/CONTROL/prerm:
 	rm -f $@
-	mkdir -p build/armv6/CONTROL
-	echo "#!/bin/sh" > $@
-	echo "rm -f /usr/lib/BrowserPlugins/${NAME}.so" >> $@
-	echo "ln -s /var/usr/lib/BrowserPlugins/${NAME}.so /usr/lib/BrowserPlugins/${NAME}.so" >> $@
-	echo "exit 0" >> $@
-	chmod ugo+x $@
-
-build/i686/CONTROL/postinst:
-	rm -f $@
-	mkdir -p build/${NAME}/CONTROL
-	echo "#!/bin/sh" > $@
-	echo "rm -f /usr/lib/BrowserPlugins/${NAME}.so" >> $@
-	echo "ln -s /var/usr/lib/BrowserPlugins/${NAME}.so /usr/lib/BrowserPlugins/${NAME}.so" >> $@
-	echo "exit 0" >> $@
-	chmod ugo+x $@
-
-build/armv7/CONTROL/prerm:
-	rm -f $@
-	mkdir -p build/armv7/CONTROL
-	echo "#!/bin/sh" > $@
-	echo "rm -f /usr/lib/BrowserPlugins/${NAME}.so" >> $@
-	echo "exit 0" >> $@
-	chmod ugo+x $@
-
-build/i686/CONTROL/prerm:
-	rm -f $@
-	mkdir -p build/${NAME}/CONTROL
+	mkdir -p build/$*/CONTROL
 	echo "#!/bin/sh" > $@
 	echo "rm -f /usr/lib/BrowserPlugins/${NAME}.so" >> $@
 	echo "exit 0" >> $@
