@@ -1,11 +1,12 @@
 NAME     = accelservice
 CLASS    = AccelService
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.3.0
+VERSION  = 0.3.1
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:${CLASS}
 MAINTAINER = Eric J. Gaudet <emoney_33@yahoo.com>
 TITLE	 = Accelerometer Service
 DESCRIPTION = This service provides access to the accelerometer driver\'s poll_interval parameter. As of webOS 1.1.0, this interval is not accessible from application development and is set to 250ms. This makes most accelerometer driven applications choppy and slow. With this service, the poll_interval can be changed dynamically by the application.
+CHANGELOG = 0.3.1: Updated for the transition to webOS 1.3.5
 TYPE = Service
 CATEGORY = Luna
 ICON	= http://www.webos-internals.org/images/d/de/Icon_WebOSInternals_AccelerometerService.png
