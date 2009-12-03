@@ -33,7 +33,7 @@ fi
 if [ "`uname -m`" != "i686" ]; then
     rm -f /etc/event.d/mobi.optware.openssh
     mkdir -p /etc/event.d/
-    cp /var/etc/event.d/mobi.optware.openssh /etc/event.d/mobi.optware.openssh
+    cp $IPKG_OFFLINE_ROOT/etc/event.d/mobi.optware.openssh /etc/event.d/mobi.optware.openssh
     /sbin/start mobi.optware.openssh
 fi
 

@@ -25,7 +25,7 @@ fi
 if [ "`uname -m`" != "i686" ]; then
     rm -f /etc/event.d/mobi.optware.dropbear
     mkdir -p /etc/event.d/
-    cp /var/etc/event.d/mobi.optware.dropbear /etc/event.d/mobi.optware.dropbear
+    cp $IPKG_OFFLINE_ROOT/etc/event.d/mobi.optware.dropbear /etc/event.d/mobi.optware.dropbear
     /sbin/start mobi.optware.dropbear
 fi
 
