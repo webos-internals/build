@@ -1,8 +1,17 @@
 #!/bin/sh
 APP_DIR=
 PATCH_NAME=
-FILE_LIST=`/var/usr/bin/diffstat -p1 -l $APP_DIR/$PATCH_NAME`
-PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
+if [ -f "/media/cryptofs/apps/usr/bin/diffstat" ] ; then
+  FILE_LIST=`/media/cryptofs/apps/usr/bin/diffstat -p1 -l $APP_DIR/$PATCH_NAME`
+else
+  FILE_LIST=`/var/usr/bin/diffstat -p1 -l $APP_DIR/$PATCH_NAME`
+fi
+if [ -f "/media/cryptofs/apps/usr/bin/patch" ] ; then
+  PATCH_EXEC=/media/cryptofs/apps/usr/bin/patch
+else
+  PATCH_EXEC=/var/usr/bin/patch
+fi
+PATCH_CONTROL_DIR=$IPKG_OFFLINE_ROOT/usr/lib/.webosinternals.patches
 
 do_failure() {
   exit 1
@@ -14,9 +23,9 @@ then
   do_failure
 fi
 
-/var/usr/bin/patch -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME || do_failure
+$PATCH_EXEC -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME || do_failure
 
-/var/usr/bin/patch -R -p1 -d / < ${APP_DIR}/$PATCH_NAME
+$PATCH_EXEC -R -p1 -d / < ${APP_DIR}/$PATCH_NAME
 
 for i in $FILE_LIST
 do

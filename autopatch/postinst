@@ -1,12 +1,20 @@
 #!/bin/sh
 APP_DIR=
 PATCH_NAME=
-FILE_LIST=`/var/usr/bin/diffstat -p1 -l $APP_DIR/$PATCH_NAME`
-IPKG_INFO_DIR=/usr/lib/ipkg/info
-PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
+if [ -f "/media/cryptofs/apps/usr/bin/diffstat" ] ; then
+  FILE_LIST=`/media/cryptofs/apps/usr/bin/diffstat -p1 -l $APP_DIR/$PATCH_NAME`
+else
+  FILE_LIST=`/var/usr/bin/diffstat -p1 -l $APP_DIR/$PATCH_NAME`
+fi
+if [ -f "/media/cryptofs/apps/usr/bin/patch" ] ; then
+  PATCH_EXEC=/media/cryptofs/apps/usr/bin/patch
+else
+  PATCH_EXEC=/var/usr/bin/patch
+fi
+PATCH_CONTROL_DIR=$IPKG_OFFLINE_ROOT/usr/lib/.webosinternals.patches
 
 do_failure() {
-  ipkg -o /var remove `basename $APP_DIR`
+  ipkg -o $IPKG_OFFLINE_ROOT remove `basename $APP_DIR`
   exit 1
 }
 
@@ -16,7 +24,7 @@ then
   do_failure
 fi
 
-/var/usr/bin/patch -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME || do_failure
+$PATCH_EXEC -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME || do_failure
 if [ ! -d $PATCH_CONTROL_DIR ]
 then
   rm -rf $PATCH_CONTROL_DIR
@@ -65,7 +73,7 @@ sed -i -e /`basename $APP_DIR`/d $PATCH_CONTROL_DIR/packages
 basename $APP_DIR >> $PATCH_CONTROL_DIR/packages
 
 cp $APP_DIR/$PATCH_NAME $PATCH_CONTROL_DIR/$PATCH_NAME
-/var/usr/bin/patch -d / -p1 < ${APP_DIR}/$PATCH_NAME || do_failure
+$PATCH_EXEC -d / -p1 < ${APP_DIR}/$PATCH_NAME || do_failure
 
 
 if [ -e $APP_DIR/postinst_extra ]

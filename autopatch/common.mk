@@ -43,14 +43,14 @@ build/all/CONTROL/prerm: build/.unpacked-${VERSION}
 	mkdir -p build/all/CONTROL
 	cp ../prerm build/all/CONTROL/prerm
 	sed -i -e 's|PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' build/all/CONTROL/prerm
-	sed -i -e 's|APP_DIR=|APP_DIR=/var/usr/palm/applications/${APP_ID}|' build/all/CONTROL/prerm
+	sed -i -e 's|APP_DIR=|APP_DIR=$$IPKG_OFFLINE_ROOT/usr/palm/applications/${APP_ID}|' build/all/CONTROL/prerm
 	chmod ugo+x $@
 
 build/all/CONTROL/postinst: build/.unpacked-${VERSION}
 	mkdir -p build/all/CONTROL
 	cp ../postinst build/all/CONTROL/postinst
 	sed -i -e 's|PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' build/all/CONTROL/postinst
-	sed -i -e 's|APP_DIR=|APP_DIR=/var/usr/palm/applications/${APP_ID}|' build/all/CONTROL/postinst
+	sed -i -e 's|APP_DIR=|APP_DIR=$$IPKG_OFFLINE_ROOT/usr/palm/applications/${APP_ID}|' build/all/CONTROL/postinst
 	chmod ugo+x $@
 
 .PHONY: clobber
