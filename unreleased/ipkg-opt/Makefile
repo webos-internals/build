@@ -1,11 +1,11 @@
 NAME     = ipkg-opt
-TITLE	 = Optware Advanced Linux Commands Installer
+TITLE	 = Optware Advanced Linux Command Line Installer
 APP_ID   = mobi.optware.${NAME}
 VERSION  = 0.99.163-10
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Optware
 TYPE	 = Optware
 CHANGELOG = 0.99.163-10: Initial release
-DESCRIPTION = This package installs the ipkg-opt command line program which allows installation of Linux command line utilities from the Optware repositories.
+DESCRIPTION = This package installs the ipkg-opt command line program which allows installation of advanced Linux command line utilities from the Optware repositories.
 CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/2/27/Icon_PrewareAlt.png
 

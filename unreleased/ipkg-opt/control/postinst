@@ -1,7 +1,11 @@
 #!/bin/sh
 
 # Install optware feeds
-echo "src/gz optware-`/bin/uname -m` http://ipkg.nslu2-linux.org/feeds/optware/`/bin/uname -m`/unstable" > $APPS/etc/ipkg/optware.conf
+echo "src/gz cross  http://ipkg.nslu2-linux.org/feeds/optware/`/bin/uname -m`/unstable" > $APPS/etc/ipkg/optware.conf
+echo "src/gz kernel http://ipkg.nslu2-linux.org/feeds/optware/device-`/bin/uname -m`/unstable" >> $APPS/etc/ipkg/optware.conf
+sed -i -e 's|device-armv7l|pre|g' $APPS/etc/ipkg/optware.conf
+sed -i -e 's|device-armv6l|pixi|g' $APPS/etc/ipkg/optware.conf
+sed -i -e 's|device-i686|pre-emulator|g' $APPS/etc/ipkg/optware.conf
 sed -i -e 's|armv7l|cs08q1armel|g' $APPS/etc/ipkg/optware.conf
 sed -i -e 's|armv6l|cs08q1armel|g' $APPS/etc/ipkg/optware.conf
 sed -i -e 's|i686|i686g25|g'       $APPS/etc/ipkg/optware.conf
