@@ -1,11 +1,12 @@
 NAME     = optware
 TITLE    = Optware Bootstrap
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.0.6
+VERSION  = 0.0.7
 HOMEPAGE = http://www.webos-internals.org/wiki/Optware
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DESCRIPTION = This package can be used to bootstrap the installation of packages from the Optware feed. Do not install or remove this package if you already have optware installed via the bootstrap script.
-CHANGELOG = 0.0.6: Added default profile to set up the path.
+CHANGELOG = 0.0.7: Updated for the transition to webOS 1.3.5, safe to install on 1.3.1 or 1.3.5.
+CHANGELOG += <br>0.0.6: Added default profile to set up the path.
 CHANGELOG += <br>0.0.3: Unmount /opt on removal.
 CHANGELOG += <br>0.0.2: Create /var/opt, and bind mount it to /opt - will add more checking for pre-existing mounts later.
 TYPE	 = Optware

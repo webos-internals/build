@@ -1,16 +1,16 @@
-NAME     = accelservice
-CLASS    = AccelService
-APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.3.1
-HOMEPAGE = http://www.webos-internals.org/wiki/Application:${CLASS}
-MAINTAINER = Eric J. Gaudet <emoney_33@yahoo.com>
-TITLE	 = Accelerometer Service
-DESCRIPTION = This service provides access to the accelerometer driver\'s poll_interval parameter. As of webOS 1.1.0, this interval is not accessible from application development and is set to 250ms. This makes most accelerometer driven applications choppy and slow. With this service, the poll_interval can be changed dynamically by the application.
-CHANGELOG = 0.3.1: Updated for the transition to webOS 1.3.5
-TYPE = Service
+NAME     = wolservice
+CLASS    = WOLService
+APP_ID   = com.thebitguru.${NAME}
+VERSION  = 0.5.0
+HOMEPAGE = 
+MAINTAINER = 
+TITLE	 = WakeOnLAN Service
+DESCRIPTION = 
+CHANGELOG = 
+TYPE	 = Service
 CATEGORY = Luna
-ICON	= http://www.webos-internals.org/images/d/de/Icon_WebOSInternals_AccelerometerService.png
-LICENSE = GPL v2 Open Source
+ICON	= 
+LICENSE = MIT Open Source
 POSTINSTALLFLAGS = RestartJava
 POSTREMOVEFLAGS  = RestartJava
 
@@ -18,7 +18,7 @@ SERVICEFILES = build/src/${APP_ID}.service
 PACKAGEPATH := $(subst .,/,${APP_ID})
 CLASSFILES := $(addsuffix .class,$(addprefix ${PACKAGEPATH}/,${CLASSES}))
 
-SRC_GIT = git://git.webos-internals.org/services/accelservice.git
+SRC_GIT = git://git.webos-internals.org/services/wolservice.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
@@ -37,7 +37,7 @@ include ../../support/service-jars.mk
 .PHONY: unpack
 unpack: build/.unpacked
 
-build/.unpacked build/src/${NAME}.java: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+build/.unpacked build/src/${CLASS}.java: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
@@ -50,7 +50,7 @@ LUNAPATH = usr/lib/luna/java
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/src/${NAME}.java
+build/.built-${VERSION}: build/src/${CLASS}.java
 	rm -f $@
 	( cd build/src ; ant build jar )
 	mkdir -p build/all/${LUNAPATH}
