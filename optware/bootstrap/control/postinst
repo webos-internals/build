@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Disable any legacy optware profile that was installed manually
+rm -f /etc/profile.d/optware
+
 # Stop org.webosinternals.optware
 if [ -f /etc/event.d/org.webosinternals.optware ]; then
     /sbin/stop org.webosinternals.optware
