@@ -1,6 +1,8 @@
 #!/bin/sh
+
 APP_DIR=
 PATCH_NAME=
+
 if [ -f "/media/cryptofs/apps/usr/bin/diffstat" ] ; then
   FILE_LIST=`/media/cryptofs/apps/usr/bin/diffstat -p1 -l $APP_DIR/$PATCH_NAME`
 else
@@ -11,11 +13,18 @@ if [ -f "/media/cryptofs/apps/usr/bin/patch" ] ; then
 else
   PATCH_EXEC=/var/usr/bin/patch
 fi
+
 PATCH_CONTROL_DIR=$IPKG_OFFLINE_ROOT/usr/lib/.webosinternals.patches
 
 do_failure() {
   exit 1
 }
+
+if [ "$IPKG_OFFLINE_ROOT" = "" ]
+then
+  echo "ERROR: IPKG_OFFLINE_ROOT must be supplied to the prerm"
+  exit 1
+fi
 
 if [ "$APP_DIR" = "" ] || [ "$PATCH_NAME" = "" ]
 then
