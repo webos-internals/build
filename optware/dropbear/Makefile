@@ -5,7 +5,7 @@ VERSION  = 0.52-9
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Dropbear
 TYPE	 = Optware
 DESCRIPTION = Dropbear is a compact SSH server and client, which enables secure root access via wifi only, on port 22, with secure ssh key authentication only (passwords are completely disabled by default).  See the Homepage link for mandatory configuration instructions.
-CHANGELOG = 0.52-9: Updated for the transition to webOS 1.3.5, safe to install on 1.3.1 or later.<br>0.52-8: Initial version.
+CHANGELOG = 0.52-9: Updated for future webOS compatibility.<br>0.52-8: Initial version.
 CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/7/76/Icon_WebOSInternals_DropBear.png
 
