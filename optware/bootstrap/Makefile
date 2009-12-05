@@ -1,11 +1,12 @@
 NAME     = optware
 TITLE    = Optware Bootstrap
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.0.8
+VERSION  = 0.0.9
 HOMEPAGE = http://www.webos-internals.org/wiki/Optware
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DESCRIPTION = This package is used to bootstrap the installation of packages from the Optware feed.
-CHANGELOG = 0.0.8: Now overrides any manually installed optware profile.
+CHANGELOG = 0.0.9: Updated again for future webOS compatibility.
+CHANGELOG += <br>0.0.8: Now overrides any manually installed optware profile.
 CHANGELOG += <br>0.0.7: Updated for future webOS compatibility.
 CHANGELOG += <br>0.0.6: Added default profile to set up the path.
 CHANGELOG += <br>0.0.3: Unmount /opt on removal.
