@@ -1,5 +1,7 @@
 #!/bin/sh
 
+mkdir -p /opt/etc/ipkg
+
 # Install optware feeds
 echo "src/gz cross  http://ipkg.nslu2-linux.org/feeds/optware/`/bin/uname -m`/unstable" > /opt/etc/ipkg/optware.conf
 echo "src/gz kernel http://ipkg.nslu2-linux.org/feeds/optware/device-`/bin/uname -m`/unstable" >> /opt/etc/ipkg/optware.conf
