@@ -214,6 +214,9 @@ endif
 ifdef POSTINSTALLFLAGS
 	/bin/echo -n ", \"PostInstallFlags\":\"${POSTINSTALLFLAGS}\"" >> $@
 endif
+ifdef POSTUPDATEFLAGS
+	/bin/echo -n ", \"PostUpdateFlags\":\"${POSTUPDATEFLAGS}\"" >> $@
+endif
 ifdef POSTREMOVEFLAGS
 	/bin/echo -n ", \"PostRemoveFlags\":\"${POSTREMOVEFLAGS}\"" >> $@
 endif
