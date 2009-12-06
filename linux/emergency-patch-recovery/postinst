@@ -1,11 +1,24 @@
 #!/bin/sh
 PACKAGE=org.webosinternals.emergency-patch-recovery
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
+PATCH_LOG=/var/log/webos-patches.log
 IPKG_INFO_DIR=/usr/lib/ipkg/info
+
+if [ ! -e $PATCH_LOG ]
+then
+  touch $PATCH_LOG
+  echo "*********** Patch Log Created by EPR $(date) ****************" >> $PATCH_LOG
+  echo "" >> $PATCH_LOG
+fi
+
+echo "------------------------------------------------------" >> $PATCH_LOG
+echo "Emergency Patch Recovery $(date)" >> $PATCH_LOG
+echo "------------------------------------------------------" >> $PATCH_LOG
+echo "" >> $PATCH_LOG
 
 if [ ! -d $PATCH_CONTROL_DIR ]
 then
-  echo "NOTE: No patches found!"
+  echo "NOTE: No patches found!" | tee -a $PATCH_LOG
   ipkg -o /var remove $PACKAGE
   exit 1
 fi
@@ -24,31 +37,32 @@ then
   do
     palm_md5sum=`grep -h $i $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`
     file_md5sum=`md5sum $i | awk '{print $1}'`
-    #echo "palm: $palm_md5sum"
-    #echo "file: $file_md5sum"
+    echo "File: $i" >> $PATCH_LOG
+    echo "  palm md5sum: $palm_md5sum" >> $PATCH_LOG
+    echo "  file md5sum: $file_md5sum" >> $PATCH_LOG
     if [ "$palm_md5sum" = "$file_md5sum" ]
     then
-      echo "Existing file matches Palm md5sum (maybe due to OTA update)"
-      echo "Removing original file..."
+      echo "Existing file matches Palm md5sum (maybe due to OTA update)" | tee -a $PATCH_LOG
+      echo "Removing original file..." | tee -a $PATCH_LOG
       rm -f $i.webosinternals.orig
     else
       if [ ! -e $i.webosinternals.orig ]
       then
-        echo "WARNING: Could not find backup for $i"
+        echo "WARNING: Could not find backup for $i" | tee -a $PATCH_LOG
       elif [ ! -s $i.webosinternals.orig ]
       then
-        echo "Removing created file $i"
+        echo "Removing created file $i" | tee -a $PATCH_LOG
         rm -f $i
         rm -f $i.webosinternals.orig
       else
-        echo "Recovering original file $i..."
+        echo "Recovering original file $i..." | tee -a $PATCH_LOG
         mv $i.webosinternals.orig $i
       fi
     fi
   done
 fi
 
-echo "DONE"
+echo "DONE" | tee -a $PATCH_LOG
 rm -rf $PATCH_CONTROL_DIR
 
 ipkg -o /var remove $PACKAGE
