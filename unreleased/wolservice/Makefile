@@ -12,6 +12,7 @@ CATEGORY = Luna
 ICON	= 
 LICENSE = MIT Open Source
 POSTINSTALLFLAGS = RestartJava
+POSTUPDATEFLAGS  = RestartJava
 POSTREMOVEFLAGS  = RestartJava
 
 SERVICEFILES = build/src/${APP_ID}.service

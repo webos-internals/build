@@ -8,8 +8,6 @@ ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Ca
 http://www.webos-internals.org/images/2/29/Icon_WebOSInternals_Patches_Email.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/a/ab/CalendarRepeatNotification.png\"]
 META_SUB_VERSION = 3
-#POSTINSTALLFLAGS = RestartLuna
-#POSTREMOVEFLAGS = RestartLuna
 
 include ../common.mk
 include ../modifications.mk

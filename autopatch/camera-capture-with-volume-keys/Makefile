@@ -7,8 +7,6 @@ VERSIONS = 1.2.1-0 1.1.3-0 1.3.1-0 1.3.5-0
 ICON = http://www.webos-internals.org/images/c/c5/Icon_WebOSInternals_Patches_Camera.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
-#POSTINSTALLFLAGS = RestartLuna
-#POSTREMOVEFLAGS = RestartLuna
 
 include ../common.mk
 include ../modifications.mk

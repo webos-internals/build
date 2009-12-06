@@ -12,6 +12,7 @@ DESCRIPTION = Double-tapping the gesture area (near the round silver button) wil
 CHANGELOG = ${VERSION}: Hide themes and sounds directories from photo app and musicplayer. NOTE: Only works with webOS 1.2.0
 SCREENSHOTS = [\"http://www.webos-internals.org/images/e/ed/Messaging_2009-22-08_000708.png\"]
 POSTINSTALLFLAGS = RestartLuna
+POSTUPDATEFLAGS  = RestartLuna
 POSTREMOVEFLAGS  = RestartLuna
 
 PATCHES = add-onscreen-keyboard.patch

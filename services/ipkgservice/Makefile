@@ -12,6 +12,7 @@ CATEGORY = Luna
 ICON	= http://www.webos-internals.org/images/7/77/Icon_WebOSInternals_PackageManager.png
 LICENSE = GPL v2 Open Source
 POSTINSTALLFLAGS = RestartJava
+POSTUPDATEFLAGS  = RestartJava
 POSTREMOVEFLAGS  = RestartJava
 
 SERVICEFILES = build/src/${APP_ID}.service

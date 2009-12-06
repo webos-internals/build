@@ -11,6 +11,7 @@ CHANGELOG = 0.2.3: Updated for future webOS compatibility.
 ICON	 = http://www.webos-internals.org/images/6/68/Icon_WebOSInternals_TerminalService.png
 LICENSE  = GPL v2 Open Source
 POSTINSTALLFLAGS = RestartLuna
+POSTUPDATEFLAGS  = RestartLuna
 POSTREMOVEFLAGS  = RestartLuna
 
 SRC_GIT = git://git.webos-internals.org/plugins/termplugin.git

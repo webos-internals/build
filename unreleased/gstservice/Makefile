@@ -12,6 +12,7 @@ CATEGORY = Luna
 ICON	= http://www.webos-internals.org/images/a/ac/Icon_WebOSInternals_Camera.png
 LICENSE = MIT Open Source
 POSTINSTALLFLAGS = RestartJava
+POSTUPDATEFLAGS  = RestartJava
 POSTREMOVEFLAGS  = RestartJava
 
 SERVICEFILES = build/src/${APP_ID}.service

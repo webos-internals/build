@@ -10,8 +10,6 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/7/7b/Readalldelall-2.png\",\
 \"http://www.webos-internals.org/images/d/dd/Readalldelall-3.png\"]
 META_SUB_VERSION = 2
-#POSTINSTALLFLAGS = RestartLuna
-#POSTREMOVEFLAGS = RestartLuna
 
 include ../common.mk
 include ../modifications.mk

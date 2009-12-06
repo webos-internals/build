@@ -12,6 +12,7 @@ CATEGORY = Luna
 ICON	= http://www.webos-internals.org/images/d/de/Icon_WebOSInternals_AccelerometerService.png
 LICENSE = GPL v2 Open Source
 POSTINSTALLFLAGS = RestartJava
+POSTUPDATEFLAGS  = RestartJava
 POSTREMOVEFLAGS  = RestartJava
 
 SERVICEFILES = build/src/${APP_ID}.service

@@ -7,8 +7,6 @@ VERSIONS = 1.2.1-5 1.3.1-0 1.3.5-0
 ICON = http://www.webos-internals.org/images/1/1f/Icon_WebOSInternals_Patches_Wifi.png
 # SCREENSHOTS = [...]
 META_SUB_VERSION = 2
-#POSTINSTALLFLAGS = RestartLuna
-#POSTREMOVEFLAGS = RestartLuna
 
 include ../common.mk
 include ../modifications.mk
