@@ -6,6 +6,7 @@ DEPENDS = org.webosinternals.patch, org.webosinternals.diffstat
 FEED = WebOS Patches
 LICENSE = MIT License Open Source
 META_GLOBAL_VERSION = 1
+WEBOS_VERSIONS = 1.1.3 1.2.1 1.3.1 1.3.5
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 ifneq ("${META_SUB_VERSION}","")
@@ -17,6 +18,9 @@ endif
 .PHONY: package
 ifneq ("${VERSIONS}", "")
 package:
+	for v in ${WEBOS_VERSIONS} ; do \
+		${MAKE} VERSIONS= DUMMY_VERSION=0 DESCRIPTION='Currently not available for WebOS version '$${v} DEPENDS= CATEGORY=Unavailable VERSION=$${v}-0 package ; \
+	done; \
 	for v in ${VERSIONS} ; do \
 	  ${MAKE} VERSIONS= VERSION=$${v} package ; \
 	done
@@ -24,6 +28,15 @@ else
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
 endif
 
+ifneq ("${DUMMY_VERSION}", "")
+build/all/CONTROL/postinst:
+	mkdir -p build/all/CONTROL
+	echo "#!/bin/sh" > build/all/CONTROL/postinst
+	echo "return -1" >> build/all/CONTROL/postinst
+	chmod ugo+x build/all/CONTROL/postinst
+
+build/.built-${VERSION}:
+else
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
 
@@ -52,10 +65,10 @@ build/all/CONTROL/postinst: build/.unpacked-${VERSION}
 	sed -i -e 's|PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' build/all/CONTROL/postinst
 	sed -i -e 's|APP_DIR=|APP_DIR=$$IPKG_OFFLINE_ROOT/usr/palm/applications/${APP_ID}|' build/all/CONTROL/postinst
 	chmod ugo+x $@
+endif
 
 .PHONY: clobber
 clobber::
 	rm -rf build
 
 include ../../support/package.mk
-
