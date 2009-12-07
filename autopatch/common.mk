@@ -36,6 +36,9 @@ build/all/CONTROL/postinst:
 	chmod ugo+x build/all/CONTROL/postinst
 
 build/.built-${VERSION}:
+	rm -rf build/all
+	mkdir -p build/all
+	touch $@
 else
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
