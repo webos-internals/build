@@ -1,6 +1,7 @@
 NAME     = wolservice
 CLASS    = WOLService
 APP_ID   = com.thebitguru.${NAME}
+SIGNER   = com.thebitguru
 VERSION  = 0.5.0
 HOMEPAGE = http://www.thebitguru.com/projects/wol
 MAINTAINER = Farhan Ahmad <farhan@thebitguru.com>
