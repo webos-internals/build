@@ -1,6 +1,7 @@
 NAME     = pwgen
 TITLE	 = Password Generator
 APP_ID   = mobi.optware.${NAME}
+SIGNER   = mobi.optware
 VERSION  = 2.04-1
 HOMEPAGE = http://pwgen.sourceforge.net/
 TYPE	 = Optware

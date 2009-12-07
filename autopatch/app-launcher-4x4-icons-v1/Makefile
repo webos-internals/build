@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = app-launcher/${NAME}.patch
 TITLE = 4x4 Icons v1
-DESCRIPTION = This will modify the App launcher to display 4x4 icons rather than 3x4. Does not word wrap.
+DESCRIPTION = This will modify the App launcher to display 4x4 icons rather than 3x4.
 CATEGORY = App Launcher
 VERSIONS = 1.2.1-0 1.3.1-0 1.3.5-0
 ICON = http://www.webos-internals.org/images/b/b1/Icon_WebOSInternals_Patches_Applauncher.png

@@ -7,8 +7,6 @@ VERSIONS = 1.2.1-7 1.1.3-1 1.3.1-0 1.3.5-0
 ICON = http://www.webos-internals.org/images/4/4a/Icon_WebOSInternals_Patches_Browser.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
-#POSTINSTALLFLAGS = RestartLuna
-#POSTREMOVEFLAGS = RestartLuna
 
 include ../common.mk
 include ../modifications.mk

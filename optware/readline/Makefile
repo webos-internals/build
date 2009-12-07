@@ -1,6 +1,7 @@
 NAME     = readline
 TITLE	 = GNU Readline Library
 APP_ID   = mobi.optware.${NAME}
+SIGNER   = mobi.optware
 VERSION  = 6.0-1
 HOMEPAGE = http://directory.fsf.org/project/readline/
 TYPE	 = Optware

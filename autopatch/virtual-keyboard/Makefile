@@ -9,6 +9,7 @@ DESCRIPTION = Double-tapping the gesture area (near the round silver button) wil
 CHANGELOG = 1.3.1-1: Ported to webos 1.3.1.  Had to remove AutoCorrect due to more strict file access via Mojo in 1.3.1. <br>1.2.1-4: Added AutoCorrect support <br>1.2.1-1: Expanded and optimized keyboard theming and user interface. Now using default theme made by un_designer.
 SCREENSHOTS = [\"http://www.webos-internals.org/images/b/b9/VirtualKeyboard_1.png\",\"http://www.webos-internals.org/images/b/bd/VirtualKeyboard_2.png\",\"http://www.webos-internals.org/images/3/34/VirtualKeyboard_3.png\",\"http://www.webos-internals.org/images/1/18/VirtualKeyboard_4.png\",\"http://www.webos-internals.org/images/1/10/VirtualKeyboard_5.png\",\"http://www.webos-internals.org/images/2/2a/VirtualKeyboard_6.png\"]
 POSTINSTALLFLAGS = RestartLuna
+POSTUPDATEFLAGS  = RestartLuna
 POSTREMOVEFLAGS  = RestartLuna
 
 PATCH = add-onscreen-keyboard.patch

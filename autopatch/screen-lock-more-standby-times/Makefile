@@ -7,8 +7,6 @@ VERSIONS = 1.2.1-0 1.1.3-0 1.3.1-0 1.3.5-0
 ICON = http://www.webos-internals.org/images/f/fa/Icon_WebOSInternals_Patches_Screenlock.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/4/4f/Longer-standby-times.png\"]
 META_SUB_VERSION = 1
-#POSTINSTALLFLAGS = RestartLuna
-#POSTREMOVEFLAGS = RestartLuna
 
 include ../common.mk
 include ../modifications.mk

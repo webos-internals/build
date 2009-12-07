@@ -9,8 +9,6 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/2/2e/CalendarSnoozeDurationSelecton_1.png\",\
 \"http://www.webos-internals.org/images/6/67/CalendarSnoozeDurationSelecton_2.png\"]
 META_SUB_VERSION = 3
-#POSTINSTALLFLAGS = RestartLuna
-#POSTREMOVEFLAGS = RestartLuna
 
 include ../common.mk
 include ../modifications.mk

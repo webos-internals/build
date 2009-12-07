@@ -1,6 +1,7 @@
 NAME     = dropbear
 TITLE	 = Dropbear
 APP_ID   = mobi.optware.${NAME}
+SIGNER   = mobi.optware
 VERSION  = 0.52-9
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Dropbear
 TYPE	 = Optware

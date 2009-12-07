@@ -36,6 +36,12 @@ ifndef CATEGORY
 PREWARE_SANITY += $(error "Please define CATEGORY in your Makefile")
 endif
 
+ifdef SIGNER
+SIGNING_ARGS := -s $(shell cd ../../../ ; pwd)/sign/${SIGNER}.crt -k $(shell cd ../../../ ; pwd)/sign/${SIGNER}.key
+else
+SIGNING_ARGS :=
+endif
+
 ipkgs/${APP_ID}_${VERSION}_%.ipk: build/.built-${VERSION}
 	rm -f ipkgs/${APP_ID}_${VERSION}_$*.ipk
 	rm -f build/$*/CONTROL/conffiles
@@ -51,7 +57,7 @@ ipkgs/${APP_ID}_${VERSION}_%.ipk: build/.built-${VERSION}
 	mkdir -p ipkgs
 	( cd build ; \
 	  TAR_OPTIONS=--wildcards \
-	  ../../../toolchain/ipkg-utils/ipkg-build -o 0 -g 0 $* )
+	  ../../../toolchain/ipkg-utils/ipkg-build -o 0 -g 0 ${SIGNING_ARGS} $* )
 	mv build/${APP_ID}_${VERSION}_$*.ipk $@
 
 build/%/CONTROL/postinst:
@@ -213,6 +219,9 @@ ifdef LICENSE
 endif
 ifdef POSTINSTALLFLAGS
 	/bin/echo -n ", \"PostInstallFlags\":\"${POSTINSTALLFLAGS}\"" >> $@
+endif
+ifdef POSTUPDATEFLAGS
+	/bin/echo -n ", \"PostUpdateFlags\":\"${POSTUPDATEFLAGS}\"" >> $@
 endif
 ifdef POSTREMOVEFLAGS
 	/bin/echo -n ", \"PostRemoveFlags\":\"${POSTREMOVEFLAGS}\"" >> $@

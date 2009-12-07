@@ -1,6 +1,7 @@
 NAME     = accelservice
 CLASS    = AccelService
 APP_ID   = org.webosinternals.${NAME}
+SIGNER   = org.webosinternals
 VERSION  = 0.3.1
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:${CLASS}
 MAINTAINER = Eric J. Gaudet <emoney_33@yahoo.com>
@@ -12,6 +13,7 @@ CATEGORY = Luna
 ICON	= http://www.webos-internals.org/images/d/de/Icon_WebOSInternals_AccelerometerService.png
 LICENSE = GPL v2 Open Source
 POSTINSTALLFLAGS = RestartJava
+POSTUPDATEFLAGS  = RestartJava
 POSTREMOVEFLAGS  = RestartJava
 
 SERVICEFILES = build/src/${APP_ID}.service

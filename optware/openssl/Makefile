@@ -1,6 +1,7 @@
 NAME     = openssl
 TITLE	 = OpenSSL
 APP_ID   = mobi.optware.${NAME}
+SIGNER   = mobi.optware
 VERSION  = 0.9.8l-1
 HOMEPAGE = http://www.openssl.org/
 TYPE	 = Optware
