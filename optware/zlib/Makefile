@@ -1,6 +1,7 @@
 NAME     = zlib
 TITLE	 = zlib
 APP_ID   = mobi.optware.${NAME}
+SIGNER   = mobi.optware
 VERSION  = 1.2.3-3
 HOMEPAGE = http://www.zlib.net/
 TYPE	 = Optware

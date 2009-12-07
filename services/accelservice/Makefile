@@ -1,6 +1,7 @@
 NAME     = accelservice
 CLASS    = AccelService
 APP_ID   = org.webosinternals.${NAME}
+SIGNER   = org.webosinternals
 VERSION  = 0.3.1
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:${CLASS}
 MAINTAINER = Eric J. Gaudet <emoney_33@yahoo.com>

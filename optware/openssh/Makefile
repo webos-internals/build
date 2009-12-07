@@ -1,6 +1,7 @@
 NAME     = openssh
 TITLE	 = OpenSSH
 APP_ID   = mobi.optware.${NAME}
+SIGNER   = mobi.optware
 VERSION  = 5.3.1-2
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:OpenSSH
 TYPE	 = Optware

@@ -1,6 +1,7 @@
 NAME     = optware
 TITLE    = Optware Bootstrap
 APP_ID   = org.webosinternals.${NAME}
+SIGNER   = org.webosinternals
 VERSION  = 0.0.9
 HOMEPAGE = http://www.webos-internals.org/wiki/Optware
 MAINTAINER = WebOS Internals <support@webos-internals.org>

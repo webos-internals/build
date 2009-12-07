@@ -1,5 +1,6 @@
 NAME     = termplugin
 APP_ID   = org.webosinternals.${NAME}
+SIGNER   = org.webosinternals
 VERSION  = 0.2.3
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Terminal
 MAINTAINER = WebOS Internals <support@webos-internals.org>

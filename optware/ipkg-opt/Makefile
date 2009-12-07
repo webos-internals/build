@@ -1,6 +1,7 @@
 NAME     = ipkg-opt
 TITLE	 = Optware Advanced Linux Command Line Installer
 APP_ID   = mobi.optware.${NAME}
+SIGNER   = mobi.optware
 VERSION  = 0.99.163-11
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Optware
 TYPE	 = Optware
