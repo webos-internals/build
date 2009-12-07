@@ -12,6 +12,7 @@ CATEGORY = Luna
 ICON	= http://www.thebitguru.com/site_media/uploads/wol_icon.png
 LICENSE = MIT Open Source
 POSTINSTALLFLAGS = RestartJava
+POSTUPDATEFLAGS  = RestartJava
 POSTREMOVEFLAGS  = RestartJava
 
 SERVICEFILES = build/src/${APP_ID}.service

@@ -1,6 +1,7 @@
 NAME     = nano
 TITLE	 = Nano
 APP_ID   = mobi.optware.${NAME}
+SIGNER   = mobi.optware
 VERSION  = 2.1.10-1
 HOMEPAGE = http://www.nano-editor.org/
 TYPE	 = Optware

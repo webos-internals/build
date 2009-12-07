@@ -10,8 +10,6 @@ TYPE	 = Service
 CATEGORY = Luna
 ICON	= http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_wIRC_Service.png
 LICENSE = GPL v2 Open Source
-POSTINSTALLFLAGS = 
-POSTREMOVEFLAGS  = 
 
 SRC_GIT = git://git.webos-internals.org/services/wIRCd.git
 

@@ -159,18 +159,24 @@ You probably want to remove them: " >&2
 ogargs=""
 outer=ar
 tar=tar
+sign=
+key=
 if [ "`uname -s`" == "Darwin" ] ; then
     tar=gnutar
 fi
 noclean=0
-usage="Usage: $0 [-c] [-C] [-o owner] [-g group] <pkg_directory> [<destination_directory>]"
-while getopts "cg:ho:v" opt; do
+usage="Usage: $0 [-c] [-C] [-o owner] [-g group] [-s sign [-k key]] <pkg_directory> [<destination_directory>]"
+while getopts "cg:hk:o:s:v" opt; do
     case $opt in
 	o ) owner=$OPTARG
 	    ogargs="--owner=$owner"
 	    ;;
 	g ) group=$OPTARG
 	    ogargs="$ogargs --group=$group"
+	    ;;
+	k ) key=$OPTARG
+	    ;;
+	s ) sign=$OPTARG
 	    ;;
         c ) outer=tar
             ;;
@@ -237,15 +243,27 @@ rm $tmp_dir/tarX
 
 echo "2.0" > $tmp_dir/debian-binary
 
+sign_files=
+if [ -n "$sign" ] ; then
+  cp $sign $tmp_dir/cert.pem
+  openssl x509 -in $sign -pubkey -noout > $tmp_dir/pubkey.pem
+  cat $tmp_dir/control.tar.gz $tmp_dir/data.tar.gz $tmp_dir/debian-binary | \
+  openssl dgst -sha1 -sign $key > $tmp_dir/signature.sha1
+  sign_files="./cert.pem ./pubkey.pem ./signature.sha1"
+fi
+
 pkg_file=$dest_dir/${pkg}_${version}_${arch}.ipk
 rm -f $pkg_file
 if [ "$outer" = "ar" ] ; then
-  ( cd $tmp_dir && ar -cr $pkg_file ./debian-binary ./data.tar.gz ./control.tar.gz )
+  ( cd $tmp_dir && ar -cr $pkg_file ./debian-binary ./data.tar.gz ./control.tar.gz $sign_files )
 else
-  ( cd $tmp_dir && $tar -zcf $pkg_file ./debian-binary ./data.tar.gz ./control.tar.gz )
+  ( cd $tmp_dir && $tar -zcf $pkg_file ./debian-binary ./data.tar.gz ./control.tar.gz $sign_files )
 fi
 
 rm $tmp_dir/debian-binary $tmp_dir/data.tar.gz $tmp_dir/control.tar.gz
+if [ -n "$sign" ] ; then
+  rm -f $tmp_dir/cert.pem $tmp_dir/pubkey.pem $tmp_dir/signature.sha1
+fi
 rmdir $tmp_dir
 
 echo "Packaged contents of $pkg_dir into $pkg_file"

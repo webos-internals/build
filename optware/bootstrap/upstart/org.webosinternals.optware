@@ -13,4 +13,11 @@ echo -n "Mounting /opt directory: "
 
 mount -o bind /var/opt /opt || echo "Failed to mount /opt" || return 1
 
+if [ -e /media/cryptofs/apps ] ; then
+  if [ ! -e /media/cryptofs/apps/opt ] ; then
+    mkdir -p /media/cryptofs/apps/opt || echo "Failed to create /media/cryptofs/apps/opt" || return 1
+  fi
+  mount -o bind /var/opt /media/cryptofs/apps/opt || echo "Failed to mount /media/cryptofs/apps/opt" || return 1
+fi  
+
 end script

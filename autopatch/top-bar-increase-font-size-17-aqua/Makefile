@@ -5,8 +5,8 @@ DESCRIPTION = This will increase the font size to 17px and the color of the carr
 CATEGORY = Top Bar
 VERSIONS = 1.3.1-20 1.3.5-0
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
-SCREENSHOTS = [\"http://www.webos-internals.org/images/e/ee/Top-bar-increase-font-size-17-aqua-1.png\"]]
-META_SUB_VERSION = 1
+SCREENSHOTS = [\"http://www.webos-internals.org/images/e/ee/Top-bar-increase-font-size-17-aqua-1.png\"]
+META_SUB_VERSION = 2
 
 include ../common.mk
 include ../modifications.mk

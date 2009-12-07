@@ -7,8 +7,6 @@ VERSIONS = 1.2.1-0 1.3.1-0
 ICON = http://www.webos-internals.org/images/b/b1/Icon_WebOSInternals_Patches_Applauncher.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/9/93/5x4-icons.png\"]
 META_SUB_VERSION = 1
-#POSTINSTALLFLAGS = RestartLuna
-#POSTREMOVEFLAGS = RestartLuna
 
 include ../common.mk
 include ../modifications.mk

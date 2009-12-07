@@ -6,8 +6,6 @@ CATEGORY = Misc
 VERSIONS = 1.2.1-0 1.1.3-0 1.3.1-0 1.3.5-0
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 META_SUB_VERSION = 2
-#POSTINSTALLFLAGS = RestartLuna
-#POSTREMOVEFLAGS = RestartLuna
 
 include ../common.mk
 include ../modifications.mk

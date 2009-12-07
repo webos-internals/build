@@ -8,8 +8,6 @@ ICON = http://www.webos-internals.org/images/8/83/Icon_WebOSInternals_Patches_Ta
 SCREENSHOTS =
 META_SUB_VERSION = 1
 
-#POSTINSTALLFLAGS = RestartLuna
-#POSTREMOVEFLAGS = RestartLuna
 
 include ../common.mk
 include ../modifications.mk

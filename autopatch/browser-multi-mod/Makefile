@@ -11,8 +11,6 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/0/02/Enable-browser-downloads-2.png\"]
 META_SUB_VERSION = 3
 
-#POSTINSTALLFLAGS = RestartLuna
-#POSTREMOVEFLAGS = RestartLuna
 
 include ../common.mk
 include ../modifications.mk
