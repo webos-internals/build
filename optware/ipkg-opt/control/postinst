@@ -4,7 +4,7 @@ mkdir -p /opt/etc/ipkg
 
 # Install optware feeds
 echo "src/gz cross  http://ipkg.nslu2-linux.org/feeds/optware/`/bin/uname -m`/cross/unstable" > /opt/etc/ipkg/optware.conf
-echo "src/gz native  http://ipkg.nslu2-linux.org/feeds/optware/`/bin/uname -m`/native/unstable" > /opt/etc/ipkg/optware.conf
+echo "src/gz native  http://ipkg.nslu2-linux.org/feeds/optware/`/bin/uname -m`/native/unstable" >> /opt/etc/ipkg/optware.conf
 echo "src/gz kernel http://ipkg.nslu2-linux.org/feeds/optware/device-`/bin/uname -m`/cross/unstable" >> /opt/etc/ipkg/optware.conf
 sed -i -e 's|device-armv7l|pre|g' /opt/etc/ipkg/optware.conf
 sed -i -e 's|device-armv6l|pixi|g' /opt/etc/ipkg/optware.conf
