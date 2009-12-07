@@ -8,6 +8,7 @@ if [ -f "/media/cryptofs/apps/usr/bin/diffstat" ] ; then
 else
   FILE_LIST=`/var/usr/bin/diffstat -p1 -l $APP_DIR/$PATCH_NAME`
 fi
+
 if [ -f "/media/cryptofs/apps/usr/bin/patch" ] ; then
   PATCH_EXEC=/media/cryptofs/apps/usr/bin/patch
 else
@@ -15,25 +16,58 @@ else
 fi
 
 PATCH_CONTROL_DIR=$IPKG_OFFLINE_ROOT/usr/lib/.webosinternals.patches
+PATCH_LOG=/var/log/webos-patches.log
 
 do_failure() {
   ipkg -o $IPKG_OFFLINE_ROOT remove `basename $APP_DIR`
   exit 1
 }
 
+if [ ! -e $PATCH_LOG ]
+then
+  touch $PATCH_LOG
+  echo "*********** Patch Log Created by postinst $(date) ****************" >> $PATCH_LOG
+  echo "" >> $PATCH_LOG
+fi
+
+echo "" >> $PATCH_LOG
+echo "------------------------------------------------------" >> $PATCH_LOG
+echo "PATCH INSTALLATION $(date)" >> $PATCH_LOG
+echo $APP_DIR/$PATCH_NAME >> $PATCH_LOG
+echo "------------------------------------------------------" >> $PATCH_LOG
+
 if [ "$IPKG_OFFLINE_ROOT" = "" ]
 then
-  echo "ERROR: IPKG_OFFLINE_ROOT must be supplied to the postinst"
+  echo "ERROR: IPKG_OFFLINE_ROOT must be supplied to the postinst" | tee -a $PATCH_LOG
   exit 1
 fi
 
 if [ "$APP_DIR" = "" ] || [ "$PATCH_NAME" = "" ]
 then
-  echo "ERROR: APP_DIR and PATCH_NAME both must be set in postinst"
+  echo "ERROR: APP_DIR and PATCH_NAME both must be set in postinst" | tee -a $PATCH_LOG
   do_failure
 fi
 
-$PATCH_EXEC -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME || do_failure
+echo "" >> $PATCH_LOG
+echo "----------------------------------" >> $PATCH_LOG
+echo "Dry run patch attempt..." >> $PATCH_LOG
+echo "----------------------------------" >> $PATCH_LOG
+echo "" >> $PATCH_LOG
+
+$PATCH_EXEC -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME >> $PATCH_LOG
+
+if [ $? -ne 0 ]
+then
+  echo "" >> $PATCH_LOG
+  echo "----------------------------------" >> $PATCH_LOG
+  echo "dry run failed, checking if -R would succeed" >> $PATCH_LOG
+  echo "----------------------------------" >> $PATCH_LOG
+  echo "" >> $PATCH_LOG
+  $PATCH_EXEC -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME >> $PATCH_LOG || do_failure
+  patch_applied=yes
+  echo "Interestingly, the patch seems to already be applied" | tee -a $PATCH_LOG
+fi
+
 if [ ! -d $PATCH_CONTROL_DIR ]
 then
   rm -rf $PATCH_CONTROL_DIR
@@ -53,11 +87,11 @@ fi
 rm -f $PATCH_CONTROL_DIR/tmp
 touch $PATCH_CONTROL_DIR/tmp || do_failure
 
-if [ -e $PATCH_CONTROL_DIR/$PATCH_NAME ]
-then
-  echo "ERROR: Patch already installed?"
-  do_failure
-fi
+#if [ -e $PATCH_CONTROL_DIR/$PATCH_NAME ]
+#then
+  #echo "ERROR: Patch already installed?"
+  #do_failure
+#fi
 
 for i in $FILE_LIST
 do
@@ -67,6 +101,7 @@ do
   then
     if [ ! -e $file ]
     then
+      mkdir -p `dirname $file`
       touch $file.webosinternals.orig
     else
       cp $file $file.webosinternals.orig
@@ -82,7 +117,16 @@ sed -i -e /`basename $APP_DIR`/d $PATCH_CONTROL_DIR/packages
 basename $APP_DIR >> $PATCH_CONTROL_DIR/packages
 
 cp $APP_DIR/$PATCH_NAME $PATCH_CONTROL_DIR/$PATCH_NAME
-$PATCH_EXEC -d / -p1 < ${APP_DIR}/$PATCH_NAME || do_failure
+
+if [ "$patch_applied" != "yes" ]
+then
+  echo "" | tee -a $PATCH_LOG
+  echo "----------------------------------" | tee -a $PATCH_LOG
+  echo "Actually applying the patch!" | tee -a $PATCH_LOG
+  echo "----------------------------------" | tee -a $PATCH_LOG
+  echo "" | tee -a $PATCH_LOG
+  $PATCH_EXEC -d / -p1 < ${APP_DIR}/$PATCH_NAME | tee -a $PATCH_LOG || do_failure
+fi
 
 
 if [ -e $APP_DIR/postinst_extra ]
@@ -91,12 +135,6 @@ then
   /bin/sh $APP_DIR/postinst_extra
 fi
 
-echo "SUCCESS"
-
-# Restart Luna
-if [ -z "$IPKG_OFFLINE_ROOT" ]; then # Defined by recent installers that also support flags.
-    /sbin/stop LunaSysMgr
-    /sbin/start LunaSysMgr
-fi
+echo "SUCCESS" | tee -a $PATCH_LOG
 
 exit 0
