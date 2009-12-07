@@ -16,13 +16,18 @@ PATCH = add-onscreen-keyboard.patch
 FILES = /usr/palm/frameworks/mojo/builtins/palmInitFramework191_15.js \
 	/usr/palm/frameworks/mojo/submissions/191.15/stylesheets/global.css
 
-SRC_GIT = git://git.webos-internals.org/patches/virtual-keyboard.git
+ifneq ("${DUMMY_VERSION}","")
+SRC_GIT =
 
 include ../common.mk
 
-include ../../support/download.mk
+build/.unpacked-${VERSION}:
+	touch $@
+else
+SRC_GIT = git://git.webos-internals.org/patches/virtual-keyboard.git
 
-#include ../../support/patch-md5sums.mk
+include ../common.mk
+include ../../support/download.mk
 
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
@@ -51,6 +56,7 @@ build/.built-${VERSION}: build/.unpacked-${VERSION}
 	  #grep $$f build/md5sums >> build/all/usr/palm/applications/${APP_ID}/md5sums ; \
 	#done
 	touch $@
+endif
 
 MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>
 HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard
