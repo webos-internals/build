@@ -3,7 +3,7 @@ PATCH = music-player/${NAME}.patch
 TITLE = Ignore A, An, The
 DESCRIPTION = Removes 'A', 'An' and 'The' from the beginning of Artists and Albums so everything sorts properly.
 CATEGORY = Music Player
-VERSIONS = 1.2.1-9 1.3.1-0 1.3.5-0
+VERSIONS = 1.2.1-9 1.3.1-0 1.3.5-1
 ICON = http://www.webos-internals.org/images/d/df/Icon_WebOSInternals_Patches_Musicplayer.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/d/d9/Music-player-ignore-a-an-the-1.png\",\

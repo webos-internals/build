@@ -3,7 +3,7 @@ PATCH = calendar/${NAME}.patch
 TITLE = All-Day Events in Month View
 DESCRIPTION = This will enable showing of all-day events while in the Month View of the Calendar application.
 CATEGORY = Calendar
-VERSIONS = 1.2.1-8 1.3.1-0 1.3.5-0
+VERSIONS = 1.2.1-8 1.3.1-0 1.3.5-1
 ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Calendar.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/7/70/Calendar-all-day-events-month-view-1.jpg\",\
