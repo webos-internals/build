@@ -32,7 +32,8 @@ ifneq ("${DUMMY_VERSION}", "")
 build/all/CONTROL/postinst:
 	mkdir -p build/all/CONTROL
 	echo "#!/bin/sh" > build/all/CONTROL/postinst
-	echo "return -1" >> build/all/CONTROL/postinst
+	echo "echo \"This patch is NOT available\" 1>&2" >> build/all/CONTROL/postinst
+	echo "return 1" >> build/all/CONTROL/postinst
 	chmod ugo+x build/all/CONTROL/postinst
 
 build/.built-${VERSION}:
