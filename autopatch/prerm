@@ -93,7 +93,7 @@ then
     echo "----------------------------------" | tee -a $PATCH_LOG
     echo "Actually removing the patch!" | tee -a $PATCH_LOG
     echo "----------------------------------" | tee -a $PATCH_LOG
-    $PATCH_EXEC -R -p1 -d / < ${APP_DIR}/$PATCH_NAME | tee -a $PATCH_LOG
+    $PATCH_EXEC -R -p1 -d --no-backup-if-mismatch / < ${APP_DIR}/$PATCH_NAME | tee -a $PATCH_LOG
   fi
 else
   echo "All of the files in the patch are already stock (most likely due to OTA update)" | tee -a $PATCH_LOG
