@@ -17,7 +17,7 @@ fi
 
 IPKG_INFO_DIR=/usr/lib/ipkg/info
 PATCH_CONTROL_DIR=$IPKG_OFFLINE_ROOT/usr/lib/.webosinternals.patches
-PATCH_LOG=/var/log/webos-patches.log
+PATCH_LOG=/media/internal/webos-patches.log
 
 do_failure() {
   exit 1
@@ -26,15 +26,14 @@ do_failure() {
 if [ ! -e $PATCH_LOG ]
 then
   touch $PATCH_LOG
-  echo "*********** Patch Log Created by prerm $(date) ****************" >> $PATCH_LOG
-  echo "" >> $PATCH_LOG
+  echo "******* Patch Log Created by prerm $(date) ************" >> $PATCH_LOG
 fi
 
 echo "" >> $PATCH_LOG
 echo "------------------------------------------------------" >> $PATCH_LOG
 echo "PATCH REMOVAL $(date)" >> $PATCH_LOG
-echo $APP_DIR/$PATCH_NAME >> $PATCH_LOG
 echo "------------------------------------------------------" >> $PATCH_LOG
+echo $APP_DIR/$PATCH_NAME >> $PATCH_LOG
 
 if [ "$IPKG_OFFLINE_ROOT" = "" ]
 then
@@ -79,7 +78,6 @@ then
   echo "----------------------------------" >> $PATCH_LOG
   echo "Dry run patch attempt..." >> $PATCH_LOG
   echo "----------------------------------" >> $PATCH_LOG
-  echo "" >> $PATCH_LOG
   $PATCH_EXEC -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME >> $PATCH_LOG
 
   if [ $? -ne 0 ]
@@ -88,7 +86,6 @@ then
     echo "----------------------------------" >> $PATCH_LOG
     echo "dry run failed, checking if applying entire patch would succeed" >> $PATCH_LOG
     echo "----------------------------------" >> $PATCH_LOG
-    echo "" >> $PATCH_LOG
     $PATCH_EXEC -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME >> $PATCH_LOG || do_failure
     echo "Interestingly, the patch seems to already be unapplied" | tee -a $PATCH_LOG
   else
@@ -96,7 +93,6 @@ then
     echo "----------------------------------" | tee -a $PATCH_LOG
     echo "Actually removing the patch!" | tee -a $PATCH_LOG
     echo "----------------------------------" | tee -a $PATCH_LOG
-    echo "" | tee -a $PATCH_LOG
     $PATCH_EXEC -R -p1 -d / < ${APP_DIR}/$PATCH_NAME | tee -a $PATCH_LOG
   fi
 else

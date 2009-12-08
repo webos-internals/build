@@ -1,20 +1,19 @@
 #!/bin/sh
 PACKAGE=org.webosinternals.emergency-patch-recovery
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
-PATCH_LOG=/var/log/webos-patches.log
+PATCH_LOG=/media/internal/webos-patches.log
 IPKG_INFO_DIR=/usr/lib/ipkg/info
 
 if [ ! -e $PATCH_LOG ]
 then
   touch $PATCH_LOG
-  echo "*********** Patch Log Created by EPR $(date) ****************" >> $PATCH_LOG
-  echo "" >> $PATCH_LOG
+  echo "******* Patch Log Created by EPR $(date) ************" >> $PATCH_LOG
 fi
 
+echo "" >> $PATCH_LOG
 echo "------------------------------------------------------" >> $PATCH_LOG
 echo "Emergency Patch Recovery $(date)" >> $PATCH_LOG
 echo "------------------------------------------------------" >> $PATCH_LOG
-echo "" >> $PATCH_LOG
 
 if [ ! -d $PATCH_CONTROL_DIR ]
 then
