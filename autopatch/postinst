@@ -15,6 +15,7 @@ else
   PATCH_EXEC=/var/usr/bin/patch
 fi
 
+IPKG_INFO_DIR=/usr/lib/ipkg/info
 PATCH_CONTROL_DIR=$IPKG_OFFLINE_ROOT/usr/lib/.webosinternals.patches
 PATCH_LOG=/media/internal/webos-patches.log
 
@@ -101,6 +102,15 @@ do
       mkdir -p `dirname $file`
       touch $file.webosinternals.orig
     else
+      cp $file $file.webosinternals.orig
+    fi
+  elif [ -e $file ]
+    palm_md5sum=`grep -h $file $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`
+    file_md5sum=`md5sum $file | awk '{print $1}'`
+
+    if [ "$file_md5sum" = "$palm_md5sum" ]
+    then
+      rm -f $file.webosinternals.orig
       cp $file $file.webosinternals.orig
     fi
   fi
