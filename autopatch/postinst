@@ -105,6 +105,7 @@ do
       cp $file $file.webosinternals.orig
     fi
   elif [ -e $file ]
+  then
     palm_md5sum=`grep -h $file $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`
     file_md5sum=`md5sum $file | awk '{print $1}'`
 
