@@ -29,6 +29,7 @@ package: ipkgs/${APP_ID}_${VERSION}_all.ipk
 endif
 
 ifneq ("${DUMMY_VERSION}", "")
+SRC_GIT=
 build/all/CONTROL/postinst:
 	mkdir -p build/all/CONTROL
 	echo "#!/bin/sh" > build/all/CONTROL/postinst
@@ -50,11 +51,15 @@ build: build/.built-${VERSION}
 build/.meta-${META_VERSION}:
 	touch $@
 
+build/.built-extra-${VERSION}:
+	touch $@
+
 build/.built-${VERSION}: build/.unpacked-${VERSION} build/.meta-${META_VERSION}
 	rm -rf build/all
 	mkdir -p build/all/usr/palm/applications/${APP_ID}
 	install -m 644 build/src-${VERSION}/${PATCH} build/all/usr/palm/applications/${APP_ID}/
 	touch $@
+	${MAKE} build/.built-extra-${VERSION}
 
 build/all/CONTROL/prerm: build/.unpacked-${VERSION}
 	mkdir -p build/all/CONTROL

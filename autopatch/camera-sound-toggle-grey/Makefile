@@ -10,10 +10,7 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-build/.built-${VERSION}: build/.unpacked-${VERSION}
-	rm -rf build/all
-	mkdir -p build/all/usr/palm/applications/${APP_ID}
-	install -m 644 build/src-${VERSION}/${PATCH} build/all/usr/palm/applications/${APP_ID}/
+build/.built-extra-${VERSION}:
 	install -m 644 *.png build/all/usr/palm/applications/${APP_ID}/
 	install -m 644 *_extra build/all/usr/palm/applications/${APP_ID}/
 	touch $@

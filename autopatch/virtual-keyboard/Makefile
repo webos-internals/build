@@ -16,14 +16,6 @@ PATCH = add-onscreen-keyboard.patch
 FILES = /usr/palm/frameworks/mojo/builtins/palmInitFramework191_15.js \
 	/usr/palm/frameworks/mojo/submissions/191.15/stylesheets/global.css
 
-ifneq ("${DUMMY_VERSION}","")
-SRC_GIT =
-
-include ../common.mk
-
-build/.unpacked-${VERSION}:
-	touch $@
-else
 SRC_GIT = git://git.webos-internals.org/patches/virtual-keyboard.git
 
 include ../common.mk
@@ -37,26 +29,19 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	tar -C build/src-${VERSION} -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	touch $@
 
-.PHONY: build
-build: build/.built-${VERSION}
-
-build/.built-${VERSION}: build/.unpacked-${VERSION}
-	rm -rf build/all
+build/.built-extra-${VERSION}:
 	rm -rf build.tmp
 	mkdir -p build.tmp
 	tar -C build.tmp -xvf build/src-${VERSION}/virtual-keyboard-themes.tar.gz
-	mkdir -p build/all/usr/palm/applications/${APP_ID}
 	mv build.tmp/media/internal/virtual-keyboard \
 	   build/all/usr/palm/applications/${APP_ID}/
 	rm -rf build.tmp
-	install -m 644 build/src-${VERSION}/${PATCH} build/all/usr/palm/applications/${APP_ID}/
 	install -m 644 build/src-${VERSION}/postinst_extra build/all/usr/palm/applications/${APP_ID}/
 	install -m 644 build/src-${VERSION}/prerm_extra build/all/usr/palm/applications/${APP_ID}/
 	#for f in ${FILES} ; do \
 	  #grep $$f build/md5sums >> build/all/usr/palm/applications/${APP_ID}/md5sums ; \
 	#done
 	touch $@
-endif
 
 MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>
 HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard
