@@ -68,6 +68,8 @@ do
     then
       echo "Found modified file $file" >> $PATCH_LOG
       found_modified=yes
+    else
+      created_files="$created_files $file"
     fi
   fi
 done
@@ -98,6 +100,12 @@ then
 else
   echo "All of the files in the patch are already stock (most likely due to OTA update)" | tee -a $PATCH_LOG
 fi
+
+for i in $created_files
+do
+  echo "Removing created file $i" >> $PATCH_LOG
+  rm -f $i
+done
 
 for i in $FILE_LIST
 do
