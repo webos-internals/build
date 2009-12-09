@@ -15,6 +15,7 @@ else
   PATCH_EXEC=/var/usr/bin/patch
 fi
 
+IPKG_INFO_DIR=/usr/lib/ipkg/info
 PATCH_CONTROL_DIR=$IPKG_OFFLINE_ROOT/usr/lib/.webosinternals.patches
 PATCH_LOG=/media/internal/webos-patches.log
 
