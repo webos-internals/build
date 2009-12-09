@@ -19,7 +19,7 @@ endif
 ifneq ("${VERSIONS}", "")
 package:
 	for v in ${WEBOS_VERSIONS} ; do \
-		${MAKE} VERSIONS= DUMMY_VERSION=0 DESCRIPTION='Currently not available for WebOS version '$${v} DEPENDS= CATEGORY=Unavailable VERSION=$${v}-0 package ; \
+		${MAKE} VERSIONS= DUMMY_VERSION=0 VERSION=$${v}-0 package ; \
 	done; \
 	for v in ${VERSIONS} ; do \
 	  ${MAKE} VERSIONS= VERSION=$${v} package ; \
@@ -29,13 +29,14 @@ package: ipkgs/${APP_ID}_${VERSION}_all.ipk
 endif
 
 ifneq ("${DUMMY_VERSION}", "")
+WEBOS_VER:=$(shell echo ${VERSION} | tr -d '\-0')
+DESCRIPTION='This package is not currently available for WebOS ${WEBOS_VER}.  This package may be installed as a placeholder to notify you when an update is available.  NOTE: This is simply an empty package placeholder, it will not affect your device in any way'
+CATEGORY=Unavailable
 SRC_GIT=
-build/all/CONTROL/postinst:
-	mkdir -p build/all/CONTROL
-	echo "#!/bin/sh" > build/all/CONTROL/postinst
-	echo "echo \"This patch is NOT available\" 1>&2" >> build/all/CONTROL/postinst
-	echo "return 1" >> build/all/CONTROL/postinst
-	chmod ugo+x build/all/CONTROL/postinst
+DEPENDS=
+POSTINSTALLFLAGS=
+POSTUPDATEFLAGS=
+POSTREMOVEFLAGS=
 
 build/.built-${VERSION}:
 	rm -rf build/all
