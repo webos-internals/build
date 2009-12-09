@@ -47,58 +47,62 @@ then
   do_failure
 fi
 
-for i in $FILE_LIST
-do
-  file=/$i
-  palm_md5sum=`grep -h $file $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`
-  file_md5sum=""
+echo "" >> $PATCH_LOG
+echo "----------------------------------" >> $PATCH_LOG
+echo "Dry run patch attempt..." >> $PATCH_LOG
+echo "----------------------------------" >> $PATCH_LOG
+$PATCH_EXEC -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME >> $PATCH_LOG
 
-  if [ -e $file ]
-  then
-    file_md5sum=`md5sum $file | awk '{print $1}'`
-  fi
-
-  if [ "$palm_md5sum" = "$file_md5sum" ]
-  then
-    echo "Existing file matches Palm md5sum (maybe due to OTA update): $file" >> $PATCH_LOG
-    rm -f $file.webosinternals.orig
-  else
-    grep -h $file $IPKG_INFO_DIR/*md5sums >> /dev/null 2>&1
-    if [ $? -eq 0 ]
-    then
-      echo "Found modified file $file" >> $PATCH_LOG
-      found_modified=yes
-    else
-      created_files="$created_files $file"
-    fi
-  fi
-done
-
-if [ "$found_modified" = "yes" ]
+if [ $? -ne 0 ]
 then
   echo "" >> $PATCH_LOG
   echo "----------------------------------" >> $PATCH_LOG
-  echo "Dry run patch attempt..." >> $PATCH_LOG
+  echo "dry run failed, checking if applying entire patch would succeed" >> $PATCH_LOG
   echo "----------------------------------" >> $PATCH_LOG
-  $PATCH_EXEC -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME >> $PATCH_LOG
+  $PATCH_EXEC -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME >> $PATCH_LOG
 
   if [ $? -ne 0 ]
   then
-    echo "" >> $PATCH_LOG
-    echo "----------------------------------" >> $PATCH_LOG
-    echo "dry run failed, checking if applying entire patch would succeed" >> $PATCH_LOG
-    echo "----------------------------------" >> $PATCH_LOG
-    $PATCH_EXEC -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME >> $PATCH_LOG || do_failure
-    echo "Interestingly, the patch seems to already be unapplied" | tee -a $PATCH_LOG
+    for i in $FILE_LIST
+    do
+      echo "" >> $PATCH_LOG
+      echo "----------------------------------" >> $PATCH_LOG
+      echo "Applying entire patch would not succeed, checking md5sums" >> $PATCH_LOG
+      echo "----------------------------------" >> $PATCH_LOG
+
+      file=/$i
+      palm_md5sum=`grep -h $file $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`
+      file_md5sum=""
+
+      if [ -e $file ]
+      then
+        file_md5sum=`md5sum $file | awk '{print $1}'`
+      fi
+
+      if [ "$palm_md5sum" = "$file_md5sum" ]
+      then
+        echo "Existing file matches Palm md5sum (maybe due to OTA update): $file" >> $PATCH_LOG
+        rm -f $file.webosinternals.orig
+      else
+        if [ "$palm_md5sum" = "" ]
+        then
+          created_files="$created_files $file"
+        else
+          echo "Found modified file $file" >> $PATCH_LOG
+          do_failure
+        fi
+      fi
+    done
+    echo "All of the files in the patch are already stock (most likely due to OTA update)" | tee -a $PATCH_LOG
   else
-    echo "" | tee -a $PATCH_LOG
-    echo "----------------------------------" | tee -a $PATCH_LOG
-    echo "Actually removing the patch!" | tee -a $PATCH_LOG
-    echo "----------------------------------" | tee -a $PATCH_LOG
-    $PATCH_EXEC -R -p1 -d / --no-backup-if-mismatch < ${APP_DIR}/$PATCH_NAME | tee -a $PATCH_LOG
+    echo "Interestingly, the patch seems to already be unapplied" | tee -a $PATCH_LOG
   fi
 else
-  echo "All of the files in the patch are already stock (most likely due to OTA update)" | tee -a $PATCH_LOG
+  echo "" | tee -a $PATCH_LOG
+  echo "----------------------------------" | tee -a $PATCH_LOG
+  echo "Actually removing the patch!" | tee -a $PATCH_LOG
+  echo "----------------------------------" | tee -a $PATCH_LOG
+  $PATCH_EXEC -R -p1 -d / --no-backup-if-mismatch < ${APP_DIR}/$PATCH_NAME | tee -a $PATCH_LOG
 fi
 
 for i in $created_files
@@ -110,7 +114,6 @@ done
 for i in $FILE_LIST
 do
   file=/$i
-  palm_md5sum=`grep -h $file $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`
   orig_md5sum=""
   file_md5sum=""
 
@@ -124,7 +127,8 @@ do
     orig_md5sum=`md5sum $file.webosinternals.orig | awk '{print $1}'`
   fi
 
-  if [ ! -e $file ] && [ ! -s $file.webosinternals.orig ] || [ "$orig_md5sum" = "$file_md5sum" ] || [ "$palm_md5sum" = "$file_md5sum" ]
+  if [ ! -e $file ] && [ ! -s $file.webosinternals.orig ] || [ "$orig_md5sum" = "$file_md5sum" ] || \
+     [ "`grep -h $file $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`" = "$file_md5sum" ]
   then
     tmpvar=`echo $file | tr '/' '.'`
     rm -f $file.webosinternals.orig
