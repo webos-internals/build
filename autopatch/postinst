@@ -131,7 +131,7 @@ then
   echo "----------------------------------" | tee -a $PATCH_LOG
   echo "Actually applying the patch!" | tee -a $PATCH_LOG
   echo "----------------------------------" | tee -a $PATCH_LOG
-  $PATCH_EXEC -d / -p1 --no-backup-if-mismatch < ${APP_DIR}/$PATCH_NAME | tee -a $PATCH_LOG || do_failure
+  $PATCH_EXEC -p1 -d / --no-backup-if-mismatch < ${APP_DIR}/$PATCH_NAME | tee -a $PATCH_LOG || do_failure
 fi
 
 
