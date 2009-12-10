@@ -78,6 +78,10 @@ do
   fi
 done
 
+echo "" >> $PATCH_LOG
+echo "------------------------------------------------------" >> $PATCH_LOG
+echo "Checking for incompatible backup files..." >> $PATCH_LOG
+echo "------------------------------------------------------" >> $PATCH_LOG
 for i in $FILE_LIST
 do
   file=/$i
