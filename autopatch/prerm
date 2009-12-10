@@ -26,6 +26,11 @@ do_failure() {
   exit 1
 }
 
+failed_remove() {
+  $PATCH_EXEC -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 1>&2
+  do_failure
+}
+
 if [ ! -e $PATCH_LOG ]
 then
   touch $PATCH_LOG
@@ -40,13 +45,13 @@ echo $APP_DIR/$PATCH_NAME >> $PATCH_LOG
 
 if [ "$IPKG_OFFLINE_ROOT" = "" ]
 then
-  echo "ERROR: IPKG_OFFLINE_ROOT must be supplied to the prerm" | tee -a $PATCH_LOG
-  exit 1
+  echo "ERROR: IPKG_OFFLINE_ROOT must be supplied to the prerm" 1>&2 | tee -a $PATCH_LOG
+  do_failure
 fi
 
 if [ "$APP_DIR" = "" ] || [ "$PATCH_NAME" = "" ]
 then
-  echo "ERROR: APP_DIR and PATCH_NAME both must be set in prerm" | tee -a $PATCH_LOG
+  echo "ERROR: APP_DIR and PATCH_NAME both must be set in prerm" 1>&2 | tee -a $PATCH_LOG
   do_failure
 fi
 
@@ -66,13 +71,13 @@ then
 
   if [ $? -ne 0 ]
   then
+    echo "" >> $PATCH_LOG
+    echo "----------------------------------" >> $PATCH_LOG
+    echo "Applying entire patch would not succeed, checking md5sums" >> $PATCH_LOG
+    echo "----------------------------------" >> $PATCH_LOG
+
     for i in $FILE_LIST
     do
-      echo "" >> $PATCH_LOG
-      echo "----------------------------------" >> $PATCH_LOG
-      echo "Applying entire patch would not succeed, checking md5sums" >> $PATCH_LOG
-      echo "----------------------------------" >> $PATCH_LOG
-
       file=/$i
       palm_md5sum=`grep -h $file $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`
       file_md5sum=""
@@ -92,10 +97,13 @@ then
           created_files="$created_files $file"
         else
           echo "Found modified file $file" >> $PATCH_LOG
-          do_failure
+          found_modifed=yes
         fi
       fi
     done
+
+    [ "$found_modified" = "" ] || failed_remove
+
     echo "All of the files in the patch are already stock (most likely due to OTA update)" | tee -a $PATCH_LOG
   else
     echo "Interestingly, the patch seems to already be unapplied" | tee -a $PATCH_LOG
