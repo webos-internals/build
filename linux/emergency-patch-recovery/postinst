@@ -26,7 +26,20 @@ if [ -e $PATCH_CONTROL_DIR/packages ]
 then
   for i in `cat $PATCH_CONTROL_DIR/packages`
   do
-    ipkg -o /var remove $i
+    package=`echo $i | awk '{print $1}'`
+    version=`echo $i | awk '{print $2}'`
+
+    if [ "$version" = "" ]
+    then
+      version=apt-1
+    fi
+
+    echo "" >> $PATCH_LOG
+    echo "------------------------------------------------------" >> $PATCH_LOG
+    echo "Removing package: $package" >> $PATCH_LOG
+    echo "Patch technology: $version" >> $PATCH_LOG
+    echo "------------------------------------------------------" >> $PATCH_LOG
+    ipkg -o /var remove $package
   done
 fi
 
@@ -34,28 +47,37 @@ if [ -e $PATCH_CONTROL_DIR/backups ]
 then
   for i in `cat $PATCH_CONTROL_DIR/backups`
   do
-    palm_md5sum=`grep -h $i $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`
-    file_md5sum=`md5sum $i | awk '{print $1}'`
-    echo "File: $i" >> $PATCH_LOG
+    file=`echo $i | awk '{print $1}'`
+    version=`echo $i | awk '{print $2}'`
+    palm_md5sum=`grep -h $file $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`
+    file_md5sum=`md5sum $file | awk '{print $1}'`
+
+    if [ "$version" = "" ]
+    then
+      version=apt-1
+    fi
+
+    echo "File: $file" >> $PATCH_LOG
+    echo "Patch technology: $version" >> $PATCH_LOG
     echo "  palm md5sum: $palm_md5sum" >> $PATCH_LOG
     echo "  file md5sum: $file_md5sum" >> $PATCH_LOG
     if [ "$palm_md5sum" = "$file_md5sum" ]
     then
       echo "Existing file matches Palm md5sum (maybe due to OTA update)" | tee -a $PATCH_LOG
       echo "Removing original file..." | tee -a $PATCH_LOG
-      rm -f $i.webosinternals.orig
+      rm -f $file.webosinternals.orig
     else
-      if [ ! -e $i.webosinternals.orig ]
+      if [ ! -e $file.webosinternals.orig ]
       then
-        echo "WARNING: Could not find backup for $i" | tee -a $PATCH_LOG
-      elif [ ! -s $i.webosinternals.orig ]
+        echo "WARNING: Could not find backup for $file" | tee -a $PATCH_LOG
+      elif [ ! -s $file.webosinternals.orig ]
       then
-        echo "Removing created file $i" | tee -a $PATCH_LOG
-        rm -f $i
-        rm -f $i.webosinternals.orig
+        echo "Removing created file $file" | tee -a $PATCH_LOG
+        rm -f $file
+        rm -f $file.webosinternals.orig
       else
-        echo "Recovering original file $i..." | tee -a $PATCH_LOG
-        mv $i.webosinternals.orig $i
+        echo "Recovering original file $file..." | tee -a $PATCH_LOG
+        mv $file.webosinternals.orig $file
       fi
     fi
   done
