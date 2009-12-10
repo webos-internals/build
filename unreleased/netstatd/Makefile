@@ -7,7 +7,7 @@ CATEGORY = System Utilities
 HOMEPAGE = http://www.daemon.de/PalmPreNetstat
 ICON     = http://www.daemon.de/images/netstat.png
 DESCRIPTION = This daemon is required for the netstat app. It runs as a background process, collects interface statistic data and stores them in a sql database (on /media/internal/)
-CHANGELOG = 1.0.3: initial release
+CHANGELOG = 1.0.3: fixed upstart respawning problem
 SCREENSHOTS = 
 LICENSE  = BSD Open Source License
 
