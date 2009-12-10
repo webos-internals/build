@@ -1,0 +1,12 @@
+The WebOS-Internals Group is pleased to announce the next generation of it's Auto Patch Technology (APT)! If you are not familiar with APT, it is the "magic" behind all the patches, known as packages, in the WebOS-Patches feed at Preware.org, and used by both Preware and WebOS Quick Install. Also, because of APT, the "Emergency Patch Recovery" tool is capable of working even *after* you have installed a webOS OTA update. Auto Patch Technology was great on its own, but it needed more. The WebOS-Internals Group envisioned an entire new set of capabilities while eliminating some old problems.
+This new incarnation will be known as Auto-Update Patch Technology, or AUPT. AUPT focuses on eliminating the need to run EPR so often. It's aim is to allow you to remove patches/packages both before and after a webOS update. AUPT also enables the ability to leave your patches installed while you update webOS OTA. This will allow you open Preware (and other installers in the future) after an webOS OTA update and select "Update All" and be done. There are some points to note when it comes to getting this to work properly. I will detail them below:
+
+1) All of your existing patches will need to be updated to include AUPT. This can be accomplished by opening Preware and "Updating" each patch/package individually.
+2) If you have installed a patch via the "Drag and Drop" feature in WebOS Quick Install, it will still need to be removed prior to an OTA update. This will hopefully change in the near future.
+3) Any theme you have installed will still have to be removed prior to any OTA update.
+
+If you feel uncertain about if your patches were all updated or not, you might consider running EPR before your next webOS OTA update. Then install all your patches new. All patches in the webOS-Patches feed going forward will automatically have AUPT built into them.
+
+As always, if you have any questions or simply want to hang out, drop by our chat channel #webos-internals on irc.freenode.net.
+
+Happy Patching!
