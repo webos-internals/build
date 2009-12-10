@@ -68,25 +68,27 @@ then
   do_failure
 fi
 
+echo "" >> $PATCH_LOG
+echo "------------------------------------------------------" >> $PATCH_LOG
+echo "Checking for incompatible backup files..." >> $PATCH_LOG
+echo "------------------------------------------------------" >> $PATCH_LOG
+
 for i in `cat $PATCH_CONTROL_DIR/backups`
 do
   version=`echo $i | awk '{print $2}'`
 
   if [ "$version" != "$VERSION" ]
   then
+    echo "Incompatible backup file: $i" >> $PATCH_LOG
     INCOMPATIBLE_BACKUPS="$INCOMPATIBLE_BACKUPS $i"
   fi
 done
 
-echo "" >> $PATCH_LOG
-echo "------------------------------------------------------" >> $PATCH_LOG
-echo "Checking for incompatible backup files..." >> $PATCH_LOG
-echo "------------------------------------------------------" >> $PATCH_LOG
-for i in $FILE_LIST
+for i in $INCOMPATIBLE_BACKUPS
 do
-  file=/$i
-  for j in $INCOMPATIBLE_BACKUPS
+  for j in $FILE_LIST
   do
+    file=/$j
     if [ "$file" = "$i" ]
     then
       echo "ERROR: A patch using an incompatible patch technology has already touched a file in this patch " 1>&2 | tee -a $PATCH_LOG
