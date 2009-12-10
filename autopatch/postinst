@@ -113,7 +113,7 @@ do
 
         if [ "$version" != "$VERSION" ]
         then
-          echo "WARNING: Package: $package uses incompatible patch technology: $version" >> $PATCH_LOG
+          echo "WARNING: Package: $package uses incompatible patch technology: $version" 1>&2 | tee -a $PATCH_LOG
         fi
       done
 
