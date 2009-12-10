@@ -4,10 +4,12 @@ APP_DIR=
 PATCH_NAME=
 
 if [ -f "/media/cryptofs/apps/usr/bin/diffstat" ] ; then
-  FILE_LIST=`/media/cryptofs/apps/usr/bin/diffstat -p1 -l $APP_DIR/$PATCH_NAME`
+  DIFFSTAT=/media/cryptofs/apps/usr/bin/diffstat
 else
-  FILE_LIST=`/var/usr/bin/diffstat -p1 -l $APP_DIR/$PATCH_NAME`
+  DIFFSTAT=/var/usr/bin/diffstat
 fi
+
+FILE_LIST=`$DIFFSTAT -p1 -l $APP_DIR/$PATCH_NAME`
 
 if [ -f "/media/cryptofs/apps/usr/bin/patch" ] ; then
   PATCH_EXEC=/media/cryptofs/apps/usr/bin/patch
@@ -18,10 +20,23 @@ fi
 IPKG_INFO_DIR=/usr/lib/ipkg/info
 PATCH_CONTROL_DIR=$IPKG_OFFLINE_ROOT/usr/lib/.webosinternals.patches
 PATCH_LOG=/media/internal/webos-patches.log
+VERSION=aupt-1
 
 do_failure() {
-  ipkg -o $IPKG_OFFLINE_ROOT remove `basename $APP_DIR`
   exit 1
+}
+
+find_incompatible() {
+  for i in `ls $PATCH_CONTROL_DIR/*.patch`
+  do
+    for j in `$DIFFSTAT -p1 -l $i`
+    do
+      if [ "$file" = "/$j" ]
+      then
+        echo "  Incompatible package: `basename $i .patch`" 1>&2 | tee -a $PATCH_LOG
+      fi
+    done
+  done
 }
 
 if [ ! -e $PATCH_LOG ]
@@ -47,6 +62,41 @@ then
   echo "ERROR: APP_DIR and PATCH_NAME both must be set in postinst" | tee -a $PATCH_LOG
   do_failure
 fi
+
+for i in $FILE_LIST
+do
+  file=/$i
+  for j in `cat $PATCH_CONTROL_DIR/backups`
+  do
+    if [ "$file" = "$i" ]
+    then
+      echo "ERROR: A patch using an incompatible patch technology has already touched a file in this patch " 1>&2 | tee -a $PATCH_LOG
+      echo "  file: $file" 1>&2 | tee -a $PATCH_LOG
+
+      find_incompatible
+
+      echo "" >> $PATCH_LOG
+      echo "----------------------------------" >> $PATCH_LOG
+      echo "Checking all packages for incompatibilities..." >> $PATCH_LOG
+      echo "----------------------------------" >> $PATCH_LOG
+      for k in `cat $PATCH_CONTROL_DIR/packages`
+      do
+        version=`echo $k | awk '{print $2}'`
+        if [ "$version" = "" ]
+        then
+          version=apt-1
+        fi
+
+        if [ "$version" != "$VERSION" ]
+        then
+          echo "WARNING: Package: $k uses incompatible patch technology: $version" >> $PATCH_LOG
+        fi
+      done
+
+      do_failure
+    fi
+  done
+done
 
 echo "" >> $PATCH_LOG
 echo "----------------------------------" >> $PATCH_LOG
@@ -118,11 +168,11 @@ do
 
   tmpvar=`echo $file | tr '/' '.'`
   sed -i -e /$tmpvar/d $PATCH_CONTROL_DIR/backups
-  echo $file >> $PATCH_CONTROL_DIR/backups
+  echo "$file $VERSION" >> $PATCH_CONTROL_DIR/backups
 done
 
 sed -i -e /`basename $APP_DIR`/d $PATCH_CONTROL_DIR/packages
-basename $APP_DIR >> $PATCH_CONTROL_DIR/packages
+basename "$APP_DIR $VERSION">> $PATCH_CONTROL_DIR/packages
 
 cp $APP_DIR/$PATCH_NAME $PATCH_CONTROL_DIR/$PATCH_NAME
 

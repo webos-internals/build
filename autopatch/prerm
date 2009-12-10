@@ -4,10 +4,12 @@ APP_DIR=
 PATCH_NAME=
 
 if [ -f "/media/cryptofs/apps/usr/bin/diffstat" ] ; then
-  FILE_LIST=`/media/cryptofs/apps/usr/bin/diffstat -p1 -l $APP_DIR/$PATCH_NAME`
+  DIFFSTAT=/media/cryptofs/apps/usr/bin/diffstat
 else
-  FILE_LIST=`/var/usr/bin/diffstat -p1 -l $APP_DIR/$PATCH_NAME`
+  DIFFSTAT=/var/usr/bin/diffstat
 fi
+
+FILE_LIST=`$DIFFSTAT -p1 -l $APP_DIR/$PATCH_NAME`
 
 if [ -f "/media/cryptofs/apps/usr/bin/patch" ] ; then
   PATCH_EXEC=/media/cryptofs/apps/usr/bin/patch
@@ -18,6 +20,7 @@ fi
 IPKG_INFO_DIR=/usr/lib/ipkg/info
 PATCH_CONTROL_DIR=$IPKG_OFFLINE_ROOT/usr/lib/.webosinternals.patches
 PATCH_LOG=/media/internal/webos-patches.log
+VERSION=aupt-1
 
 do_failure() {
   exit 1
@@ -132,12 +135,12 @@ do
   then
     tmpvar=`echo $file | tr '/' '.'`
     rm -f $file.webosinternals.orig
-    sed -i -e /\^$tmpvar\$/d $PATCH_CONTROL_DIR/backups
+    sed -i -e /\^'$tmpvar $VERSION'\$/d $PATCH_CONTROL_DIR/backups
   fi
 done
 
 rm -f $PATCH_CONTROL_DIR/$PATCH_NAME
-sed -i -e /\^`basename $APP_DIR`\$/d $PATCH_CONTROL_DIR/packages
+sed -i -e /\^'`basename $APP_DIR` $VERSION'\$/d $PATCH_CONTROL_DIR/packages
 
 if [ -e $APP_DIR/prerm_extra ]
 then
