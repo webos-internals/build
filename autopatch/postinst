@@ -75,12 +75,13 @@ echo "------------------------------------------------------" >> $PATCH_LOG
 
 for i in `cat $PATCH_CONTROL_DIR/backups`
 do
+  backup=`echo $i | awk '{print $1}'`
   version=`echo $i | awk '{print $2}'`
 
   if [ "$version" != "$VERSION" ]
   then
-    echo "Incompatible backup file: $i" >> $PATCH_LOG
-    INCOMPATIBLE_BACKUPS="$INCOMPATIBLE_BACKUPS $i"
+    echo "Incompatible backup file: $backup" >> $PATCH_LOG
+    INCOMPATIBLE_BACKUPS="$INCOMPATIBLE_BACKUPS $backup"
   fi
 done
 
@@ -102,6 +103,7 @@ do
       echo "----------------------------------" >> $PATCH_LOG
       for k in `cat $PATCH_CONTROL_DIR/packages`
       do
+        package=`echo $k | awk '{print $1}'`
         version=`echo $k | awk '{print $2}'`
 
         if [ "$version" = "" ]
@@ -111,7 +113,7 @@ do
 
         if [ "$version" != "$VERSION" ]
         then
-          echo "WARNING: Package: $k uses incompatible patch technology: $version" >> $PATCH_LOG
+          echo "WARNING: Package: $package uses incompatible patch technology: $version" >> $PATCH_LOG
         fi
       done
 
