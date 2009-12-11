@@ -52,7 +52,7 @@ do_skip() {
 }
 
 echo "***************UPDATING FEEDS***************" >> $LOG
-echo "" >> $LOG
+echo "" | tee -a $LOG
 echo -n "Updating Feeds ... "
 #ipkg -o $IPKG_OFFLINE_ROOT update >> $LOG 2>&1 || echo "Failed!"
 #if [ "$?" -eq 0 ]
@@ -91,7 +91,7 @@ else
  echo "Using IPKG LIST for patches to test." >> $LOG
 fi
 
-echo "" >> $LOG
+echo "" | tee -a $LOG
 echo "***************STARTING TESTS***************" | tee -a $LOG
 
 mount -o remount,rw / >> $LOG 2>&1
@@ -150,7 +150,7 @@ echo "" | tee -a $LOG
 echo "Succeed: ${NUM_SUCCEED}" | tee -a $LOG
 echo "Skipped: ${NUM_SKIPPED}" | tee -a $LOG
 echo "Failed:  ${NUM_FAILED}"  | tee -a $LOG
-echo "See end of the log ($LOG) for lists of packages. They are separated by succeed, failed and skipped." | tee -a $LOG
-echo "" | tee -a $LOG
-echo "**********************END OF TEST**********************" | tee -a $LOG
+echo "See the end of the log ($LOG) for lists of packages. They are separated by succeed, failed and skipped." | tee -a $LOG
+echo "" >> $LOG
+echo "**********************END OF TEST**********************" >> $LOG
 echo "" | tee -a $LOG
