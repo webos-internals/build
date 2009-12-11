@@ -19,7 +19,7 @@
 
 WEBOS_VERSION = 1.3.1
 
-SUBDIRS = apps services plugins linux
+SUBDIRS = apps services plugins daemons linux
 
 .PHONY: index package toolchain upload clobber clean
 
@@ -32,7 +32,7 @@ index:  ipkgs/webos-internals/all/Packages \
 	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
 	ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages
 
-ipkgs/webos-internals/%/Packages: package
+ipkgs/webos-internals/%/Packages: package-subdirs
 	rm -rf ipkgs/webos-internals/$*
 	mkdir -p ipkgs/webos-internals/$*
 	( find ${SUBDIRS} -type d -name ipkgs -print | \
@@ -43,7 +43,7 @@ ipkgs/webos-internals/%/Packages: package
 		-v -p ipkgs/webos-internals/$*/Packages ipkgs/webos-internals/$*
 	gzip -c ipkgs/webos-internals/$*/Packages > ipkgs/webos-internals/$*/Packages.gz
 
-ipkgs/webos-patches/%/Packages: package
+ipkgs/webos-patches/%/Packages: package-patches
 	rm -rf ipkgs/webos-patches/$*
 	mkdir -p ipkgs/webos-patches/$*
 	( find autopatch -type d -name ipkgs -print | \
@@ -54,7 +54,7 @@ ipkgs/webos-patches/%/Packages: package
 		-v -p ipkgs/webos-patches/$*/Packages ipkgs/webos-patches/$*
 	gzip -c ipkgs/webos-patches/$*/Packages > ipkgs/webos-patches/$*/Packages.gz
 
-ipkgs/optware/%/Packages: package
+ipkgs/optware/%/Packages: package-optware
 	rm -rf ipkgs/optware/$*
 	mkdir -p ipkgs/optware/$*
 	( find optware -type d -name ipkgs -print | \
@@ -65,7 +65,7 @@ ipkgs/optware/%/Packages: package
 		-v -p ipkgs/optware/$*/Packages ipkgs/optware/$*
 	gzip -c ipkgs/optware/$*/Packages > ipkgs/optware/$*/Packages.gz
 
-ipkgs/%/Packages: package
+ipkgs/%/Packages: package-feeds
 	rm -rf ipkgs/$*
 	mkdir -p ipkgs/$*
 	( find feeds/$* -type d -name ipkgs -print | \
@@ -79,22 +79,30 @@ ipkgs/%/Packages: package
 	rm -f ipkgs/$*/Packages.orig*
 	gzip -c ipkgs/$*/Packages > ipkgs/$*/Packages.gz
 
-package: toolchain
+package: package-subdirs package-patches package-optware package-feeds
+
+package-subdirs: toolchain
 	for f in `find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package || exit ; \
 	  fi; \
 	done
+
+package-patches: toolchain
 	for f in `find autopatch -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package || exit ; \
 	  fi; \
 	done
+
+package-optware: toolchain
 	for f in `find optware -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package || exit ; \
 	  fi; \
 	done
+
+package-feeds: toolchain
 	for f in `find feeds -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package ; \
@@ -116,7 +124,7 @@ webos-internals-testing:
 	${MAKE} SUBDIRS="unreleased" ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv6/Packages ipkgs/webos-internals/armv7/Packages
 	rsync -avr ipkgs/webos-internals/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
 
-webos-patches-testing: ipkgs/webos-patches/${WEBOS_VERSION}/Packages
+webos-patches-testing: package-patches
 	rsync -avr ipkgs/webos-patches/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 
 optware-testing: ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv6/Packages ipkgs/optware/armv7/Packages
