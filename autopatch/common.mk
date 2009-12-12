@@ -6,7 +6,7 @@ DEPENDS = org.webosinternals.patch, org.webosinternals.diffstat
 FEED = WebOS Patches
 LICENSE = MIT License Open Source
 META_GLOBAL_VERSION = 1
-WEBOS_VERSIONS = 1.1.3 1.2.1 1.3.1 1.3.5
+WEBOS_VERSIONS = 1.2.1 1.3.1 1.3.5
 #POSTINSTALLFLAGS = RestartLuna
 #POSTREMOVEFLAGS = RestartLuna
 ifneq ("${META_SUB_VERSION}","")
