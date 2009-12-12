@@ -6,4 +6,7 @@ rm -f /etc/ppp/ip-up.d/*mobi.optware.ez-ipupdate
 # Remove the ip-down.d script
 rm -f /etc/ppp/ip-down.d/*mobi.optware.ez-ipupdate
 
+# Remove the cache file
+rm -f /opt/var/run/ez-ipupdate.cache
+
 exit 0

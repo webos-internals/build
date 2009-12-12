@@ -1,4 +1,4 @@
 #!/bin/sh
-if [ -x /opt/bin/ez-ipupdate -a -e /opt/etc/ipupdate.conf ] ; then
-  /opt/bin/ez-ipupdate -c /opt/etc/ipupdate.conf -q > /dev/null 2>&1 || /bin/true
+if [ -x /opt/bin/ez-ipupdate -a -e /opt/etc/ez-ipupdate.conf ] ; then
+  /opt/bin/ez-ipupdate -i %WAN% -b /opt/var/run/ez-ipupdate.cache -c /opt/etc/ez-ipupdate.conf -q > /dev/null 2>&1 || /bin/true
 fi
