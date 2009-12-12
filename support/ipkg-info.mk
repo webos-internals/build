@@ -5,7 +5,7 @@ build/ipkg-info-%: ${DL_DIR}/ipkg-info-%
 	cp $</*.list $@/
 
 .PRECIOUS: ${DL_DIR}/ipkg-info-%
-${DL_DIR}/ipkg-info-%: ${DL_DIR}/webosdoctorp100ewwsprint-%.jar
+${DL_DIR}/ipkg-info-%: ${DL_DIR}/webosdoctor-%.jar
 	if [ -e $< ]; then \
 		unzip -p $< resources/webOS.tar | \
 		tar -O -x -f - ./nova-cust-image-castle.rootfs.tar.gz | \
@@ -15,19 +15,19 @@ ${DL_DIR}/ipkg-info-%: ${DL_DIR}/webosdoctorp100ewwsprint-%.jar
 	fi
 	mkdir -p $@
 
-${DL_DIR}/webosdoctorp100ewwsprint-1.1.3.jar:
+${DL_DIR}/webosdoctor-1.1.3.jar:
 	mkdir -p ${DL_DIR}
 	curl -L -o $@ http://palm.cdnetworks.net/rom/p113r0d10122009/wr640xdfgy12z/webosdoctorp100eww-wr.jar
 
-${DL_DIR}/webosdoctorp100ewwsprint-1.2.1.jar:
+${DL_DIR}/webosdoctor-1.2.1.jar:
 	mkdir -p ${DL_DIR}
 	curl -L -o $@ http://palm.cdnetworks.net/rom/p121r0d10092009/sr1ntp121rod/webosdoctorp100ewwsprint.jar
 
-${DL_DIR}/webosdoctorp100ewwsprint-1.3.1.jar:
+${DL_DIR}/webosdoctor-1.3.1.jar:
 	mkdir -p ${DL_DIR}
 	curl -L -o $@ http://palm.cdnetworks.net/rom/pre/p131r0d11172009/sr1ntp131rod/webosdoctorp100ewwsprint.jar
 
-.PHONY: ${DL_DIR}/webosdoctorp100ewwsprint-1.3.5.jar
+.PHONY: ${DL_DIR}/webosdoctor-1.3.5.jar
 ${DL_DIR}/ipkg-info-1.3.5: ${DL_DIR}/ipkg-info-1.3.1
 	cp -r $< $@
 
