@@ -17,17 +17,28 @@ ${DL_DIR}/ipkg-info-%: ${DL_DIR}/webosdoctor-%.jar
 
 ${DL_DIR}/webosdoctor-1.1.3.jar:
 	mkdir -p ${DL_DIR}
-	curl -L -o $@ http://palm.cdnetworks.net/rom/p113r0d10122009/wr640xdfgy12z/webosdoctorp100eww-wr.jar
+	if [ -e ${DL_DIR}/webosdoctorp100eww-wr-1.1.3.jar ] ; then \
+	  ln -s webosdoctorp100eww-wr-1.1.3.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/p113r0d10122009/wr640xdfgy12z/webosdoctorp100eww-wr.jar ; \
+	fi
 
 ${DL_DIR}/webosdoctor-1.2.1.jar:
 	mkdir -p ${DL_DIR}
-	curl -L -o $@ http://palm.cdnetworks.net/rom/p121r0d10092009/sr1ntp121rod/webosdoctorp100ewwsprint.jar
+	if [ -e ${DL_DIR}/webosdoctorp100ewwsprint-1.2.1.jar ] ; then \
+	  ln -s webosdoctorp100ewwsprint-1.2.1.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/p121r0d10092009/sr1ntp121rod/webosdoctorp100ewwsprint.jar ; \
+	fi
 
 ${DL_DIR}/webosdoctor-1.3.1.jar:
 	mkdir -p ${DL_DIR}
-	curl -L -o $@ http://palm.cdnetworks.net/rom/pre/p131r0d11172009/sr1ntp131rod/webosdoctorp100ewwsprint.jar
+	if [ -e ${DL_DIR}/webosdoctorp100ewwsprint-1.3.1.jar ] ; then \
+	  ln -s webosdoctorp100ewwsprint-1.3.1.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/pre/p131r0d11172009/sr1ntp131rod/webosdoctorp100ewwsprint.jar ; \
+	fi
 
 .PHONY: ${DL_DIR}/webosdoctor-1.3.5.jar
 ${DL_DIR}/ipkg-info-1.3.5: ${DL_DIR}/ipkg-info-1.3.1
 	cp -r $< $@
-
