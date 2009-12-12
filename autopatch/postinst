@@ -68,12 +68,31 @@ then
   do_failure
 fi
 
+if [ ! -d $PATCH_CONTROL_DIR ]
+then
+  rm -rf $PATCH_CONTROL_DIR
+  mkdir $PATCH_CONTROL_DIR || do_failure
+fi
+
+if [ ! -e $PATCH_CONTROL_DIR/backups ]
+then
+  touch $PATCH_CONTROL_DIR/backups || do_failure
+fi
+
+if [ ! -e $PATCH_CONTROL_DIR/packages ]
+then
+  touch $PATCH_CONTROL_DIR/packages || do_failure
+fi
+
+#rm -f $PATCH_CONTROL_DIR/tmp
+#touch $PATCH_CONTROL_DIR/tmp || do_failure
+
 echo "" >> $PATCH_LOG
 echo "------------------------------------------------------" >> $PATCH_LOG
 echo "Checking for incompatible backup files..." >> $PATCH_LOG
 echo "------------------------------------------------------" >> $PATCH_LOG
 
-for i in `cat $PATCH_CONTROL_DIR/backups`
+while read i
 do
   backup=`echo $i | awk '{print $1}'`
   version=`echo $i | awk '{print $2}'`
@@ -83,7 +102,7 @@ do
     echo "Incompatible backup file: $backup" >> $PATCH_LOG
     INCOMPATIBLE_BACKUPS="$INCOMPATIBLE_BACKUPS $backup"
   fi
-done
+done < $PATCH_CONTROL_DIR/backups
 
 for i in $INCOMPATIBLE_BACKUPS
 do
@@ -140,34 +159,34 @@ then
   echo "Interestingly, the patch seems to already be applied" | tee -a $PATCH_LOG
 fi
 
-if [ ! -d $PATCH_CONTROL_DIR ]
-then
-  rm -rf $PATCH_CONTROL_DIR
-  mkdir $PATCH_CONTROL_DIR || do_failure
-fi
-
-if [ ! -e $PATCH_CONTROL_DIR/backups ]
-then
-  touch $PATCH_CONTROL_DIR/backups || do_failure
-fi
-
-if [ ! -e $PATCH_CONTROL_DIR/packages ]
-then
-  touch $PATCH_CONTROL_DIR/packages || do_failure
-fi
-
-rm -f $PATCH_CONTROL_DIR/tmp
-touch $PATCH_CONTROL_DIR/tmp || do_failure
-
 #if [ -e $PATCH_CONTROL_DIR/$PATCH_NAME ]
 #then
   #echo "ERROR: Patch already installed?"
   #do_failure
 #fi
 
+rm -f $APP_DIR/md5sums
+touch $APP_DIR/md5sums
+
 for i in $FILE_LIST
 do
   file=/$i
+
+  echo "" >> $PATCH_LOG
+  echo "----------------------------------" >> $PATCH_LOG
+	echo "Creating md5sums list..." >> $PATCH_LOG
+  echo "----------------------------------" >> $PATCH_LOG
+  for j in `cat $APP_DIR/package_list`
+  do
+		echo "Package: $j" >> $PATCH_LOG
+    md5sum_line=`grep -h $file $IPKG_INFO_DIR/$j.md5sums`
+    if [ "$md5sum_line" != "" ]
+    then
+			echo "$md5sum_line" >> $PATCH_LOG
+      echo $md5sum_line >> $APP_DIR/md5sums
+      palm_md5sum=`echo $md5sum_line | awk '{print $1}'`
+    fi
+  done
 
   if [ ! -e $file.webosinternals.orig ]
   then
@@ -180,8 +199,12 @@ do
     fi
   elif [ -e $file ]
   then
-    palm_md5sum=`grep -h $file $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`
     file_md5sum=`md5sum $file | awk '{print $1}'`
+
+    if [ "$palm_md5sum" = "" ]
+    then
+        palm_md5sum=`grep -h $file $IPKG_INFO_DIR/*.md5sums | awk '{print $1}'`
+    fi
 
     if [ "$file_md5sum" = "$palm_md5sum" ]
     then

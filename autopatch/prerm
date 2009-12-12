@@ -79,7 +79,6 @@ then
     for i in $FILE_LIST
     do
       file=/$i
-      palm_md5sum=`grep -h $file $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`
       file_md5sum=""
 
       if [ -e $file ]
@@ -87,12 +86,32 @@ then
         file_md5sum=`md5sum $file | awk '{print $1}'`
       fi
 
+      if [ -e $APP_DIR/package_list ]
+      then
+        for j in `cat $APP_DIR/package_list`
+        do
+          if [ "$palm_md5sum" = "" ]
+          then
+            echo "Getting md5sum from Palm package: $j" >> $PATCH_LOG
+            palm_md5sum=`grep -h $file $IPKG_INFO_DIR/$j.md5sums | awk '{print $1}'`
+          fi
+        done
+      fi
+
+      if [ "$palm_md5sum" = "" ] && \
+         [ `grep -h $file $IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/*.list` ]
+      then
+        echo "Check for md5sum in $IPKG_INFO_DIR"
+        palm_md5sum=`grep -h $file $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`
+      fi
+
       if [ "$palm_md5sum" = "$file_md5sum" ]
       then
         echo "Existing file matches Palm md5sum (maybe due to OTA update): $file" >> $PATCH_LOG
         rm -f $file.webosinternals.orig
       else
-        if [ "$palm_md5sum" = "" ]
+        if [ "$palm_md5sum" = "" ] && \
+           [ `grep -h $file $IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/*.list` ]
         then
           created_files="$created_files $file"
         else
@@ -122,9 +141,15 @@ do
   rm -f $i
 done
 
+echo "" >> $PATCH_LOG
+echo "----------------------------------" >> $PATCH_LOG
+echo "Cleaning up backups..." >> $PATCH_LOG
+echo "----------------------------------" >> $PATCH_LOG
 for i in $FILE_LIST
 do
   file=/$i
+  palm_md5sum=""
+  orig_palm_md5sum=""
   orig_md5sum=""
   file_md5sum=""
 
@@ -138,9 +163,33 @@ do
     orig_md5sum=`md5sum $file.webosinternals.orig | awk '{print $1}'`
   fi
 
-  if [ ! -e $file ] && [ ! -s $file.webosinternals.orig ] || [ "$orig_md5sum" = "$file_md5sum" ] || \
+  if [ -e $APP_DIR/md5sums ]
+  then
+    orig_palm_md5sum=`grep -h $file $APP_DIR/md5sums | awk '{print $1}'`
+  fi
+  
+  if [ -e $APP_DIR/package_list ]
+  then
+    for j in `cat $APP_DIR/package_list`
+    do
+      if [ "$palm_md5sum" = "" ]
+      then
+        palm_md5sum=`grep -h $file $IPKG_INFO_DIR/$j.md5sums`
+      fi
+    done
+  fi
+
+  echo "file: $file" >> $PATCH_LOG
+  echo "file md5sum:      $file_md5sum" >> $PATCH_LOG
+  echo "orig md5sum:      $orig_md5sum" >> $PATCH_LOG
+  echo "palm md5sum:      $palm_md5sum" >> $PATCH_LOG
+  echo "orig palm md5sum: $orig_palm_md5sum" >> $PATCH_LOG
+  if [ ! -e $file ] && [ ! -s $file.webosinternals.orig ] || \
+     [ "$orig_md5sum" = "" ] || [ "$orig_md5sum" = "$file_md5sum" ] || \
+     [ "$orig_palm_md5sum" != "$palm_md5sum" ] || [ "$palm_md5sum" = "$file_md5sum" ] || \
      [ "`grep -h $file $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`" = "$file_md5sum" ]
   then
+    echo "Remove backup" >> $PATCH_LOG
     tmpvar=`echo $file | tr '/' '.'`
     rm -f $file.webosinternals.orig
     sed -i -e /\^'$tmpvar $VERSION'\$/d $PATCH_CONTROL_DIR/backups

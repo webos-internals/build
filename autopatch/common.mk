@@ -28,9 +28,11 @@ else
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
 endif
 
+include ../../support/package.mk
+
 ifneq ("${DUMMY_VERSION}", "")
 WEBOS_VER:=$(shell echo ${VERSION} | tr -d '\-0')
-DESCRIPTION='This package is not currently available for WebOS ${WEBOS_VER}.  This package may be installed as a placeholder to notify you when an update is available.  NOTE: This is simply an empty package placeholder, it will not affect your device in any way'
+DESCRIPTION=This package is not currently available for WebOS ${WEBOS_VER}.  This package may be installed as a placeholder to notify you when an update is available.  NOTE: This is simply an empty package placeholder, it will not affect your device in any way
 CATEGORY=Unavailable
 SRC_GIT=
 DEPENDS=
@@ -43,6 +45,10 @@ build/.built-${VERSION}:
 	mkdir -p build/all
 	touch $@
 else
+WEBOS_VERSION=$(shell echo ${VERSION} | cut -d- -f1)
+include ../../support/download.mk
+include ../../support/ipkg-info.mk
+
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
 
@@ -55,10 +61,18 @@ build/.meta-${META_VERSION}:
 build/.built-extra-${VERSION}:
 	touch $@
 
-build/.built-${VERSION}: build/.unpacked-${VERSION} build/.meta-${META_VERSION}
+build/.built-${VERSION}: build/.unpacked-${VERSION} build/.meta-${META_VERSION} build/ipkg-info-${WEBOS_VERSION}
 	rm -rf build/all
 	mkdir -p build/all/usr/palm/applications/${APP_ID}
 	install -m 644 build/src-${VERSION}/${PATCH} build/all/usr/palm/applications/${APP_ID}/
+	for f in `diffstat -l build/src-${VERSION}/${PATCH}` ; do \
+		myvar=`grep -l $$f build/ipkg-info-${WEBOS_VERSION}/*`; \
+		myvar=`basename $$myvar .list`; \
+		grep $$myvar build/all/usr/palm/applications/${APP_ID}/package_list; \
+		if [ $$? -ne 0 ]; then \
+			echo $$myvar >> build/all/usr/palm/applications/${APP_ID}/package_list; \
+		fi; \
+	done
 	touch $@
 	${MAKE} build/.built-extra-${VERSION}
 
@@ -78,5 +92,3 @@ endif
 .PHONY: clobber
 clobber::
 	rm -rf build
-
-include ../../support/package.mk
