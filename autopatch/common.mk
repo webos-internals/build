@@ -65,6 +65,8 @@ build/.built-${VERSION}: build/.unpacked-${VERSION} build/.meta-${META_VERSION} 
 	rm -rf build/all
 	mkdir -p build/all/usr/palm/applications/${APP_ID}
 	install -m 644 build/src-${VERSION}/${PATCH} build/all/usr/palm/applications/${APP_ID}/
+	rm -f build/all/usr/palm/applications/${APP_ID}/package_list
+	touch build/all/usr/palm/applications/${APP_ID}/package_list
 	for f in `diffstat -l build/src-${VERSION}/${PATCH}` ; do \
 		myvar=`grep -l $$f build/ipkg-info-${WEBOS_VERSION}/*`; \
 		myvar=`basename $$myvar .list`; \
