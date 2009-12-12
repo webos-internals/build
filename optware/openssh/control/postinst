@@ -29,6 +29,11 @@ if [ ! -f /opt/etc/openssh/ssh_host_dsa_key ]; then
     /opt/bin/ssh-keygen -t dsa -f /opt/etc/openssh/ssh_host_dsa_key -C '' -N ''
 fi
 
+# Install the profile script
+rm -f /etc/profile.d/mobi.optware.openssh
+mkdir -p /etc/profile.d/
+cp $IPKG_OFFLINE_ROOT/etc/profile.d/mobi.optware.openssh /etc/profile.d/mobi.optware.openssh
+
 # The emulator already has an ssh server running, so no need to start another.
 if [ "`uname -m`" != "i686" ]; then
     rm -f /etc/event.d/mobi.optware.openssh

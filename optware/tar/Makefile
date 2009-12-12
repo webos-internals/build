@@ -19,7 +19,7 @@ include ../../support/download.mk
 
 include ../../support/optware.mk
 
-build/%.built : build/%.unpacked
-	mv build/$*/opt/bin/gnutar build/$*/opt/bin/${NAME}
+build/%.built-${VERSION} : build/%.unpacked
+	[ -e build/$*/opt/bin/${NAME} ] || mv build/$*/opt/bin/gnutar build/$*/opt/bin/${NAME}
 	rm -rf build/$*/opt/libexec build/$*/opt/share build/$*/opt/sbin
 	touch $@
