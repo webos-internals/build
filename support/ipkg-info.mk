@@ -15,6 +15,10 @@ ${DL_DIR}/ipkg-info-%: ${DL_DIR}/webosdoctorp100ewwsprint-%.jar
 	fi
 	mkdir -p $@
 
+${DL_DIR}/webosdoctorp100ewwsprint-1.1.3.jar:
+	mkdir -p ${DL_DIR}
+	curl -L -o $@ http://palm.cdnetworks.net/rom/p113r0d10122009/wr640xdfgy12z/webosdoctorp100eww-wr.jar
+
 ${DL_DIR}/webosdoctorp100ewwsprint-1.2.1.jar:
 	mkdir -p ${DL_DIR}
 	curl -L -o $@ http://palm.cdnetworks.net/rom/p121r0d10092009/sr1ntp121rod/webosdoctorp100ewwsprint.jar
