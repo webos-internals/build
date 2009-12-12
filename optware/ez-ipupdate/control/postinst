@@ -1,13 +1,8 @@
 #!/bin/sh
 
 # Install the ip-up.d script
-rm -f /etc/ppp/ip-up.d/*mobi.optware.ez-ipupdate
+rm -f /etc/ppp/ip-up.d/50mobi-optware-ez-ipupdate
 mkdir -p /etc/ppp/ip-up.d/
-cp $IPKG_OFFLINE_ROOT/etc/ppp/ip-up.d/50mobi.optware.ez-ipupdate /etc/ppp/ip-up.d/50mobi.optware.ez-ipupdate
-
-# Install the ip-down.d script
-rm -f /etc/ppp/ip-down.d/*mobi.optware.ez-ipupdate
-mkdir -p /etc/ppp/ip-down.d/
-cp $IPKG_OFFLINE_ROOT/etc/ppp/ip-down.d/50mobi.optware.ez-ipupdate /etc/ppp/ip-down.d/50mobi.optware.ez-ipupdate
+cp $IPKG_OFFLINE_ROOT/etc/ppp/ip-up.d/50mobi-optware-ez-ipupdate /etc/ppp/ip-up.d/50mobi-optware-ez-ipupdate
 
 exit 0
