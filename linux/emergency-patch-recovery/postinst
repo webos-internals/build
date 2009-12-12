@@ -18,7 +18,7 @@ echo "------------------------------------------------------" >> $PATCH_LOG
 if [ ! -d $PATCH_CONTROL_DIR ]
 then
   echo "NOTE: No patches found!" | tee -a $PATCH_LOG
-  ipkg -o /var remove $PACKAGE
+  ipkg -o /var -force-depends remove $PACKAGE
   exit 1
 fi
 
