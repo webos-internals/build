@@ -5,6 +5,7 @@ VERSIONS  = 1.0.0 2.0.0
 DESCRIPTION = Regression test for simple webOS application. No dependencies, no install scripts.
 TYPE	 = Application
 CATEGORY = Simple WebOS
+FEED     = Regression Tests
 
 .PHONY: package
 ifneq ("${VERSIONS}", "")
