@@ -69,10 +69,12 @@ build/.built-${VERSION}: build/.unpacked-${VERSION} build/.meta-${META_VERSION} 
 	touch build/all/usr/palm/applications/${APP_ID}/package_list
 	for f in `diffstat -l -p1 build/src-${VERSION}/${PATCH}` ; do \
 		myvar=`grep -l $$f build/ipkg-info-${WEBOS_VERSION}/*`; \
-		myvar=`basename $$myvar .list`; \
-		grep $$myvar build/all/usr/palm/applications/${APP_ID}/package_list; \
-		if [ $$? -ne 0 ]; then \
-			echo $$myvar >> build/all/usr/palm/applications/${APP_ID}/package_list; \
+		if [ "$$myvar" != "" ]; then \
+			myvar=`basename $$myvar .list`; \
+			grep $$myvar build/all/usr/palm/applications/${APP_ID}/package_list; \
+			if [ $$? -ne 0 ]; then \
+				echo $$myvar >> build/all/usr/palm/applications/${APP_ID}/package_list; \
+			fi; \
 		fi; \
 	done
 	touch $@
