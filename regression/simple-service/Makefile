@@ -1,9 +1,9 @@
-NAME     = simple-webos
-TITLE	 = Simple Application
+NAME     = simple-service
+TITLE	 = Simple Service
 APP_ID   = org.webosinternals.regression.${NAME}
 VERSIONS  = 1.0.0 2.0.0
-DESCRIPTION = Regression test for simple webOS application. No dependencies, no install scripts.
-TYPE	 = Application
+DESCRIPTION = Regression test for simple webOS service with install scripts.
+TYPE	 = Service
 CATEGORY = Regression Tests
 FEED     = Regression Tests
 
