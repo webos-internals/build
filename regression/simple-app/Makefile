@@ -1,4 +1,4 @@
-NAME     = simple-webos
+NAME     = simple-app
 TITLE	 = Simple Application
 APP_ID   = org.webosinternals.regression.${NAME}
 VERSIONS  = 1.0.0 2.0.0
