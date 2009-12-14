@@ -20,6 +20,6 @@ include ../../support/download.mk
 
 include ../../support/optware.mk
 
-build/%.built : build/%.unpacked
+build/%.built-${VERSION} : build/%.unpacked
 	rm -rf build/$*/opt/etc
 	touch $@

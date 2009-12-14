@@ -18,19 +18,19 @@ include ../../support/package.mk
 
 include ../../support/download.mk
 
-build/armv7.built : build/armv7.unpacked
+build/armv7.built-${VERSION} : build/armv7.unpacked
 	rm -rf build/armv7/opt/etc/default build/armv7/opt/etc/init.d
 	mkdir -p build/armv7/etc/event.d
 	install -m 644 upstart/${APP_ID} build/armv7/etc/event.d/${APP_ID}
 	touch $@
 
-build/armv6.built : build/armv6.unpacked
+build/armv6.built-${VERSION} : build/armv6.unpacked
 	rm -rf build/armv6/opt/etc/default build/armv6/opt/etc/init.d
 	mkdir -p build/armv6/etc/event.d
 	install -m 644 upstart/${APP_ID} build/armv6/etc/event.d/${APP_ID}
 	touch $@
 
-build/i686.built : build/i686.unpacked
+build/i686.built-${VERSION} : build/i686.unpacked
 	rm -rf build/i686/opt/etc/default build/i686/opt/etc/init.d
 # The emulator already has an ssh server running, so no need to start another.
 	touch $@

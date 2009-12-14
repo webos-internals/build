@@ -1,6 +1,9 @@
 #!/bin/sh
 
-# The emulator already has an ssh server running, so no need to start another.
+# Remove the profile script
+rm -f /etc/profile.d/mobi.optware.openssh
+
+# The emulator already has an ssh server running, so we didn't start our own.
 if [ "`uname -m`" != "i686" ]; then
     /sbin/stop mobi.optware.openssh
     rm -f /etc/event.d/mobi.optware.openssh

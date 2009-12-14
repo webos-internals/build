@@ -30,7 +30,8 @@ index:  ipkgs/webos-internals/all/Packages \
 	ipkgs/optware/all/Packages \
 	ipkgs/optware/i686/Packages ipkgs/optware/armv6/Packages ipkgs/optware/armv7/Packages \
 	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
-	ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages
+	ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages \
+	ipkgs/regression-testing/1.0.0/Packages ipkgs/regression-testing/2.0.0/Packages
 
 ipkgs/webos-internals/%/Packages: package-subdirs
 	rm -rf ipkgs/webos-internals/$*
@@ -64,6 +65,17 @@ ipkgs/optware/%/Packages: package-optware
 	toolchain/ipkg-utils/ipkg-make-index \
 		-v -p ipkgs/optware/$*/Packages ipkgs/optware/$*
 	gzip -c ipkgs/optware/$*/Packages > ipkgs/optware/$*/Packages.gz
+
+ipkgs/regression-testing/%/Packages: package-regression
+	rm -rf ipkgs/regression-testing/$*
+	mkdir -p ipkgs/regression-testing/$*
+	( find regression -type d -name ipkgs -print | \
+	  xargs -I % find % -name "*_$*_all.ipk" -print | \
+	  xargs -I % rsync -i -a % ipkgs/regression-testing/$* )
+	TAR_OPTIONS=--wildcards \
+	toolchain/ipkg-utils/ipkg-make-index \
+		-v -p ipkgs/regression-testing/$*/Packages ipkgs/regression-testing/$*
+	gzip -c ipkgs/regression-testing/$*/Packages > ipkgs/regression-testing/$*/Packages.gz
 
 ipkgs/%/Packages: package-feeds
 	rm -rf ipkgs/$*
@@ -102,6 +114,13 @@ package-optware: toolchain
 	  fi; \
 	done
 
+package-regression: toolchain
+	for f in `find regression -mindepth 1 -maxdepth 1 -type d -print` ; do \
+	  if [ -e $$f/Makefile ]; then \
+	    ${MAKE} -C $$f package || exit ; \
+	  fi; \
+	done
+
 package-feeds: toolchain
 	for f in `find feeds -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
@@ -129,6 +148,9 @@ webos-patches-testing: package-patches
 
 optware-testing: ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv6/Packages ipkgs/optware/armv7/Packages
 	rsync -avr ipkgs/optware/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/optware/testing/
+
+regression-testing: ipkgs/regression-testing/1.0.0/Packages ipkgs/regression-testing/2.0.0/Packages 
+	rsync -avr ipkgs/regression-testing/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/regression-testing/
 
 distclean: clobber
 	find toolchain -mindepth 1 -maxdepth 1 -type d -print | \

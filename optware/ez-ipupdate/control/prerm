@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Remove the ip-up.d script
+rm -f /etc/ppp/ip-up.d/50mobi-optware-ez-ipupdate
+
+# Remove the cache file
+rm -f /opt/var/run/ez-ipupdate.cache
+
+exit 0
