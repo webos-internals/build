@@ -3,6 +3,7 @@ SCRIPTNAME="$(basename $0)"
 LOG=/media/internal/${SCRIPTNAME}.log
 NUM_FAILED="0"
 NUM_SUCCEED="0"
+NUM_SKIPPED="0"
 SUCCEED_PACKS=""
 FAILED=0
 DO="$1"
@@ -46,6 +47,13 @@ do_success() {
   FAILED=0
 }
 
+do_skip() {
+  echo "Skipping package {$v} because it is not in the feeds for 'IPKG Service'..." | tee -a $LOG
+  echo "" | tee -a $LOG
+  NUM_SKIPPED=`expr $NUM_SKIPPED + 1`
+  SKIPPED_PACKS="$SKIPPED_PACKS${v}\n"
+}
+
 if [ "$DO" != "i" -a "$DO" != "r" ] || [ ! -f "$LIST_FILE" ]
 then
   echo "Usage: $SCRIPTNAME [i|r] <list_file>"
@@ -80,11 +88,17 @@ echo "" | tee -a $LOG
 
 for v in $PACK_LIST
 do
+  PACK_CHECK=`ipkg -o $IPKG_OFFLINE_ROOT list | grep $v`
+  if [ ! "$PACK_CHECK" ]
+  then
+    do_skip
+    continue
+  fi
   if [ "$DO" = "i" ]
   then
-    echo "Installing $v" | tee -a $LOG
+    echo "Installing $v ..." | tee -a $LOG
   else
-    echo "Removing $v" | tee -a $LOG
+    echo "Removing $v ..." | tee -a $LOG
   fi
   if [ -f $IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/$v.prerm -a "$DO" = "r" ]
   then
@@ -98,7 +112,11 @@ do
   fi
   if [ "${FAILED}" -ne 1 -a "$DO" = "r" ]
   then
-    ipkg -o $IPKG_OFFLINE_ROOT --force-depends $DO2 $v >> $LOG 2>&1
+    ipkg -o $IPKG_OFFLINE_ROOT --force-depends $DO2 $v >> $LOG 2>&1 || do_failure
+    if [ "${FAILED}" -ne 1 ]
+    then
+      do_success
+    fi
   fi
   if [ "$DO" = "i" ]
   then
@@ -112,7 +130,7 @@ do
       then
 	do_success
       else
-        ipkg -o $IPKG_OFFLINE_ROOT r $v
+        ipkg -o $IPKG_OFFLINE_ROOT remove $v
       fi
     else
       do_success
@@ -128,6 +146,11 @@ echo "" >> $LOG
 echo -e $FAILED_PACKS >> $LOG
 echo "****************END OF FAILED PACKAGES****************" >> $LOG
 echo "" >> $LOG
+echo "***************START OF SKIPPED PACKAGES***************" >> $LOG
+echo "" >> $LOG
+echo -e $SKIPPED_PACKS >> $LOG
+echo "****************END OF SKIPPED PACKAGES****************" >> $LOG
+echo "" >> $LOG
 echo "***************START OF SUCCEED PACKAGES***************" >> $LOG
 echo "" >> $LOG
 echo -e $SUCCEED_PACKS >> $LOG
@@ -137,6 +160,7 @@ echo "" >> $LOG
 echo "************************RESULTS************************" | tee -a $LOG
 echo "" | tee -a $LOG
 echo "Succeed: ${NUM_SUCCEED}" | tee -a $LOG
+echo "Skipped: ${NUM_SKIPPED}" | tee -a $LOG
 echo "Failed:  ${NUM_FAILED}"  | tee -a $LOG
 echo "See the end of the log ($LOG) for lists of packages. They are separated by succeed, failed and skipped." | tee -a $LOG
 echo "" >> $LOG
