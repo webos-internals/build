@@ -112,7 +112,11 @@ do
   fi
   if [ "${FAILED}" -ne 1 -a "$DO" = "r" ]
   then
-    ipkg -o $IPKG_OFFLINE_ROOT --force-depends $DO2 $v >> $LOG 2>&1
+    ipkg -o $IPKG_OFFLINE_ROOT --force-depends $DO2 $v >> $LOG 2>&1 || do_failure
+    if [ "${FAILED}" -ne 1 ]
+    then
+      do_success
+    fi
   fi
   if [ "$DO" = "i" ]
   then
