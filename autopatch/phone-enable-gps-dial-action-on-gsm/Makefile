@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = phone/${NAME}.patch
 TITLE = Enable GPS Dial Action on GSM
-DESCRIPTION = This patch enables the \#*GPS# dial action for GSM devices.
+DESCRIPTION = This patch enables the \#*GPS\# dial action for GSM devices.
 CATEGORY = Phone
 VERSIONS = 1.3.1-24 1.3.5-4
 ICON = http://www.webos-internals.org/images/c/c8/Icon_WebOSInternals_Patches_Phonepreferences.png
