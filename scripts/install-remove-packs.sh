@@ -94,6 +94,14 @@ do
     do_skip
     continue
   fi
+  if [ "$v" = "org.webosinternals.ipkgservice" ] || [ "$v" = "org.webosinternals.preware" ] || [ "$v" = "org.webosinternals.patch" ] || [ "$v" = "org.webosinternals.diffstat" ]
+  then
+    if [ "$DO" = "r" ]
+    then
+      do_skip
+      continue
+    fi
+  fi
   if [ "$DO" = "i" ]
   then
     echo "Installing $v ..." | tee -a $LOG
