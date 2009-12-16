@@ -1,6 +1,6 @@
 #!/bin/sh
 PACKAGE=org.webosinternals.emergency-patch-recovery
-PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
+PATCH_CONTROL_DIR=$IPKG_OFFLINE_ROOT/usr/lib/.webosinternals.patches
 PATCH_LOG=/media/internal/webos-patches.log
 IPKG_INFO_DIR=/usr/lib/ipkg/info
 
@@ -15,10 +15,16 @@ echo "------------------------------------------------------" >> $PATCH_LOG
 echo "Emergency Patch Recovery $(date)" >> $PATCH_LOG
 echo "------------------------------------------------------" >> $PATCH_LOG
 
+if [ "$IPKG_OFFLINE_ROOT" = "" ]
+then
+  echo "ERROR: IPKG_OFFLINE_ROOT must be supplied to the postinst" | tee -a $PATCH_LOG
+  exit 1
+fi
+
 if [ ! -d $PATCH_CONTROL_DIR ]
 then
   echo "NOTE: No patches found!" | tee -a $PATCH_LOG
-  ipkg -o /var -force-depends remove $PACKAGE
+  ipkg -o $IPKG_OFFLINE_ROOT -force-depends remove $PACKAGE
   exit 1
 fi
 
@@ -39,7 +45,7 @@ then
     echo "Removing package: $package" >> $PATCH_LOG
     echo "Patch technology: $version" >> $PATCH_LOG
     echo "------------------------------------------------------" >> $PATCH_LOG
-    ipkg -o /var remove $package
+    ipkg -o $IPKG_OFFLINE_ROOT remove $package
   done
 fi
 
@@ -86,5 +92,5 @@ fi
 echo "DONE" | tee -a $PATCH_LOG
 rm -rf $PATCH_CONTROL_DIR
 
-ipkg -o /var remove $PACKAGE
+ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
 exit 0
