@@ -14,7 +14,8 @@ if [ -e $PATCH_CONTROL_DIR/packages ]
 then
   for i in `cat $PATCH_CONTROL_DIR/packages`
   do
-    ipkg -o $IPKG_OFFLINE_ROOT remove $i
+    ipkg -o /var remove $i
+    ipkg -o /media/cryptofs/apps remove $i
   done
 fi
 
