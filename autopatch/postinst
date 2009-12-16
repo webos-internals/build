@@ -71,7 +71,7 @@ fi
 if [ ! -d $PATCH_CONTROL_DIR ]
 then
   rm -rf $PATCH_CONTROL_DIR
-  mkdir $PATCH_CONTROL_DIR || do_failure
+  mkdir -p $PATCH_CONTROL_DIR || do_failure
 fi
 
 if [ ! -e $PATCH_CONTROL_DIR/backups ]
