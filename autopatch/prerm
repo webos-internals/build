@@ -18,7 +18,7 @@ else
 fi
 
 IPKG_INFO_DIR=/usr/lib/ipkg/info
-PATCH_CONTROL_DIR=$IPKG_OFFLINE_ROOT/usr/lib/.webosinternals.patches
+PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
 PATCH_LOG=/media/internal/webos-patches.log
 VERSION=aupt-1
 
