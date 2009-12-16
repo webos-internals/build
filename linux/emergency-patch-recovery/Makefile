@@ -1,6 +1,6 @@
 TYPE = Linux Application
 NAME = emergency-patch-recovery
-VERSION = 1.1.5
+VERSION = 1.1.6
 TITLE = Emergency Patch Recovery
 MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>
 DESCRIPTION = --UNINSTALL THEMES FIRST--  Perform 'EPR' on your Pre to restore all backed up files from any patch ipk installations.  Installing this just runs a script to do the patch removals and then removes itself.  WARNING: This is OTA update compatible, but you should run this directly before or directly after you update.  Never run this while a theme is installed.
@@ -11,6 +11,7 @@ MAINTAINER = WebOS Internals <support@webos-internals.org>
 CATEGORY = Utilities
 DEPENDS = org.webosinternals.patch, org.webosinternals.diffstat
 ICON = http://www.webos-internals.org/images/4/4f/Epr.png
+POSTINSTALLFLAGS=RestartLuna
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk

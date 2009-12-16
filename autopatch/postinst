@@ -14,7 +14,7 @@ else
   PATCH_EXEC=/var/usr/bin/patch
 fi
 
-PATCH_CONTROL_DIR=$IPKG_OFFLINE_ROOT/usr/lib/.webosinternals.patches
+PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
 
 do_failure() {
   ipkg -o $IPKG_OFFLINE_ROOT remove `basename $APP_DIR`
@@ -37,7 +37,7 @@ $PATCH_EXEC -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME || do_failure
 if [ ! -d $PATCH_CONTROL_DIR ]
 then
   rm -rf $PATCH_CONTROL_DIR
-  mkdir $PATCH_CONTROL_DIR || do_failure
+  mkdir -p $PATCH_CONTROL_DIR || do_failure
 fi
 
 if [ ! -e $PATCH_CONTROL_DIR/backups ]
