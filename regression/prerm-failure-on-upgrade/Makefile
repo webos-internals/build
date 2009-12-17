@@ -29,7 +29,8 @@ ifeq ("${VERSION}","2.0.0")
 	sed -e 's/%RETVAL%/1/' control/prerm > $@
 else
 	sed -e 's/%RETVAL%/0/' control/prerm > $@
-fi
+endif
+	chmod ugo+x $@
 
 clobber::
 	rm -rf build

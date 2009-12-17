@@ -22,9 +22,6 @@ include ../../support/package.mk
 build/.built-${VERSION}:
 	rm -rf build/all
 	mkdir -p build/all
-ifeq ("${VERSION}","2.0.0")
-	sed -e 's/%RETVAL%/1/' build/all/CONTROL/
-
 	touch $@
 
 build/all/CONTROL/postinst:
@@ -32,7 +29,8 @@ ifeq ("${VERSION}","2.0.0")
 	sed -e 's/%RETVAL%/1/' control/postinst > $@
 else
 	sed -e 's/%RETVAL%/0/' control/postinst > $@
-fi
+endif
+	chmod ugo+x $@
 
 clobber::
 	rm -rf build
