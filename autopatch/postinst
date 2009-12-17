@@ -23,11 +23,18 @@ PATCH_LOG=/media/internal/webos-patches.log
 VERSION=aupt-1
 
 do_failure() {
+  echo "*** FAILED ***" >> $PATCH_LOG
   exit 1
 }
 
 failed_install() {
-  $PATCH_EXEC -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 1>&2
+  echo "" >> $PATCH_LOG
+  echo "----------------------------------" >> $PATCH_LOG
+  echo "Installation FAILED!" >> $PATCH_LOG
+  echo "----------------------------------" >> $PATCH_LOG
+  $PATCH_EXEC -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 1>&2 | tee -a $PATCH_LOG
+  echo "ls -R ${APP_DIR}" >> $PATCH_LOG
+  ls -R ${APP_DIR} 2>&1 >> $PATCH_LOG
   do_failure
 }
 
@@ -146,7 +153,7 @@ echo "----------------------------------" >> $PATCH_LOG
 echo "Dry run patch attempt..." >> $PATCH_LOG
 echo "----------------------------------" >> $PATCH_LOG
 
-$PATCH_EXEC -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME >> $PATCH_LOG
+$PATCH_EXEC -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 2>&1 >> $PATCH_LOG
 
 if [ $? -ne 0 ]
 then
@@ -154,7 +161,7 @@ then
   echo "----------------------------------" >> $PATCH_LOG
   echo "dry run failed, checking if -R would succeed" >> $PATCH_LOG
   echo "----------------------------------" >> $PATCH_LOG
-  $PATCH_EXEC -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME >> $PATCH_LOG || failed_install
+  $PATCH_EXEC -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 2>&1 >> $PATCH_LOG || failed_install
   patch_applied=yes
   echo "Interestingly, the patch seems to already be applied" | tee -a $PATCH_LOG
 fi
@@ -174,15 +181,15 @@ do
 
   echo "" >> $PATCH_LOG
   echo "----------------------------------" >> $PATCH_LOG
-	echo "Creating md5sums list..." >> $PATCH_LOG
+  echo "Creating md5sums list..." >> $PATCH_LOG
   echo "----------------------------------" >> $PATCH_LOG
   for j in `cat $APP_DIR/package_list`
   do
-		echo "Package: $j" >> $PATCH_LOG
+    echo "Package: $j" >> $PATCH_LOG
     md5sum_line=`grep -h $file $IPKG_INFO_DIR/$j.md5sums`
     if [ "$md5sum_line" != "" ]
     then
-			echo "$md5sum_line" >> $PATCH_LOG
+      echo "$md5sum_line" >> $PATCH_LOG
       echo $md5sum_line >> $APP_DIR/md5sums
       palm_md5sum=`echo $md5sum_line | awk '{print $1}'`
     fi
@@ -229,7 +236,7 @@ then
   echo "----------------------------------" | tee -a $PATCH_LOG
   echo "Actually applying the patch!" | tee -a $PATCH_LOG
   echo "----------------------------------" | tee -a $PATCH_LOG
-  $PATCH_EXEC -p1 -d / --no-backup-if-mismatch < ${APP_DIR}/$PATCH_NAME | tee -a $PATCH_LOG || do_failure
+  $PATCH_EXEC -p1 -d / --no-backup-if-mismatch < ${APP_DIR}/$PATCH_NAME 2>&1 | tee -a $PATCH_LOG || do_failure
 fi
 
 

@@ -23,11 +23,18 @@ PATCH_LOG=/media/internal/webos-patches.log
 VERSION=aupt-1
 
 do_failure() {
+  echo "*** FAILED ***" >> $PATCH_LOG
   exit 1
 }
 
 failed_remove() {
-  $PATCH_EXEC -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 1>&2
+  echo "" >> $PATCH_LOG
+  echo "----------------------------------" >> $PATCH_LOG
+  echo "Removal FAILED!" >> $PATCH_LOG
+  echo "----------------------------------" >> $PATCH_LOG
+  $PATCH_EXEC -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 1>&2 | tee -a $PATCH_LOG
+  echo "ls -R ${APP_DIR}" >> $PATCH_LOG
+  ls -R ${APP_DIR} 2>&1 >> $PATCH_LOG
   do_failure
 }
 
@@ -59,7 +66,7 @@ echo "" >> $PATCH_LOG
 echo "----------------------------------" >> $PATCH_LOG
 echo "Dry run patch attempt..." >> $PATCH_LOG
 echo "----------------------------------" >> $PATCH_LOG
-$PATCH_EXEC -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME >> $PATCH_LOG
+$PATCH_EXEC -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 2>&1 >> $PATCH_LOG
 
 if [ $? -ne 0 ]
 then
@@ -67,7 +74,7 @@ then
   echo "----------------------------------" >> $PATCH_LOG
   echo "dry run failed, checking if applying entire patch would succeed" >> $PATCH_LOG
   echo "----------------------------------" >> $PATCH_LOG
-  $PATCH_EXEC -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME >> $PATCH_LOG
+  $PATCH_EXEC -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 2>&1 >> $PATCH_LOG
 
   if [ $? -ne 0 ]
   then
@@ -80,6 +87,7 @@ then
     do
       file=/$i
       file_md5sum=""
+      palm_md5sum=""
 
       if [ -e $file ]
       then
@@ -115,8 +123,8 @@ then
         then
           created_files="$created_files $file"
         else
-          echo "Found modified file $file" >> $PATCH_LOG
-          found_modifed=yes
+          echo "Found modified file: $file" >> $PATCH_LOG
+          found_modified=yes
         fi
       fi
     done
@@ -132,7 +140,7 @@ else
   echo "----------------------------------" | tee -a $PATCH_LOG
   echo "Actually removing the patch!" | tee -a $PATCH_LOG
   echo "----------------------------------" | tee -a $PATCH_LOG
-  $PATCH_EXEC -R -p1 -d / --no-backup-if-mismatch < ${APP_DIR}/$PATCH_NAME | tee -a $PATCH_LOG
+  $PATCH_EXEC -R -p1 -d / --no-backup-if-mismatch < ${APP_DIR}/$PATCH_NAME 2>&1 | tee -a $PATCH_LOG
 fi
 
 for i in $created_files
@@ -174,7 +182,7 @@ do
     do
       if [ "$palm_md5sum" = "" ]
       then
-        palm_md5sum=`grep -h $file $IPKG_INFO_DIR/$j.md5sums`
+        palm_md5sum=`grep -h $file $IPKG_INFO_DIR/$j.md5sums | awk '{print $1}'`
       fi
     done
   fi
