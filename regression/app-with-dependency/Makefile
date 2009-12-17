@@ -2,6 +2,7 @@ NAME     = app-with-dependency
 TITLE	 = Application With Dependency
 APP_ID   = org.webosinternals.regression.${NAME}
 DEPENDS  = org.webosinternals.regression.simple-service
+SIGNER   = org.webosinternals
 VERSIONS  = 1.0.0 2.0.0
 DESCRIPTION = Regression test for a webOS application with a dependency on a service.
 TYPE	 = Application

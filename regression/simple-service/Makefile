@@ -1,6 +1,7 @@
 NAME     = simple-service
 TITLE	 = Simple Service
 APP_ID   = org.webosinternals.regression.${NAME}
+SIGNER   = org.webosinternals
 VERSIONS  = 1.0.0 2.0.0
 DESCRIPTION = Regression test for simple webOS service with install scripts.
 TYPE	 = Service
