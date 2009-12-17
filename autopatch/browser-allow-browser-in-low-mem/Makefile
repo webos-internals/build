@@ -3,7 +3,7 @@ PATCH = browser/${NAME}.patch
 TITLE = Allow Browser in Low Mem
 DESCRIPTION = This patch will allow the web browser to startup in situations when you'd normally get the too many cards error.
 CATEGORY = Browser
-VERSION = 1.3.1-13
+VERSIONS = 1.3.1-13 1.3.5-3
 ICON = http://www.webos-internals.org/images/4/4a/Icon_WebOSInternals_Patches_Browser.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
@@ -11,5 +11,5 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = diomark <diomark@sbcglobal.net>
+MAINTAINER = diomark <diomark@sbcglobal.net>, dBsooner <webos@dbsooner.com>
 HOMEPAGE =

@@ -3,7 +3,7 @@ PATCH = mojo/${NAME}.patch
 TITLE = 3000 Autoreplace Words
 DESCRIPTION = This will make the autoreplace contain 3000 words based on the top 3000 google words. This will not cause any lag.
 CATEGORY = Mojo
-VERSION = 1.3.1-20
+VERSIONS = 1.3.1-20 1.3.5-3
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS = 
 META_SUB_VERSION = 1
@@ -11,5 +11,5 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = diomark
+MAINTAINER = diomark, dBsooner <webos@dbsooner.com>
 HOMEPAGE = 

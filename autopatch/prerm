@@ -14,7 +14,7 @@ else
   PATCH_EXEC=/var/usr/bin/patch
 fi
 
-PATCH_CONTROL_DIR=$IPKG_OFFLINE_ROOT/usr/lib/.webosinternals.patches
+PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
 
 do_failure() {
   exit 1

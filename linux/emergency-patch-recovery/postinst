@@ -6,7 +6,7 @@ IPKG_INFO_DIR=/usr/lib/ipkg/info
 if [ ! -d $PATCH_CONTROL_DIR ]
 then
   echo "NOTE: No patches found!"
-  ipkg -o /var remove $PACKAGE
+  ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
   exit 1
 fi
 
@@ -15,6 +15,7 @@ then
   for i in `cat $PATCH_CONTROL_DIR/packages`
   do
     ipkg -o /var remove $i
+    ipkg -o /media/cryptofs/apps remove $i
   done
 fi
 
@@ -51,5 +52,5 @@ fi
 echo "DONE"
 rm -rf $PATCH_CONTROL_DIR
 
-ipkg -o /var remove $PACKAGE
+ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
 exit 0
