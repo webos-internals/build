@@ -4,3 +4,5 @@ downloads
 ipkgs
 zips
 *.pyc
+*.swp
+*.swo
