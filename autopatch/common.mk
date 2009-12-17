@@ -1,5 +1,6 @@
 TYPE = Patch
 APP_ID = org.webosinternals.patches.${NAME}
+SIGNER = org.webosinternals
 HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DEPENDS = org.webosinternals.patch, org.webosinternals.diffstat
