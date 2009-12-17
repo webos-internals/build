@@ -172,6 +172,10 @@ fi
   #do_failure
 #fi
 
+echo "" >> $PATCH_LOG
+echo "----------------------------------" >> $PATCH_LOG
+echo "Creating md5sums list..." >> $PATCH_LOG
+echo "----------------------------------" >> $PATCH_LOG
 rm -f $APP_DIR/md5sums
 touch $APP_DIR/md5sums
 
@@ -179,10 +183,6 @@ for i in $FILE_LIST
 do
   file=/$i
 
-  echo "" >> $PATCH_LOG
-  echo "----------------------------------" >> $PATCH_LOG
-  echo "Creating md5sums list..." >> $PATCH_LOG
-  echo "----------------------------------" >> $PATCH_LOG
   for j in `cat $APP_DIR/package_list`
   do
     echo "Package: $j" >> $PATCH_LOG
