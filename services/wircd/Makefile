@@ -1,11 +1,11 @@
 NAME     = wircd
 APP_ID   = us.ryanhope.${NAME}
-VERSION  = 0.0.4
+VERSION  = 0.0.5
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WIRC
 MAINTAINER = Ryan Hope <rmh3093@gmail.com>
 TITLE	 = wIRCd - WebOS IRC Service
 DESCRIPTION = A native C luna service for communicating with IRC servers. So far, only wIRC uses this service.
-CHANGELOG = 
+CHANGELOG = 0.0.5: Updated for webOS 1.3.5 compatibility.
 TYPE	 = Service
 CATEGORY = Luna
 ICON	= http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_wIRC_Service.png
