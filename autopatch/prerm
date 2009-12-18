@@ -102,28 +102,31 @@ then
           then
             echo "Getting md5sum from Palm package: $j" >> $PATCH_LOG
             palm_md5sum=`grep -h $file $IPKG_INFO_DIR/$j.md5sums | awk '{print $1}'`
+            echo "  md5sum: $palm_md5sum" >> $PATCH_LOG
           fi
         done
       fi
 
       if [ "$palm_md5sum" = "" ] && \
-         [ `grep -h $file $IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/*.list` ]
+         [ "`grep $file $IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/*.list`" = "" ]
       then
         echo "Check for md5sum in $IPKG_INFO_DIR"
         palm_md5sum=`grep -h $file $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`
+        echo "  md5sum: $palm_md5sum" >> $PATCH_LOG
       fi
 
       if [ "$palm_md5sum" = "$file_md5sum" ]
       then
-        echo "Existing file matches Palm md5sum (maybe due to OTA update): $file" >> $PATCH_LOG
+        echo "  Existing file matches Palm md5sum: $file" >> $PATCH_LOG
         rm -f $file.webosinternals.orig
       else
         if [ "$palm_md5sum" = "" ] && \
-           [ `grep -h $file $IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/*.list` ]
+           [ "`grep $file $IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/*.list`" = "" ]
         then
+          echo "  Found created file: $file" >> $PATCH_LOG
           created_files="$created_files $file"
         else
-          echo "Found modified file: $file" >> $PATCH_LOG
+          echo "  Found modified file: $file" >> $PATCH_LOG
           found_modified=yes
         fi
       fi
