@@ -5,7 +5,7 @@ SIGNER   = mobi.optware
 VERSION  = 0.9.8l-1
 HOMEPAGE = http://www.openssl.org/
 TYPE	 = Optware
-CATEGORY = Utilities
+CATEGORY = Libraries
 ICON	 = http://www.webos-internals.org/images/a/ae/Icon_WebOSInternals_OpenSSL.png
 
 SRC_OPTWARE = ${NAME}_${VERSION}

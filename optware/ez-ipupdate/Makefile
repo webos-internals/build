@@ -8,7 +8,7 @@ TYPE	 = Optware
 DESCRIPTION = ez-ipupdate is a small utility for updating your host name for any of the dynamic DNS services offered at:<ul><li>http://www.ez-ip.net</li><li>http://www.justlinux.com</li><li>http://www.dhs.org</li><li>http://www.dyndns.org</li><li>http://www.ods.org</li><li>http://gnudip.cheapnet.net</li><li>http://www.dyn.ca</li><li>http://www.tzo.com</li><li>http://www.easydns.com</li><li>http://www.dyns.cx</li><li>http://www.hn.org</li><li>http://www.zoneedit.com</li></ul>
 CHANGELOG = 
 CATEGORY = Utilities
-ICON	 = 
+ICON	 = http://www.webos-internals.org/images/5/5f/Icon_WebOSInternals_Base_Optware.png
 DEPENDS  = 
 
 SRC_OPTWARE = ${NAME}_3.0.11b7-2

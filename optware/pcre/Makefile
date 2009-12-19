@@ -1,12 +1,13 @@
-NAME     = readline
-TITLE	 = GNU Readline Library
+NAME     = pcre
+TITLE	 = pcre
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
-VERSION  = 6.0-1
-HOMEPAGE = http://directory.fsf.org/project/readline/
+VERSION  = 8.00-1
+HOMEPAGE = http://www.pcre.org/
+DESCRIPTION = The PCRE library is a set of functions that implement regular expression pattern matching using the same syntax and semantics as Perl 5.
 TYPE	 = Optware
 CATEGORY = Libraries
-ICON	 = http://www.webos-internals.org/images/f/f3/Icon_WebOSInternals_GNUReadlineLib.png
+ICON	 = http://www.webos-internals.org/images/5/5f/Icon_WebOSInternals_Base_Optware.png
 
 SRC_OPTWARE = ${NAME}_${VERSION}
 
@@ -19,5 +20,5 @@ include ../../support/download.mk
 include ../../support/optware.mk
 
 build/%.built-${VERSION} : build/%.unpacked
-	rm -rf build/$*/opt/share build/$*/opt/include
+	rm -rf build/$*/opt/bin build/$*/opt/share
 	touch $@
