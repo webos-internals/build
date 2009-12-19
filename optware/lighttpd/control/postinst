@@ -1,0 +1,8 @@
+#!/bin/sh
+
+rm -f /etc/event.d/mobi.optware.lighttpd
+mkdir -p /etc/event.d/
+cp $IPKG_OFFLINE_ROOT/etc/event.d/mobi.optware.lighttpd /etc/event.d/mobi.optware.lighttpd
+/sbin/start mobi.optware.lighttpd
+
+exit 0
