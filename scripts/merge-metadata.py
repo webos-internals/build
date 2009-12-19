@@ -122,10 +122,10 @@ for line in fileinput.input([sys.argv[2]]) :
 
         if key in metadata:
 
-            if sourcejson:
-                packagedata += "Source: control: " + sourcejson + "\n"
+            if (sourcejson and (sourcejson[0] == "{")):
+                packagedata += "Source: " + sourcejson + "\n"
             else:
-                packagedata += "Source: feed: " + metadata[key] + "\n"
+                packagedata += "Source: " + metadata[key] + "\n"
                     
             print packagedata
             print
