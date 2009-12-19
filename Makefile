@@ -156,10 +156,6 @@ distclean: clobber
 	find toolchain -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
 
-clobber: clean
-	find ${SUBDIRS} feeds optware autopatch -mindepth 1 -maxdepth 1 -type d -print | \
-	xargs -I % ${MAKE} -C % clobber
-	rm -rf ipkgs
 clobber: clean clobber-subdirs clobber-patches clobber-optware clobber-regression clobber-feeds
 	rm -rf ipkgs
 
