@@ -35,6 +35,7 @@ for line in fileinput.input([sys.argv[1]]) :
 packagedata = ""
 maintainer = ""
 description = ""
+sourcejson = ""
 
 for line in fileinput.input([sys.argv[2]]) :
 
@@ -50,11 +51,13 @@ for line in fileinput.input([sys.argv[2]]) :
         packagedata = ""
         maintainer = ""
         description = ""
+        sourcejson = ""
 
-    # Elide Source: lines
+    # Save Source: lines for later processing
     regexp = re.compile('^Source: (.*)$')
     m = regexp.match(line)
     if (m):
+        sourcejson = m.group(1)
         keepline = 0
 
     # Save Maintainer: lines for later processing
@@ -78,10 +81,10 @@ for line in fileinput.input([sys.argv[2]]) :
     m = regexp.match(line)
     if (m):
         key = m.group(1)
+
         if key in title:
             packagedata += "Description: " + title[key] + "\n"
-        if key in metadata:
-            packagedata += "Source: " + metadata[key] + "\n"
+
         if maintainer:
             regexp = re.compile('^(.*\S)\s*<(.*)>$')
             m = regexp.match(maintainer)
@@ -116,6 +119,13 @@ for line in fileinput.input([sys.argv[2]]) :
     if (m):
         if not key in title:
             packagedata += "Description: " + description + "\n"
+
         if key in metadata:
+
+            if sourcejson:
+                packagedata += "Source: control: " + sourcejson + "\n"
+            else:
+                packagedata += "Source: feed: " + metadata[key] + "\n"
+                    
             print packagedata
             print

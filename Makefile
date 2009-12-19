@@ -160,6 +160,28 @@ clobber: clean
 	find ${SUBDIRS} feeds optware autopatch -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
 	rm -rf ipkgs
+clobber: clean clobber-subdirs clobber-patches clobber-optware clobber-regression clobber-feeds
+	rm -rf ipkgs
+
+clobber-subdirs:
+	find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print | \
+	xargs -I % ${MAKE} -C % clobber
+
+clobber-patches:
+	find autopatch -mindepth 1 -maxdepth 1 -type d -print | \
+	xargs -I % ${MAKE} -C % clobber
+
+clobber-optware:
+	find optware -mindepth 1 -maxdepth 1 -type d -print | \
+	xargs -I % ${MAKE} -C % clobber
+
+clobber-regression:
+	find regression -mindepth 1 -maxdepth 1 -type d -print | \
+	xargs -I % ${MAKE} -C % clobber
+
+clobber-feeds:
+	find feeds -mindepth 1 -maxdepth 1 -type d -print | \
+	xargs -I % ${MAKE} -C % clobber
 
 clean:
 	find . -name "*~" -delete
