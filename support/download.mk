@@ -36,6 +36,8 @@ ${DL_DIR}/${SRC_OPTWARE}_armv7.ipk:
 	$(call PREWARE_SANITY)
 	mkdir -p ${DL_DIR}
 	curl -f -R -L -o $@.tmp \
+		http://ipkg.nslu2-linux.org/feeds/optware/pre/cross/unstable/${SRC_OPTWARE}_arm.ipk || \
+	curl -f -R -L -o $@.tmp \
 		http://ipkg.nslu2-linux.org/feeds/optware/cs08q1armel/cross/unstable/${SRC_OPTWARE}_arm.ipk
 	mv $@.tmp $@
 
@@ -44,6 +46,8 @@ ${DL_DIR}/${SRC_OPTWARE}_armv6.ipk:
 	$(call PREWARE_SANITY)
 	mkdir -p ${DL_DIR}
 	curl -f -R -L -o $@.tmp \
+		http://ipkg.nslu2-linux.org/feeds/optware/pre/cross/unstable/${SRC_OPTWARE}_arm.ipk || \
+	curl -f -R -L -o $@.tmp \
 		http://ipkg.nslu2-linux.org/feeds/optware/cs08q1armel/cross/unstable/${SRC_OPTWARE}_arm.ipk
 	mv $@.tmp $@
 
@@ -51,6 +55,8 @@ ${DL_DIR}/${SRC_OPTWARE}_i686.ipk:
 	rm -f $@ $@.tmp
 	$(call PREWARE_SANITY)
 	mkdir -p ${DL_DIR}
+	curl -f -R -L -o $@.tmp \
+		http://ipkg.nslu2-linux.org/feeds/optware/pre-emulator/cross/unstable/${SRC_OPTWARE}_i686.ipk || \
 	curl -f -R -L -o $@.tmp \
 		http://ipkg.nslu2-linux.org/feeds/optware/i686g25/cross/unstable/${SRC_OPTWARE}_i686.ipk
 	mv $@.tmp $@
