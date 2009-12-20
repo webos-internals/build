@@ -2,6 +2,7 @@
 build
 doctor
 downloads
+staging
 ipkgs
 zips
 *.pyc

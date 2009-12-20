@@ -1,53 +1,29 @@
 NAME     = mjson
-VERSION  = 1.2
+APP_ID	 = mobi.optware.mjson
+VERSION  = 1.0-1
 HOMEPAGE = https://sourceforge.net/projects/mjson/
 LICENSE  = LGPL Open Source
 
-SRC_TGZ = http://downloads.sourceforge.net/${NAME}/${VERSION}/${NAME}-${VERSION}.tar.gz
+SRC_OPTWARE = ${NAME}_${VERSION}
 
 .PHONY: package
 package: build/.built-${VERSION}
 
 include ../../support/download.mk
 
-.PHONY: unpack
-unpack: build/.unpacked
+include ../../support/optware.mk
 
-build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	rm -rf build
-	mkdir -p build build/armv7 build/armv6 build/i686
-	tar -C build -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	mv build/json-${VERSION} build/src
+.PHONY: stage
+stage: build/.staged-${VERSION}
+
+build/.staged-${VERSION}: build/armv7.staged-${VERSION} build/armv6.staged-${VERSION} build/i686.staged-${VERSION}
 	touch $@
 
-build/.built-${VERSION}: build/armv7.built build/armv6.built build/i686.built
+build/%.staged-${VERSION} : build/%.built-${VERSION}
+	mkdir -p ../../staging/$*/usr/include/mjson
+	install -m 644 build/$*/opt/include/json.h ../../staging/$*/usr/include/mjson/
+	install -m 644 build/$*/opt/include/json_helper.h ../../staging/$*/usr/include/mjson/
+	install -m 644 build/$*/opt/include/json_utils.h ../../staging/$*/usr/include/mjson/
+	mkdir -p ../../staging/$*/usr/lib
+	install -m 644 build/$*/opt/lib/libmjson.so ../../staging/$*/usr/lib/
 	touch $@
-
-build/i686.built: build/.unpacked
-	rm -rf build/i686
-	( cd build/src ; \
-	  ./configure --host=arm-none-linux-gnueabi )
-	${MAKE} -C build/src clean
-	${MAKE} -C build/src DESTDIR=`pwd`/build/i686 install-data
-	touch $@
-
-build/armv7.built: build/.unpacked
-	rm -rf build/armv7
-	( cd build/src ; PATH="${PATH}:`pwd`/../../../../toolchain/cs08q1armel/build/arm-2008q1/bin" \
-	  ./configure --host=arm-none-linux-gnueabi )
-	${MAKE} -C build/src clean
-	PATH="${PATH}:`pwd`/../../toolchain/cs08q1armel/build/arm-2008q1/bin" \
-	${MAKE} -C build/src DESTDIR=`pwd`/build/armv7 install-data
-	touch $@
-
-build/armv6.built: build/.unpacked
-	rm -rf build/armv6
-	( cd build/src ; PATH="${PATH}:`pwd`/../../../../toolchain/cs08q1armel/build/arm-2008q1/bin" \
-	  ./configure --host=arm-none-linux-gnueabi )
-	${MAKE} -C build/src clean
-	PATH="${PATH}:`pwd`/../../toolchain/cs08q1armel/build/arm-2008q1/bin" \
-	${MAKE} -C build/src DESTDIR=`pwd`/build/armv6 install-data
-	touch $@
-
-clobber::
-	rm -rf build

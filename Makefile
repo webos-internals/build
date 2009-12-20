@@ -129,10 +129,18 @@ package-feeds: toolchain
 	done
 
 toolchain: toolchain/ipkg-utils/ipkg-make-index \
-	   toolchain/cs08q1armel/build/arm-2008q1
+	   toolchain/cs08q1armel/build/arm-2008q1 \
+	   staging/usr/include/mjson/json.h \
+	   staging/usr/include/lunaservice.h
 
 toolchain/cs08q1armel/build/arm-2008q1:
 	${MAKE} -C toolchain/cs08q1armel unpack
+
+staging/usr/include/mjson/json.h:
+	${MAKE} -C toolchain/mjson stage
+
+staging/usr/include/lunaservice.h:
+	${MAKE} -C toolchain/lunaservice stage
 
 upload:
 	rsync -avr ipkgs/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/
