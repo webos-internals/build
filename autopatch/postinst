@@ -32,7 +32,7 @@ failed_install() {
   echo "----------------------------------" >> $PATCH_LOG
   echo "Installation FAILED!" >> $PATCH_LOG
   echo "----------------------------------" >> $PATCH_LOG
-  $PATCH_EXEC -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 1>&2 | tee -a $PATCH_LOG
+  $PATCH_EXEC -s -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 1>&2 | tee -a $PATCH_LOG
   echo "ls -R ${APP_DIR}" >> $PATCH_LOG
   ls -R ${APP_DIR} 2>&1 >> $PATCH_LOG
   do_failure
@@ -127,7 +127,7 @@ do
       echo "----------------------------------" >> $PATCH_LOG
       echo "Checking all packages for incompatibilities..." >> $PATCH_LOG
       echo "----------------------------------" >> $PATCH_LOG
-      for k in `cat $PATCH_CONTROL_DIR/packages`
+      while read k
       do
         package=`echo $k | awk '{print $1}'`
         version=`echo $k | awk '{print $2}'`
@@ -141,7 +141,7 @@ do
         then
           echo "WARNING: Package: $package uses incompatible patch technology: $version" 1>&2 | tee -a $PATCH_LOG
         fi
-      done
+      done < $PATCH_CONTROL_DIR/packages
 
       do_failure
     fi

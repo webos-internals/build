@@ -30,7 +30,7 @@ fi
 
 if [ -e $PATCH_CONTROL_DIR/packages ]
 then
-  for i in `cat $PATCH_CONTROL_DIR/packages`
+  while read i
   do
     package=`echo $i | awk '{print $1}'`
     version=`echo $i | awk '{print $2}'`
@@ -45,17 +45,17 @@ then
     echo "Removing package: $package" >> $PATCH_LOG
     echo "Patch technology: $version" >> $PATCH_LOG
     echo "------------------------------------------------------" >> $PATCH_LOG
-		echo "Remove from /var..." >> $PATCH_LOG
+    echo "Remove from /var..." >> $PATCH_LOG
     ipkg -o /var --force-depends remove $package
     echo "" >> $PATCH_LOG
-		echo "Remove from /media/cryptofs/apps..." >> $PATCH_LOG
+    echo "Remove from /media/cryptofs/apps..." >> $PATCH_LOG
     ipkg -o /media/cryptofs/apps --force-depends remove $package
-  done
+  done < $PATCH_CONTROL_DIR/packages
 fi
 
 if [ -e $PATCH_CONTROL_DIR/backups ]
 then
-  for i in `cat $PATCH_CONTROL_DIR/backups`
+  while read i
   do
     file=`echo $i | awk '{print $1}'`
     version=`echo $i | awk '{print $2}'`
@@ -90,7 +90,7 @@ then
         mv $file.webosinternals.orig $file
       fi
     fi
-  done
+  done < $PATCH_CONTROL_DIR/backups
 fi
 
 echo "DONE" | tee -a $PATCH_LOG

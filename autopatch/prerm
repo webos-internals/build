@@ -32,7 +32,7 @@ failed_remove() {
   echo "----------------------------------" >> $PATCH_LOG
   echo "Removal FAILED!" >> $PATCH_LOG
   echo "----------------------------------" >> $PATCH_LOG
-  $PATCH_EXEC -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 1>&2 | tee -a $PATCH_LOG
+  $PATCH_EXEC -s -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 1>&2 | tee -a $PATCH_LOG
   echo "ls -R ${APP_DIR}" >> $PATCH_LOG
   ls -R ${APP_DIR} 2>&1 >> $PATCH_LOG
   do_failure
