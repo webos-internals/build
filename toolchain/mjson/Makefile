@@ -20,10 +20,10 @@ build/.staged-${VERSION}: build/armv7.staged-${VERSION} build/armv6.staged-${VER
 	touch $@
 
 build/%.staged-${VERSION} : build/%.built-${VERSION}
-	mkdir -p ../../staging/$*/usr/include/mjson
-	install -m 644 build/$*/opt/include/json.h ../../staging/$*/usr/include/mjson/
-	install -m 644 build/$*/opt/include/json_helper.h ../../staging/$*/usr/include/mjson/
-	install -m 644 build/$*/opt/include/json_utils.h ../../staging/$*/usr/include/mjson/
+	mkdir -p ../../staging/$*/usr/include
+	install -m 644 build/$*/opt/include/json.h ../../staging/$*/usr/include/
+	install -m 644 build/$*/opt/include/json_helper.h ../../staging/$*/usr/include/
+	install -m 644 build/$*/opt/include/json_utils.h ../../staging/$*/usr/include/
 	mkdir -p ../../staging/$*/usr/lib
 	install -m 644 build/$*/opt/lib/libmjson.so ../../staging/$*/usr/lib/
 	touch $@
