@@ -25,9 +25,9 @@
 #include "luna_service.h"
 #include "luna_methods.h"
 
-bool client_status(LSHandle* lshandle, LSMessage *message, void *ctx) {
+bool version_method(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
-  bool retVal = true;
+  bool returnVal = true;
 
   LSError lserror;
   LSErrorInit(&lserror);
@@ -35,24 +35,48 @@ bool client_status(LSHandle* lshandle, LSMessage *message, void *ctx) {
   char *jsonResponse = 0;
   int len = 0;
 
-  len = asprintf(&jsonResponse, "{\"serviceVersion\":\"%s\"}", VERSION);
+  len = asprintf(&jsonResponse, "{\"version\":\"%s\"}", VERSION);
   if (jsonResponse) {
-    LSMessageReply(lshandle,message,jsonResponse,&lserror);
+    LSMessageReply(lshandle, message, jsonResponse, &lserror);
     free(jsonResponse);
   } else
-    LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Generic error\"}",&lserror);
+    LSMessageReply(lshandle, message, "{\"returnValue\":-1,\"errorText\":\"Generic error\"}", &lserror);
 
   LSErrorFree(&lserror);
 
-  return retVal;
+  return returnVal;
 }
 
-LSMethod lscommandmethods[] = {
-  { "status", client_status },
+bool echo_method(LSHandle* lshandle, LSMessage *message, void *ctx) {
+
+  bool returnVal = true;
+
+  LSError lserror;
+  LSErrorInit(&lserror);
+
+  char *jsonResponse = 0;
+  int len = 0;
+
+  json_t *object = LSMessageGetPayloadJSON(message);
+
+  if (json_tree_to_string(object, &jsonResponse)) {
+    LSMessageReply(lshandle, message, jsonResponse, &lserror);
+    free(jsonResponse);
+  } else
+    LSMessageReply(lshandle, message, "{\"returnValue\":-1,\"errorText\":\"Generic error\"}", &lserror);
+
+  LSErrorFree(&lserror);
+
+  return returnVal;
+}
+
+LSMethod luna_methods[] = {
+  { "version",	version_method },
+  { "echo",	echo_method },
   { 0, 0 }
 };
 
 bool register_methods(LSPalmService *serviceHandle, LSError lserror) {
-  return LSPalmServiceRegisterCategory(serviceHandle, "/", lscommandmethods,
+  return LSPalmServiceRegisterCategory(serviceHandle, "/", luna_methods,
 				       NULL, NULL, NULL, &lserror);
 }
