@@ -70,9 +70,46 @@ bool echo_method(LSHandle* lshandle, LSMessage *message, void *ctx) {
   return returnVal;
 }
 
+static bool launch_handler(LSHandle *sh , LSMessage *message, void *ctx)
+{
+  return true;
+}
+
+bool launch_method(LSHandle* lshandle, LSMessage *message, void *ctx) {
+
+  bool returnVal = false;
+
+  LSError lserror;
+  LSErrorInit(&lserror);
+
+  char *jsonResponse = 0;
+  int len = 0;
+
+  json_t *object = LSMessageGetPayloadJSON(message);
+
+  json_t *id = json_find_first_label(object, "id");               
+  json_t *params = json_find_first_label(object, "params");               
+
+  if (json_tree_to_string(object, &jsonResponse)) {
+    returnVal = LSCallOneReply(lshandle, "palm://com.palm.applicationManager/launch",
+			       jsonResponse, NULL, NULL, NULL, &lserror);
+  }
+
+  if (returnVal) {
+    LSMessageReply(lshandle, message, jsonResponse, &lserror);
+    free(jsonResponse);
+  } else
+    LSMessageReply(lshandle, message, "{\"returnValue\":-1,\"errorText\":\"Generic error\"}", &lserror);
+
+  LSErrorFree(&lserror);
+
+  return returnVal;
+}
+
 LSMethod luna_methods[] = {
   { "version",	version_method },
   { "echo",	echo_method },
+  { "launch",	launch_method },
   { 0, 0 }
 };
 
