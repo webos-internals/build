@@ -40,7 +40,7 @@ bool version_method(LSHandle* lshandle, LSMessage *message, void *ctx) {
     LSMessageReply(lshandle, message, jsonResponse, &lserror);
     free(jsonResponse);
   } else
-    LSMessageReply(lshandle, message, "{\"returnValue\":-1,\"errorText\":\"Generic error\"}", &lserror);
+    LSMessageReply(lshandle, message, "{\"returnValue\":false,\"errorCode\":-1,\"errorText\":\"Generic error\"}", &lserror);
 
   LSErrorFree(&lserror);
 
@@ -63,16 +63,11 @@ bool echo_method(LSHandle* lshandle, LSMessage *message, void *ctx) {
     LSMessageReply(lshandle, message, jsonResponse, &lserror);
     free(jsonResponse);
   } else
-    LSMessageReply(lshandle, message, "{\"returnValue\":-1,\"errorText\":\"Generic error\"}", &lserror);
+    LSMessageReply(lshandle, message, "{\"returnValue\":false,\"errorCode\":-1,\"errorText\":\"Generic error\"}", &lserror);
 
   LSErrorFree(&lserror);
 
   return returnVal;
-}
-
-static bool launch_handler(LSHandle *sh , LSMessage *message, void *ctx)
-{
-  return true;
 }
 
 bool launch_method(LSHandle* lshandle, LSMessage *message, void *ctx) {
@@ -82,24 +77,24 @@ bool launch_method(LSHandle* lshandle, LSMessage *message, void *ctx) {
   LSError lserror;
   LSErrorInit(&lserror);
 
-  char *jsonResponse = 0;
+  char *jsonArgs = 0;
   int len = 0;
 
   json_t *object = LSMessageGetPayloadJSON(message);
 
-  json_t *id = json_find_first_label(object, "id");               
-  json_t *params = json_find_first_label(object, "params");               
+  // json_t *id = json_find_first_label(object, "id");               
+  // json_t *params = json_find_first_label(object, "params");               
 
-  if (json_tree_to_string(object, &jsonResponse)) {
+  if (json_tree_to_string(object, &jsonArgs)) {
     returnVal = LSCallOneReply(lshandle, "palm://com.palm.applicationManager/launch",
-			       jsonResponse, NULL, NULL, NULL, &lserror);
+			       jsonArgs, NULL, NULL, NULL, &lserror);
+    free(jsonArgs);
   }
 
   if (returnVal) {
-    LSMessageReply(lshandle, message, jsonResponse, &lserror);
-    free(jsonResponse);
+    LSMessageReply(lshandle, message, "{\"returnValue\":true}", &lserror);
   } else
-    LSMessageReply(lshandle, message, "{\"returnValue\":-1,\"errorText\":\"Generic error\"}", &lserror);
+    LSMessageReply(lshandle, message, "{\"returnValue\":false,\"errorCode\":-1,\"errorText\":\"Generic error\"}", &lserror);
 
   LSErrorFree(&lserror);
 
