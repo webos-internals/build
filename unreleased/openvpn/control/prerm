@@ -1,0 +1,6 @@
+#!/bin/sh
+
+/sbin/stop mobi.optware.openvpn
+rm -f /etc/event.d/mobi.optware.openvpn
+
+exit 0
