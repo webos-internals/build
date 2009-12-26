@@ -131,7 +131,7 @@ package-feeds: toolchain
 toolchain: toolchain/ipkg-utils/ipkg-make-index \
 	   toolchain/cs08q1armel/build/arm-2008q1 \
 	   staging/usr/include/mjson/json.h \
-	   staging/usr/include/lunaservice.h
+	   staging/usr/include/lunaservice.h \
 	   staging/usr/include/glib.h
 
 toolchain/cs08q1armel/build/arm-2008q1:
