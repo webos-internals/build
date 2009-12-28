@@ -21,9 +21,9 @@ include ../../support/download.mk
 include ../../support/optware.mk
 
 build/%.built-${VERSION} : build/%.unpacked
-	rm -rf build/$*/opt/man build/$*/opt/etc
-	mkdir -p build/$*/opt/etc/${NAME}
-	install -m 644 files/${NAME}.conf build/$*/opt/etc/${NAME}/${NAME}.conf
-	mkdir -p build/$*/etc/event.d
-	install -m 644 upstart/${APP_ID} build/$*/etc/event.d/${APP_ID}
+	rm -rf build/$*/opt/man build/$*/opt/etc  build/$*/opt/var
+#	mkdir -p build/$*/opt/etc/${NAME}
+#	install -m 644 files/${NAME}.conf build/$*/opt/etc/${NAME}/${NAME}.conf
+#	mkdir -p build/$*/etc/event.d
+#	install -m 644 upstart/${APP_ID} build/$*/etc/event.d/${APP_ID}
 	touch $@
