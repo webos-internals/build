@@ -2,6 +2,7 @@ NAME     = ez-ipupdate
 TITLE	 = ez-ipupdate
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
+OPT_VER  = 3.0.11b7-2
 VERSION  = 3.0.11.7-3
 HOMEPAGE = http://www.webos-internals.org/wiki/Tutorials_Linux_DDNS_Update_Client_ez-ipupdate
 TYPE	 = Optware
@@ -11,7 +12,7 @@ CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/5/5f/Icon_WebOSInternals_Base_Optware.png
 DEPENDS  = 
 
-SRC_OPTWARE = ${NAME}_3.0.11b7-2
+SRC_OPTWARE = ${NAME}_${OPT_VER}
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_armv6.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk

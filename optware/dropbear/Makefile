@@ -2,6 +2,7 @@ NAME     = dropbear
 TITLE	 = Dropbear
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
+OPT_VER  = 0.52-5
 VERSION  = 0.52-9
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Dropbear
 TYPE	 = Optware
@@ -10,7 +11,7 @@ CHANGELOG = 0.52-9: Updated for future webOS compatibility.<br>0.52-8: Initial v
 CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/7/76/Icon_WebOSInternals_DropBear.png
 
-SRC_OPTWARE = ${NAME}_0.52-5
+SRC_OPTWARE = ${NAME}_${OPT_VER}
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_armv6.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk

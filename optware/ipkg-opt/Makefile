@@ -2,6 +2,7 @@ NAME     = ipkg-opt
 TITLE	 = Optware Advanced Linux Command Line Installer
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
+OPT_VER  = 0.99.163-10
 VERSION  = 0.99.163-12
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Optware
 TYPE	 = Optware
@@ -10,7 +11,7 @@ DESCRIPTION = This package installs the ipkg-opt command line program which allo
 CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/2/27/Icon_PrewareAlt.png
 
-SRC_OPTWARE = ${NAME}_0.99.163-10
+SRC_OPTWARE = ${NAME}_${OPT_VER}
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_armv6.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
