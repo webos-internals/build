@@ -18,7 +18,7 @@ else
 fi
 
 IPKG_INFO_DIR=/usr/lib/ipkg/info
-PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
+PATCH_CONTROL_DIR=/media/internal/.webosinternals.patches
 PATCH_LOG=/media/internal/webos-patches.log
 VERSION=aupt-1
 
@@ -60,6 +60,11 @@ if [ "$APP_DIR" = "" ] || [ "$PATCH_NAME" = "" ]
 then
   echo "ERROR: APP_DIR and PATCH_NAME both must be set in prerm" 1>&2 | tee -a $PATCH_LOG
   do_failure
+fi
+
+if [ -d /var/usr/lib/.webosinternals.patches ]
+then
+	mv /var/usr/lib/.webosinternals.patches $PATCH_CONTROL_DIR
 fi
 
 echo "" >> $PATCH_LOG
