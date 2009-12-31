@@ -176,7 +176,6 @@ for i in $FILE_LIST
 do
   file=/$i
   palm_md5sum=""
-  orig_palm_md5sum=""
   orig_md5sum=""
   file_md5sum=""
 
@@ -190,11 +189,6 @@ do
     orig_md5sum=`md5sum $file.webosinternals.orig | awk '{print $1}'`
   fi
 
-  if [ -e $APP_DIR/md5sums ]
-  then
-    orig_palm_md5sum=`grep -h $file $APP_DIR/md5sums | awk '{print $1}'`
-  fi
-  
   if [ -e $APP_DIR/package_list ]
   then
     for j in `cat $APP_DIR/package_list`
@@ -210,10 +204,8 @@ do
   echo "file md5sum:      $file_md5sum" >> $PATCH_LOG
   echo "orig md5sum:      $orig_md5sum" >> $PATCH_LOG
   echo "palm md5sum:      $palm_md5sum" >> $PATCH_LOG
-  echo "orig palm md5sum: $orig_palm_md5sum" >> $PATCH_LOG
-  if [ ! -e $file ] && [ ! -s $file.webosinternals.orig ] || \
-     [ "$orig_md5sum" = "" ] || [ "$orig_md5sum" = "$file_md5sum" ] || \
-     [ "$orig_palm_md5sum" != "$palm_md5sum" ] || [ "$palm_md5sum" = "$file_md5sum" ] || \
+  if [ ! -e $file ] && [ ! -s $file.webosinternals.orig ] || [ "$orig_md5sum" = "" ] || \
+     [ "$orig_md5sum" = "$file_md5sum" ] || [ "$palm_md5sum" = "$file_md5sum" ] || \
      [ "`grep -h $file $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`" = "$file_md5sum" ]
   then
     echo "Remove backup" >> $PATCH_LOG
