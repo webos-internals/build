@@ -18,7 +18,8 @@ else
 fi
 
 IPKG_INFO_DIR=/usr/lib/ipkg/info
-PATCH_CONTROL_DIR=/media/internal/.webosinternals.patches
+PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
+#PATCH_CONTROL_DIR=/media/internal/.webosinternals.patches
 PATCH_LOG=/media/internal/webos-patches.log
 VERSION=aupt-1
 
@@ -62,10 +63,10 @@ then
   do_failure
 fi
 
-if [ -d /var/usr/lib/.webosinternals.patches ]
-then
-	mv /var/usr/lib/.webosinternals.patches $PATCH_CONTROL_DIR
-fi
+#if [ -d /var/usr/lib/.webosinternals.patches ]
+#then
+  #mv /var/usr/lib/.webosinternals.patches $PATCH_CONTROL_DIR
+#fi
 
 echo "" >> $PATCH_LOG
 echo "----------------------------------" >> $PATCH_LOG
@@ -92,6 +93,7 @@ then
     do
       file=/$i
       file_md5sum=""
+      orig_palm_md5sum=""
       palm_md5sum=""
 
       if [ -e $file ]
@@ -99,6 +101,12 @@ then
         file_md5sum=`md5sum $file | awk '{print $1}'`
       fi
 
+      if [ -e $APP_DIR/md5sums ]
+      then
+        orig_palm_md5sum=`grep -h $file $APP_DIR/md5sums | awk '{print $1}'`
+        echo "Palm md5sum when installed: $orig_palm_md5sum"
+      fi
+  
       if [ -e $APP_DIR/package_list ]
       then
         for j in `cat $APP_DIR/package_list`
@@ -124,9 +132,12 @@ then
       then
         echo "  Existing file matches Palm md5sum: $file" >> $PATCH_LOG
         rm -f $file.webosinternals.orig
+      elif [ "$palm_md5sum" != "$palm_orig_md5sum" ]
+      then
+        echo "  md5sum of Palm file has changed since installation, assuming OTA" >> $PATCH_LOG
+        rm -f $file.webosinternals.orig
       else
-        if [ "$palm_md5sum" = "" ] && \
-           [ "`grep $file $IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/*.list`" = "" ]
+        if [ "$palm_md5sum" = "" ]
         then
           echo "  Found created file: $file" >> $PATCH_LOG
           created_files="$created_files $file"
