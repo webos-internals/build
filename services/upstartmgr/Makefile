@@ -34,7 +34,7 @@ build/.built-${VERSION}: build/armv7.built build/armv6.built build/i686.built
 build/i686.built: build/.unpacked
 	rm -rf build/i686
 	( cd build/src ; \
-	  ${MAKE} STAGING_DIR=$(shell cd ../.. ; pwd)/staging/i686 \
+	  ${MAKE} STAGING_DIR=$(shell cd ../.. ; pwd)/staging/i686 CC=gcc \
 	  clobber ${NAME} \
 	)
 	mkdir -p build/i686/usr/sbin
