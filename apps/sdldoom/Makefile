@@ -1,14 +1,14 @@
 NAME     = sdldoom
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 1.1.1
+VERSION  = 1.1.2
 DEPENDS  = org.webosinternals.upstartmgr
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Doom
 MAINTAINER = Zsoc <precorder.webosinternals@gmail.com>, Destinal, Rod Whitby
 TITLE   = Doom
 TYPE	= Application
 DESCRIPTION = Port of the popular DOOM! 3-D shooter game written by ID Software.<br>It requires webOS 1.3.5 or later.<br>See the Homepage link below for key bindings and other instructions.
-CHANGELOG = 1.1.1: Added launching capability.<br>1.1.0: Initial release.
+CHANGELOG = 1.1.2: Allow multiple cards to be launched.<br>1.1.1: Added launching capability.<br>1.1.0: Initial release.
 CATEGORY = Games
 ICON	= http://www.webos-internals.org/images/e/eb/Tux_as_Zombie.png
 LICENSE  = ID Software License
