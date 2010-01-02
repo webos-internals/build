@@ -3,13 +3,14 @@
 APP_DIR=
 PATCH_NAME=
 
-if [ -f "/media/cryptofs/apps/usr/bin/diffstat" ] ; then
-  DIFFSTAT=/media/cryptofs/apps/usr/bin/diffstat
-else
-  DIFFSTAT=/var/usr/bin/diffstat
-fi
+#if [ -f "/media/cryptofs/apps/usr/bin/diffstat" ] ; then
+  #DIFFSTAT=/media/cryptofs/apps/usr/bin/diffstat
+#else
+  #DIFFSTAT=/var/usr/bin/diffstat
+#fi
 
-FILE_LIST=`$DIFFSTAT -p1 -l $APP_DIR/$PATCH_NAME`
+#FILE_LIST=`$DIFFSTAT -p1 -l $APP_DIR/$PATCH_NAME`
+FILE_LIST=`$LSDIFF --strip=1 $APP_DIR/$PATCH_NAME`
 
 if [ -f "/media/cryptofs/apps/usr/bin/patch" ] ; then
   PATCH_EXEC=/media/cryptofs/apps/usr/bin/patch

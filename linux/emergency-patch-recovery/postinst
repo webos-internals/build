@@ -46,10 +46,10 @@ then
     echo "Patch technology: $version" >> $PATCH_LOG
     echo "------------------------------------------------------" >> $PATCH_LOG
     echo "Remove from /var..." >> $PATCH_LOG
-    ipkg -o /var --force-depends remove $package
+    ipkg -o /var --force-depends remove $package | tee -a $PATCH_LOG
     echo "" >> $PATCH_LOG
     echo "Remove from /media/cryptofs/apps..." >> $PATCH_LOG
-    ipkg -o /media/cryptofs/apps --force-depends remove $package
+    ipkg -o /media/cryptofs/apps --force-depends remove $package | tee -a $PATCH_LOG
   done < $PATCH_CONTROL_DIR/packages
 fi
 

@@ -3,13 +3,14 @@
 APP_DIR=
 PATCH_NAME=
 
-if [ -f "/media/cryptofs/apps/usr/bin/diffstat" ] ; then
-  DIFFSTAT=/media/cryptofs/apps/usr/bin/diffstat
-else
-  DIFFSTAT=/var/usr/bin/diffstat
-fi
+#if [ -f "/media/cryptofs/apps/usr/bin/diffstat" ] ; then
+  #DIFFSTAT=/media/cryptofs/apps/usr/bin/diffstat
+#else
+  #DIFFSTAT=/var/usr/bin/diffstat
+#fi
 
-FILE_LIST=`$DIFFSTAT -p1 -l $APP_DIR/$PATCH_NAME`
+#FILE_LIST=`$DIFFSTAT -p1 -l $APP_DIR/$PATCH_NAME`
+FILE_LIST=`$LSDIFF --strip=1 $APP_DIR/$PATCH_NAME`
 
 if [ -f "/media/cryptofs/apps/usr/bin/patch" ] ; then
   PATCH_EXEC=/media/cryptofs/apps/usr/bin/patch
@@ -42,7 +43,8 @@ failed_install() {
 find_incompatible() {
   for i in `ls $PATCH_CONTROL_DIR/*.patch`
   do
-    for j in `$DIFFSTAT -p1 -l $i`
+    #for j in `$DIFFSTAT -p1 -l $i`
+    for j in `$LSDIFF --strip=1 $i`
     do
       if [ "$file" = "/$j" ]
       then
@@ -78,7 +80,7 @@ fi
 
 #if [ -d /var/usr/lib/.webosinternals.patches ]
 #then
-	#mv /var/usr/lib/.webosinternals.patches $PATCH_CONTROL_DIR
+  #mv /var/usr/lib/.webosinternals.patches $PATCH_CONTROL_DIR
 #fi
 
 if [ ! -d $PATCH_CONTROL_DIR ]
