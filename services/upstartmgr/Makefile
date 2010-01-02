@@ -1,11 +1,13 @@
 NAME     = upstartmgr
-TITLE    = Upstart Manager Service
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.0.4
+VERSION  = 0.0.5
 MAINTAINER = WebOS Internals <support@webos-internals.org>
+TITLE    = Upstart Manager Service
+DESCRIPTION = The Upstart Manager Service is a back-end interface to the initctl command line application which manages the background Linux daemons that run on a webOS Device.  It is required for launching advanced homebrew applications like DOOM! and OpenVPN.
 TYPE	 = Service
 CATEGORY = Luna
+ICON	= http://www.webos-internals.org/images/b/bc/Icon_WebOSInternals_UpstartService.png
 LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/services/upstartmgr.git
