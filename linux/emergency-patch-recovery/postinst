@@ -15,7 +15,9 @@ then
   for i in `cat $PATCH_CONTROL_DIR/packages`
   do
     ipkg -o /var remove $i
-    ipkg -o /media/cryptofs/apps remove $i
+    if grep -q /media/cryptofs/apps /etc/palm/luna.conf; then
+      ipkg -o /media/cryptofs/apps remove $i
+    fi
   done
 fi
 
