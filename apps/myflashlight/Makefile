@@ -9,6 +9,10 @@ DESCRIPTION = The original camera LED flashlight application.
 CHANGELOG = 0.2.2: Fixed palm-dark issue<br>0.2.0: Rewritten for webOS 1.3.5
 CATEGORY = System Utilities
 ICON	= http://www.webos-internals.org/images/2/28/MyFlashlight.png
+SCREENSHOTS = [\
+\"http://www.webos-internals.org/images/8/88/Myflashlight_2.png\",\
+\"http://www.webos-internals.org/images/d/de/Myflashlight_1.png\"]
+
 LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/applications/myflashlight.git
