@@ -1,16 +1,16 @@
 NAME     = sdlquake
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 1.0.11
+VERSION  = 1.1.0
 DEPENDS  = org.webosinternals.upstartmgr
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Quake
-MAINTAINER = dtzWill, Rod Whitby
+MAINTAINER = dtzWill, Jack87, Rod Whitby
 TITLE   = Quake
 TYPE	= Application
 DESCRIPTION = Port of the popular Quake 3-D shooter game written by ID Software.<br>It requires webOS 1.3.5 or later.
-CHANGELOG = 1.0.11: Playable game, better performance, fixed crashes, keybindings.<br>1.0.9: Initial release.
+CHANGELOG = 1.1.0: Increased performance, Drastic improvements to control scheme (including virtual joystick, continuous fire, added gesture controls), Modal Keyboard, fix for Segfault Error.<br>1.0.11: Playable game, better performance, fixed crashes, keybindings.<br>1.0.9: Initial release.
 CATEGORY = Games
-ICON	= http://www.webos-internals.org/images/e/eb/Tux_as_Zombie.png
+ICON	= http://www.webos-internals.org/images/3/3a/Quake-icon3-resized.png
 LICENSE  = ID Software License
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/8/85/Quake-instructions.png\",\
