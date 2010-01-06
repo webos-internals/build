@@ -7,13 +7,15 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Application:ClassicInvaders
 MAINTAINER = Ryan Hope
 TITLE   = Classic Invaders
 TYPE	= Application
-DESCRIPTION = Classic Space Invaders!<br><br>					\
-	      Controls:<br>							\
-	      Tilt Left - left<br>						\
-	      Tilt Up - up<br>							\
-	      Tilt Right - right<br>						\
-	      Tilt Down - down<br>						\
-	      Tap Gesture - Enter / Shoot <br>					\
+DESCRIPTION = Classic Space Invaders!<br><br>									\
+	      <b>NOTE: Game takes a few seconds to load. While loading a black screen is normal!</b><br><br>	\
+	      Controls:<br>											\
+	      Tilt Left - left<br>										\
+	      Tilt Up - up<br>											\
+	      Tilt Right - right<br>										\
+	      Tilt Down - down<br>										\
+	      Tap Screen - select<br>										\
+	      Tap Gesture - Shoot <br>										\
 
 CATEGORY = Games
 ICON	= http://www.webos-internals.org/images/6/6e/Icon_SpaceInvaders.png
