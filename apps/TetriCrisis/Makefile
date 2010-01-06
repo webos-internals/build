@@ -38,7 +38,7 @@ build/%.built-${VERSION}: build/.unpack
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/upstart
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/control
 	install -m 755 build/binaries/$*/tetricrisis build/$*/usr/palm/applications/${APP_ID}/bin/
-	install -m 644 build/data build/$*/usr/palm/applications/${APP_ID}/bin/
+	cp -r build/src/src/data build/$*/usr/palm/applications/${APP_ID}/bin/
 	mkdir -p build/$*/etc/event.d
 	install -m 644 build/src/upstart/${APP_ID} build/$*/etc/event.d/${APP_ID}
 	touch $@
