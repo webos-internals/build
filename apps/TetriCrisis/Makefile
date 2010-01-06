@@ -1,16 +1,24 @@
 NAME     = tetricrisis
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 5.9
+VERSION  = 5.9-1
 DEPENDS  = org.webosinternals.upstartmgr
-HOMEPAGE = ...
+HOMEPAGE = http://www.webos-internals.org/wiki/Application:TetriCrisis
 MAINTAINER = Ryan Hope
 TITLE   = TetriCrisis
 TYPE	= Application
-DESCRIPTION = THE Open-Source Cross-Platform Tetris(R) Video Game!
+DESCRIPTION = THE Open-Source Cross-Platform Tetris(R) Video Game!<br><br>	\
+	      Controls:<br>							\
+	      Q - left<br>							\
+	      W - up<br>							\
+	      E - right<br>							\
+	      S - down<br>							\
+	      O - rotate counter-clockwise<br>					\
+	      P - rotate clockwise						\
+
 CATEGORY = Games
 ICON	= http://www.webos-internals.org/images/7/75/Icon_Tetris.png
-LICENSE  = ?
+LICENSE  = GPL
 
 SRC_GIT = git://git.webos-internals.org/games/TetriCrisis.git
 
