@@ -96,28 +96,28 @@ package: package-subdirs package-patches package-optware package-feeds
 package-subdirs: toolchain
 	for f in `find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
-	    ${MAKE} -C $$f package || exit ; \
+	    ${MAKE} -C $$f package ; \
 	  fi; \
 	done
 
 package-patches: toolchain
 	for f in `find autopatch -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
-	    ${MAKE} -C $$f package || exit ; \
+	    ${MAKE} -C $$f package ; \
 	  fi; \
 	done
 
 package-optware: toolchain
 	for f in `find optware -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
-	    ${MAKE} -C $$f package || exit ; \
+	    ${MAKE} -C $$f package ; \
 	  fi; \
 	done
 
 package-regression: toolchain
 	for f in `find regression -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
-	    ${MAKE} -C $$f package || exit ; \
+	    ${MAKE} -C $$f package ; \
 	  fi; \
 	done
 
