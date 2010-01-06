@@ -1,7 +1,7 @@
 NAME     = cinvaders
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 1.0.0
+VERSION  = 1.0.0-1
 DEPENDS  = org.webosinternals.upstartmgr
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:ClassicInvaders
 MAINTAINER = Ryan Hope
