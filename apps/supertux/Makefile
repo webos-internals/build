@@ -11,7 +11,11 @@ DESCRIPTION = Port of SuperTux - Can be played without use of keyboard<br>It req
 CATEGORY = Games
 ICON	= http://www.webos-internals.org/images/a/a4/Supertux_icon.png
 LICENSE  = GPL
-SCREENSHOTS = 
+SCREENSHOTS = [\
+\"http://www.webos-internals.org/images/5/5e/Supertux1.png\",\
+\"http://www.webos-internals.org/images/a/a8/Supertux3.png\",\
+\"http://www.webos-internals.org/images/4/42/Supertux2.png\"\
+]
 
 SRC_GIT = git://git.webos-internals.org/games/supertux.git
 
