@@ -3,7 +3,7 @@ PATCH = app-catalog/${NAME}.patch
 TITLE = Hide App Vendors
 DESCRIPTION = Makes it easier to hide applications from vendors you don't like, be it because of spam or other reasons.  By 'hide' I mean 'make harder to see'.
 CATEGORY = App Catalog
-VERSIONS = 1.3.1-26 1.3.5-7
+VERSIONS = 1.3.1-26 1.3.5-10
 ICON = http://www.webos-internals.org/images/0/03/Icon_WebOSInternals_Patches_Findapps.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/7/7b/App-catalog-hide-app-vendors-1.png\",\
