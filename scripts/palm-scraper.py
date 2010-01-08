@@ -11,6 +11,8 @@ files = {}
 
 class PackageHandler(ContentHandler):
     getData = 0
+    getIcons = 0
+    getIcon = 0
     url = ""
     filename = ""
     title = ""
@@ -25,10 +27,22 @@ class PackageHandler(ContentHandler):
             self.title = ""
             self.json = "{ "
             self.author = ""
+            self.support = ""
             self.version = ""
             self.category = ""
             self.icon = ""
             self.screenshots = []
+
+        if (name == "ac:categories"):
+            self.category = attrs["ac:primary"].encode('utf-8')
+
+        if (name == "ac:icons"):
+            self.getIcons = 1
+
+        if (name == "ac:asset_url"):
+            if (attrs["ac:type"] == "app"):
+                if (self.getIcons):
+                    self.getIcon = 1
 
         self.getData = 1
         self.data = ""
@@ -41,7 +55,7 @@ class PackageHandler(ContentHandler):
             self.json += "\"Title\":\"%s\", " % self.data
 
         if (name == "link") :
-            self.json += "\"Homepage\":\"%s\", " % self.data.replace("homebrew-apps/homebrew-apps","homebrew-apps")
+            self.json += "\"Homepage\":\"%s\", " % self.data
 
         if (name == "description") :
             self.json += "\"FullDescription\":\"%s\", " % self.data
@@ -58,9 +72,20 @@ class PackageHandler(ContentHandler):
         if (name == "ac:developer") :
             self.author = self.data
 
+        if (name == "ac:support_url") :
+            self.support = self.data
+
+        if (name == "ac:icons"):
+            self.getIcons = 0
+
+        if (name == "ac:asset_url") :
+            if (self.getIcon):
+                self.icon = self.data
+                self.getIcon = 0
+
         if (name == "link") :
             self.url = self.data
-            self.type = "Application"
+            self.type = "AppCatalog"
 
         if (name == "item"):
 
@@ -68,13 +93,19 @@ class PackageHandler(ContentHandler):
 
             self.json += "\"Type\":\"%s\", " % self.type
 
+            if (self.category):
+                self.json += "\"Category\":\"%s\", " % self.category
+
+            if (self.icon):
+                self.json += "\"Icon\":\"%s\", " % self.icon
+
             self.json += "\"Feed\":\"Palm %s\" }" % sys.argv[2]
 
             print "Package: " + self.id
             print "Version: " + self.version
             print "Section: " + self.category
             print "Architecture: all"
-            print "Maintainer: " + self.author
+            print "Maintainer: %s <%s>" % (self.author, self.support)
             print "Source: " + self.json
             print "Description: " + self.title
             print
