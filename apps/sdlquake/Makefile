@@ -13,8 +13,9 @@ CATEGORY = Games
 ICON	= http://www.webos-internals.org/images/3/3a/Quake-icon3-resized.png
 LICENSE  = ID Software License
 SCREENSHOTS = [\
-\"http://www.webos-internals.org/images/8/85/Quake-instructions.png\",\
-\"http://www.webos-internals.org/images/f/f0/Quake-in-a-card.png\" \
+\"http://www.webos-internals.org/images/2/26/Quake_Menu.png\",\
+\"http://www.webos-internals.org/images/4/4b/Quake_Lava.png\",\
+\"http://www.webos-internals.org/images/6/66/Quake_Ogre.png\"\
  ]
 
 SRC_GIT = git://git.webos-internals.org/games/sdlquake.git
