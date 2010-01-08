@@ -13,6 +13,7 @@ class PackageHandler(ContentHandler):
     getData = 0
     getIcons = 0
     getIcon = 0
+    language = ""
     url = ""
     filename = ""
     title = ""
@@ -23,6 +24,7 @@ class PackageHandler(ContentHandler):
 
     def startElement(self, name, attrs):
         if (name == "item") :
+            self.language = ""
             self.id = ""
             self.title = ""
             self.json = "{ "
@@ -33,8 +35,12 @@ class PackageHandler(ContentHandler):
             self.icon = ""
             self.screenshots = []
 
+        if (name == "ac:localization"):
+            self.language = attrs["ac:language"]
+
         if (name == "ac:categories"):
-            self.category = attrs["ac:primary"].encode('utf-8')
+            if (self.language == "en"):
+                self.category = attrs["ac:primary"]
 
         if (name == "ac:icons"):
             self.getIcons = 1
@@ -44,11 +50,16 @@ class PackageHandler(ContentHandler):
                 if (self.getIcons):
                     self.getIcon = 1
 
-        self.getData = 1
+        if (self.language == "en"):
+            self.getData = 1
+        
         self.data = ""
             
     def endElement(self,name):
         self.getData = 0
+
+        if (name == "ac:localization"):
+            self.language = ""
 
         if (name == "title") :
             self.title = self.data
