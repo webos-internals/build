@@ -14,12 +14,15 @@ class PackageHandler(ContentHandler):
     getIcons = 0
     getIcon = 0
     language = ""
-    url = ""
-    filename = ""
+    id = ""
     title = ""
+    description = ""
     json = ""
     author = ""
+    support = ""
     version = ""
+    category = ""
+    icon = ""
     screenshots = []
 
     def startElement(self, name, attrs):
@@ -27,6 +30,7 @@ class PackageHandler(ContentHandler):
             self.language = ""
             self.id = ""
             self.title = ""
+            self.description = ""
             self.json = "{ "
             self.author = ""
             self.support = ""
@@ -56,19 +60,12 @@ class PackageHandler(ContentHandler):
     def endElement(self,name):
         self.getData = 0
 
-        if (name == "title") :
-            self.title = self.data
-            self.json += "\"Title\":\"%s\", " % self.data
-
         if (name == "link") :
             self.url = self.data
             self.type = "AppCatalog"
 
         if (name == "link") :
             self.json += "\"Homepage\":\"%s\", " % self.data
-
-        if (name == "description") :
-            self.json += "\"FullDescription\":\"%s\", " % self.data
 
         if (name == "pubDate") :
             self.json += "\"LastUpdated\":\"%s\", " % self.data
@@ -86,6 +83,12 @@ class PackageHandler(ContentHandler):
 
         if (self.language == "en"):
 
+            if ((name == "title") or (name == "ac:title")):
+                self.title = self.data
+                
+            if ((name == "description") or (name == "ac:summary")):
+                self.description = self.data
+
             if (name == "ac:developer") :
                 self.author = self.data
 
@@ -93,6 +96,10 @@ class PackageHandler(ContentHandler):
                 self.support = self.data
 
         if (name == "item"):
+
+            self.json += "\"Title\":\"%s\", " % self.title
+
+            self.json += "\"FullDescription\":\"%s\", " % self.description
 
             self.json += "\"Source\":\"%s\", " % self.url
 
