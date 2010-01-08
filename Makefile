@@ -17,8 +17,6 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-WEBOS_VERSION = 1.3.1
-
 SUBDIRS = apps services plugins daemons linux
 
 .PHONY: index package toolchain upload clobber clean
@@ -30,9 +28,11 @@ index:  ipkgs/webos-internals/all/Packages \
 	ipkgs/optware/all/Packages \
 	ipkgs/optware/i686/Packages ipkgs/optware/armv6/Packages ipkgs/optware/armv7/Packages \
 	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
-	ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages \
 	ipkgs/palm-catalog/Packages ipkgs/palm-beta/Packages ipkgs/palm-web/Packages \
 	ipkgs/regression-testing/1.0.0/Packages ipkgs/regression-testing/2.0.0/Packages
+
+# Disable these until they are fixed
+#	ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages \
 
 ipkgs/webos-internals/%/Packages: package-subdirs
 	rm -rf ipkgs/webos-internals/$*
