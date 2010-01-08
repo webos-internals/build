@@ -40,7 +40,7 @@ class PackageHandler(ContentHandler):
 
         if (name == "ac:categories"):
             if (self.language == "en"):
-                self.category = attrs["ac:primary"]
+                self.category = attrs["ac:primary"].encode('utf-8')
 
         if (name == "ac:icons"):
             self.getIcons = 1
@@ -50,20 +50,19 @@ class PackageHandler(ContentHandler):
                 if (self.getIcons):
                     self.getIcon = 1
 
-        if (self.language == "en"):
-            self.getData = 1
-        
+        self.getData = 1
         self.data = ""
             
     def endElement(self,name):
         self.getData = 0
 
-        if (name == "ac:localization"):
-            self.language = ""
-
         if (name == "title") :
             self.title = self.data
             self.json += "\"Title\":\"%s\", " % self.data
+
+        if (name == "link") :
+            self.url = self.data
+            self.type = "AppCatalog"
 
         if (name == "link") :
             self.json += "\"Homepage\":\"%s\", " % self.data
@@ -79,24 +78,19 @@ class PackageHandler(ContentHandler):
 
         if (name == "ac:version") :
             self.version = self.data
-
-        if (name == "ac:developer") :
-            self.author = self.data
-
-        if (name == "ac:support_url") :
-            self.support = self.data
-
-        if (name == "ac:icons"):
-            self.getIcons = 0
-
+            
         if (name == "ac:asset_url") :
             if (self.getIcon):
                 self.icon = self.data
                 self.getIcon = 0
 
-        if (name == "link") :
-            self.url = self.data
-            self.type = "AppCatalog"
+        if (self.language == "en"):
+
+            if (name == "ac:developer") :
+                self.author = self.data
+
+            if (name == "ac:support_url") :
+                self.support = self.data
 
         if (name == "item"):
 
@@ -120,6 +114,12 @@ class PackageHandler(ContentHandler):
             print "Source: " + self.json
             print "Description: " + self.title
             print
+
+        if (name == "ac:icons"):
+            self.getIcons = 0
+
+        if (name == "ac:localization"):
+            self.language = ""
 
         return
 
