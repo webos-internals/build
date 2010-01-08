@@ -1,26 +1,27 @@
-NAME     = tetricrisis
+NAME     = cinvaders
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 5.9-1
+VERSION  = 1.0.0-1
 DEPENDS  = org.webosinternals.upstartmgr
-HOMEPAGE = http://www.webos-internals.org/wiki/Application:TetriCrisis
+HOMEPAGE = http://www.webos-internals.org/wiki/Application:ClassicInvaders
 MAINTAINER = Ryan Hope
-TITLE   = TetriCrisis
+TITLE   = Classic Invaders
 TYPE	= Application
-DESCRIPTION = THE Open-Source Cross-Platform Tetris(R) Video Game!<br><br>	\
-	      Controls:<br>							\
-	      Q - left<br>							\
-	      W - up<br>							\
-	      E - right<br>							\
-	      S - down<br>							\
-	      O - rotate counter-clockwise<br>					\
-	      P - rotate clockwise						\
+DESCRIPTION = Classic Space Invaders!<br><br>									\
+	      <b>NOTE: Game takes a few seconds to load. While loading a black screen is normal!</b><br><br>	\
+	      Controls:<br>											\
+	      Tilt Left - left<br>										\
+	      Tilt Up - up<br>											\
+	      Tilt Right - right<br>										\
+	      Tilt Down - down<br>										\
+	      Tap Screen - select<br>										\
+	      Tap Gesture - Shoot <br>										\
 
 CATEGORY = Games
-ICON	= http://www.webos-internals.org/images/7/75/Icon_Tetris.png
+ICON	= http://www.webos-internals.org/images/6/6e/Icon_SpaceInvaders.png
 LICENSE  = GPL
 
-SRC_GIT = git://git.webos-internals.org/games/TetriCrisis.git
+SRC_GIT = git://git.webos-internals.org/games/Classic_Invaders.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk
@@ -45,7 +46,7 @@ build/%.built-${VERSION}: build/.unpack
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/upstart
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/control
-	install -m 755 build/binaries/$*/tetricrisis build/$*/usr/palm/applications/${APP_ID}/bin/
+	install -m 755 build/binaries/$*/cinvaders build/$*/usr/palm/applications/${APP_ID}/bin/
 	cp -r build/src/src/data build/$*/usr/palm/applications/${APP_ID}/bin/
 	mkdir -p build/$*/etc/event.d
 	install -m 644 build/src/upstart/${APP_ID} build/$*/etc/event.d/${APP_ID}

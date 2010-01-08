@@ -54,11 +54,11 @@ do_skip() {
 echo "***************UPDATING FEEDS***************" >> $LOG
 echo "" | tee -a $LOG
 echo -n "Updating Feeds ... "
-#ipkg -o $IPKG_OFFLINE_ROOT update >> $LOG 2>&1 || echo "Failed!"
-#if [ "$?" -eq 0 ]
-#then
+ipkg -o $IPKG_OFFLINE_ROOT update >> $LOG 2>&1 || echo "Failed!"
+if [ "$?" -eq 0 ]
+then
   echo "Success!"
-#fi
+fi
 echo "" >> $LOG
 echo "*************END UPDATING FEEDS*************" >> $LOG
 echo "" | tee -a $LOG
