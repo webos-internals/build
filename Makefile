@@ -31,6 +31,7 @@ index:  ipkgs/webos-internals/all/Packages \
 	ipkgs/optware/i686/Packages ipkgs/optware/armv6/Packages ipkgs/optware/armv7/Packages \
 	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
 	ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages \
+	ipkgs/palm-catalog/Packages ipkgs/palm-beta/Packages ipkgs/palm-web/Packages \
 	ipkgs/regression-testing/1.0.0/Packages ipkgs/regression-testing/2.0.0/Packages
 
 ipkgs/webos-internals/%/Packages: package-subdirs
@@ -76,6 +77,12 @@ ipkgs/regression-testing/%/Packages: package-regression
 	toolchain/ipkg-utils/ipkg-make-index \
 		-v -p ipkgs/regression-testing/$*/Packages ipkgs/regression-testing/$*
 	gzip -c ipkgs/regression-testing/$*/Packages > ipkgs/regression-testing/$*/Packages.gz
+
+ipkgs/palm-%/Packages: package-feeds
+	rm -rf ipkgs/palm-$*
+	mkdir -p ipkgs/palm-$*
+	cp feeds/palm-$*/build/Metadata ipkgs/palm-$*/Packages
+	gzip -c ipkgs/palm-$*/Packages > ipkgs/palm-$*/Packages.gz
 
 ipkgs/%/Packages: package-feeds
 	rm -rf ipkgs/$*
