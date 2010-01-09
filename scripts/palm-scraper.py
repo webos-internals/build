@@ -68,7 +68,6 @@ class PackageHandler(ContentHandler):
 
         if (name == "link") :
             self.url = self.data
-            self.type = "AppCatalog"
 
         if (name == "link") :
             self.json += "\"Homepage\":\"%s\", " % self.data
@@ -106,7 +105,7 @@ class PackageHandler(ContentHandler):
             if (name == "ac:support_url") :
                 self.support = self.data
 
-        if (name == "item"):
+        if ((name == "item") and (self.title != "")):
 
             self.json += "\"Title\":\"%s\", " % self.title
 
@@ -114,7 +113,7 @@ class PackageHandler(ContentHandler):
 
             self.json += "\"Source\":\"%s\", " % self.url
 
-            self.json += "\"Type\":\"%s\", " % self.type
+            self.json += "\"Type\":\"AppCatalog\", "
 
             if (self.category):
                 self.json += "\"Category\":\"%s\", " % self.category
