@@ -24,6 +24,7 @@ class PackageHandler(ContentHandler):
     author = ""
     support = ""
     version = ""
+    size = ""
     category = ""
     icon = ""
     screenshots = []
@@ -39,6 +40,7 @@ class PackageHandler(ContentHandler):
             self.author = ""
             self.support = ""
             self.version = ""
+            self.size = ""
             self.category = ""
             self.icon = ""
             self.screenshots = []
@@ -82,6 +84,9 @@ class PackageHandler(ContentHandler):
         if (name == "ac:version") :
             self.version = self.data
             
+        if (name == "ac:installed_size") :
+            self.size = self.data
+            
         if (name == "ac:asset_url") :
             if (self.getIcon):
                 self.icon = self.data
@@ -124,6 +129,7 @@ class PackageHandler(ContentHandler):
             print "Section: " + self.category
             print "Architecture: all"
             print "Maintainer: %s <%s>" % (self.author, self.support)
+            print "Size: " + self.size
             print "Source: " + self.json
             print "Description: " + self.title
             print
