@@ -6,11 +6,14 @@ import sys
 import re
 import urllib
 import os
+import time
+import calendar
 
 files = {}
 
 class PackageHandler(ContentHandler):
     getData = 0
+    inItem = 0
     getIcons = 0
     getIcon = 0
     language = ""
@@ -27,6 +30,7 @@ class PackageHandler(ContentHandler):
 
     def startElement(self, name, attrs):
         if (name == "item") :
+            self.inItem = 1
             self.language = ""
             self.id = ""
             self.title = ""
@@ -68,7 +72,9 @@ class PackageHandler(ContentHandler):
             self.json += "\"Homepage\":\"%s\", " % self.data
 
         if (name == "pubDate") :
-            self.json += "\"LastUpdated\":\"%s\", " % self.data
+            if (self.inItem):
+                secs = calendar.timegm(time.strptime(self.data, "%Y-%m-%d %H:%M:%S"))
+                self.json += "\"LastUpdated\":\"%s\", " % secs
 
         if (name == "ac:packageid") :
             self.id = self.data
@@ -121,6 +127,8 @@ class PackageHandler(ContentHandler):
             print "Source: " + self.json
             print "Description: " + self.title
             print
+
+            inItem = 0
 
         if (name == "ac:icons"):
             self.getIcons = 0
