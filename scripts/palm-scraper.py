@@ -64,6 +64,7 @@ class PackageHandler(ContentHandler):
             if (attrs["ac:type"] == "app"):
                 if (self.getIcons):
                     self.getIcon = 1
+            if (attrs["ac:type"] == "large"):
                 if (self.getScreenshots):
                     self.getScreenshot = 1
 
