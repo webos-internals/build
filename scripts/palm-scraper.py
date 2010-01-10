@@ -15,7 +15,9 @@ class PackageHandler(ContentHandler):
     getData = 0
     inItem = 0
     getIcons = 0
+    getScreenshots = 0
     getIcon = 0
+    getScreenshot = 0
     language = ""
     id = ""
     title = ""
@@ -55,10 +57,15 @@ class PackageHandler(ContentHandler):
         if (name == "ac:icons"):
             self.getIcons = 1
 
+        if (name == "ac:images"):
+            self.getScreenshots = 1
+
         if (name == "ac:asset_url"):
             if (attrs["ac:type"] == "app"):
                 if (self.getIcons):
                     self.getIcon = 1
+                if (self.getScreenshots):
+                    self.getScreenshot = 1
 
         self.getData = 1
         self.data = ""
@@ -90,6 +97,9 @@ class PackageHandler(ContentHandler):
             if (self.getIcon):
                 self.icon = self.data
                 self.getIcon = 0
+            if (self.getScreenshot):
+                self.screenshots.append('"' + self.data + '"')
+                self.getScreenshot = 0
 
         if (self.language == "en"):
 
@@ -121,6 +131,9 @@ class PackageHandler(ContentHandler):
             if (self.icon):
                 self.json += "\"Icon\":\"%s\", " % self.icon
 
+            if (len(self.screenshots)):
+                self.json += "\"Screenshots\":[" + ','.join(self.screenshots) + "], "
+
             self.json += "\"Feed\":\"Palm %s\" }" % sys.argv[2]
 
             print "Package: " + self.id
@@ -137,6 +150,9 @@ class PackageHandler(ContentHandler):
 
         if (name == "ac:icons"):
             self.getIcons = 0
+
+        if (name == "ac:images"):
+            self.getScreenshots = 0
 
         if (name == "ac:localization"):
             self.language = ""
