@@ -27,6 +27,7 @@ class PackageHandler(ContentHandler):
     support = ""
     version = ""
     size = ""
+    price = 0.00
     category = ""
     icon = ""
     screenshots = []
@@ -43,6 +44,7 @@ class PackageHandler(ContentHandler):
             self.support = ""
             self.version = ""
             self.size = ""
+            self.price = 0.00
             self.category = ""
             self.icon = ""
             self.screenshots = []
@@ -94,6 +96,9 @@ class PackageHandler(ContentHandler):
         if (name == "ac:installed_size") :
             self.size = self.data
             
+        if (name == "ac:price") :
+            self.price = float(self.data)
+            
         if (name == "ac:asset_url") :
             if (self.getIcon):
                 self.icon = self.data
@@ -131,6 +136,10 @@ class PackageHandler(ContentHandler):
 
             if (self.icon):
                 self.json += "\"Icon\":\"%s\", " % self.icon
+
+            if (self.price):
+                if (self.price != 0):
+                    self.json += "\"Price\":\"%.02f\", " % self.price
 
             if (len(self.screenshots)):
                 self.json += "\"Screenshots\":[" + ','.join(self.screenshots) + "], "
