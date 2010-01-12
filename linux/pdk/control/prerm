@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Stop org.webosinternals.pdk
+if [ -f /etc/event.d/org.webosinternals.pdk ]; then
+    /sbin/stop org.webosinternals.pdk
+fi
+
+# Remove the upstart script
+rm -f /etc/event.d/org.webosinternals.pdk
+
+# Unmount /usr/local
+umount /usr/local
+
+exit 0

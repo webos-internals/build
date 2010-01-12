@@ -1,0 +1,23 @@
+description "WebOS Internals PDK"
+
+start on stopped finish
+
+console output
+
+script
+
+echo -n "Mounting /usr/local directory: "
+
+[ -e /var/local ] || mkdir -p /var/local || echo "Failed to create /var/local" || return 1
+[ -e /usr/local ] || mkdir -p /usr/local || echo "Failed to create /usr/local" || return 1
+
+mount -o bind /var/local /usr/local || echo "Failed to mount /usr/local" || return 1
+
+if grep -q /media/cryptofs/apps /etc/palm/luna.conf ; then
+  if [ ! -e /media/cryptofs/apps/usr/local ] ; then
+    mkdir -p /media/cryptofs/apps/usr/local || echo "Failed to create /media/cryptofs/apps/usr/local" || return 1
+  fi
+  mount -o bind /var/local /media/cryptofs/apps/usr/local || echo "Failed to mount /media/cryptofs/apps/usr/local" || return 1
+fi  
+
+end script
