@@ -1,0 +1,6 @@
+#!/bin/sh
+
+sed -e '/\/opt\/bin\/bash/d' -i /etc/shells
+rm -f /etc/profile.d/mobi.webosinternals.bash
+
+exit 0
