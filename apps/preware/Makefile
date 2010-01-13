@@ -1,21 +1,29 @@
 NAME     = preware
 TITLE	 = Preware
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.9.12
+SIGNER   = org.webosinternals
+VERSION  = 0.9.16
 DEPENDS	 = org.webosinternals.ipkgservice
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
 ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
-DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications.
-CHANGELOG = 0.9.12: Added a fix for the recurring splash screen.<br>0.9.11: Added a preference for the partial app limit fix.<br>0.9.10: Added support for theme categories.<br>0.9.9: Performance improvements and Pixi Patching support.<br>0.9.8: Serialised the gathering of data for Type:Unknown packages to fix the hangs.<br>0.9.7: Added preference to enable or disable fetching of additional information for Type:Unknown packages.<br>0.9.6: Added the initial startup screen. Fixed the display of packages with multiple maintainers. Now loads extended appinfo and control file information for Unknown packages. Changed default list second-line to version + maintainer. No longer allows back-gestures during package operations. Multi-line package titles are now supported. Show All Packages changed to Show Available Types and now defaults to No for new users.<br>0.9.5: Better error reporting, and more verbose status messages giving indications of how long it is reasonable to wait.<br>0.9.4: Added support for package dependencies.<br>0.9.3: Enabled feed management and added the webos-patches feed.  If you have previously installed Patches from the autopatch feed or the online repository, you should run the Emergency Patch Recovery application before using this first public release of the webos-patches feed.
+DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, services and plugins.  Preware is also able to access official Palm App Catalog feeds.
+CHANGELOG = 0.9.16: Removed the partial app limit fix (obsolete as of webOS 1.3.5).<br>0.9.15: Added Palm App Catalog feeds, including price information.<br>0.9.14: Added support for installation of signed packages without confirmation. Fixed the auto-configuration of disabled webos-patches feeds.<br>0.9.13: Enabled the Update All button, and added support for skipping restart actions (e.g. when installing multiple patches).<br>0.9.12: Added a fix for the recurring splash screen.<br>0.9.11: Added a preference for the partial app limit fix.<br>0.9.10: Added support for theme categories.
 SCREENSHOTS = [\
-\"http://www.webos-internals.org/images/7/7f/Preware_ss1.jpg\",\
-\"http://www.webos-internals.org/images/4/41/Preware_ss2.jpg\",\
-\"http://www.webos-internals.org/images/3/3b/Preware_ss3.jpg\",\
-\"http://www.webos-internals.org/images/4/49/Preware_ss4.jpg\",\
-\"http://www.webos-internals.org/images/4/4b/Preware_ss5.jpg\",\
-\"http://www.webos-internals.org/images/6/6a/Preware_ss6.jpg\" ]
+\"http://www.webos-internals.org/images/3/36/Preware_ss1.png\",\
+\"http://www.webos-internals.org/images/9/97/Preware_ss2.png\",\
+\"http://www.webos-internals.org/images/6/6f/Preware_ss2a.png\",\
+\"http://www.webos-internals.org/images/e/e6/Preware_ss2b.png\",\
+\"http://www.webos-internals.org/images/8/8a/Preware_ss3.png\",\
+\"http://www.webos-internals.org/images/a/a1/Preware_ss4.png\",\
+\"http://www.webos-internals.org/images/2/28/Preware_ss5.png\",\
+\"http://www.webos-internals.org/images/e/e1/Preware_ss6.png\",\
+\"http://www.webos-internals.org/images/5/55/Preware_ss7.png\",\
+\"http://www.webos-internals.org/images/9/94/Preware_ss8.png\",\
+\"http://www.webos-internals.org/images/e/ea/Preware_ss9.png\",\
+\"http://www.webos-internals.org/images/b/bc/Preware_ss10.png\",\
+\"http://www.webos-internals.org/images/7/75/Preware_ss11.png\" ]
 LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/applications/preware.git
