@@ -3,12 +3,12 @@ TITLE	 = OpenVPN
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
 OPT_VER  = 2.1.1-1
-VERSION  = 2.1.1-1
+VERSION  = 2.1.1-2
 HOMEPAGE = http://www.openvpn.net/
 DESCRIPTION = OpenVPN is a full-featured open source SSL VPN solution.
 TYPE	 = Optware
 CATEGORY = Utilities
-ICON	 = http://www.webos-internals.org/images/5/5f/Icon_WebOSInternals_Base_Optware.png
+ICON	 = http://www.webos-internals.org/images/3/3d/Icon_OpenVPN.png
 DEPENDS	 = mobi.optware.openssl, mobi.optware.lzo
 
 SRC_OPTWARE = ${NAME}_${OPT_VER}
