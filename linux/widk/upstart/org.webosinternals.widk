@@ -1,4 +1,4 @@
-description "WebOS Internals PDK"
+description "WebOS Internals Development Kit"
 
 start on stopped finish
 
