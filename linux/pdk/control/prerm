@@ -11,4 +11,9 @@ rm -f /etc/event.d/org.webosinternals.pdk
 # Unmount /usr/local
 umount /usr/local
 
+# Unmount the install convenience mount
+if grep -q /media/cryptofs/apps /etc/palm/luna.conf ; then
+  umount /media/cryptofs/apps/usr/local
+fi
+
 exit 0
