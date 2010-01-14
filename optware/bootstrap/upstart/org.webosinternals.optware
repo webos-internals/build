@@ -11,13 +11,21 @@ echo -n "Mounting /opt directory: "
 [ -e /var/opt ]	|| mkdir -p /var/opt || echo "Failed to create /var/opt" || return 1
 [ -e /opt ]     || mkdir -p /opt     || echo "Failed to create /opt"     || return 1
 
-mount -o bind /var/opt /opt || echo "Failed to mount /opt" || return 1
+if cut -d' ' -f2 < /proc/mounts | grep -q ^/opt$; then
+  echo "/opt already mounted"
+else
+  mount -o bind /var/opt /opt || echo "Failed to mount /opt" || return 1
+fi
 
 if grep -q /media/cryptofs/apps /etc/palm/luna.conf ; then
   if [ ! -e /media/cryptofs/apps/opt ] ; then
     mkdir -p /media/cryptofs/apps/opt || echo "Failed to create /media/cryptofs/apps/opt" || return 1
   fi
-  mount -o bind /var/opt /media/cryptofs/apps/opt || echo "Failed to mount /media/cryptofs/apps/opt" || return 1
+  if cut -d' ' -f2 < /proc/mounts | grep -q ^/media/cryptofs/apps/opt$; then
+    echo "/media/cryptofs/apps/opt already mounted"
+  else
+    mount -o bind /var/opt /media/cryptofs/apps/opt || echo "Failed to mount /media/cryptofs/apps/opt" || return 1
+  fi
 fi  
 
 end script
