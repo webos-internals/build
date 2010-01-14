@@ -171,7 +171,7 @@ class PackageHandler(ContentHandler):
 
     def characters (self, ch): 
         if (self.getData) :
-            self.data += ch.encode('utf-8').replace("'", "\\'").replace('"', '\\"').replace(': ', '&#58; ').replace('\r', '').replace('\n', '')
+            self.data += ch.encode('utf-8').replace('"', '\\"').replace(': ', '&#58; ').replace('\r', '').replace('\n', '')
 
         return
 
