@@ -1,12 +1,12 @@
 NAME     = jstop
 APP_ID   = com.palm.biz.sketchyplace.${NAME}
-VERSION  = 0.0.5
+VERSION  = 0.0.6
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:JsTop
 MAINTAINER = Daniel Freedman (azakus) <dfreedm2@uiuc.edu>
 TITLE   = JsTop
 TYPE	= Application
 DESCRIPTION = An on-phone resource monitor for javascript applications.
-CHANGELOG = 0.0.5: WebOS 1.3.5 compatibility & lower memory usage.
+CHANGELOG = 0.0.6: WebOS 1.3.5 compatibility & lower memory usage.
 CATEGORY = System Utilities
 ICON	= http://www.webos-internals.org/images/2/28/Icon_WebOSInternals_Base.png
 LICENSE  = BSD (NCSA/UofI) Open Source
