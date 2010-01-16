@@ -1,14 +1,14 @@
 NAME     = visualboyadvance
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 1.0.0
+VERSION  = 1.0.1
 DEPENDS  = org.webosinternals.upstartmgr
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:VBA
 MAINTAINER = dtzWill
 TITLE   = VisualBoyAdvance
 TYPE	= Application
-DESCRIPTION = Port of the popular Game Boy, Game Boy Color, and Game Boy Advance emulator.
-CHANGELOG = 1.0.0 Initial release.  Lots of work porting this to the pre
+DESCRIPTION = Port of the popular Game Boy, Game Boy Color, and Game Boy Advance emulator.<br>If you like this game, please consider donating!  See wiki for link.
+CHANGELOG = 1.0.1 Small performance boost, public releasei<br>1.0.0 Initial release.  Reimplemented rendering engine, rom selector.
 CATEGORY = Games
 ICON	= http://www.webos-internals.org/images/3/3c/Vba.png
 LICENSE  = GPLv2
