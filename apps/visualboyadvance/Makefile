@@ -8,7 +8,7 @@ MAINTAINER = dtzWill
 TITLE   = VisualBoyAdvance
 TYPE	= Application
 DESCRIPTION = Port of the popular Game Boy, Game Boy Color, and Game Boy Advance emulator.<br>Official wiki <a href="http://www.webos-internals.org/wiki/Application:VBA">here</a> (Please read it!).<br>If you like this game, please consider donating!  See wiki for link.
-CHANGELOG = 1.0.2 Small metadata fix. 1.0.1 Small performance boost, public release!<br>1.0.0 Initial release.  Reimplemented rendering engine, rom selector.
+CHANGELOG = 1.0.2 Small metadata fix. <br>1.0.1 Small performance boost, public release!<br>1.0.0 Initial release.  Reimplemented rendering engine, rom selector.
 CATEGORY = Games
 ICON	= http://www.webos-internals.org/images/3/3c/Vba.png
 LICENSE  = GPLv2
