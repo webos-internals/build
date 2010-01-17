@@ -22,14 +22,18 @@ SUBDIRS = apps services plugins daemons linux
 .PHONY: index package toolchain upload clobber clean
 
 
+.PHONY: index
 index:  ipkgs/webos-internals/all/Packages \
 	ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv6/Packages ipkgs/webos-internals/armv7/Packages \
 	ipkgs/webos-patches/1.2.1/Packages ipkgs/webos-patches/1.3.1/Packages ipkgs/webos-patches/1.3.5/Packages \
 	ipkgs/optware/all/Packages \
 	ipkgs/optware/i686/Packages ipkgs/optware/armv6/Packages ipkgs/optware/armv7/Packages \
 	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
-	ipkgs/palm-catalog/Packages ipkgs/palm-beta/Packages ipkgs/palm-web/Packages \
+	palm-index \
 	ipkgs/regression-testing/1.0.0/Packages ipkgs/regression-testing/2.0.0/Packages
+
+.PHONY: palm-index
+palm-index: ipkgs/palm-catalog/Packages ipkgs/palm-beta/Packages ipkgs/palm-web/Packages
 
 # Disable these until they are fixed
 #	ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages \
@@ -81,7 +85,7 @@ ipkgs/regression-testing/%/Packages: package-regression
 ipkgs/palm-%/Packages: package-feeds
 	rm -rf ipkgs/palm-$*
 	mkdir -p ipkgs/palm-$*
-	cp feeds/palm-$*/build/Metadata ipkgs/palm-$*/Packages
+	cat feeds/palm-$*-base/build/Metadata feeds/palm-$*/build/Metadata > ipkgs/palm-$*/Packages
 	gzip -c ipkgs/palm-$*/Packages > ipkgs/palm-$*/Packages.gz
 
 ipkgs/%/Packages: package-feeds

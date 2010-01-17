@@ -20,7 +20,7 @@
 NAME     = palm-beta
 HOMEPAGE = http://www.palm.com/
 
-SRC_XML = http://developer.palm.com/rss/B/appcatalog.rss.xml
+SRC_XML = http://developer.palm.com/rss/B/appcatalog.update.rss.xml
 
 .PHONY: package
 package: build/.built
