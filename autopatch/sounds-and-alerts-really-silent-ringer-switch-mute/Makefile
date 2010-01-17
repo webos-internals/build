@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = sounds-and-alerts/${NAME}.patch
 TITLE = Really Silent Ringer Switch Mute
-DESCRIPTION = Flicking the ringer switch to off will mute every aspect of the webOS, music and games included.
+DESCRIPTION = Flicking the ringer switch to off will mute every aspect of the webOS, music and games included. Will not mute alarms nor the phone speaker (though will mute ringtone). If a wired or wireless headset/headphones are connected, mute will be canceled for music/games.
 CATEGORY = Sounds and Alerts
-VERSIONS = 1.3.1-28 1.3.5-11
+VERSIONS = 1.3.1-29 1.3.5-12
 ICON = http://www.webos-internals.org/images/f/ff/Icon_WebOSInternals_Patches_Soundsandalerts.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
