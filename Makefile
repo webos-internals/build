@@ -23,17 +23,27 @@ SUBDIRS = apps services plugins daemons linux
 
 
 .PHONY: index
-index:  ipkgs/webos-internals/all/Packages \
-	ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv6/Packages ipkgs/webos-internals/armv7/Packages \
-	ipkgs/webos-patches/1.2.1/Packages ipkgs/webos-patches/1.3.1/Packages ipkgs/webos-patches/1.3.5/Packages \
-	ipkgs/optware/all/Packages \
-	ipkgs/optware/i686/Packages ipkgs/optware/armv6/Packages ipkgs/optware/armv7/Packages \
+index:  webos-internals-index \
+	patches-index \
+	optware-index \
 	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
 	palm-index \
-	ipkgs/regression-testing/1.0.0/Packages ipkgs/regression-testing/2.0.0/Packages
+	regression-index
+
+.PHONY: optware-index
+optware-index: ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv6/Packages ipkgs/optware/armv7/Packages
 
 .PHONY: palm-index
 palm-index: ipkgs/palm-catalog/Packages ipkgs/palm-beta/Packages ipkgs/palm-web/Packages
+
+.PHONY: patches-index
+patches-index: ipkgs/webos-patches/1.3.1/Packages ipkgs/webos-patches/1.3.5/Packages ipkgs/webos-patches/1.4.0/Packages
+
+.PHONY: regression-index
+regression-index: ipkgs/regression-testing/1.0.0/Packages ipkgs/regression-testing/2.0.0/Packages 
+
+.PHONY: webos-internals-index
+webos-internals-index: ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv6/Packages ipkgs/webos-internals/armv7/Packages	
 
 # Disable these until they are fixed
 #	ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages \
@@ -160,19 +170,19 @@ staging/usr/include/glib.h:
 upload:
 	rsync -avr ipkgs/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/
 
-testing: webos-internals-testing webos-patches-testing optware-testing
+testing: webos-internals-testing webos-patches-testing optware-testing regression-testing
 
 webos-internals-testing:
-	${MAKE} SUBDIRS="unreleased" ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv6/Packages ipkgs/webos-internals/armv7/Packages
+	${MAKE} SUBDIRS="unreleased" webos-internals-index
 	rsync -avr ipkgs/webos-internals/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
 
-webos-patches-testing: package-patches
+webos-patches-testing: patches-index
 	rsync -avr ipkgs/webos-patches/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 
-optware-testing: ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv6/Packages ipkgs/optware/armv7/Packages
+optware-testing: optware-index
 	rsync -avr ipkgs/optware/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/optware/testing/
 
-regression-testing: ipkgs/regression-testing/1.0.0/Packages ipkgs/regression-testing/2.0.0/Packages 
+regression-testing: regression-index
 	rsync -avr ipkgs/regression-testing/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/regression-testing/
 
 distclean: clobber
