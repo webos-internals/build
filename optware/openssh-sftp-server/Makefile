@@ -2,6 +2,7 @@ NAME     = openssh-sftp-server
 TITLE	 = OpenSSH SFTP Server
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
+OPT_VER  = 5.3p1-1
 VERSION  = 5.3.1-2
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:OpenSSH
 TYPE	 = Optware
@@ -11,7 +12,7 @@ CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/8/86/Icon_WebOSInternals_OpenSSH.png
 DEPENDS	 = mobi.optware.openssh
 
-SRC_OPTWARE = ${NAME}_5.3p1-1
+SRC_OPTWARE = ${NAME}_${OPT_VER}
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_armv6.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk

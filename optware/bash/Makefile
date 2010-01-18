@@ -2,14 +2,15 @@ NAME     = bash
 TITLE	 = Bourne Again Shell
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
-VERSION  = 3.2.49-1
+OPT_VER  = 3.2.49-1
+VERSION  = 3.2.49-2
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Bash
 TYPE	 = Optware
 CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
 DEPENDS  = mobi.optware.readline
 
-SRC_OPTWARE = ${NAME}_${VERSION}
+SRC_OPTWARE = ${NAME}_${OPT_VER}
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_armv6.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
@@ -19,6 +20,6 @@ include ../../support/download.mk
 
 include ../../support/optware.mk
 
-build/%.built : build/%.unpacked
+build/%.built-${VERSION} : build/%.unpacked
 	rm -rf build/$*/opt/etc
 	touch $@

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "Post-Install Script Failure Postinst Standard Output"
+echo "Post-Install Script Failure Postinst Standard Error" 1>&2
+
+exit 1

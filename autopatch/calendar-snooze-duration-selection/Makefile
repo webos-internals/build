@@ -3,7 +3,7 @@ PATCH = calendar/${NAME}.patch
 TITLE = Snooze Duration Selection
 DESCRIPTION = Adds a snooze duration selection to the reminder notification. Currently it the list will not scroll so the snooze duration options are limited to only four durations.
 CATEGORY = Calendar
-VERSIONS = 1.2.1-2 1.3.1-13 1.3.5-1
+VERSIONS = 1.2.1-2 1.3.1-13 1.3.5-2
 ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Calendar.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/2/2e/CalendarSnoozeDurationSelecton_1.png\",\
@@ -13,5 +13,5 @@ META_SUB_VERSION = 3
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = Lclarkjr
+MAINTAINER = Lclarkjr, dBsooner <webos@dbsooner.com>
 HOMEPAGE = http://forums.precentral.net/showthread.php?p=2041492#post2041492

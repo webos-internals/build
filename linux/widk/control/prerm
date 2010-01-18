@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Stop org.webosinternals.widk
+if [ -f /etc/event.d/org.webosinternals.widk ]; then
+    /sbin/stop org.webosinternals.widk
+fi
+
+# Remove the upstart script
+rm -f /etc/event.d/org.webosinternals.widk
+
+# Unmount /usr/local
+umount /usr/local
+
+# Unmount the install convenience mount
+if grep -q /media/cryptofs/apps /etc/palm/luna.conf ; then
+  umount /media/cryptofs/apps/usr/local
+fi
+
+exit 0

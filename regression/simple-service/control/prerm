@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "Simple Service Prerm Standard Output"
+echo "Simple Service Prerm Standard Error" 1>&2
+
+exit 0

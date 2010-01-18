@@ -17,20 +17,26 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-WEBOS_VERSION = 1.3.1
-
 SUBDIRS = apps services plugins daemons linux
 
 .PHONY: index package toolchain upload clobber clean
 
 
+.PHONY: index
 index:  ipkgs/webos-internals/all/Packages \
 	ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv6/Packages ipkgs/webos-internals/armv7/Packages \
 	ipkgs/webos-patches/1.2.1/Packages ipkgs/webos-patches/1.3.1/Packages ipkgs/webos-patches/1.3.5/Packages \
 	ipkgs/optware/all/Packages \
 	ipkgs/optware/i686/Packages ipkgs/optware/armv6/Packages ipkgs/optware/armv7/Packages \
 	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
-	ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages
+	palm-index \
+	ipkgs/regression-testing/1.0.0/Packages ipkgs/regression-testing/2.0.0/Packages
+
+.PHONY: palm-index
+palm-index: ipkgs/palm-catalog/Packages ipkgs/palm-beta/Packages ipkgs/palm-web/Packages
+
+# Disable these until they are fixed
+#	ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages \
 
 ipkgs/webos-internals/%/Packages: package-subdirs
 	rm -rf ipkgs/webos-internals/$*
@@ -65,6 +71,26 @@ ipkgs/optware/%/Packages: package-optware
 		-v -p ipkgs/optware/$*/Packages ipkgs/optware/$*
 	gzip -c ipkgs/optware/$*/Packages > ipkgs/optware/$*/Packages.gz
 
+<<<<<<< HEAD
+=======
+ipkgs/regression-testing/%/Packages: package-regression
+	rm -rf ipkgs/regression-testing/$*
+	mkdir -p ipkgs/regression-testing/$*
+	( find regression -type d -name ipkgs -print | \
+	  xargs -I % find % -name "*_$*_all.ipk" -print | \
+	  xargs -I % rsync -i -a % ipkgs/regression-testing/$* )
+	TAR_OPTIONS=--wildcards \
+	toolchain/ipkg-utils/ipkg-make-index \
+		-v -p ipkgs/regression-testing/$*/Packages ipkgs/regression-testing/$*
+	gzip -c ipkgs/regression-testing/$*/Packages > ipkgs/regression-testing/$*/Packages.gz
+
+ipkgs/palm-%/Packages: package-feeds
+	rm -rf ipkgs/palm-$*
+	mkdir -p ipkgs/palm-$*
+	cat feeds/palm-$*-base/build/Metadata feeds/palm-$*/build/Metadata > ipkgs/palm-$*/Packages
+	gzip -c ipkgs/palm-$*/Packages > ipkgs/palm-$*/Packages.gz
+
+>>>>>>> master
 ipkgs/%/Packages: package-feeds
 	rm -rf ipkgs/$*
 	mkdir -p ipkgs/$*
@@ -84,21 +110,28 @@ package: package-subdirs package-patches package-optware package-feeds
 package-subdirs: toolchain
 	for f in `find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
-	    ${MAKE} -C $$f package || exit ; \
+	    ${MAKE} -C $$f package ; \
 	  fi; \
 	done
 
 package-patches: toolchain
 	for f in `find autopatch -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
-	    ${MAKE} -C $$f package || exit ; \
+	    ${MAKE} -C $$f package ; \
 	  fi; \
 	done
 
 package-optware: toolchain
 	for f in `find optware -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
-	    ${MAKE} -C $$f package || exit ; \
+	    ${MAKE} -C $$f package ; \
+	  fi; \
+	done
+
+package-regression: toolchain
+	for f in `find regression -mindepth 1 -maxdepth 1 -type d -print` ; do \
+	  if [ -e $$f/Makefile ]; then \
+	    ${MAKE} -C $$f package ; \
 	  fi; \
 	done
 
@@ -110,10 +143,22 @@ package-feeds: toolchain
 	done
 
 toolchain: toolchain/ipkg-utils/ipkg-make-index \
-	   toolchain/cs08q1armel/build/arm-2008q1
+	   toolchain/cs08q1armel/build/arm-2008q1 \
+	   staging/usr/include/mjson/json.h \
+	   staging/usr/include/lunaservice.h \
+	   staging/usr/include/glib.h
 
 toolchain/cs08q1armel/build/arm-2008q1:
 	${MAKE} -C toolchain/cs08q1armel unpack
+
+staging/usr/include/mjson/json.h:
+	${MAKE} -C toolchain/mjson stage
+
+staging/usr/include/lunaservice.h:
+	${MAKE} -C toolchain/lunaservice stage
+
+staging/usr/include/glib.h:
+	${MAKE} -C toolchain/glib stage
 
 upload:
 	rsync -avr ipkgs/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/
@@ -124,20 +169,45 @@ webos-internals-testing:
 	${MAKE} SUBDIRS="unreleased" ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv6/Packages ipkgs/webos-internals/armv7/Packages
 	rsync -avr ipkgs/webos-internals/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
 
+<<<<<<< HEAD
 webos-patches-testing: ipkgs/webos-patches/1.2.1/Packages ipkgs/webos-patches/1.3.1/Packages ipkgs/webos-patches/1.3.5/Packages
+=======
+webos-patches-testing: package-patches
+>>>>>>> master
 	rsync -avr ipkgs/webos-patches/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 
 optware-testing: ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv6/Packages ipkgs/optware/armv7/Packages
 	rsync -avr ipkgs/optware/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/optware/testing/
 
+regression-testing: ipkgs/regression-testing/1.0.0/Packages ipkgs/regression-testing/2.0.0/Packages 
+	rsync -avr ipkgs/regression-testing/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/regression-testing/
+
 distclean: clobber
 	find toolchain -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
 
-clobber: clean
-	find ${SUBDIRS} feeds optware autopatch -mindepth 1 -maxdepth 1 -type d -print | \
-	xargs -I % ${MAKE} -C % clobber
+clobber: clean clobber-subdirs clobber-patches clobber-optware clobber-regression clobber-feeds
 	rm -rf ipkgs
+
+clobber-subdirs:
+	find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print | \
+	xargs -I % ${MAKE} -C % clobber
+
+clobber-patches:
+	find autopatch -mindepth 1 -maxdepth 1 -type d -print | \
+	xargs -I % ${MAKE} -C % clobber
+
+clobber-optware:
+	find optware -mindepth 1 -maxdepth 1 -type d -print | \
+	xargs -I % ${MAKE} -C % clobber
+
+clobber-regression:
+	find regression -mindepth 1 -maxdepth 1 -type d -print | \
+	xargs -I % ${MAKE} -C % clobber
+
+clobber-feeds:
+	find feeds -mindepth 1 -maxdepth 1 -type d -print | \
+	xargs -I % ${MAKE} -C % clobber
 
 clean:
 	find . -name "*~" -delete

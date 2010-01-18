@@ -1,11 +1,11 @@
 NAME     = freetetherd
 APP_ID   = us.ryanhope.${NAME}
-VERSION  = 0.0.1
+VERSION  = 0.0.3
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:FreeTether
 MAINTAINER = Ryan Hope <rmh3093@gmail.com>
 TITLE	 = freeTetherD - Network Routing and Address Translation Service
 DESCRIPTION = A native C luna service for network routing and address translation. So far, only freeTether uses this service.
-CHANGELOG = 
+CHANGELOG = 0.0.3: Corrected the postinst and prerm to work on all known webOS versions.
 TYPE	 = Service
 CATEGORY = Luna
 ICON	= http://www.webos-internals.org/images/8/84/Icon_FreeTether.png

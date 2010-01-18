@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Disable the obsolete PDK package
+rm -f /etc/event.d/org.webosinternals.pdk
+
+# Stop org.webosinternals.widk
+if [ -f /etc/event.d/org.webosinternals.widk ]; then
+    /sbin/stop org.webosinternals.widk
+fi
+
+# Install the upstart script
+rm -f /etc/event.d/org.webosinternals.widk
+mkdir -p /etc/event.d/
+cp $IPKG_OFFLINE_ROOT/etc/event.d/org.webosinternals.widk /etc/event.d/org.webosinternals.widk
+
+# Start org.webosinternals.widk
+/sbin/start org.webosinternals.widk
+
+exit 0

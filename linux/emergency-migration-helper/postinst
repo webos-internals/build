@@ -1,0 +1,23 @@
+#!/bin/sh
+
+PACKAGE=org.webosinternals.emergency-migration-helper
+
+if [ -d /var/usr/palm/applications ] ; then
+    for f in `ls -1 /var/usr/palm/applications/` ; do
+        if [ -d /var/usr/palm/applications/$f ] ; then
+            if [ -n "`find /var/usr/palm/applications/$f -type f`" ] ; then
+	       	if [ ! -e /var/usr/palm/applications/$f/appinfo.json ] ; then
+                    echo '{"main":""}' > /var/usr/palm/applications/$f/appinfo.json
+		fi
+	    else
+                rm -rf /var/usr/palm/applications/$f
+	    fi
+	fi
+    done
+fi
+
+echo "DONE"
+
+ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
+
+exit 0

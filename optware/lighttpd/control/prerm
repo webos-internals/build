@@ -1,0 +1,6 @@
+#!/bin/sh
+
+/sbin/stop mobi.optware.lighttpd
+rm -f /etc/event.d/mobi.optware.lighttpd
+
+exit 0
