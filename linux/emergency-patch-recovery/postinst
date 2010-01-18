@@ -1,6 +1,7 @@
 #!/bin/sh
 PACKAGE=org.webosinternals.emergency-patch-recovery
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
+PATCH_PACKAGE_LIST=/media/internal/.webosinternals.patches.packages
 PATCH_LOG=/media/internal/webos-patches.log
 IPKG_INFO_DIR=/usr/lib/ipkg/info
 
@@ -30,6 +31,11 @@ fi
 
 if [ -e $PATCH_CONTROL_DIR/packages ]
 then
+  mv $PATCH_CONTROL_DIR/packages $PATCH_PACKAGES_LIST
+fi
+
+if [ -e $PATCH_PACKAGES_LIST ]
+then
   while read i
   do
     package=`echo $i | awk '{print $1}'`
@@ -50,7 +56,7 @@ then
     echo "" >> $PATCH_LOG
     echo "Remove from /media/cryptofs/apps..." >> $PATCH_LOG
     ipkg -o /media/cryptofs/apps --force-depends remove $package | tee -a $PATCH_LOG
-  done < $PATCH_CONTROL_DIR/packages
+  done < $PATCH_PACKAGES_LIST
 fi
 
 if [ -e $PATCH_CONTROL_DIR/backups ]
