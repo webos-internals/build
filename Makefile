@@ -71,8 +71,6 @@ ipkgs/optware/%/Packages: package-optware
 		-v -p ipkgs/optware/$*/Packages ipkgs/optware/$*
 	gzip -c ipkgs/optware/$*/Packages > ipkgs/optware/$*/Packages.gz
 
-<<<<<<< HEAD
-=======
 ipkgs/regression-testing/%/Packages: package-regression
 	rm -rf ipkgs/regression-testing/$*
 	mkdir -p ipkgs/regression-testing/$*
@@ -90,7 +88,6 @@ ipkgs/palm-%/Packages: package-feeds
 	cat feeds/palm-$*-base/build/Metadata feeds/palm-$*/build/Metadata > ipkgs/palm-$*/Packages
 	gzip -c ipkgs/palm-$*/Packages > ipkgs/palm-$*/Packages.gz
 
->>>>>>> master
 ipkgs/%/Packages: package-feeds
 	rm -rf ipkgs/$*
 	mkdir -p ipkgs/$*
@@ -169,11 +166,7 @@ webos-internals-testing:
 	${MAKE} SUBDIRS="unreleased" ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv6/Packages ipkgs/webos-internals/armv7/Packages
 	rsync -avr ipkgs/webos-internals/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
 
-<<<<<<< HEAD
-webos-patches-testing: ipkgs/webos-patches/1.2.1/Packages ipkgs/webos-patches/1.3.1/Packages ipkgs/webos-patches/1.3.5/Packages
-=======
 webos-patches-testing: package-patches
->>>>>>> master
 	rsync -avr ipkgs/webos-patches/ preware@ipkg.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 
 optware-testing: ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv6/Packages ipkgs/optware/armv7/Packages

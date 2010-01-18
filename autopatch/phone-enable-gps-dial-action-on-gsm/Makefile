@@ -11,9 +11,5 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-<<<<<<< HEAD
-MAINTAINER = Rod Whitby <rod@whitby.id.au>
-=======
 MAINTAINER = Rod Whitby <rod@whitby.id.au>, dBsooner <webos@dbsooner.com>
->>>>>>> master
 HOMEPAGE = 
