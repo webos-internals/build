@@ -9,7 +9,6 @@ SCREENSHOTS =
 META_SUB_VERSION = 1
 
 include ../common.mk
-DEPENDS := ${DEPENDS}, org.webosinternals.pdf-viewer-extract-app
 
 include ../modifications.mk
 
