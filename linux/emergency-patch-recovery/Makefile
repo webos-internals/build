@@ -9,7 +9,6 @@ APP_ID = org.webosinternals.${NAME}
 HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 CATEGORY = Utilities
-DEPENDS = org.webosinternals.patch, org.webosinternals.diffstat
 ICON = http://www.webos-internals.org/images/4/4f/Epr.png
 POSTINSTALLFLAGS = RestartDevice
 
