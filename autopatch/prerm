@@ -33,7 +33,7 @@ failed_remove() {
   echo "----------------------------------" >> $PATCH_LOG
   echo "Removal FAILED!" >> $PATCH_LOG
   echo "----------------------------------" >> $PATCH_LOG
-  $PATCH_EXEC -s -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 1>&2 | tee -a $PATCH_LOG
+  $PATCH_EXEC -s -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME | tee -a $PATCH_LOG 1>&2
   echo "ls -R ${APP_DIR}" >> $PATCH_LOG
   ls -R ${APP_DIR} 2>&1 >> $PATCH_LOG
   do_failure
@@ -53,13 +53,13 @@ echo $APP_DIR/$PATCH_NAME >> $PATCH_LOG
 
 if [ "$IPKG_OFFLINE_ROOT" = "" ]
 then
-  echo "ERROR: IPKG_OFFLINE_ROOT must be supplied to the prerm" 1>&2 | tee -a $PATCH_LOG
+  echo "ERROR: IPKG_OFFLINE_ROOT must be supplied to the prerm" | tee -a $PATCH_LOG 1>&2
   do_failure
 fi
 
 if [ "$APP_DIR" = "" ] || [ "$PATCH_NAME" = "" ]
 then
-  echo "ERROR: APP_DIR and PATCH_NAME both must be set in prerm" 1>&2 | tee -a $PATCH_LOG
+  echo "ERROR: APP_DIR and PATCH_NAME both must be set in prerm" | tee -a $PATCH_LOG 1>&2
   do_failure
 fi
 

@@ -33,7 +33,7 @@ failed_install() {
   echo "----------------------------------" >> $PATCH_LOG
   echo "Installation FAILED!" >> $PATCH_LOG
   echo "----------------------------------" >> $PATCH_LOG
-  $PATCH_EXEC -s -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 1>&2 | tee -a $PATCH_LOG
+  $PATCH_EXEC -s -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME | tee -a $PATCH_LOG 1>&2
   echo "ls -R ${APP_DIR}" >> $PATCH_LOG
   ls -R ${APP_DIR} 2>&1 >> $PATCH_LOG
   do_failure
@@ -46,7 +46,7 @@ find_incompatible() {
     do
       if [ "$file" = "/$j" ]
       then
-        echo "  Incompatible package: `basename $i .patch`" 1>&2 | tee -a $PATCH_LOG
+        echo "  Incompatible package: `basename $i .patch`" | tee -a $PATCH_LOG 1>&2
       fi
     done
   done
@@ -129,8 +129,8 @@ do
     file=/$j
     if [ "$file" = "$i" ]
     then
-      echo "ERROR: A patch using an incompatible patch technology has already touched a file in this patch " 1>&2 | tee -a $PATCH_LOG
-      echo "  file: $file" 1>&2 | tee -a $PATCH_LOG
+      echo "ERROR: A patch using an incompatible patch technology has already touched a file in this patch " | tee -a $PATCH_LOG 1>&2
+      echo "  file: $file" | tee -a $PATCH_LOG 1>&2
 
       find_incompatible
 
@@ -150,7 +150,7 @@ do
 
         if [ "$version" != "$VERSION" ]
         then
-          echo "WARNING: Package: $package uses incompatible patch technology: $version" 1>&2 | tee -a $PATCH_LOG
+          echo "WARNING: Package: $package uses incompatible patch technology: $version" | tee -a $PATCH_LOG 1>&2
         fi
       done < $PATCH_PACKAGES_LIST
 
