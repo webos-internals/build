@@ -84,7 +84,12 @@ class PackageHandler(ContentHandler):
 
         if (name == "pubDate") :
             if (self.inItem):
-                secs = calendar.timegm(time.strptime(self.data, "%Y-%m-%d %H:%M:%S"))
+
+                if (self.data.find("-0800") > 0):
+                    secs = calendar.timegm(time.strptime(self.data, "%a, %d %b %Y %H:%M:%S -0800")) + 8*3600
+                elif (self.data.find("-0700") > 0):
+                    secs = calendar.timegm(time.strptime(self.data, "%a, %d %b %Y %H:%M:%S -0700")) + 7*3600
+                    
                 self.json += "\"LastUpdated\":\"%s\", " % secs
 
         if (name == "ac:packageid") :
