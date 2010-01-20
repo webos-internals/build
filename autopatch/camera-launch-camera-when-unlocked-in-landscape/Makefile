@@ -6,10 +6,10 @@ CATEGORY = Camera
 VERSIONS = 1.3.1-26 1.3.5-7 1.4.0-1
 ICON = http://www.webos-internals.org/images/c/c5/Icon_WebOSInternals_Patches_Camera.png
 SCREENSHOTS =
-META_SUB_VERSION = 1
+META_SUB_VERSION = 2
 
 include ../common.mk
-DEPENDS := ${DEPENDS}, org.webosinternals.patches.camera-capture-with-volume-keys
+
 include ../modifications.mk
 
 MAINTAINER = Mijoro
