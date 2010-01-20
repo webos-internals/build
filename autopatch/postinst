@@ -210,10 +210,13 @@ do
   then
     if [ ! -e $file ]
     then
+      echo "Created file, generate empty backup $file.webosinternals.orig" >> $PATCH_LOG
       mkdir -p `dirname $file`
       touch $file.webosinternals.orig
     else
       cp $file $file.webosinternals.orig
+      echo "Backup file $file" >> $PATCH_LOG
+      echo "  `md5sum $file.webosinternals.orig`" >> $PATCH_LOG
     fi
   elif [ -e $file ]
   then

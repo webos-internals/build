@@ -131,11 +131,17 @@ then
       if [ "$palm_md5sum" = "$file_md5sum" ]
       then
         echo "  Existing file matches Palm md5sum: $file" >> $PATCH_LOG
+        echo "  Remove backup" >> $PATCH_LOG
         rm -f $file.webosinternals.orig
       elif [ "$palm_md5sum" != "$palm_orig_md5sum" ]
       then
+        orig_md5sum=`md5sum $file.webosinternals.orig | awk '{print $1}'`
         echo "  md5sum of Palm file has changed since installation, assuming OTA" >> $PATCH_LOG
-        rm -f $file.webosinternals.orig
+        if [ "$palm_md5sum" != "$orig_md5sum" ]
+        then
+          echo "  Remove backup" >> $PATCH_LOG
+          rm -f $file.webosinternals.orig
+        fi
       else
         if [ "$palm_md5sum" = "" ]
         then
