@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = browser/${NAME}.patch
-TITLE = No Auto Refresh After Idle
-DESCRIPTION = Disables the annoying browser feature that reloads the page every time you are away from it for a while.
+TITLE = Add Option to Send Link Message
+DESCRIPTION = Adds The Option 'Send Link Message' to allow you to send not only links through email but through messaging app too. Also Changes 'Send Link' to 'Send Link Email'
 CATEGORY = Browser
 VERSIONS = 1.3.1-31 1.3.5-14 1.4.0-3
 ICON = http://www.webos-internals.org/images/4/4a/Icon_WebOSInternals_Patches_Browser.png
@@ -13,4 +13,4 @@ include ../common.mk
 include ../modifications.mk
 
 MAINTAINER = fritos1406 <fritos1406@aim.com>
-HOMEPAGE = http://forums.precentral.net/webos-patches/222786-patch-no-refresh-browser.html
+HOMEPAGE =
