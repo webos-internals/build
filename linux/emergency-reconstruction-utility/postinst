@@ -1,0 +1,30 @@
+#!/bin/sh
+
+PACKAGE=org.webosinternals.emergency-reconstruction-utility
+STATUS_FILE=$IPKG_OFFLINE_ROOT/usr/lib/ipkg/status
+
+rm -f $STATUS_FILE && touch $STATUS_FILE
+
+for i in `ls $IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/*.control`
+do
+  id=`awk '/^Package:/ {print $2}' < $i`
+  version=`awk '/^Version:/ {print $2}' < $i`
+  arch=`awk '/^Architecture:/ {print $2}' < $i`
+
+  echo "Fixing `basename $i`"
+  awk '/^Package:/ {print}' < $i >> $STATUS_FILE
+  awk '/^Version:/ {print}' < $i >> $STATUS_FILE
+  awk '/^Depends:/ {print}' < $i >> $STATUS_FILE
+  echo "Status: install user installed" >> $STATUS_FILE
+  awk '/^Architecture:/ {print}' < $i >> $STATUS_FILE
+  awk '/^Description:/ {print}' < $i >> $STATUS_FILE
+  awk '/^Maintainer:/ {print}' < $i >> $STATUS_FILE
+  awk '/^Section:/ {print}' < $i >> $STATUS_FILE
+  echo "Size: 0" >> $STATUS_FILE
+  echo "Filename: ${id}_${version}_${arch}.ipk" >> $STATUS_FILE
+  echo "" >> $STATUS_FILE 
+done
+
+echo "DONE"
+
+ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
