@@ -1,7 +1,7 @@
 NAME     = terminus
 APP_ID   = us.ryanhope.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.0.1
+VERSION  = 0.0.2
 DEPENDS  = org.webosinternals.upstartmgr
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:ClassicInvaders
 MAINTAINER = Ryan Hope
@@ -37,14 +37,11 @@ build/%.built-${VERSION}: build/.unpack
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/data
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
-	rm -rf build/$*/usr/palm/applications/${APP_ID}/upstart
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/control
 	install -m 755 build/binaries/$*/terminus build/$*/usr/palm/applications/${APP_ID}/bin/
 	cp -r build/src/src/data/*.png build/$*/usr/palm/applications/${APP_ID}/data/
 	cp -r build/src/src/data/*.ttf build/$*/usr/palm/applications/${APP_ID}/data/
 	cp -r build/binaries/$*/deps build/$*/usr/palm/applications/${APP_ID}/
-	mkdir -p build/$*/etc/event.d
-	install -m 644 build/src/upstart/${APP_ID} build/$*/etc/event.d/${APP_ID}
 	touch $@
 
 build/%/CONTROL/postinst:
