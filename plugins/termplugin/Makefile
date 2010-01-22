@@ -1,14 +1,14 @@
 NAME     = termplugin
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.2.3
+VERSION  = 0.2.4
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Terminal
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 TITLE = Terminal Service Plugin
 TYPE = Plugin
 CATEGORY = Browser
 DESCRIPTION = The Terminal Service Plugin is a back-end binary browser plugin providing the core of the Terminal application.  It does not have an icon, and cannot be launched - it can only be used by another application.
-CHANGELOG = 0.2.3: Updated for future webOS compatibility.
+CHANGELOG = 0.2.4: Fixed bug that caused Luna crash on WebOS 1.3.5.x <br>0.2.3: Updated for future webOS compatibility.
 ICON	 = http://www.webos-internals.org/images/6/68/Icon_WebOSInternals_TerminalService.png
 LICENSE  = GPL v2 Open Source
 POSTINSTALLFLAGS = RestartLuna
