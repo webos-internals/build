@@ -1,26 +1,23 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = misc/${NAME}.patch
 TITLE = No Auto-Off While Charging
-DESCRIPTION = **OBSOLETE** This package supercedes Screen Lock: No Auto-Off While Charging. Please install that package instead. Prevents the screen from turning off while the device is charging.
+DESCRIPTION = **OBSOLETE** This package is superceded by Screen Lock: No Auto-Off While Charging. Please install that package instead. Prevents the screen from turning off while the device is charging.
 CATEGORY = Obsolete
-VERSION = 1.3.5-99
+VERSIONS = 1.3.1-99 1.3.5-99
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 APP_ID=org.webosinternals.patches.${NAME}
 TYPE = Patch
+META_SUB_VERSION=2
 
-package: ipkgs/${APP_ID}_${VERSION}_all.ipk
-
-include ../../support/package.mk
-DEPENDS := ${DEPENDS}, org.webosinternals.patches.screen-lock-no-auto-off-while-charging
+include ../common.mk
 include ../../support/download.mk
 
-build: build/.built-${VERSION}
+DEPENDS = org.webosinternals.patches.screen-lock-no-auto-off-while-charging
 
 build/.built-${VERSION}:
+	touch $@
+
+build/.unpacked-${VERSION}:
 	rm -rf build/all
 	mkdir -p build/all
 	touch $@
-
-clobber::
-	rm -rf build
-
