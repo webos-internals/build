@@ -3,7 +3,7 @@ PATCH = phone/${NAME}.patch
 TITLE = Add Roam Control to Prefs
 DESCRIPTION = This will enable a roam only option in the Phone Preferences.
 CATEGORY = Phone
-VERSIONS = 1.2.1-1 1.3.1-1 1.3.5-12
+VERSIONS = 1.2.1-2 1.3.1-2 1.3.5-13
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/6/66/Phone-add-roam-control-to-prefs-1.png\",\
