@@ -1,7 +1,7 @@
 NAME     = terminus
 APP_ID   = us.ryanhope.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.0.3-1
+VERSION  = 0.0.4
 DEPENDS  = org.webosinternals.upstartmgr
 HOMEPAGE = http://git.webos-internals.org/trac/terminus
 MAINTAINER = Ryan Hope
