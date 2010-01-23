@@ -11,4 +11,4 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = Ikyo <jody.r.owens@sprint.com>, dbsooner <webos@dbsooner.com>
+MAINTAINER = Ikyo <jody.r.owens@sprint.com>, dbsooner 

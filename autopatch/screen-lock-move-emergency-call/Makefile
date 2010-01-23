@@ -11,5 +11,5 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = Eric Salo <salo@cs.stanford.edu>, dBsooner <webos@dbsooner.com>
+MAINTAINER = Eric Salo <salo@cs.stanford.edu>, dBsooner 
 HOMEPAGE = http://forums.precentral.net/webos-patches/212795-patch-move-emergency-call-middle-lock-screen.html

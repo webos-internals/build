@@ -12,5 +12,5 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = Jason Robitaille, dBsooner <webos@dbsooner.com>
+MAINTAINER = Jason Robitaille, dBsooner 
 HOMEPAGE = http://forums.precentral.net/webos-patches/212150-patch-altered-email-message-button-layout.html

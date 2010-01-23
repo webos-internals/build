@@ -11,5 +11,5 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = Mike dg, dBsooner <webos@dbsooner.com>
+MAINTAINER = Mike dg, dBsooner 
 HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Messaging_New_Cards_For_Each_Conversation

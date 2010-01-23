@@ -17,5 +17,5 @@ build/.built-extra-${VERSION}:
 	install -m 644 *_extra build/all/usr/palm/applications/${APP_ID}/
 	touch $@
 
-MAINTAINER = Hopspitfire, dBsooner <webos@dbsooner.com>
+MAINTAINER = Hopspitfire, dBsooner 
 HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Camera_Shutter_Sound_On-Off_Button

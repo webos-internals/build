@@ -11,5 +11,5 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = Elryon <elryon@gmail.com>, dBsooner <webos@dbsooner.com>
+MAINTAINER = Elryon <elryon@gmail.com>, dBsooner 
 HOMEPAGE = http://forums.precentral.net/webos-patches/213063-patch-request-messaging-app-like-iphones-11.html#post2037734

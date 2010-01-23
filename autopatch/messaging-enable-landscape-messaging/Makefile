@@ -11,5 +11,5 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = fritos1406, dBsooner <webos@dbsooner.com>
+MAINTAINER = fritos1406, dBsooner 
 HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Messaging_Landscape_Orientation

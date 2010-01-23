@@ -11,5 +11,5 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = acydlord <acydlord@badbinary.com>, dBsooner <webos@dbsooner.com>
+MAINTAINER = acydlord <acydlord@badbinary.com>, dBsooner 
 HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Messaging_Adding_Timestamps_to_All_Received_Messages

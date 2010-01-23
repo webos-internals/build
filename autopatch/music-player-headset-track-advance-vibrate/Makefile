@@ -11,5 +11,5 @@ META_SUB_VERSION = 4
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = jhoff80, dBsooner <webos@dbsooner.com>
+MAINTAINER = jhoff80, dBsooner 
 HOMEPAGE = http://forums.precentral.net/webos-patches/211631-musicplayer-vibrate-headset-button-track-advance.html

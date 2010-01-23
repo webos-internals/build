@@ -13,5 +13,5 @@ META_SUB_VERSION = 3
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = Lclarkjr, dBsooner <webos@dbsooner.com>
+MAINTAINER = Lclarkjr, dBsooner 
 HOMEPAGE = http://forums.precentral.net/showthread.php?p=2041492#post2041492

@@ -11,5 +11,5 @@ META_SUB_VERSION = 2
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = Eric Salo <salo@cs.stanford.edu>, dBsooner <webos@dbsooner.com>
+MAINTAINER = Eric Salo <salo@cs.stanford.edu>, dBsooner 
 HOMEPAGE =

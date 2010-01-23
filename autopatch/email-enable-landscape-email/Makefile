@@ -11,5 +11,5 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = user <andrewboudreau@gmail.com>, SirWill, dBsooner <webos@dbsooner.com>
+MAINTAINER = user <andrewboudreau@gmail.com>, SirWill, dBsooner 
 HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Email_Enable_Landscape_Viewing

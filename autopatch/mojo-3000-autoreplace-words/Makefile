@@ -11,5 +11,5 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = diomark, dBsooner <webos@dbsooner.com>
+MAINTAINER = diomark, dBsooner 
 HOMEPAGE = 

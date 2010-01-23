@@ -11,5 +11,5 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = dallashigh <karl@webosnerd.com>, dBsooner <webos@dbsooner.com>
+MAINTAINER = dallashigh <karl@webosnerd.com>, dBsooner 
 HOMEPAGE = http://www.webosnerd.com

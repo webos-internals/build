@@ -11,5 +11,5 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = zinge, dBsooner <webos@dbsooner.com>
+MAINTAINER = zinge, dBsooner 
 HOMEPAGE = http://forums.precentral.net/webos-patches/214390-patch-gesture-click-browser-context-menu.html

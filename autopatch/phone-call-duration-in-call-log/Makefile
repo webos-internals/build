@@ -11,5 +11,5 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = dBsooner <webos@dbsooner.com>
+MAINTAINER = dBsooner 
 HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Phone_Show_Call_Duration_in_the_Call_Log

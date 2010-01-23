@@ -11,5 +11,5 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = jjvcuyler <jack@unixgeeks.biz>, dBsooner <webos@dbsooner.com>
+MAINTAINER = jjvcuyler <jack@unixgeeks.biz>, dBsooner 
 HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Messaging_Change_%22Enter_Key%22_To_Create_Newline

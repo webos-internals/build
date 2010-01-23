@@ -13,5 +13,5 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = Ikyo <jody.r.owens@sprint.com>, Elryon, dBsooner <webos@dbsooner.com>
+MAINTAINER = Ikyo <jody.r.owens@sprint.com>, Elryon, dBsooner 
 HOMEPAGE = http://forums.precentral.net/webos-patches/215183-updated-sms-tone-per-contact-1-3-1-a.html
