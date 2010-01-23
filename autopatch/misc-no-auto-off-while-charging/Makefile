@@ -5,7 +5,7 @@ DESCRIPTION = **OBSOLETE** This package is superceded by Screen Lock: No Auto-Of
 CATEGORY = Obsolete
 VERSIONS = 1.3.1-99 1.3.5-99
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
-META_SUB_VERSION=3
+META_SUB_VERSION=4
 
 include ../common.mk
 include ../../support/download.mk
