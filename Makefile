@@ -121,7 +121,7 @@ package-subdirs: toolchain
 	  fi; \
 	done
 
-package-patches: toolchain
+package-patches:
 	for f in `find autopatch -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package ; \

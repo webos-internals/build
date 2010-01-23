@@ -3,37 +3,84 @@
 APP_DIR=
 PATCH_NAME=
 
-if [ -f "/media/cryptofs/apps/usr/bin/diffstat" ] ; then
-  FILE_LIST=`/media/cryptofs/apps/usr/bin/diffstat -p1 -l $APP_DIR/$PATCH_NAME`
+if [ -f "/media/cryptofs/apps/usr/bin/lsdiff" ] ; then
+  LSDIFF=/media/cryptofs/apps/usr/bin/lsdiff
 else
-  FILE_LIST=`/var/usr/bin/diffstat -p1 -l $APP_DIR/$PATCH_NAME`
+  LSDIFF=/var/usr/bin/lsdiff
 fi
+
+FILE_LIST=`$LSDIFF --strip=1 $APP_DIR/$PATCH_NAME`
+
 if [ -f "/media/cryptofs/apps/usr/bin/patch" ] ; then
   PATCH_EXEC=/media/cryptofs/apps/usr/bin/patch
 else
   PATCH_EXEC=/var/usr/bin/patch
 fi
 
+IPKG_INFO_DIR=/usr/lib/ipkg/info
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
+PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
+PATCH_LOG=/media/internal/webos-patches.log
+VERSION=aupt-1
 
 do_failure() {
-  ipkg -o $IPKG_OFFLINE_ROOT remove `basename $APP_DIR`
+  echo "*** FAILED ***" >> $PATCH_LOG
   exit 1
 }
 
+failed_install() {
+  echo "" >> $PATCH_LOG
+  echo "----------------------------------" >> $PATCH_LOG
+  echo "Installation FAILED!" >> $PATCH_LOG
+  echo "----------------------------------" >> $PATCH_LOG
+  $PATCH_EXEC -s -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME | tee -a $PATCH_LOG 1>&2
+  echo "ls -R ${APP_DIR}" >> $PATCH_LOG
+  ls -R ${APP_DIR} 2>&1 >> $PATCH_LOG
+  do_failure
+}
+
+find_incompatible() {
+  for i in `ls $PATCH_CONTROL_DIR/*.patch`
+  do
+    for j in `$LSDIFF --strip=1 $i`
+    do
+      if [ "$file" = "/$j" ]
+      then
+        echo "  Incompatible package: `basename $i .patch`" | tee -a $PATCH_LOG 1>&2
+      fi
+    done
+  done
+}
+
+if [ ! -e $PATCH_LOG ]
+then
+  touch $PATCH_LOG
+  echo "******* Patch Log Created by postinst $(date) ************" >> $PATCH_LOG
+fi
+
+echo "" >> $PATCH_LOG
+echo "------------------------------------------------------" >> $PATCH_LOG
+echo "PATCH INSTALLATION $(date)" >> $PATCH_LOG
+echo "------------------------------------------------------" >> $PATCH_LOG
+echo $APP_DIR/$PATCH_NAME >> $PATCH_LOG
+
 if [ "$IPKG_OFFLINE_ROOT" = "" ]
 then
-  echo "ERROR: IPKG_OFFLINE_ROOT must be supplied to the postinst"
+  echo "ERROR: IPKG_OFFLINE_ROOT must be supplied to the postinst" | tee -a $PATCH_LOG
   exit 1
 fi
 
 if [ "$APP_DIR" = "" ] || [ "$PATCH_NAME" = "" ]
 then
-  echo "ERROR: APP_DIR and PATCH_NAME both must be set in postinst"
+  echo "ERROR: APP_DIR and PATCH_NAME both must be set in postinst" | tee -a $PATCH_LOG
   do_failure
 fi
 
-$PATCH_EXEC -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME || do_failure
+#if [ -d /var/usr/lib/.webosinternals.patches ]
+#then
+  #mv /var/usr/lib/.webosinternals.patches $PATCH_CONTROL_DIR
+#fi
+
 if [ ! -d $PATCH_CONTROL_DIR ]
 then
   rm -rf $PATCH_CONTROL_DIR
@@ -45,44 +92,166 @@ then
   touch $PATCH_CONTROL_DIR/backups || do_failure
 fi
 
-if [ ! -e $PATCH_CONTROL_DIR/packages ]
+if [ -e $PATCH_CONTROL_DIR/packages ]
 then
-  touch $PATCH_CONTROL_DIR/packages || do_failure
+  mv $PATCH_CONTROL_DIR/packages $PATCH_PACKAGES_LIST
 fi
 
-rm -f $PATCH_CONTROL_DIR/tmp
-touch $PATCH_CONTROL_DIR/tmp || do_failure
-
-if [ -e $PATCH_CONTROL_DIR/$PATCH_NAME ]
+if [ ! -e $PATCH_PACKAGES_LIST ]
 then
-  echo "ERROR: Patch already installed?"
-  do_failure
+  touch $PATCH_PACKAGES_LIST || do_failure
 fi
+
+#rm -f $PATCH_CONTROL_DIR/tmp
+#touch $PATCH_CONTROL_DIR/tmp || do_failure
+
+echo "" >> $PATCH_LOG
+echo "------------------------------------------------------" >> $PATCH_LOG
+echo "Checking for incompatible backup files..." >> $PATCH_LOG
+echo "------------------------------------------------------" >> $PATCH_LOG
+
+while read i
+do
+  backup=`echo $i | awk '{print $1}'`
+  version=`echo $i | awk '{print $2}'`
+
+  if [ "$version" != "$VERSION" ]
+  then
+    echo "Incompatible backup file: $backup" >> $PATCH_LOG
+    INCOMPATIBLE_BACKUPS="$INCOMPATIBLE_BACKUPS $backup"
+  fi
+done < $PATCH_CONTROL_DIR/backups
+
+for i in $INCOMPATIBLE_BACKUPS
+do
+  for j in $FILE_LIST
+  do
+    file=/$j
+    if [ "$file" = "$i" ]
+    then
+      echo "ERROR: A patch using an incompatible patch technology has already touched a file in this patch " | tee -a $PATCH_LOG 1>&2
+      echo "  file: $file" | tee -a $PATCH_LOG 1>&2
+
+      find_incompatible
+
+      echo "" >> $PATCH_LOG
+      echo "----------------------------------" >> $PATCH_LOG
+      echo "Checking all packages for incompatibilities..." >> $PATCH_LOG
+      echo "----------------------------------" >> $PATCH_LOG
+      while read k
+      do
+        package=`echo $k | awk '{print $1}'`
+        version=`echo $k | awk '{print $2}'`
+
+        if [ "$version" = "" ]
+        then
+          version=apt-1
+        fi
+
+        if [ "$version" != "$VERSION" ]
+        then
+          echo "WARNING: Package: $package uses incompatible patch technology: $version" | tee -a $PATCH_LOG 1>&2
+        fi
+      done < $PATCH_PACKAGES_LIST
+
+      do_failure
+    fi
+  done
+done
+
+echo "" >> $PATCH_LOG
+echo "----------------------------------" >> $PATCH_LOG
+echo "Dry run patch attempt..." >> $PATCH_LOG
+echo "----------------------------------" >> $PATCH_LOG
+
+$PATCH_EXEC -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 2>&1 >> $PATCH_LOG
+
+if [ $? -ne 0 ]
+then
+  echo "" >> $PATCH_LOG
+  echo "----------------------------------" >> $PATCH_LOG
+  echo "dry run failed, checking if -R would succeed" >> $PATCH_LOG
+  echo "----------------------------------" >> $PATCH_LOG
+  $PATCH_EXEC -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 2>&1 >> $PATCH_LOG || failed_install
+  patch_applied=yes
+  echo "Interestingly, the patch seems to already be applied" | tee -a $PATCH_LOG
+fi
+
+#if [ -e $PATCH_CONTROL_DIR/$PATCH_NAME ]
+#then
+  #echo "ERROR: Patch already installed?"
+  #do_failure
+#fi
+
+echo "" >> $PATCH_LOG
+echo "----------------------------------" >> $PATCH_LOG
+echo "Creating md5sums list..." >> $PATCH_LOG
+echo "----------------------------------" >> $PATCH_LOG
+rm -f $APP_DIR/md5sums
+touch $APP_DIR/md5sums
 
 for i in $FILE_LIST
 do
   file=/$i
 
+  for j in `cat $APP_DIR/package_list`
+  do
+    echo "Package: $j" >> $PATCH_LOG
+    md5sum_line=`grep -h $file $IPKG_INFO_DIR/$j.md5sums`
+    if [ "$md5sum_line" != "" ]
+    then
+      echo "$md5sum_line" >> $PATCH_LOG
+      echo $md5sum_line >> $APP_DIR/md5sums
+      palm_md5sum=`echo $md5sum_line | awk '{print $1}'`
+    fi
+  done
+
   if [ ! -e $file.webosinternals.orig ]
   then
     if [ ! -e $file ]
     then
+      echo "Created file, generate empty backup $file.webosinternals.orig" >> $PATCH_LOG
+      mkdir -p `dirname $file`
       touch $file.webosinternals.orig
     else
+      cp $file $file.webosinternals.orig
+      echo "Backup file $file" >> $PATCH_LOG
+      echo "  `md5sum $file.webosinternals.orig`" >> $PATCH_LOG
+    fi
+  elif [ -e $file ]
+  then
+    file_md5sum=`md5sum $file | awk '{print $1}'`
+
+    if [ "$palm_md5sum" = "" ]
+    then
+        palm_md5sum=`grep -h $file $IPKG_INFO_DIR/*.md5sums | awk '{print $1}'`
+    fi
+
+    if [ "$file_md5sum" = "$palm_md5sum" ]
+    then
+      rm -f $file.webosinternals.orig
       cp $file $file.webosinternals.orig
     fi
   fi
 
   tmpvar=`echo $file | tr '/' '.'`
   sed -i -e /$tmpvar/d $PATCH_CONTROL_DIR/backups
-  echo $file >> $PATCH_CONTROL_DIR/backups
+  echo "$file $VERSION" >> $PATCH_CONTROL_DIR/backups
 done
 
-sed -i -e /`basename $APP_DIR`/d $PATCH_CONTROL_DIR/packages
-basename $APP_DIR >> $PATCH_CONTROL_DIR/packages
+sed -i -e /`basename $APP_DIR`/d $PATCH_PACKAGES_LIST
+basename "$APP_DIR $VERSION">> $PATCH_PACKAGES_LIST
 
 cp $APP_DIR/$PATCH_NAME $PATCH_CONTROL_DIR/$PATCH_NAME
-$PATCH_EXEC -d / -p1 < ${APP_DIR}/$PATCH_NAME || do_failure
+
+if [ "$patch_applied" != "yes" ]
+then
+  echo "" | tee -a $PATCH_LOG
+  echo "----------------------------------" | tee -a $PATCH_LOG
+  echo "Actually applying the patch!" | tee -a $PATCH_LOG
+  echo "----------------------------------" | tee -a $PATCH_LOG
+  $PATCH_EXEC -p1 -d / --no-backup-if-mismatch < ${APP_DIR}/$PATCH_NAME 2>&1 | tee -a $PATCH_LOG || do_failure
+fi
 
 
 if [ -e $APP_DIR/postinst_extra ]
@@ -91,12 +260,6 @@ then
   /bin/sh $APP_DIR/postinst_extra
 fi
 
-echo "SUCCESS"
-
-# Restart Luna
-if [ -z "$IPKG_OFFLINE_ROOT" ]; then # Defined by recent installers that also support flags.
-    /sbin/stop LunaSysMgr
-    /sbin/start LunaSysMgr
-fi
+echo "SUCCESS" | tee -a $PATCH_LOG
 
 exit 0

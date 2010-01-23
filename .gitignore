@@ -6,3 +6,5 @@ staging
 ipkgs
 zips
 *.pyc
+*.swp
+*.swo
