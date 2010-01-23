@@ -5,14 +5,21 @@ DESCRIPTION = **OBSOLETE** This package is superceded by Screen Lock: No Auto-Of
 CATEGORY = Obsolete
 VERSIONS = 1.3.1-99 1.3.5-99
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
-APP_ID=org.webosinternals.patches.${NAME}
-TYPE = Patch
-META_SUB_VERSION=2
+META_SUB_VERSION=3
 
 include ../common.mk
 include ../../support/download.mk
 
 DEPENDS = org.webosinternals.patches.screen-lock-no-auto-off-while-charging
+
+build/all/CONTROL/postinst:
+	touch $@
+	echo "#!/bin/sh" >> $@
+	echo "return 1" >> $@
+	chmod ugo+x $@
+
+build/all/CONTROL/prerm:
+	rm -rf build/all/CONTROL/prerm
 
 build/.built-${VERSION}:
 	touch $@
