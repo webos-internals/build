@@ -1,7 +1,7 @@
 #!/bin/sh
 PACKAGE=org.webosinternals.emergency-patch-recovery
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
-PATCH_PACKAGE_LIST=/media/internal/.webosinternals.patches.packages
+PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
 PATCH_LOG=/media/internal/webos-patches.log
 IPKG_INFO_DIR=/usr/lib/ipkg/info
 
