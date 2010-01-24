@@ -63,7 +63,7 @@ install_files() {
     file=${i#$APP_DIR/additional_files}
     echo "Installing file $file" | tee -a $PATCH_LOG
     mkdir -p `dirname $file`
-    cp $APP_DIR/$file $file
+    cp $i $file
   done
 
   if [ "$is_theme" = "yes" ]
@@ -281,17 +281,23 @@ for i in $FILE_LIST
 do
   file=/$i
 
-  for j in `cat $APP_DIR/package_list`
-  do
-    echo "Package: $j" >> $PATCH_LOG
-    md5sum_line=`grep -h $file $IPKG_INFO_DIR/$j.md5sums`
-    if [ "$md5sum_line" != "" ]
-    then
-      echo "$md5sum_line" >> $PATCH_LOG
-      echo $md5sum_line >> $APP_DIR/md5sums
-      palm_md5sum=`echo $md5sum_line | awk '{print $1}'`
-    fi
-  done
+  if [ -e $file ]
+  then
+    echo "Find package for file $file" >> $PATCH_LOG
+    for j in `cat $APP_DIR/package_list`
+    do
+      md5sum_line=`grep -h $file $IPKG_INFO_DIR/$j.md5sums`
+      if [ "$md5sum_line" != "" ]
+      then
+        echo "  FOUND in package $j" >> $PATCH_LOG
+        echo "  $md5sum_line" >> $PATCH_LOG
+        echo $md5sum_line >> $APP_DIR/md5sums
+        palm_md5sum=`echo $md5sum_line | awk '{print $1}'`
+      else
+        echo "  Not in package $j" >> $PATCH_LOG
+      fi
+    done
+  fi
 
   if [ ! -e $file.webosinternals.orig ]
   then
