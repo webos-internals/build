@@ -60,7 +60,7 @@ find_incompatible() {
 install_files() {
   for i in `find $APP_DIR/additional_files -type f`
   do
-    file=/$i
+    file=${i#$APP_DIR/additional_files}
     echo "Installing file $file" | tee -a $PATCH_LOG
     mkdir -p `dirname $file`
     cp $APP_DIR/$file $file
@@ -78,7 +78,7 @@ verify_files() {
   then
     for i in `find $APP_DIR/additional_files -type f`
     do
-      file=/$i
+      file=${i#$APP_DIR/additional_files}
       if [ -e $file ]
       then
         # TODO: for now just fail if the file exists
@@ -96,10 +96,10 @@ verify_files() {
           do_failure
         fi
 
-        if [ "`$FILE_UTIL $APP_DIR/$file |grep PNG`" = "" ] && [ "`$FILE_UTIL $APP_DIR/$file |grep JPEG`" = "" ]
+        if [ "`$FILE_UTIL $i |grep PNG`" = "" ] && [ "`$FILE_UTIL $i |grep JPEG`" = "" ]
         then
-          echo "ERROR: Unsupported file type: $APP_DIR/$file" | tee -a $PATCH_LOG 1>&2
-          echo "  `$FILE_UTIL $APP_DIR/$file`" | tee -a $PATCH_LOG 1>&2
+          echo "ERROR: Unsupported file type: $i" | tee -a $PATCH_LOG 1>&2
+          echo "  `$FILE_UTIL $i`" | tee -a $PATCH_LOG 1>&2
           do_failure
         fi
 
@@ -127,7 +127,11 @@ verify_files() {
     done
   fi
 
-  FILE_LIST="$FILE_LIST `find $APP_DIR/additional_files -type f`"
+  for i in `find $APP_DIR/additional_files -type f`
+  do
+    file=${i#$APP_DIR/additional_files}
+    FILE_LIST="$FILE_LIST $file"
+  done
 }
 
 # MAIN
