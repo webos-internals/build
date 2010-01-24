@@ -26,19 +26,5 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	tar -C build/src-${VERSION} -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	touch $@
 
-build/.built-extra-${VERSION}:
-	rm -rf build.tmp
-	mkdir -p build.tmp
-	tar -C build.tmp -xvf build/src-${VERSION}/virtual-keyboard-themes.tar.gz
-	mv build.tmp/media/internal/virtual-keyboard \
-	   build/all/usr/palm/applications/${APP_ID}/
-	rm -rf build.tmp
-	install -m 644 build/src-${VERSION}/postinst_extra build/all/usr/palm/applications/${APP_ID}/
-	install -m 644 build/src-${VERSION}/prerm_extra build/all/usr/palm/applications/${APP_ID}/
-	#for f in ${FILES} ; do \
-	  #grep $$f build/md5sums >> build/all/usr/palm/applications/${APP_ID}/md5sums ; \
-	#done
-	touch $@
-
 MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>
 HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard

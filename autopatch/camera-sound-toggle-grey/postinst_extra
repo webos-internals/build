@@ -1,3 +1,0 @@
-#!/bin/sh
-
-mv ${APP_DIR}/menu-shutter-sound.png /usr/palm/applications/com.palm.app.camera/images/

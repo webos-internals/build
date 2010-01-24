@@ -1,4 +1,0 @@
-#!/bin/sh
-
-rm -f /usr/lib/luna/system/luna-applauncher/images/search-keytoss.png
-rm -f /usr/palm/applications/com.palm.app.browser/images/list-icon-keytoss.png

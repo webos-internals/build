@@ -9,14 +9,19 @@ else
   LSDIFF=/var/usr/bin/lsdiff
 fi
 
-FILE_LIST=`$LSDIFF --strip=1 $APP_DIR/$PATCH_NAME`
-
 if [ -f "/media/cryptofs/apps/usr/bin/patch" ] ; then
   PATCH_EXEC=/media/cryptofs/apps/usr/bin/patch
 else
   PATCH_EXEC=/var/usr/bin/patch
 fi
 
+if [ -f "/media/cryptofs/apps/usr/bin/file" ] ; then
+  FILE_UTIL=/media/cryptofs/apps/usr/bin/file
+else
+  FILE_UTIL=/var/usr/bin/file
+fi
+
+FILE_LIST=`$LSDIFF --strip=1 $APP_DIR/$PATCH_NAME`
 IPKG_INFO_DIR=/usr/lib/ipkg/info
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
 PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
@@ -39,6 +44,30 @@ failed_remove() {
   do_failure
 }
 
+remove_images() {
+  for i in `find $APP_DIR/additional_files -type f`
+  do
+    file=/$i
+    echo "Removing file $file" | tee -a $PATCH_LOG
+    if [ -e $file.webosinternals.orig ]
+    then
+      mv $file.webosinternals.orig $file
+    fi
+
+    if [ ! -s $file ]
+    then
+      rm $file
+    fi
+  done
+
+  if [ -e $PATCH_CONTROL_DIR/installed_theme ] && [ "`cat $PATCH_CONTROL_DIR/installed_theme`" = "`basename $APP_DIR`" ]
+  then
+    echo "Remove installed theme `basename $APP_DIR`" | tee -a $PATCH_LOG
+    rm $PATCH_CONTROL_DIR/installed_theme
+  fi
+}
+
+# MAIN
 if [ ! -e $PATCH_LOG ]
 then
   touch $PATCH_LOG
@@ -63,10 +92,17 @@ then
   do_failure
 fi
 
-#if [ -d /var/usr/lib/.webosinternals.patches ]
-#then
-  #mv /var/usr/lib/.webosinternals.patches $PATCH_CONTROL_DIR
-#fi
+if [ ! -e $PATCH_EXEC ]
+then
+  echo "ERROR: Cannot find $PATCH_EXEC" | tee -a $PATCH_LOG 1>&2
+  do_failure
+fi
+
+if [ ! -e $LSDIFF ]
+then
+  echo "ERROR: Cannot find $LSDIFF" | tee -a $PATCH_LOG 1>&2
+  do_failure
+fi
 
 echo "" >> $PATCH_LOG
 echo "----------------------------------" >> $PATCH_LOG
@@ -165,6 +201,7 @@ else
   echo "----------------------------------" | tee -a $PATCH_LOG
   echo "Actually removing the patch!" | tee -a $PATCH_LOG
   echo "----------------------------------" | tee -a $PATCH_LOG
+  remove_images
   $PATCH_EXEC -R -p1 -d / --no-backup-if-mismatch < ${APP_DIR}/$PATCH_NAME 2>&1 | tee -a $PATCH_LOG
 fi
 
@@ -223,12 +260,6 @@ done
 
 rm -f $PATCH_CONTROL_DIR/$PATCH_NAME
 sed -i -e /\^'`basename $APP_DIR` $VERSION'\$/d $PATCH_PACKAGES_LIST
-
-if [ -e $APP_DIR/prerm_extra ]
-then
-  export APP_DIR
-  /bin/sh $APP_DIR/prerm_extra
-fi
 
 rm -rf ${APP_DIR}
 echo "SUCCESS" | tee -a $PATCH_LOG

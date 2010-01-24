@@ -12,10 +12,5 @@ META_SUB_VERSION = 1
 include ../common.mk
 include ../modifications.mk
 
-build/.built-extra-${VERSION}:
-	install -m 644 *.png build/all/usr/palm/applications/${APP_ID}/
-	install -m 644 *_extra build/all/usr/palm/applications/${APP_ID}/
-	touch $@
-
 MAINTAINER = Hopspitfire, dBsooner 
 HOMEPAGE = http://www.webos-internals.org/wiki/Patch_Camera_Shutter_Sound_On-Off_Button

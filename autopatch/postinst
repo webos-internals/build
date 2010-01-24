@@ -9,14 +9,19 @@ else
   LSDIFF=/var/usr/bin/lsdiff
 fi
 
-FILE_LIST=`$LSDIFF --strip=1 $APP_DIR/$PATCH_NAME`
-
 if [ -f "/media/cryptofs/apps/usr/bin/patch" ] ; then
   PATCH_EXEC=/media/cryptofs/apps/usr/bin/patch
 else
   PATCH_EXEC=/var/usr/bin/patch
 fi
 
+if [ -f "/media/cryptofs/apps/usr/bin/file" ] ; then
+  FILE_UTIL=/media/cryptofs/apps/usr/bin/file
+else
+  FILE_UTIL=/var/usr/bin/file
+fi
+
+FILE_LIST=`$LSDIFF --strip=1 $APP_DIR/$PATCH_NAME`
 IPKG_INFO_DIR=/usr/lib/ipkg/info
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
 PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
@@ -52,6 +57,80 @@ find_incompatible() {
   done
 }
 
+install_files() {
+  for i in `find $APP_DIR/additional_files -type f`
+  do
+    file=/$i
+    echo "Installing file $file" | tee -a $PATCH_LOG
+    mkdir -p `dirname $file`
+    cp $APP_DIR/$file $file
+  done
+
+  if [ "$is_theme" = "yes" ]
+  then
+    echo "Installed THEME: `basename $APP_DIR`" | tee -a $PATCH_LOG
+    echo "`basename $APP_DIR`" > $PATCH_CONTROL_DIR/installed_theme
+  fi
+}
+
+verify_files() {
+  if [ -d $APP_DIR/additional_files ]
+  then
+    for i in `find $APP_DIR/additional_files -type f`
+    do
+      file=/$i
+      if [ -e $file ]
+      then
+        # TODO: for now just fail if the file exists
+        do_failure
+        if [ ! e $FILE_UTIL ]
+        then
+          echo "ERROR: Missing file utility, cannot replace files" | tee -a $PATCH_LOG 1>&2
+          do_failure
+        fi
+
+        if [ "`$FILE_UTIL $file |grep PNG`" = "" ] && [ "`$FILE_UTIL $file |grep JPEG`" = "" ]
+        then
+          echo "ERROR: Unsupported file type: $file" | tee -a $PATCH_LOG 1>&2
+          echo "  `$FILE_UTIL $file`" | tee -a $PATCH_LOG 1>&2
+          do_failure
+        fi
+
+        if [ "`$FILE_UTIL $APP_DIR/$file |grep PNG`" = "" ] && [ "`$FILE_UTIL $APP_DIR/$file |grep JPEG`" = "" ]
+        then
+          echo "ERROR: Unsupported file type: $APP_DIR/$file" | tee -a $PATCH_LOG 1>&2
+          echo "  `$FILE_UTIL $APP_DIR/$file`" | tee -a $PATCH_LOG 1>&2
+          do_failure
+        fi
+
+        current_md5sum=`md5sum $file | awk '{print $1}'`
+        new_md5sum=`md5sum $APP_DIR/$file | awk '{print $1}'`
+
+        if [ "$current_md5sum" ] != [ "$new_md5sum" ] 
+        then
+          if [ -e $PATCH_CONTROL_DIR/installed_theme ]
+          then
+            echo "ERROR: A theme is already installed!" | tee -a $PATCH_LOG 1>&2
+            echo "  Installed theme: `cat $PATCH_CONTROL_DIR/installed_theme`" | tee -a $PATCH_LOG 1>&2
+            do_failure
+          fi
+
+          if [ -e $file.webosinternals.orig ]
+          then
+            echo "ERROR: A backup already exists!" | tee -a $PATCH_LOG 1>&2
+            echo "  Backup file: $file.webosinternals.orig" | tee -a $PATCH_LOG 1>&2
+            do_failure
+          fi
+        fi
+        is_theme="yes"
+      fi
+    done
+  fi
+
+  FILE_LIST="$FILE_LIST `find $APP_DIR/additional_files -type f`"
+}
+
+# MAIN
 if [ ! -e $PATCH_LOG ]
 then
   touch $PATCH_LOG
@@ -66,20 +145,27 @@ echo $APP_DIR/$PATCH_NAME >> $PATCH_LOG
 
 if [ "$IPKG_OFFLINE_ROOT" = "" ]
 then
-  echo "ERROR: IPKG_OFFLINE_ROOT must be supplied to the postinst" | tee -a $PATCH_LOG
-  exit 1
+  echo "ERROR: IPKG_OFFLINE_ROOT must be supplied to the postinst" | tee -a $PATCH_LOG 1>&2
+  do_failure
 fi
 
 if [ "$APP_DIR" = "" ] || [ "$PATCH_NAME" = "" ]
 then
-  echo "ERROR: APP_DIR and PATCH_NAME both must be set in postinst" | tee -a $PATCH_LOG
+  echo "ERROR: APP_DIR and PATCH_NAME both must be set in postinst" | tee -a $PATCH_LOG 1>&2
   do_failure
 fi
 
-#if [ -d /var/usr/lib/.webosinternals.patches ]
-#then
-  #mv /var/usr/lib/.webosinternals.patches $PATCH_CONTROL_DIR
-#fi
+if [ ! -e $PATCH_EXEC ]
+then
+  echo "ERROR: Cannot find $PATCH_EXEC" | tee -a $PATCH_LOG 1>&2
+  do_failure
+fi
+
+if [ ! -e $LSDIFF ]
+then
+  echo "ERROR: Cannot find $LSDIFF" | tee -a $PATCH_LOG 1>&2
+  do_failure
+fi
 
 if [ ! -d $PATCH_CONTROL_DIR ]
 then
@@ -101,9 +187,6 @@ if [ ! -e $PATCH_PACKAGES_LIST ]
 then
   touch $PATCH_PACKAGES_LIST || do_failure
 fi
-
-#rm -f $PATCH_CONTROL_DIR/tmp
-#touch $PATCH_CONTROL_DIR/tmp || do_failure
 
 echo "" >> $PATCH_LOG
 echo "------------------------------------------------------" >> $PATCH_LOG
@@ -177,11 +260,11 @@ then
   echo "Interestingly, the patch seems to already be applied" | tee -a $PATCH_LOG
 fi
 
-#if [ -e $PATCH_CONTROL_DIR/$PATCH_NAME ]
-#then
-  #echo "ERROR: Patch already installed?"
-  #do_failure
-#fi
+echo "" >> $PATCH_LOG
+echo "----------------------------------" >> $PATCH_LOG
+echo "Verify file replacements..." >> $PATCH_LOG
+echo "----------------------------------" >> $PATCH_LOG
+verify_files
 
 echo "" >> $PATCH_LOG
 echo "----------------------------------" >> $PATCH_LOG
@@ -250,14 +333,8 @@ then
   echo "----------------------------------" | tee -a $PATCH_LOG
   echo "Actually applying the patch!" | tee -a $PATCH_LOG
   echo "----------------------------------" | tee -a $PATCH_LOG
+  install_files
   $PATCH_EXEC -p1 -d / --no-backup-if-mismatch < ${APP_DIR}/$PATCH_NAME 2>&1 | tee -a $PATCH_LOG || do_failure
-fi
-
-
-if [ -e $APP_DIR/postinst_extra ]
-then
-  export APP_DIR
-  /bin/sh $APP_DIR/postinst_extra
 fi
 
 echo "SUCCESS" | tee -a $PATCH_LOG

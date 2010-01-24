@@ -69,7 +69,7 @@ build/.built-${VERSION}: build/.unpacked-${VERSION} build/.meta-${META_VERSION} 
 	install -m 644 build/src-${VERSION}/${PATCH} build/all/usr/palm/applications/${APP_ID}/
 	rm -f build/all/usr/palm/applications/${APP_ID}/package_list
 	touch build/all/usr/palm/applications/${APP_ID}/package_list
-	for f in `diffstat -l -p1 build/src-${VERSION}/${PATCH}` ; do \
+	for f in `lsdiff --strip=1 build/src-${VERSION}/${PATCH}` ; do \
 		myvar=`grep -l $$f build/ipkg-info-${WEBOS_VERSION}/*`; \
 		if [ "$$myvar" != "" ]; then \
 			myvar=`basename $$myvar .list`; \
@@ -79,6 +79,10 @@ build/.built-${VERSION}: build/.unpacked-${VERSION} build/.meta-${META_VERSION} 
 			fi; \
 		fi; \
 	done
+	if [ -e additional_files.tar.gz ]; then \
+		mkdir -p build/all/usr/palm/applications/${APP_ID}/additional_files; \
+		tar -C build/all/usr/palm/applications/${APP_ID}/additional_files -xzf additional_files.tar.gz; \
+	fi
 	touch $@
 	${MAKE} build/.built-extra-${VERSION}
 
