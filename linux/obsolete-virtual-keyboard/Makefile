@@ -1,6 +1,6 @@
 TYPE = Linux Application
 NAME = virtual-keyboard
-VERSION = 0.4.6
+VERSION = 0.4.7
 TITLE = OBSOLETE Virtual Keyboard
 MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>
 DESCRIPTION = This package will clean up created files/directories from previous VKB installs and then remove itself.
