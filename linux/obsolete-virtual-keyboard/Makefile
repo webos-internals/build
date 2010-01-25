@@ -3,10 +3,9 @@ NAME = virtual-keyboard
 VERSION = 0.4.6
 TITLE = OBSOLETE Virtual Keyboard
 MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>
-DESCRIPTION = This will clean up created files/directories from previous VKB installs and then install the actual Virtual Keyboard patch.
+DESCRIPTION = This package will clean up created files/directories from previous VKB installs and then remove itself.
 APP_ID = org.webosinternals.${NAME}
 CATEGORY = Utilities
-DEPENDS = org.webosinternals.patches.add-onscreen-keyboard
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
