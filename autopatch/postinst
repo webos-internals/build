@@ -58,18 +58,21 @@ find_incompatible() {
 }
 
 install_files() {
-  for i in `find $APP_DIR/additional_files -type f`
-  do
-    file=${i#$APP_DIR/additional_files}
-    echo "Installing file $file" | tee -a $PATCH_LOG
-    mkdir -p `dirname $file`
-    cp $i $file
-  done
-
-  if [ "$is_theme" = "yes" ]
+  if [ -d $APP_DIR/additional_files ]
   then
-    echo "Installed THEME: `basename $APP_DIR`" | tee -a $PATCH_LOG
-    echo "`basename $APP_DIR`" > $PATCH_CONTROL_DIR/installed_theme
+    for i in `find $APP_DIR/additional_files -type f`
+    do
+      file=${i#$APP_DIR/additional_files}
+      echo "Installing file $file" | tee -a $PATCH_LOG
+      mkdir -p `dirname $file`
+      cp $i $file
+    done
+
+    if [ "$is_theme" = "yes" ]
+    then
+      echo "Installed THEME: `basename $APP_DIR`" | tee -a $PATCH_LOG
+      echo "`basename $APP_DIR`" > $PATCH_CONTROL_DIR/installed_theme
+    fi
   fi
 }
 
@@ -125,13 +128,13 @@ verify_files() {
         is_theme="yes"
       fi
     done
-  fi
 
-  for i in `find $APP_DIR/additional_files -type f`
-  do
-    file=${i#$APP_DIR/additional_files}
-    FILE_LIST="$FILE_LIST $file"
-  done
+    for i in `find $APP_DIR/additional_files -type f`
+    do
+     file=${i#$APP_DIR/additional_files}
+     FILE_LIST="$FILE_LIST $file"
+    done
+  fi
 }
 
 # MAIN

@@ -45,25 +45,28 @@ failed_remove() {
 }
 
 remove_images() {
-  for i in `find $APP_DIR/additional_files -type f`
-  do
-    file=${i#$APP_DIR/additional_files}
-    echo "Removing file $file" | tee -a $PATCH_LOG
-    if [ -e $file.webosinternals.orig ]
-    then
-      mv $file.webosinternals.orig $file
-    fi
-
-    if [ ! -s $file ]
-    then
-      rm $file
-    fi
-  done
-
-  if [ -e $PATCH_CONTROL_DIR/installed_theme ] && [ "`cat $PATCH_CONTROL_DIR/installed_theme`" = "`basename $APP_DIR`" ]
+  if [ -d $APP_DIR/additional_files ]
   then
-    echo "Remove installed theme `basename $APP_DIR`" | tee -a $PATCH_LOG
-    rm $PATCH_CONTROL_DIR/installed_theme
+    for i in `find $APP_DIR/additional_files -type f`
+    do
+      file=${i#$APP_DIR/additional_files}
+      echo "Removing file $file" | tee -a $PATCH_LOG
+      if [ -e $file.webosinternals.orig ]
+      then
+        mv $file.webosinternals.orig $file
+      fi
+
+      if [ ! -s $file ]
+      then
+        rm $file
+      fi
+    done
+
+    if [ -e $PATCH_CONTROL_DIR/installed_theme ] && [ "`cat $PATCH_CONTROL_DIR/installed_theme`" = "`basename $APP_DIR`" ]
+    then
+      echo "Remove installed theme `basename $APP_DIR`" | tee -a $PATCH_LOG
+      rm $PATCH_CONTROL_DIR/installed_theme
+    fi
   fi
 }
 
