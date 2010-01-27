@@ -1,7 +1,7 @@
 #!/bin/sh
 PACKAGE=org.webosinternals.emergency-patch-recovery
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
-PATCH_PACKAGE_LIST=/media/internal/.webosinternals.patches.packages
+PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
 PATCH_LOG=/media/internal/webos-patches.log
 IPKG_INFO_DIR=/usr/lib/ipkg/info
 
@@ -31,7 +31,9 @@ fi
 
 if [ -e $PATCH_CONTROL_DIR/packages ]
 then
-  mv $PATCH_CONTROL_DIR/packages $PATCH_PACKAGES_LIST
+  touch $PATCH_PACKAGES_LIST
+  cat $PATCH_CONTROL_DIR/packages >> $PATCH_PACKAGES_LIST
+  rm -f $PATCH_CONTROL_DIR/packages
 fi
 
 if [ -e $PATCH_PACKAGES_LIST ]
@@ -101,6 +103,7 @@ fi
 
 echo "DONE" | tee -a $PATCH_LOG
 rm -rf $PATCH_CONTROL_DIR
+rm -f  $PATCH_PACKAGES_LIST
 
 ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
 exit 0

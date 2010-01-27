@@ -187,7 +187,9 @@ fi
 
 if [ -e $PATCH_CONTROL_DIR/packages ]
 then
-  mv $PATCH_CONTROL_DIR/packages $PATCH_PACKAGES_LIST
+  touch $PATCH_PACKAGES_LIST
+  cat $PATCH_CONTROL_DIR/packages >> $PATCH_PACKAGES_LIST
+  rm -f $PATCH_CONTROL_DIR/packages
 fi
 
 if [ ! -e $PATCH_PACKAGES_LIST ]
