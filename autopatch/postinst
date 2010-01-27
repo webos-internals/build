@@ -44,18 +44,18 @@ failed_install() {
   do_failure
 }
 
-find_incompatible() {
-  for i in `ls $PATCH_CONTROL_DIR/*.patch`
-  do
-    for j in `$LSDIFF --strip=1 $i`
-    do
-      if [ "$file" = "/$j" ]
-      then
-        echo "  Incompatible package: `basename $i .patch`" | tee -a $PATCH_LOG 1>&2
-      fi
-    done
-  done
-}
+#find_incompatible() {
+  #for i in `ls $PATCH_CONTROL_DIR/*.patch`
+  #do
+    #for j in `$LSDIFF --strip=1 $i`
+    #do
+      #if [ "$file" = "/$j" ]
+      #then
+        #echo "  Incompatible package: `basename $i .patch`" | tee -a $PATCH_LOG 1>&2
+      #fi
+    #done
+  #done
+#}
 
 install_files() {
   if [ -d $APP_DIR/additional_files ]
@@ -195,59 +195,59 @@ then
   touch $PATCH_PACKAGES_LIST || do_failure
 fi
 
-echo "" >> $PATCH_LOG
-echo "------------------------------------------------------" >> $PATCH_LOG
-echo "Checking for incompatible backup files..." >> $PATCH_LOG
-echo "------------------------------------------------------" >> $PATCH_LOG
+#echo "" >> $PATCH_LOG
+#echo "------------------------------------------------------" >> $PATCH_LOG
+#echo "Checking for incompatible backup files..." >> $PATCH_LOG
+#echo "------------------------------------------------------" >> $PATCH_LOG
 
-while read i
-do
-  backup=`echo $i | awk '{print $1}'`
-  version=`echo $i | awk '{print $2}'`
+#while read i
+#do
+  #backup=`echo $i | awk '{print $1}'`
+  #version=`echo $i | awk '{print $2}'`
 
-  if [ "$version" != "$VERSION" ]
-  then
-    echo "Incompatible backup file: $backup" >> $PATCH_LOG
-    INCOMPATIBLE_BACKUPS="$INCOMPATIBLE_BACKUPS $backup"
-  fi
-done < $PATCH_CONTROL_DIR/backups
+  #if [ "$version" != "$VERSION" ]
+  #then
+    #echo "Incompatible backup file: $backup" >> $PATCH_LOG
+    #INCOMPATIBLE_BACKUPS="$INCOMPATIBLE_BACKUPS $backup"
+  #fi
+#done < $PATCH_CONTROL_DIR/backups
 
-for i in $INCOMPATIBLE_BACKUPS
-do
-  for j in $FILE_LIST
-  do
-    file=/$j
-    if [ "$file" = "$i" ]
-    then
-      echo "ERROR: A patch using an incompatible patch technology has already touched a file in this patch " | tee -a $PATCH_LOG 1>&2
-      echo "  file: $file" | tee -a $PATCH_LOG 1>&2
+#for i in $INCOMPATIBLE_BACKUPS
+#do
+  #for j in $FILE_LIST
+  #do
+    #file=/$j
+    #if [ "$file" = "$i" ]
+    #then
+      #echo "ERROR: A patch using an incompatible patch technology has already touched a file in this patch " | tee -a $PATCH_LOG 1>&2
+      #echo "  file: $file" | tee -a $PATCH_LOG 1>&2
 
-      find_incompatible
+      #find_incompatible
 
-      echo "" >> $PATCH_LOG
-      echo "----------------------------------" >> $PATCH_LOG
-      echo "Checking all packages for incompatibilities..." >> $PATCH_LOG
-      echo "----------------------------------" >> $PATCH_LOG
-      while read k
-      do
-        package=`echo $k | awk '{print $1}'`
-        version=`echo $k | awk '{print $2}'`
+      #echo "" >> $PATCH_LOG
+      #echo "----------------------------------" >> $PATCH_LOG
+      #echo "Checking all packages for incompatibilities..." >> $PATCH_LOG
+      #echo "----------------------------------" >> $PATCH_LOG
+      #while read k
+      #do
+        #package=`echo $k | awk '{print $1}'`
+        #version=`echo $k | awk '{print $2}'`
 
-        if [ "$version" = "" ]
-        then
-          version=apt-1
-        fi
+        #if [ "$version" = "" ]
+        #then
+          #version=apt-1
+        #fi
 
-        if [ "$version" != "$VERSION" ]
-        then
-          echo "WARNING: Package: $package uses incompatible patch technology: $version" | tee -a $PATCH_LOG 1>&2
-        fi
-      done < $PATCH_PACKAGES_LIST
+        #if [ "$version" != "$VERSION" ]
+        #then
+          #echo "WARNING: Package: $package uses incompatible patch technology: $version" | tee -a $PATCH_LOG 1>&2
+        #fi
+      #done < $PATCH_PACKAGES_LIST
 
-      do_failure
-    fi
-  done
-done
+      #do_failure
+    #fi
+  #done
+#done
 
 echo "" >> $PATCH_LOG
 echo "----------------------------------" >> $PATCH_LOG
