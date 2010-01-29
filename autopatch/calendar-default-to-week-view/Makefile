@@ -6,9 +6,9 @@ CATEGORY = Calendar
 VERSIONS = 1.2.1-1 1.1.3-1 1.3.1-1 1.3.5-2 1.4.0-2
 ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Calendar.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/2/27/Default-to-week-view.png\"]
-META_SUB_VERSION = 1
+META_SUB_VERSION = 2
 
 include ../common.mk
 include ../modifications.mk
 
-MAINTAINER = matthewn <matthewn@alum.berkeley.edu>
+MAINTAINER = matthewn <webospatches@mahnamahna.net>
