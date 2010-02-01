@@ -1,7 +1,7 @@
 TYPE = Linux Application
 NAME = virtual-keyboard
-VERSION = 0.4.7
-TITLE = OBSOLETE Virtual Keyboard
+VERSION = 0.4.8
+TITLE = CLEANUP VKB Files
 MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>
 DESCRIPTION = This package will clean up created files/directories from previous VKB installs and then remove itself.
 APP_ID = org.webosinternals.${NAME}
