@@ -51,11 +51,12 @@ build/.built: build/.unpacked
 			rm -f `find build/$$t -name \*.html`; \
 			rm -f `find build/$$t -name \*.json`; \
 	    mkdir -p build/`basename $$f .zip`/CONTROL ; \
-	    ../../scripts/xml-theme-converter.py \
+	    ( ../../scripts/xml-theme-converter.py \
 	      build/`basename $$f .zip`/net.precentral.themes/theme.xml \
-	      build/`basename $$f .zip` `basename $$f .zip` && \
-	    chmod ugo+x build/`basename $$f .zip`/CONTROL/postinst build/`basename $$f .zip`/CONTROL/prerm && \
-	    ( cd ipkgs ; ../../../toolchain/ipkg-utils/ipkg-build ../build/`basename $$f .zip` ) ; \
+	      build/`basename $$f .zip` `basename $$f .zip` ) || rm -rf build/`basename $$f .zip` ; \
+	    [ ! -e build/`basename $$f .zip` ] || \
+	    ( chmod ugo+x build/`basename $$f .zip`/CONTROL/postinst build/`basename $$f .zip`/CONTROL/prerm && \
+	      ( cd ipkgs ; ../../../toolchain/ipkg-utils/ipkg-build ../build/`basename $$f .zip` ) ) ; \
 	  fi ; \
 	done
 	touch $@

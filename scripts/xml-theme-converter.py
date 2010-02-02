@@ -49,6 +49,7 @@ class PackageHandler(ContentHandler):
             print >>self.control, "Version: %s" % m.group(1)
             if (self.data != m.group(1)):
                 sys.stderr.write(self.filename + ": Version mismatch between feed and theme.xml\n")
+                sys.exit(1)
 
         if (name == "creator") :
             print >>self.control,  "Maintainer: %s <http://forums.precentral.net/members/%s.html>" % (self.data, urllib.quote(self.data))
@@ -62,7 +63,7 @@ class PackageHandler(ContentHandler):
             print >>self.control,  "Source: unknown"
             print >>self.postinst, ""
             print >>self.postinst, "mkdir -p /var/usr/lib/webos-quick-install/"
-            print >>self.postinst, "cp /var/net.precentral.themes/theme.xml /var/usr/lib/webos-quick-install/theme.xml"
+            print >>self.postinst, "cp /media/cryptofs/apps/net.precentral.themes/theme.xml /var/usr/lib/webos-quick-install/theme.xml"
             print >>self.prerm,    ""
             print >>self.prerm,    "rm -f /var/usr/lib/webos-quick-install/theme.xml"
 
@@ -71,7 +72,7 @@ class PackageHandler(ContentHandler):
                 print >>self.postinst, ""
                 print >>self.postinst, "mkdir -p /media/internal/wallpapers/"
                 print >>self.postinst, "rm -f /media/internal/wallpapers/%s" % os.path.basename(self.data)
-                print >>self.postinst, "cp /var/net.precentral.themes/%s /media/internal/wallpapers/%s" % (self.data, os.path.basename(self.data))
+                print >>self.postinst, "cp /media/cryptofs/apps/net.precentral.themes/%s /media/internal/wallpapers/%s" % (self.data, os.path.basename(self.data))
                 print >>self.postinst, ""
                 print >>self.postinst, "luna-send -n 1 palm://com.palm.systemservice/wallpaper/importWallpaper '{ \"target\":\"/media/internal/wallpapers/%s\" }'" % os.path.basename(self.data)
                 print >>self.postinst, "luna-send -n 1 palm://com.palm.systemservice/setPreferences '{ \"wallpaper\": { \"wallpaperName\":\"%s\", \"wallpaperFile\":\"/media/internal/wallpapers/%s\" } }'" % (os.path.basename(self.data), os.path.basename(self.data))
@@ -90,7 +91,7 @@ class PackageHandler(ContentHandler):
                 print >>self.postinst, "if [ -f %s -a ! -f %sBACKUP ] ; then" % (self.data, self.data)
                 print >>self.postinst, "  cp %s %sBACKUP" % (self.data, self.data)
                 print >>self.postinst, "fi"
-                print >>self.postinst, "cp /var/net.precentral.themes/%s %s" % (self.file, self.data)
+                print >>self.postinst, "cp /media/cryptofs/apps/net.precentral.themes/%s %s" % (self.file, self.data)
                 print >>self.prerm,    ""
                 print >>self.prerm,    "if [ -f %sBACKUP ] ; then" % self.data
                 print >>self.prerm,    "  mv %sBACKUP %s" % (self.data, self.data)
@@ -108,7 +109,7 @@ class PackageHandler(ContentHandler):
                 print >>self.postinst, "if [ -f %s -a ! -f %sBACKUP ] ; then" % (self.data, self.data)
                 print >>self.postinst, "  cp %s %sBACKUP" % (self.data, self.data)
                 print >>self.postinst, "fi"
-                print >>self.postinst, "cp /var/net.precentral.themes/%s %s" % (self.file, self.data)
+                print >>self.postinst, "cp /media/cryptofs/apps/net.precentral.themes/%s %s" % (self.file, self.data)
                 print >>self.prerm,    ""
                 print >>self.prerm,    "if [ -f %sBACKUP ] ; then" % self.data
                 print >>self.prerm,    "  mv %sBACKUP %s" % (self.data, self.data)
