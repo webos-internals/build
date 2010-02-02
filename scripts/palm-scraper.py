@@ -22,6 +22,7 @@ class PackageHandler(ContentHandler):
     id = ""
     title = ""
     description = ""
+    license = ""
     json = ""
     author = ""
     support = ""
@@ -39,6 +40,7 @@ class PackageHandler(ContentHandler):
             self.id = ""
             self.title = ""
             self.description = ""
+            self.license = ""
             self.json = "{ "
             self.author = ""
             self.support = ""
@@ -98,6 +100,9 @@ class PackageHandler(ContentHandler):
         if (name == "ac:version") :
             self.version = self.data
             
+        if (name == "ac:license") :
+            self.license = self.data
+            
         if (name == "ac:installed_size") :
             self.size = self.data
             
@@ -135,6 +140,9 @@ class PackageHandler(ContentHandler):
             self.json += "\"Source\":\"%s\", " % self.url
 
             self.json += "\"Type\":\"AppCatalog\", "
+
+            if (self.license):
+                self.json += "\"License\":\"%s\", " % self.license
 
             if (self.category):
                 self.json += "\"Category\":\"%s\", " % self.category
