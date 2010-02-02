@@ -39,8 +39,8 @@ palm-index: ipkgs/palm-catalog/Packages ipkgs/palm-beta/Packages ipkgs/palm-web/
 .PHONY: patches-index
 patches-index: ipkgs/webos-patches/1.3.5/Packages ipkgs/webos-patches/1.4.0/Packages
 	chmod o-x ipkgs/webos-patches/1.4.0
-	ln -s 1.3.5 ipkgs/webos-patches/1.3.5.1
-	ln -s 1.3.5 ipkgs/webos-patches/1.3.5.2
+	ln -f -s 1.3.5 ipkgs/webos-patches/1.3.5.1
+	ln -f -s 1.3.5 ipkgs/webos-patches/1.3.5.2
 
 .PHONY: regression-index
 regression-index: ipkgs/regression-testing/1.0.0/Packages ipkgs/regression-testing/2.0.0/Packages 
