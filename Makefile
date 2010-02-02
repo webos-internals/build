@@ -37,8 +37,10 @@ optware-index: ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optw
 palm-index: ipkgs/palm-catalog/Packages ipkgs/palm-beta/Packages ipkgs/palm-web/Packages
 
 .PHONY: patches-index
-patches-index: ipkgs/webos-patches/1.3.1/Packages ipkgs/webos-patches/1.3.5/Packages ipkgs/webos-patches/1.4.0/Packages
+patches-index: ipkgs/webos-patches/1.3.5/Packages ipkgs/webos-patches/1.4.0/Packages
 	chmod o-x ipkgs/webos-patches/1.4.0
+	ln -s 1.3.5 ipks/webos-patches/1.3.5.1
+	ln -s 1.3.5 ipks/webos-patches/1.3.5.2
 
 .PHONY: regression-index
 regression-index: ipkgs/regression-testing/1.0.0/Packages ipkgs/regression-testing/2.0.0/Packages 
