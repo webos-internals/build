@@ -3,7 +3,7 @@ TITLE	 = OpenSSL
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
 OPT_VER  = 0.9.8l-1
-VERSION  = 0.9.8.12-1
+VERSION  = 0.9.8.12-2
 HOMEPAGE = http://www.openssl.org/
 TYPE	 = Optware
 CATEGORY = Libraries
@@ -18,3 +18,10 @@ include ../../support/package.mk
 include ../../support/download.mk
 
 include ../../support/optware.mk
+
+build/%.built-${VERSION} : build/%.unpacked
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/lib/libcrypto.so
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/lib/libcrypto.so.0
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/lib/libssl.so
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/lib/libssl.so.0
+	touch $@
