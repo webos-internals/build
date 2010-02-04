@@ -1,0 +1,10 @@
+#!/bin/sh
+
+APPID=mobi.optware.openssh-sftp-server
+
+# Symlink files into /opt
+cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
+find libexec -type d -exec mkdir -p /opt/{} \;
+find libexec -type f -exec ln -sf $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt/{} /opt/{} \;
+
+exit 0
