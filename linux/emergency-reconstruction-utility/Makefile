@@ -5,6 +5,7 @@ TITLE = Emergency Reconstruction Utility
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DESCRIPTION = Install this package on your Pre to reconstruct the ipkg status file in the event that it has been corrupted.  The symptom of a corrupted status file is Preware suddenly not noticing some or all installed packages.  NOTE: If the symptom occurs directly after an OTA update to 1.3.5.x WebOS, you should install Emergency Migration Helper.
 APP_ID = org.webosinternals.${NAME}
+SIGNER = org.webosinternals
 MAINTAINER = WebOS Internals
 CATEGORY = Utilities
 ICON = http://www.webos-internals.org/images/4/4f/Epr.png

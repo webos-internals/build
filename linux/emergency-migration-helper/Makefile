@@ -5,6 +5,7 @@ TITLE = Emergency Migration Helper
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DESCRIPTION = Install this package on your Pre to help webOS 1.3.5 migrate all your homebrew packages from /var to /media/cryptofs/apps.  If you are having problems install applications from the Palm App Catalog, and you have previously installed homebrew services, plugins, patches or themes, then you should install this package.  Installing this package just runs a script to do the migration fixes and then removes itself.  You should only need to run it once, then the device will restart the user interface and the app migration will then proceed in the background, so give it 30 minutes before you try the app catalog again.
 APP_ID = org.webosinternals.${NAME}
+SIGNER = org.webosinternals
 MAINTAINER = WebOS Internals
 CATEGORY = Utilities
 ICON = http://www.webos-internals.org/images/4/4f/Epr.png
