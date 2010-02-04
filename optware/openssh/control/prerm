@@ -1,16 +1,23 @@
 #!/bin/sh
 
+APPID=mobi.optware.openssh
+
 # Remove the profile script
-rm -f /etc/profile.d/mobi.optware.openssh
+rm -f /etc/profile.d/${APPID}
 
 # The emulator already has an ssh server running, so we didn't start our own.
 if [ "`uname -m`" != "i686" ]; then
-    /sbin/stop mobi.optware.openssh
-    rm -f /etc/event.d/mobi.optware.openssh
+    /sbin/stop ${APPID}
+    rm -f /etc/event.d/${APPID}
 fi
 
-update-alternatives --remove scp /opt/bin/openssh-scp
-update-alternatives --remove ssh /opt/bin/openssh-ssh
+/opt/bin/update-alternatives --remove scp /opt/bin/openssh-scp
+/opt/bin/update-alternatives --remove ssh /opt/bin/openssh-ssh
+
+# Remove files from /opt
+cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
+find * -depth -type f -exec rm -f /opt/{} \;
+find * -depth -type d -exec rmdir /opt/{} \;
 
 # We intentionally do not remove the host keys.
 

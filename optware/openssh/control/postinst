@@ -1,13 +1,20 @@
 #!/bin/sh
 
+APPID=mobi.optware.openssh
+
+# Symlink files into /opt
+cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
+find * -type d -exec mkdir -p /opt/{} \;
+find * -type f -exec ln -sf $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt/{} /opt/{} \;
+
 # Disable any legacy openssh server that was installed manually
 if [ -f /etc/event.d/optware-openssh ]; then
     /sbin/stop optware-openssh
     rm -f /etc/event.d/optware-openssh
 fi
 
-update-alternatives --install /opt/bin/scp scp /opt/bin/openssh-scp 80
-update-alternatives --install /opt/bin/ssh ssh /opt/bin/openssh-ssh 80
+/opt/bin/update-alternatives --install /opt/bin/scp scp /opt/bin/openssh-scp 80
+/opt/bin/update-alternatives --install /opt/bin/ssh ssh /opt/bin/openssh-ssh 80
 
 mkdir -p /opt/etc/openssh
 
@@ -30,16 +37,16 @@ if [ ! -f /opt/etc/openssh/ssh_host_dsa_key ]; then
 fi
 
 # Install the profile script
-rm -f /etc/profile.d/mobi.optware.openssh
+rm -f /etc/profile.d/${APPID}
 mkdir -p /etc/profile.d/
-cp $IPKG_OFFLINE_ROOT/etc/profile.d/mobi.optware.openssh /etc/profile.d/mobi.optware.openssh
+cp $IPKG_OFFLINE_ROOT/etc/profile.d/${APPID} /etc/profile.d/${APPID}
 
 # The emulator already has an ssh server running, so no need to start another.
 if [ "`uname -m`" != "i686" ]; then
-    rm -f /etc/event.d/mobi.optware.openssh
+    rm -f /etc/event.d/${APPID}
     mkdir -p /etc/event.d/
-    cp $IPKG_OFFLINE_ROOT/etc/event.d/mobi.optware.openssh /etc/event.d/mobi.optware.openssh
-    /sbin/start mobi.optware.openssh
+    cp $IPKG_OFFLINE_ROOT/etc/event.d/${APPID} /etc/event.d/${APPID}
+    /sbin/start ${APPID}
 fi
 
 exit 0
