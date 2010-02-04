@@ -16,8 +16,8 @@ fi
 
 # Remove files from /opt
 cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
-find * -depth -type f -exec rm -f /opt/{} \;
-find * -depth -type d -exec rmdir /opt/{} \;
+find bin etc libexec sbin var -depth -type f -exec rm -f /opt/{} \;
+find bin etc libexec sbin var -depth -type d -exec rmdir /opt/{} \;
 
 # We intentionally do not remove the host keys.
 

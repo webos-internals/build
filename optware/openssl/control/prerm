@@ -6,5 +6,5 @@ APPID=mobi.optware.openssl
 rm -f /opt/lib/libcrypto.so /opt/lib/libcrypto.so.0
 rm -f /opt/lib/libssl.so /opt/lib/libssl.so.0
 cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
-find * -depth -type f -exec rm -f /opt/{} \;
-find * -depth -type d -exec rmdir /opt/{} \;
+find bin lib share -depth -type f -exec rm -f /opt/{} \;
+find bin lib share -depth -type d -exec rmdir /opt/{} \;

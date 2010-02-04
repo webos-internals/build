@@ -4,8 +4,8 @@ APPID=mobi.optware.openssh
 
 # Symlink files into /opt
 cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
-find * -type d -exec mkdir -p /opt/{} \;
-find * -type f -exec ln -sf $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt/{} /opt/{} \;
+find bin etc libexec sbin var -type d -exec mkdir -p /opt/{} \;
+find bin etc libexec sbin var -type f -exec ln -sf $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt/{} /opt/{} \;
 
 # Disable any legacy openssh server that was installed manually
 if [ -f /etc/event.d/optware-openssh ]; then

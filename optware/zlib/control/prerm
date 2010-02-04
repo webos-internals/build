@@ -5,5 +5,5 @@ APPID=mobi.optware.zlib
 # Remove files from /opt
 rm -f /opt/lib/libz.so /opt/lib/libz.so.1
 cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
-find * -depth -type f -exec rm -f /opt/{} \;
-find * -depth -type d -exec rmdir /opt/{} \;
+find lib -depth -type f -exec rm -f /opt/{} \;
+find lib -depth -type d -exec rmdir /opt/{} \;
