@@ -68,7 +68,12 @@ build/%.unpacked: ${DL_DIR}/${SRC_OPTWARE}_%.ipk
 	[ -f build/${SRC_OPTWARE}_$*/CONTROL/control ]
 	rm -f build/${SRC_OPTWARE}_$*.ipk
 	mv build/${SRC_OPTWARE}_$* build/$*
-	cp build/$*/CONTROL/control build/$*.control
+	mv build/$*/CONTROL/control build/$*.control
+	for dir in `cd build/$* ; ls -1` ; do \
+	  mkdir -p build/$*/usr/palm/applications/${APP_ID} ; \
+	  mv build/$*/$$dir build/$*/usr/palm/applications/${APP_ID}/ ; \
+	done
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/CONTROL
 	touch $@
 
 endif

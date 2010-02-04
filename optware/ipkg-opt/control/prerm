@@ -1,0 +1,13 @@
+#!/bin/sh
+
+APPID=mobi.optware.ipkg-opt
+
+rm -rf /opt/etc/ipkg
+
+# Remove files from /opt
+rm -f /opt/bin/ipkg-opt /opt/lib/libipkg.so /opt/lib/libipkg.so.0
+cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
+find * -depth -type f -exec rm -f /opt/{} \;
+find * -depth -type d -exec rmdir /opt/{} \;
+
+rmdir /opt/etc

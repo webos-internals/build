@@ -1,5 +1,15 @@
 #!/bin/sh
 
+APPID=mobi.optware.ipkg-opt
+
+# Symlink files into /opt
+cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
+find * -type d -exec mkdir -p /opt/{} \;
+find * -type f -exec ln -sf $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt/{} /opt/{} \;
+ln -sf ipkg /opt/bin/ipkg-opt
+ln -sf libipkg.so.0.0.0 /opt/lib/libipkg.so
+ln -sf libipkg.so.0.0.0 /opt/lib/libipkg.so.0
+
 mkdir -p /opt/etc/ipkg
 
 # Install optware feeds
