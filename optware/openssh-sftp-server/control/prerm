@@ -6,3 +6,5 @@ APPID=mobi.optware.openssh-sftp-server
 cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
 find libexec -depth -type f -exec rm -f /opt/{} \;
 find libexec -depth -type d -exec rmdir /opt/{} \;
+
+exit 0
