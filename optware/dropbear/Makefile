@@ -12,6 +12,7 @@ CHANGELOG += <br>0.52-9: Updated for future webOS compatibility.
 CHANGELOG += <br>0.52-8: Initial version.
 CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/7/76/Icon_WebOSInternals_DropBear.png
+DEPENDS  = mobi.optware.ipkg-opt
 
 SRC_OPTWARE = ${NAME}_${OPT_VER}
 
