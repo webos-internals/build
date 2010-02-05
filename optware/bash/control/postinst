@@ -1,10 +1,21 @@
 #!/bin/sh
 
+APPID=mobi.optware.bash
+
+# Symlink files into /opt
+cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
+find bin -type d -exec mkdir -p /opt/{} \;
+find bin -type f -exec ln -sf $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt/{} /opt/{} \;
+
 if [ ! -d "/etc/profile.d" ]; then
   mkdir /etc/profile.d
 fi
 
-cat > /etc/profile.d/mobi.webosinternals.bash << "EOF"
+# Remove the incorrectly named profile
+rm -f /etc/profile.d/mobi.webosinternals.bash
+
+# Create a new profile
+cat > /etc/profile.d/$APPID << "EOF"
 if [ "`id -u`" -eq 0 ]; then
   PS1='\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[00m\] '
 else
@@ -16,11 +27,11 @@ if [ ! -f "/etc/shells" ]; then
   touch /etc/shells
 fi
 
-if grep -q /bin/sh /etc/shells; then
+if ! grep -q /bin/sh /etc/shells; then
   echo /bin/sh >> /etc/shells
 fi
 
-if grep -q /opt/bin/bash /etc/shells; then
+if ! grep -q /opt/bin/bash /etc/shells; then
   echo /opt/bin/bash >> /etc/shells
 fi
 

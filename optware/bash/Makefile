@@ -3,7 +3,8 @@ TITLE	 = Bourne Again Shell
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
 OPT_VER  = 3.2.49-1
-VERSION  = 3.2.49-2
+VERSION  = 3.2.49-3
+CHANGELOG = 3.2.49-3: Made compatible with the Emergency Service Enabler to survive doctoring.
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Bash
 TYPE	 = Optware
 CATEGORY = Utilities
@@ -21,5 +22,5 @@ include ../../support/download.mk
 include ../../support/optware.mk
 
 build/%.built-${VERSION} : build/%.unpacked
-	rm -rf build/$*/opt/etc
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/etc
 	touch $@
