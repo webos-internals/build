@@ -25,8 +25,8 @@ build/armv7.built-${VERSION} : build/armv7.unpacked
 	rm -rf build/armv7/usr/palm/applications/${APP_ID}/opt/etc/default
 	rm -rf build/armv7/usr/palm/applications/${APP_ID}/opt/etc/init.d
 	rm -rf build/armv7/usr/palm/applications/${APP_ID}/opt/bin/slogin
-	mkdir -p build/armv7/etc/profile.d
-	install -m 644 profile/${APP_ID} build/armv7/etc/profile.d/${APP_ID}
+#	mkdir -p build/armv7/etc/profile.d
+#	install -m 644 profile/${APP_ID} build/armv7/etc/profile.d/${APP_ID}
 	mkdir -p build/armv7/etc/event.d
 	install -m 644 upstart/${APP_ID} build/armv7/etc/event.d/${APP_ID}
 	touch $@
@@ -35,8 +35,8 @@ build/armv6.built-${VERSION} : build/armv6.unpacked
 	rm -rf build/armv6/usr/palm/applications/${APP_ID}/opt/etc/default
 	rm -rf build/armv6/usr/palm/applications/${APP_ID}/opt/etc/init.d
 	rm -rf build/armv6/usr/palm/applications/${APP_ID}/opt/bin/slogin
-	mkdir -p build/armv6/etc/profile.d
-	install -m 644 profile/${APP_ID} build/armv6/etc/profile.d/${APP_ID}
+#	mkdir -p build/armv6/etc/profile.d
+#	install -m 644 profile/${APP_ID} build/armv6/etc/profile.d/${APP_ID}
 	mkdir -p build/armv6/etc/event.d
 	install -m 644 upstart/${APP_ID} build/armv6/etc/event.d/${APP_ID}
 	touch $@
@@ -45,8 +45,8 @@ build/i686.built-${VERSION} : build/i686.unpacked
 	rm -rf build/i686/usr/palm/applications/${APP_ID}/opt/etc/default
 	rm -rf build/i686/usr/palm/applications/${APP_ID}/opt/etc/init.d
 	rm -rf build/i686/usr/palm/applications/${APP_ID}/opt/bin/slogin
-	mkdir -p build/armv6/etc/profile.d
-	install -m 644 profile/${APP_ID} build/armv6/etc/profile.d/${APP_ID}
+#	mkdir -p build/armv6/etc/profile.d
+#	install -m 644 profile/${APP_ID} build/armv6/etc/profile.d/${APP_ID}
 # The emulator already has an ssh server running, so no need to start another.
 	touch $@
 
