@@ -7,6 +7,7 @@ $IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/org.webosinternals.optware.postinst \
 $IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/org.webosinternals.widk.postinst \
 $IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/org.webosinternals.patch.postinst \
 $IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/org.webosinternals.lsdiff.postinst \
+$IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/mobi.optware.ipkg-opt.postinst \
 "
 
 for i in $FIRSTS `ls $IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/*.postinst | grep -v $PACKAGE`

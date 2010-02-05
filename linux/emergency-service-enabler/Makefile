@@ -1,6 +1,6 @@
 TYPE = Linux Application
 NAME = emergency-service-enabler
-VERSION = 1.1.0
+VERSION = 1.2.0
 TITLE = Emergency Service Enabler
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DESCRIPTION = Install this package on your webOS device immediately after running the webOS Doctor to restart any services or plugins that have been disabled by running the webOS Doctor.  A side effect is that it also reapplies any patches, which is a good idea if you are doctoring to the same version, but a very bad idea if you are doctoring to a different version.
