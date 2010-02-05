@@ -2,7 +2,14 @@
 
 PACKAGE=org.webosinternals.emergency-service-enabler
 
-for i in `ls $IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/*.postinst | grep -v $PACKAGE`
+FIRSTS="\
+$IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/org.webosinternals.optware.postinst \
+$IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/org.webosinternals.widk.postinst \
+$IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/org.webosinternals.patch.postinst \
+$IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/org.webosinternals.lsdiff.postinst \
+"
+
+for i in $FIRSTS `ls $IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/*.postinst | grep -v $PACKAGE`
 do
   if [ -e $i ] ; then
     echo "Enabling `basename $i`"
