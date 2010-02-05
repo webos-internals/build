@@ -3,7 +3,6 @@
 APPID=mobi.optware.bash
 
 # Remove files from /opt
-rm -f /opt/lib/libz.so /opt/lib/libz.so.1
 cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
 find bin -depth -type f -exec rm -f /opt/{} \;
 find bin -depth -type d -exec rmdir /opt/{} \;
