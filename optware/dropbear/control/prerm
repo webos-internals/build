@@ -1,13 +1,21 @@
 #!/bin/sh
 
+APPID=mobi.optware.dropbear
+
 # The emulator already has an ssh server running, so no need to start another.
 if [ "`uname -m`" != "i686" ]; then
-    /sbin/stop mobi.optware.dropbear
-    rm -f /etc/event.d/mobi.optware.dropbear
+    /sbin/stop $APPID
+    rm -f /etc/event.d/$APPID
 fi
 
-update-alternatives --remove scp /opt/sbin/dropbearmulti
-update-alternatives --remove ssh /opt/sbin/dropbearmulti
+/opt/bin/update-alternatives --remove scp /opt/sbin/dropbearmulti
+/opt/bin/update-alternatives --remove ssh /opt/sbin/dropbearmulti
+
+# Remove files from /opt
+rm -f /opt/bin/dbclient /opt/sbin/dropbear /opt/sbin/dropbearconvert /opt/sbin/dropbearkey
+cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
+find bin etc sbin -depth -type f -exec rm -f /opt/{} \;
+find bin etc sbin -depth -type d -exec rmdir /opt/{} \;
 
 # We intentionally do not remove the host keys.
 

@@ -1,13 +1,24 @@
 #!/bin/sh
 
+APPID=mobi.optware.dropbear
+
+# Symlink files into /opt
+cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
+find bin etc sbin -type d -exec mkdir -p /opt/{} \;
+find bin etc sbin -type f -exec ln -sf $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt/{} /opt/{} \;
+ln -sf /opt/sbin/dropbearmulti /opt/bin/dbclient
+ln -sf /opt/sbin/dropbearmulti /opt/sbin/dropbear
+ln -sf /opt/sbin/dropbearmulti /opt/sbin/dropbearconvert
+ln -sf /opt/sbin/dropbearmulti /opt/sbin/dropbearkey
+
 # Disable any legacy dropbear server that was installed manually
 if [ -f /etc/event.d/optware-dropbear ]; then
     /sbin/stop optware-dropbear
     rm -f /etc/event.d/optware-dropbear
 fi
 
-update-alternatives --install /opt/bin/scp scp /opt/sbin/dropbearmulti 50
-update-alternatives --install /opt/bin/ssh ssh /opt/sbin/dropbearmulti 50
+/opt/bin/update-alternatives --install /opt/bin/scp scp /opt/sbin/dropbearmulti 50
+/opt/bin/update-alternatives --install /opt/bin/ssh ssh /opt/sbin/dropbearmulti 50
 
 mkdir -p /opt/etc/dropbear
 
@@ -23,10 +34,10 @@ fi
 
 # The emulator already has an ssh server running, so no need to start another.
 if [ "`uname -m`" != "i686" ]; then
-    rm -f /etc/event.d/mobi.optware.dropbear
+    rm -f /etc/event.d/$APPID
     mkdir -p /etc/event.d/
-    cp $IPKG_OFFLINE_ROOT/etc/event.d/mobi.optware.dropbear /etc/event.d/mobi.optware.dropbear
-    /sbin/start mobi.optware.dropbear
+    cp $IPKG_OFFLINE_ROOT/etc/event.d/$APPID /etc/event.d/$APPID
+    /sbin/start $APPID
 fi
 
 exit 0
