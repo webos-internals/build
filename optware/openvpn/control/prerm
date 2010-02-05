@@ -1,6 +1,13 @@
 #!/bin/sh
 
-/sbin/stop mobi.optware.openvpn
-rm -f /etc/event.d/mobi.optware.openvpn
+APPID=mobi.optware.openvpn
+
+# Remove files from /opt
+cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
+find sbin -depth -type f -exec rm -f /opt/{} \;
+find sbin -depth -type d -exec rmdir /opt/{} \;
+
+/sbin/stop $APPID
+rm -f /etc/event.d/$APPID
 
 exit 0

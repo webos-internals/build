@@ -1,8 +1,15 @@
 #!/bin/sh
 
-rm -f /etc/event.d/mobi.optware.openvpn
+APPID=mobi.optware.openvpn
+
+# Symlink files into /opt
+cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
+find sbin -type d -exec mkdir -p /opt/{} \;
+find sbin -type f -exec ln -sf $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt/{} /opt/{} \;
+
+rm -f /etc/event.d/$APPID
 mkdir -p /etc/event.d/
-cp $IPKG_OFFLINE_ROOT/etc/event.d/mobi.optware.openvpn /etc/event.d/mobi.optware.openvpn
-/sbin/start mobi.optware.openvpn
+cp $IPKG_OFFLINE_ROOT/etc/event.d/$APPID /etc/event.d/$APPID
+/sbin/start $APPID
 
 exit 0
