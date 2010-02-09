@@ -1,6 +1,13 @@
 #!/bin/sh
 
-/sbin/stop mobi.optware.lighttpd
-rm -f /etc/event.d/mobi.optware.lighttpd
+APPID=mobi.optware.lighttpd
+
+/sbin/stop $APPID
+rm -f /etc/event.d/$APPID
+
+# Remove files from /opt
+cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
+find etc lib sbin var -depth -type f -exec rm -f /opt/{} \;
+find etc lib sbin var -depth -type d -exec rmdir /opt/{} \;
 
 exit 0
