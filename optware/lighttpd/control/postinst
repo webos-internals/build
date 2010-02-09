@@ -12,4 +12,6 @@ mkdir -p /etc/event.d/
 cp $IPKG_OFFLINE_ROOT/etc/event.d/$APPID /etc/event.d/$APPID
 /sbin/start $APPID
 
+mkdir -p /media/internal/www
+
 exit 0
