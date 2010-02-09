@@ -3,9 +3,10 @@ TITLE	 = pcre
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
 OPT_VER  = 8.00-1
-VERSION  = 8.0.0-1
+VERSION  = 8.0.0-2
 HOMEPAGE = http://www.pcre.org/
 DESCRIPTION = The PCRE library is a set of functions that implement regular expression pattern matching using the same syntax and semantics as Perl 5.
+CHANGELOG = 8.0.0-2: Made compatible with the Emergency Service Enabler to survive doctoring.
 TYPE	 = Optware
 CATEGORY = Libraries
 ICON	 = http://www.webos-internals.org/images/5/5f/Icon_WebOSInternals_Base_Optware.png
@@ -21,5 +22,12 @@ include ../../support/download.mk
 include ../../support/optware.mk
 
 build/%.built-${VERSION} : build/%.unpacked
-	rm -rf build/$*/opt/bin build/$*/opt/share
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/bin
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/share
+	rm -f build/$*/usr/palm/applications/${APP_ID}/opt/lib/libpcre.so.0
+	rm -f build/$*/usr/palm/applications/${APP_ID}/opt/lib/libpcre.so
+	rm -f build/$*/usr/palm/applications/${APP_ID}/opt/lib/libpcrecpp.so.0
+	rm -f build/$*/usr/palm/applications/${APP_ID}/opt/lib/libpcrecpp.so
+	rm -f build/$*/usr/palm/applications/${APP_ID}/opt/lib/libpcreposix.so.0
+	rm -f build/$*/usr/palm/applications/${APP_ID}/opt/lib/libpcreposix.so
 	touch $@
