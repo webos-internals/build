@@ -1,5 +1,12 @@
 #!/bin/sh
 
+APPID=mobi.optware.ez-ipupdate
+
+# Symlink files into /opt
+cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
+find bin -type d -exec mkdir -p /opt/{} \;
+find bin -type f -exec ln -sf $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt/{} /opt/{} \;
+
 # Install the ip-up.d script
 rm -f /etc/ppp/ip-up.d/50mobi-optware-ez-ipupdate
 mkdir -p /etc/ppp/ip-up.d/

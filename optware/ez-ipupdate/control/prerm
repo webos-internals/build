@@ -1,9 +1,16 @@
 #!/bin/sh
 
+APPID=mobi.optware.ez-ipupdate
+
 # Remove the ip-up.d script
 rm -f /etc/ppp/ip-up.d/50mobi-optware-ez-ipupdate
 
 # Remove the cache file
 rm -f /opt/var/run/ez-ipupdate.cache
+
+# Remove files from /opt
+cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
+find bin -depth -type f -exec rm -f /opt/{} \;
+find bin -depth -type d -exec rmdir /opt/{} \;
 
 exit 0
