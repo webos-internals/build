@@ -11,7 +11,11 @@ CHANGELOG = 3.0.0: initial public test release
 CATEGORY = Games
 ICON	= http://www.webos-internals.org/images/0/0e/Stella_icon.png
 LICENSE  = GPL
-SCREENSHOTS = [\"http://www.webos-internals.org/images/0/0e/Stella_icon.png\", \"http://www.webos-internals.org/images/0/0e/Stella_icon.png\"]
+SCREENSHOTS = [\"http://www.webos-internals.org/images/2/22/Romlauncher.png\",\
+               \"http://www.webos-internals.org/images/9/91/Stella_About.png\",\
+               \"http://www.webos-internals.org/images/3/34/Stella_Settings.png\",\
+               \"http://www.webos-internals.org/images/2/2c/Mario_Bros._(1983)_(Atari).png\",\
+               \"http://www.webos-internals.org/images/6/6a/Quadrun_(1983)_(Atari)_(Prototype).png\"]
 
 SRC_GIT = git://git.webos-internals.org/games/stella.git
 
