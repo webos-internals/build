@@ -3,6 +3,7 @@ APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 VERSION  = 0.0.1
 STELLAVERSION = 3.0
+DEPENDS  = org.webosinternals.upstartmgr
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Stella
 MAINTAINER = debilater
 TITLE   = Stella Atari 2600 VCS Emulator 3.0
@@ -22,10 +23,10 @@ include ../../support/package.mk
 
 include ../../support/download.mk
 
-build/.unpack: ${DL_DIR}/${NAME}-${STELLAVERSION}.tar.gz
+build/.unpack: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src/
-	tar -C build/src -xf ${DL_DIR}/${NAME}-${STELLAVERSION}.tar.gz
+	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mv build/src/binaries build/binaries
 	touch $@
 
@@ -34,10 +35,6 @@ build/.built-${VERSION}: build/armv7.built-${VERSION}
 
 build/%.built-${VERSION}: build/.unpack
 	rm -f $@
-	mkdir -p build/$*/media/internal/stella/config
-	rm -rf build/$*/media/internal/stella/config/*
-	mkdir -p build/$*/media/internal/stella/roms
-	mkdir -p build/$*/media/internal/stella/screenshots
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/bin
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
