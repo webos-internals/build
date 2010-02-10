@@ -1,14 +1,13 @@
 NAME     = stella
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.0.1
-STELLAVERSION = 3.0
+VERSION  = 3.0.0
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Stella
 MAINTAINER = debilater
 TITLE   = Stella Atari 2600 VCS Emulator 3.0
 TYPE	= Application
 DESCRIPTION = Stella is a multi-platform Atari 2600 VCS emulator ported to webOS.<br>Official wiki <a href="http://www.webos-internals.org/wiki/Application:Stella">here</a> (Please read it!).<br>If you like this game, please consider <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=10505897">donating</a>.  All donations go back into development.
-CHANGELOG = 0.0.1: initial public test release
+CHANGELOG = 3.0.0: initial public test release
 CATEGORY = Games
 ICON	= http://www.webos-internals.org/images/0/0e/Stella_icon.png
 LICENSE  = GPL
@@ -22,10 +21,10 @@ include ../../support/package.mk
 
 include ../../support/download.mk
 
-build/.unpack: ${DL_DIR}/${NAME}-${STELLAVERSION}.tar.gz
+build/.unpack: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src/
-	tar -C build/src -xf ${DL_DIR}/${NAME}-${STELLAVERSION}.tar.gz
+	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mv build/src/binaries build/binaries
 	touch $@
 
