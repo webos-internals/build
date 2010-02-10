@@ -46,6 +46,7 @@ build/%/CONTROL/postinst:
 	rm -f $@
 	mkdir -p build/$*/CONTROL
 	install -m 0775 build/src/control/postinst build/$*/CONTROL
+	install -m 0775 build/src/control/prerm build/$*/CONTROL
 	chmod ugo+x $@
 
 .PHONY: clobber
