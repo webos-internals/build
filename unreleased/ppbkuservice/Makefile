@@ -1,12 +1,12 @@
 NAME     = ppbkuservice
 CLASS    = PPBkuService
 APP_ID   = com.tntservices.${NAME}
-VERSION  = 0.2.0
+VERSION  = 0.3.0
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:BackupUtility
 MAINTAINER = TNT Services <Drewp9@yahoo.com>
 TITLE	 = Backup Utility Service
 DESCRIPTION = The Backup Utility Service is a back-end interface for the Palm Pre Backup Utility application.  It is not an application in itself and does not appear in the launcher when installed.
-CHANGELOG = 0.2.0: Fixed install scripts for webOS 1.3.5 and later.<br>0.1.1124: Updated to support file picker on restore.<br>0.1.1116: First public alpha test version.
+CHANGELOG = 0.3.0: Removed the dependency on GNU Tar, since it is now in the Palm base firmware.<br>0.2.0: Fixed install scripts for webOS 1.3.5 and later.<br>0.1.1124: Updated to support file picker on restore.<br>0.1.1116: First public alpha test version.
 TYPE	 = Service
 CATEGORY = Luna
 ICON	= http://www.webos-internals.org/images/5/55/Archive.png
