@@ -1,0 +1,39 @@
+#!/bin/sh
+PACKAGE=org.webosinternals.emergency-patch-installer
+PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
+PATCH_LOG=/media/internal/webos-patches.log
+
+if [ ! -e $PATCH_LOG ]
+then
+  touch $PATCH_LOG
+  echo "******* Patch Log Created by EPI $(date) ************" >> $PATCH_LOG
+fi
+
+echo "" >> $PATCH_LOG
+echo "------------------------------------------------------" >> $PATCH_LOG
+echo "Emergency Patch Installer $(date)" >> $PATCH_LOG
+echo "------------------------------------------------------" >> $PATCH_LOG
+
+if [ "$IPKG_OFFLINE_ROOT" = "" ]
+then
+  echo "ERROR: IPKG_OFFLINE_ROOT must be supplied to the postinst" | tee -a $PATCH_LOG
+  exit 1
+fi
+
+if [ ! -d $PATCH_CONTROL_DIR ]
+then
+  echo "NOTE: No patches found!" | tee -a $PATCH_LOG
+  ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
+  exit 1
+fi
+
+for i in `ls $PATCH_CONTROL_DIR/*.patch`
+do
+  patch=`basename $i .patch`
+  ipkg -o $IPKG_OFFLINE_ROOT install org.webosinternals.patches.$patch
+done
+
+echo "DONE" | tee -a $PATCH_LOG
+
+ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
+exit 0
