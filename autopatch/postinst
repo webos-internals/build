@@ -26,7 +26,7 @@ IPKG_INFO_DIR=/usr/lib/ipkg/info
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
 PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
 PATCH_LOG=/media/internal/webos-patches.log
-VERSION=aupt-1
+VERSION=aupt-2
 
 do_failure() {
   echo "*** FAILED ***" >> $PATCH_LOG
