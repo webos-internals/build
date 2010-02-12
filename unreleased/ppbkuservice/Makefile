@@ -22,7 +22,7 @@ CLASSFILES := $(addsuffix .class,$(addprefix ${PACKAGEPATH}/,${CLASSES}))
 SRC_GIT = git://git.webos-internals.org/services/ppbkuservice.git
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_armv6.ipk ipkgs/${APP_ID}_${VERSION}_armv7.ipk
+package: ipkgs/${APP_ID}_${VERSION}_all.ipk
 include ../../support/package.mk
 
 include ../../support/download.mk
@@ -51,30 +51,27 @@ LUNAPATH = usr/lib/luna/java
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/armv6.built build/armv7.built
-	touch $@
-
-build/%.built: build/src/${PACKAGEPATH}/${CLASS}.java
+build/.built-${VERSION}: build/src/${PACKAGEPATH}/${CLASS}.java
 	rm -f $@
 	( cd build/src ; ant build jar )
-	mkdir -p build/$*/${LUNAPATH}
-	install -m 644 build/src/${APP_ID}.jar build/$*/${LUNAPATH}/
-	mkdir -p build/$*/usr/share/dbus-1/system-services
-	install -m 644 ${SERVICEFILES} build/$*/usr/share/dbus-1/system-services/
-	mkdir -p build/$*/etc/event.d
-	install -m 644 build/src/upstart/${APP_ID} build/$*/etc/event.d/${APP_ID}
+	mkdir -p build/all/${LUNAPATH}
+	install -m 644 build/src/${APP_ID}.jar build/all/${LUNAPATH}/
+	mkdir -p build/all/usr/share/dbus-1/system-services
+	install -m 644 ${SERVICEFILES} build/all/usr/share/dbus-1/system-services/
+	mkdir -p build/all/etc/event.d
+	install -m 644 build/src/upstart/${APP_ID} build/all/etc/event.d/${APP_ID}
 	touch $@
 
-build/%/CONTROL/postinst:
+build/all/CONTROL/postinst:
 	rm -f $@
-	mkdir -p build/$*/CONTROL
-	install -m 0775 build/src/control/postinst build/$*/CONTROL
+	mkdir -p build/all/CONTROL
+	install -m 0775 build/src/control/postinst build/all/CONTROL
 	chmod ugo+x $@
 
-build/%/CONTROL/prerm:
+build/all/CONTROL/prerm:
 	rm -f $@
-	mkdir -p build/$*/CONTROL
-	install -m 0775 build/src/control/prerm build/$*/CONTROL
+	mkdir -p build/all/CONTROL
+	install -m 0775 build/src/control/prerm build/all/CONTROL
 	chmod ugo+x $@
 
 clobber::
