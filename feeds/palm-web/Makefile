@@ -17,10 +17,10 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-NAME     = palm-web-updates
+NAME     = palm-web
 HOMEPAGE = http://www.palm.com/
 
-SRC_XML = http://developer.palm.com/rss/W/appcatalog.update.rss.xml
+SRC_XML = http://developer.palm.com/rss/W/appcatalog.rss.xml
 
 .PHONY: package
 package: build/.built

@@ -17,10 +17,10 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-NAME     = palm-web
+NAME     = palm-beta-updates
 HOMEPAGE = http://www.palm.com/
 
-SRC_XML = http://developer.palm.com/rss/W/appcatalog.rss.xml
+SRC_XML = http://developer.palm.com/rss/B/appcatalog.update.rss.xml
 
 .PHONY: package
 package: build/.built
@@ -34,7 +34,7 @@ build/.unpacked build/.built: ${DL_DIR}/${NAME}-feed.xml
 	rm -f $@
 	mkdir -p build ipkgs
 	sed -i.orig -e 's/& /\&amp; /g' ${DL_DIR}/${NAME}-feed.xml
-	../../scripts/palm-scraper.py ${DL_DIR}/${NAME}-feed.xml Web > build/Metadata
+	../../scripts/palm-scraper.py ${DL_DIR}/${NAME}-feed.xml Beta > build/Metadata
 	touch $@
 
 .PHONY: clobber
