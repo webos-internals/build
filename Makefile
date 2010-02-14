@@ -34,7 +34,8 @@ index:  webos-internals-index \
 optware-index: ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv6/Packages ipkgs/optware/armv7/Packages
 
 .PHONY: palm-index
-palm-index: ipkgs/palm-catalog/Packages ipkgs/palm-beta/Packages ipkgs/palm-web/Packages
+palm-index: ipkgs/palm-catalog/Packages ipkgs/palm-beta/Packages ipkgs/palm-web/Packages \
+	    ipkgs/palm-catalog-updates/Packages ipkgs/palm-beta-updates/Packages ipkgs/palm-web-updates/Packages
 
 .PHONY: patches-index
 patches-index: ipkgs/webos-patches/1.3.5/Packages ipkgs/webos-patches/1.4.0/Packages
@@ -98,7 +99,7 @@ ipkgs/regression-testing/%/Packages: package-regression
 ipkgs/palm-%/Packages: package-feeds
 	rm -rf ipkgs/palm-$*
 	mkdir -p ipkgs/palm-$*
-	cat feeds/palm-$*-base/build/Metadata feeds/palm-$*/build/Metadata > ipkgs/palm-$*/Packages
+	cp feeds/palm-$*/build/Metadata ipkgs/palm-$*/Packages
 	gzip -c ipkgs/palm-$*/Packages > ipkgs/palm-$*/Packages.gz
 
 ipkgs/%/Packages: package-feeds
