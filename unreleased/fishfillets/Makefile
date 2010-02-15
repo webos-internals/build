@@ -20,61 +20,43 @@ SCREENSHOTS = [\"http://www.webos-internals.org/images/6/6b/Fishfillets-level.pn
 SRC_GIT = git://git.webos-internals.org/games/fishfillets.git
 
 
-
-DEPENDS = libsdl libsdl-mixer libsdl-ttf libsdl-image lua
-SRC_TGZ = http://prdownloads.sourceforge.net/fillets/fillets-ng-0.9.2.tar.gz?download
-DATATGZ = http://prdownloads.sourceforge.net/fillets/fillets-ng-data-0.9.2.tar.gz?download
-APP_DIR = /media/cryptofs/apps/usr/palm/applications/org.webosinternals.fishfillets
+.PHONY: package
+package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk
+include ../../support/package.mk
 
 include ../../support/download.mk
 
-.PHONY: unpack
-unpack: build/.unpacked
-
-${DL_DIR}/${NAME}-${VERSION}.tar.gz:
-	curl -f -R -L -o ${DL_DIR}/${NAME}-${VERSION}.tar.gz ${SRC_TGZ}
-
-${DL_DIR}/${NAME}-data-${VERSION}.tar.gz:
-	curl -f -R -L -o ${DL_DIR}/${NAME}-data-${VERSION}.tar.gz ${DATATGZ}
-
-build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz ${DL_DIR}/${NAME}-data-${VERSION}.tar.gz
+build/.unpack: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
-	mkdir -p build
-	tar -C build -z -x -f $<
-	mv build/fillets-ng-${VERSION} build/src
-	tar -C build -z -x -f ${DL_DIR}/${NAME}-data-${VERSION}.tar.gz
-	mv build/fillets-ng-data-${VERSION} build/data
+	mkdir -p build/src/
+	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	mv build/src/binaries build/binaries
 	touch $@
 
-include ../../support/staging.mk
-
-include ../../support/cross-compile.mk
-
-stage:: build/armv7.built
-
-build/.patched:
-	cp -r modified-${VERSION}/* build/src/src/
+build/.built-${VERSION}: build/armv7.built-${VERSION}
 	touch $@
 
-build/.configured:
+build/%.built-${VERSION}: build/.unpack
 	rm -f $@
-	( cd build/src ; ${SB2} LDFLAGS="\"-L/usr/local/lib -Wl,-rpath-link,/usr/local/lib -Wl,-rpath,/usr/local/lib\" PATH=/usr/local/bin:${PATH}" \
-	./configure --prefix=${APP_DIR} --disable-sdltest --disable-dependency-tracking --with-sdl-prefix=/usr/local )
+	mkdir -p build/$*/usr/palm/applications/${APP_ID}/bin
+	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/control
+	install -m 755 build/binaries/$*/fillets build/$*/usr/palm/applications/${APP_ID}/bin/
 	touch $@
 
-build/.built: build/.unpacked build/.configured build/.patched
-	( cd build/src ; ${SB2} cp `which libtool` . )
-	( cd build/src ; ${SB2} make && ${SB2} make install )
-	touch $@
+build/%/CONTROL/postinst:
+	rm -f $@
+	mkdir -p build/$*/CONTROL
+	install -m 0775 build/src/control/postinst build/$*/CONTROL
+	chmod ugo+x $@
 
-build/%.built: build/.unpacked build/.configured build/.built
-	mkdir -p ${APP_DIR}/share/games/fillets-ng
-	cp -r build/data/* ${APP_DIR}/share/games/fillets-ng/
-	touch $@
+build/%/CONTROL/prerm:
+	rm -f $@
+	mkdir -p build/$*/CONTROL
+	install -m 0775 build/src/control/prerm build/$*/CONTROL
+	chmod ugo+x $@
 
-clean:
-	( cd build/src/${NAME} ; ${SB2} make clean )
-
-
+.PHONY: clobber
 clobber::
 	rm -rf build
