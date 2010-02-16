@@ -30,7 +30,7 @@ build/.built-${VERSION} build/.unpack: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mkdir -p build/all/etc/event.d
 	install -m 644 build/src/upstart/${APP_ID} build/all/etc/event.d/${APP_ID}
 	touch $@
-	
+
 build/%/CONTROL/postinst:
 	rm -f $@
 	mkdir -p build/$*/CONTROL
