@@ -63,6 +63,31 @@ fi
 
 if [ -e $PATCH_CONTROL_DIR/backups ]
 then
+  touch $PATCH_CONTROL_DIR/file_list
+  rm -f $PATCH_CONTROL_DIR/translated_backups
+  cat $PATCH_CONTROL_DIR/backups | tr '\0' ' ' > $PATCH_CONTROL_DIR/translated_backups
+  while read inp
+  do
+    patch_technology=`echo $inp | awk '{print $(NF)}' |grep aupt`
+    if [ "$patch_technology" = "" ]
+    then
+      file=`echo $inp | awk '{print $(NF)}'`
+    else
+      file=`echo $inp | awk '{print $(NF-1)}'`
+    fi
+
+    if [ -e $file ]
+    then
+      echo "$file $patch_technology" >> $PATCH_CONTROL_DIR/file_list
+    fi
+  done < $PATCH_CONTROL_DIR/translated_backups
+
+  rm -f $PATCH_CONTROL_DIR/translated_backups
+  rm -f $PATCH_CONTROL_DIR/backups
+fi
+
+if [ -e $PATCH_CONTROL_DIR/file_list ]
+then
   while read i
   do
     file=`echo $i | awk '{print $1}'`
@@ -98,7 +123,7 @@ then
         mv $file.webosinternals.orig $file
       fi
     fi
-  done < $PATCH_CONTROL_DIR/backups
+  done < $PATCH_CONTROL_DIR/file_list
 fi
 
 echo "DONE" | tee -a $PATCH_LOG
