@@ -59,7 +59,7 @@ do
     patch_technology="apt"
   fi
 
-  if [ "$patch_technology" != "aupt-1" ] && [ "$patch_technology" != "aupt-3" ]
+  if [ "$patch_technology" != "aupt-3" ]
   then
     OLD_PACKAGES="$OLD_PACKAGES\tPackage: $package $patch_technology"
     failed=1
@@ -68,7 +68,7 @@ done < $PATCH_PACKAGES_LIST
 
 if [ "$OLD_PACKAGES" != "" ]
 then
-  echo "Packages installed with unsupported patch technology" | tee -a $PATCH_LOG 1>&2
+  echo "Detected patches that must be removed and reinstalled in order to maintain correct handling of auto-update and OTA compatibility:" | tee -a $PATCH_LOG 1>&2
   echo -e $OLD_PACKAGES | tee -a $PATCH_LOG 1>&2
   echo  "" | tee -a $PATCH_LOG 1>&2
 else
@@ -107,7 +107,7 @@ else
     then
       NO_BACKUP_FILES="$NO_BACKUP_FILES\tFile: $file\n"
       failed=1
-    elif [ "$patch_technology" != "aupt-1" ] && [ "$patch_technology" != "aupt-3" ]
+    elif [ "$patch_technology" != "aupt-3" ]
     then
       OLD_BACKUP_FILES="$OLD_BACKUP_FILES\tFile: $file $patch_technology\n"
       failed=1
@@ -116,14 +116,14 @@ else
 
   if [ "$NO_BACKUP_FILES" != "" ]
   then
-    echo "Modified files with no known patch backups" | tee -a $PATCH_LOG 1>&2
+    echo "Detected stock files modified via a method other than supported patch technologies:" | tee -a $PATCH_LOG 1>&2
     echo -e $NO_BACKUP_FILES | tee -a $PATCH_LOG 1>&2
     echo  "" | tee -a $PATCH_LOG 1>&2
   fi
 
   if [ "$OLD_BACKUP_FILES" != "" ]
   then
-    echo "Modified files with outdated patch technology" | tee -a $PATCH_LOG 1>&2
+    echo "Detected stock files modified with prior versions of patch technology:" | tee -a $PATCH_LOG 1>&2
     echo -e $OLD_BACKUP_FILES | tee -a $PATCH_LOG 1>&2
     echo  "" | tee -a $PATCH_LOG 1>&2
   fi
