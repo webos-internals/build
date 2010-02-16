@@ -4,6 +4,7 @@ PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
 PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
 PATCH_LOG=/media/internal/webos-patches.log
 IPKG_INFO_DIR=/usr/lib/ipkg/info
+failed=0
 
 if [ ! -e $PATCH_LOG ]
 then
@@ -47,49 +48,6 @@ then
   rm -f $PATCH_CONTROL_DIR/backups
 fi
 
-rm -f /tmp/webosinternals-md5sums
-rm -f /tmp/webosinternals-md5sums.failed
-cat $IPKG_INFO_DIR/*.md5sums > /tmp/webosinternals-md5sums
-sed -i -e /.var.lib.update.install-first-update.sh/d /tmp/webosinternals-md5sums
-sed -i -e /.var.lib.update.install-first.sh/d /tmp/webosinternals-md5sums
-sed -i -e /.usr.local.bin.wifi-mfg-labtool/d /tmp/webosinternals-md5sums
-
-if [ -e /usr/bin/md5sum ]
-then
-  cd / && /usr/bin/md5sum -c /tmp/webosinternals-md5sums 2>>/dev/null |grep -v OK > /tmp/webosinternals-md5sums.failed
-fi
-
-failed=0
-NO_BACKUP_FILES=""
-OLD_BACKUP_FILES=""
-while read inp
-do
-  backup_file=""
-  patch_technology=""
-  file=`echo $inp |awk -F: '{print $1}' |cut -d '.' -f2-`
-
-  if [ -e $PATCH_CONTROL_DIR/file_list ]
-  then
-    backup_file=`grep -h $file $PATCH_CONTROL_DIR/file_list`
-    patch_technology=`echo $backup_file | awk '{print $2}'`
-  fi
-
-  if [ "$patch_technology" = "" ]
-  then
-    patch_technology="apt"
-  fi
-
-  if [ "$backup_file" = "" ]
-  then
-    NO_BACKUP_FILES="$NO_BACKUP_FILES\tFile: $file\n"
-    failed=1
-  elif [ "$patch_technology" != "aupt-1" ] && [ "$patch_technology" != "aupt-3" ]
-  then
-    OLD_BACKUP_FILES="$OLD_BACKUP_FILES\tFile: $file $patch_technology\n"
-    failed=1
-  fi
-done < /tmp/webosinternals-md5sums.failed
-
 OLD_PACKAGES=""
 while read inp
 do
@@ -108,25 +66,67 @@ do
   fi
 done < $PATCH_PACKAGES_LIST
 
-if [ "$NO_BACKUP_FILES" != "" ]
-then
-  echo "Modified files with outdated patch technology" | tee -a $PATCH_LOG 1>&2
-  echo -e $NO_BACKUP_FILES | tee -a $PATCH_LOG 1>&2
-  echo  "" | tee -a $PATCH_LOG 1>&2
-fi
-
-if [ "$OLD_BACKUP_FILES" != "" ]
-then
-  echo "Modified files with no known patch backups" | tee -a $PATCH_LOG 1>&2
-  echo -e $OLD_BACKUP_FILES | tee -a $PATCH_LOG 1>&2
-  echo  "" | tee -a $PATCH_LOG 1>&2
-fi
-
 if [ "$OLD_PACKAGES" != "" ]
 then
-  echo "Packages installed with old patch technology" | tee -a $PATCH_LOG 1>&2
+  echo "Packages installed with unsupported patch technology" | tee -a $PATCH_LOG 1>&2
   echo -e $OLD_PACKAGES | tee -a $PATCH_LOG 1>&2
   echo  "" | tee -a $PATCH_LOG 1>&2
+else
+  rm -f /tmp/webosinternals-md5sums
+  rm -f /tmp/webosinternals-md5sums.failed
+  cat $IPKG_INFO_DIR/*.md5sums > /tmp/webosinternals-md5sums
+  sed -i -e /.var.lib.update.install-first-update.sh/d /tmp/webosinternals-md5sums
+  sed -i -e /.var.lib.update.install-first.sh/d /tmp/webosinternals-md5sums
+  sed -i -e /.usr.local.bin.wifi-mfg-labtool/d /tmp/webosinternals-md5sums
+
+  if [ -e /usr/bin/md5sum ]
+  then
+    cd / && /usr/bin/md5sum -c /tmp/webosinternals-md5sums 2>>/dev/null |grep -v OK > /tmp/webosinternals-md5sums.failed
+  fi
+
+  NO_BACKUP_FILES=""
+  OLD_BACKUP_FILES=""
+  while read inp
+  do
+    backup_file=""
+    patch_technology=""
+    file=`echo $inp |awk -F: '{print $1}' |cut -d '.' -f2-`
+
+    if [ -e $PATCH_CONTROL_DIR/file_list ]
+    then
+      backup_file=`grep -h $file $PATCH_CONTROL_DIR/file_list`
+      patch_technology=`echo $backup_file | awk '{print $2}'`
+    fi
+
+    if [ "$patch_technology" = "" ]
+    then
+      patch_technology="apt"
+    fi
+
+    if [ "$backup_file" = "" ]
+    then
+      NO_BACKUP_FILES="$NO_BACKUP_FILES\tFile: $file\n"
+      failed=1
+    elif [ "$patch_technology" != "aupt-1" ] && [ "$patch_technology" != "aupt-3" ]
+    then
+      OLD_BACKUP_FILES="$OLD_BACKUP_FILES\tFile: $file $patch_technology\n"
+      failed=1
+    fi
+  done < /tmp/webosinternals-md5sums.failed
+
+  if [ "$NO_BACKUP_FILES" != "" ]
+  then
+    echo "Modified files with outdated patch technology" | tee -a $PATCH_LOG 1>&2
+    echo -e $NO_BACKUP_FILES | tee -a $PATCH_LOG 1>&2
+    echo  "" | tee -a $PATCH_LOG 1>&2
+  fi
+
+  if [ "$OLD_BACKUP_FILES" != "" ]
+  then
+    echo "Modified files with no known patch backups" | tee -a $PATCH_LOG 1>&2
+    echo -e $OLD_BACKUP_FILES | tee -a $PATCH_LOG 1>&2
+    echo  "" | tee -a $PATCH_LOG 1>&2
+  fi
 fi
 
 ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE

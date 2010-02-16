@@ -1,9 +1,9 @@
 TYPE = Linux Application
 NAME = emergency-file-verification
-VERSION = 1.0.0
+VERSION = 1.1.0
 TITLE = Emergency File Verification
 MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>
-DESCRIPTION = Verifies all files are stock or modified by working aupt technology
+DESCRIPTION = Verifies all patch packages are installed with supported patch technology and then verifies all files are stock or modified by working aupt technology
 APP_ID = org.webosinternals.${NAME}
 SIGNER = org.webosinternals
 HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS
