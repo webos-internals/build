@@ -116,14 +116,14 @@ else
 
   if [ "$NO_BACKUP_FILES" != "" ]
   then
-    echo "Modified files with outdated patch technology" | tee -a $PATCH_LOG 1>&2
+    echo "Modified files with no known patch backups" | tee -a $PATCH_LOG 1>&2
     echo -e $NO_BACKUP_FILES | tee -a $PATCH_LOG 1>&2
     echo  "" | tee -a $PATCH_LOG 1>&2
   fi
 
   if [ "$OLD_BACKUP_FILES" != "" ]
   then
-    echo "Modified files with no known patch backups" | tee -a $PATCH_LOG 1>&2
+    echo "Modified files with outdated patch technology" | tee -a $PATCH_LOG 1>&2
     echo -e $OLD_BACKUP_FILES | tee -a $PATCH_LOG 1>&2
     echo  "" | tee -a $PATCH_LOG 1>&2
   fi
