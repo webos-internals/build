@@ -331,7 +331,7 @@ do
 
   if [ "$palm_md5sum" = "" ]
   then
-    echo "File not found in packages_list, checking all *.md5sums" >> $PATCH_LOG
+    echo "File not found in package_list, checking all *.md5sums" >> $PATCH_LOG
     md5sum_line=`grep -h $file $IPKG_INFO_DIR/*.md5sums`
     if [ "$md5sum_line" != "" ]
     then
