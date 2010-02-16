@@ -83,7 +83,7 @@ do
   then
     NO_BACKUP_FILES="$NO_BACKUP_FILES\tFile: $file\n"
     failed=1
-  elif [ "$patch_technology" != "aupt-3" ]
+  elif [ "$patch_technology" != "aupt-1" ] && [ "$patch_technology" != "aupt-3" ]
   then
     OLD_BACKUP_FILES="$OLD_BACKUP_FILES\tFile: $file $patch_technology\n"
     failed=1
