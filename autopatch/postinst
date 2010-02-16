@@ -26,7 +26,7 @@ IPKG_INFO_DIR=/usr/lib/ipkg/info
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
 PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
 PATCH_LOG=/media/internal/webos-patches.log
-VERSION=aupt-2
+VERSION=aupt-3
 
 do_failure() {
   echo "*** FAILED ***" >> $PATCH_LOG
@@ -180,9 +180,34 @@ then
   mkdir -p $PATCH_CONTROL_DIR || do_failure
 fi
 
-if [ ! -e $PATCH_CONTROL_DIR/backups ]
+if [ -e $PATCH_CONTROL_DIR/backups ]
 then
-  touch $PATCH_CONTROL_DIR/backups || do_failure
+  touch $PATCH_CONTROL_DIR/file_list
+  rm -f $PATCH_CONTROL_DIR/translated_backups
+  cat $PATCH_CONTROL_DIR/backups | tr '\0' ' ' > $PATCH_CONTROL_DIR/translated_backups
+  while read inp
+  do
+    patch_technology=`echo $inp | awk '{print $(NF)}' |grep aupt`
+    if [ "$patch_technology" = "" ]
+    then
+      file=`echo $inp | awk '{print $(NF)}'`
+    else
+      file=`echo $inp | awk '{print $(NF-1)}'`
+    fi
+
+    if [ -e $file ]
+    then
+      echo "$file $patch_technology" >> $PATCH_CONTROL_DIR/file_list
+    fi
+  done < $PATCH_CONTROL_DIR/translated_backups
+
+  rm -f $PATCH_CONTROL_DIR/translated_backups
+  rm -f $PATCH_CONTROL_DIR/backups
+fi
+
+if [ ! -e $PATCH_CONTROL_DIR/file_list ]
+then
+  touch $PATCH_CONTROL_DIR/file_list || do_failure
 fi
 
 if [ -e $PATCH_CONTROL_DIR/packages ]
@@ -304,6 +329,21 @@ do
     done
   fi
 
+  if [ "$palm_md5sum" = "" ]
+  then
+    echo "File not found in package_list, checking all *.md5sums" >> $PATCH_LOG
+    md5sum_line=`grep -h $file $IPKG_INFO_DIR/*.md5sums`
+    if [ "$md5sum_line" != "" ]
+    then
+      echo "  FOUND" >> $PATCH_LOG
+      echo "  $md5sum_line" >> $PATCH_LOG
+      echo $md5sum_line >> $APP_DIR/md5sums
+      palm_md5sum=`echo $md5sum_line | awk '{print $1}'`
+    else
+      echo "  File not found in md5sums, most likely not a stock WebOS file" >> $PATCH_LOG
+    fi
+  fi
+
   if [ ! -e $file.webosinternals.orig ]
   then
     if [ ! -e $file ]
@@ -316,25 +356,26 @@ do
       echo "Backup file $file" >> $PATCH_LOG
       echo "  `md5sum $file.webosinternals.orig`" >> $PATCH_LOG
     fi
+    created_backup="yes"
   elif [ -e $file ]
   then
     file_md5sum=`md5sum $file | awk '{print $1}'`
-
-    if [ "$palm_md5sum" = "" ]
-    then
-        palm_md5sum=`grep -h $file $IPKG_INFO_DIR/*.md5sums | awk '{print $1}'`
-    fi
 
     if [ "$file_md5sum" = "$palm_md5sum" ]
     then
       rm -f $file.webosinternals.orig
       cp $file $file.webosinternals.orig
+      created_backup="yes"
     fi
   fi
 
-  tmpvar=`echo $file | tr '/' '.'`
-  sed -i -e /$tmpvar/d $PATCH_CONTROL_DIR/backups
-  echo "$file $VERSION" >> $PATCH_CONTROL_DIR/backups
+  if [ "$created_backup" = "yes" ] || [ ! -s $file.webosinternals.orig ] || \
+     [ "`md5sum $file.webosinternals.orig`" = "$palm_md5sum" ]
+  then
+    tmpvar=`echo $file | tr '/' '.'`
+    sed -i -e /$tmpvar/d $PATCH_CONTROL_DIR/file_list
+    echo "$file $VERSION" >> $PATCH_CONTROL_DIR/file_list
+  fi
 done
 
 sed -i -e /`basename $APP_DIR`/d $PATCH_PACKAGES_LIST

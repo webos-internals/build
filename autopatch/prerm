@@ -26,7 +26,7 @@ IPKG_INFO_DIR=/usr/lib/ipkg/info
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
 PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
 PATCH_LOG=/media/internal/webos-patches.log
-VERSION=aupt-2
+VERSION=aupt-3
 
 do_failure() {
   echo "*** FAILED ***" >> $PATCH_LOG
@@ -91,7 +91,7 @@ check_for_ota() {
     if [ -e $APP_DIR/md5sums ]
     then
       orig_palm_md5sum=`grep -h $file $APP_DIR/md5sums | awk '{print $1}'`
-      echo "Palm md5sum when installed: $orig_palm_md5sum"
+      echo "Palm md5sum when installed: $orig_palm_md5sum" >> $PATCH_LOG
     fi
   
     if [ -e $APP_DIR/package_list ]
@@ -120,10 +120,12 @@ check_for_ota() {
       echo "  Existing file matches Palm md5sum: $file" >> $PATCH_LOG
       echo "  Remove backup" >> $PATCH_LOG
       rm -f $file.webosinternals.orig
-    elif [ "$palm_md5sum" != "$palm_orig_md5sum" ]
+    elif [ "$palm_md5sum" != "$orig_palm_md5sum" ]
     then
       orig_md5sum=`md5sum $file.webosinternals.orig | awk '{print $1}'`
       echo "  md5sum of Palm file has changed since installation, assuming OTA" >> $PATCH_LOG
+      echo "  palm_md5sum:      $palm_md5sum" >> $PATCH_LOG
+      echo "  orig_palm_md5sum: $orig_palm_md5sum" >> $PATCH_LOG
       if [ "$palm_md5sum" != "$orig_md5sum" ]
       then
         echo "  Remove backup" >> $PATCH_LOG
@@ -267,7 +269,7 @@ do
     echo "Remove backup" >> $PATCH_LOG
     tmpvar=`echo $file | tr '/' '.'`
     rm -f $file.webosinternals.orig
-    sed -i -e /\^'$tmpvar $VERSION'\$/d $PATCH_CONTROL_DIR/backups
+    sed -i -e /\^'$tmpvar $VERSION'\$/d $PATCH_CONTROL_DIR/file_list
   fi
 done
 

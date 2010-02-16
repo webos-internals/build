@@ -1,0 +1,133 @@
+#!/bin/sh
+PACKAGE=org.webosinternals.emergency-file-verification
+PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
+PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
+PATCH_LOG=/media/internal/webos-patches.log
+IPKG_INFO_DIR=/usr/lib/ipkg/info
+failed=0
+
+if [ ! -e $PATCH_LOG ]
+then
+  touch $PATCH_LOG
+  echo "******* Patch Log Created by EFV $(date) ************" >> $PATCH_LOG
+fi
+
+echo "" >> $PATCH_LOG
+echo "------------------------------------------------------" >> $PATCH_LOG
+echo "Emergency File Verification $(date)" >> $PATCH_LOG
+echo "------------------------------------------------------" >> $PATCH_LOG
+
+if [ "$IPKG_OFFLINE_ROOT" = "" ]
+then
+  echo "ERROR: IPKG_OFFLINE_ROOT must be supplied to the postinst" | tee -a $PATCH_LOG
+  exit 1
+fi
+
+if [ -e $PATCH_CONTROL_DIR/backups ]
+then
+  touch $PATCH_CONTROL_DIR/file_list
+  rm -f $PATCH_CONTROL_DIR/translated_backups
+  cat $PATCH_CONTROL_DIR/backups | tr '\0' ' ' > $PATCH_CONTROL_DIR/translated_backups
+  while read inp
+  do
+    patch_technology=`echo $inp | awk '{print $(NF)}' |grep aupt`
+    if [ "$patch_technology" = "" ]
+    then
+      file=`echo $inp | awk '{print $(NF)}'`
+    else
+      file=`echo $inp | awk '{print $(NF-1)}'`
+    fi
+
+    if [ -e $file ]
+    then
+      echo "$file $patch_technology" >> $PATCH_CONTROL_DIR/file_list
+    fi
+  done < $PATCH_CONTROL_DIR/translated_backups
+
+  rm -f $PATCH_CONTROL_DIR/translated_backups
+  rm -f $PATCH_CONTROL_DIR/backups
+fi
+
+OLD_PACKAGES=""
+while read inp
+do
+  package=`echo $inp |awk '{print $1}'`
+  patch_technology=`echo $inp |awk '{print $2}'`
+
+  if [ "$patch_technology" = "" ]
+  then
+    patch_technology="apt"
+  fi
+
+  if [ "$patch_technology" != "aupt-3" ]
+  then
+    OLD_PACKAGES="$OLD_PACKAGES\tPackage: $package $patch_technology"
+    failed=1
+  fi
+done < $PATCH_PACKAGES_LIST
+
+if [ "$OLD_PACKAGES" != "" ]
+then
+  echo "Detected patches that must be removed and reinstalled in order to maintain correct handling of auto-update and OTA compatibility:" | tee -a $PATCH_LOG 1>&2
+  echo -e $OLD_PACKAGES | tee -a $PATCH_LOG 1>&2
+  echo  "" | tee -a $PATCH_LOG 1>&2
+else
+  rm -f /tmp/webosinternals-md5sums
+  rm -f /tmp/webosinternals-md5sums.failed
+  cat $IPKG_INFO_DIR/*.md5sums > /tmp/webosinternals-md5sums
+  sed -i -e /.var.lib.update.install-first-update.sh/d /tmp/webosinternals-md5sums
+  sed -i -e /.var.lib.update.install-first.sh/d /tmp/webosinternals-md5sums
+  sed -i -e /.usr.local.bin.wifi-mfg-labtool/d /tmp/webosinternals-md5sums
+
+  if [ -e /usr/bin/md5sum ]
+  then
+    cd / && /usr/bin/md5sum -c /tmp/webosinternals-md5sums 2>>/dev/null |grep -v OK > /tmp/webosinternals-md5sums.failed
+  fi
+
+  NO_BACKUP_FILES=""
+  OLD_BACKUP_FILES=""
+  while read inp
+  do
+    backup_file=""
+    patch_technology=""
+    file=`echo $inp |awk -F: '{print $1}' |cut -d '.' -f2-`
+
+    if [ -e $PATCH_CONTROL_DIR/file_list ]
+    then
+      backup_file=`grep -h $file $PATCH_CONTROL_DIR/file_list`
+      patch_technology=`echo $backup_file | awk '{print $2}'`
+    fi
+
+    if [ "$patch_technology" = "" ]
+    then
+      patch_technology="apt"
+    fi
+
+    if [ "$backup_file" = "" ]
+    then
+      NO_BACKUP_FILES="$NO_BACKUP_FILES\tFile: $file\n"
+      failed=1
+    elif [ "$patch_technology" != "aupt-3" ]
+    then
+      OLD_BACKUP_FILES="$OLD_BACKUP_FILES\tFile: $file $patch_technology\n"
+      failed=1
+    fi
+  done < /tmp/webosinternals-md5sums.failed
+
+  if [ "$NO_BACKUP_FILES" != "" ]
+  then
+    echo "Detected stock files modified via a method other than supported patch technologies:" | tee -a $PATCH_LOG 1>&2
+    echo -e $NO_BACKUP_FILES | tee -a $PATCH_LOG 1>&2
+    echo  "" | tee -a $PATCH_LOG 1>&2
+  fi
+
+  if [ "$OLD_BACKUP_FILES" != "" ]
+  then
+    echo "Detected stock files modified with prior versions of patch technology:" | tee -a $PATCH_LOG 1>&2
+    echo -e $OLD_BACKUP_FILES | tee -a $PATCH_LOG 1>&2
+    echo  "" | tee -a $PATCH_LOG 1>&2
+  fi
+fi
+
+ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
+exit $failed
