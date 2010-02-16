@@ -1,8 +1,8 @@
 #!/bin/sh
-PACKAGE=org.webosinternals.emergency-patch-recovery
+PACKAGE=org.webosinternals.emergency-file-verification
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
 PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
-PATCH_LOG=/media/internal/webos-patches.log2
+PATCH_LOG=/media/internal/webos-patches.log
 IPKG_INFO_DIR=/usr/lib/ipkg/info
 
 if [ ! -e $PATCH_LOG ]
@@ -90,6 +90,24 @@ do
   fi
 done < /tmp/webosinternals-md5sums.failed
 
+OLD_PACKAGES=""
+while read inp
+do
+  package=`echo $inp |awk '{print $1}'`
+  patch_technology=`echo $inp |awk '{print $2}'`
+
+  if [ "$patch_technology" = "" ]
+  then
+    patch_technology="apt"
+  fi
+
+  if [ "$patch_technology" != "aupt-1" ] && [ "$patch_technology" != "aupt-3" ]
+  then
+    OLD_PACKAGES="$OLD_PACKAGES\tPackage: $package $patch_technology"
+    failed=1
+  fi
+done < $PATCH_PACKAGES_LIST
+
 if [ "$NO_BACKUP_FILES" != "" ]
 then
   echo "Modified files with outdated patch technology" | tee -a $PATCH_LOG 1>&2
@@ -104,5 +122,12 @@ then
   echo  "" | tee -a $PATCH_LOG 1>&2
 fi
 
-#ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
+if [ "$OLD_PACKAGES" != "" ]
+then
+  echo "Packages installed with old patch technology" | tee -a $PATCH_LOG 1>&2
+  echo -e $OLD_PACKAGES | tee -a $PATCH_LOG 1>&2
+  echo  "" | tee -a $PATCH_LOG 1>&2
+fi
+
+ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
 exit $failed
