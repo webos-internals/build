@@ -42,7 +42,7 @@ build/%.built-${VERSION}: build/.unpack
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/control
-	install -m 755 build/binaries/$*/fillets build/$*/usr/palm/applications/${APP_ID}/bin/
+	install -m 755 build/binaries/$*/${NAME} build/$*/usr/palm/applications/${APP_ID}/bin/
 	touch $@
 
 build/%/CONTROL/postinst:
