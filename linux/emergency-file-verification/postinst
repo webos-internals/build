@@ -123,7 +123,7 @@ else
 
   if [ "$OLD_BACKUP_FILES" != "" ]
   then
-    echo "Detected stock files modified with prior versions of patch technology:" | tee -a $PATCH_LOG 1>&2
+    echo "Detected stock files backed up with prior versions of patch technology:" | tee -a $PATCH_LOG 1>&2
     echo -e $OLD_BACKUP_FILES | tee -a $PATCH_LOG 1>&2
     echo  "" | tee -a $PATCH_LOG 1>&2
   fi
