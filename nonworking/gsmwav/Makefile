@@ -1,4 +1,4 @@
-ME     = gsmwav
+NAME     = gsmwav
 APP_ID   = org.webosinternals.gstcodecs.${NAME}
 SIGNER   = org.webosinternals
 VERSION  = 1.0
@@ -8,7 +8,7 @@ MAINTAINER = zsoc
 TITLE   = GSM WAV Codec
 TYPE	= Application
 DESCRIPTION = GSM 6.10 WAV Codec for webOS. This package allows those with <br>voicemail systems that send gsm encoded wav files via email, to listen to these attachments on their webOS device. 
-CHANGELOG = 1.0.0: Initial Release
+CHANGELOG = 1.0: Initial Release
 CATEGORY = Codecs
 ICON	= http://www.webos-internals.org/wiki/Image:Icon_WebOSInternals_Base_Plugin.png
 LICENSE  = GPL
@@ -26,7 +26,7 @@ build/.unpack: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src/
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	mv build/src/binaries build/binaries
+	##mv build/src/binaries build/binaries
 	touch $@
 
 build/.built-${VERSION}: build/armv7.built-${VERSION}
@@ -35,6 +35,7 @@ build/.built-${VERSION}: build/armv7.built-${VERSION}
 build/%.built-${VERSION}: build/.unpack
 	rm -f $@
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/binaries
+	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
 	touch $@
 
