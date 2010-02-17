@@ -37,8 +37,9 @@ build/.built-${VERSION}: build/armv6.built-${VERSION}
 build/%.built-${VERSION}: build/.unpack
 	rm -f $@
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/binaries
-	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
+	mv build/$*/usr/palm/applications/${APP_ID}/binaries/$* build/$*/usr/palm/applications/${APP_ID}/bin
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/binaries
 	touch $@
 
 build/%/CONTROL/postinst:
