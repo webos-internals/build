@@ -1,5 +1,5 @@
 NAME = add-onscreen-keyboard
-VERSIONS = 1.2.1-6 1.3.1-3 1.3.5-6
+VERSIONS = 1.2.1-6 1.3.1-3 1.3.5-7
 META_SUB_VERSION = 1
 HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard
 TITLE = Virtual Keyboard
