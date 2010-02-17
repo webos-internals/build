@@ -15,7 +15,8 @@ LICENSE  = GPL
 SCREENSHOTS = [\"http://www.webos-internals.org/images/6/6b/Fishfillets-level.png\",
                \"http://www.webos-internals.org/images/4/44/Fishfillets-map.png\",
                \"http://www.webos-internals.org/images/2/2d/Fishfillets-options.png\",
-               \"http://www.webos-internals.org/images/c/c9/Fishfillets-credits.png\"]
+               \"http://www.webos-internals.org/images/c/c9/Fishfillets-credits.png\",
+		\"http://www.webos-internals.org/images/8/86/Fishfillets-Keyboard-320.png\"]
 
 SRC_GIT = git://git.webos-internals.org/games/fishfillets.git
 
@@ -42,7 +43,7 @@ build/%.built-${VERSION}: build/.unpack
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/control
-	install -m 755 build/binaries/$*/fillets build/$*/usr/palm/applications/${APP_ID}/bin/
+	install -m 755 build/binaries/$*/${NAME} build/$*/usr/palm/applications/${APP_ID}/bin/
 	touch $@
 
 build/%/CONTROL/postinst:
