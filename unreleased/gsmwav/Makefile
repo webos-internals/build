@@ -32,6 +32,9 @@ build/.unpack: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 build/.built-${VERSION}: build/armv7.built-${VERSION}
 	touch $@
 
+build/.built-${VERSION}: build/armv6.built-${VERSION}
+        touch $@
+
 build/%.built-${VERSION}: build/.unpack
 	rm -f $@
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/binaries
