@@ -26,14 +26,13 @@ build/.unpack: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src/
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	##mv build/src/binaries build/binaries
 	touch $@
 
 build/.built-${VERSION}: build/armv7.built-${VERSION}
 	touch $@
 
 build/.built-${VERSION}: build/armv6.built-${VERSION}
-        touch $@
+	touch $@
 
 build/%.built-${VERSION}: build/.unpack
 	rm -f $@
