@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = top-bar/${NAME}.patch
 TITLE = Flashlight in Device Menu
-DESCRIPTION = Adds a flashlight toggle to the device menu. Requires SysToolsMgr Service.
+DESCRIPTION = Adds a flashlight toggle to the device menu.
 CATEGORY = Top Bar
-VERSIONS = 1.3.1-29 1.3.5-12 1.4.0-3
+VERSIONS = 1.3.1-39 1.3.5-23 1.4.0-12
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS =
 META_SUB_VERSION = 1

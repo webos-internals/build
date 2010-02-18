@@ -3,10 +3,10 @@ PATCH = notifications/${NAME}.patch
 TITLE = Advanced Reset Options
 DESCRIPTION = On power button hold, it goes straight to the reset options, with airplane mode, java restart, and luna restart added, and skips the swap-battery/shutdown prompt.
 CATEGORY = Notifications
-VERSIONS = 1.3.1-31 1.3.5-14 1.4.0-3
+VERSIONS = 1.3.1-39 1.3.5-23 1.4.0-12
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS =
-META_SUB_VERSION = 1
+META_SUB_VERSION = 
 
 include ../common.mk
 DEPENDS := ${DEPENDS}, ca.canucksoftware.systoolsmgr

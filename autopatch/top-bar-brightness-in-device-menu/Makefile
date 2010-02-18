@@ -3,12 +3,13 @@ PATCH = top-bar/${NAME}.patch
 TITLE = Brightness in Device Menu
 DESCRIPTION = Adds screen brightness control to the device menu.
 CATEGORY = Top Bar
-VERSIONS = 1.2.1-23 1.3.1-3 1.3.5-3
+VERSIONS = 1.2.1-23 1.3.1-3 1.3.5-3 1.4.0-12
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
-SCREENSHOTS = [\"http://www.webos-internals.org/images/c/cc/Top-bar-brightness-in-device-menu.png\"]
+SCREENSHOTS = [ \"http://www.webos-internals.org/images/c/cc/Top-bar-brightness-in-device-menu.png\" ]
 META_SUB_VERSION = 1
 
 include ../common.mk
+
 include ../modifications.mk
 
 MAINTAINER = Jason Robitaille
