@@ -370,7 +370,7 @@ do
   fi
 
   if [ "$created_backup" = "yes" ] || [ ! -s $file.webosinternals.orig ] || \
-     [ "`md5sum $file.webosinternals.orig`" = "$palm_md5sum" ]
+     [ "`md5sum $file.webosinternals.orig |awk '{print $1}'`" = "$palm_md5sum" ]
   then
     tmpvar=`echo $file | tr '/' '.'`
     sed -i -e /$tmpvar/d $PATCH_CONTROL_DIR/file_list
