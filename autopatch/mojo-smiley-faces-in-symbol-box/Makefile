@@ -3,7 +3,7 @@ PATCH = mojo/${NAME}.patch
 TITLE = Smiley Faces in Symbol Box
 DESCRIPTION = This will add smiley faces to symbol box popup.  Sym+k and sym+z offer different smiley faces.
 CATEGORY = Mojo
-VERSIONS = 1.2.1-3 1.3.5-14
+VERSIONS = 1.3.5-14
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/a/a4/Mojo-smiley-faces-in-symbol-box-1.png\",\
