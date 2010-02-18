@@ -3,12 +3,13 @@ PATCH = app-launcher/${NAME}.patch
 TITLE = Hide Quick Launch Bar
 DESCRIPTION = Hides the quick launch bar (while still alowing the quick launch wave)
 CATEGORY = App Launcher
-VERSIONS = 1.3.1-15 1.3.5-3 1.4.0-3
+VERSIONS = 1.3.1-39 1.3.5-23 1.4.0-12
 ICON = http://www.webos-internals.org/images/b/b1/Icon_WebOSInternals_Patches_Applauncher.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
 
 include ../common.mk
+
 include ../modifications.mk
 
 MAINTAINER = Jason Robitaille
