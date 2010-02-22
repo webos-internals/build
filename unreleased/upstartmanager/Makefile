@@ -1,5 +1,5 @@
 NAME     = upstartmanager
-APP_ID   = com.palm.cryptk.${NAME}
+APP_ID   = org.webosinternals.${NAME}
 VERSION  = 0.1.1
 DEPENDS = org.webosinternals.upstartmgr
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UpstartManager
