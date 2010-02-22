@@ -1,13 +1,13 @@
 NAME     = upstartmanager
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.1.1
+VERSION  = 0.1.2
 DEPENDS = org.webosinternals.upstartmgr
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UpstartManager
 MAINTAINER = Chris Jowett (cryptk) <cryptk@gmail.com>
 TITLE   = Upstart Manager
 TYPE	= Application
 DESCRIPTION = A WebOS GUI for the webos-internals Upstart Manager service.
-CHANGELOG = 0.1.1: Fixing the list items disappearing during fast scrolling<br>0.1.0: Initial release to the testing feed.
+CHANGELOG = 0.1.2: changing AppID to org.webosinternals.upstartmanager<br>0.1.1: Fixing the list items disappearing during fast scrolling<br>0.1.0: Initial release to the testing feed.
 CATEGORY = System Utilities
 ICON	= http://www.webos-internals.org/images/2/28/Icon_WebOSInternals_Base.png
 LICENSE  = BSD (NCSA/UofI) Open Source
