@@ -1,7 +1,7 @@
 NAME     = fishfillets
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.9.2
+VERSION  = 0.9.2-1
 DEPENDS  = org.webosinternals.upstartmgr
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Fishfillets
 MAINTAINER = debilater
