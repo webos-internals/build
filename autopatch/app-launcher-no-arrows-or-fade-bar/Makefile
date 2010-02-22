@@ -6,7 +6,7 @@ CATEGORY = App Launcher
 VERSIONS = 1.3.5-26 1.4.0-14
 ICON = http://www.webos-internals.org/images/b/b1/Icon_WebOSInternals_Patches_Applauncher.png
 SCREENSHOTS = [ \"http://www.webos-internals.org/images/5/50/App-launcher-no-arrows-or-fade-bar-1.png\" ]
-META_SUB_VERSION = 
+META_SUB_VERSION = 1 
 
 include ../common.mk
 

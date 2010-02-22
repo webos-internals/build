@@ -8,7 +8,7 @@ ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Me
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/e/ed/Messaging-remove-send-and-attach-buttons-1.png\",\
 \"http://www.webos-internals.org/images/0/05/Messaging-remove-send-and-attach-buttons-2.png\" ]
-META_SUB_VERSION = 
+META_SUB_VERSION = 1 
 
 include ../common.mk
 

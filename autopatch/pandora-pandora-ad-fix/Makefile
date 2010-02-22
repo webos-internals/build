@@ -6,7 +6,7 @@ CATEGORY = Pandora
 VERSIONS = 1.3.5-24
 ICON = http://www.webos-internals.org/images/d/d1/Icon_WebOSInternals_Patches_Pandora.png
 SCREENSHOTS =
-META_SUB_VERSION = 
+META_SUB_VERSION = 1 
 
 include ../common.mk
 

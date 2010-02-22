@@ -6,7 +6,7 @@ CATEGORY = App Launcher
 VERSIONS = 1.3.5-21
 ICON = http://www.webos-internals.org/images/b/b1/Icon_WebOSInternals_Patches_Applauncher.png
 SCREENSHOTS =
-META_SUB_VERSION = 
+META_SUB_VERSION = 1 
 
 include ../common.mk
 

@@ -6,7 +6,7 @@ CATEGORY = Universal Search
 VERSIONS = 1.3.5-24 1.4.0-13
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS = [ \"http://www.webos-internals.org/images/4/43/Universal-search-sms-icon-for-mobile-tagged-numbers-only-1.png\" ]
-META_SUB_VERSION = 
+META_SUB_VERSION = 1 
 
 include ../common.mk
 

@@ -6,7 +6,7 @@ CATEGORY = Email
 VERSIONS = 1.3.5-21
 ICON = http://www.webos-internals.org/images/2/29/Icon_WebOSInternals_Patches_Email.png
 SCREENSHOTS = [ \"http://www.webos-internals.org/images/2/2d/Email-replies-forwards-multi-mod-10pt-arial-black-1.png\" ]
-META_SUB_VERSION = 
+META_SUB_VERSION = 1 
 
 include ../common.mk
 

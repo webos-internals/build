@@ -6,7 +6,7 @@ CATEGORY = Sounds and Alerts
 VERSIONS = 1.3.5-14 1.4.0-12
 ICON = http://www.webos-internals.org/images/f/ff/Icon_WebOSInternals_Patches_Soundsandalerts.png
 SCREENSHOTS =
-META_SUB_VERSION = 
+META_SUB_VERSION = 1 
 
 include ../common.mk
 

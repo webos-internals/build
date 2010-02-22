@@ -6,7 +6,7 @@ CATEGORY = Browser
 VERSIONS = 1.3.5-24 1.4.0-13
 ICON = http://www.webos-internals.org/images/4/4a/Icon_WebOSInternals_Patches_Browser.png
 SCREENSHOTS =
-META_SUB_VERSION = 
+META_SUB_VERSION = 1 
 
 include ../common.mk
 

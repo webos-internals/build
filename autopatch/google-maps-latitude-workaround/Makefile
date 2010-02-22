@@ -8,7 +8,7 @@ ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/3/37/Google-maps-latitude-workaround-1.png\",\
 \"http://www.webos-internals.org/images/7/79/Google-maps-latitude-workaround-2.png\" ]
-META_SUB_VERSION = 
+META_SUB_VERSION = 1 
 
 include ../common.mk
 
