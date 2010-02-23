@@ -182,7 +182,7 @@ class PackageHandler(ContentHandler):
             if (self.filename and self.price == 0):
                 if (not os.path.exists(sys.argv[2] + "/" + self.filename)):
                     sys.stderr.write("Fetching: " + self.filename + "\n")
-                    os.system("curl -R -L -o " + sys.argv[2] + "/" + self.filename + " " + self.url)
+                    os.system("curl -k -R -L -o " + sys.argv[2] + "/" + self.filename + " " + self.url)
                 if (os.path.exists(sys.argv[2] + "/" + self.filename)):
                     files[self.filename] = 1
                     self.size = os.stat(sys.argv[2] + "/" + self.filename)[stat.ST_SIZE]
