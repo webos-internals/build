@@ -12,11 +12,12 @@ CHANGELOG = 0.9.2: initial public test release
 CATEGORY = Games
 ICON	= http://www.daemon.de/idisk/palmpre/fishfillet-icon.png
 LICENSE  = GPL
-SCREENSHOTS = [\"http://www.webos-internals.org/images/6/6b/Fishfillets-level.png\",
-               \"http://www.webos-internals.org/images/4/44/Fishfillets-map.png\",
-               \"http://www.webos-internals.org/images/2/2d/Fishfillets-options.png\",
-               \"http://www.webos-internals.org/images/c/c9/Fishfillets-credits.png\",
-		\"http://www.webos-internals.org/images/8/86/Fishfillets-Keyboard-320.png\"]
+SCREENSHOTS = [\
+\"http://www.webos-internals.org/images/6/6b/Fishfillets-level.png\",\
+\"http://www.webos-internals.org/images/4/44/Fishfillets-map.png\",\
+\"http://www.webos-internals.org/images/2/2d/Fishfillets-options.png\",\
+\"http://www.webos-internals.org/images/c/c9/Fishfillets-credits.png\",\
+\"http://www.webos-internals.org/images/8/86/Fishfillets-Keyboard-320.png\" ]
 
 SRC_GIT = git://git.webos-internals.org/games/fishfillets.git
 
