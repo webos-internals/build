@@ -6,7 +6,7 @@ CATEGORY = Notifications
 VERSIONS = 1.3.5-23 1.4.0-12
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS =
-META_SUB_VERSION = 
+META_SUB_VERSION = 1 
 
 include ../common.mk
 DEPENDS := ${DEPENDS}, ca.canucksoftware.systoolsmgr

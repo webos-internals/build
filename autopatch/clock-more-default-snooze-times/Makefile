@@ -6,7 +6,7 @@ CATEGORY = Clock
 VERSIONS = 1.3.5-23 1.4.0-12
 ICON = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_Patches_Clock.png
 SCREENSHOTS = [ \"http://www.webos-internals.org/images/4/4d/Clock-more-default-snooze-times-1.png\" ]
-META_SUB_VERSION = 
+META_SUB_VERSION = 1 
 
 include ../common.mk
 

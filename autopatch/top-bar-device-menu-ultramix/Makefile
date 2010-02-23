@@ -6,7 +6,7 @@ CATEGORY = Top Bar
 VERSIONS = 1.3.5-21
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS = [ \"http://www.webos-internals.org/images/2/27/Top-bar-device-menu-ultramix-1.png\" ]
-META_SUB_VERSION = 
+META_SUB_VERSION = 1 
 
 include ../common.mk
 DEPENDS := ${DEPENDS}, ca.canucksoftware.systoolsmgr

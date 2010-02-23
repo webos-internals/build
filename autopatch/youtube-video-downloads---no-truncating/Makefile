@@ -6,7 +6,7 @@ CATEGORY = YouTube
 VERSIONS = 1.3.5-23 1.4.0-12
 ICON = http://www.webos-internals.org/images/8/8b/Icon_WebOSInternals_Patches_Youtube.png
 SCREENSHOTS =
-META_SUB_VERSION = 
+META_SUB_VERSION = 1 
 
 include ../common.mk
 

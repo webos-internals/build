@@ -9,7 +9,7 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/d/d3/App-launcher-4x4-icons-v4-no-arrows-plus-more-1.png\",\
 \"http://www.webos-internals.org/images/f/fb/App-launcher-4x4-icons-v4-no-arrows-plus-more-2.png\",\
 \"http://www.webos-internals.org/images/0/0e/App-launcher-4x4-icons-v4-no-arrows-plus-more-3.png\" ]
-META_SUB_VERSION = 
+META_SUB_VERSION = 1 
 
 include ../common.mk
 
