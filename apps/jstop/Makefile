@@ -8,7 +8,7 @@ TYPE	= Application
 DESCRIPTION = An on-phone resource monitor for javascript applications.
 CHANGELOG = 0.0.11: Follow a specific app, show anonymous applications, auto GC every 5 minutes (yes/no in menu). Swipe forward to get back to full list of apps (swipe back was being funky).
 CATEGORY = System Utilities
-ICON	= http://www.webos-internals.org/images/2/28/Icon_WebOSInternals_Base.png
+ICON	= http://www.webos-internals.org/images/c/c5/Icon_WebOSInternals_ProcessMonitor.png
 LICENSE  = BSD (NCSA/UofI) Open Source
 SCREENSHOTS = [\"http://www.webos-internals.org/images/3/32/Jstop.png\"]
 
