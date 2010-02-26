@@ -6,8 +6,10 @@ import sys
 import re
 import urllib
 import os
+import stat
 import time
 import calendar
+import hashlib
 
 files = {}
 
@@ -27,11 +29,14 @@ class PackageHandler(ContentHandler):
     author = ""
     support = ""
     version = ""
-    size = ""
+    size = 0
     price = 0.00
     category = ""
     icon = ""
     screenshots = []
+    filename = ""
+    md5sum = ""
+    countries = []
 
     def startElement(self, name, attrs):
         if (name == "item") :
@@ -45,14 +50,20 @@ class PackageHandler(ContentHandler):
             self.author = ""
             self.support = ""
             self.version = ""
-            self.size = ""
+            self.size = 0
             self.price = 0.00
             self.category = ""
             self.icon = ""
             self.screenshots = []
+            self.filename = ""
+            self.md5sum = ""
+            self.countries = []
 
         if (name == "ac:localization"):
-            self.language = attrs["ac:language"]
+            self.language = attrs["ac:language"].encode('utf-8')
+            country = '"' + attrs["ac:country"].encode('utf-8') + '"'
+            if (country not in self.countries):
+                self.countries.append('"' + attrs["ac:country"].encode('utf-8') + '"')
 
         if (name == "ac:categories"):
             if (self.language == "en"):
@@ -80,8 +91,6 @@ class PackageHandler(ContentHandler):
 
         if (name == "link") :
             self.url = self.data
-
-        if (name == "link") :
             self.json += "\"Homepage\":\"%s\", " % self.data
 
         if (name == "pubDate") :
@@ -104,7 +113,7 @@ class PackageHandler(ContentHandler):
             self.license = self.data
             
         if (name == "ac:installed_size") :
-            self.size = self.data
+            self.size = int(self.data)
             
         if (name == "ac:price") :
             self.price = float(self.data)
@@ -133,6 +142,14 @@ class PackageHandler(ContentHandler):
 
         if ((name == "item") and (self.title != "")):
 
+            if (self.icon and self.id and self.version and self.price == 0):
+                regexp = re.compile("^http://cdn.downloads.palm.com/public/([0-9]+)/.*")
+                m = regexp.match(self.icon)
+                if (m):
+                    number = m.group(1)
+                    self.filename = self.id + "_" + self.version + "_all.ipk"
+                    self.url = "https://cdn.downloads.palm.com/apps/" + number + "/files/" + self.filename
+
             self.json += "\"Title\":\"%s\", " % self.title
 
             self.json += "\"FullDescription\":\"%s\", " % self.description
@@ -157,14 +174,32 @@ class PackageHandler(ContentHandler):
             if (len(self.screenshots)):
                 self.json += "\"Screenshots\":[" + ','.join(self.screenshots) + "], "
 
-            self.json += "\"Feed\":\"Palm %s\" }" % sys.argv[2]
+            if (len(self.countries)):
+                self.json += "\"Countries\":[" + ','.join(self.countries) + "], "
+
+            self.json += "\"Feed\":\"Palm %s\" }" % sys.argv[3]
+
+            if (self.filename and self.price == 0):
+                if (not os.path.exists(sys.argv[2] + "/" + self.filename)):
+                    sys.stderr.write("Fetching: " + self.filename + "\n")
+                    os.system("curl -k -R -L -o " + sys.argv[2] + "/" + self.filename + " " + self.url)
+                if (os.path.exists(sys.argv[2] + "/" + self.filename)):
+                    files[self.filename] = 1
+                    self.size = os.stat(sys.argv[2] + "/" + self.filename)[stat.ST_SIZE]
+                    m = hashlib.md5();
+                    m.update(file(sys.argv[2] + "/" + self.filename).read());
+                    self.md5sum = m.hexdigest()
 
             print "Package: " + self.id
             print "Version: " + self.version
             print "Section: " + self.category
             print "Architecture: all"
             print "Maintainer: %s <%s>" % (self.author, self.support)
-            print "Size: " + self.size
+            if (self.md5sum):
+                print "MD5Sum: %s" % self.md5sum
+            print "Size: %d" % self.size
+            if (files.has_key(self.filename)):
+                print "Filename: " + self.filename
             print "Source: " + self.json
             print "Description: " + self.title
             print
@@ -194,3 +229,8 @@ saxparser.setContentHandler(feedprint)
                         
 datasource = open(sys.argv[1],"r")
 saxparser.parse(datasource)
+
+# for f in os.listdir(sys.argv[2]):
+#     if (not files.has_key(f)):
+#         sys.stderr.write(sys.argv[2] + "/" + f + "\n")
+#         os.remove(sys.argv[2] + "/" + f)

@@ -34,7 +34,7 @@ build/.unpacked build/.built: ${DL_DIR}/${NAME}-feed.xml
 	rm -f $@
 	mkdir -p build ipkgs
 	sed -i.orig -e 's/& /\&amp; /g' ${DL_DIR}/${NAME}-feed.xml
-	../../scripts/palm-scraper.py ${DL_DIR}/${NAME}-feed.xml Web > build/Metadata
+	../../scripts/palm-scraper.py ${DL_DIR}/${NAME}-feed.xml ipkgs Web > build/Metadata
 	touch $@
 
 .PHONY: clobber
