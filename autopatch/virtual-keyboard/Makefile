@@ -13,9 +13,12 @@ PATCH = add-onscreen-keyboard.patch
 FILES = /usr/palm/frameworks/mojo/builtins/palmInitFramework191_15.js \
 	/usr/palm/frameworks/mojo/submissions/191.15/stylesheets/global.css
 
-SRC_GIT = git://git.webos-internals.org/patches/virtual-keyboard.git
-
 include ../common.mk
+
+ifeq ("${DUMMY_VERSION}", "")
+SRC_GIT = git://git.webos-internals.org/patches/virtual-keyboard.git
+endif
+
 include ../../support/download.mk
 
 .PHONY: unpack
