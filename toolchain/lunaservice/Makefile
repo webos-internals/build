@@ -21,8 +21,8 @@ build/.staged-${VERSION}: build/armv7.staged-${VERSION} build/armv6.staged-${VER
 
 build/%.staged-${VERSION} : build/%.built-${VERSION}
 	mkdir -p ../../staging/$*/usr/include/
-	install -m 644 build/$*/opt/include/lunaservice.h ../../staging/$*/usr/include/
-	install -m 644 build/$*/opt/include/lunaservice-errors.h ../../staging/$*/usr/include/
+	install -m 644 build/$*/usr/palm/applications/${APP_ID}/opt/include/lunaservice.h ../../staging/$*/usr/include/
+	install -m 644 build/$*/usr/palm/applications/${APP_ID}/opt/include/lunaservice-errors.h ../../staging/$*/usr/include/
 	mkdir -p ../../staging/$*/usr/lib
-	install -m 644 build/$*/opt/lib/liblunaservice.so ../../staging/$*/usr/lib/
+	install -m 644 build/$*/usr/palm/applications/${APP_ID}/opt/lib/liblunaservice.so ../../staging/$*/usr/lib/
 	touch $@
