@@ -3,12 +3,13 @@ PATCH = camera/${NAME}.patch
 TITLE = Simple Shutter Sound Off
 DESCRIPTION = This will permanently disable the shutter sound for the camera.
 CATEGORY = Camera
-VERSIONS = 1.3.5-3
+VERSIONS = 1.3.5-3 1.4.0-16
 ICON = http://www.webos-internals.org/images/c/c5/Icon_WebOSInternals_Patches_Camera.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
 
 include ../common.mk
+
 include ../modifications.mk
 
 MAINTAINER = jhoff80
