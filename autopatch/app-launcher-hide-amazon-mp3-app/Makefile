@@ -3,13 +3,14 @@ PATCH = app-launcher/${NAME}.patch
 TITLE = Hide Amazon MP3 App
 DESCRIPTION = This patch will hide the Amazon MP3 icon in the launcher.
 CATEGORY = App Launcher
-VERSIONS = 1.3.5-3
+VERSIONS = 1.3.5-3 1.4.0-17
 ICON = http://www.webos-internals.org/images/b/b1/Icon_WebOSInternals_Patches_Applauncher.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
 
 include ../common.mk
+
 include ../modifications.mk
 
-MAINTAINER = v3ritas (Sean McAdam) <CoiretFirinne@gmail.com>
+MAINTAINER = cryptk <CoiretFirinne@gmail.com>, v3ritas (Sean McAdam)
 HOMEPAGE = http://forums.precentral.net/showthread.php?p=2045728#post2045728
