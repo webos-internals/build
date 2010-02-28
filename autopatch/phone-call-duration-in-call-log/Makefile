@@ -5,8 +5,9 @@ DESCRIPTION = This will add an option in the Phone Preferences to enable or disa
 CATEGORY = Phone
 VERSIONS = 1.3.5-4 1.4.0-17
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
-SCREENSHOTS = [ \"http://www.webos-internals.org/images/f/fe/Phone-call-duration-in-call-log-1.png\" ]
-META_SUB_VERSION = 1
+SCREENSHOTS = [ \"http://www.webos-internals.org/images/f/fe/Phone-call-duration-in-call-log-1.png\",\
+\"http://www.webos-internals.org/images/4/42/Phone-call-duration-in-call-log-2.png\" ]
+META_SUB_VERSION = 2
 
 include ../common.mk
 
