@@ -39,6 +39,10 @@ ${DOCTOR_DIR}/webosdoctor-1.3.1.jar:
 	  curl -L -o $@ http://palm.cdnetworks.net/rom/pre/p131r0d11172009/sr1ntp131rod/webosdoctorp100ewwsprint.jar ; \
 	fi
 
-.PHONY: ${DOCTOR_DIR}/webosdoctor-1.3.5.jar
-${DOCTOR_DIR}/ipkg-info-1.3.5: ${DOCTOR_DIR}/ipkg-info-1.3.1
-	cp -r $< $@
+${DOCTOR_DIR}/webosdoctor-1.3.5.jar:
+	mkdir -p ${DOCTOR_DIR}
+	curl -L -o $@ http://palm.cdnetworks.net/rom/pre/p135r0d12302009/sr1ntp135rod/webosdoctorp100ewwsprint.jar
+
+${DOCTOR_DIR}/webosdoctor-1.4.0.jar:
+	mkdir -p ${DOCTOR_DIR}
+	curl -L -o $@ http://palm.cdnetworks.net/rom/pre/p14r0d02252010/sr1ntp140rod/webosdoctorp100ewwsprint.jar;
