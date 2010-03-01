@@ -33,7 +33,7 @@ endif
 include ../../support/package.mk
 
 ifneq ("${DUMMY_VERSION}", "")
-WEBOS_VER:=$(shell echo ${VERSION} | tr -d '\-0')
+WEBOS_VER:=$(shell echo ${VERSION} | cut -d- -f1)
 DESCRIPTION=This package is not currently available for WebOS ${WEBOS_VER}.  This package may be installed as a placeholder to notify you when an update is available.  NOTE: This is simply an empty package placeholder, it will not affect your device in any way
 CATEGORY=Unavailable
 SRC_GIT=
