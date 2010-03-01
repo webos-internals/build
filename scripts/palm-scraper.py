@@ -35,6 +35,7 @@ class PackageHandler(ContentHandler):
     icon = ""
     screenshots = []
     filename = ""
+    appnumber = ""
     md5sum = ""
     countries = []
 
@@ -56,6 +57,7 @@ class PackageHandler(ContentHandler):
             self.icon = ""
             self.screenshots = []
             self.filename = ""
+            self.appnumber = ""
             self.md5sum = ""
             self.countries = []
 
@@ -146,9 +148,9 @@ class PackageHandler(ContentHandler):
                 regexp = re.compile("^http://cdn.downloads.palm.com/public/([0-9]+)/.*")
                 m = regexp.match(self.icon)
                 if (m):
-                    number = m.group(1)
+                    self.appnumber = m.group(1)
                     self.filename = self.id + "_" + self.version + "_all.ipk"
-                    self.url = "https://cdn.downloads.palm.com/apps/" + number + "/files/" + self.filename
+                    self.url = "https://cdn.downloads.palm.com/apps/" + self.appnumber + "/files/" + self.filename
 
             self.json += "\"Title\":\"%s\", " % self.title
 
@@ -199,7 +201,7 @@ class PackageHandler(ContentHandler):
                 print "MD5Sum: %s" % self.md5sum
             print "Size: %d" % self.size
             if (files.has_key(self.filename)):
-                print "Filename: " + self.filename
+                print "Filename: apps/" + self.appnumber + "/files/" + self.filename
             print "Source: " + self.json
             print "Description: " + self.title
             print
