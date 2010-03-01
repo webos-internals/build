@@ -1,6 +1,6 @@
 NAME = add-onscreen-keyboard
 VERSIONS = 1.3.5-7 1.4.0-1
-META_SUB_VERSION = 3
+META_SUB_VERSION = 4
 HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard
 TITLE = Virtual Keyboard
 CATEGORY = Mojo
@@ -33,7 +33,7 @@ build/all/CONTROL/postinst: build/.unpacked-${VERSION}
 			-e 's|APP_DIR=|APP_DIR=$$IPKG_OFFLINE_ROOT/usr/palm/applications/${APP_ID}|' \
 		 	-e '/^#!\/bin\/sh/a rm -f /media/internal/virtual-keyboard/kb_config.json'	\
 		 	-e '/^#!\/bin\/sh/a rm -f /media/internal/virtual-keyboard/.sounds/click1.wav'	\
-		 	-e '/^#!\/bin\/sh/a rm -rf /media/internal/virtual-keyboard/.themes/LPC_DarkRounded_2e'	\
+		 	-e '/^#!\/bin\/sh/a rm -rf /media/internal/virtual-keyboard/.themes/LPC_Dark_Rounded_2e'	\
 		 	-e '/^#!\/bin\/sh/a rm -rf /media/internal/virtual-keyboard/.themes/remix_ice'	\
 		 	-e '/^#!\/bin\/sh/a rm -rf /media/internal/virtual-keyboard/.themes/remix_glossy'	\
 		 	-e '/^#!\/bin\/sh/a rm -rf /media/internal/virtual-keyboard/.themes/remix_classic'	\
