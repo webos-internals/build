@@ -9,15 +9,6 @@ fi
 
 if [ "`ipkg -o $IPKG_OFFLINE_ROOT list_installed | awk '{print $1}' | grep ^org.webosinternals.patches.add-onscreen-keyboard$`" = "" ]
 then
-  rm -rf /usr/palm/frameworks/mojo/submissions/200.18/templates/kbselector
-  rm -rf /usr/palm/frameworks/mojo/submissions/200.18/resources/*/kbchars*
-  rm -f /usr/palm/frameworks/mojo/submissions/200.18/stylesheets/webos-internals-virtual-keyboard.css
-  rm -rf /usr/palm/frameworks/mojo/submissions/200.47/templates/kbselector
-  rm -rf /usr/palm/frameworks/mojo/submissions/200.47/resources/*/kbchars*
-  rm -f /usr/palm/frameworks/mojo/submissions/200.47/stylesheets/webos-internals-virtual-keyboard.css
-  rm -rf /usr/palm/frameworks/mojo/submissions/200.72/templates/kbselector
-  rm -rf /usr/palm/frameworks/mojo/submissions/200.72/resources/*/kbchars*
-  rm -f /usr/palm/frameworks/mojo/submissions/200.72/stylesheets/webos-internals-virtual-keyboard.css
   rm -rf /media/internal/virtual-keyboard/.themes/remix_classic
   rm -rf /media/internal/virtual-keyboard/.themes/remix_glossy
   rm -rf /media/internal/virtual-keyboard/.themes/remix_ice
