@@ -3,10 +3,10 @@ PATCH = app-launcher/${NAME}.patch
 TITLE = Hide YouTube App
 DESCRIPTION = This patch will hide the YouTube Application (as per request).
 CATEGORY = App Launcher
-VERSIONS = 1.3.5-21
+VERSIONS = 1.3.5-21 1.4.0-20
 ICON = http://www.webos-internals.org/images/b/b1/Icon_WebOSInternals_Patches_Applauncher.png
 SCREENSHOTS =
-META_SUB_VERSION = 1 
+META_SUB_VERSION = 1
 
 include ../common.mk
 

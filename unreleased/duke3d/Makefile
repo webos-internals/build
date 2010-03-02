@@ -1,20 +1,21 @@
 NAME     = duke3d
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 1.0.4
+VERSION  = 1.0.5
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Duke3D
 MAINTAINER = Henk Jonas
 TITLE   = Duke3D
 TYPE	= Application
-DESCRIPTION = Port of the popular Duke Nukem 3D shooter game written by Real Software.<br>It requires webOS 1.3.5 or later.
-CHANGELOG = 1.0.0: Control overlay. Initial release.
+DESCRIPTION = Port of the popular Duke Nukem 3D shooter game written by 3DRealms.<br>It requires webOS 1.3.5 or later.
+CHANGELOG = 1.0.5: Onscreen controls, screenshots and splashscreen
 CATEGORY = Games
-ICON	= http://www.webos-internals.org/images/3/3a/Quake-icon3-resized.png
+ICON	= http://git.webos-internals.org/?p=games/duke3d.git;a=blob_plain;f=icon.png
 LICENSE  = GNU License
 SCREENSHOTS = [\
-\"http://www.webos-internals.org/images/2/26/Quake_Menu.png\",\
-\"http://www.webos-internals.org/images/4/4b/Quake_Lava.png\",\
-\"http://www.webos-internals.org/images/6/66/Quake_Ogre.png\"\
+\"http://git.webos-internals.org/?p=games/duke3d.git;a=blob_plain;f=images/duke3d_title.png\",\
+\"http://git.webos-internals.org/?p=games/duke3d.git;a=blob_plain;f=images/duke3d_menu.png\",\
+\"http://git.webos-internals.org/?p=games/duke3d.git;a=blob_plain;f=images/duke3d_game1.png\",\
+\"http://git.webos-internals.org/?p=games/duke3d.git;a=blob_plain;f=images/duke3d_game2.png\"\
  ]
 
 SRC_GIT = git://git.webos-internals.org/games/duke3d.git
