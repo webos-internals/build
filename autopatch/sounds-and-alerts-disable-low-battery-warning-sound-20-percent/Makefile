@@ -1,0 +1,16 @@
+NAME = $(shell basename $(shell pwd))
+PATCH = sounds-and-alerts/${NAME}.patch
+TITLE = Disable Low Battery Warning Sound 20 Percent
+DESCRIPTION = Disables 20% battery low warning sound.
+CATEGORY = Sounds and Alerts
+VERSIONS = 1.4.0-23
+ICON = http://www.webos-internals.org/images/f/ff/Icon_WebOSInternals_Patches_Soundsandalerts.png
+SCREENSHOTS =
+META_SUB_VERSION = 1
+
+include ../common.mk
+
+include ../modifications.mk
+
+MAINTAINER = mamouton <marion.mouton@gmail.com>
+HOMEPAGE =
