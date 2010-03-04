@@ -9,7 +9,6 @@ import os
 import stat
 import time
 import calendar
-import hashlib
 
 files = {}
 
@@ -144,6 +143,12 @@ class PackageHandler(ContentHandler):
 
         if ((name == "item") and (self.title != "")):
 
+            self.json += "\"Title\":\"%s\", " % self.title
+
+            self.json += "\"FullDescription\":\"%s\", " % self.description
+
+            self.json += "\"Source\":\"%s\", " % self.url
+
             if (self.icon and self.id and self.version and self.price == 0):
                 regexp = re.compile("^http://cdn.downloads.palm.com/public/([0-9]+)/.*")
                 m = regexp.match(self.icon)
@@ -151,12 +156,7 @@ class PackageHandler(ContentHandler):
                     self.appnumber = m.group(1)
                     self.filename = self.id + "_" + self.version + "_all.ipk"
                     self.url = "https://cdn.downloads.palm.com/apps/" + self.appnumber + "/files/" + self.filename
-
-            self.json += "\"Title\":\"%s\", " % self.title
-
-            self.json += "\"FullDescription\":\"%s\", " % self.description
-
-            self.json += "\"Source\":\"%s\", " % self.url
+                    self.json += "\"Filename\":\"%s\", " %   ("apps/" + self.appnumber + "/files/" + self.filename)
 
             self.json += "\"Type\":\"AppCatalog\", "
 
@@ -187,21 +187,13 @@ class PackageHandler(ContentHandler):
                     os.system("curl -k -R -L -o " + sys.argv[2] + "/" + self.filename + " " + self.url)
                 if (os.path.exists(sys.argv[2] + "/" + self.filename)):
                     files[self.filename] = 1
-                    self.size = os.stat(sys.argv[2] + "/" + self.filename)[stat.ST_SIZE]
-                    m = hashlib.md5();
-                    m.update(file(sys.argv[2] + "/" + self.filename).read());
-                    self.md5sum = m.hexdigest()
 
             print "Package: " + self.id
             print "Version: " + self.version
             print "Section: " + self.category
             print "Architecture: all"
             print "Maintainer: %s <%s>" % (self.author, self.support)
-            if (self.md5sum):
-                print "MD5Sum: %s" % self.md5sum
             print "Size: %d" % self.size
-            if (files.has_key(self.filename)):
-                print "Filename: apps/" + self.appnumber + "/files/" + self.filename
             print "Source: " + self.json
             print "Description: " + self.title
             print
