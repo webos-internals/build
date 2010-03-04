@@ -3,10 +3,10 @@ PATCH = app-launcher/${NAME}.patch
 TITLE = Hide VZNav
 DESCRIPTION = Hides VZNav icon
 CATEGORY = App Launcher
-VERSIONS = 1.3.5-24
+VERSIONS = 1.3.5-24 1.4.0-24
 ICON = http://www.webos-internals.org/images/b/b1/Icon_WebOSInternals_Patches_Applauncher.png
 SCREENSHOTS =
-META_SUB_VERSION = 1 
+META_SUB_VERSION = 1
 
 include ../common.mk
 
