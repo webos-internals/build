@@ -3,7 +3,7 @@ PATCH = mojo/${NAME}.patch
 TITLE = Smiley Faces in Symbol Box
 DESCRIPTION = Use the sym key and letter K (symbols) or Z (words) to bring up the built-in emoticons list. <br/>(Now has increased language support.)
 CATEGORY = Mojo
-VERSIONS = 1.3.5-14 1.4.0-24
+VERSIONS = 1.3.5-14 1.4.0-25
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/a/a4/Mojo-smiley-faces-in-symbol-box-1.png\",\
