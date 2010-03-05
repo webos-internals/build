@@ -36,7 +36,7 @@ build/.built-${VERSION}: build/armv7.built build/armv6.built build/i686.built
 
 OPKG_CONFIGURE_ARGS = --disable-shared --disable-gpg --disable-curl \
 	--with-opkglibdir=/media/cryptofs/apps/usr/lib \
-	--with-opkgetcdir=/media/cryptofs/apps/usr/lib
+	--with-opkgetcdir=/media/cryptofs/apps/etc
 
 build/i686.built: build/.unpacked
 	rm -rf build/i686
