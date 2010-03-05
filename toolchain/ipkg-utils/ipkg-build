@@ -165,8 +165,9 @@ if [ "`uname -s`" == "Darwin" ] ; then
     tar=gnutar
 fi
 noclean=0
-usage="Usage: $0 [-c] [-C] [-o owner] [-g group] [-s sign [-k key]] <pkg_directory> [<destination_directory>]"
-while getopts "cg:hk:o:s:v" opt; do
+palmformat=0
+usage="Usage: $0 [-c] [-C] [-o owner] [-g group] [-p] [-s sign [-k key]] <pkg_directory> [<destination_directory>]"
+while getopts "cg:hk:o:ps:v" opt; do
     case $opt in
 	o ) owner=$OPTARG
 	    ogargs="--owner=$owner"
@@ -175,6 +176,8 @@ while getopts "cg:hk:o:s:v" opt; do
 	    ogargs="$ogargs --group=$group"
 	    ;;
 	k ) key=$OPTARG
+	    ;;
+	p ) palmformat=1
 	    ;;
 	s ) sign=$OPTARG
 	    ;;
@@ -265,26 +268,41 @@ rm -f $pkg_dir/$CONTROL/*.pem $pkg_dir/$CONTROL/*.sha1
 
 echo "2.0" > $tmp_dir/debian-binary
 
+palm_files=
+if [ "$palmformat" = "1" ]; then
+  if [ -e $pkg_dir/$CONTROL/postinst ] ; then
+      cp $pkg_dir/$CONTROL/postinst $tmp_dir/pmPostInstall.script
+      palm_files="$palm_files ./pmPostInstall.script"
+  fi
+  if [ -e $pkg_dir/$CONTROL/prerm ] ; then
+      cp $pkg_dir/$CONTROL/prerm $tmp_dir/pmPreRemove.script
+      palm_files="$palm_files ./pmPreRemove.script"
+  fi
+fi
+
 sign_files=
 if [ -n "$sign" ] ; then
   cp $sign $tmp_dir/cert.pem
   openssl x509 -in $sign -pubkey -noout > $tmp_dir/pubkey.pem
-  cat $tmp_dir/control.tar.gz $tmp_dir/data.tar.gz $tmp_dir/debian-binary | \
-  openssl dgst -sha1 -sign $key > $tmp_dir/signature.sha1
+  ( cd $tmp_dir ; cat ./control.tar.gz ./data.tar.gz ./debian-binary $palm_files | \
+    openssl dgst -sha1 -sign $key > ./signature.sha1 )
   sign_files="./cert.pem ./pubkey.pem ./signature.sha1"
 fi
 
 pkg_file=$dest_dir/${pkg}_${version}_${arch}.ipk
 rm -f $pkg_file
 if [ "$outer" = "ar" ] ; then
-  ( cd $tmp_dir && ar -cr $pkg_file ./debian-binary ./data.tar.gz ./control.tar.gz $sign_files )
+  ( cd $tmp_dir && ar -cr $pkg_file ./debian-binary ./data.tar.gz ./control.tar.gz $sign_files $palm_files )
 else
-  ( cd $tmp_dir && $tar -zcf $pkg_file ./debian-binary ./data.tar.gz ./control.tar.gz $sign_files )
+  ( cd $tmp_dir && $tar -zcf $pkg_file ./debian-binary ./data.tar.gz ./control.tar.gz $sign_files $palm_files )
 fi
 
 rm $tmp_dir/debian-binary $tmp_dir/data.tar.gz $tmp_dir/control.tar.gz
-if [ -n "$sign" ] ; then
-  rm -f $tmp_dir/cert.pem $tmp_dir/pubkey.pem $tmp_dir/signature.sha1
+if [ -n "$sign" -a -n "$sign_files" ] ; then
+  ( cd $tmp_dir && rm -f $sign_files )
+fi
+if [ "$palmformat" = "1" -a -n "$palm_files" ] ; then
+  ( cd $tmp_dir && rm -f $palm_files )
 fi
 rmdir $tmp_dir
 
