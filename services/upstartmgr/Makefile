@@ -1,7 +1,8 @@
 NAME     = upstartmgr
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.0.5
+VERSION  = 0.0.7
+CHANGELOG = 0.0.7: Added the jps method for the new Upstart Manager application to use.  Fixed the installation of the dbus service description.
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 TITLE    = Upstart Manager Service
 DESCRIPTION = The Upstart Manager Service is a back-end interface to the initctl command line application which manages the background Linux daemons that run on a webOS Device.  It is required for launching advanced homebrew applications like DOOM! and OpenVPN.
@@ -42,7 +43,7 @@ build/i686.built: build/.unpacked
 	mkdir -p build/i686/usr/sbin
 	install -m 755 build/src/${NAME} build/i686/usr/sbin/${APP_ID}
 	mkdir -p build/i686/usr/share/dbus-1/system-services
-	install -m 644 build/src/${APP_ID} build/i686/usr/share/dbus-1/system-services/
+	install -m 644 build/src/${APP_ID}.service build/i686/usr/share/dbus-1/system-services/
 	mkdir -p build/i686/etc/event.d
 	install -m 644 build/src/upstart/${APP_ID} build/i686/etc/event.d/${APP_ID}
 	touch $@
@@ -57,7 +58,7 @@ build/armv7.built: build/.unpacked
 	mkdir -p build/armv7/usr/sbin
 	install -m 755 build/src/${NAME} build/armv7/usr/sbin/${APP_ID}
 	mkdir -p build/armv7/usr/share/dbus-1/system-services
-	install -m 644 build/src/${APP_ID} build/armv7/usr/share/dbus-1/system-services/
+	install -m 644 build/src/${APP_ID}.service build/armv7/usr/share/dbus-1/system-services/
 	mkdir -p build/armv7/etc/event.d
 	install -m 644 build/src/upstart/${APP_ID} build/armv7/etc/event.d/${APP_ID}
 	touch $@
@@ -72,7 +73,7 @@ build/armv6.built: build/.unpacked
 	mkdir -p build/armv6/usr/sbin
 	install -m 755 build/src/${NAME} build/armv6/usr/sbin/${APP_ID}
 	mkdir -p build/armv6/usr/share/dbus-1/system-services
-	install -m 644 build/src/${APP_ID} build/armv6/usr/share/dbus-1/system-services/
+	install -m 644 build/src/${APP_ID}.service build/armv6/usr/share/dbus-1/system-services/
 	mkdir -p build/armv6/etc/event.d
 	install -m 644 build/src/upstart/${APP_ID} build/armv6/etc/event.d/${APP_ID}
 	touch $@
