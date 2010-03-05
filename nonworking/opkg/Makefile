@@ -13,7 +13,7 @@ LICENSE  = GPL v2 Open Source
 SRC_TGZ = http://opkg.googlecode.com/files/${NAME}-${VERSION}.tar.gz
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_armv6.ipk ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
+package: ipkgs/${APP_ID}_${VERSION}_i686.ipk ipkgs/${APP_ID}_${VERSION}_armv6.ipk ipkgs/${APP_ID}_${VERSION}_armv7.ipk
 include ../../support/package.mk
 
 include ../../support/download.mk
@@ -26,15 +26,15 @@ build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mkdir -p build/armv6 build/armv7 build/i686
 	tar -C build -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mv build/${NAME}-${VERSION} build/src
-	sed -i  -e 's|DEST_NAME "root"|DEST_NAME "apps"|' \
-		-e 's|DEST_ROOT_DIR "/"|DEST_ROOT_DIR "/media/cryptofs/apps"|' \
+	sed -i.orig -e 's|DEST_NAME "root"|DEST_NAME "apps"|' \
+		    -e 's|DEST_ROOT_DIR "/"|DEST_ROOT_DIR "/media/cryptofs/apps"|' \
 		build/src/libopkg/opkg_conf.h
 	touch $@
 
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/armv7.built build/armv6.built build/i686.built
+build/.built-${VERSION}: build/i686.built build/armv7.built build/armv6.built
 	touch $@
 
 OPKG_CONFIGURE_ARGS = --disable-shared --disable-gpg --disable-curl \
@@ -43,7 +43,10 @@ OPKG_CONFIGURE_ARGS = --disable-shared --disable-gpg --disable-curl \
 
 build/i686.built: build/.unpacked
 	rm -rf build/i686
-	( cd build/src ; ./configure ${OPKG_CONFIGURE_ARGS} ; ${MAKE} )
+	( cd build/src ; \
+	  export PATH=`pwd`/../../../../toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu/bin:${PATH} ; \
+	  ./configure --host=i686-unknown-linux-gnu ${OPKG_CONFIGURE_ARGS} ; \
+	  ${MAKE} )
 	mkdir -p build/i686/usr/bin
 	install -m 755 build/src/src/${NAME}-cl build/i686/usr/bin/${NAME}
 	( cd build/src ; ${MAKE} clean )
