@@ -26,6 +26,9 @@ build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mkdir -p build/armv6 build/armv7 build/i686
 	tar -C build -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mv build/${NAME}-${VERSION} build/src
+	sed -i  -e 's|DEST_NAME "root"|DEST_NAME "apps"|' \
+		-e 's|DEST_ROOT_DIR "/"|DEST_ROOT_DIR "/media/cryptofs/apps"|' \
+		build/src/libopkg/opkg_conf.h
 	touch $@
 
 .PHONY: build
