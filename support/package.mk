@@ -52,13 +52,13 @@ ipkgs/${APP_ID}_${VERSION}_%.ipk: build/.built-${VERSION}
 	if [ -n "${SIGNER}" -a -e ../../../sign/${SIGNER}.crt -a ../../../sign/${SIGNER}.key ] ; then \
 	  ( cd build ; \
 	    TAR_OPTIONS=--wildcards \
-	    ../../../toolchain/ipkg-utils/ipkg-build -o 0 -g 0 \
+	    ../../../toolchain/ipkg-utils/ipkg-build -o 0 -g 0 ${IPKGFLAGS} \
 	    -s $(shell cd ../../.. ; pwd)/sign/${SIGNER}.crt -k $(shell cd ../../.. ; pwd)/sign/${SIGNER}.key \
 	    $* ) ; \
 	else \
 	  ( cd build ; \
 	    TAR_OPTIONS=--wildcards \
-	    ../../../toolchain/ipkg-utils/ipkg-build -o 0 -g 0 $* ) ; \
+	    ../../../toolchain/ipkg-utils/ipkg-build -o 0 -g 0 ${IPKGFLAGS} $* ) ; \
 	fi
 	mv build/${APP_ID}_${VERSION}_$*.ipk $@
 

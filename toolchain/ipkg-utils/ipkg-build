@@ -284,8 +284,8 @@ sign_files=
 if [ -n "$sign" ] ; then
   cp $sign $tmp_dir/cert.pem
   openssl x509 -in $sign -pubkey -noout > $tmp_dir/pubkey.pem
-  cat $tmp_dir/control.tar.gz $tmp_dir/data.tar.gz $tmp_dir/debian-binary $palm_files | \
-  openssl dgst -sha1 -sign $key > $tmp_dir/signature.sha1
+  ( cd $tmp_dir ; cat ./control.tar.gz ./data.tar.gz ./debian-binary $palm_files | \
+    openssl dgst -sha1 -sign $key > ./signature.sha1 )
   sign_files="./cert.pem ./pubkey.pem ./signature.sha1"
 fi
 

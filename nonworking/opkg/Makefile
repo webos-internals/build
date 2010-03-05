@@ -1,6 +1,8 @@
 NAME     = opkg
 TITLE    = opkg
 APP_ID   = org.webosinternals.${NAME}
+SIGNER   = org.webosinternals
+IPKGFLAGS = -p
 VERSION  = 0.1.8
 HOMEPAGE = http://opkg.googlecode.com
 MAINTAINER = WebOS Internals <support@webos-internals.org>
