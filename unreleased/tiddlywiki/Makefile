@@ -23,18 +23,30 @@ SRC_GIT = git://git.webos-internals.org/applications/tiddlywiki.git
 
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_arm7.ipk
+package: ipkgs/${APP_ID}_${VERSION}_arm7.ipk ipkgs/${APP_ID}_${VERSION}_arm6.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
 include ../../support/package.mk
 
 include ../../support/download.mk
 
-build/.built-${VERSION} build/.unpack: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+build/.unpack: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/all/usr/palm/applications/${APP_ID}
 	tar -C build/all/usr/palm/applications/${APP_ID} -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build/all/usr/palm/applications/${APP_ID}/.git*
 	touch $@
 
+build/.built-${VERSION}: build/armv6.built build/armv7.built build/i686.built
+	touch $@
+
+build/%.built: build/.unpacked
+	rm -rf build/$*
+	mkdir -p build/cgi-bin
+	install -m 755 build/binaries/$*/savetiddlywiki.cgi build/cgi-bin
+	touch $@
+
+
 .PHONY: clobber
 clobber::
 	rm -rf build
+
+
