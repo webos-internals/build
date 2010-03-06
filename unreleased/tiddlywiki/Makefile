@@ -1,7 +1,7 @@
 NAME     = tiddlywiki
 APP_ID   = de.daemon.tiddlywiki
 SIGNER   = de.daemon
-VERSION  = 1.0.0-1
+VERSION  = 1.0.0-2
 DEPENDS  = mobi.optware.lighttpd
 HOMEPAGE = http://www.daemon.de/PalmPreTiddlyWiki
 MAINTAINER = debilater
@@ -23,7 +23,7 @@ SRC_GIT = git://git.webos-internals.org/applications/tiddlywiki.git
 
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_arm7.ipk ipkgs/${APP_ID}_${VERSION}_arm6.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
+package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_armv6.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
 include ../../support/package.mk
 
 include ../../support/download.mk
