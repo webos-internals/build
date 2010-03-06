@@ -3,12 +3,13 @@ PATCH = top-bar/${NAME}.patch
 TITLE = No Date
 DESCRIPTION = Remove date from device menu.
 CATEGORY = Top Bar
-VERSIONS = 1.3.5-3
+VERSIONS = 1.3.5-3 1.4.0-26
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
 
 include ../common.mk
+
 include ../modifications.mk
 
 MAINTAINER = zhzyg <emailtodonald@gmail.com>

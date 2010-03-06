@@ -1,14 +1,15 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = email/${NAME}.patch
 TITLE = Delete From Notification
-DESCRIPTION = This patch lets you delete the email displayed in the notification bar. Once deleted the sync should send an update to your Pre to either remove the notification or update the notification with the next new email.<br/><br/>Changelog:<br/>11-23-09: Handle deletes better - now clear stage after every delete. Fix single-email-template for line that was to long aparently.
+DESCRIPTION = This patch lets you delete the email displayed in the notification bar. Once deleted the sync should send an update to your Pre to either remove the notification or update the notification with the next new email.
 CATEGORY = Email
-VERSIONS = 1.3.5-9
+VERSIONS = 1.3.5-9 1.4.0-26
 ICON = http://www.webos-internals.org/images/2/29/Icon_WebOSInternals_Patches_Email.png
-SCREENSHOTS = [\"http://www.webos-internals.org/images/b/b4/Email-delete-from-notification-1.jpg\"]
+SCREENSHOTS = [ \"http://www.webos-internals.org/images/b/b4/Email-delete-from-notification-1.jpg\" ]
 META_SUB_VERSION = 3
 
 include ../common.mk
+
 include ../modifications.mk
 
 MAINTAINER = lclarkjr <lclarkjr@gmail.com>
