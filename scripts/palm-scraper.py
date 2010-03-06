@@ -149,15 +149,6 @@ class PackageHandler(ContentHandler):
 
             self.json += "\"Source\":\"%s\", " % self.url
 
-            if (self.icon and self.id and self.version and self.price == 0):
-                regexp = re.compile("^http://cdn.downloads.palm.com/public/([0-9]+)/.*")
-                m = regexp.match(self.icon)
-                if (m):
-                    self.appnumber = m.group(1)
-                    self.filename = self.id + "_" + self.version + "_all.ipk"
-                    self.url = "https://cdn.downloads.palm.com/apps/" + self.appnumber + "/files/" + self.filename
-                    self.json += "\"Filename\":\"%s\", " %   ("apps/" + self.appnumber + "/files/" + self.filename)
-
             self.json += "\"Type\":\"AppCatalog\", "
 
             if (self.license):
@@ -180,13 +171,6 @@ class PackageHandler(ContentHandler):
                 self.json += "\"Countries\":[" + ','.join(self.countries) + "], "
 
             self.json += "\"Feed\":\"Palm %s\" }" % sys.argv[3]
-
-            if (self.filename and self.price == 0):
-                if (not os.path.exists(sys.argv[2] + "/" + self.filename)):
-                    sys.stderr.write("Fetching: " + self.filename + "\n")
-                    os.system("curl -k -R -L -o " + sys.argv[2] + "/" + self.filename + " " + self.url)
-                if (os.path.exists(sys.argv[2] + "/" + self.filename)):
-                    files[self.filename] = 1
 
             print "Package: " + self.id
             print "Version: " + self.version
@@ -223,8 +207,3 @@ saxparser.setContentHandler(feedprint)
                         
 datasource = open(sys.argv[1],"r")
 saxparser.parse(datasource)
-
-# for f in os.listdir(sys.argv[2]):
-#     if (not files.has_key(f)):
-#         sys.stderr.write(sys.argv[2] + "/" + f + "\n")
-#         os.remove(sys.argv[2] + "/" + f)
