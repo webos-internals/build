@@ -30,19 +30,35 @@ include ../../support/download.mk
 
 build/.unpack: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
-	mkdir -p build/all/usr/palm/applications/${APP_ID}
-	tar -C build/all/usr/palm/applications/${APP_ID} -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	rm -rf build/all/usr/palm/applications/${APP_ID}/.git*
+	mkdir -p build/src
+	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	mv build/src/binaries build/binaries
 	touch $@
 
 build/.built-${VERSION}: build/armv6.built build/armv7.built build/i686.built
 	touch $@
 
-build/%.built: build/.unpacked
-	rm -rf build/$*
-	mkdir -p build/cgi-bin
-	install -m 755 build/binaries/$*/savetiddlywiki.cgi build/cgi-bin
+build/%.built-${VERSION}: build/.unpack
+	rm -f $@
+	mkdir -p build/$*/usr/palm/applications/${APP_ID}/cgi-bin
+	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/control
+	install -m 755 build/binaries/$*/savetiddlywiki.cgi build/$*/usr/palm/applications/${APP_ID}/cgi-bin/
 	touch $@
+
+build/%/CONTROL/postinst:
+	rm -f $@
+	mkdir -p build/$*/CONTROL
+	install -m 0775 build/src/control/postinst build/$*/CONTROL
+	chmod ugo+x $@
+
+build/%/CONTROL/prerm:
+	rm -f $@
+	mkdir -p build/$*/CONTROL
+	install -m 0775 build/src/control/prerm build/$*/CONTROL
+	chmod ugo+x $@
+
 
 
 .PHONY: clobber
