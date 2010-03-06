@@ -13,10 +13,10 @@ CATEGORY = Utilities
 ICON	= http://www.daemon.de/idisk/palmpre/tiddlywiki/icon.png
 LICENSE  = GPL
 SCREENSHOTS = [\
-\"http://www.daemon.de/idisk/palmpre/tiddlywiki/tiddlywiki_2010-03-03_233233.png\",
-\"http://www.daemon.de/idisk/palmpre/tiddlywiki/tiddlywiki_2010-03-03_214556.png\",
-\"http://www.daemon.de/idisk/palmpre/tiddlywiki/tiddlywiki_2010-03-03_214623.png\",
-\"http://www.daemon.de/idisk/palmpre/tiddlywiki/tiddlywiki_2010-03-03_214636.png\",
+\"http://www.daemon.de/idisk/palmpre/tiddlywiki/tiddlywiki_2010-03-03_233233.png\",\
+\"http://www.daemon.de/idisk/palmpre/tiddlywiki/tiddlywiki_2010-03-03_214556.png\",\
+\"http://www.daemon.de/idisk/palmpre/tiddlywiki/tiddlywiki_2010-03-03_214623.png\",\
+\"http://www.daemon.de/idisk/palmpre/tiddlywiki/tiddlywiki_2010-03-03_214636.png\",\
 \"http://www.daemon.de/idisk/palmpre/tiddlywiki/tiddlywiki_2010-03-03_220301.png\" ]
 
 SRC_GIT = git://git.webos-internals.org/applications/tiddlywiki.git
@@ -28,17 +28,23 @@ include ../../support/package.mk
 
 include ../../support/download.mk
 
-build/.unpack: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+.PHONY: unpack
+unpack: build/.unpacked
+
+build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mv build/src/binaries build/binaries
 	touch $@
 
-build/.built-${VERSION}: build/armv6.built build/armv7.built build/i686.built
+.PHONY: build
+build: build/.built-${VERSION}
+
+build/.built-${VERSION}: build/armv6.built-${VERSION} build/armv7.built-${VERSION} build/i686.built-${VERSION}
 	touch $@
 
-build/%.built-${VERSION}: build/.unpack
+build/%.built-${VERSION}: build/.unpacked
 	rm -f $@
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/cgi-bin
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
