@@ -1,7 +1,7 @@
 NAME     = tiddlywiki
 APP_ID   = de.daemon.tiddlywiki
 SIGNER   = de.daemon
-VERSION  = 1.0.0
+VERSION  = 1.0.0-1
 DEPENDS  = mobi.optware.lighttpd
 HOMEPAGE = http://www.daemon.de/PalmPreTiddlyWiki
 MAINTAINER = debilater
