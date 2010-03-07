@@ -1,14 +1,14 @@
 NAME     = tiddlywiki
 APP_ID   = de.daemon.tiddlywiki
 SIGNER   = de.daemon
-VERSION  = 1.0.1
+VERSION  = 1.0.2
 DEPENDS  = mobi.optware.lighttpd
 HOMEPAGE = http://www.daemon.de/PalmPreTiddlyWiki
 MAINTAINER = debilater
 TITLE   = Tiddlywiki for Palm Pre
 TYPE	= Application
 DESCRIPTION = TiddlyWiki is a single-file, self-contained wiki for managing micro-content, written in JavaScript. This is the port to the Palm Pre platform based on ITW (http://itw.bidix.info/). It requires lighttpd to be installed which it uses to save itself via a CGI script to the usb drive. No network connectivity is required to use it. You can copy the wikifile (www/itw.html) to your desktop, modify it there and copy it back to the palm.
-CHANGELOG = 1.0.1: added help, enhanced about, added on-device restore feature<br/>1.0.0: initial public test release
+CHANGELOG = 1.0.2: missed updated cgi in 1.0.1<br/>1.0.1: added help, enhanced about, added on-device restore feature<br/>1.0.0: initial public test release
 CATEGORY = Utilities
 ICON	= http://www.daemon.de/idisk/palmpre/tiddlywiki/icon.png
 LICENSE  = GPL
