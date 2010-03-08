@@ -1,12 +1,12 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = google-maps/${NAME}.patch
 TITLE = Start in Fullscreen
-DESCRIPTION = Starts Google Maps in fullscreen mode which can later be toggled on and off using the forward gesture.
+DESCRIPTION = Starts Google Maps in fullscreen mode which can later be toggled on and off with a tap-hold on the screen.
 CATEGORY = Google Maps
-VERSIONS = 1.3.5-22 1.4.0-11
-ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
+VERSIONS = 1.3.5-22 1.4.0-28
+ICON = http://www.webos-internals.org/images/c/c3/Icon_WebOSInternals_Patches_SprintNav.png
 SCREENSHOTS =
-META_SUB_VERSION = 1 
+META_SUB_VERSION = 1
 
 include ../common.mk
 
