@@ -1,7 +1,7 @@
 NAME     = duke3d
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 1.0.5
+VERSION  = 1.0.6
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Duke3D
 MAINTAINER = Henk Jonas
 TITLE   = Duke3D
