@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ -z "$IPKG_OFFLINE_ROOT" ]; then
+  mount -o remount,rw /
+fi
+
+# Remove the executable symlink
+rm -f /usr/bin/opkg
+
+exit 0

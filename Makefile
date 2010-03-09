@@ -155,12 +155,16 @@ package-feeds: toolchain
 
 toolchain: toolchain/ipkg-utils/ipkg-make-index \
 	   toolchain/cs08q1armel/build/arm-2008q1 \
+	   toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu \
 	   staging/usr/include/mjson/json.h \
 	   staging/usr/include/lunaservice.h \
 	   staging/usr/include/glib.h
 
 toolchain/cs08q1armel/build/arm-2008q1:
 	${MAKE} -C toolchain/cs08q1armel unpack
+
+toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu:
+	${MAKE} -C toolchain/i686-unknown-linux-gnu unpack
 
 staging/usr/include/mjson/json.h:
 	${MAKE} -C toolchain/mjson stage
@@ -174,6 +178,7 @@ staging/usr/include/glib.h:
 upload:
 	rsync -avr ipkgs/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/
 	rsync -avr ipkgs/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/
+	rsync -avr ipkgs/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/
 
 testing: webos-internals-testing webos-patches-testing optware-testing regression-testing
 
@@ -181,18 +186,22 @@ webos-internals-testing:
 	${MAKE} SUBDIRS="unreleased" webos-internals-index
 	rsync -avr ipkgs/webos-internals/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
 	rsync -avr ipkgs/webos-internals/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
+	rsync -avr ipkgs/webos-internals/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
 
 webos-patches-testing: patches-index
 	rsync -avr ipkgs/webos-patches/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 	rsync -avr ipkgs/webos-patches/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
+	rsync -avr ipkgs/webos-patches/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 
 optware-testing: optware-index
 	rsync -avr ipkgs/optware/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/optware/testing/
 	rsync -avr ipkgs/optware/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/optware/testing/
+	rsync -avr ipkgs/optware/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/optware/testing/
 
 regression-testing: regression-index
 	rsync -avr ipkgs/regression-testing/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/regression-testing/
 	rsync -avr ipkgs/regression-testing/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/regression-testing/
+	rsync -avr ipkgs/regression-testing/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/regression-testing/
 
 distclean: clobber
 	find toolchain -mindepth 1 -maxdepth 1 -type d -print | \
