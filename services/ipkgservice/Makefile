@@ -2,7 +2,6 @@ NAME     = ipkgservice
 CLASS    = IPKGService
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-IPKGFLAGS = -p
 VERSION  = 0.9.42
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
 MAINTAINER = WebOS Internals <support@webos-internals.org>
