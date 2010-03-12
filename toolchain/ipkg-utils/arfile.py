@@ -79,6 +79,8 @@ class ArFile:
             descriptor = l.split()
 #            print descriptor
             memberName = descriptor[0]
+
+            # Handle GNU-style extended filenames
             if memberName[0] == '/':
                 if memberName[1] == '/':
                     # Read past the extended directory
@@ -95,8 +97,18 @@ class ArFile:
                     memberName = descriptor[0]
                 else:
                     size = int(memberName[1:])
-                    descriptor[0] = self.filenames[size:].split()[0]
-                    memberName = descriptor[0]
+                    memberName = self.filenames[size:].split()[0]
+                    descriptor[0] = memberName
+
+            # Handle BSD-style extended filenames
+            if memberName[0] == '#' and memberName[1] == '1' and memberName[2] == '/':
+                # Read the extended directory
+                size = int(memberName[3:])
+                memberName = self.f.read(size)
+                while (memberName[-1] == '\x00'):
+                    memberName = memberName[:-1]
+                descriptor[0] = memberName
+                descriptor[5] = int(descriptor[5]) - size
                 
             size = int(descriptor[5])
             if memberName[-1] == '/': memberName = memberName[:-1]
@@ -128,6 +140,8 @@ class ArFile:
             descriptor = l.split()
 #            print descriptor
             memberName = descriptor[0]
+
+            # Handle GNU-style extended filenames
             if memberName[0] == '/':
                 if memberName[1] == '/':
                     # Read past the extended directory
@@ -144,9 +158,19 @@ class ArFile:
                     memberName = descriptor[0]
                 else:
                     size = int(memberName[1:])
-                    descriptor[0] = self.filenames[size:].split()[0]
-                    memberName = descriptor[0]
-                
+                    memberName = self.filenames[size:].split()[0]
+                    descriptor[0] = memberName
+
+            # Handle BSD-style extended filenames
+            if memberName[0] == '#' and memberName[1] == '1' and memberName[2] == '/':
+                # Read the extended directory
+                size = int(memberName[3:])
+                memberName = self.f.read(size)
+                while (memberName[-1] == '\x00'):
+                    memberName = memberName[:-1]
+                descriptor[0] = memberName
+                descriptor[5] = int(descriptor[5]) - size
+
             size = int(descriptor[5])
             if memberName[-1] == '/': memberName = memberName[:-1]
             self.directory[memberName] = descriptor + [self.f.tell()]
