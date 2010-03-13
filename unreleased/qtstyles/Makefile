@@ -11,7 +11,7 @@ TYPE	 = Application
 CATEGORY = Demos
 ICON	 = http://www.webos-internals.org/images/2/2e/Net.griffin.qt.png
 LICENSE  = LGPL 2.1
-SCREENSHOTS = [\ 
+SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/0/07/Net.griffin.qtstyles.png\", \
 \"http://www.webos-internals.org/images/3/39/Net.griffin.qtstyles_cde.png\", \
 \"http://www.webos-internals.org/images/b/b3/Net.griffin.qtstyles_cleanlooks.png\", \
@@ -41,9 +41,9 @@ build/%.built-${VERSION}: build/.unpack
 	rm -f $@
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
-        install -m 755 build/binaries/$*/* build/$*/usr/palm/applications/${APP_ID}/
-        install -m 755 build/src/start.sh build/$*/usr/palm/applications/${APP_ID}/
-      	touch $@
+	install -m 755 build/binaries/$*/* build/$*/usr/palm/applications/${APP_ID}/
+	install -m 755 build/src/start.sh build/$*/usr/palm/applications/${APP_ID}/
+	touch $@
 
 .PHONY: clobber
 clobber::
