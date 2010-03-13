@@ -1,19 +1,20 @@
-NAME     = qt
-TITLE    = Qt Framework
+NAME     = qtopengl
+TITLE    = Qt OpenGL Demo
 APP_ID   = net.griffin.${NAME}
 VERSION  = 4.6.2
+DEPENDS  = net.griffin.qt
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Qt
 MAINTAINER = Griffin INet, Inc. <darron@griffin.net>
-DESCRIPTION = Qt framework libraries, needed to run Qt applications
+DESCRIPTION = OpenGL ES2 demo for the Qt framework
 CHANGELOG = 4.6.2: Initial release
-TYPE	 = Linux Application
-CATEGORY = Infrastructure
+TYPE	 = Application
+CATEGORY = Applications
 ICON	 = http://www.webos-internals.org/images/2/2e/Net.griffin.qt.png
 LICENSE  = LGPL 2.1
 SCREENSHOTS = [\
  ]
 
-SRC_GIT = git://git.webos-internals.org/qt/qt.git
+SRC_GIT = git://git.webos-internals.org/qt/qtopengl.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk
