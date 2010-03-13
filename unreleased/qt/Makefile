@@ -2,14 +2,14 @@ NAME     = qt
 TITLE    = Qt Framework
 APP_ID   = net.griffin.${NAME}
 VERSION  = 4.6.2
-HOMEPAGE = 
-MAINTAINER = 
-DESCRIPTION = 
-CHANGELOG = 
+HOMEPAGE = http://
+MAINTAINER = Griffin INet, Inc. <darron@griffin.net>
+DESCRIPTION = Qt framework libraries, needed to run Qt applications
+CHANGELOG = 4.6.2: Initial release
 TYPE	 = Linux Application
 CATEGORY = Infrastructure
-ICON	 = 
-LICENSE  = 
+ICON	 = http://www.webos-internals.org/images/2/2e/Net.griffin.qt.png
+LICENSE  = LGPL 2.1
 SCREENSHOTS = [\
  ]
 
