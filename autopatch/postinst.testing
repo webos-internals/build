@@ -1,0 +1,398 @@
+#!/bin/sh
+
+APP_DIR=
+PATCH_NAME=
+
+if [ -f "/media/cryptofs/apps/usr/bin/lsdiff" ] ; then
+  LSDIFF=/media/cryptofs/apps/usr/bin/lsdiff
+else
+  LSDIFF=/var/usr/bin/lsdiff
+fi
+
+if [ -f "/media/cryptofs/apps/usr/bin/patch" ] ; then
+  PATCH_EXEC=/media/cryptofs/apps/usr/bin/patch
+else
+  PATCH_EXEC=/var/usr/bin/patch
+fi
+
+if [ -f "/media/cryptofs/apps/usr/bin/file" ] ; then
+  FILE_UTIL=/media/cryptofs/apps/usr/bin/file
+else
+  FILE_UTIL=/var/usr/bin/file
+fi
+
+FILE_LIST=`$LSDIFF --strip=1 $APP_DIR/$PATCH_NAME`
+IPKG_INFO_DIR=/usr/lib/ipkg/info
+PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
+PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
+PATCH_LOG=/media/internal/webos-patches.log
+VERSION=aupt-3
+
+do_failure() {
+  echo "*** FAILED ***" >> $PATCH_LOG
+  exit 1
+}
+
+failed_install() {
+  echo "" >> $PATCH_LOG
+  echo "----------------------------------" >> $PATCH_LOG
+  echo "Installation FAILED!" >> $PATCH_LOG
+  echo "----------------------------------" >> $PATCH_LOG
+  $PATCH_EXEC -s -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME | tee -a $PATCH_LOG 1>&2
+  echo "ls -R ${APP_DIR}" >> $PATCH_LOG
+  ls -R ${APP_DIR} 2>&1 >> $PATCH_LOG
+  do_failure
+}
+
+#find_incompatible() {
+  #for i in `ls $PATCH_CONTROL_DIR/*.patch`
+  #do
+    #for j in `$LSDIFF --strip=1 $i`
+    #do
+      #if [ "$file" = "/$j" ]
+      #then
+        #echo "  Incompatible package: `basename $i .patch`" | tee -a $PATCH_LOG 1>&2
+      #fi
+    #done
+  #done
+#}
+
+install_files() {
+  if [ -d $APP_DIR/additional_files ]
+  then
+    for i in `find $APP_DIR/additional_files -type f`
+    do
+      file=${i#$APP_DIR/additional_files}
+      echo "Installing file $file" | tee -a $PATCH_LOG
+      mkdir -p `dirname $file`
+      cp $i $file
+    done
+
+    if [ "$is_theme" = "yes" ]
+    then
+      echo "Installed THEME: `basename $APP_DIR`" | tee -a $PATCH_LOG
+      echo "`basename $APP_DIR`" > $PATCH_CONTROL_DIR/installed_theme
+    fi
+  fi
+}
+
+verify_files() {
+  if [ -d $APP_DIR/additional_files ]
+  then
+    for i in `find $APP_DIR/additional_files -type f`
+    do
+      file=${i#$APP_DIR/additional_files}
+      if [ -e $file ]
+      then
+        # TODO: for now just fail if the file exists
+        do_failure
+        if [ ! e $FILE_UTIL ]
+        then
+          echo "ERROR: Missing file utility, cannot replace files" | tee -a $PATCH_LOG 1>&2
+          do_failure
+        fi
+
+        if [ "`$FILE_UTIL $file |grep PNG`" = "" ] && [ "`$FILE_UTIL $file |grep JPEG`" = "" ]
+        then
+          echo "ERROR: Unsupported file type: $file" | tee -a $PATCH_LOG 1>&2
+          echo "  `$FILE_UTIL $file`" | tee -a $PATCH_LOG 1>&2
+          do_failure
+        fi
+
+        if [ "`$FILE_UTIL $i |grep PNG`" = "" ] && [ "`$FILE_UTIL $i |grep JPEG`" = "" ]
+        then
+          echo "ERROR: Unsupported file type: $i" | tee -a $PATCH_LOG 1>&2
+          echo "  `$FILE_UTIL $i`" | tee -a $PATCH_LOG 1>&2
+          do_failure
+        fi
+
+        current_md5sum=`md5sum $file | awk '{print $1}'`
+        new_md5sum=`md5sum $APP_DIR/$file | awk '{print $1}'`
+
+        if [ "$current_md5sum" ] != [ "$new_md5sum" ] 
+        then
+          if [ -e $PATCH_CONTROL_DIR/installed_theme ]
+          then
+            echo "ERROR: A theme is already installed!" | tee -a $PATCH_LOG 1>&2
+            echo "  Installed theme: `cat $PATCH_CONTROL_DIR/installed_theme`" | tee -a $PATCH_LOG 1>&2
+            do_failure
+          fi
+
+          if [ -e $file.webosinternals.orig ]
+          then
+            echo "ERROR: A backup already exists!" | tee -a $PATCH_LOG 1>&2
+            echo "  Backup file: $file.webosinternals.orig" | tee -a $PATCH_LOG 1>&2
+            do_failure
+          fi
+        fi
+        is_theme="yes"
+      fi
+    done
+
+    for i in `find $APP_DIR/additional_files -type f`
+    do
+     file=${i#$APP_DIR/additional_files}
+     FILE_LIST="$FILE_LIST $file"
+    done
+  fi
+}
+
+# MAIN
+if [ ! -e $PATCH_LOG ]
+then
+  touch $PATCH_LOG
+  echo "******* Patch Log Created by postinst $(date) ************" >> $PATCH_LOG
+fi
+
+echo "" >> $PATCH_LOG
+echo "------------------------------------------------------" >> $PATCH_LOG
+echo "PATCH INSTALLATION $(date)" >> $PATCH_LOG
+echo "------------------------------------------------------" >> $PATCH_LOG
+echo $APP_DIR/$PATCH_NAME >> $PATCH_LOG
+
+if [ "$IPKG_OFFLINE_ROOT" = "" ]
+then
+  echo "ERROR: IPKG_OFFLINE_ROOT must be supplied to the postinst" | tee -a $PATCH_LOG 1>&2
+  do_failure
+fi
+
+if [ "$APP_DIR" = "" ] || [ "$PATCH_NAME" = "" ]
+then
+  echo "ERROR: APP_DIR and PATCH_NAME both must be set in postinst" | tee -a $PATCH_LOG 1>&2
+  do_failure
+fi
+
+if [ ! -e $PATCH_EXEC ]
+then
+  echo "ERROR: Cannot find $PATCH_EXEC" | tee -a $PATCH_LOG 1>&2
+  do_failure
+fi
+
+if [ ! -e $LSDIFF ]
+then
+  echo "ERROR: Cannot find $LSDIFF" | tee -a $PATCH_LOG 1>&2
+  do_failure
+fi
+
+if [ ! -d $PATCH_CONTROL_DIR ]
+then
+  rm -rf $PATCH_CONTROL_DIR
+  mkdir -p $PATCH_CONTROL_DIR || do_failure
+fi
+
+if [ -e $PATCH_CONTROL_DIR/backups ]
+then
+  touch $PATCH_CONTROL_DIR/file_list
+  rm -f $PATCH_CONTROL_DIR/translated_backups
+  cat $PATCH_CONTROL_DIR/backups | tr '\0' ' ' > $PATCH_CONTROL_DIR/translated_backups
+  while read inp
+  do
+    patch_technology=`echo $inp | awk '{print $(NF)}' |grep aupt`
+    if [ "$patch_technology" = "" ]
+    then
+      file=`echo $inp | awk '{print $(NF)}'`
+    else
+      file=`echo $inp | awk '{print $(NF-1)}'`
+    fi
+
+    if [ -e $file ]
+    then
+      echo "$file $patch_technology" >> $PATCH_CONTROL_DIR/file_list
+    fi
+  done < $PATCH_CONTROL_DIR/translated_backups
+
+  rm -f $PATCH_CONTROL_DIR/translated_backups
+  rm -f $PATCH_CONTROL_DIR/backups
+fi
+
+if [ ! -e $PATCH_CONTROL_DIR/file_list ]
+then
+  touch $PATCH_CONTROL_DIR/file_list || do_failure
+fi
+
+if [ -e $PATCH_CONTROL_DIR/packages ]
+then
+  touch $PATCH_PACKAGES_LIST
+  cat $PATCH_CONTROL_DIR/packages >> $PATCH_PACKAGES_LIST
+  rm -f $PATCH_CONTROL_DIR/packages
+fi
+
+if [ ! -e $PATCH_PACKAGES_LIST ]
+then
+  touch $PATCH_PACKAGES_LIST || do_failure
+fi
+
+#echo "" >> $PATCH_LOG
+#echo "------------------------------------------------------" >> $PATCH_LOG
+#echo "Checking for incompatible backup files..." >> $PATCH_LOG
+#echo "------------------------------------------------------" >> $PATCH_LOG
+
+#while read i
+#do
+  #backup=`echo $i | awk '{print $1}'`
+  #version=`echo $i | awk '{print $2}'`
+
+  #if [ "$version" != "$VERSION" ]
+  #then
+    #echo "Incompatible backup file: $backup" >> $PATCH_LOG
+    #INCOMPATIBLE_BACKUPS="$INCOMPATIBLE_BACKUPS $backup"
+  #fi
+#done < $PATCH_CONTROL_DIR/backups
+
+#for i in $INCOMPATIBLE_BACKUPS
+#do
+  #for j in $FILE_LIST
+  #do
+    #file=/$j
+    #if [ "$file" = "$i" ]
+    #then
+      #echo "ERROR: A patch using an incompatible patch technology has already touched a file in this patch " | tee -a $PATCH_LOG 1>&2
+      #echo "  file: $file" | tee -a $PATCH_LOG 1>&2
+
+      #find_incompatible
+
+      #echo "" >> $PATCH_LOG
+      #echo "----------------------------------" >> $PATCH_LOG
+      #echo "Checking all packages for incompatibilities..." >> $PATCH_LOG
+      #echo "----------------------------------" >> $PATCH_LOG
+      #while read k
+      #do
+        #package=`echo $k | awk '{print $1}'`
+        #version=`echo $k | awk '{print $2}'`
+
+        #if [ "$version" = "" ]
+        #then
+          #version=apt-1
+        #fi
+
+        #if [ "$version" != "$VERSION" ]
+        #then
+          #echo "WARNING: Package: $package uses incompatible patch technology: $version" | tee -a $PATCH_LOG 1>&2
+        #fi
+      #done < $PATCH_PACKAGES_LIST
+
+      #do_failure
+    #fi
+  #done
+#done
+
+echo "" >> $PATCH_LOG
+echo "----------------------------------" >> $PATCH_LOG
+echo "Dry run patch attempt..." >> $PATCH_LOG
+echo "----------------------------------" >> $PATCH_LOG
+
+$PATCH_EXEC -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 2>&1 >> $PATCH_LOG
+
+if [ $? -ne 0 ]
+then
+  echo "" >> $PATCH_LOG
+  echo "----------------------------------" >> $PATCH_LOG
+  echo "dry run failed, checking if -R would succeed" >> $PATCH_LOG
+  echo "----------------------------------" >> $PATCH_LOG
+  $PATCH_EXEC -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 2>&1 >> $PATCH_LOG || failed_install
+  patch_applied=yes
+  echo "Interestingly, the patch seems to already be applied" | tee -a $PATCH_LOG
+fi
+
+echo "" >> $PATCH_LOG
+echo "----------------------------------" >> $PATCH_LOG
+echo "Verify file replacements..." >> $PATCH_LOG
+echo "----------------------------------" >> $PATCH_LOG
+verify_files
+
+echo "" >> $PATCH_LOG
+echo "----------------------------------" >> $PATCH_LOG
+echo "Creating md5sums list..." >> $PATCH_LOG
+echo "----------------------------------" >> $PATCH_LOG
+rm -f $APP_DIR/md5sums
+touch $APP_DIR/md5sums
+
+for i in $FILE_LIST
+do
+  file=/$i
+
+  if [ -e $file ]
+  then
+    echo "Find package for file $file" >> $PATCH_LOG
+    for j in `cat $APP_DIR/package_list`
+    do
+      md5sum_line=`grep -h $file $IPKG_INFO_DIR/$j.md5sums`
+      if [ "$md5sum_line" != "" ]
+      then
+        echo "  FOUND in package $j" >> $PATCH_LOG
+        echo "  $md5sum_line" >> $PATCH_LOG
+        echo $md5sum_line >> $APP_DIR/md5sums
+        palm_md5sum=`echo $md5sum_line | awk '{print $1}'`
+      else
+        echo "  Not in package $j" >> $PATCH_LOG
+      fi
+    done
+  fi
+
+  if [ "$palm_md5sum" = "" ]
+  then
+    echo "File not found in package_list, checking all *.md5sums" >> $PATCH_LOG
+    md5sum_line=`grep -h $file $IPKG_INFO_DIR/*.md5sums`
+    if [ "$md5sum_line" != "" ]
+    then
+      echo "  FOUND" >> $PATCH_LOG
+      echo "  $md5sum_line" >> $PATCH_LOG
+      echo $md5sum_line >> $APP_DIR/md5sums
+      palm_md5sum=`echo $md5sum_line | awk '{print $1}'`
+    else
+      echo "  File not found in md5sums, most likely not a stock WebOS file" >> $PATCH_LOG
+    fi
+  fi
+
+  if [ ! -e $file.webosinternals.orig ]
+  then
+    if [ ! -e $file ]
+    then
+      echo "Created file, generate empty backup $file.webosinternals.orig" >> $PATCH_LOG
+      mkdir -p `dirname $file`
+      touch $file.webosinternals.orig
+    else
+      cp $file $file.webosinternals.orig
+      echo "Backup file $file" >> $PATCH_LOG
+      echo "  `md5sum $file.webosinternals.orig`" >> $PATCH_LOG
+    fi
+    created_backup="yes"
+  elif [ -e $file ]
+  then
+    file_md5sum=`md5sum $file | awk '{print $1}'`
+
+    if [ "$file_md5sum" = "$palm_md5sum" ]
+    then
+      rm -f $file.webosinternals.orig
+      cp $file $file.webosinternals.orig
+      created_backup="yes"
+    fi
+  fi
+
+  if [ "$created_backup" = "yes" ] || [ ! -s $file.webosinternals.orig ] || \
+     [ "`md5sum $file.webosinternals.orig |awk '{print $1}'`" = "$palm_md5sum" ]
+  then
+    tmpvar=`echo $file | tr '/' '.'`
+    sed -i -e /$tmpvar/d $PATCH_CONTROL_DIR/file_list
+    echo "$file $VERSION" >> $PATCH_CONTROL_DIR/file_list
+  fi
+done
+
+sed -i -e /`basename $APP_DIR`/d $PATCH_PACKAGES_LIST
+basename "$APP_DIR $VERSION">> $PATCH_PACKAGES_LIST
+
+cp $APP_DIR/$PATCH_NAME $PATCH_CONTROL_DIR/$PATCH_NAME
+
+if [ "$patch_applied" != "yes" ]
+then
+  echo "" | tee -a $PATCH_LOG
+  echo "----------------------------------" | tee -a $PATCH_LOG
+  echo "Actually applying the patch!" | tee -a $PATCH_LOG
+  echo "----------------------------------" | tee -a $PATCH_LOG
+  install_files
+  $PATCH_EXEC -p1 -d / --no-backup-if-mismatch < ${APP_DIR}/$PATCH_NAME 2>&1 | tee -a $PATCH_LOG || do_failure
+fi
+
+echo "SUCCESS" | tee -a $PATCH_LOG
+
+exit 0
