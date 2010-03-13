@@ -41,7 +41,7 @@ build/%.built-${VERSION}: build/.unpack
 	rm -f $@
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
-	cp -r build/binaries/$*/qt build/$*/usr/palm/applications/${APP_ID}/
+	cp -r build/binaries/$*/* build/$*/usr/palm/applications/${APP_ID}/
 	touch $@
 
 .PHONY: clobber
