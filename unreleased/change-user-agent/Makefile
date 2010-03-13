@@ -1,7 +1,7 @@
 NAME=change-user-agent
 BSPATCH_FILE=/usr/lib/libWebKitLuna.so
 PATCH=${BSPATCH_FILE}.bspatch
-VERSIONS = 1.4.0-1
+VERSIONS = 1.4.0-2
 TITLE = Change User Agent
 CATEGORY = WebKitLuna
 DESCRIPTION = Spoof user agent

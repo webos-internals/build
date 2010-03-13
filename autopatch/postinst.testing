@@ -138,11 +138,11 @@ verify_additional_files() {
     do
       file=${i#$APP_DIR/additional_files/}
       get_palm_md5sum
-      if [ "$palm_md5sum" != "" ] && [ "$palm_md5sum" != "`md5sum $file | awk '{print $1}'`" ]
+      if [ "$palm_md5sum" != "" ] && [ "$palm_md5sum" != "`md5sum /$file | awk '{print $1}'`" ]
       then
         echo "ERROR: File must be stock to replace" | tee -a $PATCH_LOG 1>&2
-        echo "  file: $file" | tee -a $PATCH_LOG 1>&2
-        echo "  md5um: `md5sum $file`" | tee -a $PATCH_LOG 1>&2
+        echo "  file: /$file" | tee -a $PATCH_LOG 1>&2
+        echo "  md5um: `md5sum /$file`" | tee -a $PATCH_LOG 1>&2
         echo "  palm_md5um: $palm_md5sum" | tee -a $PATCH_LOG 1>&2
         do_failure
       fi
