@@ -11,7 +11,7 @@ TYPE	 = Application
 CATEGORY = Demos
 ICON	 = http://www.webos-internals.org/images/2/2e/Net.griffin.qt.png
 LICENSE  = LGPL 2.1
-SCREENSHOTS = [\ \"http://www.webos-internals.org/images/7/78/Net.griffin.qttiles.png\"\
+SCREENSHOTS = [ \"http://www.webos-internals.org/images/7/78/Net.griffin.qttiles.png\"\
  ]
 
 SRC_GIT = git://git.webos-internals.org/qt/qttiles.git
