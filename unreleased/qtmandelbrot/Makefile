@@ -11,7 +11,8 @@ TYPE	 = Application
 CATEGORY = Demos
 ICON	 = http://www.webos-internals.org/images/2/2e/Net.griffin.qt.png
 LICENSE  = LGPL 2.1
-SCREENSHOTS = [ \"http://www.webos-internals.org/images/9/9a/Net.griffin.qtmandelbrot.png\"\
+SCREENSHOTS = [\
+\"http://www.webos-internals.org/images/9/9a/Net.griffin.qtmandelbrot.png\"\
  ]
 
 SRC_GIT = git://git.webos-internals.org/qt/qtmandelbrot.git
