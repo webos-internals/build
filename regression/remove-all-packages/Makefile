@@ -2,6 +2,7 @@ NAME     = remove-all-packages
 TITLE	 = Remove All Regression Testing Packages
 APP_ID   = org.webosinternals.regression.${NAME}
 SIGNER   = org.webosinternals
+BLDFLAGS = -p
 VERSIONS  = 1.0.0 2.0.0
 DESCRIPTION = Maintenance package to remove any other packages which intentionally prevent themselves being removed normally.  It does this whenever it is removed (but not when it is updated).
 TYPE	 = Service

@@ -2,6 +2,7 @@ NAME     = postinst-failure-on-upgrade
 TITLE	 = Post-Install Script Failure On Upgrade
 APP_ID   = org.webosinternals.regression.${NAME}
 SIGNER   = org.webosinternals
+BLDFLAGS = -p
 VERSIONS  = 1.0.0 2.0.0
 DESCRIPTION = Regression test for a post-install script failure on upgrade.
 TYPE	 = Service
