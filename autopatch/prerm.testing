@@ -2,6 +2,7 @@
 
 APP_DIR=
 PATCH_NAME=
+BSPATCH_FILE=
 
 if [ -f "/media/cryptofs/apps/usr/bin/lsdiff" ] ; then
   LSDIFF=/media/cryptofs/apps/usr/bin/lsdiff
@@ -21,12 +22,14 @@ else
   FILE_UTIL=/var/usr/bin/file
 fi
 
+BSPATCH_EXEC=/usr/bin/bspatch
+BSPATCH_NAME=`basename $BSPATCH_FILE`.bspatch
 FILE_LIST=`$LSDIFF --strip=1 $APP_DIR/$PATCH_NAME`
 IPKG_INFO_DIR=/usr/lib/ipkg/info
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
 PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
 PATCH_LOG=/media/internal/webos-patches.log
-VERSION=aupt-3
+VERSION=aupt-4
 
 do_failure() {
   echo "*** FAILED ***" >> $PATCH_LOG
@@ -44,7 +47,18 @@ failed_remove() {
   do_failure
 }
 
-remove_images() {
+remove_patch() {
+  if [ -e $APP_DIR/$PATCH_NAME ] && [ "$patch_unapplied" != "yes" ]
+  then
+    echo "" | tee -a $PATCH_LOG
+    echo "----------------------------------" | tee -a $PATCH_LOG
+    echo "Actually removing the patch!" | tee -a $PATCH_LOG
+    echo "----------------------------------" | tee -a $PATCH_LOG
+    $PATCH_EXEC -R -p1 -d / --no-backup-if-mismatch < ${APP_DIR}/$PATCH_NAME 2>&1 | tee -a $PATCH_LOG
+  fi
+}
+
+remove_additional_files() {
   if [ -d $APP_DIR/additional_files ]
   then
     for i in `find $APP_DIR/additional_files -type f`
@@ -61,12 +75,6 @@ remove_images() {
         rm $file
       fi
     done
-
-    if [ -e $PATCH_CONTROL_DIR/installed_theme ] && [ "`cat $PATCH_CONTROL_DIR/installed_theme`" = "`basename $APP_DIR`" ]
-    then
-      echo "Remove installed theme `basename $APP_DIR`" | tee -a $PATCH_LOG
-      rm $PATCH_CONTROL_DIR/installed_theme
-    fi
   fi
 }
 
@@ -160,7 +168,22 @@ echo "" >> $PATCH_LOG
 echo "------------------------------------------------------" >> $PATCH_LOG
 echo "PATCH REMOVAL $(date)" >> $PATCH_LOG
 echo "------------------------------------------------------" >> $PATCH_LOG
-echo $APP_DIR/$PATCH_NAME >> $PATCH_LOG
+
+if [ -e $APP_DIR/$BSPATCH_NAME ]
+then
+  echo $APP_DIR/$PATCH_NAME >> $PATCH_LOG
+fi
+
+if [ -e $APP_DIR/$BSPATCH_NAME ]
+then
+  echo $APP_DIR/$BSPATCH_NAME >> $PATCH_LOG
+  echo $BSPATCH_FILE >> $PATCH_LOG
+fi
+
+if [ -d $APP_DIR/additional_files ]
+then
+  echo "Contains additional files" >> $PATCH_LOG
+fi
 
 if [ "$IPKG_OFFLINE_ROOT" = "" ]
 then
@@ -168,10 +191,20 @@ then
   do_failure
 fi
 
-if [ "$APP_DIR" = "" ] || [ "$PATCH_NAME" = "" ]
+if [ "$APP_DIR" = "" ]
 then
-  echo "ERROR: APP_DIR and PATCH_NAME both must be set in prerm" | tee -a $PATCH_LOG 1>&2
+  echo "ERROR: APP_DIR must be set in prerm" | tee -a $PATCH_LOG 1>&2
   do_failure
+fi
+
+if [ ! -d $APP_DIR ]
+then
+  echo "ERROR: $APP_DIR is not a directory or does not exist!" | tee -a $PATCH_LOG 1>&2
+fi
+
+if [ ! -f $APP_DIR/$PATCH_NAME ] && [ ! -f $APP_DIR/$BSPATCH_NAME ] && [ ! -d ${APP_DIR}/additional_files ]
+then
+  echo "ERROR: Cannot find patch file, bspatch file or additonal_files!" | tee -a $PATCH_LOG 1>&2
 fi
 
 if [ ! -e $PATCH_EXEC ]
@@ -186,9 +219,15 @@ then
   do_failure
 fi
 
+if [ ! -e $BSPATCH_EXEC ]
+then
+  echo "ERROR: Cannot find $LSDIFF" | tee -a $PATCH_LOG 1>&2
+  do_failure
+fi
+
 check_for_ota
 
-if [ "$found_modified" != "" ]
+if [ "$found_modified" != "" ] && [ -e $APP_DIR/$PATCH_NAME ]
 then
   echo "" >> $PATCH_LOG
   echo "----------------------------------" >> $PATCH_LOG
@@ -209,16 +248,12 @@ then
       failed_remove
     else
       echo "Interestingly, the patch seems to already be unapplied" | tee -a $PATCH_LOG
+      patch_unapplied=yes
     fi
-  else
-    echo "" | tee -a $PATCH_LOG
-    echo "----------------------------------" | tee -a $PATCH_LOG
-    echo "Actually removing the patch!" | tee -a $PATCH_LOG
-    echo "----------------------------------" | tee -a $PATCH_LOG
-    remove_images
-    $PATCH_EXEC -R -p1 -d / --no-backup-if-mismatch < ${APP_DIR}/$PATCH_NAME 2>&1 | tee -a $PATCH_LOG
-  fi
 fi
+
+remove_patch
+remove_additional_files
 
 for i in $created_files
 do
@@ -275,8 +310,8 @@ done
 
 rm -f $PATCH_CONTROL_DIR/$PATCH_NAME
 sed -i -e /\^'`basename $APP_DIR` $VERSION'\$/d $PATCH_PACKAGES_LIST
-
 rm -rf ${APP_DIR}
+
 echo "SUCCESS" | tee -a $PATCH_LOG
 
 exit 0
