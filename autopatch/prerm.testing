@@ -48,7 +48,7 @@ failed_remove() {
 }
 
 remove_patch() {
-  if [ -e $APP_DIR/$PATCH_NAME ] && [ "$patch_unapplied" != "yes" ]
+  if [ -f $APP_DIR/$PATCH_NAME ] && [ "$patch_unapplied" != "yes" ]
   then
     echo "" | tee -a $PATCH_LOG
     echo "----------------------------------" | tee -a $PATCH_LOG
@@ -64,8 +64,8 @@ remove_additional_files() {
     for i in `find $APP_DIR/additional_files -type f`
     do
       file=${i#$APP_DIR/additional_files}
-      echo "Removing file $file" | tee -a $PATCH_LOG
-      if [ -e $file.webosinternals.orig ]
+      echo "Reverting file $file" | tee -a $PATCH_LOG
+      if [ -f $file.webosinternals.orig ]
       then
         mv $file.webosinternals.orig $file
       fi
@@ -76,6 +76,14 @@ remove_additional_files() {
       fi
     done
   fi
+}
+
+add_additional_files() {
+  for i in `find $APP_DIR/additional_files -type f`
+  do
+    file=${i#$APP_DIR/additional_files/}
+    FILE_LIST="$FILE_LIST $file"
+  done
 }
 
 check_for_ota() {
@@ -91,18 +99,18 @@ check_for_ota() {
     orig_palm_md5sum=""
     palm_md5sum=""
 
-    if [ -e $file ]
+    if [ -f $file ]
     then
       file_md5sum=`md5sum $file | awk '{print $1}'`
     fi
 
-    if [ -e $APP_DIR/md5sums ]
+    if [ -f $APP_DIR/md5sums ]
     then
       orig_palm_md5sum=`grep -h $file $APP_DIR/md5sums | awk '{print $1}'`
       echo "Palm md5sum when installed: $orig_palm_md5sum" >> $PATCH_LOG
     fi
   
-    if [ -e $APP_DIR/package_list ]
+    if [ -f $APP_DIR/package_list ]
     then
       for j in `cat $APP_DIR/package_list`
       do
@@ -118,7 +126,7 @@ check_for_ota() {
     if [ "$palm_md5sum" = "" ] && \
        [ "`grep $file $IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/*.list`" = "" ]
     then
-      echo "Check for md5sum in $IPKG_INFO_DIR"
+      echo "Check for md5sum in $IPKG_INFO_DIR" | tee -a $PATCH_LOG
       palm_md5sum=`grep -h $file $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`
       echo "  md5sum: $palm_md5sum" >> $PATCH_LOG
     fi
@@ -158,7 +166,7 @@ check_for_ota() {
 }
 
 # MAIN
-if [ ! -e $PATCH_LOG ]
+if [ ! -f $PATCH_LOG ]
 then
   touch $PATCH_LOG
   echo "******* Patch Log Created by prerm $(date) ************" >> $PATCH_LOG
@@ -169,15 +177,17 @@ echo "------------------------------------------------------" >> $PATCH_LOG
 echo "PATCH REMOVAL $(date)" >> $PATCH_LOG
 echo "------------------------------------------------------" >> $PATCH_LOG
 
-if [ -e $APP_DIR/$BSPATCH_NAME ]
+if [ -f $APP_DIR/$PATCH_NAME ]
 then
-  echo $APP_DIR/$PATCH_NAME >> $PATCH_LOG
+  echo "Contains text patch" >> $PATCH_LOG
+  echo "  $APP_DIR/$PATCH_NAME" >> $PATCH_LOG
 fi
 
-if [ -e $APP_DIR/$BSPATCH_NAME ]
+if [ -f $APP_DIR/$BSPATCH_NAME ]
 then
-  echo $APP_DIR/$BSPATCH_NAME >> $PATCH_LOG
-  echo $BSPATCH_FILE >> $PATCH_LOG
+  echo "Contains binary patch" >> $PATCH_LOG
+  echo "  $APP_DIR/$BSPATCH_NAME" >> $PATCH_LOG
+  echo "  $BSPATCH_FILE" >> $PATCH_LOG
 fi
 
 if [ -d $APP_DIR/additional_files ]
@@ -200,60 +210,68 @@ fi
 if [ ! -d $APP_DIR ]
 then
   echo "ERROR: $APP_DIR is not a directory or does not exist!" | tee -a $PATCH_LOG 1>&2
+  do_failure
 fi
 
 if [ ! -f $APP_DIR/$PATCH_NAME ] && [ ! -f $APP_DIR/$BSPATCH_NAME ] && [ ! -d ${APP_DIR}/additional_files ]
 then
   echo "ERROR: Cannot find patch file, bspatch file or additonal_files!" | tee -a $PATCH_LOG 1>&2
+  do_failure
 fi
 
-if [ ! -e $PATCH_EXEC ]
+if [ ! -x $PATCH_EXEC ]
 then
   echo "ERROR: Cannot find $PATCH_EXEC" | tee -a $PATCH_LOG 1>&2
   do_failure
 fi
 
-if [ ! -e $LSDIFF ]
+if [ ! -x $LSDIFF ]
 then
   echo "ERROR: Cannot find $LSDIFF" | tee -a $PATCH_LOG 1>&2
   do_failure
 fi
 
-if [ ! -e $BSPATCH_EXEC ]
+if [ ! -x $BSPATCH_EXEC ]
 then
   echo "ERROR: Cannot find $LSDIFF" | tee -a $PATCH_LOG 1>&2
   do_failure
 fi
 
+add_additional_files
 check_for_ota
 
-if [ "$found_modified" != "" ] && [ -e $APP_DIR/$PATCH_NAME ]
+if [ "$found_modified" != "" ]
 then
-  echo "" >> $PATCH_LOG
-  echo "----------------------------------" >> $PATCH_LOG
-  echo "Dry run patch attempt..." >> $PATCH_LOG
-  echo "----------------------------------" >> $PATCH_LOG
-  $PATCH_EXEC -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 2>&1 >> $PATCH_LOG
-
-  if [ $? -ne 0 ]
+  if [ -f $APP_DIR/$PATCH_NAME ]
   then
     echo "" >> $PATCH_LOG
     echo "----------------------------------" >> $PATCH_LOG
-    echo "dry run failed, checking if applying entire patch would succeed" >> $PATCH_LOG
+    echo "Dry run patch attempt..." >> $PATCH_LOG
     echo "----------------------------------" >> $PATCH_LOG
-    $PATCH_EXEC -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 2>&1 >> $PATCH_LOG
+    $PATCH_EXEC -R -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 2>&1 >> $PATCH_LOG
 
     if [ $? -ne 0 ]
     then
-      failed_remove
-    else
-      echo "Interestingly, the patch seems to already be unapplied" | tee -a $PATCH_LOG
-      patch_unapplied=yes
+      echo "" >> $PATCH_LOG
+      echo "----------------------------------" >> $PATCH_LOG
+      echo "dry run failed, checking if applying entire patch would succeed" >> $PATCH_LOG
+      echo "----------------------------------" >> $PATCH_LOG
+      $PATCH_EXEC -p1 -d / --dry-run < ${APP_DIR}/$PATCH_NAME 2>&1 >> $PATCH_LOG
+
+      if [ $? -ne 0 ]
+      then
+        failed_remove
+      else
+        echo "Interestingly, the patch seems to already be unapplied" | tee -a $PATCH_LOG
+        patch_unapplied=yes
+      fi
     fi
+  fi
+
+  remove_patch
+  remove_additional_files
 fi
 
-remove_patch
-remove_additional_files
 
 for i in $created_files
 do
@@ -272,17 +290,17 @@ do
   orig_md5sum=""
   file_md5sum=""
 
-  if [ -e $file ]
+  if [ -f $file ]
   then
     file_md5sum=`md5sum $file | awk '{print $1}'`
   fi
 
-  if [ -e $file.webosinternals.orig ]
+  if [ -f $file.webosinternals.orig ]
   then
     orig_md5sum=`md5sum $file.webosinternals.orig | awk '{print $1}'`
   fi
 
-  if [ -e $APP_DIR/package_list ]
+  if [ -f $APP_DIR/package_list ]
   then
     for j in `cat $APP_DIR/package_list`
     do
@@ -297,7 +315,7 @@ do
   echo "file md5sum:      $file_md5sum" >> $PATCH_LOG
   echo "orig md5sum:      $orig_md5sum" >> $PATCH_LOG
   echo "palm md5sum:      $palm_md5sum" >> $PATCH_LOG
-  if [ ! -e $file ] && [ ! -s $file.webosinternals.orig ] || [ "$orig_md5sum" = "" ] || \
+  if [ ! -f $file ] && [ ! -s $file.webosinternals.orig ] || [ "$orig_md5sum" = "" ] || \
      [ "$orig_md5sum" = "$file_md5sum" ] || [ "$palm_md5sum" = "$file_md5sum" ] || \
      [ "`grep -h $file $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`" = "$file_md5sum" ]
   then
@@ -308,9 +326,13 @@ do
   fi
 done
 
-rm -f $PATCH_CONTROL_DIR/$PATCH_NAME
+if [ -f $PATCH_CONTROL_DIR/$PATCH_NAME ]
+then
+  rm -f $PATCH_CONTROL_DIR/$PATCH_NAME
+fi
+
 sed -i -e /\^'`basename $APP_DIR` $VERSION'\$/d $PATCH_PACKAGES_LIST
-rm -rf ${APP_DIR}
+#rm -rf ${APP_DIR}
 
 echo "SUCCESS" | tee -a $PATCH_LOG
 
