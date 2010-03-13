@@ -35,6 +35,7 @@ class FileSection:
         return self.f.tell() - self.offset
 
     def read(self, size = -1):
+        if (size == -1): size = self.size
 #        print "read(%d)" % size
         return self.f.read(size)
 
@@ -44,6 +45,7 @@ class ArFile:
         self.f = f
         self.directory = {}
         self.directoryRead = False
+        self.filenames = ""
 
         signature = self.f.readline()
         assert signature == "!<arch>\n"
@@ -76,8 +78,39 @@ class ArFile:
                 if not l: break
             descriptor = l.split()
 #            print descriptor
-            size = int(descriptor[5])
             memberName = descriptor[0]
+
+            # Handle GNU-style extended filenames
+            if memberName[0] == '/':
+                if memberName[1] == '/':
+                    # Read past the extended directory
+                    size = int(descriptor[1])
+                    current = 0
+                    while (current < size):
+                        l = self.f.readline()
+                        descriptor = l.split()
+                        memberName = descriptor[0]
+                        self.filenames = self.filenames + l +"\n"
+                        current = current + len(l)
+                    l = self.f.readline()
+                    descriptor = l.split()
+                    memberName = descriptor[0]
+                else:
+                    size = int(memberName[1:])
+                    memberName = self.filenames[size:].split()[0]
+                    descriptor[0] = memberName
+
+            # Handle BSD-style extended filenames
+            if memberName[0] == '#' and memberName[1] == '1' and memberName[2] == '/':
+                # Read the extended directory
+                size = int(memberName[3:])
+                memberName = self.f.read(size)
+                while (memberName[-1] == '\x00'):
+                    memberName = memberName[:-1]
+                descriptor[0] = memberName
+                descriptor[5] = int(descriptor[5]) - size
+                
+            size = int(descriptor[5])
             if memberName[-1] == '/': memberName = memberName[:-1]
             self.directory[memberName] = descriptor + [self.f.tell()]
 #            print "read:", memberName
@@ -106,8 +139,39 @@ class ArFile:
                 if not l: break
             descriptor = l.split()
 #            print descriptor
-            size = int(descriptor[5])
             memberName = descriptor[0]
+
+            # Handle GNU-style extended filenames
+            if memberName[0] == '/':
+                if memberName[1] == '/':
+                    # Read past the extended directory
+                    size = int(descriptor[1])
+                    current = 0
+                    while (current < size):
+                        l = self.f.readline()
+                        descriptor = l.split()
+                        memberName = descriptor[0]
+                        self.filenames = self.filenames + l
+                        current = current + len(l)
+                    l = self.f.readline()
+                    descriptor = l.split()
+                    memberName = descriptor[0]
+                else:
+                    size = int(memberName[1:])
+                    memberName = self.filenames[size:].split()[0]
+                    descriptor[0] = memberName
+
+            # Handle BSD-style extended filenames
+            if memberName[0] == '#' and memberName[1] == '1' and memberName[2] == '/':
+                # Read the extended directory
+                size = int(memberName[3:])
+                memberName = self.f.read(size)
+                while (memberName[-1] == '\x00'):
+                    memberName = memberName[:-1]
+                descriptor[0] = memberName
+                descriptor[5] = int(descriptor[5]) - size
+
+            size = int(descriptor[5])
             if memberName[-1] == '/': memberName = memberName[:-1]
             self.directory[memberName] = descriptor + [self.f.tell()]
 #            print "read:", memberName
