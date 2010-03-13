@@ -4,14 +4,14 @@ APP_ID   = net.griffin.${NAME}
 VERSION  = 4.6.2
 DEPENDS  = net.griffin.qt
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Qt
-MAINTAINER = Griffin INet, Inc. <darron@griffin.net>
+MAINTAINER = Griffin INet Inc. <darron@griffin.net>
 DESCRIPTION = Styles demo for the Qt framework
 CHANGELOG = 4.6.2: Initial release
 TYPE	 = Application
-CATEGORY = Applications
+CATEGORY = Demos
 ICON	 = http://www.webos-internals.org/images/2/2e/Net.griffin.qt.png
 LICENSE  = LGPL 2.1
-SCREENSHOTS = [\ 
+SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/0/07/Net.griffin.qtstyles.png\", \
 \"http://www.webos-internals.org/images/3/39/Net.griffin.qtstyles_cde.png\", \
 \"http://www.webos-internals.org/images/b/b3/Net.griffin.qtstyles_cleanlooks.png\", \
@@ -41,7 +41,8 @@ build/%.built-${VERSION}: build/.unpack
 	rm -f $@
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
-	cp -r build/binaries/$*/qt build/$*/usr/palm/applications/${APP_ID}/
+	install -m 755 build/binaries/$*/* build/$*/usr/palm/applications/${APP_ID}/
+	install -m 755 build/src/start.sh build/$*/usr/palm/applications/${APP_ID}/
 	touch $@
 
 .PHONY: clobber

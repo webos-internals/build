@@ -1,20 +1,21 @@
-NAME     = qtspread
-TITLE    = Qt Spread
+NAME     = qtmaps
+TITLE    = Qt Maps
 APP_ID   = net.griffin.${NAME}
 VERSION  = 4.6.2
 DEPENDS  = net.griffin.qt
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Qt
-MAINTAINER = Griffin INet, Inc. <darron@griffin.net>
-DESCRIPTION = Spreadsheet demo for the Qt framework
+MAINTAINER = Griffin INet Inc. <darron@griffin.net>
+DESCRIPTION = Maps demo for the Qt framework
 CHANGELOG = 4.6.2: Initial release
 TYPE	 = Application
-CATEGORY = Applications
+CATEGORY = Demos
 ICON	 = http://www.webos-internals.org/images/2/2e/Net.griffin.qt.png
 LICENSE  = LGPL 2.1
-SCREENSHOTS = [\ \"http://www.webos-internals.org/images/1/1e/Net.griffin.qtspread.png\"\
+SCREENSHOTS = [\
+\"http://www.webos-internals.org/images/4/4c/Net.griffin.qtmaps.png\"\
  ]
 
-SRC_GIT = git://git.webos-internals.org/qt/qtspread.git
+SRC_GIT = git://git.webos-internals.org/qt/qtmaps.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk
@@ -36,7 +37,8 @@ build/%.built-${VERSION}: build/.unpack
 	rm -f $@
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
-	cp -r build/binaries/$*/qt build/$*/usr/palm/applications/${APP_ID}/
+	install -m 755 build/binaries/$*/* build/$*/usr/palm/applications/${APP_ID}/
+	install -m 755 build/src/start.sh build/$*/usr/palm/applications/${APP_ID}/
 	touch $@
 
 .PHONY: clobber

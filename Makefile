@@ -49,9 +49,6 @@ regression-index: ipkgs/regression-testing/1.0.0/Packages ipkgs/regression-testi
 .PHONY: webos-internals-index
 webos-internals-index: ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv6/Packages ipkgs/webos-internals/armv7/Packages	
 
-# Disable these until they are fixed
-#	ipkgs/pimpmypre/Packages ipkgs/canuck-software/Packages \
-
 ipkgs/webos-internals/%/Packages: package-subdirs
 	rm -rf ipkgs/webos-internals/$*
 	mkdir -p ipkgs/webos-internals/$*

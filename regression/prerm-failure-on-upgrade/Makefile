@@ -2,6 +2,7 @@ NAME     = prerm-failure-on-upgrade
 TITLE	 = Pre-Remove Script Failure On Upgrade
 APP_ID   = org.webosinternals.regression.${NAME}
 SIGNER   = org.webosinternals
+BLDFLAGS = -p
 VERSIONS  = 1.0.0 2.0.0
 DESCRIPTION = Regression test for a pre-remove script failure on upgrade.
 TYPE	 = Service

@@ -1,20 +1,19 @@
-NAME     = qtmaps
-TITLE    = Qt Maps
+NAME     = qt
+TITLE    = Qt Framework
 APP_ID   = net.griffin.${NAME}
 VERSION  = 4.6.2
-DEPENDS  = net.griffin.qt
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Qt
-MAINTAINER = Griffin INet, Inc. <darron@griffin.net>
-DESCRIPTION = Maps demo for the Qt framework
+MAINTAINER = Griffin INet Inc. <darron@griffin.net>
+DESCRIPTION = Qt framework libraries, needed to run Qt applications
 CHANGELOG = 4.6.2: Initial release
-TYPE	 = Application
-CATEGORY = Applications
+TYPE	 = Linux Application
+CATEGORY = Infrastructure
 ICON	 = http://www.webos-internals.org/images/2/2e/Net.griffin.qt.png
 LICENSE  = LGPL 2.1
-SCREENSHOTS = [\ \"http://www.webos-internals.org/images/4/4c/Net.griffin.qtmaps.png\"\
+SCREENSHOTS = [\
  ]
 
-SRC_GIT = git://git.webos-internals.org/qt/qtmaps.git
+SRC_GIT = git://git.webos-internals.org/qt/qt.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk

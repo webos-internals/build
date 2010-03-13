@@ -4,11 +4,11 @@ APP_ID   = net.griffin.${NAME}
 VERSION  = 4.6.2
 DEPENDS  = net.griffin.qt
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Qt
-MAINTAINER = Griffin INet, Inc. <darron@griffin.net>
+MAINTAINER = Griffin INet Inc. <darron@griffin.net>
 DESCRIPTION = OpenGL ES2 demo for the Qt framework
 CHANGELOG = 4.6.2: Initial release
 TYPE	 = Application
-CATEGORY = Applications
+CATEGORY = Demos
 ICON	 = http://www.webos-internals.org/images/2/2e/Net.griffin.qt.png
 LICENSE  = LGPL 2.1
 SCREENSHOTS = [\
@@ -36,7 +36,8 @@ build/%.built-${VERSION}: build/.unpack
 	rm -f $@
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
-	cp -r build/binaries/$*/qt build/$*/usr/palm/applications/${APP_ID}/
+	install -m 755 build/binaries/$*/* build/$*/usr/palm/applications/${APP_ID}
+	install -m 755 build/src/start.sh build/$*/usr/palm/applications/${APP_ID}/
 	touch $@
 
 .PHONY: clobber
