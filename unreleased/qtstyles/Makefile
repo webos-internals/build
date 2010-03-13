@@ -1,19 +1,25 @@
-NAME     = qt
-TITLE    = Qt Framework
+NAME     = qtstyles
+TITLE    = Qt Styles
 APP_ID   = net.griffin.${NAME}
 VERSION  = 4.6.2
+DEPENDS  = net.griffin.qt
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Qt
 MAINTAINER = Griffin INet, Inc. <darron@griffin.net>
-DESCRIPTION = Qt framework libraries, needed to run Qt applications
+DESCRIPTION = Styles demo for the Qt framework
 CHANGELOG = 4.6.2: Initial release
-TYPE	 = Linux Application
-CATEGORY = Infrastructure
+TYPE	 = Application
+CATEGORY = Applications
 ICON	 = http://www.webos-internals.org/images/2/2e/Net.griffin.qt.png
 LICENSE  = LGPL 2.1
-SCREENSHOTS = [\
+SCREENSHOTS = [\ 
+\"http://www.webos-internals.org/images/0/07/Net.griffin.qtstyles.png\", \
+\"http://www.webos-internals.org/images/3/39/Net.griffin.qtstyles_cde.png\", \
+\"http://www.webos-internals.org/images/b/b3/Net.griffin.qtstyles_cleanlooks.png\", \
+\"http://www.webos-internals.org/images/5/5b/Net.griffin.qtstyles_plastique.png\", \
+\"http://www.webos-internals.org/images/6/6d/Net.griffin.qtstyles_windows.png\"\
  ]
 
-SRC_GIT = git://git.webos-internals.org/qt/qt.git
+SRC_GIT = git://git.webos-internals.org/qt/qtstyles.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk
