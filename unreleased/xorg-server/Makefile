@@ -1,14 +1,14 @@
-NAME     = xlauncher
+NAME     = x11
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.0.1
+VERSION  = 0.0.2
 DEPENDS  = org.webosinternals.upstartmgr
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X
 MAINTAINER = Will Dietz (dtzWill), WebOSInternals
 TITLE   = X Window System Server
 TYPE	= Application
 DESCRIPTION = Runs the X Window System server. Requires 1.3.5 or later<br><br>Note that this is <b>just the server</b>, and unless you know what an X server is, probably not something you care about.  Yet.<br><br>Porting effort by Will Dietz and Shivaram Venkataraman.<br>Thanks to everyone on the WebOSInternals team, particularly jacques and rwhitby for making this possible.
-CHANGELOG = 0.0.1 First public release.
+CHANGELOG = <br>0.0.2<br>Rebuilt libraries, much smaller filesize and renamed packge<br><br>0.0.1<br>First public release.
 CATEGORY = Application
 ICON	= http://www.webos-internals.org/images/a/a5/X.png
 LICENSE  = MIT/X11 License
