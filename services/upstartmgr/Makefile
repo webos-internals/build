@@ -1,6 +1,7 @@
 NAME     = upstartmgr
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
+BLDFLAGS = -p
 VERSION  = 0.0.8
 CHANGELOG = 0.0.8: Now supports installation via palm-install.<br>0.0.7: Added the jps method for the new Upstart Manager application to use.  Fixed the installation of the dbus service description.
 MAINTAINER = WebOS Internals <support@webos-internals.org>
