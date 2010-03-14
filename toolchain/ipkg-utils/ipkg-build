@@ -272,10 +272,12 @@ palm_files=
 if [ "$palmformat" = "1" ]; then
   if [ -e $pkg_dir/$CONTROL/postinst ] ; then
       cp $pkg_dir/$CONTROL/postinst $tmp_dir/pmPostInstall.script
+      chmod 755 $tmp_dir/pmPostInstall.script
       palm_files="$palm_files ./pmPostInstall.script"
   fi
   if [ -e $pkg_dir/$CONTROL/prerm ] ; then
       cp $pkg_dir/$CONTROL/prerm $tmp_dir/pmPreRemove.script
+      chmod 755 $tmp_dir/pmPreRemove.script
       palm_files="$palm_files ./pmPreRemove.script"
   fi
 fi
