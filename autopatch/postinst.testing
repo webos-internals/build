@@ -23,9 +23,18 @@ else
   FILE_UTIL=/var/usr/bin/file
 fi
 
+if [ -f $APP_DIR/$PATCH_NAME ]
+then 
+  FILE_LIST=`$LSDIFF --strip=1 $APP_DIR/$PATCH_NAME`
+fi
+
+if [ "$BSPATCH_FILE" != "" ]
+then
+  BSPATCH_NAME=`basename $BSPATCH_FILE`.bspatch
+fi
+
+
 BSPATCH_EXEC=/usr/bin/bspatch
-BSPATCH_NAME=`basename $BSPATCH_FILE`.bspatch
-FILE_LIST=`$LSDIFF --strip=1 $APP_DIR/$PATCH_NAME`
 IPKG_INFO_DIR=/usr/lib/ipkg/info
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
 PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
@@ -63,19 +72,22 @@ failed_install() {
 
 check_package_list() {
   echo "Find package for file $file" >> $PATCH_LOG
-  for j in `cat $APP_DIR/package_list`
-  do
-    md5sum_line=`grep -h $file $IPKG_INFO_DIR/$j.md5sums`
-    if [ "$md5sum_line" != "" ]
-    then
-     echo "  FOUND in package $j" >> $PATCH_LOG
-     echo "  $md5sum_line" >> $PATCH_LOG
-     echo $md5sum_line >> $APP_DIR/md5sums
-     palm_md5sum=`echo $md5sum_line | awk '{print $1}'`
-    else
-     echo "  Not in package $j" >> $PATCH_LOG
-    fi
-  done
+  if [ -f $APP_DIR/package_list ]
+  then
+    for j in `cat $APP_DIR/package_list`
+    do
+      md5sum_line=`grep -h $file $IPKG_INFO_DIR/$j.md5sums`
+      if [ "$md5sum_line" != "" ]
+      then
+      echo "  FOUND in package $j" >> $PATCH_LOG
+      echo "  $md5sum_line" >> $PATCH_LOG
+      echo $md5sum_line >> $APP_DIR/md5sums
+      palm_md5sum=`echo $md5sum_line | awk '{print $1}'`
+      else
+      echo "  Not in package $j" >> $PATCH_LOG
+      fi
+    done
+  fi
 }
 
 get_palm_md5sum() {
