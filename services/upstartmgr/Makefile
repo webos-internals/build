@@ -1,8 +1,9 @@
 NAME     = upstartmgr
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.0.7
-CHANGELOG = 0.0.7: Added the jps method for the new Upstart Manager application to use.  Fixed the installation of the dbus service description.
+BLDFLAGS = -p
+VERSION  = 0.0.8
+CHANGELOG = 0.0.8: Now supports installation via palm-install.<br>0.0.7: Added the jps method for the new Upstart Manager application to use.  Fixed the installation of the dbus service description.
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 TITLE    = Upstart Manager Service
 DESCRIPTION = The Upstart Manager Service is a back-end interface to the initctl command line application which manages the background Linux daemons that run on a webOS Device.  It is required for launching advanced homebrew applications like DOOM! and OpenVPN.
