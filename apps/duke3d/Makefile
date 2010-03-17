@@ -12,13 +12,13 @@ desktop version, either demo or full. Start the game once on your WebOS device a
 USB drive. Read the readme file which should be there for further infos.
 CHANGELOG = 1.0.8: error display if something went wrong
 CATEGORY = Games
-ICON	= http://git.webos-internals.org/?p=games/duke3d.git;a=blob_plain;f=icon.png
+ICON	= http://www.webos-internals.org/images/0/03/Duke3d_icon.png
 LICENSE  = GNU License
 SCREENSHOTS = [\
-\"http://git.webos-internals.org/?p=games/duke3d.git;a=blob_plain;f=images/duke3d_title.png\",\
-\"http://git.webos-internals.org/?p=games/duke3d.git;a=blob_plain;f=images/duke3d_menu.png\",\
-\"http://git.webos-internals.org/?p=games/duke3d.git;a=blob_plain;f=images/duke3d_game1.png\",\
-\"http://git.webos-internals.org/?p=games/duke3d.git;a=blob_plain;f=images/duke3d_game2.png\"\
+\"http://www.webos-internals.org/images/b/b1/Duke3d_game1.png\",\
+\"http://www.webos-internals.org/images/b/b1/Duke3d_menu.png\",\
+\"http://www.webos-internals.org/images/b/b1/Duke3d_title.png\",\
+\"http://www.webos-internals.org/images/b/b1/Duke3d_game2.png\"\
  ]
 
 SRC_GIT = git://git.webos-internals.org/games/duke3d.git
