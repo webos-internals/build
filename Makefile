@@ -203,7 +203,7 @@ upload:
 testing: webos-internals-testing webos-patches-testing hardware-patches-testing optware-testing regression-testing
 
 webos-internals-testing:
-	${MAKE} SUBDIRS="unreleased" webos-internals-index
+	${MAKE} SUBDIRS="testing" webos-internals-index
 	rsync -avr ipkgs/webos-internals/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
 	rsync -avr ipkgs/webos-internals/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
 	rsync -avr ipkgs/webos-internals/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
