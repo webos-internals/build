@@ -1,14 +1,14 @@
 NAME     = xlib
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.0.1
+VERSION  = 0.0.2
 DEPENDS  = 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X
 MAINTAINER = Will Dietz (dtzWill), WebOSInternals
 TITLE   = X Libraries
 TYPE	 = Linux Application
 DESCRIPTION = Libraries for X server and clients
-CHANGELOG = <br>0.0.1<br>First release.
+CHANGELOG = <br>0.0.2<br>First release.
 CATEGORY = Infrastructure
 ICON	= http://www.webos-internals.org/images/a/a5/X.png
 LICENSE  = MIT/X11 License
