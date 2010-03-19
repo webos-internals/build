@@ -1,14 +1,14 @@
 NAME     = xterm-launcher
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.0.3
+VERSION  = 0.0.4
 DEPENDS  = org.webosinternals.xterm-bin, org.webosinternals.xorg-server
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X
 MAINTAINER = Will Dietz (dtzWill), WebOSInternals
 TITLE   = xterm
 TYPE	 = Application
 DESCRIPTION = Launcher for xterm
-CHANGELOG = <br>0.0.3<br>First release.
+CHANGELOG = <br>0.0.4<br>Use login shell to get proper env.<br><br>0.0.3<br>First release.
 CATEGORY = Infrastructure
 ICON	= http://www.webos-internals.org/images/a/a5/X.png
 LICENSE  = MIT/X11 License
