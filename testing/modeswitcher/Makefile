@@ -1,9 +1,9 @@
 NAME     = modeswitcher
-MAINTAINER = Janne Julkunen <janne.julkunen@wee.e-lnx.org>
+MAINTAINER = Janne Julkunen <janne.julkunen@e-lnx.org>
 TITLE    = Mode Switcher
 APP_ID   = com.palm.org.e-lnx.wee.apps.${NAME}
 VERSION  = 0.9.6
-DEPENDS  = org.e-lnx.wee.patches.launch-mode-switcher-at-boot
+DEPENDS  = org.webosinternals.patches.launch-mode-switcher-at-boot
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/homebrew-apps/224544-mode-switcher.html
