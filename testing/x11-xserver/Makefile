@@ -1,14 +1,14 @@
 NAME     = xorg-server
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.0.2
+VERSION  = 0.0.3
 DEPENDS  = org.webosinternals.xlib
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X
 MAINTAINER = Will Dietz (dtzWill), WebOSInternals
 TITLE   = X Window System Server (bin)
 TYPE	 = Linux Application
 DESCRIPTION = Binaries for the xorg-server
-CHANGELOG = <br>0.0.2<br>First release.
+CHANGELOG = <br>0.0.3<br>Improve keyboard support (including some extra symbols).  See wiki for details.<br><br>0.0.2<br>First release.
 CATEGORY = Infrastructure
 ICON	= http://www.webos-internals.org/images/a/a5/X.png
 LICENSE  = MIT/X11 License
