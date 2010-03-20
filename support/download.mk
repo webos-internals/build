@@ -20,7 +20,7 @@
 .PHONY: download
 
 DL_DIR = ../../downloads
-DOCTOR_DIR = ../../doctor
+DOCTOR_DIR = ../../doctors
 
 PREWARE_SANITY =
 ifndef VERSION
