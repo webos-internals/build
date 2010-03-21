@@ -2,7 +2,7 @@ NAME     = saverestore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.1.2
+VERSION  = 0.1.3
 HOMEPAGE = http://www.webos-internals.org/wiki/Save_and_Restore
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 TITLE    = Save/Restore
@@ -12,8 +12,8 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 <li>Glyder2</li>\
 <li>Netstat</li>\
 </ul>
-TYPE	 = Service
-CATEGORY = Luna
+TYPE	 = Application
+CATEGORY = System Utilities
 ICON	= http://www.webos-internals.org/images/5/55/Archive.png
 LICENSE  = GPL v2 Open Source
 
