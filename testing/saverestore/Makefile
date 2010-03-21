@@ -3,9 +3,15 @@ APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
 VERSION  = 0.1.2
+HOMEPAGE = http://www.webos-internals.org/wiki/Save_and_Restore
 MAINTAINER = WebOS Internals <support@webos-internals.org>
-TITLE    = Save & Restore
-DESCRIPTION = Save & Restore enables saving and restoring application data to and from the /media/internal/saverestore/ directory on a webOS device.
+TITLE    = Save/Restore
+DESCRIPTION = Save/Restore enables saving and restoring application data to and from the /media/internal/saverestore/ directory on a webOS device.<br>It is in early alpha testing, and you should be prepared to lose your data if you agree to test it.<br>Currently supported applications include:<br><ul>\
+<li>drPodder HB</li>\
+<li>NFSU</li>\
+<li>Glyder2</li>\
+<li>Netstat</li>\
+</ul>
 TYPE	 = Service
 CATEGORY = Luna
 ICON	= http://www.webos-internals.org/images/5/55/Archive.png
