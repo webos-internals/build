@@ -39,6 +39,10 @@ PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
 PATCH_LOG=/media/internal/webos-patches.log
 VERSION=aupt-4
 
+remount_rw() {
+  mount -o rw,remount /
+}
+
 do_failure() {
   echo "*** FAILED ***" >> $PATCH_LOG
   exit 1
@@ -183,6 +187,8 @@ then
   echo "******* Patch Log Created by prerm $(date) ************" >> $PATCH_LOG
 fi
 
+remount_rw | tee -a $PATCH_LOG 1>&2
+
 echo "" >> $PATCH_LOG
 echo "------------------------------------------------------" >> $PATCH_LOG
 echo "PATCH REMOVAL $(date)" >> $PATCH_LOG
@@ -208,8 +214,7 @@ fi
 
 if [ "$IPKG_OFFLINE_ROOT" = "" ]
 then
-  echo "ERROR: IPKG_OFFLINE_ROOT must be supplied to the prerm" | tee -a $PATCH_LOG 1>&2
-  do_failure
+  IPKG_OFFLINE_ROOT=/media/cryptofs/apps
 fi
 
 if [ "$APP_DIR" = "" ]
