@@ -1,0 +1,12 @@
+#!/bin/sh
+
+APPID=mobi.optware.libstdc++
+
+# Symlink files into /opt
+cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
+find lib -type d -exec mkdir -p /opt/{} \;
+find lib -type f -exec ln -sf $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt/{} /opt/{} \;
+ln -sf libstdc++.so.6.0.9 /opt/lib/libstdc++.so
+ln -sf libstdc++.so.6.0.9 /opt/lib/libstdc++.so.6
+
+exit 0

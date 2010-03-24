@@ -3,7 +3,7 @@ TITLE	 = libstdc++
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
 OPT_VER  = 6.0.9-6
-VERSION  = 6.0.9-6
+VERSION  = 6.0.9-7
 HOMEPAGE = http://www.codesourcery.com/sgpp/lite/arm/portal/release323
 TYPE	 = Optware
 CATEGORY = Libraries
@@ -20,4 +20,6 @@ include ../../support/download.mk
 include ../../support/optware.mk
 
 build/%.built-${VERSION} : build/%.unpacked
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/lib/libstdc++.so
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/lib/libstdc++.so.6
 	touch $@
