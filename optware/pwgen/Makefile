@@ -3,7 +3,8 @@ TITLE	 = Password Generator
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
 OPT_VER  = 2.04-1
-VERSION  = 2.0.4-1
+VERSION  = 2.0.4-2
+CHANGELOG = 2.0.4-2: Made compatible with the Emergency Service Enabler to survive doctoring.
 HOMEPAGE = http://pwgen.sourceforge.net/
 TYPE	 = Optware
 CATEGORY = Utilities
@@ -18,3 +19,7 @@ include ../../support/package.mk
 include ../../support/download.mk
 
 include ../../support/optware.mk
+
+build/%.built-${VERSION} : build/%.unpacked
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/man
+	touch $@
