@@ -1,0 +1,10 @@
+#!/bin/sh
+
+APPID=mobi.optware.easy-rsa
+
+# Symlink files into /opt
+cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
+find share -type d -exec mkdir -p /opt/{} \;
+find share -type f -exec ln -sf $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt/{} /opt/{} \;
+
+exit 0
