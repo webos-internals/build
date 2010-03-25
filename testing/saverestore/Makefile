@@ -6,7 +6,7 @@ BLDFLAGS = -p
 VERSION  = 0.2.4
 TYPE	 = Application
 CATEGORY = System Utilities
-HOMEPAGE = http://www.webos-internals.org/wiki/Appliation:SaveRestore
+HOMEPAGE = http://www.webos-internals.org/wiki/Application:SaveRestore
 ICON	 = http://www.webos-internals.org/images/2/2e/Icon_WebOSInternals_SaveRestore.png
 DESCRIPTION = Save/Restore enables saving and restoring application data to and from the /media/internal/saverestore/ directory on a webOS device.<br>It is in early alpha testing, and you should be prepared to lose your data if you agree to test it.<br>Currently supported applications include:<br><ul>\
 <li>drPodder</li>\
