@@ -3,7 +3,7 @@ TITLE    = Save/Restore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.2.2
+VERSION  = 0.2.3
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Appliation:SaveRestore
@@ -20,7 +20,7 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 <li>SplashID</li>\
 <li>Netstat</li>\
 </ul>
-CHANGELOG = 0.2.2: First functional version.
+CHANGELOG = 0.2.3: First functional version.
 SCREENSHOTS = [ \"http://www.webos-internals.org/images/1/1e/Save_Restore_Screenshot.png\" ]
 LICENSE  = GPL v2 Open Source
 
@@ -39,6 +39,8 @@ build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	tar -C build/src/scripts -zcf build/src/scripts.tgz .
+	rm -rf build/src/scripts
 	touch $@
 
 .PHONY: build
