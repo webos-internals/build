@@ -21,7 +21,13 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 <li>Netstat</li>\
 </ul>
 CHANGELOG = 0.2.4: First functional version.
-SCREENSHOTS = [ \"http://www.webos-internals.org/images/1/1e/Save_Restore_Screenshot.png\" ]
+SCREENSHOTS = [\
+\"http://www.webos-internals.org/images/b/b5/Saverestore_ss1.png\", \
+\"http://www.webos-internals.org/images/7/76/Saverestore_ss2.png\", \
+\"http://www.webos-internals.org/images/4/47/Saverestore_ss3.png\", \
+\"http://www.webos-internals.org/images/3/36/Saverestore_ss4.png\", \
+\"http://www.webos-internals.org/images/c/cb/Saverestore_ss5.png\" \
+ ]
 LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/applications/saverestore.git
