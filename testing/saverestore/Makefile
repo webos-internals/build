@@ -3,17 +3,24 @@ TITLE    = Save/Restore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.1.8
+VERSION  = 0.2.1
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Appliation:SaveRestore
 ICON	 = http://www.webos-internals.org/images/2/2e/Icon_WebOSInternals_SaveRestore.png
 DESCRIPTION = Save/Restore enables saving and restoring application data to and from the /media/internal/saverestore/ directory on a webOS device.<br>It is in early alpha testing, and you should be prepared to lose your data if you agree to test it.<br>Currently supported applications include:<br><ul>\
+<li>drPodder</li>\
 <li>drPodder HB</li>\
 <li>NFSU</li>\
+<li>Asphalt5</li>\
+<li>Asphalt5 Free</li>\
+<li>Shrek Kart</li>\
+<li>Dragon Game</li>\
 <li>Glyder2</li>\
+<li>SplashID</li>\
 <li>Netstat</li>\
 </ul>
+CHANGELOG = 0.2.1: First functional version.
 SCREENSHOTS = [ \"http://www.webos-internals.org/images/1/1e/Save_Restore_Screenshot.png\" ]
 LICENSE  = GPL v2 Open Source
 
