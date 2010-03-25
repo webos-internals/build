@@ -13,7 +13,7 @@ CATEGORY = Utility
 ICON	 = http://www.webos-internals.org/images/b/bc/Terminus_Icon.png
 LICENSE  = GPL
 
-CHANGELOG = 0.0.5 Fixed the \"slow loading\"; terminus should now start instantly.
+CHANGELOG = 0.0.5 Fixed the slow loading; terminus should now start instantly.
 
 SRC_GIT = git://git.webos-internals.org/applications/terminus.git
 
