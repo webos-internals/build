@@ -3,7 +3,7 @@ TITLE    = Save/Restore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.2.3
+VERSION  = 0.2.4
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Appliation:SaveRestore
@@ -20,7 +20,7 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 <li>SplashID</li>\
 <li>Netstat</li>\
 </ul>
-CHANGELOG = 0.2.3: First functional version.
+CHANGELOG = 0.2.4: First functional version.
 SCREENSHOTS = [ \"http://www.webos-internals.org/images/1/1e/Save_Restore_Screenshot.png\" ]
 LICENSE  = GPL v2 Open Source
 
@@ -60,7 +60,7 @@ build/i686.built: build/.unpacked
 	cp -r build/src/* build/i686/usr/palm/applications/${APP_ID}/
 	rm -rf build/i686/usr/palm/applications/${APP_ID}/src
 	mkdir -p build/i686/usr/palm/applications/${APP_ID}/bin
-	install -m 755 build/src/src/${NAME} build/i686/usr/palm/applications/${APP_ID}/bin/
+	install -m 755 build/src/src/${NAME} build/i686/usr/palm/applications/${APP_ID}/bin/${APP_ID}
 	touch $@
 
 build/armv7.built: build/.unpacked
@@ -74,7 +74,7 @@ build/armv7.built: build/.unpacked
 	cp -r build/src/* build/armv7/usr/palm/applications/${APP_ID}/
 	rm -rf build/armv7/usr/palm/applications/${APP_ID}/src
 	mkdir -p build/armv7/usr/palm/applications/${APP_ID}/bin
-	install -m 755 build/src/src/${NAME} build/armv7/usr/palm/applications/${APP_ID}/bin/
+	install -m 755 build/src/src/${NAME} build/armv7/usr/palm/applications/${APP_ID}/bin/${APP_ID}
 	touch $@
 
 build/armv6.built: build/.unpacked
@@ -88,7 +88,7 @@ build/armv6.built: build/.unpacked
 	cp -r build/src/* build/armv6/usr/palm/applications/${APP_ID}/
 	rm -rf build/armv6/usr/palm/applications/${APP_ID}/src
 	mkdir -p build/armv6/usr/palm/applications/${APP_ID}/bin
-	install -m 755 build/src/src/${NAME} build/armv6/usr/palm/applications/${APP_ID}/bin/
+	install -m 755 build/src/src/${NAME} build/armv6/usr/palm/applications/${APP_ID}/bin/${APP_ID}
 	touch $@
 
 build/%/CONTROL/postinst:
