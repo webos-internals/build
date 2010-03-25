@@ -17,6 +17,9 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 <li>Shrek Kart</li>\
 <li>Dragon Game</li>\
 <li>Glyder2</li>\
+<li>Keyring</li>\
+<li>JogStats</li>\
+<li>JogStats Trial</li>\
 <li>SplashID</li>\
 <li>Netstat</li>\
 </ul>
