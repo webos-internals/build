@@ -3,7 +3,7 @@ TITLE    = Save/Restore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.2.4
+VERSION  = 0.2.5
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:SaveRestore
@@ -23,7 +23,7 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 <li>SplashID</li>\
 <li>Netstat</li>\
 </ul>
-CHANGELOG = 0.2.4: First functional version.
+CHANGELOG = 0.2.5: UI update with toggle buttons.<br>0.2.4: First functional version.
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/b/b5/Saverestore_ss1.png\", \
 \"http://www.webos-internals.org/images/7/76/Saverestore_ss2.png\", \
