@@ -8,21 +8,7 @@ TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:SaveRestore
 ICON	 = http://www.webos-internals.org/images/2/2e/Icon_WebOSInternals_SaveRestore.png
-DESCRIPTION = Save/Restore enables saving and restoring application data to and from the /media/internal/saverestore/ directory on a webOS device.<br>It is in early alpha testing, and you should be prepared to lose your data if you agree to test it.<br>Currently supported applications include:<br><ul>\
-<li>drPodder</li>\
-<li>drPodder HB</li>\
-<li>NFSU</li>\
-<li>Asphalt5</li>\
-<li>Asphalt5 Free</li>\
-<li>Shrek Kart</li>\
-<li>Dragon Game</li>\
-<li>Glyder2</li>\
-<li>Keyring</li>\
-<li>JogStats</li>\
-<li>JogStats Trial</li>\
-<li>SplashID</li>\
-<li>Netstat</li>\
-</ul>
+DESCRIPTION = Save/Restore enables saving and restoring application data to and from the /media/internal/saverestore/ directory on a webOS device.<br>It is in a general alpha testing phase, and you should not trust it as your sole backup of data.
 CHANGELOG = 0.3.5: Bounty addition of A+ Student Organiser.<br>0.3.4: Added section counts and saved data detection.<br>0.3.3: Added the Installed Applications screen.<br>0.3.2: Changed the toggles to on/off.<br>0.3.1: Now with application names.<br>0.2.5: UI update with toggle buttons.<br>0.2.4: First functional version.
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/b/b5/Saverestore_ss1.png\", \
