@@ -22,14 +22,26 @@ else
   FILE_UTIL=/var/usr/bin/file
 fi
 
+if [ -f $APP_DIR/$PATCH_NAME ]
+then
+  FILE_LIST=`$LSDIFF --strip=1 $APP_DIR/$PATCH_NAME`
+fi
+
+if [ "$BSPATCH_FILE" != "" ]
+then
+  BSPATCH_NAME=`basename $BSPATCH_FILE`.bspatch
+fi
+
 BSPATCH_EXEC=/usr/bin/bspatch
-BSPATCH_NAME=`basename $BSPATCH_FILE`.bspatch
-FILE_LIST=`$LSDIFF --strip=1 $APP_DIR/$PATCH_NAME`
 IPKG_INFO_DIR=/usr/lib/ipkg/info
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
 PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
 PATCH_LOG=/media/internal/webos-patches.log
 VERSION=aupt-4
+
+remount_rw() {
+  mount -o rw,remount /
+}
 
 do_failure() {
   echo "*** FAILED ***" >> $PATCH_LOG
@@ -79,11 +91,14 @@ remove_additional_files() {
 }
 
 add_additional_files() {
-  for i in `find $APP_DIR/additional_files -type f`
-  do
-    file=${i#$APP_DIR/additional_files/}
-    FILE_LIST="$FILE_LIST $file"
-  done
+  if [ -d $APP_DIR/additional_files ]
+  then 
+    for i in `find $APP_DIR/additional_files -type f`
+    do
+      file=${i#$APP_DIR/additional_files/}
+      FILE_LIST="$FILE_LIST $file"
+    done
+  fi
 }
 
 check_for_ota() {
@@ -123,7 +138,7 @@ check_for_ota() {
       done
     fi
 
-    if [ "$palm_md5sum" = "" ] && \
+    if [ -s $file.webosinternals.orig ] && [ "$palm_md5sum" = "" ] && \
        [ "`grep $file $IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/*.list`" = "" ]
     then
       echo "Check for md5sum in $IPKG_INFO_DIR" | tee -a $PATCH_LOG
@@ -172,6 +187,8 @@ then
   echo "******* Patch Log Created by prerm $(date) ************" >> $PATCH_LOG
 fi
 
+remount_rw | tee -a $PATCH_LOG 1>&2
+
 echo "" >> $PATCH_LOG
 echo "------------------------------------------------------" >> $PATCH_LOG
 echo "PATCH REMOVAL $(date)" >> $PATCH_LOG
@@ -197,8 +214,7 @@ fi
 
 if [ "$IPKG_OFFLINE_ROOT" = "" ]
 then
-  echo "ERROR: IPKG_OFFLINE_ROOT must be supplied to the prerm" | tee -a $PATCH_LOG 1>&2
-  do_failure
+  IPKG_OFFLINE_ROOT=/media/cryptofs/apps
 fi
 
 if [ "$APP_DIR" = "" ]

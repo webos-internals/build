@@ -1,0 +1,10 @@
+#!/bin/sh
+
+APPID=mobi.optware.easy-rsa
+
+# Remove files from /opt
+cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
+find share -depth -type f -exec rm -f /opt/{} \;
+find share -depth -type d -exec rmdir /opt/{} \;
+
+exit 0

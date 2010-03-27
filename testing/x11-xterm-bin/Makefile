@@ -1,24 +1,20 @@
-NAME     = x11
+NAME     = xterm-bin
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.0.3
-DEPENDS  = 
+VERSION  = 0.0.2
+DEPENDS  = org.webosinternals.xlib
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X
 MAINTAINER = Will Dietz (dtzWill), WebOSInternals
-TITLE   = X Window System Server
-TYPE	= Application
-DESCRIPTION = Runs the X Window System server. Requires 1.3.5 or later<br><br>Note that this is <b>just the server</b>, and unless you know what an X server is, probably not something you care about.  Yet.<br><br>Porting effort by Will Dietz and Shivaram Venkataraman.<br>Thanks to everyone on the WebOSInternals team, particularly jacques and rwhitby for making this possible.
-CHANGELOG = <br>0.0.3<br>Removed false dependency on upstartmgr<br>0.0.2<br>Rebuilt libraries, much smaller filesize and renamed packge<br><br>0.0.1<br>First public release.
-CATEGORY = Application
+TITLE   = XTerm Binaries
+TYPE	 = Linux Application
+DESCRIPTION = Binaries for the X Window System Terminal Application<br>You probably want to install the XTerm application instead of this package.
+CHANGELOG = <br>0.0.2<br>First release.
+CATEGORY = X Window System
 ICON	= http://www.webos-internals.org/images/a/a5/X.png
 LICENSE  = MIT/X11 License
 SCREENSHOTS = []
-#XXX: Get some screenshots?
-#XXX: Not sure if it's "fair" to include screenshots that
-#depict more than just the server, since they're not
-#part of this package.
 
-SRC_GIT = git://git.webos-internals.org/x11/xlauncher.git
+SRC_GIT = git://git.webos-internals.org/x11/${NAME}-pkg.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk

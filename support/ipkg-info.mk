@@ -41,8 +41,16 @@ ${DOCTOR_DIR}/webosdoctor-1.3.1.jar:
 
 ${DOCTOR_DIR}/webosdoctor-1.3.5.jar:
 	mkdir -p ${DOCTOR_DIR}
-	curl -L -o $@ http://palm.cdnetworks.net/rom/pre/p135r0d12302009/sr1ntp135rod/webosdoctorp100ewwsprint.jar
+	if [ -e ${DOCTOR_DIR}/webosdoctorp100ewwsprint-1.3.5.jar ] ; then \
+	  ln -s webosdoctorp100ewwsprint-1.3.5.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/pre/p135r0d12302009/sr1ntp135rod/webosdoctorp100ewwsprint.jar ; \
+	fi
 
 ${DOCTOR_DIR}/webosdoctor-1.4.0.jar:
 	mkdir -p ${DOCTOR_DIR}
-	curl -L -o $@ http://palm.cdnetworks.net/rom/pre/p14r0d02252010/sr1ntp140rod/webosdoctorp100ewwsprint.jar;
+	if [ -e ${DOCTOR_DIR}/webosdoctorp100ewwsprint-1.4.0.jar ] ; then \
+	  ln -s webosdoctorp100ewwsprint-1.4.0.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/pre/p14r0d02252010/sr1ntp140rod/webosdoctorp100ewwsprint.jar; \
+	fi
