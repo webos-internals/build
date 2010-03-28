@@ -3,13 +3,13 @@ TITLE    = Save/Restore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.3.9
+VERSION  = 0.4.1
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:SaveRestore
 ICON	 = http://www.webos-internals.org/images/2/2e/Icon_WebOSInternals_SaveRestore.png
-DESCRIPTION = Save/Restore enables saving and restoring application data to and from the /media/internal/saverestore/ directory on a webOS device.<br>It is in a general alpha testing phase, and you should not trust it as your sole backup of data.
-CHANGELOG = 0.3.9: Gives feedback on save and restore operations.<br>0.3.8: Store the timestamps in ISO8601 combined basic format, for the right combination of global precision and human readability.<br>0.3.7: Now with save timestamps.<br>0.3.6: Fixed the database scripts.<br>0.3.5: Bounty addition of A+ Student Organiser.<br>0.3.4: Added section counts and saved data detection.<br>0.3.3: Added the Installed Applications screen.<br>0.3.2: Changed the toggles to on/off.<br>0.3.1: Now with application names.<br>0.2.5: UI update with toggle buttons.<br>0.2.4: First functional version.
+DESCRIPTION = Save/Restore enables saving and restoring application data to and from the /media/internal/saverestore/ directory on a webOS device.<br>It is in a general beta testing phase, buy you should not trust it as your sole backup of data.
+CHANGELOG = 0.4.1: Major UI rewrite.
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/b/b5/Saverestore_ss1.png\", \
 \"http://www.webos-internals.org/images/7/76/Saverestore_ss2.png\", \
