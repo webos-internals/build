@@ -3,7 +3,7 @@ TITLE    = Save/Restore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.4.6
+VERSION  = 0.5.0
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:SaveRestore
@@ -11,7 +11,7 @@ ICON	 = http://www.webos-internals.org/images/2/2e/Icon_WebOSInternals_SaveResto
 DESCRIPTION = Save/Restore enables saving and restoring application data to and from the /media/internal/saverestore/ directory on a webOS device.<br>It is in a general beta testing phase, but you should not trust it as your sole backup of data.<br>\
 WebOS Internals provides Save/Retore as is without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.  The entire risk as to the quality and performance of Save/Restore is with you.  Should Save/Restore prove defective, you assume the cost of all necessary servicing, repair or correction.<br>\
 In no event will WebOS Internals or any other party be liable to you for damages, including any general, special, incidental or consequential damages arising out of the use or inability to use Save/Restore (including but not limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of Save/Restore to operate with any other programs).
-CHANGELOG = 0.4.6: Added support for Dungeon Hunter.<br>0.4.5: Public Release Candidate.
+CHANGELOG = 0.5.0: First Public Release
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/b/b5/Saverestore_ss1.png\", \
 \"http://www.webos-internals.org/images/7/76/Saverestore_ss2.png\", \
