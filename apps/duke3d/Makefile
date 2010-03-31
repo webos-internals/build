@@ -1,7 +1,7 @@
 NAME     = duke3d
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 1.0.9
+VERSION  = 1.0.10
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Duke3D
 MAINTAINER = Henk Jonas
 TITLE   = Duke3D
@@ -10,8 +10,8 @@ DESCRIPTION = Port of the popular Duke Nukem 3D shooter game written by 3DRealms
 This port is based on the desktop port from JonoF (http://www.jonof.id.au).<br>You will need files from the Duke Nukem 3D \
 desktop version, either demo or full. Start the game once on your WebOS device and it will create a Duke3D folder on your internal \
 USB drive. Read the readme file which should be there for further infos.<br>To get music work, copy timidity patches into \
-the timidity folder on your internal drive.
-CHANGELOG = 1.0.9: music, broken sound and some OSD
+the timidity folder on your internal drive. Please read the readme.txt about it.
+CHANGELOG = 1.0.10: find the how-to for music in the readme, sound still not perfect
 CATEGORY = Games
 ICON	= http://www.webos-internals.org/images/0/03/Duke3d_icon.png
 LICENSE  = GNU License
