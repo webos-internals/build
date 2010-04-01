@@ -3,7 +3,7 @@ TITLE    = Save/Restore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.6.1
+VERSION  = 0.6.2
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:SaveRestore
@@ -12,6 +12,7 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 WebOS Internals provides Save/Retore as is without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.  The entire risk as to the quality and performance of Save/Restore is with you.  Should Save/Restore prove defective, you assume the cost of all necessary servicing, repair or correction.<br>\
 In no event will WebOS Internals or any other party be liable to you for damages, including any general, special, incidental or consequential damages arising out of the use or inability to use Save/Restore (including but not limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of Save/Restore to operate with any other programs).
 CHANGELOG = \
+0.6.1: Applications: Applications: Hawx, Myles, Time is Money<br>\
 0.6.1: Applications: Sorrowind Slots, GiftJammer, GolfPinFinder, Flickr Addict<br>\
 0.6.0: Added support for saving and restoring cookies. Applications: Paratrooper, Weather Window, Scoop, Tweed, Clock Sync.<br>\
 0.5.2: Added activity notifications and disabled main buttons while reloading.<br>\
