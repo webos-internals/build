@@ -3,7 +3,7 @@ PATCH = misc/${NAME}.patch
 TITLE = No Auto-Off While Charging
 DESCRIPTION = **OBSOLETE** This package is superceded by Screen Lock: No Auto-Off While Charging.  Trying to install/update this package will install the new package and remove itself.
 CATEGORY = Obsolete
-VERSIONS = 1.3.5-100 v1.4.1-1
+VERSIONS = 1.3.5-100 1.4.1-1
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 META_SUB_VERSION=4
 
