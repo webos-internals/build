@@ -43,7 +43,7 @@ webos-patches-index: ipkgs/webos-patches/1.3.5/Packages ipkgs/webos-patches/1.4.
 	rm -f ipkgs/webos-patches/1.3.5.1 ipkgs/webos-patches/1.3.5.2 ipkgs/webos-patches/1.4.1.1
 	ln -f -s 1.3.5 ipkgs/webos-patches/1.3.5.1
 	ln -f -s 1.3.5 ipkgs/webos-patches/1.3.5.2
-	ln -f -s 1.4.1 ipkgs/hardware-patches/1.4.1.1
+	ln -f -s 1.4.1 ipkgs/webos-patches/1.4.1.1
 
 .PHONY: hardware-patches-index
 hardware-patches-index: ipkgs/hardware-patches/1.3.5/Packages ipkgs/hardware-patches/1.4.0/Packages ipkgs/hardware-patches/1.4.1/Packages
