@@ -1,4 +1,3 @@
-
 build/ipkg-info-%: ${DOCTOR_DIR}/ipkg-info-%
 	rm -rf build/ipkg-info-$*
 	mkdir -p build/ipkg-info-$*
@@ -53,4 +52,12 @@ ${DOCTOR_DIR}/webosdoctor-1.4.0.jar:
 	  ln -s webosdoctorp100ewwsprint-1.4.0.jar $@ ; \
 	else \
 	  curl -L -o $@ http://palm.cdnetworks.net/rom/pre/p14r0d02252010/sr1ntp140rod/webosdoctorp100ewwsprint.jar; \
+	fi
+
+${DOCTOR_DIR}/webosdoctor-1.4.1.jar:
+	mkdir -p ${DOCTOR_DIR}
+	if [ -e ${DOCTOR_DIR}/webosdoctorp100ewwsprint-1.4.1.jar ] ; then \
+	  ln -s webosdoctorp100ewwsprint-1.4.1.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/pre/p1411r0d03312010/sr1ntp1411rod/webosdoctorp100ewwsprint.jar; \
 	fi
