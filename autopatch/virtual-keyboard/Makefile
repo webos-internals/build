@@ -15,7 +15,6 @@ include ../common.mk
 
 ifeq ("${DUMMY_VERSION}", "")
 SRC_GIT = git://git.webos-internals.org/patches/virtual-keyboard.git
-endif
 
 include ../../support/download.mk
 
@@ -39,6 +38,7 @@ build/all/CONTROL/postinst: build/.unpacked-${VERSION}
 		 	-e '/^#!\/bin\/sh/a rm -rf /media/internal/virtual-keyboard/.themes/remix_classic'	\
 			../postinst > build/all/CONTROL/postinst
 	chmod ugo+x $@
+endif
 
 MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>
 HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard
