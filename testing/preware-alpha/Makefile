@@ -3,13 +3,13 @@ TITLE	 = Preware Alpha
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.9.54
+VERSION  = 0.9.55
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
 ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 DESCRIPTION = <b>This is the experimental alpha testing version of Preware.<br>You probably do not want to install this version.</b><br>The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, services and plugins.  Preware is also able to access official Palm App Catalog feeds.<br><b>Requires webOS 1.3.5 or later.</b>
-CHANGELOG = 0.9.54: New C-language based ipkgservice as part of the single stand-alone Preware package.  Has some nice things like download progress meters, but may be broken in some areas.
+CHANGELOG = 0.9.55: New C-language based ipkgservice as part of the single stand-alone Preware package.  Has some nice things like download progress meters, but may be broken in some areas.
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/3/36/Preware_ss1.png\",\
 \"http://www.webos-internals.org/images/9/97/Preware_ss2.png\",\
@@ -31,7 +31,7 @@ SRC_GIT = git://git.webos-internals.org/applications/preware.git
 IPKGSERVICE = org.webosinternals.ipkgservice
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_armv6.ipk ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
+package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
 include ../../support/package.mk
 
 include ../../support/download.mk
@@ -62,7 +62,7 @@ build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/armv7.built build/armv6.built build/i686.built
+build/.built-${VERSION}: build/arm.built build/i686.built
 	touch $@
 
 build/i686.built: build/.unpacked
@@ -81,36 +81,20 @@ build/i686.built: build/.unpacked
 	install -m 644 feeds/*.conf build/i686/etc/ipkg/
 	touch $@
 
-build/armv7.built: build/.unpacked
-	rm -rf build/armv7
+build/arm.built: build/.unpacked
+	rm -rf build/arm
 	( cd build/src/src ; \
 	  ${MAKE} VERSION=${VERSION} STAGING_DIR=$(shell cd ../.. ; pwd)/staging/armv7 \
 	  CC=$(shell cd ../.. ; pwd)/toolchain/cs08q1armel/build/arm-2008q1/bin/arm-none-linux-gnueabi-gcc \
 	  clobber ipkgservice \
 	)
-	mkdir -p build/armv7/usr/palm/applications/${APP_ID}
-	cp -r build/src/* build/armv7/usr/palm/applications/${APP_ID}/
-	rm -rf build/armv7/usr/palm/applications/${APP_ID}/src
-	mkdir -p build/armv7/usr/palm/applications/${APP_ID}/bin
-	install -m 755 build/src/src/ipkgservice build/armv7/usr/palm/applications/${APP_ID}/bin/${IPKGSERVICE}
-	mkdir -p build/armv7/etc/ipkg
-	install -m 644 feeds/*.conf build/armv7/etc/ipkg/
-	touch $@
-
-build/armv6.built: build/.unpacked
-	rm -rf build/armv6
-	( cd build/src/src ; \
-	  ${MAKE} VERSION=${VERSION} STAGING_DIR=$(shell cd ../.. ; pwd)/staging/armv7 \
-	  CC=$(shell cd ../.. ; pwd)/toolchain/cs08q1armel/build/arm-2008q1/bin/arm-none-linux-gnueabi-gcc \
-	  clobber ipkgservice \
-	)
-	mkdir -p build/armv6/usr/palm/applications/${APP_ID}
-	cp -r build/src/* build/armv6/usr/palm/applications/${APP_ID}/
-	rm -rf build/armv6/usr/palm/applications/${APP_ID}/src
-	mkdir -p build/armv6/usr/palm/applications/${APP_ID}/bin
-	install -m 755 build/src/src/ipkgservice build/armv6/usr/palm/applications/${APP_ID}/bin/${IPKGSERVICE}
-	mkdir -p build/armv6/etc/ipkg
-	install -m 644 feeds/*.conf build/armv6/etc/ipkg/
+	mkdir -p build/arm/usr/palm/applications/${APP_ID}
+	cp -r build/src/* build/arm/usr/palm/applications/${APP_ID}/
+	rm -rf build/arm/usr/palm/applications/${APP_ID}/src
+	mkdir -p build/arm/usr/palm/applications/${APP_ID}/bin
+	install -m 755 build/src/src/ipkgservice build/arm/usr/palm/applications/${APP_ID}/bin/${IPKGSERVICE}
+	mkdir -p build/arm/etc/ipkg
+	install -m 644 feeds/*.conf build/arm/etc/ipkg/
 	touch $@
 
 build/%/CONTROL/postinst:

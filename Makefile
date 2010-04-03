@@ -61,9 +61,15 @@ webos-internals-index: ipkgs/webos-internals/all/Packages ipkgs/webos-internals/
 ipkgs/webos-internals/%/Packages: package-subdirs
 	rm -rf ipkgs/webos-internals/$*
 	mkdir -p ipkgs/webos-internals/$*
-	( find ${SUBDIRS} -type d -name ipkgs -print | \
-	  xargs -I % find % -name "*_$*.ipk" -print | \
-	  xargs -I % rsync -i -a % ipkgs/webos-internals/$* )
+	if [ "$*" == "i686" ] ; then \
+	  ( find ${SUBDIRS} -type d -name ipkgs -print | \
+	    xargs -I % find % -name "*_$*.ipk" -print | \
+	    xargs -I % rsync -i -a % ipkgs/webos-internals/$* ) ; \
+	else \
+	  ( find ${SUBDIRS} -type d -name ipkgs -print | \
+	    xargs -I % find % -name "*_$*.ipk" -o -name "*_arm.ipk" -print | \
+	    xargs -I % rsync -i -a % ipkgs/webos-internals/$* ) ; \
+	fi	
 	TAR_OPTIONS=--wildcards \
 	toolchain/ipkg-utils/ipkg-make-index \
 		-v -p ipkgs/webos-internals/$*/Packages ipkgs/webos-internals/$*
@@ -94,9 +100,15 @@ ipkgs/hardware-patches/%/Packages: package-hardware-patches
 ipkgs/optware/%/Packages: package-optware
 	rm -rf ipkgs/optware/$*
 	mkdir -p ipkgs/optware/$*
-	( find optware -type d -name ipkgs -print | \
-	  xargs -I % find % -name "*_$*.ipk" -print | \
-	  xargs -I % rsync -i -a % ipkgs/optware/$* )
+	if [ "$*" == "i686" ] ; then \
+	  ( find optware -type d -name ipkgs -print | \
+	    xargs -I % find % -name "*_$*.ipk" -print | \
+	    xargs -I % rsync -i -a % ipkgs/optware/$* ) ; \
+	else \
+	  ( find optware -type d -name ipkgs -print | \
+	    xargs -I % find % -name "*_$*.ipk" -o -name "*_arm.ipk" -print | \
+	    xargs -I % rsync -i -a % ipkgs/optware/$* ) ; \
+	fi	
 	TAR_OPTIONS=--wildcards \
 	toolchain/ipkg-utils/ipkg-make-index \
 		-v -p ipkgs/optware/$*/Packages ipkgs/optware/$*
