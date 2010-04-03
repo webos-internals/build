@@ -61,7 +61,7 @@ webos-internals-index: ipkgs/webos-internals/all/Packages ipkgs/webos-internals/
 ipkgs/webos-internals/%/Packages: package-subdirs
 	rm -rf ipkgs/webos-internals/$*
 	mkdir -p ipkgs/webos-internals/$*
-	if [ "$*" == "i686" ] ; then \
+	if [ "$*" = "i686" -o "$*" = "all" ] ; then \
 	  ( find ${SUBDIRS} -type d -name ipkgs -print | \
 	    xargs -I % find % -name "*_$*.ipk" -print | \
 	    xargs -I % rsync -i -a % ipkgs/webos-internals/$* ) ; \
@@ -100,7 +100,7 @@ ipkgs/hardware-patches/%/Packages: package-hardware-patches
 ipkgs/optware/%/Packages: package-optware
 	rm -rf ipkgs/optware/$*
 	mkdir -p ipkgs/optware/$*
-	if [ "$*" == "i686" ] ; then \
+	if [ "$*" = "i686" -o "$*" = "all" ] ; then \
 	  ( find optware -type d -name ipkgs -print | \
 	    xargs -I % find % -name "*_$*.ipk" -print | \
 	    xargs -I % rsync -i -a % ipkgs/optware/$* ) ; \
