@@ -67,7 +67,7 @@ ipkgs/webos-internals/%/Packages: package-subdirs
 	    xargs -I % rsync -i -a % ipkgs/webos-internals/$* ) ; \
 	else \
 	  ( find ${SUBDIRS} -type d -name ipkgs -print | \
-	    xargs -I % find % -name "*_$*.ipk" -o -name "*_arm.ipk" -print | \
+	    xargs -I % find % \( -name "*_$*.ipk" -o -name "*_arm.ipk" \) -print | \
 	    xargs -I % rsync -i -a % ipkgs/webos-internals/$* ) ; \
 	fi	
 	TAR_OPTIONS=--wildcards \
@@ -106,7 +106,7 @@ ipkgs/optware/%/Packages: package-optware
 	    xargs -I % rsync -i -a % ipkgs/optware/$* ) ; \
 	else \
 	  ( find optware -type d -name ipkgs -print | \
-	    xargs -I % find % -name "*_$*.ipk" -o -name "*_arm.ipk" -print | \
+	    xargs -I % find % \( -name "*_$*.ipk" -o -name "*_arm.ipk" \) -print | \
 	    xargs -I % rsync -i -a % ipkgs/optware/$* ) ; \
 	fi	
 	TAR_OPTIONS=--wildcards \
