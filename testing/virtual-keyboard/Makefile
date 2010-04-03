@@ -16,10 +16,8 @@ include ../../autopatch/common.mk
 DEPENDS := ${DEPENDS}, org.webosinternals.vkb-default-themes-config
 
 ifeq ("${DUMMY_VERSION}", "")
-SRC_GIT = git://git.webos-internals.org/patches/virtual-keyboard.git
-endif
 
-include ../../support/download.mk
+SRC_GIT = git://git.webos-internals.org/patches/virtual-keyboard.git
 
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
@@ -41,6 +39,8 @@ build/all/CONTROL/prerm: build/.unpacked-${VERSION}
 	sed -e 's|PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' \
 			-e 's|APP_DIR=|APP_DIR=$$IPKG_OFFLINE_ROOT/usr/palm/applications/${APP_ID}|' ../../autopatch/prerm.testing > build/all/CONTROL/prerm
 	chmod ugo+x $@
+
+endif
 
 MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>
 HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard
