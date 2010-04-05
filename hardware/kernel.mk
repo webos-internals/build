@@ -1,0 +1,1 @@
+../autopatch/kernel.mk
