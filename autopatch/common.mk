@@ -28,7 +28,11 @@ package:
 	  ${MAKE} VERSIONS= VERSION=$${v} package ; \
 	done
 else
+ifneq ("${PACKAGES}", "")
+package: ${PACKAGES}
+else
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
+endif
 endif
 
 include ../../support/package.mk
