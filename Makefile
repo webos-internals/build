@@ -39,17 +39,13 @@ palm-index: ipkgs/palm-catalog/Packages ipkgs/palm-beta/Packages ipkgs/palm-web/
 	    ipkgs/palm-catalog-updates/Packages ipkgs/palm-beta-updates/Packages ipkgs/palm-web-updates/Packages
 
 .PHONY: webos-patches-index
-webos-patches-index: ipkgs/webos-patches/1.3.5/Packages ipkgs/webos-patches/1.4.0/Packages ipkgs/webos-patches/1.4.1/Packages
-	rm -f ipkgs/webos-patches/1.3.5.1 ipkgs/webos-patches/1.3.5.2 ipkgs/webos-patches/1.4.1.1
-	ln -f -s 1.3.5 ipkgs/webos-patches/1.3.5.1
-	ln -f -s 1.3.5 ipkgs/webos-patches/1.3.5.2
+webos-patches-index: ipkgs/webos-patches/1.4.0/Packages ipkgs/webos-patches/1.4.1/Packages
+	rm -f ipkgs/webos-patches/1.4.1.1
 	ln -f -s 1.4.1 ipkgs/webos-patches/1.4.1.1
 
 .PHONY: hardware-patches-index
-hardware-patches-index: ipkgs/hardware-patches/1.3.5/Packages ipkgs/hardware-patches/1.4.0/Packages ipkgs/hardware-patches/1.4.1/Packages
-	rm -f ipkgs/hardware-patches/1.3.5.1 ipkgs/hardware-patches/1.3.5.2 ipkgs/hardware-patches/1.4.1.1
-	ln -f -s 1.3.5 ipkgs/hardware-patches/1.3.5.1
-	ln -f -s 1.3.5 ipkgs/hardware-patches/1.3.5.2
+hardware-patches-index: ipkgs/hardware-patches/1.4.0/Packages ipkgs/hardware-patches/1.4.1/Packages
+	rm -f ipkgs/hardware-patches/1.4.1.1
 	ln -f -s 1.4.1 ipkgs/hardware-patches/1.4.1.1
 
 .PHONY: regression-index
