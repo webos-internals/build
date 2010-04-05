@@ -43,7 +43,7 @@ POSTINSTALLFLAGS=
 POSTUPDATEFLAGS=
 POSTREMOVEFLAGS=
 
-build/.built-${VERSION}:
+build/.built-%:
 	rm -rf build/all
 	mkdir -p build/all
 	touch $@
@@ -58,19 +58,19 @@ unpack: build/.unpacked-${VERSION}
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.meta-${META_VERSION}:
+build/.meta-%:
 	touch $@
 
-build/.built-extra-${VERSION}:
+build/.built-extra-%:
 	touch $@
 
-build/.built-${VERSION}: build/.unpacked-${VERSION} build/.meta-${META_VERSION} build/ipkg-info-${WEBOS_VERSION}
+build/.built-%: build/.unpacked-% build/.meta-${META_VERSION} build/ipkg-info-${WEBOS_VERSION}
 	rm -rf build/all
 	mkdir -p build/all/usr/palm/applications/${APP_ID}
-	install -m 644 build/src-${VERSION}/${PATCH} build/all/usr/palm/applications/${APP_ID}/
+	install -m 644 build/src-$*/${PATCH} build/all/usr/palm/applications/${APP_ID}/
 	rm -f build/all/usr/palm/applications/${APP_ID}/package_list
 	touch build/all/usr/palm/applications/${APP_ID}/package_list
-	for f in `lsdiff --strip=1 build/src-${VERSION}/${PATCH}` ; do \
+	for f in `lsdiff --strip=1 build/src-$*/${PATCH}` ; do \
 		myvar=`grep -l $$f build/ipkg-info-${WEBOS_VERSION}/*`; \
 		if [ "$$myvar" != "" ]; then \
 			myvar=`basename $$myvar .list`; \
@@ -85,16 +85,16 @@ build/.built-${VERSION}: build/.unpacked-${VERSION} build/.meta-${META_VERSION} 
 		tar -C build/all/usr/palm/applications/${APP_ID}/additional_files -xzf additional_files.tar.gz; \
 	fi
 	touch $@
-	${MAKE} build/.built-extra-${VERSION}
+	${MAKE} build/.built-extra-$*
 
-build/all/CONTROL/prerm: build/.unpacked-${VERSION}
-	mkdir -p build/all/CONTROL
+build/%/CONTROL/prerm: build/.unpacked-${VERSION}
+	mkdir -p build/$*/CONTROL
 	sed -e 's|PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' \
 			-e 's|APP_DIR=|APP_DIR=$$IPKG_OFFLINE_ROOT/usr/palm/applications/${APP_ID}|' ../prerm${SUFFIX} > build/all/CONTROL/prerm
 	chmod ugo+x $@
 
-build/all/CONTROL/postinst: build/.unpacked-${VERSION}
-	mkdir -p build/all/CONTROL
+build/%/CONTROL/postinst: build/.unpacked-${VERSION}
+	mkdir -p build/$*/CONTROL
 	sed -e 's|PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' \
 			-e 's|APP_DIR=|APP_DIR=$$IPKG_OFFLINE_ROOT/usr/palm/applications/${APP_ID}|' ../postinst${SUFFIX} > build/all/CONTROL/postinst
 	chmod ugo+x $@
