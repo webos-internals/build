@@ -65,36 +65,21 @@ build: build/.built-${VERSION}
 build/.built-${VERSION}: build/arm.built build/i686.built
 	touch $@
 
-build/i686.built: build/.unpacked
-	rm -rf build/i686
-	( cd build/src/src ; \
-	  ${MAKE} VERSION=${VERSION} STAGING_DIR=$(shell cd ../.. ; pwd)/staging/i686 \
-	  CC=$(shell cd ../.. ; pwd)/toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu/bin/i686-unknown-linux-gnu-gcc \
-	  clobber ipkgservice \
-	)
-	mkdir -p build/i686/usr/palm/applications/${APP_ID}
-	cp -r build/src/* build/i686/usr/palm/applications/${APP_ID}/
-	rm -rf build/i686/usr/palm/applications/${APP_ID}/src
-	mkdir -p build/i686/usr/palm/applications/${APP_ID}/bin
-	install -m 755 build/src/src/ipkgservice build/i686/usr/palm/applications/${APP_ID}/bin/${IPKGSERVICE}
-	mkdir -p build/i686/etc/ipkg
-	install -m 644 feeds/*.conf build/i686/etc/ipkg/
-	touch $@
+include ../../support/cross-compile.mk
 
-build/arm.built: build/.unpacked
-	rm -rf build/arm
+build/%.built: build/.unpacked
+	rm -rf build/$*
 	( cd build/src/src ; \
-	  ${MAKE} VERSION=${VERSION} STAGING_DIR=$(shell cd ../.. ; pwd)/staging/armv7 \
-	  CC=$(shell cd ../.. ; pwd)/toolchain/cs08q1armel/build/arm-2008q1/bin/arm-none-linux-gnueabi-gcc \
+	  ${MAKE} VERSION=${VERSION} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc \
 	  clobber ipkgservice \
 	)
-	mkdir -p build/arm/usr/palm/applications/${APP_ID}
-	cp -r build/src/* build/arm/usr/palm/applications/${APP_ID}/
-	rm -rf build/arm/usr/palm/applications/${APP_ID}/src
-	mkdir -p build/arm/usr/palm/applications/${APP_ID}/bin
-	install -m 755 build/src/src/ipkgservice build/arm/usr/palm/applications/${APP_ID}/bin/${IPKGSERVICE}
-	mkdir -p build/arm/etc/ipkg
-	install -m 644 feeds/*.conf build/arm/etc/ipkg/
+	mkdir -p build/$*/usr/palm/applications/${APP_ID}
+	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
+	mkdir -p build/$*/usr/palm/applications/${APP_ID}/bin
+	install -m 755 build/src/src/ipkgservice build/$*/usr/palm/applications/${APP_ID}/bin/${IPKGSERVICE}
+	mkdir -p build/$*/etc/ipkg
+	install -m 644 feeds/*.conf build/$*/etc/ipkg/
 	touch $@
 
 build/%/CONTROL/postinst:

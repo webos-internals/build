@@ -53,46 +53,19 @@ build: build/.built-${VERSION}
 build/.built-${VERSION}: build/armv7.built build/armv6.built build/i686.built
 	touch $@
 
-build/i686.built: build/.unpacked
+include ../../support/cross-compile.mk
+
+build/%.built: build/.unpacked
 	rm -rf build/i686
 	( cd build/src/src ; \
-	  ${MAKE} STAGING_DIR=$(shell cd ../.. ; pwd)/staging/i686 \
-	  CC=$(shell cd ../.. ; pwd)/toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu/bin/i686-unknown-linux-gnu-gcc \
+	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc \
 	  clobber ${NAME} \
 	)
-	mkdir -p build/i686/usr/palm/applications/${APP_ID}
-	cp -r build/src/* build/i686/usr/palm/applications/${APP_ID}/
-	rm -rf build/i686/usr/palm/applications/${APP_ID}/src
-	mkdir -p build/i686/usr/palm/applications/${APP_ID}/bin
-	install -m 755 build/src/src/${NAME} build/i686/usr/palm/applications/${APP_ID}/bin/${APP_ID}
-	touch $@
-
-build/armv7.built: build/.unpacked
-	rm -rf build/armv7
-	( cd build/src/src ; \
-	  ${MAKE} STAGING_DIR=$(shell cd ../.. ; pwd)/staging/armv7 \
-	  CC=$(shell cd ../.. ; pwd)/toolchain/cs08q1armel/build/arm-2008q1/bin/arm-none-linux-gnueabi-gcc \
-	  clobber ${NAME} \
-	)
-	mkdir -p build/armv7/usr/palm/applications/${APP_ID}
-	cp -r build/src/* build/armv7/usr/palm/applications/${APP_ID}/
-	rm -rf build/armv7/usr/palm/applications/${APP_ID}/src
-	mkdir -p build/armv7/usr/palm/applications/${APP_ID}/bin
-	install -m 755 build/src/src/${NAME} build/armv7/usr/palm/applications/${APP_ID}/bin/${APP_ID}
-	touch $@
-
-build/armv6.built: build/.unpacked
-	rm -rf build/armv6
-	( cd build/src/src ; \
-	  ${MAKE} STAGING_DIR=$(shell cd ../.. ; pwd)/staging/armv7 \
-	  CC=$(shell cd ../.. ; pwd)/toolchain/cs08q1armel/build/arm-2008q1/bin/arm-none-linux-gnueabi-gcc \
-	  clobber ${NAME} \
-	)
-	mkdir -p build/armv6/usr/palm/applications/${APP_ID}
-	cp -r build/src/* build/armv6/usr/palm/applications/${APP_ID}/
-	rm -rf build/armv6/usr/palm/applications/${APP_ID}/src
-	mkdir -p build/armv6/usr/palm/applications/${APP_ID}/bin
-	install -m 755 build/src/src/${NAME} build/armv6/usr/palm/applications/${APP_ID}/bin/${APP_ID}
+	mkdir -p build/$*/usr/palm/applications/${APP_ID}
+	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
+	mkdir -p build/$*/usr/palm/applications/${APP_ID}/bin
+	install -m 755 build/src/src/${NAME} build/$*/usr/palm/applications/${APP_ID}/bin/${APP_ID}
 	touch $@
 
 build/%/CONTROL/postinst:
