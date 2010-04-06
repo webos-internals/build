@@ -91,14 +91,14 @@ build/.built-%: build/.unpacked-% build/.meta-${META_VERSION} build/ipkg-info-${
 	touch $@
 	${MAKE} build/.built-extra-$*
 
-build/%/CONTROL/prerm: build/.unpacked-${VERSION}
-	mkdir -p build/$*/CONTROL
+build/all/CONTROL/prerm: build/.unpacked-${VERSION}
+	mkdir -p build/all/CONTROL
 	sed -e 's|PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' \
 			-e 's|APP_DIR=|APP_DIR=$$IPKG_OFFLINE_ROOT/usr/palm/applications/${APP_ID}|' ../prerm${SUFFIX} > build/all/CONTROL/prerm
 	chmod ugo+x $@
 
-build/%/CONTROL/postinst: build/.unpacked-${VERSION}
-	mkdir -p build/$*/CONTROL
+build/all/CONTROL/postinst: build/.unpacked-${VERSION}
+	mkdir -p build/all/CONTROL
 	sed -e 's|PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' \
 			-e 's|APP_DIR=|APP_DIR=$$IPKG_OFFLINE_ROOT/usr/palm/applications/${APP_ID}|' ../postinst${SUFFIX} > build/all/CONTROL/postinst
 	chmod ugo+x $@
