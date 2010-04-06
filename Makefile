@@ -22,10 +22,12 @@ SUBDIRS = apps services plugins daemons linux
 .PHONY: index package toolchain upload clobber clean
 
 
+# Not ready just yet
+#	hardware-patches-index
+
 .PHONY: index
 index:  webos-internals-index \
 	webos-patches-index \
-	hardware-patches-index \
 	optware-index \
 	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
 	palm-index \
