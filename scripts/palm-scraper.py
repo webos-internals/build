@@ -67,7 +67,7 @@ class PackageHandler(ContentHandler):
                 self.countries.append('"' + attrs["ac:country"].encode('utf-8') + '"')
 
         if (name == "ac:categories"):
-            if (self.language == "en"):
+            if ((self.language == "en") or (self.category == "")):
                 self.category = attrs["ac:primary"].encode('utf-8')
 
         if (name == "ac:icons"):
@@ -126,22 +126,24 @@ class PackageHandler(ContentHandler):
             if (self.getScreenshot):
                 self.screenshots.append('"' + self.data + '"')
                 self.getScreenshot = 0
-
-        if (self.language == "en"):
-
-            if ((name == "title") or (name == "ac:title")):
-                self.title = self.data
                 
-            if ((name == "description") or (name == "ac:summary")):
+        if ((name == "title") or (name == "ac:title")):
+            if ((self.language == "en") or (self.title == "")):
+                self.title = self.data
+
+        if ((name == "description") or (name == "ac:summary")):
+            if ((self.language == "en") or (self.description == "")):
                 self.description = self.data
 
-            if (name == "ac:developer") :
+        if (name == "ac:developer") :
+            if ((self.language == "en") or (self.author == "")):
                 self.author = self.data
 
-            if (name == "ac:support_url") :
+        if (name == "ac:support_url") :
+            if ((self.language == "en") or (self.support == "")):
                 self.support = self.data
 
-        if ((name == "item") and (self.title != "")):
+        if ((name == "item") and (self.id != "") and (self.version != "")):
 
             self.json += "\"Title\":\"%s\", " % self.title
 
