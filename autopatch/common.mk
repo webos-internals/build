@@ -62,19 +62,19 @@ unpack: build/.unpacked-${VERSION}
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.meta-%:
+build/.meta-${META_VERSION}:
 	touch $@
 
-build/.built-extra-%:
+build/.built-extra-${VERSION}:
 	touch $@
 
-build/.built-%: build/.unpacked-% build/.meta-${META_VERSION} build/ipkg-info-${WEBOS_VERSION}
+build/.built-${VERSION}: build/.unpacked-${VERSION} build/.meta-${META_VERSION} build/ipkg-info-${WEBOS_VERSION}
 	rm -rf build/all
 	mkdir -p build/all/usr/palm/applications/${APP_ID}
-	install -m 644 build/src-$*/${PATCH} build/all/usr/palm/applications/${APP_ID}/
+	install -m 644 build/src-${VERSION}/${PATCH} build/all/usr/palm/applications/${APP_ID}/
 	rm -f build/all/usr/palm/applications/${APP_ID}/package_list
 	touch build/all/usr/palm/applications/${APP_ID}/package_list
-	for f in `lsdiff --strip=1 build/src-$*/${PATCH}` ; do \
+	for f in `lsdiff --strip=1 build/src-${VERSION}/${PATCH}` ; do \
 		myvar=`grep -l $$f build/ipkg-info-${WEBOS_VERSION}/*`; \
 		if [ "$$myvar" != "" ]; then \
 			myvar=`basename $$myvar .list`; \
@@ -88,8 +88,8 @@ build/.built-%: build/.unpacked-% build/.meta-${META_VERSION} build/ipkg-info-${
 		mkdir -p build/all/usr/palm/applications/${APP_ID}/additional_files; \
 		tar -C build/all/usr/palm/applications/${APP_ID}/additional_files -xzf additional_files.tar.gz; \
 	fi
+	${MAKE} build/.built-extra-${VERSION}
 	touch $@
-	${MAKE} build/.built-extra-$*
 
 build/all/CONTROL/prerm: build/.unpacked-${VERSION}
 	mkdir -p build/all/CONTROL
