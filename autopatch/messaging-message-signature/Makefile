@@ -3,7 +3,7 @@ PATCH = messaging/${NAME}.patch
 TITLE = Message Signature
 DESCRIPTION = Adds customizable signature to outgoing text messages which can be changed in the Preferences & Accounts page.
 CATEGORY = Messaging
-VERSIONS = 1.4.1-4
+VERSIONS = 1.4.1-5
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/a/ac/Messaging-message-signature-1.png\",\
