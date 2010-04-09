@@ -13,9 +13,9 @@ build/.unpacked-${VERSION}: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERS
 	zcat ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-pre.gz | \
 		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 
 	tar -C build/src-${VERSION}/patches -xf ${DL_DIR}/patches-${VERSION}.tar.gz
-	if [ -n "${KERNEL_PATCHES}" ] ; then
+	if [ -n "${KERNEL_PATCHES}" ] ; then \
 	  ( cd build/src-${VERSION}/patches ; cat ${KERNEL_PATCHES} ) | \
-		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1
+		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 ; \
 	fi
 	touch $@
 
