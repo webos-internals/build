@@ -10,7 +10,7 @@ WebOS Internals provides this Uber-Kernel as is without warranty of any kind, ei
 In no event will WebOS Internals or any other party be liable to you for damages, including any general, special, incidental or consequential damages arising out of the use or inability to use Uber-Kernel (including but not limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of Uber-Kernel to operate with any other programs).
 CATEGORY = Hardware-Related
 # VERSIONS = 1.4.0-0
-VERSION = 1.4.0-0
+VERSION = 1.4.1-1
 ICON = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
 SCREENSHOTS = 
 META_SUB_VERSION = 1
