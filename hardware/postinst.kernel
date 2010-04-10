@@ -12,62 +12,62 @@ mount -o remount,rw /boot
 
 APPS=/media/cryptofs/apps
 
-[ -d $APPS ] || { echo "Requires webOS 1.3.5 or later" ; exit 1 ; }
+[ -d ${APPS} ] || { echo "Requires webOS 1.3.5 or later" ; exit 1 ; }
 
-SRCDIR=$APPS/usr/palm/applications/${PID}/additional_files
+SRCDIR=${APPS}/usr/palm/applications/${PID}/additional_files
 
 error=0
 
 # Make a backup of all files that are about to be modified
-cd $SRCDIR
-tar -C / -zcf $APPS/usr/palm/applications/${PID}/backup.tar.gz `find boot lib -type f -print` || error=1
+cd ${SRCDIR}
+tar -C / -zcf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz `find boot lib -type f -print` || error=1
 
-if $error ; then
+if ${error} ; then
   echo "Fatal error occurred, unable to create backup tarball"
   exit 1
 fi
 
 # Verify the backup of all files that are about to be modified
-cd $SRCDIR
-tar -C / -zdf $APPS/usr/palm/applications/${PID}/backup.tar.gz || error=1
+cd ${SRCDIR}
+tar -C / -zdf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || error=1
 
-if $error ; then
+if ${error} ; then
   echo "Fatal error occurred, unable to verify backup tarball"
   exit 1
 fi
 
 # Make sure all the target directories exist
 for dir in `find boot lib -type d -print` ; do
-  mkdir -p /$dir			|| { echo "Unable to create $dir"			; error=1 ; }
+  mkdir -p /$dir			|| { echo "Error creating $dir"				; error=1 ; }
   [ -d $dir ]				|| { echo "Unable to create $dir"			; error=1 ; }
 done
 
 # Make sure all the target files are readable and writeable
 for file in `find boot lib -type f -print` ; do
-  [ -r $SRCDIR/$file ]			|| { echo "Unable to read from $SRCDIR/$file"	; error=1 ; }
-  [ -w /$file ]				|| { echo "Unable to write to $file"		; error=1 ; }
+  [ -r ${SRCDIR}/${file} ]		|| { echo "Unable to read from ${SRCDIR}/${file}"	; error=1 ; }
+  [ -w /${file} ]			|| { echo "Unable to write to ${file}"			; error=1 ; }
 done
 
-if $error ; then
+if ${error} ; then
   echo "Fatal error occurred, not installing files"
   exit 1
 fi
 
 # Copy all the files to the target locations
 for file in `find boot lib -type f -print` ; do
-  rm -f /$file				|| { echo "Unable to remove $file"			; error=1 ; }
-  [ ! -f /$file ]			|| { echo "Unable to remove $file"			; error=1 ; }
-# cp $SRCDIR/$file /$file		|| { echo "Unable to install $file"			; error=1 ; }
-# [ -f /$file ]				|| { echo "Unable to install $file"			; error=1 ; }
-# cmp $SRCDIR/$file /$file		|| { echo "Unable to verify $file"			; error=1 ; }
+  rm -f /${file}			|| { echo "Error removing ${file}"			; error=1 ; }
+  [ ! -f /${file} ]			|| { echo "Unable to remove ${file}"			; error=1 ; }
+# cp ${SRCDIR}/${file} /${file}		|| { echo "Error installing ${file}"			; error=1 ; }
+# [ -f /${file} ]			|| { echo "Unable to install ${file}"			; error=1 ; }
+# cmp ${SRCDIR}/${file} /${file}	|| { echo "Unable to verify ${file}"			; error=1 ; }
 done
 
-if $error ; then
+if ${error} ; then
   echo "Fatal error occurred, restoring original files"
-  cd $SRCDIR
-# tar -C / -zxf $APPS/usr/palm/applications/${PID}/backup.tar.gz || \
+  cd ${SRCDIR}
+# tar -C / -zxf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || \
 #  { echo "Fatal error occurred, unable to extract tarball" ; exit 1 ; }
-# tar -C / -zdf $APPS/usr/palm/applications/${PID}/backup.tar.gz \
+# tar -C / -zdf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz \
 #  { echo "Fatal error occurred, unable to verify tarball extraction" ; exit 1 ; }
   exit 1
 fi
