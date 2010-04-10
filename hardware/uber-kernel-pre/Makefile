@@ -22,6 +22,7 @@ PACKAGES = ipkgs/${APP_ID}_${VERSION}_armv7.ipk
 include ../common.mk
 include ../kernel.mk
 
+APP_ID = org.webosinternals.kernels.${NAME}
 MAINTAINER = WebOS Internals
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
 POSTINSTALLFLAGS = RestartDevice
