@@ -22,7 +22,7 @@ error=0
 cd ${SRCDIR}
 tar -C / -zcf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz `find boot lib -type f -print` || error=1
 
-if ${error} ; then
+if [ "${error}" = "1" ] ; then
   echo "Fatal error occurred, unable to create backup tarball"
   exit 1
 fi
@@ -31,7 +31,7 @@ fi
 cd ${SRCDIR}
 tar -C / -zdf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || error=1
 
-if ${error} ; then
+if [ "${error}" = "1" ] ; then
   echo "Fatal error occurred, unable to verify backup tarball"
   exit 1
 fi
@@ -48,21 +48,22 @@ for file in `find boot lib -type f -print` ; do
   [ -w /${file} ]			|| { echo "Unable to write to ${file}"			; error=1 ; }
 done
 
-if ${error} ; then
+if [ "${error}" = "1" ] ; then
   echo "Fatal error occurred, not installing files"
   exit 1
 fi
 
 # Copy all the files to the target locations
 for file in `find boot lib -type f -print` ; do
-  rm -f /${file}			|| { echo "Error removing ${file}"			; error=1 ; }
-  [ ! -f /${file} ]			|| { echo "Unable to remove ${file}"			; error=1 ; }
+# rm -f /${file}			|| { echo "Error removing ${file}"			; error=1 ; }
+# [ ! -f /${file} ]			|| { echo "Unable to remove ${file}"			; error=1 ; }
 # cp ${SRCDIR}/${file} /${file}		|| { echo "Error installing ${file}"			; error=1 ; }
 # [ -f /${file} ]			|| { echo "Unable to install ${file}"			; error=1 ; }
 # cmp ${SRCDIR}/${file} /${file}	|| { echo "Unable to verify ${file}"			; error=1 ; }
+  true
 done
 
-if ${error} ; then
+if [ "${error}" = "1" ] ; then
   echo "Fatal error occurred, restoring original files"
   cd ${SRCDIR}
 # tar -C / -zxf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || \
