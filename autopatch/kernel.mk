@@ -4,6 +4,21 @@ KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkern
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(pre\).gz
 DL_DIR = ../../downloads
 
+build/armv7.built-${VERSION}: build/.unpacked-${VERSION}
+	mkdir -p build/armv7/usr/palm/applications/${APP_ID}/additional_files/boot
+	( cd build/src-${VERSION}/linux-${KERNEL_VERSION} ; \
+	  yes '' | ${MAKE} ARCH=arm omap_sirloin_3430_defconfig ; \
+	  ${MAKE} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_armv7} \
+		INSTALL_MOD_PATH=$(shell pwd)/build/armv7/usr/palm/applications/${APP_ID}/additional_files \
+		uImage modules modules_install ; \
+	)
+	rm -f build/armv7/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/build
+	rm -f build/armv7/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/source
+	rm -f build/armv7/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/*.bin
+	cp build/src-${VERSION}/linux-${KERNEL_VERSION}/arch/arm/boot/uImage \
+		build/armv7/usr/palm/applications/${APP_ID}/additional_files/boot/uImage-2.6.24-palm-joplin-3430
+	touch $@
+
 build/.unpacked-${VERSION}: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}.tgz \
 			    ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-pre.gz \
 			    ${DL_DIR}/patches-${VERSION}.tar.gz

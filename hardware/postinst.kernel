@@ -1,6 +1,6 @@
 #!/bin/sh                                                                                       
 
-PID="org.webosinternals.kernels.palm-kernel-pre"
+PID=
 
 # Handle execution as pmPostInstall.script
 if [ -z "$IPKG_OFFLINE_ROOT" ]; then

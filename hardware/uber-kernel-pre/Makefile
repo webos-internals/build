@@ -20,7 +20,6 @@ KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch overclocking/defc
 PACKAGES = ipkgs/${APP_ID}_${VERSION}_armv7.ipk
 
 include ../common.mk
-include ../kernel.mk
 
 APP_ID = org.webosinternals.kernels.${NAME}
 MAINTAINER = WebOS Internals
@@ -31,31 +30,15 @@ POSTREMOVEFLAGS  = RestartDevice
 
 include ../../support/cross-compile.mk
 
-APP_DIR = $(shell pwd)/build/armv7/usr/palm/applications/${APP_ID}
-
-build/.built-${VERSION}: build/.unpacked-${VERSION}
-	mkdir -p build/armv7/usr/palm/applications/${APP_ID}/additional_files/boot
-	( cd build/src-${VERSION}/linux-${KERNEL_VERSION} ; \
-	  yes '' | ${MAKE} ARCH=arm omap_sirloin_3430_defconfig ; \
-	  ${MAKE} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_armv7} \
-		INSTALL_MOD_PATH=${APP_DIR}/additional_files \
-		uImage modules modules_install ; \
-	)
-	rm -f ${APP_DIR}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/build
-	rm -f ${APP_DIR}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/source
-	rm -f ${APP_DIR}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/*.bin
-	cp build/src-${VERSION}/linux-${KERNEL_VERSION}/arch/arm/boot/uImage \
-		${APP_DIR}/additional_files/boot/uImage-2.6.24-palm-joplin-3430
+build/.built-${VERSION}: build/armv7.built-${VERSION}
 	touch $@
+
+include ../kernel.mk
 
 build/armv7/CONTROL/postinst:
 	mkdir -p build/armv7/CONTROL
-	sed -e 's|APP_DIR=|APP_DIR=$$IPKG_OFFLINE_ROOT/usr/palm/applications/${APP_ID}|' \
-		../postinst${SUFFIX} > $@
+	sed -e 's|PID=|PID="${APP_ID}"|' ../postinst.kernel > $@
 	chmod ugo+x $@
 
 build/armv7/CONTROL/prerm:
-	mkdir -p build/armv7/CONTROL
-	sed -e 's|APP_DIR=|APP_DIR=$$IPKG_OFFLINE_ROOT/usr/palm/applications/${APP_ID}|' \
-		../prerm${SUFFIX} > $@
-	chmod ugo+x $@
+	rm -f $@
