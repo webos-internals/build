@@ -15,7 +15,7 @@ ICON = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInter
 SCREENSHOTS = 
 META_SUB_VERSION = 1
 
-KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch
+KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch overclocking/defconfig.patch
 
 PACKAGES = ipkgs/${APP_ID}_${VERSION}_armv7.ipk
 
