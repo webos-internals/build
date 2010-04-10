@@ -6,8 +6,9 @@ PID=
 if [ -z "$IPKG_OFFLINE_ROOT" ]; then
   IPKG_OFFLINE_ROOT=/media/cryptofs/apps
   mount -o remount,rw /
-  mount -o remount,rw /boot
 fi
+
+mount -o remount,rw /boot
 
 APPS=/media/cryptofs/apps
 
