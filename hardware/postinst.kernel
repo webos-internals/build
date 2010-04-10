@@ -8,7 +8,7 @@ if [ -z "$IPKG_OFFLINE_ROOT" ]; then
   mount -o remount,rw /
 fi
 
-mount -o remount,rw /boot
+# mount -o remount,rw /boot
 
 APPS=/media/cryptofs/apps
 
@@ -36,16 +36,22 @@ if [ "${error}" = "1" ] ; then
   exit 1
 fi
 
-# Make sure all the target directories exist
+# Make sure all the target directories exist and are writeable
 for dir in `find boot lib -type d -print` ; do
-  mkdir -p /$dir			|| { echo "Error creating $dir"				; error=1 ; }
-  [ -d $dir ]				|| { echo "Unable to create $dir"			; error=1 ; }
+  mkdir -p /$dir			|| { echo "Error creating /$dir"			; error=1 ; }
+  [ -d /$dir ]				|| { echo "Unable to create /$dir"			; error=1 ; }
+  rm -f /$dir/.webosinternals.org ]	|| { echo "Error removing /$dir/.webosinternals.org"	; error=1 ; }
+  [ ! -f /$dir/.webosinternals.org ]	|| { echo "Unable to remove /$dir/.webosinternals.org"	; error=1 ; }
+  touch /$dir/.webosinternals.org ]	|| { echo "Error touching /$dir/.webosinternals.org"	; error=1 ; }
+  [ -f /$dir/.webosinternals.org ]	|| { echo "Unable to touch /$dir/.webosinternals.org"	; error=1 ; }
+  rm -f /$dir/.webosinternals.org ]	|| { echo "Error removing /$dir/.webosinternals.org"	; error=1 ; }
+  [ ! -f /$dir/.webosinternals.org ]	|| { echo "Unable to remove /$dir/.webosinternals.org"	; error=1 ; }
 done
 
 # Make sure all the target files are readable and writeable
 for file in `find boot lib -type f -print` ; do
-  [ -r ${SRCDIR}/${file} ]		|| { echo "Unable to read from ${SRCDIR}/${file}"	; error=1 ; }
-  [ -w /${file} ]			|| { echo "Unable to write to ${file}"			; error=1 ; }
+  [ -r ${SRCDIR}/$file ]		|| { echo "Unable to read from ${SRCDIR}/$file"		; error=1 ; }
+  [ -w /$file ]				|| { echo "Unable to write to /$file"			; error=1 ; }
 done
 
 if [ "${error}" = "1" ] ; then
@@ -55,11 +61,11 @@ fi
 
 # Copy all the files to the target locations
 for file in `find boot lib -type f -print` ; do
-# rm -f /${file}			|| { echo "Error removing ${file}"			; error=1 ; }
-# [ ! -f /${file} ]			|| { echo "Unable to remove ${file}"			; error=1 ; }
-# cp ${SRCDIR}/${file} /${file}		|| { echo "Error installing ${file}"			; error=1 ; }
-# [ -f /${file} ]			|| { echo "Unable to install ${file}"			; error=1 ; }
-# cmp ${SRCDIR}/${file} /${file}	|| { echo "Unable to verify ${file}"			; error=1 ; }
+# rm -f /$file				|| { echo "Error removing /$file"			; error=1 ; }
+# [ ! -f /$file ]			|| { echo "Unable to remove /$file"			; error=1 ; }
+# cp ${SRCDIR}/$file /$file		|| { echo "Error installing /$file"			; error=1 ; }
+# [ -f /$file ]				|| { echo "Unable to install /$file"			; error=1 ; }
+# cmp ${SRCDIR}/$file /$file		|| { echo "Unable to verify /$file"			; error=1 ; }
   true
 done
 
