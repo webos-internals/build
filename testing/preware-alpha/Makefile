@@ -3,13 +3,13 @@ TITLE	 = Preware Alpha
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.9.58
+VERSION  = 0.9.60
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
 ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 DESCRIPTION = <b>This is the experimental alpha testing version of Preware.<br>You probably do not want to install this version.</b><br>The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, services and plugins.  Preware is also able to access official Palm App Catalog feeds.<br><b>Requires webOS 1.3.5 or later.</b>
-CHANGELOG = 0.9.58: Fixed a bug in scanning unknown packages.<br>0.9.57: Based on Preware 0.9.35<br>0.9.56: Based on Preware 0.9.34<br>0.9.55: New C-language based ipkgservice as part of a single stand-alone Preware package.
+CHANGELOG = 0.9.60: Lots of new useability additions, ready for early alpha testing.<br>0.9.59: Search from the main screen.<br>0.9.58: Fixed a bug in scanning unknown packages.<br>0.9.57: Based on Preware 0.9.35<br>0.9.56: Based on Preware 0.9.34<br>0.9.55: New C-language based ipkgservice as part of a single stand-alone Preware package.
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/3/36/Preware_ss1.png\",\
 \"http://www.webos-internals.org/images/9/97/Preware_ss2.png\",\
@@ -78,8 +78,6 @@ build/%.built: build/.unpacked
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/bin
 	install -m 755 build/src/src/ipkgservice build/$*/usr/palm/applications/${APP_ID}/bin/${IPKGSERVICE}
-	mkdir -p build/$*/etc/ipkg
-	install -m 644 feeds/*.conf build/$*/etc/ipkg/
 	touch $@
 
 build/%/CONTROL/postinst:
