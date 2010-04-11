@@ -188,14 +188,14 @@ package-feeds: toolchain
 	done
 
 toolchain: toolchain/ipkg-utils/ipkg-make-index \
-	   toolchain/cs08q1armel/build/arm-2008q1 \
+	   toolchain/cs07q3armel/build/arm-2007q3 \
 	   toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu \
 	   staging/usr/include/mjson/json.h \
 	   staging/usr/include/lunaservice.h \
 	   staging/usr/include/glib.h
 
-toolchain/cs08q1armel/build/arm-2008q1:
-	${MAKE} -C toolchain/cs08q1armel unpack
+toolchain/cs07q3armel/build/arm-2007q3:
+	${MAKE} -C toolchain/cs07q3armel unpack
 
 toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu:
 	${MAKE} -C toolchain/i686-unknown-linux-gnu unpack
