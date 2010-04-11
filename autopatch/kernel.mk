@@ -49,8 +49,8 @@ POSTREMOVEFLAGS=
 include ../../support/package.mk
 
 build/.built-${VERSION}:
-	rm -rf build/all
-	mkdir -p build/all
+	rm -rf build/arm
+	mkdir -p build/arm
 	touch $@
 
 else
