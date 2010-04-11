@@ -10,11 +10,6 @@ CATEGORY = Hardware-Related
 VERSIONS = 1.4.1-2
 ICON = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
 SCREENSHOTS = 
-META_SUB_VERSION = 1
-
-PACKAGES = ipkgs/${APP_ID}_${VERSION}_arm.ipk
-
-include ../common.mk
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
 KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch overclocking/defconfig-safe.patch

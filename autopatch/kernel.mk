@@ -1,9 +1,13 @@
 TYPE = Kernel
 APP_ID = org.webosinternals.kernels.${NAME}
+SIGNER = org.webosinternals
+BLDFLAGS = -p
+MAINTAINER = WebOS Internals <support@webos-internals.org>
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 DEPENDS = 
 FEED = Hardware Patches
 LICENSE = GPL v2 Open Source
+WEBOS_VERSIONS = 1.4.0 1.4.1
 KERNEL_VERSION = 2.6.24
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tgz
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(pre\).gz
@@ -17,6 +21,21 @@ In no event will WebOS Internals or any other party be liable to you for damages
 
 include ../../support/cross-compile.mk
 
+.PHONY: package
+ifneq ("${VERSIONS}", "")
+package:
+	for v in ${WEBOS_VERSIONS} ; do \
+	  VERSION=$${v}-0 ${MAKE} VERSIONS= DUMMY_VERSION=0 package ; \
+	done; \
+	for v in ${VERSIONS} ; do \
+	  VERSION=$${v} ${MAKE} VERSIONS= package ; \
+	done
+else
+package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
+endif
+
+WEBOS_VERSION:=$(shell echo ${VERSION} | cut -d- -f1)
+
 ifneq ("${DUMMY_VERSION}", "")
 
 DESCRIPTION=This package is not currently available for WebOS ${WEBOS_VERSION}.  This package may be installed as a placeholder to notify you when an update is available.  NOTE: This is simply an empty package placeholder, it will not affect your device in any way
@@ -27,12 +46,24 @@ POSTINSTALLFLAGS=
 POSTUPDATEFLAGS=
 POSTREMOVEFLAGS=
 
-build/built-${VERSION}:
+include ../../support/package.mk
+
+build/.built-${VERSION}:
 	rm -rf build/all
 	mkdir -p build/all
 	touch $@
 
 else
+
+include ../../support/download.mk
+
+.PHONY: unpack
+unpack: build/.unpacked-${VERSION}
+
+include ../../support/package.mk
+
+.PHONY: build
+build: build/.built-${VERSION}
 
 build/.built-${VERSION}: build/arm.built-${VERSION}
 	touch $@
@@ -99,3 +130,7 @@ ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-pre.gz:
 	mv $@.tmp $@
 
 endif
+
+.PHONY: clobber
+clobber::
+	rm -rf build
