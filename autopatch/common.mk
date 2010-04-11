@@ -106,4 +106,4 @@ endif
 
 .PHONY: clobber
 clobber::
-	rm -rf build ${DOCTOR_DIR}/ipkg-info-*
+	rm -rf build
