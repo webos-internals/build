@@ -22,10 +22,10 @@ endif
 ifneq ("${VERSIONS}", "")
 package:
 	for v in ${WEBOS_VERSIONS} ; do \
-		${MAKE} VERSIONS= DUMMY_VERSION=0 VERSION=$${v}-0 package ; \
+	  VERSION=$${v}-0 ${MAKE} VERSIONS= DUMMY_VERSION=0 package ; \
 	done; \
 	for v in ${VERSIONS} ; do \
-	  ${MAKE} VERSIONS= VERSION=$${v} package ; \
+	  VERSION=$${v} ${MAKE} VERSIONS= package ; \
 	done
 else
 ifneq ("${PACKAGES}", "")
