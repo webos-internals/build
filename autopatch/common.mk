@@ -37,8 +37,9 @@ endif
 
 include ../../support/package.mk
 
-ifneq ("${DUMMY_VERSION}", "")
 WEBOS_VERSION:=$(shell echo ${VERSION} | cut -d- -f1)
+
+ifneq ("${DUMMY_VERSION}", "")
 DESCRIPTION=This package is not currently available for WebOS ${WEBOS_VERSION}.  This package may be installed as a placeholder to notify you when an update is available.  NOTE: This is simply an empty package placeholder, it will not affect your device in any way
 CATEGORY=Unavailable
 SRC_GIT=
@@ -52,7 +53,6 @@ build/.built-%:
 	mkdir -p build/all
 	touch $@
 else
-WEBOS_VERSION=$(shell echo ${VERSION} | cut -d- -f1)
 include ../../support/download.mk
 include ../../support/ipkg-info.mk
 

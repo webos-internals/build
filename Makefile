@@ -88,7 +88,7 @@ ipkgs/hardware-patches/%/Packages: package-hardware-patches
 	rm -rf ipkgs/hardware-patches/$*
 	mkdir -p ipkgs/hardware-patches/$*
 	( find hardware -type d -name ipkgs -print | \
-	  xargs -I % find % -name "*_$*-*_all.ipk" -print | \
+	  xargs -I % find % -name "*_$*-*_*.ipk" -print | \
 	  xargs -I % rsync -i -a % ipkgs/hardware-patches/$* )
 	TAR_OPTIONS=--wildcards \
 	toolchain/ipkg-utils/ipkg-make-index \

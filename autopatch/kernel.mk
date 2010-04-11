@@ -17,19 +17,47 @@ In no event will WebOS Internals or any other party be liable to you for damages
 
 include ../../support/cross-compile.mk
 
-build/armv7.built-${VERSION}: build/.unpacked-${VERSION}
-	mkdir -p build/armv7/usr/palm/applications/${APP_ID}/additional_files/boot
+ifneq ("${DUMMY_VERSION}", "")
+
+DESCRIPTION=This package is not currently available for WebOS ${WEBOS_VERSION}.  This package may be installed as a placeholder to notify you when an update is available.  NOTE: This is simply an empty package placeholder, it will not affect your device in any way
+CATEGORY=Unavailable
+SRC_GIT=
+DEPENDS=
+POSTINSTALLFLAGS=
+POSTUPDATEFLAGS=
+POSTREMOVEFLAGS=
+
+build/built-${VERSION}:
+	rm -rf build/all
+	mkdir -p build/all
+	touch $@
+
+else
+
+build/.built-${VERSION}: build/arm.built-${VERSION}
+	touch $@
+
+build/arm/CONTROL/postinst:
+	mkdir -p build/arm/CONTROL
+	sed -e 's|PID=|PID="${APP_ID}"|' ../postinst.kernel > $@
+	chmod ugo+x $@
+
+build/arm/CONTROL/prerm:
+	rm -f $@
+
+build/arm.built-${VERSION}: build/.unpacked-${VERSION}
+	mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/boot
 	( cd build/src-${VERSION}/linux-${KERNEL_VERSION} ; \
 	  yes '' | ${MAKE} ARCH=arm omap_sirloin_3430_defconfig ; \
-	  ${MAKE} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_armv7} \
-		INSTALL_MOD_PATH=$(shell pwd)/build/armv7/usr/palm/applications/${APP_ID}/additional_files \
+	  ${MAKE} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
+		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
 		uImage modules modules_install ; \
 	)
-	rm -f build/armv7/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/build
-	rm -f build/armv7/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/source
-	rm -f build/armv7/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/*.bin
+	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/build
+	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/source
+	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/*.bin
 	cp build/src-${VERSION}/linux-${KERNEL_VERSION}/arch/arm/boot/uImage \
-		build/armv7/usr/palm/applications/${APP_ID}/additional_files/boot/uImage-2.6.24-palm-joplin-3430
+		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/uImage-2.6.24-palm-joplin-3430
 	touch $@
 
 build/.unpacked-${VERSION}: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}.tgz \
@@ -69,3 +97,4 @@ ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-pre.gz:
 	curl -f -R -L -o $@.tmp ${KERNEL_PATCH}
 	mv $@.tmp $@
 
+endif
