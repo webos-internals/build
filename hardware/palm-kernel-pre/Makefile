@@ -8,11 +8,11 @@ ICON = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInter
 SCREENSHOTS = 
 META_SUB_VERSION = 1
 
+PACKAGES = ipkgs/${APP_ID}_${VERSION}_arm.ipk
+
 include ../common.mk
 
 HOMEPAGE = http://opensource.palm.com
 KERNEL_PATCHES =
-
-PACKAGES = ipkgs/${APP_ID}_${VERSION}_arm.ipk
 
 include ../kernel.mk
