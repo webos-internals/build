@@ -74,7 +74,9 @@ build/arm/CONTROL/postinst:
 	chmod ugo+x $@
 
 build/arm/CONTROL/prerm:
-	rm -f $@
+	mkdir -p build/arm/CONTROL
+	sed -e 's|PID=|PID="${APP_ID}"|' ../prerm.kernel > $@
+	chmod ugo+x $@
 
 build/arm.built-${VERSION}: build/.unpacked-${VERSION}
 	mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/boot

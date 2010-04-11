@@ -1,0 +1,49 @@
+#!/bin/sh                                                                                       
+
+PID=
+
+# Handle execution as pmPreRemove.script
+if [ -z "$IPKG_OFFLINE_ROOT" ]; then
+  IPKG_OFFLINE_ROOT=/media/cryptofs/apps
+  mount -o remount,rw /
+fi
+
+mount -o remount,rw /boot
+
+APPS=/media/cryptofs/apps
+
+[ -d ${APPS} ] || { echo "Requires webOS 1.3.5 or later" ; exit 1 ; }
+
+SRCDIR=${APPS}/usr/palm/applications/${PID}/additional_files
+cd ${SRCDIR}
+
+error=0
+
+[ -f ${APPS}/usr/palm/applications/${PID}/backup.tar.gz ] || \
+  { echo "Fatal error occurred, unable to locate tarball" ; exit 1 ; }
+
+# Make sure all the target directories exist and are writeable
+for dir in boot lib ; do
+  mkdir -p /$dir			|| { echo "Error creating /$dir"			; error=1 ; }
+  [ -d /$dir ]				|| { echo "Unable to create /$dir"			; error=1 ; }
+  rm -f /$dir/.webosinternals.org ]	|| { echo "Error removing /$dir/.webosinternals.org"	; error=1 ; }
+  [ ! -f /$dir/.webosinternals.org ]	|| { echo "Unable to remove /$dir/.webosinternals.org"	; error=1 ; }
+  touch /$dir/.webosinternals.org ]	|| { echo "Error touching /$dir/.webosinternals.org"	; error=1 ; }
+  [ -f /$dir/.webosinternals.org ]	|| { echo "Unable to touch /$dir/.webosinternals.org"	; error=1 ; }
+  rm -f /$dir/.webosinternals.org ]	|| { echo "Error removing /$dir/.webosinternals.org"	; error=1 ; }
+  [ ! -f /$dir/.webosinternals.org ]	|| { echo "Unable to remove /$dir/.webosinternals.org"	; error=1 ; }
+done
+
+if [ "${error}" = "1" ] ; then
+  echo "Fatal error occurred, not extracting files"
+  exit 1
+fi
+
+# Extract all the files to the target locations
+tar -C / -zxf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || \
+  { echo "Fatal error occurred, unable to extract tarball" ; exit 1 ; }
+
+tar -C / -zdf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || \
+  { echo "Fatal error occurred, unable to verify tarball extraction" ; exit 1 ; }
+
+exit 0
