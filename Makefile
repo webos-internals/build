@@ -22,16 +22,12 @@ SUBDIRS = apps services plugins daemons linux
 .PHONY: index package toolchain upload clobber clean
 
 
-# Not ready just yet
-#	hardware-patches-index
-
 .PHONY: index
 index:  webos-internals-index \
 	webos-patches-index \
 	optware-index \
 	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
 	palm-index \
-	regression-index
 
 .PHONY: optware-index
 optware-index: ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv6/Packages ipkgs/optware/armv7/Packages
