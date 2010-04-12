@@ -83,7 +83,7 @@ build/arm.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src-${VERSION}/linux-${KERNEL_VERSION} ; \
 	  yes '' | ${MAKE} ARCH=arm omap_sirloin_3430_defconfig ; \
 	  ${MAKE} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
-		KBUILD_BUILD_COMPILE_BY=v${VERSION} KBUILD_BUILD_COMPILE_HOST=webos-internals.org \
+		KBUILD_BUILD_COMPILE_BY=v${VERSION} KBUILD_BUILD_COMPILE_HOST=${APP_ID} \
 		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
 		uImage modules modules_install ; \
 	)
