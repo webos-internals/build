@@ -93,6 +93,10 @@ build/arm.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/modules.*
 	cp build/src-${VERSION}/linux-${KERNEL_VERSION}/arch/arm/boot/uImage \
 		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/uImage-2.6.24-palm-joplin-3430
+	cp build/src-${VERSION}/linux-${KERNEL_VERSION}/System.map \
+		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/System.map-2.6.24-palm-joplin-3430
+	cp build/src-${VERSION}/linux-${KERNEL_VERSION}/.config \
+		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/config-2.6.24-palm-joplin-3430
 	touch $@
 
 build/.unpacked-${VERSION}: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}.tgz \
