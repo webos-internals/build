@@ -35,7 +35,7 @@ LICENSE  = GPL v2 Open Source
 SRC_GIT = git://git.webos-internals.org/applications/saverestore.git
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_armv6.ipk ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
+package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
 include ../../support/package.mk
 
 include ../../support/download.mk
@@ -54,13 +54,13 @@ build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/armv7.built build/armv6.built build/i686.built
+build/.built-${VERSION}: build/arm.built build/i686.built
 	touch $@
 
 include ../../support/cross-compile.mk
 
 build/%.built: build/.unpacked
-	rm -rf build/i686
+	rm -rf build/$*
 	( cd build/src/src ; \
 	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc \
 	  clobber ${NAME} \
