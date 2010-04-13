@@ -5,7 +5,7 @@ DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre/
 Current additions include:<ul>\
 <li>720MHz and 800MHz kernel operating points (OPP6 and OPP7 for VDD1), based on the open source OMAP3440 kernel port, ported to the Palm Pre/Pre+ by uNiXpSyChO</li>\
 <li>All cpufreq governors made available for experimentation</li>\
-</ul><br>
+</ul><br>\
 All additions are disabled by default, and must be enabled by separate packages or scripts (not included in this package).<br>${KERNEL_DISCLAIMER}
 CATEGORY = Experimental
 VERSIONS = 1.4.1-2
