@@ -8,7 +8,6 @@ Current additions include:<ul>\
 </ul><br>${KERNEL_DISCLAIMER}
 CATEGORY = Hardware-Related
 VERSIONS = 1.4.1-2
-ICON = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
 SCREENSHOTS = 
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel

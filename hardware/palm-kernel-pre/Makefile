@@ -5,7 +5,6 @@ Useful for restoring the operation of your device back to factory specifications
 CATEGORY = Hardware-Related
 # VERSIONS = 1.4.1-1
 VERSION = 1.4.1-1
-ICON = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
 SCREENSHOTS = 
 
 HOMEPAGE = http://opensource.palm.com
