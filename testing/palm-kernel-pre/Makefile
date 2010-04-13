@@ -1,9 +1,8 @@
 NAME = $(shell basename $(shell pwd))-${WEBOS_VERSION}
-TITLE = Original webOS ${WEBOS_VERSION} Kernel (Palm Pre/Pre+)
-DESCRIPTION = Use this package to reinstall the original webOS ${WEBOS_VERSION} factory kernel.<br>${KERNEL_DISCLAIMER}
+TITLE = Palm webOS ${WEBOS_VERSION} Kernel (Palm Pre/Pre+)
+DESCRIPTION = Use this package to reinstall the official webOS ${WEBOS_VERSION} kernel from Palm.<br>${KERNEL_DISCLAIMER}
 CATEGORY = Recovery
 VERSIONS = 1.4.0-1 1.4.1-1
-SCREENSHOTS = 
 FORCE_INSTALL = 1
 HOMEPAGE = http://opensource.palm.com
 SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch(pre).gz

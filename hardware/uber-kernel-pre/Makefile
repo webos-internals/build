@@ -1,11 +1,12 @@
 NAME = $(shell basename $(shell pwd))
-TITLE = Uber-Kernel (Palm Pre)
-DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre, rolled into a single OTA-safe installation package.<br>\
+TITLE = Uber-Kernel (Palm Pre/Pre+)
+DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to void your warranty if things go wrong.<b><br>\
 Current additions include:<ul>\
-<li>720MHz and 800MHz operating points (OPP6 and OPP7 for VDD1), based on the open source OMAP3440 kernel port, modified for the Palm Pre kernel by uNiXpSyChO</li>\
-<li><a href=http://kernel.org/pub/linux/kernel/people/lenb/acpi/doc/OLS2006-ondemand-paper.pdf>Ondemand dynamic in-kernel cpufreq governor</a> that can change CPU frequency depending on CPU utilization (a standard part of the open source Linux kernel, compiled for Palm Pre kernel by uNiXpSyChO)</li>\
-</ul><br>${KERNEL_DISCLAIMER}
+<li>720MHz and 800MHz kernel operating points (OPP6 and OPP7 for VDD1), based on the open source OMAP3440 kernel port, ported to the Palm Pre/Pre+ by uNiXpSyChO</li>\
+<li>All cpufreq governors made available for experimentation</li>\
+</ul><br>
+All additions are disabled by default, and must be enabled by separate packages or scripts (not included in this package).<br>${KERNEL_DISCLAIMER}
 CATEGORY = Experimental
 VERSIONS = 1.4.1-2
 SCREENSHOTS = 
