@@ -8,6 +8,7 @@ VERSION = 1.4.1-1
 SCREENSHOTS = 
 
 HOMEPAGE = http://opensource.palm.com
+SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES =
 
 include ../kernel.mk

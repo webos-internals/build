@@ -11,6 +11,7 @@ VERSIONS = 1.4.1-2
 SCREENSHOTS = 
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
+SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch overclocking/defconfig-safe.patch
 
 include ../kernel.mk

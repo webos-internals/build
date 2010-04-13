@@ -6,6 +6,7 @@ VERSIONS = 1.4.0-1 1.4.1-1
 SCREENSHOTS = 
 FORCE_INSTALL = 1
 HOMEPAGE = http://opensource.palm.com
+SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch(pre).gz
 KERNEL_PATCHES =
 
 include ../kernel.mk
