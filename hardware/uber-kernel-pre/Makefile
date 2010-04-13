@@ -6,7 +6,7 @@ Current additions include:<ul>\
 <li>720MHz and 800MHz operating points (OPP6 and OPP7 for VDD1), based on the open source OMAP3440 kernel port, modified for the Palm Pre kernel by uNiXpSyChO</li>\
 <li><a href=http://kernel.org/pub/linux/kernel/people/lenb/acpi/doc/OLS2006-ondemand-paper.pdf>Ondemand dynamic in-kernel cpufreq governor</a> that can change CPU frequency depending on CPU utilization (a standard part of the open source Linux kernel, compiled for Palm Pre kernel by uNiXpSyChO)</li>\
 </ul><br>${KERNEL_DISCLAIMER}
-CATEGORY = Hardware-Related
+CATEGORY = Experimental
 VERSIONS = 1.4.1-2
 SCREENSHOTS = 
 
