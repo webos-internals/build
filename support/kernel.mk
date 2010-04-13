@@ -21,20 +21,20 @@ In no event will WebOS Internals or any other party be liable to you for damages
 
 include ../../support/cross-compile.mk
 
+WEBOS_VERSION:=$(shell echo ${VERSION} | cut -d- -f1)
+
 .PHONY: package
 ifneq ("${VERSIONS}", "")
 package:
 	for v in ${WEBOS_VERSIONS} ; do \
-	  VERSION=$${v}-0 ${MAKE} VERSIONS= DUMMY_VERSION=0 package ; \
+	  VERSION=$${v}-0 ${MAKE} VERSIONS= WEBOS_VERSION=$${v} DUMMY_VERSION=0 package ; \
 	done; \
 	for v in ${VERSIONS} ; do \
-	  VERSION=$${v} ${MAKE} VERSIONS= package ; \
+	  VERSION=$${v} ${MAKE} VERSIONS= WEBOS_VERSION=`echo $${v} | cut -d- -f1` package ; \
 	done
 else
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
 endif
-
-WEBOS_VERSION:=$(shell echo ${VERSION} | cut -d- -f1)
 
 ifneq ("${DUMMY_VERSION}", "")
 
@@ -66,7 +66,7 @@ include ../../support/package.mk
 build: build/.built-${VERSION}
 
 build/.built-${VERSION}: build/arm.built-${VERSION}
-	cp ../kernel-icon.png build/arm/usr/palm/applications/${APP_ID}/icon.png
+	cp ../../support/kernel.png build/arm/usr/palm/applications/${APP_ID}/icon.png
 	echo "{" > build/arm/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "\"title\": \"${TITLE}\"," >> build/arm/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "\"id\": \"${APP_ID}\"," >> build/arm/usr/palm/applications/${APP_ID}/appinfo.json
@@ -80,13 +80,13 @@ build/.built-${VERSION}: build/arm.built-${VERSION}
 build/%/CONTROL/postinst:
 	mkdir -p build/arm/CONTROL
 	sed -e 's|PID=|PID="${APP_ID}"|' -e 's|FORCE_INSTALL=|FORCE_INSTALL="${FORCE_INSTALL}"|' \
-		../postinst.kernel > $@
+		../../support/kernel.postinst > $@
 	chmod ugo+x $@
 
 build/%/CONTROL/prerm:
 	mkdir -p build/arm/CONTROL
 	sed -e 's|PID=|PID="${APP_ID}"|' -e 's|FORCE_INSTALL=|FORCE_INSTALL="${FORCE_INSTALL}"|' \
-		../prerm.kernel > $@
+		../../support/kernel.prerm > $@
 	chmod ugo+x $@
 
 build/arm.built-%: build/.unpacked-%

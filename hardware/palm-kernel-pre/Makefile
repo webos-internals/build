@@ -11,4 +11,4 @@ HOMEPAGE = http://opensource.palm.com
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES =
 
-include ../kernel.mk
+include ../../support/kernel.mk
