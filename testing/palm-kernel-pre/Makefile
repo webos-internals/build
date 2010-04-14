@@ -10,14 +10,12 @@ KERNEL_PATCHES =
 
 include ../../support/kernel.mk
 
-include ../../support/doctors.mk
-
 build/arm.built-${VERSION}: ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
 	rm -rf build/arm
 	mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files
 	unzip -p $< resources/webOS.tar | \
 	tar -O -x -f - ./nova-cust-image-castle.rootfs.tar.gz | \
-	tar -C build/arm/usr/palm/applications/${APP_ID}/additional_files/ -m -z -x -f - ./boot ./lib/modules
+	tar -C build/arm/usr/palm/applications/${APP_ID}/additional_files/ -m -z -x -f - ./md5sums ./boot ./lib/modules
 	rm -rf build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/boot.bin
 	rm -rf build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/uImage
 	rm -rf build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/dspbridge

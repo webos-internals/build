@@ -55,12 +55,14 @@ build/.built-${VERSION}:
 
 else
 
+include ../../support/package.mk
+
+include ../../support/doctors.mk
+
 include ../../support/download.mk
 
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
-
-include ../../support/package.mk
 
 .PHONY: build
 build: build/.built-${VERSION}
@@ -89,7 +91,7 @@ build/%/CONTROL/prerm:
 		../../support/kernel.prerm > $@
 	chmod ugo+x $@
 
-build/arm.built-%: build/.unpacked-%
+build/arm.built-%: build/.unpacked-% ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
 	mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/boot
 	( cd build/src-$*/linux-${KERNEL_VERSION} ; \
 	  yes '' | ${MAKE} ARCH=arm omap_sirloin_3430_defconfig ; \
@@ -108,6 +110,9 @@ build/arm.built-%: build/.unpacked-%
 		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/System.map-2.6.24-palm-joplin-3430
 	cp build/src-$*/linux-${KERNEL_VERSION}/.config \
 		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/config-2.6.24-palm-joplin-3430
+	unzip -p ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar resources/webOS.tar | \
+	tar -O -x -f - ./nova-cust-image-castle.rootfs.tar.gz | \
+	tar -C build/arm/usr/palm/applications/${APP_ID}/additional_files/ -m -z -x -f - ./md5sums
 	touch $@
 
 build/.unpacked-%: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}.tgz \

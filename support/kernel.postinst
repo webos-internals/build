@@ -1,6 +1,7 @@
 #!/bin/sh                                                                                       
 
 PID=
+FORCE_INSTALL=
 
 # Handle execution as pmPostInstall.script
 if [ -z "$IPKG_OFFLINE_ROOT" ]; then
@@ -16,10 +17,31 @@ APPS=/media/cryptofs/apps
 
 SRCDIR=${APPS}/usr/palm/applications/${PID}/additional_files
 
+cd ${SRCDIR}
+
 error=0
 
+if [ "${FORCE_INSTALL}" = "1" ] ; then
+  echo "Forcing unconditional overwrite of all kernel files"
+fi
+
+if [ "${FORCE_INSTALL}" != "1" ] ; then
+  # Make sure all the target files are in virgin condition
+  echo "Verifying no existing modifications to target files ..."
+  for file in `find boot lib -type f -print` ; do
+    md5sum="`grep -e \*./$file$ ${SRCDIR}/md5sums | awk '{print $1}'`"
+    [ "`md5sum /$file | awk '{print $1}'`" = "$md5sum" ] || \
+	{ echo "Verification failed on /$file"		; error=1 ; }
+  done
+fi
+
+if [ "${error}" = "1" ] ; then
+  echo "Device kernel is not in factory condition, refusing to install replacement"
+  exit 1
+fi
+
 # Make a backup of all files that are about to be modified
-cd ${SRCDIR}
+echo "Creating backup of existing kernel files ..."
 tar -C / -zcf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz `find boot lib -type f -print` || error=1
 
 if [ "${error}" = "1" ] ; then
@@ -28,7 +50,7 @@ if [ "${error}" = "1" ] ; then
 fi
 
 # Verify the backup of all files that are about to be modified
-cd ${SRCDIR}
+echo "Verifying backup of existing kernel files ..."
 tar -C / -zdf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || error=1
 
 if [ "${error}" = "1" ] ; then
@@ -37,6 +59,7 @@ if [ "${error}" = "1" ] ; then
 fi
 
 # Make sure all the target directories exist and are writeable
+echo "Verifying ability to write to target directories ..."
 for dir in `find boot lib -type d -print` ; do
   mkdir -p /$dir			|| { echo "Error creating /$dir"			; error=1 ; }
   [ -d /$dir ]				|| { echo "Unable to create /$dir"			; error=1 ; }
@@ -49,6 +72,7 @@ for dir in `find boot lib -type d -print` ; do
 done
 
 # Make sure all the target files are readable and writeable
+echo "Verifying ability to write to target files ..."
 for file in `find boot lib -type f -print` ; do
   [ -r ${SRCDIR}/$file ]		|| { echo "Unable to read from ${SRCDIR}/$file"		; error=1 ; }
   [ -w /$file ]				|| { echo "Unable to write to /$file"			; error=1 ; }
@@ -60,6 +84,7 @@ if [ "${error}" = "1" ] ; then
 fi
 
 # Copy all the files to the target locations
+echo "Installing replacement kernel files ..."
 for file in `find boot lib -type f -print` ; do
   rm -f /$file				|| { echo "Error removing /$file"			; error=1 ; }
   [ ! -f /$file ]			|| { echo "Unable to remove /$file"			; error=1 ; }
@@ -71,7 +96,6 @@ done
 
 if [ "${error}" = "1" ] ; then
   echo "Fatal error occurred, restoring original files"
-  cd ${SRCDIR}
   tar -C / -zxf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || \
     { echo "Fatal error occurred, unable to extract tarball" ; exit 1 ; }
   tar -C / -zdf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || \
@@ -79,5 +103,7 @@ if [ "${error}" = "1" ] ; then
   echo "Original files restored, we have normality, I repeat we have normality"
   exit 1
 fi
+
+echo "Replacement kernel successfully installed"
 
 exit 0
