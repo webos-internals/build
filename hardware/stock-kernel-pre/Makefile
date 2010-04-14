@@ -7,6 +7,8 @@ VERSIONS = 1.4.1-1
 
 HOMEPAGE = http://opensource.palm.com
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
-KERNEL_PATCHES =
+KERNEL_PATCHES = 
+# Perhaps consider this in the future:
+# KERNEL_PATCHES = sensors/sensors_temp_omap34xx.patch sensors/defconfig-safe.patch
 
 include ../../support/kernel.mk
