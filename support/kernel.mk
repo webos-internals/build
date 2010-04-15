@@ -23,6 +23,14 @@ include ../../support/cross-compile.mk
 
 WEBOS_VERSION:=$(shell echo ${VERSION} | cut -d- -f1)
 
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
+COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
+
+ifeq ("${WEBOS_VERSION}", "1.4.1")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
+COMPATIBLE_VERSIONS = 1.4.1 | 1.4.1.1
+endif
+
 .PHONY: package
 ifneq ("${VERSIONS}", "")
 package:
@@ -81,17 +89,19 @@ build/.built-${VERSION}: build/arm.built-${VERSION}
 
 build/%/CONTROL/postinst:
 	mkdir -p build/arm/CONTROL
-	sed -e 's|PID=|PID="${APP_ID}"|' -e 's|FORCE_INSTALL=|FORCE_INSTALL="${FORCE_INSTALL}"|' \
+	sed -e 's/PID=/PID="${APP_ID}"/' -e 's/FORCE_INSTALL=/FORCE_INSTALL="${FORCE_INSTALL}"/' \
+	    -e 's/%COMPATIBLE_VERSIONS%/${COMPATIBLE_VERSIONS}/' \
 		../../support/kernel.postinst > $@
 	chmod ugo+x $@
 
 build/%/CONTROL/prerm:
 	mkdir -p build/arm/CONTROL
-	sed -e 's|PID=|PID="${APP_ID}"|' -e 's|FORCE_INSTALL=|FORCE_INSTALL="${FORCE_INSTALL}"|' \
+	sed -e 's/PID=/PID="${APP_ID}"/' -e 's/FORCE_REMOVE=/FORCE_REMOVE="${FORCE_REMOVE}"/' \
+	    -e 's/%COMPATIBLE_VERSIONS%/${COMPATIBLE_VERSIONS}/' \
 		../../support/kernel.prerm > $@
 	chmod ugo+x $@
 
-build/arm.built-%: build/.unpacked-% ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
+build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/boot
 	( cd build/src-$*/linux-${KERNEL_VERSION} ; \
 	  yes '' | ${MAKE} ARCH=arm omap_sirloin_3430_defconfig ; \
@@ -110,7 +120,7 @@ build/arm.built-%: build/.unpacked-% ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS
 		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/System.map-2.6.24-palm-joplin-3430
 	cp build/src-$*/linux-${KERNEL_VERSION}/.config \
 		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/config-2.6.24-palm-joplin-3430
-	unzip -p ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar resources/webOS.tar | \
+	unzip -p ${WEBOS_DOCTOR} resources/webOS.tar | \
 	tar -O -x -f - ./nova-cust-image-castle.rootfs.tar.gz | \
 	tar -C build/arm/usr/palm/applications/${APP_ID}/additional_files/ -m -z -x -f - ./md5sums
 	touch $@

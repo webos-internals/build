@@ -17,9 +17,21 @@ APPS=/media/cryptofs/apps
 
 SRCDIR=${APPS}/usr/palm/applications/${PID}/additional_files
 
+VERSION=`grep PRODUCT_VERSION_STRING /etc/palm-build-info | sed -e 's/.*=Palm webOS \([0-9.]*\).*/\1/'`
+
 cd ${SRCDIR}
 
 error=0
+
+case "${VERSION}" in
+    %COMPATIBLE_VERSIONS% )
+    echo "Kernel confirmed to be compatible with this webOS version"
+    ;;
+    * )
+    echo "Kernel is not compatible with this webOS version, aborting"
+    exit 1
+    ;;
+esac
 
 if [ "${FORCE_INSTALL}" = "1" ] ; then
   echo "Forcing unconditional overwrite of all kernel files"

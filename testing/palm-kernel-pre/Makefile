@@ -10,7 +10,7 @@ KERNEL_PATCHES =
 
 include ../../support/kernel.mk
 
-build/arm.built-${VERSION}: ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
+build/arm.built-${VERSION}: ${WEBOS_DOCTOR}
 	rm -rf build/arm
 	mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files
 	unzip -p $< resources/webOS.tar | \
