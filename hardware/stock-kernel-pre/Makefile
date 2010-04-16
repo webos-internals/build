@@ -1,7 +1,8 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = Stock Kernel (Palm Pre/Pre+)
-DESCRIPTION = An unmodified kernel, recompiled from source.<br>\
-Useful for testing the kernel packaging and upgrade processes.<br>${KERNEL_DISCLAIMER}
+DESCRIPTION = An unmodified kernel, recompiled from source code published by Palm.<br>\
+This kernel should be identical in function to the official webOS ${WEBOS_VERSION} kernel from Palm.<br>\
+It is useful mainly for testing the kernel packaging and upgrade processes.<br>${KERNEL_DISCLAIMER}
 CATEGORY = Stable
 VERSIONS = 1.4.1-1
 
