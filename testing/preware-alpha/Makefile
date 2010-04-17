@@ -3,13 +3,13 @@ TITLE	 = Preware Alpha
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.9.56
+VERSION  = 0.9.61
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
 ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 DESCRIPTION = <b>This is the experimental alpha testing version of Preware.<br>You probably do not want to install this version.</b><br>The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, services and plugins.  Preware is also able to access official Palm App Catalog feeds.<br><b>Requires webOS 1.3.5 or later.</b>
-CHANGELOG = 0.9.56: Based on Preware 0.9.34<br>0.9.55: New C-language based ipkgservice as part of the single stand-alone Preware package.  Has some nice things like download progress meters, but may be broken in some areas.
+CHANGELOG = 0.9.61: Added support for handling kernels.<br>0.9.60: Lots of new useability additions, ready for early alpha testing.<br>0.9.59: Search from the main screen.<br>0.9.58: Fixed a bug in scanning unknown packages.<br>0.9.57: Based on Preware 0.9.35<br>0.9.56: Based on Preware 0.9.34<br>0.9.55: New C-language based ipkgservice as part of a single stand-alone Preware package.
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/3/36/Preware_ss1.png\",\
 \"http://www.webos-internals.org/images/9/97/Preware_ss2.png\",\
@@ -65,36 +65,19 @@ build: build/.built-${VERSION}
 build/.built-${VERSION}: build/arm.built build/i686.built
 	touch $@
 
-build/i686.built: build/.unpacked
-	rm -rf build/i686
-	( cd build/src/src ; \
-	  ${MAKE} VERSION=${VERSION} STAGING_DIR=$(shell cd ../.. ; pwd)/staging/i686 \
-	  CC=$(shell cd ../.. ; pwd)/toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu/bin/i686-unknown-linux-gnu-gcc \
-	  clobber ipkgservice \
-	)
-	mkdir -p build/i686/usr/palm/applications/${APP_ID}
-	cp -r build/src/* build/i686/usr/palm/applications/${APP_ID}/
-	rm -rf build/i686/usr/palm/applications/${APP_ID}/src
-	mkdir -p build/i686/usr/palm/applications/${APP_ID}/bin
-	install -m 755 build/src/src/ipkgservice build/i686/usr/palm/applications/${APP_ID}/bin/${IPKGSERVICE}
-	mkdir -p build/i686/etc/ipkg
-	install -m 644 feeds/*.conf build/i686/etc/ipkg/
-	touch $@
+include ../../support/cross-compile.mk
 
-build/arm.built: build/.unpacked
-	rm -rf build/arm
+build/%.built: build/.unpacked
+	rm -rf build/$*
 	( cd build/src/src ; \
-	  ${MAKE} VERSION=${VERSION} STAGING_DIR=$(shell cd ../.. ; pwd)/staging/armv7 \
-	  CC=$(shell cd ../.. ; pwd)/toolchain/cs08q1armel/build/arm-2008q1/bin/arm-none-linux-gnueabi-gcc \
+	  ${MAKE} VERSION=${VERSION} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc \
 	  clobber ipkgservice \
 	)
-	mkdir -p build/arm/usr/palm/applications/${APP_ID}
-	cp -r build/src/* build/arm/usr/palm/applications/${APP_ID}/
-	rm -rf build/arm/usr/palm/applications/${APP_ID}/src
-	mkdir -p build/arm/usr/palm/applications/${APP_ID}/bin
-	install -m 755 build/src/src/ipkgservice build/arm/usr/palm/applications/${APP_ID}/bin/${IPKGSERVICE}
-	mkdir -p build/arm/etc/ipkg
-	install -m 644 feeds/*.conf build/arm/etc/ipkg/
+	mkdir -p build/$*/usr/palm/applications/${APP_ID}
+	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
+	mkdir -p build/$*/usr/palm/applications/${APP_ID}/bin
+	install -m 755 build/src/src/ipkgservice build/$*/usr/palm/applications/${APP_ID}/bin/${IPKGSERVICE}
 	touch $@
 
 build/%/CONTROL/postinst:

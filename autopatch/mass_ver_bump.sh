@@ -24,7 +24,7 @@ for v in ${LIST} ; do
   echo $v >> test.log
   echo "$SINPLU =$VERSIONS_ARRAY" >> test.log
   echo $OUTPUT_VERSION >> test.log
-  echo "sed -i -e 's|$OLD_VERSION|$OUTPUT_VERSION|' $v" >> test.log
+  echo "sed -i.orig -e 's|$OLD_VERSION|$OUTPUT_VERSION|' $v" >> test.log
 # To Run for real, uncomment the following line.. :)
-#  sed -i -e 's|$OLD_VERSION|$OUTPUT_VERSION|' $v
+#  sed -i.orig -e 's|$OLD_VERSION|$OUTPUT_VERSION|' $v
 done

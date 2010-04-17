@@ -8,7 +8,7 @@ DEPENDS = org.webosinternals.patch, org.webosinternals.lsdiff
 FEED = WebOS Patches
 LICENSE = MIT License Open Source
 META_GLOBAL_VERSION = 4
-WEBOS_VERSIONS = 1.3.5 1.4.0 1.4.1
+WEBOS_VERSIONS = 1.4.0 1.4.1
 POSTINSTALLFLAGS = RestartLuna
 POSTUPDATEFLAGS  = RestartLuna
 POSTREMOVEFLAGS  = RestartLuna
@@ -22,20 +22,25 @@ endif
 ifneq ("${VERSIONS}", "")
 package:
 	for v in ${WEBOS_VERSIONS} ; do \
-		${MAKE} VERSIONS= DUMMY_VERSION=0 VERSION=$${v}-0 package ; \
+	  VERSION=$${v}-0 ${MAKE} VERSIONS= DUMMY_VERSION=0 package ; \
 	done; \
 	for v in ${VERSIONS} ; do \
-	  ${MAKE} VERSIONS= VERSION=$${v} package ; \
+	  VERSION=$${v} ${MAKE} VERSIONS= package ; \
 	done
 else
+ifneq ("${PACKAGES}", "")
+package: ${PACKAGES}
+else
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
+endif
 endif
 
 include ../../support/package.mk
 
+WEBOS_VERSION:=$(shell echo ${VERSION} | cut -d- -f1)
+
 ifneq ("${DUMMY_VERSION}", "")
-WEBOS_VER:=$(shell echo ${VERSION} | cut -d- -f1)
-DESCRIPTION=This package is not currently available for WebOS ${WEBOS_VER}.  This package may be installed as a placeholder to notify you when an update is available.  NOTE: This is simply an empty package placeholder, it will not affect your device in any way
+DESCRIPTION=This package is not currently available for WebOS ${WEBOS_VERSION}.  This package may be installed as a placeholder to notify you when an update is available.  NOTE: This is simply an empty package placeholder, it will not affect your device in any way
 CATEGORY=Unavailable
 SRC_GIT=
 DEPENDS=
@@ -43,12 +48,11 @@ POSTINSTALLFLAGS=
 POSTUPDATEFLAGS=
 POSTREMOVEFLAGS=
 
-build/.built-${VERSION}:
+build/.built-%:
 	rm -rf build/all
 	mkdir -p build/all
 	touch $@
 else
-WEBOS_VERSION=$(shell echo ${VERSION} | cut -d- -f1)
 include ../../support/download.mk
 include ../../support/ipkg-info.mk
 
@@ -84,8 +88,8 @@ build/.built-${VERSION}: build/.unpacked-${VERSION} build/.meta-${META_VERSION} 
 		mkdir -p build/all/usr/palm/applications/${APP_ID}/additional_files; \
 		tar -C build/all/usr/palm/applications/${APP_ID}/additional_files -xzf additional_files.tar.gz; \
 	fi
-	touch $@
 	${MAKE} build/.built-extra-${VERSION}
+	touch $@
 
 build/all/CONTROL/prerm: build/.unpacked-${VERSION}
 	mkdir -p build/all/CONTROL
@@ -102,4 +106,4 @@ endif
 
 .PHONY: clobber
 clobber::
-	rm -rf build ${DOCTOR_DIR}/ipkg-info-*
+	rm -rf build

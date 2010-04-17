@@ -25,11 +25,9 @@ SUBDIRS = apps services plugins daemons linux
 .PHONY: index
 index:  webos-internals-index \
 	webos-patches-index \
-	hardware-patches-index \
 	optware-index \
 	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
 	palm-index \
-	regression-index
 
 .PHONY: optware-index
 optware-index: ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv6/Packages ipkgs/optware/armv7/Packages
@@ -39,18 +37,14 @@ palm-index: ipkgs/palm-catalog/Packages ipkgs/palm-beta/Packages ipkgs/palm-web/
 	    ipkgs/palm-catalog-updates/Packages ipkgs/palm-beta-updates/Packages ipkgs/palm-web-updates/Packages
 
 .PHONY: webos-patches-index
-webos-patches-index: ipkgs/webos-patches/1.3.5/Packages ipkgs/webos-patches/1.4.0/Packages ipkgs/webos-patches/1.4.1/Packages
-	rm -f ipkgs/webos-patches/1.3.5.1 ipkgs/webos-patches/1.3.5.2 ipkgs/webos-patches/1.4.1.1
-	ln -f -s 1.3.5 ipkgs/webos-patches/1.3.5.1
-	ln -f -s 1.3.5 ipkgs/webos-patches/1.3.5.2
+webos-patches-index: ipkgs/webos-patches/1.4.0/Packages ipkgs/webos-patches/1.4.1/Packages
+	rm -f ipkgs/webos-patches/1.4.1.1
 	ln -f -s 1.4.1 ipkgs/webos-patches/1.4.1.1
 
-.PHONY: hardware-patches-index
-hardware-patches-index: ipkgs/hardware-patches/1.3.5/Packages ipkgs/hardware-patches/1.4.0/Packages ipkgs/hardware-patches/1.4.1/Packages
-	rm -f ipkgs/hardware-patches/1.3.5.1 ipkgs/hardware-patches/1.3.5.2 ipkgs/hardware-patches/1.4.1.1
-	ln -f -s 1.3.5 ipkgs/hardware-patches/1.3.5.1
-	ln -f -s 1.3.5 ipkgs/hardware-patches/1.3.5.2
-	ln -f -s 1.4.1 ipkgs/hardware-patches/1.4.1.1
+.PHONY: hardware-index
+hardware-index: ipkgs/hardware/1.4.0/Packages ipkgs/hardware/1.4.1/Packages
+	rm -f ipkgs/hardware/1.4.1.1
+	ln -f -s 1.4.1 ipkgs/hardware/1.4.1.1
 
 .PHONY: regression-index
 regression-index: ipkgs/regression-testing/1.0.0/Packages ipkgs/regression-testing/2.0.0/Packages 
@@ -86,16 +80,16 @@ ipkgs/webos-patches/%/Packages: package-webos-patches
 		-v -p ipkgs/webos-patches/$*/Packages ipkgs/webos-patches/$*
 	gzip -c ipkgs/webos-patches/$*/Packages > ipkgs/webos-patches/$*/Packages.gz
 
-ipkgs/hardware-patches/%/Packages: package-hardware-patches
-	rm -rf ipkgs/hardware-patches/$*
-	mkdir -p ipkgs/hardware-patches/$*
+ipkgs/hardware/%/Packages: package-hardware
+	rm -rf ipkgs/hardware/$*
+	mkdir -p ipkgs/hardware/$*
 	( find hardware -type d -name ipkgs -print | \
-	  xargs -I % find % -name "*_$*-*_all.ipk" -print | \
-	  xargs -I % rsync -i -a % ipkgs/hardware-patches/$* )
+	  xargs -I % find % -name "*_$*-*_*.ipk" -print | \
+	  xargs -I % rsync -i -a % ipkgs/hardware/$* )
 	TAR_OPTIONS=--wildcards \
 	toolchain/ipkg-utils/ipkg-make-index \
-		-v -p ipkgs/hardware-patches/$*/Packages ipkgs/hardware-patches/$*
-	gzip -c ipkgs/hardware-patches/$*/Packages > ipkgs/hardware-patches/$*/Packages.gz
+		-v -p ipkgs/hardware/$*/Packages ipkgs/hardware/$*
+	gzip -c ipkgs/hardware/$*/Packages > ipkgs/hardware/$*/Packages.gz
 
 ipkgs/optware/%/Packages: package-optware
 	rm -rf ipkgs/optware/$*
@@ -145,7 +139,7 @@ ipkgs/%/Packages: package-feeds
 	rm -f ipkgs/$*/Packages.orig*
 	gzip -c ipkgs/$*/Packages > ipkgs/$*/Packages.gz
 
-package: package-subdirs package-webos-patches package-hardware-patches package-optware package-feeds
+package: package-subdirs package-webos-patches package-hardware package-optware package-feeds
 
 package-subdirs: toolchain
 	for f in `find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print` ; do \
@@ -161,7 +155,7 @@ package-webos-patches:
 	  fi; \
 	done
 
-package-hardware-patches:
+package-hardware:
 	for f in `find hardware -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package ; \
@@ -190,14 +184,14 @@ package-feeds: toolchain
 	done
 
 toolchain: toolchain/ipkg-utils/ipkg-make-index \
-	   toolchain/cs08q1armel/build/arm-2008q1 \
+	   toolchain/cs07q3armel/build/arm-2007q3 \
 	   toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu \
 	   staging/usr/include/mjson/json.h \
 	   staging/usr/include/lunaservice.h \
 	   staging/usr/include/glib.h
 
-toolchain/cs08q1armel/build/arm-2008q1:
-	${MAKE} -C toolchain/cs08q1armel unpack
+toolchain/cs07q3armel/build/arm-2007q3:
+	${MAKE} -C toolchain/cs07q3armel unpack
 
 toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu:
 	${MAKE} -C toolchain/i686-unknown-linux-gnu unpack
@@ -216,7 +210,7 @@ upload:
 	rsync -avr ipkgs/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/
 	rsync -avr ipkgs/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/
 
-testing: webos-internals-testing webos-patches-testing hardware-patches-testing optware-testing regression-testing
+testing: webos-internals-testing webos-patches-testing hardware-testing optware-testing regression-testing
 
 webos-internals-testing:
 	${MAKE} SUBDIRS="testing" webos-internals-index
@@ -224,15 +218,16 @@ webos-internals-testing:
 	rsync -avr ipkgs/webos-internals/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
 	rsync -avr ipkgs/webos-internals/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
 
-webos-patches-testing: webos-patches-index
+webos-patches-testing:
+	${MAKE} SUFFIX=.testing webos-patches-index
 	rsync -avr ipkgs/webos-patches/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 	rsync -avr ipkgs/webos-patches/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 	rsync -avr ipkgs/webos-patches/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 
-hardware-patches-testing: hardware-patches-index
-	rsync -avr ipkgs/hardware-patches/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/hardware-patches/testing/
-	rsync -avr ipkgs/hardware-patches/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/hardware-patches/testing/
-	rsync -avr ipkgs/hardware-patches/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/hardware-patches/testing/
+hardware-testing: hardware-index
+	rsync -avr ipkgs/hardware/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/hardware/testing/
+	rsync -avr ipkgs/hardware/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/hardware/testing/
+	rsync -avr ipkgs/hardware/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/hardware/testing/
 
 optware-testing: optware-index
 	rsync -avr ipkgs/optware/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/optware/testing/

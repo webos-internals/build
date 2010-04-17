@@ -3,10 +3,10 @@ PATCH = top-bar/${NAME}.patch
 TITLE = Palm Carrier String
 DESCRIPTION = Custom carrier string of 'Palm' for the launcher.  Note: also replaces 'phone offline' message.
 CATEGORY = Top Bar
-VERSIONS = 1.4.0-13
+VERSIONS = 1.4.0-13 1.4.1-2
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS =
-META_SUB_VERSION = 1 
+META_SUB_VERSION = 1
 
 include ../common.mk
 

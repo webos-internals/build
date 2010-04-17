@@ -3,7 +3,7 @@ TITLE    = Save/Restore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.6.3
+VERSION  = 0.6.7
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:SaveRestore
@@ -12,6 +12,10 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 WebOS Internals provides Save/Retore as is without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.  The entire risk as to the quality and performance of Save/Restore is with you.  Should Save/Restore prove defective, you assume the cost of all necessary servicing, repair or correction.<br>\
 In no event will WebOS Internals or any other party be liable to you for damages, including any general, special, incidental or consequential damages arising out of the use or inability to use Save/Restore (including but not limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of Save/Restore to operate with any other programs).
 CHANGELOG = \
+0.6.7: Applications: AmpachPre, Stock Kernel (Palm Pre), Uber-Kernel (Palm Pre)<br>\
+0.6.6: NFL 2010, Real Soccer 2010, Sandstorm, Let\'s Golf, Shopping List, ShopList, ClassTracker, Fliq Notes<br>\
+0.6.5: Applications: NewsRoom, SecuStore<br>\
+0.6.4: Applications: Checkbook, Brothers in Arms<br>\
 0.6.3: Fixed positioning of the list when toggling selections. Now supports databases on the emulator, Applications: Preware, FlashCards, Absolute Fitness<br>\
 0.6.2: Applications: Applications: Hawx, Myles, Time is Money<br>\
 0.6.1: Applications: Sorrowind Slots, GiftJammer, GolfPinFinder, Flickr Addict<br>\
@@ -31,7 +35,7 @@ LICENSE  = GPL v2 Open Source
 SRC_GIT = git://git.webos-internals.org/applications/saverestore.git
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_armv6.ipk ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
+package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
 include ../../support/package.mk
 
 include ../../support/download.mk
@@ -50,49 +54,22 @@ build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/armv7.built build/armv6.built build/i686.built
+build/.built-${VERSION}: build/arm.built build/i686.built
 	touch $@
 
-build/i686.built: build/.unpacked
-	rm -rf build/i686
-	( cd build/src/src ; \
-	  ${MAKE} STAGING_DIR=$(shell cd ../.. ; pwd)/staging/i686 \
-	  CC=$(shell cd ../.. ; pwd)/toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu/bin/i686-unknown-linux-gnu-gcc \
-	  clobber ${NAME} \
-	)
-	mkdir -p build/i686/usr/palm/applications/${APP_ID}
-	cp -r build/src/* build/i686/usr/palm/applications/${APP_ID}/
-	rm -rf build/i686/usr/palm/applications/${APP_ID}/src
-	mkdir -p build/i686/usr/palm/applications/${APP_ID}/bin
-	install -m 755 build/src/src/${NAME} build/i686/usr/palm/applications/${APP_ID}/bin/${APP_ID}
-	touch $@
+include ../../support/cross-compile.mk
 
-build/armv7.built: build/.unpacked
-	rm -rf build/armv7
+build/%.built: build/.unpacked
+	rm -rf build/$*
 	( cd build/src/src ; \
-	  ${MAKE} STAGING_DIR=$(shell cd ../.. ; pwd)/staging/armv7 \
-	  CC=$(shell cd ../.. ; pwd)/toolchain/cs08q1armel/build/arm-2008q1/bin/arm-none-linux-gnueabi-gcc \
+	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc \
 	  clobber ${NAME} \
 	)
-	mkdir -p build/armv7/usr/palm/applications/${APP_ID}
-	cp -r build/src/* build/armv7/usr/palm/applications/${APP_ID}/
-	rm -rf build/armv7/usr/palm/applications/${APP_ID}/src
-	mkdir -p build/armv7/usr/palm/applications/${APP_ID}/bin
-	install -m 755 build/src/src/${NAME} build/armv7/usr/palm/applications/${APP_ID}/bin/${APP_ID}
-	touch $@
-
-build/armv6.built: build/.unpacked
-	rm -rf build/armv6
-	( cd build/src/src ; \
-	  ${MAKE} STAGING_DIR=$(shell cd ../.. ; pwd)/staging/armv7 \
-	  CC=$(shell cd ../.. ; pwd)/toolchain/cs08q1armel/build/arm-2008q1/bin/arm-none-linux-gnueabi-gcc \
-	  clobber ${NAME} \
-	)
-	mkdir -p build/armv6/usr/palm/applications/${APP_ID}
-	cp -r build/src/* build/armv6/usr/palm/applications/${APP_ID}/
-	rm -rf build/armv6/usr/palm/applications/${APP_ID}/src
-	mkdir -p build/armv6/usr/palm/applications/${APP_ID}/bin
-	install -m 755 build/src/src/${NAME} build/armv6/usr/palm/applications/${APP_ID}/bin/${APP_ID}
+	mkdir -p build/$*/usr/palm/applications/${APP_ID}
+	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
+	mkdir -p build/$*/usr/palm/applications/${APP_ID}/bin
+	install -m 755 build/src/src/${NAME} build/$*/usr/palm/applications/${APP_ID}/bin/${APP_ID}
 	touch $@
 
 build/%/CONTROL/postinst:

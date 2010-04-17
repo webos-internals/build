@@ -35,49 +35,20 @@ build: build/.built-${VERSION}
 build/.built-${VERSION}: build/armv7.built build/armv6.built build/i686.built
 	touch $@
 
-build/i686.built: build/.unpacked
-	rm -rf build/i686
-	( cd build/src ; \
-	  ${MAKE} STAGING_DIR=$(shell cd ../.. ; pwd)/staging/i686 \
-	  CC=$(shell cd ../.. ; pwd)/toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu/bin/i686-unknown-linux-gnu-gcc \
-	  clobber ${NAME} \
-	)
-	mkdir -p build/i686/usr/sbin
-	install -m 755 build/src/${NAME} build/i686/usr/sbin/${APP_ID}
-	mkdir -p build/i686/usr/share/dbus-1/system-services
-	install -m 644 build/src/${APP_ID}.service build/i686/usr/share/dbus-1/system-services/
-	mkdir -p build/i686/etc/event.d
-	install -m 644 build/src/upstart/${APP_ID} build/i686/etc/event.d/${APP_ID}
-	touch $@
+include ../../support/cross-compile.mk
 
-build/armv7.built: build/.unpacked
-	rm -rf build/armv7
+build/%.built: build/.unpacked
+	rm -rf build/$*
 	( cd build/src ; \
-	  ${MAKE} STAGING_DIR=$(shell cd ../.. ; pwd)/staging/armv7 \
-	  CC=$(shell cd ../.. ; pwd)/toolchain/cs08q1armel/build/arm-2008q1/bin/arm-none-linux-gnueabi-gcc \
+	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc \
 	  clobber ${NAME} \
 	)
-	mkdir -p build/armv7/usr/sbin
-	install -m 755 build/src/${NAME} build/armv7/usr/sbin/${APP_ID}
-	mkdir -p build/armv7/usr/share/dbus-1/system-services
-	install -m 644 build/src/${APP_ID}.service build/armv7/usr/share/dbus-1/system-services/
-	mkdir -p build/armv7/etc/event.d
-	install -m 644 build/src/upstart/${APP_ID} build/armv7/etc/event.d/${APP_ID}
-	touch $@
-
-build/armv6.built: build/.unpacked
-	rm -rf build/armv6
-	( cd build/src ; \
-	  ${MAKE} STAGING_DIR=$(shell cd ../.. ; pwd)/staging/armv7 \
-	  CC=$(shell cd ../.. ; pwd)/toolchain/cs08q1armel/build/arm-2008q1/bin/arm-none-linux-gnueabi-gcc \
-	  clobber ${NAME} \
-	)
-	mkdir -p build/armv6/usr/sbin
-	install -m 755 build/src/${NAME} build/armv6/usr/sbin/${APP_ID}
-	mkdir -p build/armv6/usr/share/dbus-1/system-services
-	install -m 644 build/src/${APP_ID}.service build/armv6/usr/share/dbus-1/system-services/
-	mkdir -p build/armv6/etc/event.d
-	install -m 644 build/src/upstart/${APP_ID} build/armv6/etc/event.d/${APP_ID}
+	mkdir -p build/$*/usr/sbin
+	install -m 755 build/src/${NAME} build/$*/usr/sbin/${APP_ID}
+	mkdir -p build/$*/usr/share/dbus-1/system-services
+	install -m 644 build/src/${APP_ID}.service build/$*/usr/share/dbus-1/system-services/
+	mkdir -p build/$*/etc/event.d
+	install -m 644 build/src/upstart/${APP_ID} build/$*/etc/event.d/${APP_ID}
 	touch $@
 
 build/%/CONTROL/postinst:
