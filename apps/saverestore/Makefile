@@ -3,7 +3,7 @@ TITLE    = Save/Restore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.6.7
+VERSION  = 0.6.8
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:SaveRestore
@@ -12,12 +12,13 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 WebOS Internals provides Save/Retore as is without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.  The entire risk as to the quality and performance of Save/Restore is with you.  Should Save/Restore prove defective, you assume the cost of all necessary servicing, repair or correction.<br>\
 In no event will WebOS Internals or any other party be liable to you for damages, including any general, special, incidental or consequential damages arising out of the use or inability to use Save/Restore (including but not limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of Save/Restore to operate with any other programs).
 CHANGELOG = \
+0.6.8: Fixed Messaging query support. Applications: N.O.V.A<br>\
 0.6.7: Applications: AmpachPre, Stock Kernel (Palm Pre), Uber-Kernel (Palm Pre)<br>\
-0.6.6: NFL 2010, Real Soccer 2010, Sandstorm, Let\'s Golf, Shopping List, ShopList, ClassTracker, Fliq Notes<br>\
+0.6.6: Applications: NFL 2010, Real Soccer 2010, Sandstorm, Let\'s Golf, Shopping List, ShopList, ClassTracker, Fliq Notes<br>\
 0.6.5: Applications: NewsRoom, SecuStore<br>\
 0.6.4: Applications: Checkbook, Brothers in Arms<br>\
-0.6.3: Fixed positioning of the list when toggling selections. Now supports databases on the emulator, Applications: Preware, FlashCards, Absolute Fitness<br>\
-0.6.2: Applications: Applications: Hawx, Myles, Time is Money<br>\
+0.6.3: Fixed positioning of the list when toggling selections. Now supports databases on the emulator. Applications: Preware, FlashCards, Absolute Fitness<br>\
+0.6.2: Applications: Hawx, Myles, Time is Money<br>\
 0.6.1: Applications: Sorrowind Slots, GiftJammer, GolfPinFinder, Flickr Addict<br>\
 0.6.0: Added support for saving and restoring cookies. Applications: Paratrooper, Weather Window, Scoop, Tweed, Clock Sync.<br>\
 0.5.2: Added activity notifications and disabled main buttons while reloading.<br>\
