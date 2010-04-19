@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = messaging/${NAME}.patch
 TITLE = Message Signature
-DESCRIPTION = Adds customizable signature to outgoing text messages which can be changed in the Preferences & Accounts page.
+DESCRIPTION = Adds customizable greeting and/or signature to outgoing text messages which can be changed via the Preferences & Accounts page.<br/><br/><br/>Note: The greeting could be used to enter a delivery confirmation string for those who have carriers which support that sort of thing.
 CATEGORY = Messaging
-VERSIONS = 1.4.1-5
+VERSIONS = 1.4.1-8
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/a/ac/Messaging-message-signature-1.png\",\

@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = phone/${NAME}.patch
 TITLE = Big CallerID Yellow Size 30
-DESCRIPTION = Large font size CallerID readable without glaces. At some expense of the photo, which shifts a little downwards.
+DESCRIPTION = Big callerID readable without glaces. V  0.904 enlarges unlisted numbers too. Big callerID or unlisted number are now positioned at the bottom of the photo area.
 CATEGORY = Phone
-VERSIONS = 1.4.0-38 1.4.1-7
+VERSIONS = 1.4.0-39 1.4.1-8
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
 SCREENSHOTS = [ \"http://www.webos-internals.org/images/2/2d/Phone-big-callerid-yellow-size-30-1.jpg\" ]
 META_SUB_VERSION = 1

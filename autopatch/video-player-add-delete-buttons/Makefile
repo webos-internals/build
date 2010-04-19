@@ -3,7 +3,7 @@ PATCH = video-player/${NAME}.patch
 TITLE = Add Delete Buttons
 DESCRIPTION = Adds buttons for deleting a video while viewing the video details or watching the video.
 CATEGORY = Video Player
-VERSIONS = 1.4.1-7
+VERSIONS = 1.4.1-8
 ICON = http://www.webos-internals.org/images/f/ff/Icon_WebOSInternals_Patches_Videoplayer.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/e/ed/Video-player-add-delete-buttons-1.png\",\
