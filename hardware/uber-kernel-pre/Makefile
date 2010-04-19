@@ -9,7 +9,7 @@ Current additions include:<ul>\
 </ul><br>\
 All additions are disabled by default, and must be enabled by separate packages or scripts (not included in this package).<br>${KERNEL_DISCLAIMER}
 CATEGORY = Experimental
-VERSIONS = 1.4.1-7
+VERSIONS = 1.4.1-8
 SCREENSHOTS = 
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
