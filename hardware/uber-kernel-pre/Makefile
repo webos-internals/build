@@ -9,11 +9,12 @@ Current additions include:<ul>\
 </ul><br>\
 All additions are disabled by default, and must be enabled by separate packages or scripts (not included in this package).<br>${KERNEL_DISCLAIMER}
 CATEGORY = Experimental
-VERSIONS = 1.4.1-6
+VERSIONS = 1.4.1-7
 SCREENSHOTS = 
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
-KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch overclocking/defconfig-safe.patch
+KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch overclocking/defconfig-safe.patch \
+		 sensors/sensors_temp_omap34xx.patch sensors/defconfig-safe.patch
 
 include ../../support/kernel.mk
