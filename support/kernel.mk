@@ -65,9 +65,10 @@ else
 
 include ../../support/package.mk
 
+include ../../support/download.mk
+
 include ../../support/doctors.mk
 
-include ../../support/download.mk
 
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
