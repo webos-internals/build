@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = mojo/${NAME}.patch
-TITLE = Faster Card Animations
-DESCRIPTION = Speeds up various timings related to how app cards and the launcher are animated. <br/><br/>Express version: The load glow is only slight faster than normal speed.
+TITLE = Faster Card Animations No Glow
+DESCRIPTION = Speeds up various timings related to how app cards and the launcher are animated.<br/><br/>No Glow version: The loading glow will not start fading until after 20 seconds.
 CATEGORY = Mojo
 VERSIONS = 1.4.1-9
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png

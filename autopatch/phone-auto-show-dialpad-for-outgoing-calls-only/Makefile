@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = phone/${NAME}.patch
-TITLE = Auto Show Dialpad on Call
-DESCRIPTION = Automatically shows the dialpad when any call is connected rather than the contact pic.
+TITLE = Auto Show Dialpad for Outgoing Calls Only
+DESCRIPTION = Automatically shows the dialpad only when an outgoing call is connected rather than the contact pic.
 CATEGORY = Phone
-VERSIONS = 1.4.1-9
+VERSIONS = 1.4.1-10
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
