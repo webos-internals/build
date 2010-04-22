@@ -3,7 +3,7 @@ TITLE    = Precorder
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.5.2
+VERSION  = 0.5.3
 TYPE	 = Application
 CATEGORY = Media
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Precorder
@@ -20,7 +20,7 @@ LICENSE  = GPL v2 Open Source
 SRC_GIT = git://git.webos-internals.org/applications/precorder.git
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk
+package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_armv6.ipk
 
 include ../../support/package.mk
 
