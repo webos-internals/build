@@ -6,7 +6,7 @@ Note that only files related to the Linux kernel are restored, and these will be
 In particular, any non-kernel files modified by overclocking patches or other modifications will not be restored. You should contact the maintainer of such patches for recovery procedures.<br>\
 On removal, this package does not modify any files, not does it restore any previous state of the kernel.  The sole purpose of this package is to install the official webOS ${WEBOS_VERSION} kernel from Palm and to do nothing else.<br>${KERNEL_DISCLAIMER}
 CATEGORY = Recovery
-VERSIONS = 1.4.0-1 1.4.1-1
+VERSIONS = 1.4.0-2 1.4.1-2
 FORCE_INSTALL = 1
 HOMEPAGE = http://opensource.palm.com
 SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch(pre).gz
