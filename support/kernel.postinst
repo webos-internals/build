@@ -118,4 +118,10 @@ fi
 
 echo "Replacement kernel successfully installed"
 
+if [ "${FORCE_INSTALL}" = "1" ] ; then
+  echo "Removing recovery kernel package"
+  /usr/bin/ipkg -o ${APPS} remove ${PID}
+  rm -rf ${APPS}/usr/palm/applications/${PID}
+fi
+
 exit 0
