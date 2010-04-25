@@ -3,13 +3,13 @@ TITLE    = Precorder
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.5.4
+VERSION  = 0.5.5
 TYPE	 = Application
 CATEGORY = Media
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Precorder
 ICON	 = http://www.webos-internals.org/images/5/58/Icon_WebOSInternals_PrecorderNew.png 
 DESCRIPTION = Precorder (Soon to be Prelolo) records audio from the microphone and from the internal media stream.
-CHANGELOG = 0.5.4: Added real time position timer. Tidyed up backend service methods. <br> 0.5.3: Added more robust stop method handling. Fixed hang-on-restart issues. <br> 0.5.2: Fixed stereo/mono problems. Error handling is now.. handled. <br> 0.5.0: Should function. Pre-Alpha testing purposes only.
+CHANGELOG = 0.5.5: Minor UI overhaul. 0.5.4: Added real time position timer. Tidyed up backend service methods. <br> 0.5.3: Added more robust stop method handling. Fixed hang-on-restart issues. <br> 0.5.2: Fixed stereo/mono problems. Error handling is now.. handled. <br> 0.5.0: Should function. Pre-Alpha testing purposes only.
 SCREENSHOTS = [\
 \"\", \
 \"\", \
