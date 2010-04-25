@@ -19,10 +19,10 @@ CHANGELOG = \
 0.0.6: Added periodic updating when the app is open<br>\
 0.0.5: First Public Release
 SCREENSHOTS = [\
-\"http://www.webos-internals.org/images/b/ba/Govnah_ss1.png\"\
-\"http://www.webos-internals.org/images/f/fb/Govnah_ss2.png\"\
+\"http://www.webos-internals.org/images/b/ba/Govnah_ss1.png\",\
+\"http://www.webos-internals.org/images/f/fb/Govnah_ss2.png\",\
 \"http://www.webos-internals.org/images/4/44/Govnah_ss3.png\"\
- ]
+]
 LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/applications/govnah.git
