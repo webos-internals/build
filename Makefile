@@ -25,6 +25,7 @@ SUBDIRS = apps services plugins daemons linux
 .PHONY: index
 index:  webos-internals-index \
 	webos-patches-index \
+	webos-kernels-index \
 	optware-index \
 	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
 	palm-index \
