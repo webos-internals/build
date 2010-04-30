@@ -105,7 +105,7 @@ build/%/CONTROL/prerm:
 build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/boot
 	( cd build/src-$*/linux-${KERNEL_VERSION} ; \
-	  yes '' | ${MAKE} ARCH=arm omap_sirloin_3430_defconfig ; \
+	  yes '' | ${MAKE} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} omap_sirloin_3430_defconfig ; \
 	  ${MAKE} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
 		KBUILD_BUILD_COMPILE_BY=v$* KBUILD_BUILD_COMPILE_HOST=${APP_ID} \
 		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
