@@ -8,7 +8,7 @@ Current additions include:<ul>\
 <li>All cpufreq governors made available for experimentation</li>\
 </ul><br>\
 All additions are disabled by default, and must be enabled by separate packages or scripts (not included in this package).<br>${KERNEL_DISCLAIMER}
-CATEGORY = Experimental
+CATEGORY = Stable
 VERSIONS = 1.4.1-9
 SCREENSHOTS = 
 
