@@ -1,13 +1,12 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = SBromwichKernel (Palm Pre/Pre+)
 CATEGORY = Experimental
-VERSIONS = 1.4.1-21
+VERSIONS = 1.4.1-22
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from sbromwich.<br>\
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "1.4.1-21", "log" : [ "Rename FOLK diff" ] }, \
-{ "version" : "1.4.1-20", "log" : [ "Enable Functionally OverLoaded Kernel settings" ] }, \
+{ "version" : "1.4.1-22", "log" : [ "Enable Functionally OverLoaded Kernel settings" ] }, \
 { "version" : "1.4.1-19", "log" : [ "Optimise for cortex CPU, tweak power reduction code, enable pre-emptive kernel" ] }, \
 { "version" : "1.4.1-16", "log" : [ "Improved screenstate transition detection" ] }, \
 { "version" : "1.4.1-13", "log" : [ "Initial public release" ] }, \
