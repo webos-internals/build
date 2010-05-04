@@ -1,1 +1,0 @@
-../autopatch/modifications.mk

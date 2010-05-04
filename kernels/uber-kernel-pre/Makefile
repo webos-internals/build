@@ -9,7 +9,7 @@ Current additions include:<ul>\
 <li>A new <b>screenstate</b> governor created by uNiXpSyChO specifically for the Palm Pre/Pre+ which runs at a higher speed when the screen is on, and a lower speed when the screen is off</li>\
 </ul><br>\
 All additions are disabled by default, and must be enabled by separate packages or scripts (not included in this package).<br>${KERNEL_DISCLAIMER}
-CATEGORY = Experimental
+CATEGORY = Stable
 VERSIONS = 1.4.1-13
 SCREENSHOTS = 
 

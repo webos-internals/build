@@ -5,7 +5,7 @@ BLDFLAGS = -p
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 ICON = http://www.webos-internals.org/images/9/9e/Icon_WebOSInternals_Kernel.png
 DEPENDS = 
-FEED = Hardware
+FEED = WebOS Kernels
 LICENSE = GPL v2 Open Source
 WEBOS_VERSIONS = 1.4.0 1.4.1
 KERNEL_VERSION = 2.6.24
@@ -105,7 +105,7 @@ build/%/CONTROL/prerm:
 build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/boot
 	( cd build/src-$*/linux-${KERNEL_VERSION} ; \
-	  yes '' | ${MAKE} ARCH=arm omap_sirloin_3430_defconfig ; \
+	  yes '' | ${MAKE} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} omap_sirloin_3430_defconfig ; \
 	  ${MAKE} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
 		KBUILD_BUILD_COMPILE_BY=v$* KBUILD_BUILD_COMPILE_HOST=${APP_ID} \
 		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \

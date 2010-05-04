@@ -25,6 +25,7 @@ SUBDIRS = apps services plugins daemons linux
 .PHONY: index
 index:  webos-internals-index \
 	webos-patches-index \
+	webos-kernels-index \
 	optware-index \
 	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
 	palm-index \
@@ -41,10 +42,10 @@ webos-patches-index: ipkgs/webos-patches/1.4.0/Packages ipkgs/webos-patches/1.4.
 	rm -f ipkgs/webos-patches/1.4.1.1
 	ln -f -s 1.4.1 ipkgs/webos-patches/1.4.1.1
 
-.PHONY: hardware-index
-hardware-index: ipkgs/hardware/1.4.0/Packages ipkgs/hardware/1.4.1/Packages
-	rm -f ipkgs/hardware/1.4.1.1
-	ln -f -s 1.4.1 ipkgs/hardware/1.4.1.1
+.PHONY: webos-kernels-index
+webos-kernels-index: ipkgs/webos-kernels/1.4.0/Packages ipkgs/webos-kernels/1.4.1/Packages
+	rm -f ipkgs/webos-kernels/1.4.1.1
+	ln -f -s 1.4.1 ipkgs/webos-kernels/1.4.1.1
 
 .PHONY: regression-index
 regression-index: ipkgs/regression-testing/1.0.0/Packages ipkgs/regression-testing/2.0.0/Packages 
@@ -80,16 +81,16 @@ ipkgs/webos-patches/%/Packages: package-webos-patches
 		-v -p ipkgs/webos-patches/$*/Packages ipkgs/webos-patches/$*
 	gzip -c ipkgs/webos-patches/$*/Packages > ipkgs/webos-patches/$*/Packages.gz
 
-ipkgs/hardware/%/Packages: package-hardware
-	rm -rf ipkgs/hardware/$*
-	mkdir -p ipkgs/hardware/$*
-	( find hardware -type d -name ipkgs -print | \
+ipkgs/webos-kernels/%/Packages: package-webos-kernels
+	rm -rf ipkgs/webos-kernels/$*
+	mkdir -p ipkgs/webos-kernels/$*
+	( find kernels -type d -name ipkgs -print | \
 	  xargs -I % find % -name "*_$*-*_*.ipk" -print | \
-	  xargs -I % rsync -i -a % ipkgs/hardware/$* )
+	  xargs -I % rsync -i -a % ipkgs/webos-kernels/$* )
 	TAR_OPTIONS=--wildcards \
 	toolchain/ipkg-utils/ipkg-make-index \
-		-v -p ipkgs/hardware/$*/Packages ipkgs/hardware/$*
-	gzip -c ipkgs/hardware/$*/Packages > ipkgs/hardware/$*/Packages.gz
+		-v -p ipkgs/webos-kernels/$*/Packages ipkgs/webos-kernels/$*
+	gzip -c ipkgs/webos-kernels/$*/Packages > ipkgs/webos-kernels/$*/Packages.gz
 
 ipkgs/optware/%/Packages: package-optware
 	rm -rf ipkgs/optware/$*
@@ -139,7 +140,7 @@ ipkgs/%/Packages: package-feeds
 	rm -f ipkgs/$*/Packages.orig*
 	gzip -c ipkgs/$*/Packages > ipkgs/$*/Packages.gz
 
-package: package-subdirs package-webos-patches package-hardware package-optware package-feeds
+package: package-subdirs package-webos-patches package-webos-kernels package-optware package-feeds
 
 package-subdirs: toolchain
 	for f in `find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print` ; do \
@@ -155,8 +156,8 @@ package-webos-patches:
 	  fi; \
 	done
 
-package-hardware:
-	for f in `find hardware -mindepth 1 -maxdepth 1 -type d -print` ; do \
+package-webos-kernels:
+	for f in `find kernels -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package ; \
 	  fi; \
@@ -210,7 +211,7 @@ upload:
 	rsync -avr ipkgs/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/
 	rsync -avr ipkgs/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/
 
-testing: webos-internals-testing webos-patches-testing hardware-testing optware-testing regression-testing
+testing: webos-internals-testing webos-patches-testing webos-kernels-testing optware-testing regression-testing
 
 webos-internals-testing:
 	${MAKE} SUBDIRS="testing" webos-internals-index
@@ -224,10 +225,10 @@ webos-patches-testing:
 	rsync -avr ipkgs/webos-patches/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 	rsync -avr ipkgs/webos-patches/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 
-hardware-testing: hardware-index
-	rsync -avr ipkgs/hardware/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/hardware/testing/
-	rsync -avr ipkgs/hardware/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/hardware/testing/
-	rsync -avr ipkgs/hardware/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/hardware/testing/
+webos-kernels-testing: webos-kernels-index
+	rsync -avr ipkgs/webos-kernels/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/webos-kernels/testing/
+	rsync -avr ipkgs/webos-kernels/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-kernels/testing/
+	rsync -avr ipkgs/webos-kernels/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-kernels/testing/
 
 optware-testing: optware-index
 	rsync -avr ipkgs/optware/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/optware/testing/
