@@ -18,6 +18,7 @@
 #
 
 SUBDIRS = apps services plugins daemons linux
+KERNDIR = kernels
 
 .PHONY: index package toolchain upload clobber clean
 
@@ -84,7 +85,7 @@ ipkgs/webos-patches/%/Packages: package-webos-patches
 ipkgs/webos-kernels/%/Packages: package-webos-kernels
 	rm -rf ipkgs/webos-kernels/$*
 	mkdir -p ipkgs/webos-kernels/$*
-	( find kernels -type d -name ipkgs -print | \
+	( find ${KERNDIR} -type d -name ipkgs -print | \
 	  xargs -I % find % -name "*_$*-*_*.ipk" -print | \
 	  xargs -I % rsync -i -a % ipkgs/webos-kernels/$* )
 	TAR_OPTIONS=--wildcards \
@@ -157,7 +158,7 @@ package-webos-patches:
 	done
 
 package-webos-kernels:
-	for f in `find kernels -mindepth 1 -maxdepth 1 -type d -print` ; do \
+	for f in `find ${KERNDIR} -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package ; \
 	  fi; \
@@ -225,7 +226,8 @@ webos-patches-testing:
 	rsync -avr ipkgs/webos-patches/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 	rsync -avr ipkgs/webos-patches/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 
-webos-kernels-testing: webos-kernels-index
+webos-kernels-testing:
+	${MAKE} KERNDIR="testing-kernels" webos-kernels-index
 	rsync -avr ipkgs/webos-kernels/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/webos-kernels/testing/
 	rsync -avr ipkgs/webos-kernels/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-kernels/testing/
 	rsync -avr ipkgs/webos-kernels/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-kernels/testing/
@@ -244,11 +246,15 @@ distclean: clobber
 	find toolchain -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
 
-clobber: clean clobber-subdirs clobber-patches clobber-optware clobber-regression clobber-feeds
+clobber: clean clobber-subdirs clobber-patches clobber-kernels clobber-optware clobber-regression clobber-feeds
 	rm -rf ipkgs
 
 clobber-subdirs:
 	find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print | \
+	xargs -I % ${MAKE} -C % clobber
+
+clobber-kernels:
+	find ${KERNDIR} -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
 
 clobber-patches:
