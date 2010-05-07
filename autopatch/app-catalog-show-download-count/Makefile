@@ -12,5 +12,5 @@ include ../common.mk
 
 include ../modifications.mk
 
-MAINTAINER = dBsooner, PreGame
+MAINTAINER = Author: Brian Jost, Maintainer: dBsooner
 HOMEPAGE =

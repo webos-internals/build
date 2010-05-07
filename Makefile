@@ -18,6 +18,8 @@
 #
 
 SUBDIRS = apps services plugins daemons linux
+KERNDIR = kernels
+PTCHDIR = autopatch
 
 .PHONY: index package toolchain upload clobber clean
 
@@ -38,7 +40,7 @@ palm-index: ipkgs/palm-catalog/Packages ipkgs/palm-beta/Packages ipkgs/palm-web/
 	    ipkgs/palm-catalog-updates/Packages ipkgs/palm-beta-updates/Packages ipkgs/palm-web-updates/Packages
 
 .PHONY: webos-patches-index
-webos-patches-index: ipkgs/webos-patches/1.4.0/Packages ipkgs/webos-patches/1.4.1/Packages
+webos-patches-index: ipkgs/webos-patches/1.4.0/Packages ipkgs/webos-patches/1.4.1/Packages ipkgs/webos-patches/1.4.2/Packages
 	rm -f ipkgs/webos-patches/1.4.1.1
 	ln -f -s 1.4.1 ipkgs/webos-patches/1.4.1.1
 
@@ -73,7 +75,7 @@ ipkgs/webos-internals/%/Packages: package-subdirs
 ipkgs/webos-patches/%/Packages: package-webos-patches
 	rm -rf ipkgs/webos-patches/$*
 	mkdir -p ipkgs/webos-patches/$*
-	( find autopatch -type d -name ipkgs -print | \
+	( find ${PTCHDIR} -type d -name ipkgs -print | \
 	  xargs -I % find % -name "*_$*-*_all.ipk" -print | \
 	  xargs -I % rsync -i -a % ipkgs/webos-patches/$* )
 	TAR_OPTIONS=--wildcards \
@@ -84,7 +86,7 @@ ipkgs/webos-patches/%/Packages: package-webos-patches
 ipkgs/webos-kernels/%/Packages: package-webos-kernels
 	rm -rf ipkgs/webos-kernels/$*
 	mkdir -p ipkgs/webos-kernels/$*
-	( find kernels -type d -name ipkgs -print | \
+	( find ${KERNDIR} -type d -name ipkgs -print | \
 	  xargs -I % find % -name "*_$*-*_*.ipk" -print | \
 	  xargs -I % rsync -i -a % ipkgs/webos-kernels/$* )
 	TAR_OPTIONS=--wildcards \
@@ -150,14 +152,14 @@ package-subdirs: toolchain
 	done
 
 package-webos-patches:
-	for f in `find autopatch -mindepth 1 -maxdepth 1 -type d -print` ; do \
+	for f in `find ${PTCHDIR} -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package ; \
 	  fi; \
 	done
 
 package-webos-kernels:
-	for f in `find kernels -mindepth 1 -maxdepth 1 -type d -print` ; do \
+	for f in `find ${KERNDIR} -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package ; \
 	  fi; \
@@ -220,12 +222,13 @@ webos-internals-testing:
 	rsync -avr ipkgs/webos-internals/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
 
 webos-patches-testing:
-	${MAKE} SUFFIX=.testing webos-patches-index
+	${MAKE} PTCHDIR="testing-patches" SUFFIX=.testing webos-patches-index
 	rsync -avr ipkgs/webos-patches/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 	rsync -avr ipkgs/webos-patches/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 	rsync -avr ipkgs/webos-patches/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 
-webos-kernels-testing: webos-kernels-index
+webos-kernels-testing:
+	${MAKE} KERNDIR="testing-kernels" webos-kernels-index
 	rsync -avr ipkgs/webos-kernels/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/webos-kernels/testing/
 	rsync -avr ipkgs/webos-kernels/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-kernels/testing/
 	rsync -avr ipkgs/webos-kernels/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-kernels/testing/
@@ -244,15 +247,19 @@ distclean: clobber
 	find toolchain -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
 
-clobber: clean clobber-subdirs clobber-patches clobber-optware clobber-regression clobber-feeds
+clobber: clean clobber-subdirs clobber-patches clobber-kernels clobber-optware clobber-regression clobber-feeds
 	rm -rf ipkgs
 
 clobber-subdirs:
 	find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
 
+clobber-kernels:
+	find ${KERNDIR} -mindepth 1 -maxdepth 1 -type d -print | \
+	xargs -I % ${MAKE} -C % clobber
+
 clobber-patches:
-	find autopatch -mindepth 1 -maxdepth 1 -type d -print | \
+	find ${PTCHDIR} -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
 
 clobber-optware:
