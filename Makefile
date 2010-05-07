@@ -19,6 +19,7 @@
 
 SUBDIRS = apps services plugins daemons linux
 KERNDIR = kernels
+PTCHDIR = autopatch
 
 .PHONY: index package toolchain upload clobber clean
 
@@ -74,7 +75,7 @@ ipkgs/webos-internals/%/Packages: package-subdirs
 ipkgs/webos-patches/%/Packages: package-webos-patches
 	rm -rf ipkgs/webos-patches/$*
 	mkdir -p ipkgs/webos-patches/$*
-	( find autopatch -type d -name ipkgs -print | \
+	( find ${PTCHDIR} -type d -name ipkgs -print | \
 	  xargs -I % find % -name "*_$*-*_all.ipk" -print | \
 	  xargs -I % rsync -i -a % ipkgs/webos-patches/$* )
 	TAR_OPTIONS=--wildcards \
@@ -151,7 +152,7 @@ package-subdirs: toolchain
 	done
 
 package-webos-patches:
-	for f in `find autopatch -mindepth 1 -maxdepth 1 -type d -print` ; do \
+	for f in `find ${PTCHDIR} -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package ; \
 	  fi; \
@@ -221,7 +222,7 @@ webos-internals-testing:
 	rsync -avr ipkgs/webos-internals/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
 
 webos-patches-testing:
-	${MAKE} SUFFIX=.testing webos-patches-index
+	${MAKE} PTCHDIR="testing-patches" SUFFIX=.testing webos-patches-index
 	rsync -avr ipkgs/webos-patches/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 	rsync -avr ipkgs/webos-patches/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 	rsync -avr ipkgs/webos-patches/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
@@ -258,7 +259,7 @@ clobber-kernels:
 	xargs -I % ${MAKE} -C % clobber
 
 clobber-patches:
-	find autopatch -mindepth 1 -maxdepth 1 -type d -print | \
+	find ${PTCHDIR} -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
 
 clobber-optware:
