@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = Uber-Kernel (Palm Pre/Pre+)
 CATEGORY = Stable
-VERSIONS = 1.4.1-16
+VERSIONS = 1.4.1-21
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to void your warranty if things go wrong.<b><br>\
 Current additions include:<ul>\
@@ -14,10 +14,11 @@ All additions are disabled by default, and must be enabled by separate packages 
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "1.4.1-21", "log" : [ "Limit IVA2 block to 360MHz as per the mystery bug mentioned in the Palm kernel patch" ] }, \
 { "version" : "1.4.1-16", "log" : [ "Improved screenstate transition detection" ] }, \
 { "version" : "1.4.1-13", "log" : [ "Initial public release" ] }, \
 ]
-CHANGELOG = 1.4.1-16: Improved screenstate transition detection.<br>1.4.1-13: Initial public release
+CHANGELOG = 1.4.1-21: Limit IVA2 block to 360MHz as per the mystery bug mentioned in the Palm kernel patch.<br>1.4.1-16: Improved screenstate transition detection.<br>1.4.1-13: Initial public release
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
