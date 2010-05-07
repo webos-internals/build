@@ -3,7 +3,7 @@ HEADLESSAPP_SOURCE = git://git.webos-internals.org/applications/headlessapp.git
 ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz:
 	rm -f $@
 	rm -rf build/headlessapp
-	mkdir build/headlessapp
+	mkdir -p build
 	( cd build ; git clone -n ${HEADLESSAPP_SOURCE} ; cd headlessapp ; git checkout v${HEADLESSAPP_VERSION} )
 	rm -f build/headlessapp/appinfo.json build/headlessapp/icon.png
 	mkdir -p ${DL_DIR}
