@@ -2,14 +2,14 @@ NAME     = modeswitcher
 MAINTAINER = Janne Julkunen <janne.julkunen@e-lnx.org>
 TITLE    = Mode Switcher
 APP_ID   = com.palm.org.e-lnx.wee.apps.${NAME}
-VERSION  = 0.9.6
-# DEPENDS  = org.webosinternals.patches.launch-mode-switcher-at-boot
+VERSION  = 0.9.22
+DEPENDS  = org.webosinternals.patches.misc-launch-mode-switcher-on-luna-boot
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/homebrew-apps/224544-mode-switcher.html
 ICON     = http://wee.e-lnx.org/webos/images/icons/modeswitcher.png
 DESCRIPTION = Mode Switcher.
-CHANGELOG = 0.9.6: Initial release.
+CHANGELOG = 0.9.22: Initial release.
 SCREENSHOTS = []
 LICENSE  = BSD Open Source License
 
