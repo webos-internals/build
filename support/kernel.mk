@@ -149,6 +149,7 @@ build/.unpacked-%: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}.tgz 
 		patch -d build/src-$*/linux-${KERNEL_VERSION} -p1 
 	tar -C build/src-$*/patches -xf ${DL_DIR}/${NAME}-$*.tar.gz
 	if [ -n "${KERNEL_PATCHES}" ] ; then \
+	  ( cd build/src-$*/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
 	  ( cd build/src-$*/patches ; cat ${KERNEL_PATCHES} ) | \
 		patch -d build/src-$*/linux-${KERNEL_VERSION} -p1 ; \
 	fi
