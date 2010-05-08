@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-TITLE = SBromwichKernel (Palm Pre/Pre+)
+TITLE = SBromwich Kernel (Pre/Pre+)
 CATEGORY = Experimental
 VERSIONS = 1.4.1-23
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from sbromwich.<br>\

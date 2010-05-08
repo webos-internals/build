@@ -1,5 +1,5 @@
-NAME = $(shell basename $(shell pwd))-${WEBOS_VERSION}
-TITLE = Palm webOS ${WEBOS_VERSION} Kernel (Palm Pre/Pre+)
+NAME = $(shell basename $(shell pwd))
+TITLE = Palm Kernel (Pre/Pre+)
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 CATEGORY = Recovery
 FORCE_INSTALL = 1

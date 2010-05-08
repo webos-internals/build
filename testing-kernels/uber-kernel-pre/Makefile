@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-TITLE = Uber-Kernel (Palm Pre/Pre+)
+TITLE = UberKernel (Pre/Pre+)
 CATEGORY = Stable
 VERSIONS = 1.4.1-21
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
