@@ -1,17 +1,18 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = SBromwich Kernel (Pre/Pre+)
 CATEGORY = Experimental
-VERSIONS = 1.4.1-23
+VERSIONS = 1.4.1-24
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from sbromwich.<br>\
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "1.4.1-24", "log" : [ "Reduce number of scheduling calls to reduce battery drain" ] }, \
 { "version" : "1.4.1-23", "log" : [ "Enable Functionally OverLoaded Kernel settings" ] }, \
 { "version" : "1.4.1-19", "log" : [ "Optimise for cortex CPU, tweak power reduction code, enable pre-emptive kernel" ] }, \
 { "version" : "1.4.1-16", "log" : [ "Improved screenstate transition detection" ] }, \
 { "version" : "1.4.1-13", "log" : [ "Initial public release" ] }, \
 ]
-CHANGELOG = 1.4.1-23: Enable Functionally OverLoaded Kernel settings.<br>1.4.1-19: Optimise for cortex CPU, tweak power reduction code, enable pre-emptive kernel.<br>1.4.1-16: Improved screenstate transition detection.<br>1.4.1-13: Initial public release.
+CHANGELOG = 1.4.1-24: Reduce number of scheduling calls to reduce battery drain<br>1.4.1-23: Enable Functionally OverLoaded Kernel settings.<br>1.4.1-19: Optimise for cortex CPU, tweak power reduction code, enable pre-emptive kernel.<br>1.4.1-16: Improved screenstate transition detection.<br>1.4.1-13: Initial public release.
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:SBromwichKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
