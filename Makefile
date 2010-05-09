@@ -148,6 +148,8 @@ package-subdirs: toolchain
 	for f in `find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package ; \
+	  else \
+	    rm -rf $$f ; \
 	  fi; \
 	done
 
@@ -155,6 +157,8 @@ package-webos-patches:
 	for f in `find ${PTCHDIR} -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package ; \
+	  else \
+	    rm -rf $$f ; \
 	  fi; \
 	done
 
@@ -162,6 +166,8 @@ package-webos-kernels:
 	for f in `find ${KERNDIR} -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package ; \
+	  else \
+	    rm -rf $$f ; \
 	  fi; \
 	done
 
@@ -169,6 +175,8 @@ package-optware: toolchain
 	for f in `find optware -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package ; \
+	  else \
+	    rm -rf $$f ; \
 	  fi; \
 	done
 
@@ -176,6 +184,8 @@ package-regression: toolchain
 	for f in `find regression -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package ; \
+	  else \
+	    rm -rf $$f ; \
 	  fi; \
 	done
 
@@ -183,6 +193,8 @@ package-feeds: toolchain
 	for f in `find feeds -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package ; \
+	  else \
+	    rm -rf $$f ; \
 	  fi; \
 	done
 
