@@ -1,7 +1,7 @@
 NAME     = wirc
 TITLE	 = wIRC
 APP_ID   = ws.junk.${NAME}
-VERSION  = 0.0.4
+VERSION  = 0.1.0
 DEPENDS	 = us.ryanhope.wircd
 TYPE	 = Application
 CATEGORY = System Utilities
@@ -9,7 +9,7 @@ MAINTAINER = oil, PuffTheMagic, egaudet
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WIRC
 ICON	 = http://www.webos-internals.org/images/1/10/Icon_WebOSInternals_wIRC.png
 DESCRIPTION = A native webOS IRC client.
-CHANGELOG = 0.0.4: Lots of bug fixes and updates. Includes some pre-configured servers for easy server setup. Added support for list and whois commands.
+CHANGELOG = 0.1.0: A bunch of changes and updates.
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/5/5a/Wirc.png\",\
 \"http://www.webos-internals.org/images/d/d2/Wirc_2.png\",\
