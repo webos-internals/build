@@ -34,4 +34,4 @@ for filename in sys.argv[1:]:
 
     os.system('tar xzf %s/data.tar.gz -C %s' % (pkg, pkg))
     os.system('tar xzf %s/control.tar.gz -C %s/CONTROL' % (pkg, pkg))
-#    os.system('rm -f %s/control.tar.gz %s/data.tar.gz %s/debian-binary' % (pkg, pkg, pkg))
+    os.system('rm -f %s/control.tar.gz %s/data.tar.gz %s/debian-binary' % (pkg, pkg, pkg))
