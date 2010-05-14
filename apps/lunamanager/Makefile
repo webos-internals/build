@@ -1,5 +1,7 @@
 NAME     = lunamanager
 APP_ID   = org.webosinternals.${NAME}
+SIGNER   = org.webosinternals
+BLDFLAGS = -p
 VERSION  = 0.0.5
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:LunaManager
 MAINTAINER = WebOS Internals <support@webos-internals.org>

@@ -19,8 +19,6 @@ LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/applications/wIRC.git
 
-CC = /srv/preware/build/toolchain/cs07q3armel/build/arm-2007q3/bin/arm-none-linux-gnueabi-gcc
-
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
 
