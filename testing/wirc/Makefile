@@ -1,14 +1,14 @@
 NAME     = wirc
 TITLE    = wIRC
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.2.3
+VERSION  = 0.2.4
 TYPE     = Application
 CATEGORY = System Utilities
 MAINTAINER = oil, PuffTheMagic, zsoc, egaudet, rwhitby
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WIRC
 ICON     = http://www.webos-internals.org/images/1/10/Icon_WebOSInternals_wIRC.png
 DESCRIPTION = A native webOS IRC client.
-CHANGELOG = 0.2.3: Renamed appid and removes separate wircd service on install.<br>0.2.0: Service and Application combined for easier and safer install and removal.
+CHANGELOG = 0.2.4: Renamed appid and removes separate wircd service on install.<br>0.2.0: Service and Application combined for easier and safer install and removal.
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/5/5a/Wirc.png\",\
 \"http://www.webos-internals.org/images/d/d2/Wirc_2.png\",\
