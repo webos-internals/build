@@ -48,7 +48,7 @@ build/%.built: build/.unpacked
 	( cd build/src/src/libircclient ; \
 	  CC=${CROSS_COMPILE_$*}gcc ./configure && \
 	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc \
-		clean all )
+		SUBDIRS=src clean all )
 	( cd build/src/src ; \
 	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc \
 		clobber ${APP_ID} )
