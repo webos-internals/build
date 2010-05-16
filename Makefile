@@ -40,12 +40,12 @@ palm-index: ipkgs/palm-catalog/Packages ipkgs/palm-beta/Packages ipkgs/palm-web/
 	    ipkgs/palm-catalog-updates/Packages ipkgs/palm-beta-updates/Packages ipkgs/palm-web-updates/Packages
 
 .PHONY: webos-patches-index
-webos-patches-index: ipkgs/webos-patches/1.4.0/Packages ipkgs/webos-patches/1.4.1/Packages ipkgs/webos-patches/1.4.2/Packages
+webos-patches-index: ipkgs/webos-patches/1.4.0/Packages ipkgs/webos-patches/1.4.1/Packages ipkgs/webos-patches/1.4.2/Packages ipkgs/webos-patches/1.4.5/Packages
 	rm -f ipkgs/webos-patches/1.4.1.1
 	ln -f -s 1.4.1 ipkgs/webos-patches/1.4.1.1
 
 .PHONY: webos-kernels-index
-webos-kernels-index: ipkgs/webos-kernels/1.4.0/Packages ipkgs/webos-kernels/1.4.1/Packages
+webos-kernels-index: ipkgs/webos-kernels/1.4.0/Packages ipkgs/webos-kernels/1.4.1/Packages ipkgs/webos-kernels/1.4.2/Packages ipkgs/webos-kernels/1.4.5/Packages
 	rm -f ipkgs/webos-kernels/1.4.1.1
 	ln -f -s 1.4.1 ipkgs/webos-kernels/1.4.1.1
 
