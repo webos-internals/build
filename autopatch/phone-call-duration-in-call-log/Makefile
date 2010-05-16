@@ -12,7 +12,7 @@ SCREENSHOTS = [\
 META_SUB_VERSION = 2
 
 include ../common.mk
-DEPENDS := ${DEPENDS}, org.webosinternals.ipkgservice
+DEPENDS := ${DEPENDS}, org.webosinternals.preware
 include ../modifications.mk
 
 MAINTAINER = dBsooner

@@ -11,7 +11,7 @@ SCREENSHOTS = [\
 META_SUB_VERSION = 1
 
 include ../common.mk
-DEPENDS := ${DEPENDS}, org.webosinternals.ipkgservice,org.webosinternals.patches.phone-call-duration-in-call-log
+DEPENDS := ${DEPENDS}, org.webosinternals.preware,org.webosinternals.patches.phone-call-duration-in-call-log
 include ../modifications.mk
 
 MAINTAINER = dBsooner
