@@ -3,7 +3,7 @@ PATCH = contacts/${NAME}.patch
 TITLE = Add Sync Now
 DESCRIPTION = Adds a menu item to sync all contacts while in the main list of contacts.
 CATEGORY = Contacts
-VERSIONS = 1.4.0-42 1.4.1-12
+VERSIONS = 1.4.0-42 1.4.1-12 1.4.2-1
 ICON = http://www.webos-internals.org/images/c/ca/Icon_WebOSInternals_Patches_Contacts.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/1/18/Contacts-add-sync-now-1.png\",\

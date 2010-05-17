@@ -3,7 +3,7 @@ PATCH = calendar/${NAME}.patch
 TITLE = Create Birthday Events
 DESCRIPTION = Create Birthday events in the calendar from your contacts.
 CATEGORY = Calendar
-VERSIONS = 1.4.1-15
+VERSIONS = 1.4.1-15 1.4.2-1
 ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Calendar.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/a/a3/Contacts-create-birthday-events-1.png\",\
