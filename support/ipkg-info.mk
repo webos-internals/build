@@ -61,3 +61,11 @@ ${DOCTOR_DIR}/webosdoctor-1.4.1.jar:
 	else \
 	  curl -L -o $@ http://palm.cdnetworks.net/rom/pre/p1411r0d03312010/sr1ntp1411rod/webosdoctorp100ewwsprint.jar; \
 	fi
+
+${DOCTOR_DIR}/webosdoctor-1.4.2.jar:
+	mkdir -p ${DOCTOR_DIR}
+	if [ -e ${DOCTOR_DIR}/webosdoctorp101ewwatt-1.4.2.jar ] ; then \
+	  ln -s webosdoctorp101ewwatt-1.4.2.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/preplus/p142r0d05162010/attp142rod/webosdoctorp101ewwatt.jar; \
+	fi
