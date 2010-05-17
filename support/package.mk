@@ -51,13 +51,13 @@ ipkgs/${APP_ID}_${VERSION}_%.ipk: build/.built-${VERSION}
 	mkdir -p ipkgs
 	if [ -n "${SIGNER}" -a -e ../../../sign/${SIGNER}.crt -a ../../../sign/${SIGNER}.key ] ; then \
 	  ( cd build ; \
-	    TAR_OPTIONS=--wildcards \
+	    TAR_OPTIONS="--wildcards --mode=g-s" \
 	    ../../../toolchain/ipkg-utils/ipkg-build -o 0 -g 0 ${BLDFLAGS} \
 	    -s $(shell cd ../../.. ; pwd)/sign/${SIGNER}.crt -k $(shell cd ../../.. ; pwd)/sign/${SIGNER}.key \
 	    $* ) ; \
 	else \
 	  ( cd build ; \
-	    TAR_OPTIONS=--wildcards \
+	    TAR_OPTIONS="--wildcards --mode=g-s" \
 	    ../../../toolchain/ipkg-utils/ipkg-build -o 0 -g 0 ${BLDFLAGS} $* ) ; \
 	fi
 	mv build/${APP_ID}_${VERSION}_$*.ipk $@
