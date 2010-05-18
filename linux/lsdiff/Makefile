@@ -1,6 +1,7 @@
 NAME     = lsdiff
 TITLE    = Lsdiff
 APP_ID   = org.webosinternals.${NAME}
+SIGNER   = org.webosinternals
 VERSION  = 0.3.1
 HOMEPAGE = http://cyberelk.net/tim/software/patchutils/
 MAINTAINER = WebOS Internals <support@webos-internals.org>

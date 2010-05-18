@@ -5,6 +5,7 @@ TITLE = CLEANUP VKB Files
 MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>
 DESCRIPTION = This package will clean up keyboard configuration and image files that may be left over from previous installs.
 APP_ID = org.webosinternals.${NAME}
+SIGNER   = org.webosinternals
 CATEGORY = Utilities
 
 .PHONY: package

@@ -1,6 +1,7 @@
 NAME     = diffstat
 TITLE    = Diffstat
 APP_ID   = org.webosinternals.${NAME}
+SIGNER   = org.webosinternals
 VERSION  = 1.45
 HOMEPAGE = http://invisible-island.net/diffstat/
 MAINTAINER = WebOS Internals <support@webos-internals.org>
