@@ -33,6 +33,10 @@ WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
 COMPATIBLE_VERSIONS = 1.4.1 | 1.4.1.1
 endif
 
+ifeq ("${WEBOS_VERSION}", "1.4.2")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp101ewwatt-${WEBOS_VERSION}.jar
+endif
+
 .PHONY: package
 ifneq ("${VERSIONS}", "")
 package:
