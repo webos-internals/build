@@ -48,6 +48,7 @@ class PackageHandler(ContentHandler):
             m = regexp.search(self.filename)
             if (self.data != m.group(1)):
                 sys.stderr.write(self.filename + ": Version mismatch between feed and theme.xml\n")
+                sys.exit(1)
 
         if (name == "creator") :
             print >>self.control,  "Maintainer: %s <http://forums.precentral.net/members/%s.html>" % (self.data, urllib.quote(self.data))

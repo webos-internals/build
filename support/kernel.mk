@@ -7,7 +7,7 @@ ICON = http://www.webos-internals.org/images/9/9e/Icon_WebOSInternals_Kernel.png
 DEPENDS = 
 FEED = WebOS Kernels
 LICENSE = GPL v2 Open Source
-WEBOS_VERSIONS = 1.4.0 1.4.1
+WEBOS_VERSIONS = 1.4.0 1.4.1 1.4.2
 KERNEL_VERSION = 2.6.24
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tgz
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(pre\).gz
@@ -31,6 +31,10 @@ COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
 ifeq ("${WEBOS_VERSION}", "1.4.1")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
 COMPATIBLE_VERSIONS = 1.4.1 | 1.4.1.1
+endif
+
+ifeq ("${WEBOS_VERSION}", "1.4.2")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp101ewwatt-${WEBOS_VERSION}.jar
 endif
 
 .PHONY: package

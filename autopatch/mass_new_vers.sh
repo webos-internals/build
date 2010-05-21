@@ -9,6 +9,6 @@ for v in ${LIST} ; do
     SINPLU=VERSION
   fi
   OLD_VERSION=$(awk '/^'$SINPLU' =/ {print}' $v)
-  OUTPUT_VERSION="$OLD_VERSION v1.4.1-1"
+  OUTPUT_VERSION="$OLD_VERSION 1.4.2-1"
   echo "sed -i.orig -e 's|$OLD_VERSION|$OUTPUT_VERSION|' $v" >> test.log
 done

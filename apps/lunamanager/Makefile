@@ -1,12 +1,13 @@
 NAME     = lunamanager
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.0.4
+SIGNER   = org.webosinternals
+BLDFLAGS = -p
+VERSION  = 0.0.5
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:LunaManager
 MAINTAINER = WebOS Internals <support@webos-internals.org>
-DEPENDS = org.webosinternals.ipkgservice (>= 0.8.6)
 TYPE	= Application
 DESCRIPTION = A utility to control various aspects of the Luna system.
-CHANGELOG = 0.0.4: Updated the service method names.<br>0.0.3: fixed "package manager not running" error on java restart
+CHANGELOG = 0.0.5: Removed the dependency on the package manager service.<br>0.0.4: Updated the service method names.<br>0.0.3: fixed "package manager not running" error on java restart
 CATEGORY = System Utilities
 ICON	= http://www.webos-internals.org/images/b/bd/Icon_WebOSInternals_StopLight.png
 LICENSE  = GPL v2 Open Source

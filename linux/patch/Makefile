@@ -1,6 +1,7 @@
 NAME     = patch
 TITLE    = GNU Patch
 APP_ID   = org.webosinternals.${NAME}
+SIGNER   = org.webosinternals
 VERSION  = 2.5.9-3
 HOMEPAGE = http://savannah.gnu.org/projects/patch
 MAINTAINER = WebOS Internals <support@webos-internals.org>
