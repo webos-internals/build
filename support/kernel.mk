@@ -1,7 +1,6 @@
 TYPE = Kernel
 APP_ID = org.webosinternals.kernels.${NAME}
 SIGNER = org.webosinternals
-BLDFLAGS = -p
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 ICON = http://www.webos-internals.org/images/9/9e/Icon_WebOSInternals_Kernel.png
 DEPENDS = 
