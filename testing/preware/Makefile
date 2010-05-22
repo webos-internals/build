@@ -26,6 +26,9 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/b/bc/Preware_ss10.png\",\
 \"http://www.webos-internals.org/images/7/75/Preware_ss11.png\" ]
 LICENSE  = GPL v2 Open Source
+POSTINSTALLFLAGS = RestartLuna
+POSTUPDATEFLAGS  = RestartLuna
+POSTREMOVEFLAGS  = RestartLuna
 
 SRC_GIT = git://git.webos-internals.org/applications/preware.git
 
