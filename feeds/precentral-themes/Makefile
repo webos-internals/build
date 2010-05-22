@@ -56,7 +56,8 @@ build/.built: build/.unpacked
 	      build/`basename $$f .zip` `basename $$f .zip` ) || rm -rf build/`basename $$f .zip` ; \
 	    [ ! -e build/`basename $$f .zip` ] || \
 	    ( chmod ugo+x build/`basename $$f .zip`/CONTROL/postinst build/`basename $$f .zip`/CONTROL/prerm && \
-	      ( cd ipkgs ; ../../../toolchain/ipkg-utils/ipkg-build ../build/`basename $$f .zip` ) ) ; \
+	      ( cd ipkgs ; TAR_OPTIONS="--wildcards --mode=g-s" \
+		../../../toolchain/ipkg-utils/ipkg-build -o 0 -g 0 ../build/`basename $$f .zip` ) ) ; \
 	  fi ; \
 	done
 	touch $@
