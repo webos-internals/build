@@ -2,6 +2,7 @@ NAME     = preware
 TITLE	 = Preware
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
+BLDFLAGS = -p
 VERSION  = 1.0.0
 TYPE	 = Application
 CATEGORY = System Utilities
