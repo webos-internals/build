@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = PsychoKernel (Palm Pre/Pre+)
 CATEGORY = Experimental
-VERSIONS = 1.4.1-17
+VERSIONS = 1.4.1-18
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br>\
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
