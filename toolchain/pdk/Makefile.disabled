@@ -1,0 +1,10 @@
+NAME     = pdk
+VERSION	 = 
+
+run-pdk-script::
+	rm -rf build
+	mkdir -p build
+	(cd build; sh ../../../scripts/pdk-stage.sh)
+
+clobber::
+	rm -rf build

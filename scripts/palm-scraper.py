@@ -37,6 +37,7 @@ class PackageHandler(ContentHandler):
     appnumber = ""
     md5sum = ""
     countries = []
+    languages = []
 
     def startElement(self, name, attrs):
         if (name == "item") :
@@ -59,12 +60,16 @@ class PackageHandler(ContentHandler):
             self.appnumber = ""
             self.md5sum = ""
             self.countries = []
+            self.languages = []
 
         if (name == "ac:localization"):
             self.language = attrs["ac:language"].encode('utf-8')
+            language = '"' + self.language + '"'
+            if (language not in self.languages):
+                self.languages.append(language)
             country = '"' + attrs["ac:country"].encode('utf-8') + '"'
             if (country not in self.countries):
-                self.countries.append('"' + attrs["ac:country"].encode('utf-8') + '"')
+                self.countries.append(country)
 
         if (name == "ac:categories"):
             if ((self.language == "en") or (self.category == "")):
@@ -171,6 +176,9 @@ class PackageHandler(ContentHandler):
 
             if (len(self.countries)):
                 self.json += "\"Countries\":[" + ','.join(self.countries) + "], "
+
+            if (len(self.languages)):
+                self.json += "\"Languages\":[" + ','.join(self.languages) + "], "
 
             self.json += "\"Feed\":\"Palm %s\" }" % sys.argv[3]
 
