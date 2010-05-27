@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = phone/${NAME}.patch
 TITLE = AutoSpeakerphone via Proximity Sensor Instant
-DESCRIPTION = Immediately changes the audio route between the front and back speaker as the display is turned on & off by the proximity sensor.
+DESCRIPTION = Immediately changes the audio route between the front and back speaker as the display is turned on & off by the proximity sensor.<br/><br/>(BT/headset/aux audio compatible)
 CATEGORY = Phone
-VERSIONS = 1.4.1-15 1.4.2-1
+VERSIONS = 1.4.0-45 1.4.1-16 1.4.2-2
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
 SCREENSHOTS =
 META_SUB_VERSION = 1

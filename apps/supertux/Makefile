@@ -1,7 +1,7 @@
 NAME     = supertux
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 1.0.2
+VERSION  = 1.0.3
 DEPENDS  = org.webosinternals.upstartmgr
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:SuperTux
 MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>

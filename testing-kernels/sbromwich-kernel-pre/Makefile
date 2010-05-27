@@ -27,8 +27,7 @@ KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch overclocking/defc
 		 preempt/defconfig-enablepreempt.diff preempt/vermagic.diff \
 		 folk/board-sirloin-headset-detect.c.diff \
 		 folk/defconfig-folk.diff folk/omap_fb.c.diff \
-		 folk/omap_misc_hsuart.c.diff folk/pm_cpuidle.c.diff \
-		 folk/defconfig-folk.diff 
+		 folk/omap_misc_hsuart.c.diff folk/pm_cpuidle.c.diff 
 
 include ../../support/kernel.mk
 
