@@ -22,7 +22,7 @@ SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch overclocking/defconfig-safe.patch \
 		 sensors/sensors_temp_omap34xx.patch sensors/defconfig-safe.patch \
 		 screenstate/screenstate.patch screenstate/defconfig-safe.patch \
-		 koptimise/defconfig-optimise makefiletune/Makefile.diff \
+		 koptimise/defconfig-optimise makefiletune/Makefile.diff makefiletune/armMakefile.diff \
 		 prcm/prcm_clk.c.diff prcm/proc_pwr.c.diff \
 		 preempt/defconfig-enablepreempt.diff preempt/vermagic.diff \
 		 folk/board-sirloin-headset-detect.c.diff \
