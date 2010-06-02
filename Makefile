@@ -30,7 +30,7 @@ index:  webos-internals-index \
 	webos-kernels-index \
 	optware-index \
 	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
-	palm-index \
+	palm-index
 
 .PHONY: optware-index
 optware-index: ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv6/Packages ipkgs/optware/armv7/Packages
@@ -43,6 +43,7 @@ palm-index: ipkgs/palm-catalog/Packages ipkgs/palm-beta/Packages ipkgs/palm-web/
 webos-patches-index: ipkgs/webos-patches/1.4.0/Packages ipkgs/webos-patches/1.4.1/Packages ipkgs/webos-patches/1.4.2/Packages ipkgs/webos-patches/1.4.5/Packages
 	rm -f ipkgs/webos-patches/1.4.1.1
 	ln -f -s 1.4.1 ipkgs/webos-patches/1.4.1.1
+	chmod o-x ipkgs/webos-patches/1.4.5
 
 .PHONY: webos-kernels-index
 webos-kernels-index: ipkgs/webos-kernels/1.4.0/Packages ipkgs/webos-kernels/1.4.1/Packages ipkgs/webos-kernels/1.4.2/Packages ipkgs/webos-kernels/1.4.5/Packages
