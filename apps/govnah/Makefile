@@ -3,13 +3,17 @@ TITLE    = Govnah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.3.0
+VERSION  = 0.4.2
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
 DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature.
 CHANGELOG = \
+0.4.2: Fixed the unknown profile problem.<br>\
+0.4.1: Added the startup splash screen and some initial default profiles.<br>\
+0.4.0: Select a profile to have it automatically reapplied on each clean reboot.<br>\
+0.3.1: Launch parameter support, and ignore_nice_load always shows true on profile screen bug fix<br>\
 0.3.0: Profile support<br>\
 0.2.5: Now only stores the latest 5 minutes of temperature data in memory<br>\
 0.2.4: Graphing updates<br>\
