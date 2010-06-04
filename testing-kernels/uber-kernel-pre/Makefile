@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Pre/Pre+)
 CATEGORY = Experimental
-VERSIONS = 1.4.1-31 1.4.2-31
+VERSIONS = 1.4.1-31 1.4.2-31 1.4.5-31
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to void your warranty if things go wrong.<b><br>\
 Current additions include:<ul>\
