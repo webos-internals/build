@@ -7,3 +7,8 @@ STAGING_DIR_armv7 = $(shell cd ../.. ; pwd)/staging/armv7
 STAGING_DIR_armv6 = $(shell cd ../.. ; pwd)/staging/armv6
 STAGING_DIR_arm   = $(shell cd ../.. ; pwd)/staging/armv7
 STAGING_DIR_i686  = $(shell cd ../.. ; pwd)/staging/i686
+
+CONFIGURE_HOST_armv7 = arm-none-linux-gnueabi
+CONFIGURE_HOST_armv6 = arm-none-linux-gnueabi
+CONFIGURE_HOST_arm   = arm-none-linux-gnueabi
+CONFIGURE_HOST_i686  = i686-unknown-linux-gnu
