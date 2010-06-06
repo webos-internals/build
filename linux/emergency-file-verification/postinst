@@ -4,6 +4,7 @@ PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
 PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
 PATCH_LOG=/media/internal/webos-patches.log
 IPKG_INFO_DIR=/usr/lib/ipkg/info
+AUPT_VERSION=aupt-4
 failed=0
 
 if [ ! -e $PATCH_LOG ]
@@ -59,7 +60,7 @@ do
     patch_technology="apt"
   fi
 
-  if [ "$patch_technology" != "aupt-3" ]
+  if [ "$patch_technology" != "$AUPT_VERSION" ]
   then
     OLD_PACKAGES="$OLD_PACKAGES\tPackage: $package $patch_technology"
     failed=1
@@ -107,7 +108,7 @@ else
     then
       NO_BACKUP_FILES="$NO_BACKUP_FILES\tFile: $file\n"
       failed=1
-    elif [ "$patch_technology" != "aupt-3" ]
+    elif [ "$patch_technology" != "$AUPT_VERSION" ]
     then
       OLD_BACKUP_FILES="$OLD_BACKUP_FILES\tFile: $file $patch_technology\n"
       failed=1
