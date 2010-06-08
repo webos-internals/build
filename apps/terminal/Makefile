@@ -1,32 +1,69 @@
 NAME     = terminal
 TITLE	 = Terminal
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.2.3
-DEPENDS  = org.webosinternals.termplugin
+BLDFLAGS = -p
+VERSION  = 0.3.0
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Terminal
 ICON	 = http://www.webos-internals.org/images/7/74/Icon_WebOSInternals_Terminal.png
-DESCRIPTION = Description for Terminal
-CHANGELOG = 0.2.3: Added help page for key mappings and detection of the termplugin.
+DESCRIPTION = Command line terminal for webOS.
+CHANGELOG = 0.3.0: Subsumed the Terminal Service Plugin into this package.<br>0.2.3: Added help page for key mappings and detection of the termplugin.
 SCREENSHOTS = [\"http://www.webos-internals.org/images/b/bd/Application_Terminal.jpg\"]
 LICENSE  = GPL v2 Open Source
+POSTINSTALLFLAGS = RestartLuna
+POSTUPDATEFLAGS  = RestartLuna
+POSTREMOVEFLAGS  = RestartLuna
 
 SRC_GIT = git://git.webos-internals.org/applications/terminal.git
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_all.ipk
+package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
 include ../../support/package.mk
 
 include ../../support/download.mk
 
-build/.built-${VERSION} build/.unpack: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+.PHONY: unpack
+unpack: build/.unpacked
+
+build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
-	mkdir -p build/all/usr/palm/applications/${APP_ID}
-	tar -C build/all/usr/palm/applications/${APP_ID} -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	rm -rf build/all/usr/palm/applications/${APP_ID}/.git*
+	mkdir -p build/src
+	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	touch $@
 
-.PHONY: clobber
+.PHONY: build
+build: build/.built-${VERSION}
+
+build/.built-${VERSION}: build/arm.built build/i686.built
+	touch $@
+
+include ../../support/cross-compile.mk
+
+build/%.built: build/.unpacked
+	rm -rf build/$*
+	( cd build/src/src ; \
+	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}g++ \
+	  clean all \
+	)
+	mkdir -p build/$*/usr/palm/applications/${APP_ID}
+	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
+	mkdir -p build/$*/usr/palm/applications/${APP_ID}/lib
+	install -m 755 build/src/src/termplugin.so build/$*/usr/palm/applications/${APP_ID}/lib/
+	touch $@
+
+build/%/CONTROL/postinst:
+	rm -f $@
+	mkdir -p build/$*/CONTROL
+	install -m 0775 build/src/control/postinst build/$*/CONTROL
+	chmod ugo+x $@
+
+build/%/CONTROL/prerm:
+	rm -f $@
+	mkdir -p build/$*/CONTROL
+	install -m 0775 build/src/control/prerm build/$*/CONTROL
+	chmod ugo+x $@
+
 clobber::
 	rm -rf build
