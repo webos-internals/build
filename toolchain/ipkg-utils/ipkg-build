@@ -161,7 +161,7 @@ outer=ar
 tar=tar
 sign=
 key=
-if [ "`uname -s`" == "Darwin" ] ; then
+if [ "`uname -s`" = "Darwin" ] ; then
     tar=gnutar
 fi
 noclean=0
