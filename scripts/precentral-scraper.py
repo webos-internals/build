@@ -38,7 +38,7 @@ class PackageHandler(ContentHandler):
             self.json += "\"Title\":\"%s\", " % self.data
 
         if (name == "version") :
-            self.version = self.data
+            self.version = self.data.replace(" ","-")
 
         if (name == "lastupdate") :
             self.json += "\"LastUpdated\":\"%s\", " % self.data
@@ -96,7 +96,6 @@ class PackageHandler(ContentHandler):
                     id = "net.precentral.themes." + self.title.strip().lower().replace('\\\"',"").replace("&amp;","-").replace("&#58; ","-").replace("_quick_install_2.0","").replace("_","-").replace(": ","-").replace("&","").replace("#","").replace("  "," ").replace(" ","-").replace(".","").replace("'","").replace("(","").replace(")","").replace("+","").replace("!","").replace("/","").rstrip("-") + "_" + self.version + "_all"
                     print "Filename: " + id + ".ipk"
                     self.filename = id + ".zip"
-#                    if (id == "net.precentral.themes.elf-at-night_1_all"): return
                 else:
                     print "Filename: " + self.filename
                 print "Title: " + self.title
