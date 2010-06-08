@@ -49,7 +49,7 @@ ipkgs/${APP_ID}_${VERSION}_%.ipk: build/.built-${VERSION}
 	rm -f build/$*/CONTROL/conffiles
 	${MAKE} build/$*/CONTROL/conffiles
 	mkdir -p ipkgs
-	if [ -n "${SIGNER}" -a -e ../../../sign/${SIGNER}.crt -a ../../../sign/${SIGNER}.key ] ; then \
+	if [ -n "${SIGNER}" ] && [ -e ../../../sign/${SIGNER}.crt ] && [ -e ../../../sign/${SIGNER}.key ] ; then \
 	  ( cd build ; \
 	    TAR_OPTIONS="--wildcards --mode=g-s" \
 	    ../../../toolchain/ipkg-utils/ipkg-build -o 0 -g 0 ${BLDFLAGS} \
