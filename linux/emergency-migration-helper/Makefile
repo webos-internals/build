@@ -18,14 +18,14 @@ include ../../support/download.mk
 
 
 .PHONY: unpack
-unpack: build/.unpacked
+unpack: build/.unpacked-${VERSION}
 
-build/.unpacked:
+build/.unpacked-${VERSION}:
 	rm -rf build
 	mkdir -p build
 	touch $@
 
-build/all/CONTROL/postinst: build/.unpacked
+build/all/CONTROL/postinst: build/.unpacked-${VERSION}
 	mkdir -p build/all/CONTROL
 	cp postinst build/all/CONTROL/postinst
 	chmod ugo+x $@
@@ -33,7 +33,7 @@ build/all/CONTROL/postinst: build/.unpacked
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/.unpacked
+build/.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/all
 	touch $@
 

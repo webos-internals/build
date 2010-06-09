@@ -20,9 +20,9 @@ include ../../support/package.mk
 include ../../support/download.mk
 
 .PHONY: unpack
-unpack: build/.unpacked
+unpack: build/.unpacked-${VERSION}
 
-build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build
 	mkdir -p build/src
@@ -32,7 +32,7 @@ build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/.unpacked
+build/.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/all
 	mkdir -p build/all/usr/sbin/
 	install -m 755 build/src/usr/sbin/netstatd build/all/usr/sbin/
@@ -41,16 +41,16 @@ build/.built-${VERSION}: build/.unpacked
 	install -m 755 build/src/upstart/${APP_ID} build/all/etc/event.d/
 	touch $@
 
-build/all/CONTROL/prerm: build/.unpacked
+build/%/CONTROL/postinst:
 	rm -f $@
-	mkdir -p build/all/CONTROL
-	install -m 0775 build/src/control/prerm build/all/CONTROL
+	mkdir -p build/$*/CONTROL
+	install -m 0775 build/src/control/postinst build/$*/CONTROL
 	chmod ugo+x $@
 
-build/all/CONTROL/postinst: build/.unpacked
+build/%/CONTROL/prerm:
 	rm -f $@
-	mkdir -p build/all/CONTROL
-	install -m 0775 build/src/control/postinst build/all/CONTROL
+	mkdir -p build/$*/CONTROL
+	install -m 0775 build/src/control/prerm build/$*/CONTROL
 	chmod ugo+x $@
 
 .PHONY: clobber

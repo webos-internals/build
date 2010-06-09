@@ -22,7 +22,7 @@ include ../../support/download.mk
 
 include ../../support/optware.mk
 
-build/%.built-${VERSION} : build/%.unpacked
+build/%.built-${VERSION} : build/%.unpacked-${VERSION}
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/share
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/etc/init.d
 	install -m 644 files/${NAME}.conf build/$*/usr/palm/applications/${APP_ID}/opt/etc/${NAME}/${NAME}.conf

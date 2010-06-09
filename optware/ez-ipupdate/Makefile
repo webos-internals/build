@@ -20,21 +20,21 @@ include ../../support/package.mk
 
 include ../../support/download.mk
 
-build/armv7.built-${VERSION} : build/armv7.unpacked
+build/armv7.built-${VERSION} : build/armv7.unpacked-${VERSION}
 	rm -rf build/armv7/usr/palm/applications/${APP_ID}/opt/share
 	mkdir -p build/armv7/etc/ppp/ip-up.d
 	sed -e 's/%WAN%/ppp0/' files/ip-up > build/armv7/etc/ppp/ip-up.d/50mobi-optware-ez-ipupdate
 	chmod 755 build/armv7/etc/ppp/ip-up.d/50mobi-optware-ez-ipupdate
 	touch $@
 
-build/armv6.built-${VERSION} : build/armv6.unpacked
+build/armv6.built-${VERSION} : build/armv6.unpacked-${VERSION}
 	rm -rf build/armv6/usr/palm/applications/${APP_ID}/opt/share
 	mkdir -p build/armv6/etc/ppp/ip-up.d
 	sed -e 's/%WAN%/rmnet0/' files/ip-up > build/armv6/etc/ppp/ip-up.d/50mobi-optware-ez-ipupdate
 	chmod 755 build/armv6/etc/ppp/ip-up.d/50mobi-optware-ez-ipupdate
 	touch $@
 
-build/i686.built-${VERSION} : build/i686.unpacked
+build/i686.built-${VERSION} : build/i686.unpacked-${VERSION}
 	rm -rf build/i686/usr/palm/applications/${APP_ID}/opt/share
 	mkdir -p build/i686/etc/ppp/ip-up.d
 	sed -e 's/%WAN%/eth0/' files/ip-up > build/i686/etc/ppp/ip-up.d/50mobi-optware-ez-ipupdate

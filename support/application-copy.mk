@@ -19,6 +19,6 @@
 
 include ../../support/application-unpack.mk
 
-%/.built-${VERSION} : %/.unpacked
+%/.built-${VERSION} : %/.unpacked-${VERSION}
 	touch $@
 

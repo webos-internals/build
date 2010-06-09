@@ -22,9 +22,9 @@ include ../../support/package.mk
 include ../../support/download.mk
 
 .PHONY: unpack
-unpack: build/.unpacked
+unpack: build/.unpacked-${VERSION}
 
-build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/armv6 build/armv7 build/i686
 	tar -C build -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
@@ -34,12 +34,12 @@ build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/armv6.built build/armv7.built build/i686.built
+build/.built-${VERSION}: build/armv6.built-${VERSION} build/armv7.built-${VERSION} build/i686.built-${VERSION}
 	touch $@
 
 include ../../support/cross-compile.mk
 
-build/%.built: build/.unpacked
+build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	( cd build/src ; \
 	  CC=${CROSS_COMPILE_$*}gcc \

@@ -21,6 +21,6 @@ include ../../support/download.mk
 
 include ../../support/optware.mk
 
-build/%.built-${VERSION} : build/%.unpacked
+build/%.built-${VERSION} : build/%.unpacked-${VERSION}
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/etc
 	touch $@

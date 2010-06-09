@@ -27,9 +27,9 @@ include ../../support/package.mk
 include ../../support/download.mk
 
 .PHONY: unpack
-unpack: build/.unpacked
+unpack: build/.unpacked-${VERSION}
 
-build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
@@ -38,23 +38,15 @@ build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/armv7.built build/armv6.built
+build/.built-${VERSION}: build/armv7.built-${VERSION} build/armv6.built-${VERSION}
 	touch $@
 
-build/armv7.built: build/.unpacked
-	rm -rf build/armv7
-	mkdir -p build/armv7/usr/palm/applications/${APP_ID}
-	cp -r build/src/* build/armv7/usr/palm/applications/${APP_ID}/
-	rm -rf build/armv7/usr/palm/applications/${APP_ID}/src
-	install -m 755 build/src/bin/${NAME} build/armv7/usr/palm/applications/${APP_ID}/bin/${APP_ID}
-	touch $@
-
-build/armv6.built: build/.unpacked
-	rm -rf build/armv6
-	mkdir -p build/armv6/usr/palm/applications/${APP_ID}
-	cp -r build/src/* build/armv6/usr/palm/applications/${APP_ID}/
-	rm -rf build/armv6/usr/palm/applications/${APP_ID}/src
-	install -m 755 build/src/bin/${NAME} build/armv6/usr/palm/applications/${APP_ID}/bin/${APP_ID}
+build/%.built-${VERSION}: build/.unpacked-${VERSION}
+	rm -rf build/$*
+	mkdir -p build/$*/usr/palm/applications/${APP_ID}
+	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
+	install -m 755 build/src/bin/${NAME} build/$*/usr/palm/applications/${APP_ID}/bin/${APP_ID}
 	touch $@
 
 build/%/CONTROL/postinst:
