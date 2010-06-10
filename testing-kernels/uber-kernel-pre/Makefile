@@ -34,7 +34,6 @@ ifeq ("${WEBOS_VERSION}", "1.4.5")
 CATEGORY = Temporary
 TEMPVER  = 1.4.1
 
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${TEMPVER}.jar
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${TEMPVER}/linuxkernel-${KERNEL_VERSION}.tgz
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${TEMPVER}/linuxkernel-${KERNEL_VERSION}-patch\(pre\).gz
 
