@@ -53,6 +53,7 @@ webos-kernels-index: ipkgs/webos-kernels/1.4.0/Packages ipkgs/webos-kernels/1.4.
 	ln -f -s 1.4.1 ipkgs/webos-kernels/1.4.1.1
 	rm -f ipkgs/webos-kernels/1.4.1.3
 	ln -f -s 1.4.1 ipkgs/webos-kernels/1.4.1.3
+	chmod o-x ipkgs/webos-kernels/1.4.5
 
 .PHONY: regression-index
 regression-index: ipkgs/regression-testing/1.0.0/Packages ipkgs/regression-testing/2.0.0/Packages 
