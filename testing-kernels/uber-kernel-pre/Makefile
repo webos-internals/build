@@ -28,7 +28,7 @@ KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch overclocking/defc
 		 sensors/sensors_temp_omap34xx.patch sensors/defconfig-safe.patch \
 		 screenstate/screenstate.patch screenstate/defconfig-safe.patch \
 		 compcache/compcache.patch
-KERNEL_MODULES = compcache/compcache-0.5.4
+# KERNEL_MODULES = compcache/compcache-0.5.4
 
 include ../../support/kernel.mk
 
