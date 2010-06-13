@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Pre/Pre+)
 CATEGORY = Experimental
-VERSIONS = 1.4.1-32 1.4.2-32 1.4.5-32
+VERSIONS = 1.4.1-35 1.4.2-35 1.4.5-35
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to void your warranty if things go wrong.<b><br>\
 Current additions include:<ul>\
@@ -14,18 +14,21 @@ All additions are disabled by default, and must be enabled by separate packages 
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-35", "log" : [ "Added initial infrastructure for compcache" ] }, \
 { "version" : "${WEBOS_VERSION}-32", "log" : [ "Update and cleanup of charging code in screenstate governor" ] }, \
 { "version" : "${WEBOS_VERSION}-21", "log" : [ "Limit IVA2 block to 360MHz as per the mystery bug mentioned in the Palm kernel patch" ] }, \
 { "version" : "${WEBOS_VERSION}-16", "log" : [ "Improved screenstate transition detection" ] }, \
 { "version" : "${WEBOS_VERSION}-13", "log" : [ "Initial public release" ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-32: Update and cleanup of charging code in screenstate governor.<br>${WEBOS_VERSION}-21: Limit IVA2 block to 360MHz as per the mystery bug mentioned in the Palm kernel patch.<br>${WEBOS_VERSION}-16: Improved screenstate transition detection.<br>${WEBOS_VERSION}-13: Initial public release
+CHANGELOG = ${WEBOS_VERSION}-35: Added initial infrastructure for compcache.<br>${WEBOS_VERSION}-32: Update and cleanup of charging code in screenstate governor.<br>${WEBOS_VERSION}-21: Limit IVA2 block to 360MHz as per the mystery bug mentioned in the Palm kernel patch.<br>${WEBOS_VERSION}-16: Improved screenstate transition detection.<br>${WEBOS_VERSION}-13: Initial public release
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch overclocking/defconfig-safe.patch \
 		 sensors/sensors_temp_omap34xx.patch sensors/defconfig-safe.patch \
-		 screenstate/screenstate.patch screenstate/defconfig-safe.patch
+		 screenstate/screenstate.patch screenstate/defconfig-safe.patch \
+		 compcache/compcache.patch
+KERNEL_MODULES = compcache/compcache-0.5.4
 
 include ../../support/kernel.mk
 
