@@ -120,13 +120,22 @@ build/%/CONTROL/prerm:
 
 build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/boot
-	( cd build/src-$*/linux-${KERNEL_VERSION} ; \
-	  yes '' | ${MAKE} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} omap_sirloin_3430_defconfig ; \
-	  ${MAKE} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
+	yes '' | \
+	${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
+		omap_sirloin_3430_defconfig
+	${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
 		KBUILD_BUILD_COMPILE_BY=v$* KBUILD_BUILD_COMPILE_HOST=${APP_ID} \
 		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
-		uImage modules modules_install ; \
-	)
+		uImage modules modules_install
+	if [ -n "${KERNEL_MODULES}" ] ; then \
+	  for module in ${KERNEL_MODULES} ; do \
+	    ( cd build/src-$*/patches/$$module ; \
+	      ${MAKE} -C $(shell pwd)/build/src-$*/patches/$$module ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
+		KERNEL_BUILD_PATH=$(shell pwd)/build/src-$*/linux-${KERNEL_VERSION} \
+		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
+		modules modules_install ) ; \
+	  done \
+	fi
 	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/build
 	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/source
 	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/*.bin
