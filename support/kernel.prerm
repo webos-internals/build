@@ -37,7 +37,7 @@ esac
   { echo "Fatal error occurred, unable to locate tarball" ; exit 1 ; }
 
 # Make sure all the target directories exist and are writeable
-for dir in boot lib ; do
+for dir in boot lib/modules ; do
   mkdir -p /$dir			|| { echo "Error creating /$dir"			; error=1 ; }
   [ -d /$dir ]				|| { echo "Unable to create /$dir"			; error=1 ; }
   rm -f /$dir/.webosinternals.org ]	|| { echo "Error removing /$dir/.webosinternals.org"	; error=1 ; }
