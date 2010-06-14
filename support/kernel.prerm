@@ -60,4 +60,7 @@ tar -C / -zxf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || \
 tar -C / -zdf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || \
   { echo "Fatal error occurred, unable to verify tarball extraction" ; exit 1 ; }
 
+# Remove any additional out-of-tree kernel modules
+rm -rf /lib/modules/`uname -r`/extra
+
 exit 0
