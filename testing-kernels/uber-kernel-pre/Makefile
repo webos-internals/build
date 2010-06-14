@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Pre/Pre+)
 CATEGORY = Experimental
-VERSIONS = 1.4.1-36 1.4.2-36 1.4.5-36
+VERSIONS = 1.4.1-37 1.4.2-37 1.4.5-37
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to void your warranty if things go wrong.<b><br>\
 Current additions include:<ul>\
@@ -9,19 +9,20 @@ Current additions include:<ul>\
 <li>All standard Linux 2.6.24 cpufreq governors made available for selection via the Govnah application</li>\
 <li>The OMAP3430 internal CPU temperature sensor is made available for measuring the true CPU temperature, ported to the Palm Pre/Pre+ by ka6sox & rwhitby</li>\
 <li>A new <b>screenstate</b> governor created by uNiXpSyChO specifically for the Palm Pre/Pre+ which runs at a higher speed when the screen is on, and a lower speed when the screen is off</li>\
+<li>A new <b>compcache</b> compressed RAM swap kernel module ported to the Palm Pre/Pre+ by uNiXpSyChO & rwhitby</li>\
 </ul><br>\
 All additions are disabled by default, and must be enabled by separate packages or scripts (not included in this package).<br>\
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-36", "log" : [ "Added lowmemory notify calculation correction patch" ] }, \
-{ "version" : "${WEBOS_VERSION}-35", "log" : [ "Added initial infrastructure for compcache" ] }, \
+{ "version" : "${WEBOS_VERSION}-37", "log" : [ "Include free swap in memory calculations" ] }, \
+{ "version" : "${WEBOS_VERSION}-35", "log" : [ "Added compcache compressed RAM swap kernel module (not loaded by default)" ] }, \
 { "version" : "${WEBOS_VERSION}-32", "log" : [ "Update and cleanup of charging code in screenstate governor" ] }, \
 { "version" : "${WEBOS_VERSION}-21", "log" : [ "Limit IVA2 block to 360MHz as per the mystery bug mentioned in the Palm kernel patch" ] }, \
 { "version" : "${WEBOS_VERSION}-16", "log" : [ "Improved screenstate transition detection" ] }, \
 { "version" : "${WEBOS_VERSION}-13", "log" : [ "Initial public release" ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-36: Added lowmemory notify calculation correction patch.<br>${WEBOS_VERSION}-35: Added initial infrastructure for compcache.<br>${WEBOS_VERSION}-32: Update and cleanup of charging code in screenstate governor.<br>${WEBOS_VERSION}-21: Limit IVA2 block to 360MHz as per the mystery bug mentioned in the Palm kernel patch.<br>${WEBOS_VERSION}-16: Improved screenstate transition detection.<br>${WEBOS_VERSION}-13: Initial public release
+CHANGELOG = ${WEBOS_VERSION}-37: Include free swap in memory calculations.<br>${WEBOS_VERSION}-35: Added compcache compressed RAM swap kernel module (not loaded by default).<br>${WEBOS_VERSION}-32: Update and cleanup of charging code in screenstate governor.<br>${WEBOS_VERSION}-21: Limit IVA2 block to 360MHz as per the mystery bug mentioned in the Palm kernel patch.<br>${WEBOS_VERSION}-16: Improved screenstate transition detection.<br>${WEBOS_VERSION}-13: Initial public release
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
