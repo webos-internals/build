@@ -14,6 +14,17 @@ ${DOCTOR_DIR}/ipkg-info-%: ${DOCTOR_DIR}/webosdoctor-%.jar
 	fi
 	mkdir -p $@
 
+.PRECIOUS: ${DOCTOR_DIR}/ipkg-info-1.4.3
+${DOCTOR_DIR}/ipkg-info-1.4.3: ${DOCTOR_DIR}/webosdoctor-1.4.3.jar
+	if [ -e $< ]; then \
+		unzip -p $< resources/webOS.tar | \
+		tar -O -x -f - ./nova-cust-image-pixie.rootfs.tar.gz | \
+		tar -C ${DOCTOR_DIR} -m -z -x -f - ./usr/lib/ipkg/info; \
+		mv ${DOCTOR_DIR}/usr/lib/ipkg/info ${DOCTOR_DIR}/ipkg-info-$*; \
+		rm -rf ${DOCTOR_DIR}/usr; \
+	fi
+	mkdir -p $@
+
 ${DOCTOR_DIR}/webosdoctor-1.1.3.jar:
 	mkdir -p ${DOCTOR_DIR}
 	if [ -e ${DOCTOR_DIR}/webosdoctorp100eww-wr-1.1.3.jar ] ; then \
@@ -69,3 +80,6 @@ ${DOCTOR_DIR}/webosdoctor-1.4.2.jar:
 	else \
 	  curl -L -o $@ http://palm.cdnetworks.net/rom/preplus/p142r0d05162010/attp142rod/webosdoctorp101ewwatt.jar; \
 	fi
+
+${DOCTOR_DIR}/webosdoctor-1.4.3.jar:
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/pixiplus/px143r0d06062010/attp143rod/webosdoctorp121ewwatt.jar
