@@ -26,9 +26,13 @@ WEBOS_VERSION:=$(shell echo ${VERSION} | cut -d- -f1)
 
 ifeq ("${DEVICE}","pixi")
 CODENAME = pixie
+DEFCONFIG = chuck_defconfig
+KERNEL_TYPE = palm-chuck
 else
 DEVICE = pre
 CODENAME = castle
+DEFCONFIG = omap_sirloin_3430_defconfig
+KERNEL_TYPE = palm-joplin-3430
 endif
 
 ifeq ("${DEVICE}","pixi")
@@ -139,7 +143,7 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/boot
 	yes '' | \
 	${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
-		omap_sirloin_3430_defconfig
+		${DEFCONFIG}
 	${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
 		KBUILD_BUILD_COMPILE_BY=v$* KBUILD_BUILD_COMPILE_HOST=${APP_ID} \
 		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
@@ -153,16 +157,16 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 		modules modules_install ) ; \
 	  done \
 	fi
-	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/build
-	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/source
-	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/*.bin
-	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/modules.*
+	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/build
+	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/source
+	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/*.bin
+	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/modules.*
 	cp build/src-$*/linux-${KERNEL_VERSION}/arch/arm/boot/uImage \
-		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/uImage-2.6.24-palm-joplin-3430
+		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/uImage-2.6.24-${KERNEL_TYPE}
 	cp build/src-$*/linux-${KERNEL_VERSION}/System.map \
-		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/System.map-2.6.24-palm-joplin-3430
+		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/System.map-2.6.24-${KERNEL_TYPE}
 	cp build/src-$*/linux-${KERNEL_VERSION}/.config \
-		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/config-2.6.24-palm-joplin-3430
+		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/config-2.6.24-${KERNEL_TYPE}
 	unzip -p ${WEBOS_DOCTOR} resources/webOS.tar | \
 	tar -O -x -f - ./nova-cust-image-${CODENAME}.rootfs.tar.gz | \
 	tar -C build/arm/usr/palm/applications/${APP_ID}/additional_files/ -m -z -x -f - ./md5sums
