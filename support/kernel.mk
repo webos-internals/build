@@ -24,16 +24,26 @@ include ../../support/cross-compile.mk
 
 WEBOS_VERSION:=$(shell echo ${VERSION} | cut -d- -f1)
 
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
+ifeq ("${CODENAME}","pixie")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp200ewwsprint-${WEBOS_VERSION}.jar
+else
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ewwsprint-${WEBOS_VERSION}.jar
+endif
 COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
 
 ifeq ("${WEBOS_VERSION}", "1.4.1")
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
+ifeq ("${CODENAME}","pixie")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ueu-wr-${WEBOS_VERSION}.jar
+endif
 COMPATIBLE_VERSIONS = 1.4.1 | 1.4.1.1
 endif
 
 ifeq ("${WEBOS_VERSION}", "1.4.2")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp101ewwatt-${WEBOS_VERSION}.jar
+endif
+
+ifeq ("${WEBOS_VERSION}", "1.4.3")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewwatt-${WEBOS_VERSION}.jar
 endif
 
 .PHONY: package
