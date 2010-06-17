@@ -64,5 +64,5 @@ build/.unpacked-${VERSION}: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}.t
 endif
 
 # Override the compiler
-CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs08q1armel/build/arm-2008q1/bin/arm-none-linux-gnueabi-
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs10q1armel/build/arm-2010q1/bin/arm-none-linux-gnueabi-
 
