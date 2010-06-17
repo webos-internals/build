@@ -48,7 +48,7 @@ webos-patches-index: ipkgs/webos-patches/1.4.0/Packages ipkgs/webos-patches/1.4.
 	chmod o-x ipkgs/webos-patches/1.4.5
 
 .PHONY: webos-kernels-index
-webos-kernels-index: ipkgs/webos-kernels/1.4.0/Packages ipkgs/webos-kernels/1.4.1/Packages ipkgs/webos-kernels/1.4.2/Packages ipkgs/webos-kernels/1.4.5/Packages
+webos-kernels-index: ipkgs/webos-kernels/1.4.0/Packages ipkgs/webos-kernels/1.4.1/Packages ipkgs/webos-kernels/1.4.2/Packages ipkgs/webos-kernels/1.4.3/Packages ipkgs/webos-kernels/1.4.5/Packages
 	rm -f ipkgs/webos-kernels/1.4.1.1
 	ln -f -s 1.4.1 ipkgs/webos-kernels/1.4.1.1
 	rm -f ipkgs/webos-kernels/1.4.1.3
