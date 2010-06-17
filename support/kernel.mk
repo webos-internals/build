@@ -9,7 +9,7 @@ LICENSE = GPL v2 Open Source
 WEBOS_VERSIONS = 1.4.0 1.4.1 1.4.2 1.4.3 1.4.5
 KERNEL_VERSION = 2.6.24
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tgz
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(pre\).gz
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
 DL_DIR = ../../downloads
 POSTINSTALLFLAGS = RestartDevice
 POSTUPDATEFLAGS  = RestartDevice
@@ -24,7 +24,14 @@ include ../../support/cross-compile.mk
 
 WEBOS_VERSION:=$(shell echo ${VERSION} | cut -d- -f1)
 
-ifeq ("${CODENAME}","pixie")
+ifeq ("${DEVICE}","pixi")
+CODENAME = pixie
+else
+DEVICE = pre
+CODENAME = castle
+endif
+
+ifeq ("${DEVICE}","pixi")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp200ewwsprint-${WEBOS_VERSION}.jar
 else
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ewwsprint-${WEBOS_VERSION}.jar
@@ -32,7 +39,7 @@ endif
 COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
 
 ifeq ("${WEBOS_VERSION}", "1.4.1")
-ifeq ("${CODENAME}","pixie")
+ifeq ("${DEVICE}","pixi")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ueu-wr-${WEBOS_VERSION}.jar
 endif
 COMPATIBLE_VERSIONS = 1.4.1 | 1.4.1.1
@@ -157,17 +164,17 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	cp build/src-$*/linux-${KERNEL_VERSION}/.config \
 		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/config-2.6.24-palm-joplin-3430
 	unzip -p ${WEBOS_DOCTOR} resources/webOS.tar | \
-	tar -O -x -f - ./nova-cust-image-castle.rootfs.tar.gz | \
+	tar -O -x -f - ./nova-cust-image-${CODENAME}.rootfs.tar.gz | \
 	tar -C build/arm/usr/palm/applications/${APP_ID}/additional_files/ -m -z -x -f - ./md5sums
 	touch $@
 
 build/.unpacked-%: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}.tgz \
-			    ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-pre.gz \
+			    ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz \
 			    ${DL_DIR}/${NAME}-%.tar.gz
 	rm -rf build/src-$*
 	mkdir -p build/src-$*/patches
 	tar -C build/src-$* -xf ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}.tgz
-	zcat ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-pre.gz | \
+	zcat ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz | \
 		patch -d build/src-$*/linux-${KERNEL_VERSION} -p1 
 	tar -C build/src-$*/patches -xf ${DL_DIR}/${NAME}-$*.tar.gz
 	if [ -n "${KERNEL_PATCHES}" ] ; then \
@@ -183,7 +190,7 @@ ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}.tgz:
 	curl -f -R -L -o $@.tmp ${KERNEL_SOURCE}
 	mv $@.tmp $@
 
-${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-pre.gz:
+${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz:
 	rm -f $@ $@.tmp
 	mkdir -p ${DL_DIR}
 	curl -f -R -L -o $@.tmp ${KERNEL_PATCH}
