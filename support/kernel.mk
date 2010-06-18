@@ -143,9 +143,16 @@ build/%/CONTROL/prerm:
 
 build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/boot
-	yes '' | \
-	${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
-		${DEFCONFIG}
+	if [ -n "${KERNEL_DEFCONFIG}" ] ; then \
+	  cp build/src-$*/patches/${KERNEL_DEFCONFIG} build/src-$*/linux-${KERNEL_VERSION}/.config ; \
+	  yes '' | \
+	  ${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
+		oldconfig ; \
+	else \
+	  yes '' | \
+	  ${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
+		${DEFCONFIG} ; \
+	fi
 	${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
 		KBUILD_BUILD_COMPILE_BY=v$* KBUILD_BUILD_COMPILE_HOST=${APP_ID} \
 		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
