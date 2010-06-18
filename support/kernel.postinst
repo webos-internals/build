@@ -36,6 +36,10 @@ esac
 
 if [ "${FORCE_INSTALL}" = "1" ] ; then
     echo "Forcing unconditional overwrite of all kernel files"
+    # Remove any additional kernel upstart scripts
+    rm -f /var/palm/event.d/org.webosinternals.kernels.*
+    # Remove any additional out-of-tree kernel modules
+    rm -rf /lib/modules/`uname -r`/extra
 fi
 
 if [ "${FORCE_INSTALL}" != "1" ] ; then
@@ -135,7 +139,9 @@ fi
 
 if [ "${error}" = "1" ] ; then
     echo "Fatal error occurred, restoring original files"
-    rm -f /var/palm/event.d/${PID}
+    # Remove any additional kernel upstart scripts
+    rm -f /var/palm/event.d/org.webosinternals.kernels.*
+    # Remove any additional out-of-tree kernel modules
     rm -rf /lib/modules/`uname -r`/extra
     tar -C / -zxf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || \
 	{ echo "Fatal error occurred, unable to extract tarball" ; exit 1 ; }
