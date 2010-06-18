@@ -131,6 +131,7 @@ build/%/CONTROL/postinst:
 	mkdir -p build/arm/CONTROL
 	sed -e 's/PID=/PID="${APP_ID}"/' -e 's/FORCE_INSTALL=/FORCE_INSTALL="${FORCE_INSTALL}"/' \
 	    -e 's/%COMPATIBLE_VERSIONS%/${COMPATIBLE_VERSIONS}/' \
+	    -e 's|%UPSTART_SCRIPT%|${KERNEL_UPSTART}|' \
 		../../support/kernel.postinst > $@
 	chmod ugo+x $@
 
@@ -138,6 +139,7 @@ build/%/CONTROL/prerm:
 	mkdir -p build/arm/CONTROL
 	sed -e 's/PID=/PID="${APP_ID}"/' -e 's/FORCE_REMOVE=/FORCE_REMOVE="${FORCE_REMOVE}"/' \
 	    -e 's/%COMPATIBLE_VERSIONS%/${COMPATIBLE_VERSIONS}/' \
+	    -e 's|%UPSTART_SCRIPT%|${KERNEL_UPSTART}|' \
 		../../support/kernel.prerm > $@
 	chmod ugo+x $@
 
@@ -179,6 +181,11 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	unzip -p ${WEBOS_DOCTOR} resources/webOS.tar | \
 	tar -O -x -f - ./nova-cust-image-${CODENAME}.rootfs.tar.gz | \
 	tar -C build/arm/usr/palm/applications/${APP_ID}/additional_files/ -m -z -x -f - ./md5sums
+	if [ -n "${KERNEL_UPSTART}" ] ; then \
+		mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/var/palm/event.d ; \
+		install -m 755 build/src-$*/patches/${KERNEL_UPSTART} \
+			 build/arm/usr/palm/applications/${APP_ID}/additional_files/var/palm/event.d/${APP_ID} ; \
+	fi
 	touch $@
 
 build/.unpacked-%: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}.tgz \

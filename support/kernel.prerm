@@ -2,6 +2,7 @@
 
 PID=
 FORCE_REMOVE=
+UPSTART_SCRIPT=%UPSTART_SCRIPT%
 
 # Handle execution as pmPreRemove.script
 if [ -z "$IPKG_OFFLINE_ROOT" ]; then
@@ -22,6 +23,12 @@ VERSION=`grep PRODUCT_VERSION_STRING /etc/palm-build-info | sed -e 's/.*=Palm we
 cd ${SRCDIR}
 
 error=0
+
+# Remove any additional kernel upstart scripts
+rm -f /var/palm/event.d/org.webosinternals.kernels.*
+
+# Remove any additional out-of-tree kernel modules
+rm -rf /lib/modules/`uname -r`/extra
 
 case "${VERSION}" in
     %COMPATIBLE_VERSIONS% )
@@ -59,8 +66,5 @@ tar -C / -zxf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || \
 
 tar -C / -zdf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || \
   { echo "Fatal error occurred, unable to verify tarball extraction" ; exit 1 ; }
-
-# Remove any additional out-of-tree kernel modules
-rm -rf /lib/modules/`uname -r`/extra
 
 exit 0
