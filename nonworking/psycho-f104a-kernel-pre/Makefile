@@ -15,7 +15,9 @@ SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch \
 		 sensors/sensors_temp_omap34xx.patch \
 		 screenstate/screenstate.patch \
+		 compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
 		 psychobuild/kstrip.patch
+KERNEL_MODULES = compcache/compcache-0.5.4
 KERNEL_DEFCONFIG = psychobuild/F104A.config
 
 include ../../support/kernel.mk

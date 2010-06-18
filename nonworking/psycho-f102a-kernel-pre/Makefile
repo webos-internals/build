@@ -12,10 +12,12 @@ CHANGELOG = ${WEBOS_VERSION}-40: Initial public release, rebased off UberKernel 
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
-KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch overclocking/defconfig-safe.patch \
-		 sensors/sensors_temp_omap34xx.patch sensors/defconfig-safe.patch \
-		 screenstate/screenstate.patch screenstate/defconfig-safe.patch \
+KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch \
+		 sensors/sensors_temp_omap34xx.patch \
+		 screenstate/screenstate.patch \
+		 compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
 		 psychobuild/kstrip.patch
+KERNEL_MODULES = compcache/compcache-0.5.4
 KERNEL_DEFCONFIG = psychobuild/F102A.config
 
 include ../../support/kernel.mk
