@@ -155,12 +155,13 @@ download: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 ${DL_DIR}/${NAME}-${VERSION}.tar.gz:
 	rm -f $@
 	$(call PREWARE_SANITY)
-	rm -rf build
-	mkdir build
+	rm -rf build/`basename ${SRC_GIT} .git`
+	mkdir -p build
 	( cd build ; git clone -n ${SRC_GIT} ; cd `basename ${SRC_GIT} .git` ; git checkout v${VERSION} )
 	mkdir -p ${DL_DIR}
 	tar -C build/`basename ${SRC_GIT} .git` -zcf $@ .
 	( cd build/`basename ${SRC_GIT} .git` ; git log --pretty="format:%ct" -n 1 v${VERSION} ) | \
 	python -c 'import os,sys; time = int(sys.stdin.read()); os.utime("$@",(time,time));'
+	rm -rf build/`basename ${SRC_GIT} .git`
 endif
 
