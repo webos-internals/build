@@ -15,7 +15,7 @@ SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch \
 		 sensors/sensors_temp_omap34xx.patch \
 		 screenstate/screenstate.patch \
-		 compcache/compcache.patch memory/tmc_mem.patch
+		 compcache/compcache.patch memory/tmc_mem.patch \
 		 makefiletune/armMakefile.diff
 KERNEL_MODULES = compcache/compcache-0.5.4
 
