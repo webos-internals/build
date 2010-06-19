@@ -2,6 +2,7 @@
 
 PID=
 FORCE_REMOVE=
+UPSTART_SCRIPT=%UPSTART_SCRIPT%
 
 # Handle execution as pmPreRemove.script
 if [ -z "$IPKG_OFFLINE_ROOT" ]; then
@@ -23,6 +24,12 @@ cd ${SRCDIR}
 
 error=0
 
+# Remove any additional kernel upstart scripts
+rm -f /var/palm/event.d/org.webosinternals.kernels.*
+
+# Remove any additional out-of-tree kernel modules
+rm -rf /lib/modules/`uname -r`/extra
+
 case "${VERSION}" in
     %COMPATIBLE_VERSIONS% )
     echo "Kernel confirmed to be compatible with this webOS version"
@@ -37,7 +44,7 @@ esac
   { echo "Fatal error occurred, unable to locate tarball" ; exit 1 ; }
 
 # Make sure all the target directories exist and are writeable
-for dir in boot lib ; do
+for dir in boot lib/modules ; do
   mkdir -p /$dir			|| { echo "Error creating /$dir"			; error=1 ; }
   [ -d /$dir ]				|| { echo "Unable to create /$dir"			; error=1 ; }
   rm -f /$dir/.webosinternals.org ]	|| { echo "Error removing /$dir/.webosinternals.org"	; error=1 ; }

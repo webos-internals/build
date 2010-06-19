@@ -17,7 +17,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-SUBDIRS = apps services plugins daemons linux
+SUBDIRS = apps services daemons linux
 KERNDIR = kernels
 PTCHDIR = autopatch
 
@@ -30,7 +30,7 @@ index:  webos-internals-index \
 	webos-kernels-index \
 	optware-index \
 	ipkgs/precentral/Packages ipkgs/precentral-themes/Packages \
-	palm-index \
+	palm-index
 
 .PHONY: optware-index
 optware-index: ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv6/Packages ipkgs/optware/armv7/Packages
@@ -40,14 +40,20 @@ palm-index: ipkgs/palm-catalog/Packages ipkgs/palm-beta/Packages ipkgs/palm-web/
 	    ipkgs/palm-catalog-updates/Packages ipkgs/palm-beta-updates/Packages ipkgs/palm-web-updates/Packages
 
 .PHONY: webos-patches-index
-webos-patches-index: ipkgs/webos-patches/1.4.0/Packages ipkgs/webos-patches/1.4.1/Packages ipkgs/webos-patches/1.4.2/Packages ipkgs/webos-patches/1.4.5/Packages
+webos-patches-index: ipkgs/webos-patches/1.4.0/Packages ipkgs/webos-patches/1.4.1/Packages ipkgs/webos-patches/1.4.2/Packages ipkgs/webos-patches/1.4.3/Packages ipkgs/webos-patches/1.4.5/Packages
 	rm -f ipkgs/webos-patches/1.4.1.1
 	ln -f -s 1.4.1 ipkgs/webos-patches/1.4.1.1
+	rm -f ipkgs/webos-patches/1.4.1.3
+	ln -f -s 1.4.1 ipkgs/webos-patches/1.4.1.3
+	chmod o-x ipkgs/webos-patches/1.4.5
 
 .PHONY: webos-kernels-index
-webos-kernels-index: ipkgs/webos-kernels/1.4.0/Packages ipkgs/webos-kernels/1.4.1/Packages ipkgs/webos-kernels/1.4.2/Packages ipkgs/webos-kernels/1.4.5/Packages
+webos-kernels-index: ipkgs/webos-kernels/1.4.0/Packages ipkgs/webos-kernels/1.4.1/Packages ipkgs/webos-kernels/1.4.2/Packages ipkgs/webos-kernels/1.4.3/Packages ipkgs/webos-kernels/1.4.5/Packages
 	rm -f ipkgs/webos-kernels/1.4.1.1
 	ln -f -s 1.4.1 ipkgs/webos-kernels/1.4.1.1
+	rm -f ipkgs/webos-kernels/1.4.1.3
+	ln -f -s 1.4.1 ipkgs/webos-kernels/1.4.1.3
+	chmod o-x ipkgs/webos-kernels/1.4.5
 
 .PHONY: regression-index
 regression-index: ipkgs/regression-testing/1.0.0/Packages ipkgs/regression-testing/2.0.0/Packages 

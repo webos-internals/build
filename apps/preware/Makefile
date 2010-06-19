@@ -3,13 +3,17 @@ TITLE	 = Preware
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.0.0
+VERSION  = 1.1.4
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
 ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
-DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, kernels, services and plugins.  Preware is also able to access official Palm App Catalog, Web Distribution and Beta Distribution feeds.<br><b>Requires webOS 1.3.5 or later</b>.
-CHANGELOG = 1.0.0: The Package Manager Service has been rewritten in C and incorporated into this single Preware package.  Installing Preware 1.0.0 will remove the Package Manager Service as the last step of the upgrade process.<br>0.9.38: Robustified the scanning of unknown packages, with the hope of preventing hangs. Added the ability to swipe delete items from the Saved Package List. Disabled the app catalog and themes feeds on first installation, but kept palm update feeds enabled. Added prerm conditionals to assist an easy transition from Preware Alpha back to Preware 1.0. Added support for the webos-kernels feed.<br>0.9.36: Added searching from the main screen. Added the ability to email an IPKG Log. Added warning message for custom feed additions, and robustified the feed management page. Added support for kernel packages.<br>0.9.35: Added Saved Package List functionality for saving and restoring your list of installed packages. Updated German translations, courtesy of Markus Leutwyler (swisstomcat). Restricted new feed names to lower case characters for consistency.<br>0.9.33: Restricted input character set for new custom feed names. Fixed javascript timeout problem with large feeds.<br>0.9.31: Renamed Fix Unknown Types to Scan Unknown Packages, and now reports the id of the package being scannned.
+DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, kernels, services and plugins.  Preware is also able to access official Palm App Catalog, Web Distribution and Beta Distribution feeds.<br><b>Requires webOS 1.4.0 or later</b>.
+CHANGELOG = \
+1.1.4: Fixed hang on package download failures.<br>\
+1.1.2: Added support for the ENABLE_TESTING_FEEDS Meta-Doctor feature. Removed the tag line about eventually reaching 1.0. Minor French translation updates, courtesy of Yannick LE NY.<br>\
+1.1.1: Added languages field in package descriptions. Added preference to only show packages with English descriptions.<br>\
+1.1.0: Now defaults (selectable by a preference option) to using an alternative installation method to avoid the webOS 1.4 rescan bug which closes and stops notifications from your phone, email and messaging applications. Updated German and French translations, courtesy of Markus Leutwyler and Yannick LE NY. Fixed deletion of disabled feeds. Added service version number to the ipkgservice API. Robustified the service upgrade process.
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/3/36/Preware_ss1.png\",\
 \"http://www.webos-internals.org/images/d/d5/Preware_ss1a.png\",\
@@ -38,9 +42,9 @@ include ../../support/package.mk
 include ../../support/download.mk
 
 .PHONY: unpack
-unpack: build/.unpacked
+unpack: build/.unpacked-${VERSION}
 
-build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
@@ -63,12 +67,12 @@ build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/arm.built build/i686.built
+build/.built-${VERSION}: build/arm.built-${VERSION} build/i686.built-${VERSION}
 	touch $@
 
 include ../../support/cross-compile.mk
 
-build/%.built: build/.unpacked
+build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	( cd build/src/src ; \
 	  ${MAKE} VERSION=${VERSION} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc \

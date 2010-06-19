@@ -1,16 +1,15 @@
 TYPE = Kernel
 APP_ID = org.webosinternals.kernels.${NAME}
 SIGNER = org.webosinternals
-BLDFLAGS = -p
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 ICON = http://www.webos-internals.org/images/9/9e/Icon_WebOSInternals_Kernel.png
 DEPENDS = 
 FEED = WebOS Kernels
 LICENSE = GPL v2 Open Source
-WEBOS_VERSIONS = 1.4.0 1.4.1
+WEBOS_VERSIONS = 1.4.0 1.4.1 1.4.2 1.4.3 1.4.5
 KERNEL_VERSION = 2.6.24
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tgz
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(pre\).gz
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
 DL_DIR = ../../downloads
 POSTINSTALLFLAGS = RestartDevice
 POSTUPDATEFLAGS  = RestartDevice
@@ -25,12 +24,39 @@ include ../../support/cross-compile.mk
 
 WEBOS_VERSION:=$(shell echo ${VERSION} | cut -d- -f1)
 
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
+ifeq ("${DEVICE}","pixi")
+CODENAME = pixie
+DEFCONFIG = chuck_defconfig
+KERNEL_TYPE = palm-chuck
+else
+DEVICE = pre
+CODENAME = castle
+DEFCONFIG = omap_sirloin_3430_defconfig
+KERNEL_TYPE = palm-joplin-3430
+endif
+
+ifeq ("${DEVICE}","pixi")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp200ewwsprint-${WEBOS_VERSION}.jar
+else
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ewwsprint-${WEBOS_VERSION}.jar
+endif
 COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
 
 ifeq ("${WEBOS_VERSION}", "1.4.1")
+ifeq ("${DEVICE}","pixi")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ueu-wr-${WEBOS_VERSION}.jar
+else
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
+endif
 COMPATIBLE_VERSIONS = 1.4.1 | 1.4.1.1
+endif
+
+ifeq ("${WEBOS_VERSION}", "1.4.2")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp101ewwatt-${WEBOS_VERSION}.jar
+endif
+
+ifeq ("${WEBOS_VERSION}", "1.4.3")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewwatt-${WEBOS_VERSION}.jar
 endif
 
 .PHONY: package
@@ -105,6 +131,7 @@ build/%/CONTROL/postinst:
 	mkdir -p build/arm/CONTROL
 	sed -e 's/PID=/PID="${APP_ID}"/' -e 's/FORCE_INSTALL=/FORCE_INSTALL="${FORCE_INSTALL}"/' \
 	    -e 's/%COMPATIBLE_VERSIONS%/${COMPATIBLE_VERSIONS}/' \
+	    -e 's|%UPSTART_SCRIPT%|${KERNEL_UPSTART}|' \
 		../../support/kernel.postinst > $@
 	chmod ugo+x $@
 
@@ -112,40 +139,62 @@ build/%/CONTROL/prerm:
 	mkdir -p build/arm/CONTROL
 	sed -e 's/PID=/PID="${APP_ID}"/' -e 's/FORCE_REMOVE=/FORCE_REMOVE="${FORCE_REMOVE}"/' \
 	    -e 's/%COMPATIBLE_VERSIONS%/${COMPATIBLE_VERSIONS}/' \
+	    -e 's|%UPSTART_SCRIPT%|${KERNEL_UPSTART}|' \
 		../../support/kernel.prerm > $@
 	chmod ugo+x $@
 
 build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/boot
-	( cd build/src-$*/linux-${KERNEL_VERSION} ; \
-	  yes '' | ${MAKE} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} omap_sirloin_3430_defconfig ; \
-	  ${MAKE} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
+	if [ -n "${KERNEL_DEFCONFIG}" ] ; then \
+	  cp build/src-$*/patches/${KERNEL_DEFCONFIG} build/src-$*/linux-${KERNEL_VERSION}/.config ; \
+	  yes '' | \
+	  ${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
+		oldconfig ; \
+	else \
+	  yes '' | \
+	  ${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
+		${DEFCONFIG} ; \
+	fi
+	${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
 		KBUILD_BUILD_COMPILE_BY=v$* KBUILD_BUILD_COMPILE_HOST=${APP_ID} \
 		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
-		uImage modules modules_install ; \
-	)
-	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/build
-	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/source
-	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/*.bin
-	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-palm-joplin-3430/modules.*
+		uImage modules modules_install
+	if [ -n "${KERNEL_MODULES}" ] ; then \
+	  for module in ${KERNEL_MODULES} ; do \
+	    ( cd build/src-$*/patches/$$module ; \
+	      ${MAKE} -C $(shell pwd)/build/src-$*/patches/$$module ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
+		KERNEL_BUILD_PATH=$(shell pwd)/build/src-$*/linux-${KERNEL_VERSION} DEVICE=${DEVICE} \
+		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
+		modules modules_install ) ; \
+	  done \
+	fi
+	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/build
+	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/source
+	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/*.bin
+	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/modules.*
 	cp build/src-$*/linux-${KERNEL_VERSION}/arch/arm/boot/uImage \
-		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/uImage-2.6.24-palm-joplin-3430
+		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/uImage-2.6.24-${KERNEL_TYPE}
 	cp build/src-$*/linux-${KERNEL_VERSION}/System.map \
-		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/System.map-2.6.24-palm-joplin-3430
+		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/System.map-2.6.24-${KERNEL_TYPE}
 	cp build/src-$*/linux-${KERNEL_VERSION}/.config \
-		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/config-2.6.24-palm-joplin-3430
+		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/config-2.6.24-${KERNEL_TYPE}
 	unzip -p ${WEBOS_DOCTOR} resources/webOS.tar | \
-	tar -O -x -f - ./nova-cust-image-castle.rootfs.tar.gz | \
+	tar -O -x -f - ./nova-cust-image-${CODENAME}.rootfs.tar.gz | \
 	tar -C build/arm/usr/palm/applications/${APP_ID}/additional_files/ -m -z -x -f - ./md5sums
+	if [ -n "${KERNEL_UPSTART}" ] ; then \
+		mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/var/palm/event.d ; \
+		install -m 755 build/src-$*/patches/${KERNEL_UPSTART} \
+			 build/arm/usr/palm/applications/${APP_ID}/additional_files/var/palm/event.d/${APP_ID} ; \
+	fi
 	touch $@
 
 build/.unpacked-%: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}.tgz \
-			    ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-pre.gz \
+			    ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz \
 			    ${DL_DIR}/${NAME}-%.tar.gz
 	rm -rf build/src-$*
 	mkdir -p build/src-$*/patches
 	tar -C build/src-$* -xf ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}.tgz
-	zcat ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-pre.gz | \
+	zcat ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz | \
 		patch -d build/src-$*/linux-${KERNEL_VERSION} -p1 
 	tar -C build/src-$*/patches -xf ${DL_DIR}/${NAME}-$*.tar.gz
 	if [ -n "${KERNEL_PATCHES}" ] ; then \
@@ -155,13 +204,66 @@ build/.unpacked-%: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}.tgz 
 	fi
 	touch $@
 
+
+ifeq ("${WEBOS_VERSION}", "1.4.3")
+
+CATEGORY = Temporary
+TEMPVER  = 1.4.1
+
+KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${TEMPVER}/linuxkernel-${KERNEL_VERSION}.tgz
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${TEMPVER}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
+
+build/.unpacked-${VERSION}: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}.tgz \
+			    ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}-patch-${DEVICE}.gz \
+			    ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	rm -rf build/src-${VERSION}
+	mkdir -p build/src-${VERSION}/patches
+	tar -C build/src-${VERSION} -xf ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}.tgz
+	zcat ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}-patch-${DEVICE}.gz | \
+		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 
+	tar -C build/src-${VERSION}/patches -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	if [ -n "${KERNEL_PATCHES}" ] ; then \
+	  ( cd build/src-${VERSION}/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
+	  ( cd build/src-${VERSION}/patches ; cat ${KERNEL_PATCHES} ) | \
+		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 ; \
+	fi
+	touch $@
+
+endif
+
+ifeq ("${WEBOS_VERSION}", "1.4.5")
+
+CATEGORY = Temporary
+TEMPVER  = 1.4.1
+
+KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${TEMPVER}/linuxkernel-${KERNEL_VERSION}.tgz
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${TEMPVER}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
+
+build/.unpacked-${VERSION}: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}.tgz \
+			    ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}-patch-${DEVICE}.gz \
+			    ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	rm -rf build/src-${VERSION}
+	mkdir -p build/src-${VERSION}/patches
+	tar -C build/src-${VERSION} -xf ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}.tgz
+	zcat ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}-patch-${DEVICE}.gz | \
+		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 
+	tar -C build/src-${VERSION}/patches -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	if [ -n "${KERNEL_PATCHES}" ] ; then \
+	  ( cd build/src-${VERSION}/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
+	  ( cd build/src-${VERSION}/patches ; cat ${KERNEL_PATCHES} ) | \
+		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 ; \
+	fi
+	touch $@
+
+endif
+
 ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}.tgz:
 	rm -f $@ $@.tmp
 	mkdir -p ${DL_DIR}
 	curl -f -R -L -o $@.tmp ${KERNEL_SOURCE}
 	mv $@.tmp $@
 
-${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-pre.gz:
+${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz:
 	rm -f $@ $@.tmp
 	mkdir -p ${DL_DIR}
 	curl -f -R -L -o $@.tmp ${KERNEL_PATCH}

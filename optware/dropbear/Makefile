@@ -22,7 +22,7 @@ include ../../support/package.mk
 
 include ../../support/download.mk
 
-build/armv7.built-${VERSION} : build/armv7.unpacked
+build/armv7.built-${VERSION} : build/armv7.unpacked-${VERSION}
 	rm -rf build/armv7/usr/palm/applications/${APP_ID}/opt/etc/default
 	rm -rf build/armv7/usr/palm/applications/${APP_ID}/opt/etc/init.d
 	rm -f  build/armv7/usr/palm/applications/${APP_ID}/opt/bin/dbclient
@@ -33,7 +33,7 @@ build/armv7.built-${VERSION} : build/armv7.unpacked
 	install -m 644 upstart/${APP_ID} build/armv7/etc/event.d/${APP_ID}
 	touch $@
 
-build/armv6.built-${VERSION} : build/armv6.unpacked
+build/armv6.built-${VERSION} : build/armv6.unpacked-${VERSION}
 	rm -rf build/armv6/usr/palm/applications/${APP_ID}/opt/etc/default
 	rm -rf build/armv6/usr/palm/applications/${APP_ID}/opt/etc/init.d
 	rm -f  build/armv6/usr/palm/applications/${APP_ID}/opt/bin/dbclient
@@ -44,7 +44,7 @@ build/armv6.built-${VERSION} : build/armv6.unpacked
 	install -m 644 upstart/${APP_ID} build/armv6/etc/event.d/${APP_ID}
 	touch $@
 
-build/i686.built-${VERSION} : build/i686.unpacked
+build/i686.built-${VERSION} : build/i686.unpacked-${VERSION}
 	rm -rf build/i686/usr/palm/applications/${APP_ID}/opt/etc/default
 	rm -rf build/i686/usr/palm/applications/${APP_ID}/opt/etc/init.d
 	rm -f  build/i686/usr/palm/applications/${APP_ID}/opt/bin/dbclient

@@ -24,7 +24,7 @@ include ../../support/download.mk
 
 include ../../support/optware.mk
 
-build/%.built-${VERSION} : build/%.unpacked
+build/%.built-${VERSION} : build/%.unpacked-${VERSION}
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/etc
 	sed -i.orig -e 's|link=$$IPKG_OFFLINE_ROOT/|link=|' \
 	  build/armv7/usr/palm/applications/mobi.optware.ipkg-opt/opt/bin/update-alternatives

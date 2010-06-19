@@ -32,11 +32,11 @@ ifndef NAME
 PREWARE_SANITY += $(error "Please define NAME in your Makefile")
 endif
 
-unpack: build/.unpacked
+unpack: build/.unpacked-${VERSION}
 
 ifdef SRC_IPKG
 
-build/.unpacked: ${DL_DIR}/${APP_ID}_${VERSION}_all.ipk
+build/.unpacked-${VERSION}: ${DL_DIR}/${APP_ID}_${VERSION}_all.ipk
 	$(call PREWARE_SANITY)
 	rm -rf build
 	mkdir -p build
@@ -54,9 +54,9 @@ endif
 
 ifdef SRC_OPTWARE
 
-build/.unpacked: build/armv7.unpacked build/i686.unpacked
+build/.unpacked-${VERSION}: build/armv7.unpacked-${VERSION} build/i686.unpacked-${VERSION}
 
-build/%.unpacked: ${DL_DIR}/${SRC_OPTWARE}_%.ipk
+build/%.unpacked-${VERSION}: ${DL_DIR}/${SRC_OPTWARE}_%.ipk
 	$(call PREWARE_SANITY)
 	rm -rf build/$* build/${SRC_OPTWARE}_$*.ipk
 	mkdir -p build

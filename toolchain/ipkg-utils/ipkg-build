@@ -161,7 +161,7 @@ outer=ar
 tar=tar
 sign=
 key=
-if [ "`uname -s`" == "Darwin" ] ; then
+if [ "`uname -s`" = "Darwin" ] ; then
     tar=gnutar
 fi
 noclean=0
@@ -243,28 +243,7 @@ echo $CONTROL > $tmp_dir/tarX
 ( cd $pkg_dir && $tar $ogargs -X $tmp_dir/tarX -czf $tmp_dir/data.tar.gz . )
 rm $tmp_dir/tarX
 
-rm -f $pkg_dir/$CONTROL/*.pem $pkg_dir/$CONTROL/*.sha1
-
-if [ -n "$sign" ] ; then
-  cp $sign $pkg_dir/$CONTROL/cert.pem
-  openssl x509 -in $sign -pubkey -noout > $pkg_dir/$CONTROL/pubkey.pem
-  if [ -e $pkg_dir/$CONTROL/control ] ; then
-    cat $pkg_dir/$CONTROL/control | \
-    openssl dgst -sha1 -sign $key > $pkg_dir/$CONTROL/control.sha1
-  fi
-  if [ -e $pkg_dir/$CONTROL/postinst ] ; then
-    cat $pkg_dir/$CONTROL/postinst | \
-    openssl dgst -sha1 -sign $key > $pkg_dir/$CONTROL/postinst.sha1
-  fi
-  if [ -e $pkg_dir/$CONTROL/prerm ] ; then
-    cat $pkg_dir/$CONTROL/prerm | \
-    openssl dgst -sha1 -sign $key > $pkg_dir/$CONTROL/prerm.sha1
-  fi
-fi
-
 ( cd $pkg_dir/$CONTROL && $tar $ogargs -czf $tmp_dir/control.tar.gz . )
-
-rm -f $pkg_dir/$CONTROL/*.pem $pkg_dir/$CONTROL/*.sha1
 
 echo "2.0" > $tmp_dir/debian-binary
 

@@ -20,7 +20,7 @@ include ../../support/download.mk
 
 include ../../support/optware.mk
 
-build/%.built-${VERSION} : build/%.unpacked
+build/%.built-${VERSION} : build/%.unpacked-${VERSION}
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/lib/libcrypto.so
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/lib/libcrypto.so.0
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/lib/libssl.so

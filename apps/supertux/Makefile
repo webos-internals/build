@@ -1,7 +1,7 @@
 NAME     = supertux
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 1.0.2
+VERSION  = 1.0.3
 DEPENDS  = org.webosinternals.upstartmgr
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:SuperTux
 MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>
@@ -25,7 +25,7 @@ include ../../support/package.mk
 
 include ../../support/download.mk
 
-build/.unpack: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src/
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
@@ -36,7 +36,7 @@ build/.unpack: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 build/.built-${VERSION}: build/armv7.built-${VERSION}
 	touch $@
 
-build/%.built-${VERSION}: build/.unpack
+build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -f $@
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/bin
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/data

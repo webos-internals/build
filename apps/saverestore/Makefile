@@ -3,7 +3,7 @@ TITLE    = Save/Restore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.7.4
+VERSION  = 0.8.2
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:SaveRestore
@@ -12,6 +12,14 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 WebOS Internals provides Save/Retore as is without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.  The entire risk as to the quality and performance of Save/Restore is with you.  Should Save/Restore prove defective, you assume the cost of all necessary servicing, repair or correction.<br>\
 In no event will WebOS Internals or any other party be liable to you for damages, including any general, special, incidental or consequential damages arising out of the use or inability to use Save/Restore (including but not limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of Save/Restore to operate with any other programs).
 CHANGELOG = \
+0.8.2: Applications: Applications: Gangstar, wIRC (courtesy of Audermars02).<br>\
+0.8.1: Removed DOS line endings from some contributed scripts that caused startup failure.<br>\
+0.8.0: Applications: Sports Live, Football Live, US Soccer Live (all courtesy of MoreSolutions).<br>\
+0.7.9: Applications: Hockey Live, Basketball Live, Baseball Live (all courtesy of MoreSolutions).<br>\
+0.7.8: Applications: Pack n Track, Pribbage, Top Stocks, Roll Quest, The Helicopter Game, Whendle, Bubble Puzzle (all courtesy of Audermars02), Time Tracker Full (courtesy of baldric).<br>\
+0.7.7: Applications: Transformers G1, WOG Card Keeper (both courtesy of Audermars02).<br>\
+0.7.6: Robustified initial loading of applications. Added the Installed Applications list.<br>\
+0.7.5: Applications: MapTool, Just Pong, Match This, Consumption Calculator, UberRadio, Soccer 2010, TravelGuide, Wikay, OGCOpenInfo, My webOS Apps, FreeWeather (all courtesy of MetaView). Improved Mail Lists support.<br>\
 0.7.4: Robustified saving and restoring multiple items.<br>\
 0.7.3: Improved Deer Hunter 3D support.<br>\
 0.7.2: Improved Govnah support.<br>\
@@ -48,12 +56,13 @@ include ../../support/package.mk
 include ../../support/download.mk
 
 .PHONY: unpack
-unpack: build/.unpacked
+unpack: build/.unpacked-${VERSION}
 
-build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	chmod ugo+x build/src/scripts/*
 	tar -C build/src/scripts -zcf build/src/scripts.tgz .
 	rm -rf build/src/scripts
 	touch $@
@@ -61,12 +70,12 @@ build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/arm.built build/i686.built
+build/.built-${VERSION}: build/arm.built-${VERSION} build/i686.built-${VERSION}
 	touch $@
 
 include ../../support/cross-compile.mk
 
-build/%.built: build/.unpacked
+build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	( cd build/src/src ; \
 	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc \

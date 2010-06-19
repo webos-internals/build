@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = phone/${NAME}.patch
 TITLE = AutoSpeakerphone via Proximity Sensor Delayed
-DESCRIPTION = Switches between the front and back speaker as the display is turned on & off by the proximity sensor.<br/><br/>A 2 second delay is observed before the audio route is changed from front to back while the change from back to front is immediate.
+DESCRIPTION = Switches between the front and back speaker as the display is turned on & off by the proximity sensor.<br/><br/>A 2 second delay is observed before the audio route is changed from front to back while the change from back to front is immediate.<br/><br/>(BT/headset/aux audio compatible)
 CATEGORY = Phone
-VERSIONS = 1.4.1-15
+VERSIONS = 1.4.0-48 1.4.1-20 1.4.2-5
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
 SCREENSHOTS =
 META_SUB_VERSION = 1

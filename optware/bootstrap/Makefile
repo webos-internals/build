@@ -26,9 +26,9 @@ package: ipkgs/${APP_ID}_${VERSION}_all.ipk
 include ../../support/package.mk
 
 .PHONY: unpack
-unpack: build/.unpacked
+unpack: build/.unpacked-${VERSION}
 
-build/.unpacked:
+build/.unpacked-${VERSION}:
 	rm -rf build
 	mkdir -p build/all
 	touch $@
@@ -36,7 +36,7 @@ build/.unpacked:
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/.unpacked
+build/.built-${VERSION}: build/.unpacked-${VERSION}
 	mkdir -p build/all/etc/event.d
 	install -m 644 upstart/${APP_ID} build/all/etc/event.d/${APP_ID}
 	mkdir -p build/all/etc/profile.d

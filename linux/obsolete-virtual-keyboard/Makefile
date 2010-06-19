@@ -5,6 +5,7 @@ TITLE = CLEANUP VKB Files
 MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>
 DESCRIPTION = This package will clean up keyboard configuration and image files that may be left over from previous installs.
 APP_ID = org.webosinternals.${NAME}
+SIGNER   = org.webosinternals
 CATEGORY = Utilities
 
 .PHONY: package
@@ -14,14 +15,14 @@ include ../../support/download.mk
 
 
 .PHONY: unpack
-unpack: build/.unpacked
+unpack: build/.unpacked-${VERSION}
 
-build/.unpacked:
+build/.unpacked-${VERSION}:
 	rm -rf build
 	mkdir -p build
 	touch $@
 
-build/all/CONTROL/postinst: build/.unpacked
+build/all/CONTROL/postinst: build/.unpacked-${VERSION}
 	mkdir -p build/all/CONTROL
 	cp postinst build/all/CONTROL/postinst
 	chmod ugo+x $@
@@ -29,7 +30,7 @@ build/all/CONTROL/postinst: build/.unpacked
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/.unpacked
+build/.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/all
 	mkdir -p build/all/usr/palm/applications/${APP_ID}
 	touch $@

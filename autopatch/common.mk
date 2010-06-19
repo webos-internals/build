@@ -1,14 +1,13 @@
 TYPE = Patch
 APP_ID = org.webosinternals.patches.${NAME}
 SIGNER = org.webosinternals
-BLDFLAGS = -p
 HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DEPENDS = org.webosinternals.patch, org.webosinternals.lsdiff
 FEED = WebOS Patches
 LICENSE = MIT License Open Source
 META_GLOBAL_VERSION = 4
-WEBOS_VERSIONS = 1.4.0 1.4.1 1.4.2 1.4.5
+WEBOS_VERSIONS = 1.4.0 1.4.1 1.4.2 1.4.3 1.4.5
 POSTINSTALLFLAGS = RestartLuna
 POSTUPDATEFLAGS  = RestartLuna
 POSTREMOVEFLAGS  = RestartLuna
@@ -94,13 +93,13 @@ build/.built-${VERSION}: build/.unpacked-${VERSION} build/.meta-${META_VERSION} 
 build/all/CONTROL/prerm: build/.unpacked-${VERSION}
 	mkdir -p build/all/CONTROL
 	sed -e 's|PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' \
-			-e 's|APP_DIR=|APP_DIR=$$IPKG_OFFLINE_ROOT/usr/palm/applications/${APP_ID}|' ../prerm${SUFFIX} > build/all/CONTROL/prerm
+			-e 's|APP_DIR=|APP_DIR=/media/cryptofs/apps/usr/palm/applications/${APP_ID}|' ../prerm${SUFFIX} > build/all/CONTROL/prerm
 	chmod ugo+x $@
 
 build/all/CONTROL/postinst: build/.unpacked-${VERSION}
 	mkdir -p build/all/CONTROL
 	sed -e 's|PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' \
-			-e 's|APP_DIR=|APP_DIR=$$IPKG_OFFLINE_ROOT/usr/palm/applications/${APP_ID}|' ../postinst${SUFFIX} > build/all/CONTROL/postinst
+			-e 's|APP_DIR=|APP_DIR=/media/cryptofs/apps/usr/palm/applications/${APP_ID}|' ../postinst${SUFFIX} > build/all/CONTROL/postinst
 	chmod ugo+x $@
 endif
 

@@ -29,9 +29,9 @@ include ../../support/package.mk
 include ../../support/download.mk
 
 .PHONY: unpack
-unpack: build/.unpacked
+unpack: build/.unpacked-${VERSION}
 
-build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
@@ -44,7 +44,7 @@ build: build/.built-${VERSION}
 build/.built-${VERSION}: build/armv6.built-${VERSION} build/armv7.built-${VERSION} build/i686.built-${VERSION}
 	touch $@
 
-build/%.built-${VERSION}: build/.unpacked
+build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -f $@
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/cgi-bin
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
