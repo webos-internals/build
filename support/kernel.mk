@@ -163,7 +163,7 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	  for module in ${KERNEL_MODULES} ; do \
 	    ( cd build/src-$*/patches/$$module ; \
 	      ${MAKE} -C $(shell pwd)/build/src-$*/patches/$$module ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
-		KERNEL_BUILD_PATH=$(shell pwd)/build/src-$*/linux-${KERNEL_VERSION} \
+		KERNEL_BUILD_PATH=$(shell pwd)/build/src-$*/linux-${KERNEL_VERSION} DEVICE=${DEVICE} \
 		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
 		modules modules_install ) ; \
 	  done \
