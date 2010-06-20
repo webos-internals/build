@@ -1,4 +1,4 @@
-NAME     = nignx
+NAME     = nginx
 TITLE	 = Nginx Web Server
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
