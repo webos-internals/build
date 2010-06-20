@@ -1,0 +1,17 @@
+#!/bin/sh
+
+APPID=mobi.optware.lighttpd
+
+# Symlink files into /opt
+cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
+find etc lib sbin var -type d -exec mkdir -p /opt/{} \;
+find etc lib sbin var -type f -exec ln -sf $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt/{} /opt/{} \;
+
+rm -f /etc/event.d/$APPID
+mkdir -p /etc/event.d/
+cp $IPKG_OFFLINE_ROOT/etc/event.d/$APPID /etc/event.d/$APPID
+/sbin/start $APPID
+
+mkdir -p /media/internal/www
+
+exit 0
