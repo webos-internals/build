@@ -23,7 +23,7 @@ POSTREMOVEFLAGS  = RestartLuna
 .PHONY: all
 all:
 	for i in ${VERSIONS}; do \
-		VERSION=$$i ${MAKE} package; \
+		${MAKE} VERSION=$$i package; \
 	done
 
 .PHONY: package
