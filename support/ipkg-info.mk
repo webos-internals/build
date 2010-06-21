@@ -1,24 +1,15 @@
 build/ipkg-info-%: ${DOCTOR_DIR}/ipkg-info-%
 	rm -rf build/ipkg-info-$*
 	mkdir -p build/ipkg-info-$*
-	cp $</*.list $@/
+	if [ "`ls $</*.list`" != "" ]; then \
+		cp $</*.list $@/; \
+	fi
 
 .PRECIOUS: ${DOCTOR_DIR}/ipkg-info-%
 ${DOCTOR_DIR}/ipkg-info-%: ${DOCTOR_DIR}/webosdoctor-%.jar
 	if [ -e $< ]; then \
 		unzip -p $< resources/webOS.tar | \
-		tar -O -x -f - ./nova-cust-image-castle.rootfs.tar.gz | \
-		tar -C ${DOCTOR_DIR} -m -z -x -f - ./usr/lib/ipkg/info; \
-		mv ${DOCTOR_DIR}/usr/lib/ipkg/info ${DOCTOR_DIR}/ipkg-info-$*; \
-		rm -rf ${DOCTOR_DIR}/usr; \
-	fi
-	mkdir -p $@
-
-.PRECIOUS: ${DOCTOR_DIR}/ipkg-info-1.4.3
-${DOCTOR_DIR}/ipkg-info-1.4.3: ${DOCTOR_DIR}/webosdoctor-1.4.3.jar
-	if [ -e $< ]; then \
-		unzip -p $< resources/webOS.tar | \
-		tar -O -x -f - ./nova-cust-image-pixie.rootfs.tar.gz | \
+		tar --wildcards -O -x -f - './nova-cust-image-*.rootfs.tar.gz' | \
 		tar -C ${DOCTOR_DIR} -m -z -x -f - ./usr/lib/ipkg/info; \
 		mv ${DOCTOR_DIR}/usr/lib/ipkg/info ${DOCTOR_DIR}/ipkg-info-$*; \
 		rm -rf ${DOCTOR_DIR}/usr; \
