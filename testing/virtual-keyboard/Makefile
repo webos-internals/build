@@ -1,6 +1,6 @@
 NAME = add-onscreen-keyboard
 #VERSIONS = 1.4.0-1 1.4.1-1 1.4.2-2 1.4.3-1
-VERSIONS = 1.4.1-1
+VERSIONS = 1.4.1-2
 META_SUB_VERSION = 4
 HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard
 TITLE = Virtual Keyboard
@@ -20,14 +20,15 @@ POSTINSTALLFLAGS = RestartLuna
 POSTUPDATEFLAGS  = RestartLuna
 POSTREMOVEFLAGS  = RestartLuna
 
-.PHONY: all
-all:
-	for i in ${VERSIONS}; do \
-		${MAKE} VERSION=$$i package; \
-	done
-
 .PHONY: package
+ifneq ("$(VERSIONS)","")
+package:
+	for i in ${VERSIONS}; do \
+		${MAKE} VERSIONS= VERSION=$$i package; \
+	done
+else
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
+endif
 
 include ../../support/package.mk
 include ../../support/download.mk
@@ -70,7 +71,6 @@ update-src: ${SRC_DIR}
 	cd $< && git pull
 
 ${SRC_DIR}:
-	echo "HI ${SRC_DIR}"
 	mkdir -p build
 	( git clone -n ${TESTING_GIT} $@; cd $@ ; git checkout -b webos-${WEBOS_VERSION} origin/webos-${WEBOS_VERSION} )
 

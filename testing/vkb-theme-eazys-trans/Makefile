@@ -1,9 +1,9 @@
 NAME = vkb-theme-eazys-trans
-APP_ID = org.webosinternals.${NAME}
+APP_ID = org.webosinternals.themes.${NAME}
 VERSION = 1.0.1
 TITLE = Eazys Trans
-TYPE = Miscellaneous
-CATEGORY = VKB Theme
+TYPE = Theme
+CATEGORY = Virtual Keyboard
 ICON = http://www.webos-internals.org/images/0/0f/Icon_WebOSInternals_Keyboard.png
 DESCRIPTION = This package contains the eazys trans theme for the Virtual Keyboard patch.
 SCREENSHOTS = [\"http://www.webos-internals.org/images/5/5f/Eazystrans.png\"]
