@@ -1,0 +1,8 @@
+#!/bin/sh
+THEME=eazys_themegloss
+KB_CONFIG=/media/internal/virtual-keyboard/kb_config.json
+
+rm -rf /media/internal/virtual-keyboard/.themes/${THEME}
+if [ -e ${KB_CONFIG} ]; then
+  sed -i -e '/"value":"'${THEME}'"/d' ${KB_CONFIG}
+fi
