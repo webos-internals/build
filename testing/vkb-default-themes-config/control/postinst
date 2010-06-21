@@ -4,8 +4,10 @@ APP_DIR=$IPKG_OFFLINE_ROOT/usr/palm/applications/org.webosinternals.vkb-default-
 
 tar --no-same-owner --strip-components=2 -xvzf ${APP_DIR}/additional_files.tar.gz -C /media/internal
 
-for t in `ls /media/internal/virtual-keyboard/.themes`; do
-  if [ "$t" != "LPC_Dark_Rounded_2e" ]; then
-    sed -i -e '/\[/a \      {"label":"'${t}'","value":"'${t}'"},' /media/internal/virtual-keyboard/kb_config.json
+for t in `find /media/internal/virtual-keyboard/.themes -name theme_config.json`; do
+  dir=`dirname $t`
+  theme=`basename $dir`
+  if [ "$theme" != "LPC_Dark_Rounded_2e" ]; then
+    sed -i -e '/\[/a \      {"label":"'${theme}'","value":"'${theme}'"},' /media/internal/virtual-keyboard/kb_config.json
   fi
 done
