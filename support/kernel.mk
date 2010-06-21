@@ -163,7 +163,7 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	  for module in ${KERNEL_MODULES} ; do \
 	    ( cd build/src-$*/patches/$$module ; \
 	      ${MAKE} -C $(shell pwd)/build/src-$*/patches/$$module ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
-		KERNEL_BUILD_PATH=$(shell pwd)/build/src-$*/linux-${KERNEL_VERSION} \
+		KERNEL_BUILD_PATH=$(shell pwd)/build/src-$*/linux-${KERNEL_VERSION} DEVICE=${DEVICE} \
 		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
 		modules modules_install ) ; \
 	  done \
@@ -203,6 +203,59 @@ build/.unpacked-%: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}.tgz 
 		patch -d build/src-$*/linux-${KERNEL_VERSION} -p1 ; \
 	fi
 	touch $@
+
+
+ifeq ("${WEBOS_VERSION}", "1.4.3")
+
+CATEGORY = Temporary
+TEMPVER  = 1.4.1
+
+KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${TEMPVER}/linuxkernel-${KERNEL_VERSION}.tgz
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${TEMPVER}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
+
+build/.unpacked-${VERSION}: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}.tgz \
+			    ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}-patch-${DEVICE}.gz \
+			    ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	rm -rf build/src-${VERSION}
+	mkdir -p build/src-${VERSION}/patches
+	tar -C build/src-${VERSION} -xf ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}.tgz
+	zcat ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}-patch-${DEVICE}.gz | \
+		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 
+	tar -C build/src-${VERSION}/patches -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	if [ -n "${KERNEL_PATCHES}" ] ; then \
+	  ( cd build/src-${VERSION}/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
+	  ( cd build/src-${VERSION}/patches ; cat ${KERNEL_PATCHES} ) | \
+		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 ; \
+	fi
+	touch $@
+
+endif
+
+ifeq ("${WEBOS_VERSION}", "1.4.5")
+
+CATEGORY = Temporary
+TEMPVER  = 1.4.1
+
+KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${TEMPVER}/linuxkernel-${KERNEL_VERSION}.tgz
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${TEMPVER}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
+
+build/.unpacked-${VERSION}: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}.tgz \
+			    ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}-patch-${DEVICE}.gz \
+			    ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	rm -rf build/src-${VERSION}
+	mkdir -p build/src-${VERSION}/patches
+	tar -C build/src-${VERSION} -xf ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}.tgz
+	zcat ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}-patch-${DEVICE}.gz | \
+		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 
+	tar -C build/src-${VERSION}/patches -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	if [ -n "${KERNEL_PATCHES}" ] ; then \
+	  ( cd build/src-${VERSION}/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
+	  ( cd build/src-${VERSION}/patches ; cat ${KERNEL_PATCHES} ) | \
+		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 ; \
+	fi
+	touch $@
+
+endif
 
 ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}.tgz:
 	rm -f $@ $@.tmp

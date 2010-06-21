@@ -1,11 +1,12 @@
 NAME = $(shell basename $(shell pwd))
-TITLE = UberKernelBlackbird (Pre/Pre+)
+TITLE = WarthogKernel (Pre/Pre+)
+DEVICE   = pre
 CATEGORY = Experimental
-VERSIONS = 1.4.1-38 1.4.2-38 1.4.5-38
+VERSIONS = 1.4.1-44 1.4.2-44
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
 Current additions include:<ul>\
-<li>Use of the latest gcc toolchain for compilation as well as optimized compile flags</li>\
+<li>Optimized compile flags</li>\
 <li>720MHz and 800MHz kernel operating points (OPP6 and OPP7 for VDD1), based on the open source OMAP3440 kernel port, ported to the Palm Pre/Pre+ by uNiXpSyChO</li>\
 <li>All standard Linux 2.6.24 <a href=http://www.ibm.com/developerworks/linux/library/l-cpufreq-1/index.html>cpufreq governors</a> made available for selection via the Govnah application</li>\
 <li>The OMAP3430 internal CPU temperature sensor is made available for measuring the true CPU temperature, ported to the Palm Pre/Pre+ by ka6sox & rwhitby</li>\
@@ -16,6 +17,9 @@ All additions are disabled by default, and must be enabled by separate packages 
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-44", "log" : [ "Updated compcache compile flags" ] }, \
+{ "version" : "${WEBOS_VERSION}-43", "log" : [ "Updated with latest postinst and prerm OTA safety measures" ] }, \
+{ "version" : "${WEBOS_VERSION}-40", "log" : [ "Enabled lower frequencies for screenstate minimum" ] }, \
 { "version" : "${WEBOS_VERSION}-38", "log" : [ "Updated gcc toolchain as well as optimized compile flags" ] }, \
 { "version" : "${WEBOS_VERSION}-37", "log" : [ "Include free swap in memory calculations" ] }, \
 { "version" : "${WEBOS_VERSION}-35", "log" : [ "Added compcache compressed RAM swap kernel module (not loaded by default)" ] }, \
@@ -24,9 +28,9 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-16", "log" : [ "Improved screenstate transition detection" ] }, \
 { "version" : "${WEBOS_VERSION}-13", "log" : [ "Initial public release" ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-38: Updated gcc toolchain as well as optimized compile flags.<br>${WEBOS_VERSION}-37: Include free swap in memory calculations.<br>${WEBOS_VERSION}-35: Added compcache compressed RAM swap kernel module (not loaded by default).<br>${WEBOS_VERSION}-32: Update and cleanup of charging code in screenstate governor.<br>${WEBOS_VERSION}-21: Limit IVA2 block to 360MHz as per the mystery bug mentioned in the Palm kernel patch.<br>${WEBOS_VERSION}-16: Improved screenstate transition detection.<br>${WEBOS_VERSION}-13: Initial public release
+CHANGELOG = ${WEBOS_VERSION}-44: Updated compcache compile flags.<br>${WEBOS_VERSION}-43: Updated with latest postinst and prerm OTA safety measures.<br>${WEBOS_VERSION}-40: Enabled lower frequencies for screenstate minimum.<br>${WEBOS_VERSION}-38: Updated gcc toolchain as well as optimized compile flags.<br>${WEBOS_VERSION}-37: Include free swap in memory calculations.<br>${WEBOS_VERSION}-35: Added compcache compressed RAM swap kernel module (not loaded by default).<br>${WEBOS_VERSION}-32: Update and cleanup of charging code in screenstate governor.<br>${WEBOS_VERSION}-21: Limit IVA2 block to 360MHz as per the mystery bug mentioned in the Palm kernel patch.<br>${WEBOS_VERSION}-16: Improved screenstate transition detection.<br>${WEBOS_VERSION}-13: Initial public release
 
-HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
+HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch overclocking/defconfig-safe.patch \
 		 sensors/sensors_temp_omap34xx.patch sensors/defconfig-safe.patch \
@@ -36,33 +40,3 @@ KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch overclocking/defc
 KERNEL_MODULES = compcache/compcache-0.5.4
 
 include ../../support/kernel.mk
-
-ifeq ("${WEBOS_VERSION}", "1.4.5")
-
-CATEGORY = Temporary
-TEMPVER  = 1.4.1
-
-KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${TEMPVER}/linuxkernel-${KERNEL_VERSION}.tgz
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${TEMPVER}/linuxkernel-${KERNEL_VERSION}-patch\(pre\).gz
-
-build/.unpacked-${VERSION}: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}.tgz \
-			    ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}-patch-pre.gz \
-			    ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	rm -rf build/src-${VERSION}
-	mkdir -p build/src-${VERSION}/patches
-	tar -C build/src-${VERSION} -xf ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}.tgz
-	zcat ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}-patch-pre.gz | \
-		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 
-	tar -C build/src-${VERSION}/patches -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	if [ -n "${KERNEL_PATCHES}" ] ; then \
-	  ( cd build/src-${VERSION}/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
-	  ( cd build/src-${VERSION}/patches ; cat ${KERNEL_PATCHES} ) | \
-		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 ; \
-	fi
-	touch $@
-
-endif
-
-# Override the compiler
-CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs10q1armel/build/arm-2010q1/bin/arm-none-linux-gnueabi-
-
