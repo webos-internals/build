@@ -3,15 +3,16 @@ TITLE    = Govnah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.4.8
+VERSION  = 0.4.9
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
 DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature.
 CHANGELOG = \
+0.4.9: Fixed the profile save bug, please recreate any custom profiles. Added support in the service for sticky compcache settings.<br>\
 0.4.8: Robustified parameter display and profile handling.<br>\
-0.4.7: Added Pixi temperature and available frequency support.<br>\
+0.4.7: Added Pixi temperature and available frequency support. Created default and fixed speed 600 profiles for Pixi.<br>\
 0.4.6: Now detects whether configurable compcache support is available.<br>\
 0.4.5: Added error reporting for compcache configuration.<br>\
 0.4.4: Report correct compcache memlimit.<br>\
