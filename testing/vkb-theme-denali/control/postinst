@@ -1,0 +1,10 @@
+#!/bin/sh
+
+APP_DIR=$IPKG_OFFLINE_ROOT/usr/palm/applications/org.webosinternals.vkb-theme-denali
+KB_CONFIG=/media/internal/virtual-keyboard/kb_config.json
+
+tar --no-same-owner --strip-components=2 -xvzf ${APP_DIR}/additional_files.tar.gz -C /media/internal
+
+if [ -e ${KB_CONFIG} ]; then
+  sed -i -e '/\[/a \      {"label":"Denali","value":"denali"},' ${KB_CONFIG}
+fi
