@@ -23,7 +23,7 @@ CHANGELOG = ${WEBOS_VERSION}-46: Updated compcache compile flags.<br>${WEBOS_VER
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
-		 makefiletune/Makefile.pixi.diff
+		 makefiletune/armMakefile.diff
 KERNEL_MODULES = compcache/compcache-0.5.4
 
 include ../../support/kernel.mk
