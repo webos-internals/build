@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (Pixi/Pixi+)
 DEVICE = pixi
 CATEGORY = Experimental
-VERSIONS = 1.4.1-48 1.4.3-48
+VERSIONS = 1.4.1-49 1.4.3-49
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pixi/Pixi+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
 Current additions include:<ul>\
@@ -14,16 +14,18 @@ All additions are disabled by default, and must be enabled by separate packages 
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-49", "log" : [ "Turn on all TCP congest algos and CPU governors" ] }, \
 { "version" : "${WEBOS_VERSION}-48", "log" : [ "Updated compcache compile flags" ] }, \
 { "version" : "${WEBOS_VERSION}-43", "log" : [ "Updated with latest postinst and prerm OTA safety measures" ] }, \
 { "version" : "${WEBOS_VERSION}-40", "log" : [ "First Pixi custom kernel" ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-48: Updated compcache compile flags.<br>${WEBOS_VERSION}-43: Updated with latest postinst and prerm OTA safety measures.<br>${WEBOS_VERSION}-40: First Pixi custom kernel
+CHANGELOG = ${WEBOS_VERSION}-49: Turn on all TCP congest algos and CPU governors.<br>${WEBOS_VERSION}-48: Updated compcache compile flags.<br>${WEBOS_VERSION}-43: Updated with latest postinst and prerm OTA safety measures.<br>${WEBOS_VERSION}-40: First Pixi custom kernel
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
-		 makefiletune/armMakefile.diff
+		 makefiletune/armMakefile.diff \
+		 defconfig/defconfig.pixi.cpugov defconfig/defconfig.pixi.tcpcong
 KERNEL_MODULES = compcache/compcache-0.5.4
 
 include ../../support/kernel.mk
