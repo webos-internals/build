@@ -3,7 +3,7 @@ PATCH = browser/${NAME}.patch
 TITLE = Multi Mod
 DESCRIPTION = This will give the option to download or stream streamable files. <br/><br/>It will also enable the display of the URL bar in landscape mode. <br/><br/>Finally, it adds hotkeys for in-page navigation as shown below and adjusts them for right orientation, i.e the phone is on it's side with the keyboard out to the left.<br/><br/>Keyboard navigation:<br/>Top of page = backspace<br/>Bottom of page = enter key<br/>Line Up = sym key<br/>Page Up = period<br/>Page Down = space bar<br/>Line Down = '@' key<br/><br/>Adjusted for right orientation:<br/>Line Up = '@' key<br/>Page Up = space bar<br/>Page Down = period<br/>Line Down = sym key
 CATEGORY = Browser
-VERSIONS = 1.3.5-3 1.4.0-21 1.4.1-14 1.4.2-1
+VERSIONS = 1.3.5-3 1.4.0-21 1.4.1-14 1.4.2-1 1.4.3-1
 ICON = http://www.webos-internals.org/images/4/4a/Icon_WebOSInternals_Patches_Browser.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/0/0d/Enable-browser-downloads-1.png\",\
