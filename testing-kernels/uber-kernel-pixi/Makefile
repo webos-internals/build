@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Pixi/Pixi+)
 DEVICE   = pixi
 CATEGORY = Experimental
-VERSIONS = 1.4.1-50 1.4.3-46 1.4.5-50
+VERSIONS = 1.4.1-50 1.4.3-50 1.4.5-50
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pixi/Pixi+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
 Current additions include:<ul>\
