@@ -23,7 +23,7 @@ KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch overclocking/defc
 		 sensors/sensors_temp_omap34xx.patch sensors/defconfig-safe.patch \
 		 screenstate/screenstate.patch \
 		 koptimise/defconfig-optimise makefiletune/armMakefile.diff \
-		 defconfig/defconfig.pre.cpugov	defconfig/defconfig.pre.tcpcong \
+		 defconfig/defconfig.pre.cpugov \
 		 prcm/prcm_clk.c.diff prcm/proc_pwr.c.diff \
 		 preempt/defconfig-enablepreempt.diff preempt/vermagic.diff \
 		 folk/board-sirloin-headset-detect.c.diff \
