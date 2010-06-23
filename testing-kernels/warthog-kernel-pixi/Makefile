@@ -29,3 +29,6 @@ KERNEL_PATCHES = compcache/compcache.patch compcache/lowmemnotify-total-memory.p
 KERNEL_MODULES = compcache/compcache-0.5.4
 
 include ../../support/kernel.mk
+
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs10q1armel/build/arm-2010q1/bin/arm-none-linux-gnueabi-
