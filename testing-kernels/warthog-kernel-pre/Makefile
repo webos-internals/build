@@ -3,7 +3,7 @@ TITLE = WarthogKernel (Pre/Pre+)
 DEVICE = pre
 CATEGORY = Experimental
 VERSIONS = 1.4.1-50 1.4.2-50
-APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
+APPINFO_DESCRIPTION = A testbed of kernel patches for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
 Current additions include:<ul>\
 <li>Optimized compile flags</li>\
