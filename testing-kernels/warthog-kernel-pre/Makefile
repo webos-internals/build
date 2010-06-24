@@ -34,7 +34,7 @@ CHANGELOG = ${WEBOS_VERSION}-53: Turn on all TCP congest algos and CPU governors
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
-KERNEL_PATCHES = warthogbuild/opp6-720-opp7-800-opp8-1005-min-opp5.patch warthogbuild/defconfig-standard.patch \
+KERNEL_PATCHES = warthogbuild/opp6-720-opp7-800-opp8-1005-min-opp5.patch overclocking/defconfig-standard.patch \
 		 sensors/sensors_temp_omap34xx.patch sensors/defconfig-safe.patch \
 		 screenstate/screenstate.patch \
 		 warthogbuild/armMakefile.diff \
