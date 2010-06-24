@@ -8,6 +8,7 @@ APPINFO_DESCRIPTION = A testbed of kernel patches for the Palm Pre/Pre+, rolled 
 Current additions include:<ul>\
 <li>Optimized compile flags</li>\
 <li>720MHz and 800MHz kernel operating points (OPP6 and OPP7 for VDD1), based on the open source OMAP3440 kernel port, ported to the Palm Pre/Pre+ by uNiXpSyChO</li>\
+<li>Additional 1005MHz speed (OPP8 for VDD1). Discovered by uNiXpSyChO, added by codecrumb.</li>\
 <li>All standard Linux 2.6.24 <a href=http://www.ibm.com/developerworks/linux/library/l-cpufreq-1/index.html>cpufreq governors</a> made available for selection via the Govnah application</li>\
 <li>The OMAP3430 internal CPU temperature sensor is made available for measuring the true CPU temperature, ported to the Palm Pre/Pre+ by ka6sox & rwhitby</li>\
 <li>A new <b>screenstate</b> governor created by uNiXpSyChO specifically for the Palm Pre/Pre+ which runs at a higher speed when the screen is on, and a lower speed when the screen is off</li>\
@@ -33,7 +34,7 @@ CHANGELOG = ${WEBOS_VERSION}-52: Turn on all TCP congest algos and CPU governors
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
-KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch overclocking/defconfig-standard.patch \
+KERNEL_PATCHES = warthogbuild/opp6-720-opp7-800-opp8-1005-min-opp5.patch warthogbuild/defconfig-standard.patch \
 		 sensors/sensors_temp_omap34xx.patch sensors/defconfig-safe.patch \
 		 screenstate/screenstate.patch \
 		 warthogbuild/armMakefile.diff \
