@@ -60,7 +60,13 @@ WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewwatt-${WEBOS_VERSION}.jar
 endif
 
 .PHONY: package
+.PHONY: head
 ifneq ("${VERSIONS}", "")
+head:
+	for v in ${VERSIONS} ; do \
+	  VERSION=$${v} ${MAKE} VERSIONS= WEBOS_VERSION=`echo $${v} | cut -d- -f1` head ; \
+	done
+
 package:
 	for v in ${WEBOS_VERSIONS} ; do \
 	  VERSION=$${v}-0 ${MAKE} VERSIONS= WEBOS_VERSION=$${v} DUMMY_VERSION=0 package ; \
@@ -69,6 +75,18 @@ package:
 	  VERSION=$${v} ${MAKE} VERSIONS= WEBOS_VERSION=`echo $${v} | cut -d- -f1` package ; \
 	done
 else
+head:
+	rm -rf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	$(call PREWARE_SANITY)
+	rm -rf build/`basename ${SRC_GIT} .git`
+	mkdir -p build
+	( cd build ; git clone ${SRC_GIT} )
+	mkdir -p ${DL_DIR}
+	tar -C build/`basename ${SRC_GIT} .git` -zcf ${DL_DIR}/${NAME}-${VERSION}.tar.gz .
+	rm -rf build/`basename ${SRC_GIT} .git`
+	$(MAKE) package
+	rm -rf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
 endif
 
