@@ -13,6 +13,8 @@ CHANGELOG   = \
 0.1.0: Inception
 SCREENSHOTS = 
 LICENSE     = GPL v2 Open Source
+MAINTAINER  = Eric J Gaudet <emoney_33@yahoo.com>
+
 SRC_GIT     = git://git.webos-internals.org/applications/keyboss.git
 
 .PHONY: package
