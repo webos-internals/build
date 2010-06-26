@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-TITLE = WarthogKernel (Pixi/Pixi+)
+TITLE = MagicDonkeyKernel (Pixi/Pixi+)
 DEVICE = pixi
 CATEGORY = Experimental
 VERSIONS = 1.4.1-57 1.4.3-57

@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-TITLE = WarthogKernel (Pre/Pre+)
+TITLE = MagicDonkeyKernel (Pre/Pre+)
 DEVICE = pre
 CATEGORY = Experimental
 VERSIONS = 1.4.1-57 1.4.2-57
