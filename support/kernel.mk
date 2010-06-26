@@ -74,22 +74,8 @@ head:
 	for v in ${VERSIONS} ; do \
 	  VERSION=$${v} ${MAKE} VERSIONS= WEBOS_VERSION=`echo $${v} | cut -d- -f1` head ; \
 	done
-
 else
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
-
-head:
-	rm -rf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	$(call PREWARE_SANITY)
-	rm -rf build/`basename ${SRC_GIT} .git`
-	mkdir -p build
-	( cd build ; git clone ${SRC_GIT} )
-	mkdir -p ${DL_DIR}
-	tar -C build/`basename ${SRC_GIT} .git` -zcf ${DL_DIR}/${NAME}-${VERSION}.tar.gz .
-	rm -rf build/`basename ${SRC_GIT} .git`
-	$(MAKE) package
-	rm -rf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-
 endif
 
 ifneq ("${DUMMY_VERSION}", "")
@@ -112,6 +98,10 @@ build/.built-${VERSION}:
 else
 
 include ../../support/package.mk
+
+ifeq ("$(VERSIONS)", "")
+include ../../support/head.mk
+endif
 
 include ../../support/download.mk
 
