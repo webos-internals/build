@@ -62,11 +62,6 @@ endif
 .PHONY: package
 .PHONY: head
 ifneq ("${VERSIONS}", "")
-head:
-	for v in ${VERSIONS} ; do \
-	  VERSION=$${v} ${MAKE} VERSIONS= WEBOS_VERSION=`echo $${v} | cut -d- -f1` head ; \
-	done
-
 package:
 	for v in ${WEBOS_VERSIONS} ; do \
 	  VERSION=$${v}-0 ${MAKE} VERSIONS= WEBOS_VERSION=$${v} DUMMY_VERSION=0 package ; \
@@ -74,7 +69,15 @@ package:
 	for v in ${VERSIONS} ; do \
 	  VERSION=$${v} ${MAKE} VERSIONS= WEBOS_VERSION=`echo $${v} | cut -d- -f1` package ; \
 	done
+
+head:
+	for v in ${VERSIONS} ; do \
+	  VERSION=$${v} ${MAKE} VERSIONS= WEBOS_VERSION=`echo $${v} | cut -d- -f1` head ; \
+	done
+
 else
+package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
+
 head:
 	rm -rf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	$(call PREWARE_SANITY)
@@ -87,7 +90,6 @@ head:
 	$(MAKE) package
 	rm -rf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 
-package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
 endif
 
 ifneq ("${DUMMY_VERSION}", "")
