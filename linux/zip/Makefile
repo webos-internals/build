@@ -6,12 +6,12 @@ SRC_VER  = 3.0
 VERSION  = 3.0-1
 HOMEPAGE = http://www.info-zip.org/
 MAINTAINER = WebOS Internals <support@webos-internals.org>
-DESCRIPTION = This package is simply the Zip utility, cross-compiled and packaged up in a form such that it can be used in the installation scripts of other packages.
+DESCRIPTION = This package is simply the Zip utility, cross-compiled and packaged up in a form such that it can be used by other packages (such as Save/Restore).
 CHANGELOG = 3.0-1: First public release.
 TYPE	 = Linux Application
 CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/d/d9/Icon_WebOSInternals_ZLib.png
-LICENSE  = GPL v2 Open Source
+LICENSE  = Info-ZIP Open Source
 
 SRC_TGZ = http://ftp.debian.org/debian/pool/main/z/zip/zip_${SRC_VER}.orig.tar.gz
 
