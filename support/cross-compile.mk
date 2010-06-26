@@ -13,7 +13,7 @@ CONFIGURE_HOST_armv6 = arm-none-linux-gnueabi
 CONFIGURE_HOST_arm   = arm-none-linux-gnueabi
 CONFIGURE_HOST_i686  = i686-unknown-linux-gnu
 
-CFLAGS_armv7 = -Os
-CFLAGS_armv6 = -Os
-CFLAGS_arm   = -Os
-CFLAGS_i686  = -Os
+CFLAGS_armv7 = -O2 -fexpensive-optimizations -fexpensive-optimizations -frename-registers
+CFLAGS_armv6 = -O2 -fexpensive-optimizations -fexpensive-optimizations -frename-registers
+CFLAGS_arm   = -O2 -fexpensive-optimizations -fexpensive-optimizations -frename-registers
+CFLAGS_i686  = -O2 -fexpensive-optimizations -fexpensive-optimizations -frename-registers
