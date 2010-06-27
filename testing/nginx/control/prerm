@@ -1,6 +1,6 @@
 #!/bin/sh
 
-APPID=mobi.optware.lighttpd
+APPID=mobi.optware.nginx
 
 /sbin/stop $APPID
 rm -f /etc/event.d/$APPID
