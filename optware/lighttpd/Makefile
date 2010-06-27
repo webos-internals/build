@@ -9,7 +9,7 @@ DESCRIPTION = Lighttpd (pronounced 'Lighty') is a web server which has a small m
 CHANGELOG = 1.4.25-6: Added support for the saverestore alias.<br>1.4.25-5: Create the /media/internal/www directory at install time.<br>1.4.25-4: Made compatible with the Emergency Service Enabler to survive doctoring. Moved to /media/internal/www for the directory served by the web server.
 TYPE	 = Optware
 CATEGORY = Utilities
-ICON	 = http://www.webos-internals.org/wiki/Image:Icon_lighttpd.png
+ICON	 = http://www.webos-internals.org/images/3/36/Icon_lighttpd.png
 DEPENDS	 = mobi.optware.pcre
 
 SRC_OPTWARE = ${NAME}_${OPT_VER}
