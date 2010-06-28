@@ -65,11 +65,11 @@ ipkgs/webos-internals/%/Packages: package-subdirs
 	rm -rf ipkgs/webos-internals/$*
 	mkdir -p ipkgs/webos-internals/$*
 	if [ "$*" = "i686" -o "$*" = "all" ] ; then \
-	  ( find ${SUBDIRS} -type d -name ipkgs -print | \
+	  ( find ${SUBDIRS} -mindepth 2 -maxdepth 2 -type d -name ipkgs -print | \
 	    xargs -I % find % -name "*_$*.ipk" -print | \
 	    xargs -I % rsync -i -a % ipkgs/webos-internals/$* ) ; \
 	else \
-	  ( find ${SUBDIRS} -type d -name ipkgs -print | \
+	  ( find ${SUBDIRS} -mindepth 2 -maxdepth 2 -type d -name ipkgs -print | \
 	    xargs -I % find % \( -name "*_$*.ipk" -o -name "*_arm.ipk" \) -print | \
 	    xargs -I % rsync -i -a % ipkgs/webos-internals/$* ) ; \
 	fi	
@@ -81,7 +81,7 @@ ipkgs/webos-internals/%/Packages: package-subdirs
 ipkgs/webos-patches/%/Packages: package-webos-patches
 	rm -rf ipkgs/webos-patches/$*
 	mkdir -p ipkgs/webos-patches/$*
-	( find ${PTCHDIR} -type d -name ipkgs -print | \
+	( find ${PTCHDIR} -mindepth 2 -maxdepth 2 -type d -name ipkgs -print | \
 	  xargs -I % find % -name "*_$*-*_all.ipk" -print | \
 	  xargs -I % rsync -i -a % ipkgs/webos-patches/$* )
 	TAR_OPTIONS=--wildcards \
@@ -92,7 +92,7 @@ ipkgs/webos-patches/%/Packages: package-webos-patches
 ipkgs/webos-kernels/%/Packages: package-webos-kernels
 	rm -rf ipkgs/webos-kernels/$*
 	mkdir -p ipkgs/webos-kernels/$*
-	( find ${KERNDIR} -type d -name ipkgs -print | \
+	( find ${KERNDIR} -mindepth 2 -maxdepth 2 -type d -name ipkgs -print | \
 	  xargs -I % find % -name "*_$*-*_*.ipk" -print | \
 	  xargs -I % rsync -i -a % ipkgs/webos-kernels/$* )
 	TAR_OPTIONS=--wildcards \
@@ -104,11 +104,11 @@ ipkgs/optware/%/Packages: package-optware
 	rm -rf ipkgs/optware/$*
 	mkdir -p ipkgs/optware/$*
 	if [ "$*" = "i686" -o "$*" = "all" ] ; then \
-	  ( find optware -type d -name ipkgs -print | \
+	  ( find optware -mindepth 2 -maxdepth 2 -type d -name ipkgs -print | \
 	    xargs -I % find % -name "*_$*.ipk" -print | \
 	    xargs -I % rsync -i -a % ipkgs/optware/$* ) ; \
 	else \
-	  ( find optware -type d -name ipkgs -print | \
+	  ( find optware -mindepth 2 -maxdepth 2 -type d -name ipkgs -print | \
 	    xargs -I % find % \( -name "*_$*.ipk" -o -name "*_arm.ipk" \) -print | \
 	    xargs -I % rsync -i -a % ipkgs/optware/$* ) ; \
 	fi	
@@ -120,7 +120,7 @@ ipkgs/optware/%/Packages: package-optware
 ipkgs/regression-testing/%/Packages: package-regression
 	rm -rf ipkgs/regression-testing/$*
 	mkdir -p ipkgs/regression-testing/$*
-	( find regression -type d -name ipkgs -print | \
+	( find regression -mindepth 2 -maxdepth 2 -type d -name ipkgs -print | \
 	  xargs -I % find % -name "*_$*_all.ipk" -print | \
 	  xargs -I % rsync -i -a % ipkgs/regression-testing/$* )
 	TAR_OPTIONS=--wildcards \
@@ -137,7 +137,7 @@ ipkgs/palm-%/Packages: package-feeds
 ipkgs/%/Packages: package-feeds
 	rm -rf ipkgs/$*
 	mkdir -p ipkgs/$*
-	( find feeds/$* -type d -name ipkgs -print | \
+	( find feeds/$* -mindepth 1 -maxdepth 1 -type d -name ipkgs -print | \
 	  xargs -I % find % -name "*.ipk" -print | \
 	  xargs -I % rsync -i -a % ipkgs/$* )
 	TAR_OPTIONS=--wildcards \
