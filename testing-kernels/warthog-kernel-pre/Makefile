@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (Pre/Pre+)
 DEVICE = pre
 CATEGORY = Experimental
-VERSIONS = 1.4.1-58 1.4.2-58
+VERSIONS = 1.4.1-61 1.4.2-61
 APPINFO_DESCRIPTION = A testbed of kernel patches for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
 Current additions include:<ul>\
@@ -17,6 +17,7 @@ All additions are disabled by default, and must be enabled by separate packages 
 For more information, visit <a href="${HOMEPAGE}">${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-61", "log" : [ "Disable MODVERSIONS." ] }, \
 { "version" : "${WEBOS_VERSION}-58", "log" : [ "Turn off some debug options" ] }, \
 { "version" : "${WEBOS_VERSION}-56", "log" : [ "Turn on all TCP congest algos and CPU governors. And a bit more." ] }, \
 { "version" : "${WEBOS_VERSION}-48", "log" : [ "Updated compcache compile flags" ] }, \
@@ -30,11 +31,11 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-16", "log" : [ "Improved screenstate transition detection" ] }, \
 { "version" : "${WEBOS_VERSION}-13", "log" : [ "Initial public release" ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-58: Turn off some debug options.<br>${WEBOS_VERSION}-56: Turn on all TCP congest algos and CPU governors. And a bit more.<br>${WEBOS_VERSION}-48: Updated compcache compile flags.<br>${WEBOS_VERSION}-43: Updated with latest postinst and prerm OTA safety measures.<br>${WEBOS_VERSION}-40: Enabled lower frequencies for screenstate minimum.<br>${WEBOS_VERSION}-38: Updated gcc toolchain as well as optimized compile flags.<br>${WEBOS_VERSION}-37: Include free swap in memory calculations.<br>${WEBOS_VERSION}-35: Added compcache compressed RAM swap kernel module (not loaded by default).<br>${WEBOS_VERSION}-32: Update and cleanup of charging code in screenstate governor.<br>${WEBOS_VERSION}-21: Limit IVA2 block to 360MHz as per the mystery bug mentioned in the Palm kernel patch.<br>${WEBOS_VERSION}-16: Improved screenstate transition detection.<br>${WEBOS_VERSION}-13: Initial public release
+CHANGELOG = ${WEBOS_VERSION}-61: Disable MODVERSIONS.<br>${WEBOS_VERSION}-58: Turn off some debug options.<br>${WEBOS_VERSION}-56: Turn on all TCP congest algos and CPU governors. And a bit more.<br>${WEBOS_VERSION}-48: Updated compcache compile flags.<br>${WEBOS_VERSION}-43: Updated with latest postinst and prerm OTA safety measures.<br>${WEBOS_VERSION}-40: Enabled lower frequencies for screenstate minimum.<br>${WEBOS_VERSION}-38: Updated gcc toolchain as well as optimized compile flags.<br>${WEBOS_VERSION}-37: Include free swap in memory calculations.<br>${WEBOS_VERSION}-35: Added compcache compressed RAM swap kernel module (not loaded by default).<br>${WEBOS_VERSION}-32: Update and cleanup of charging code in screenstate governor.<br>${WEBOS_VERSION}-21: Limit IVA2 block to 360MHz as per the mystery bug mentioned in the Palm kernel patch.<br>${WEBOS_VERSION}-16: Improved screenstate transition detection.<br>${WEBOS_VERSION}-13: Initial public release
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
-KERNEL_PATCHES = warthogbuild/opp6-720-opp7-1005-min-opp5.patch overclocking/defconfig-standard.patch \
+KERNEL_PATCHES = warthogbuild/opp6-720-opp7-1050-min-opp5.patch overclocking/defconfig-standard.patch \
 		 sensors/sensors_temp_omap34xx.patch sensors/defconfig-safe.patch \
 		 screenstate/screenstate.patch \
 		 warthogbuild/armMakefile.diff \
