@@ -3,14 +3,14 @@ TITLE	 = Nginx Web Server
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
 OPT_VER  = 0.7.67-1
-VERSION  = 0.7.67-1
+VERSION  = 0.7.67-4
 HOMEPAGE = http://nginx.org/
 DESCRIPTION = nginx (pronounced “engine X”) is a lightweight, high-performance Web server/reverse proxy and e-mail (IMAP/POP3) proxy, licensed under a BSD-like license.
-CHANGELOG = 0.7.67-1: First release
+CHANGELOG = 0.7.67-4: Fixed upstart script and config file.<br>0.7.67-1: First release
 TYPE	 = Optware
 CATEGORY = Utilities
-ICON	 = http://www.webos-internals.org/wiki/Image:Icon_lighttpd.png
-DEPENDS	 = mobi.optware.pcre
+ICON	 = http://www.webos-internals.org/images/9/9e/Icon_NGiNX.png
+DEPENDS	 = mobi.optware.pcre, mobi.optware.openssl, mobi.optware.zlib
 
 SRC_OPTWARE = ${NAME}_${OPT_VER}
 

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-APPID=mobi.optware.lighttpd
+APPID=mobi.optware.nginx
 
 # Symlink files into /opt
 cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
