@@ -1,5 +1,0 @@
-#!/bin/sh
-
-rm -f /media/internal/virtual-keyboard/kb_config.json
-rm -f /media/internal/virtual-keyboard/.sounds/click1.wav
-rm -rf /media/internal/virtual-keyboard/.themes/LPC_Dark_Rounded_2e
