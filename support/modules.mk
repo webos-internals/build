@@ -1,5 +1,5 @@
 TYPE = Kernel
-APP_ID = org.webosinternals.kernels.${NAME}
+APP_ID = org.webosinternals.modules.${NAME}
 SIGNER = org.webosinternals
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 ICON = http://www.webos-internals.org/images/9/9e/Icon_WebOSInternals_Kernel.png
@@ -57,6 +57,10 @@ endif
 
 ifeq ("${WEBOS_VERSION}", "1.4.3")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewwatt-${WEBOS_VERSION}.jar
+endif
+
+ifneq ("${KERNEL_IMAGE}", "")
+KERNEL_MODULES  = modules
 endif
 
 .PHONY: package
@@ -139,18 +143,24 @@ endif
 
 build/%/CONTROL/postinst:
 	mkdir -p build/arm/CONTROL
-	sed -e 's/PID=/PID="${APP_ID}"/' -e 's/FORCE_INSTALL=/FORCE_INSTALL="${FORCE_INSTALL}"/' \
-	    -e 's/%COMPATIBLE_VERSIONS%/${COMPATIBLE_VERSIONS}/' \
-	    -e 's|%UPSTART_SCRIPT%|${KERNEL_UPSTART}|' \
-		../../support/kernel.postinst > $@
+	#sed -e 's/PID=/PID="${APP_ID}"/' -e 's/FORCE_INSTALL=/FORCE_INSTALL="${FORCE_INSTALL}"/' \
+	    #-e 's/%COMPATIBLE_VERSIONS%/${COMPATIBLE_VERSIONS}/' \
+	    #-e 's|%UPSTART_SCRIPT%|${KERNEL_UPSTART}|' \
+		#../../support/kernel.postinst > $@
+	sed -e 's|PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' \
+			-e 's|APP_DIR=|APP_DIR=/media/cryptofs/apps/usr/palm/applications/${APP_ID}|' \
+			../../autopatch/postinst${SUFFIX} > $@
 	chmod ugo+x $@
 
 build/%/CONTROL/prerm:
 	mkdir -p build/arm/CONTROL
-	sed -e 's/PID=/PID="${APP_ID}"/' -e 's/FORCE_REMOVE=/FORCE_REMOVE="${FORCE_REMOVE}"/' \
-	    -e 's/%COMPATIBLE_VERSIONS%/${COMPATIBLE_VERSIONS}/' \
-	    -e 's|%UPSTART_SCRIPT%|${KERNEL_UPSTART}|' \
-		../../support/kernel.prerm > $@
+	#sed -e 's/PID=/PID="${APP_ID}"/' -e 's/FORCE_REMOVE=/FORCE_REMOVE="${FORCE_REMOVE}"/' \
+	    #-e 's/%COMPATIBLE_VERSIONS%/${COMPATIBLE_VERSIONS}/' \
+	    #-e 's|%UPSTART_SCRIPT%|${KERNEL_UPSTART}|' \
+		#../../support/kernel.prerm > $@
+	sed -e 's|PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' \
+			-e 's|APP_DIR=|APP_DIR=/media/cryptofs/apps/usr/palm/applications/${APP_ID}|' \
+			../../autopatch/prerm${SUFFIX} > $@
 	chmod ugo+x $@
 
 build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
@@ -159,18 +169,18 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	  cp build/src-$*/patches/${KERNEL_DEFCONFIG} build/src-$*/linux-${KERNEL_VERSION}/.config ; \
 	  yes '' | \
 	  ${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
-		oldconfig ; \
+		oldconfig prepare ; \
 	else \
 	  yes '' | \
 	  ${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
-		${DEFCONFIG} ; \
+		${DEFCONFIG} prepare ; \
 	fi
 	${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
 		KBUILD_BUILD_COMPILE_BY=v$* KBUILD_BUILD_COMPILE_HOST=${APP_ID} \
 		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
-		uImage modules modules_install
-	if [ -n "${KERNEL_MODULES}" ] ; then \
-	  for module in ${KERNEL_MODULES} ; do \
+		${KERNEL_IMAGE} ${KERNEL_MODULES} modules_install
+	if [ -n "${EXTRA_MODULES}" ] ; then \
+	  for module in ${EXTRA_MODULES} ; do \
 	    ( cd build/src-$*/patches/$$module ; \
 	      ${MAKE} -C $(shell pwd)/build/src-$*/patches/$$module ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
 		KERNEL_BUILD_PATH=$(shell pwd)/build/src-$*/linux-${KERNEL_VERSION} DEVICE=${DEVICE} \
@@ -182,12 +192,14 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/source
 	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/*.bin
 	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/modules.*
-	cp build/src-$*/linux-${KERNEL_VERSION}/arch/arm/boot/uImage \
-		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/uImage-2.6.24-${KERNEL_TYPE}
-	cp build/src-$*/linux-${KERNEL_VERSION}/System.map \
-		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/System.map-2.6.24-${KERNEL_TYPE}
-	cp build/src-$*/linux-${KERNEL_VERSION}/.config \
-		build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/config-2.6.24-${KERNEL_TYPE}
+	if [ -n "${KERNEL_IMAGE}" ]; then \
+		cp build/src-$*/linux-${KERNEL_VERSION}/arch/arm/boot/uImage \
+			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/uImage-2.6.24-${KERNEL_TYPE}; \
+		cp build/src-$*/linux-${KERNEL_VERSION}/System.map \
+			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/System.map-2.6.24-${KERNEL_TYPE}; \
+		cp build/src-$*/linux-${KERNEL_VERSION}/.config \
+			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/config-2.6.24-${KERNEL_TYPE}; \
+	fi
 	unzip -p ${WEBOS_DOCTOR} resources/webOS.tar | \
 	tar -O -x -f - ./nova-cust-image-${CODENAME}.rootfs.tar.gz | \
 	tar -C build/arm/usr/palm/applications/${APP_ID}/additional_files/ -m -z -x -f - ./md5sums
