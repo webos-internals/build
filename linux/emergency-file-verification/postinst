@@ -18,11 +18,9 @@ echo "------------------------------------------------------" >> $PATCH_LOG
 echo "Emergency File Verification $(date)" >> $PATCH_LOG
 echo "------------------------------------------------------" >> $PATCH_LOG
 
-if [ "$IPKG_OFFLINE_ROOT" = "" ]
-then
-  echo "ERROR: IPKG_OFFLINE_ROOT must be supplied to the postinst" | tee -a $PATCH_LOG
-  exit 1
-fi
+APPS=/media/cryptofs/apps
+
+[ -d $APPS ] || { echo "Requires webOS 1.3.5 or later" ; exit 1 ; }
 
 if [ -e $PATCH_CONTROL_DIR/backups ]
 then
@@ -50,22 +48,26 @@ then
 fi
 
 OLD_PACKAGES=""
-while read inp
-do
-  package=`echo $inp |awk '{print $1}'`
-  patch_technology=`echo $inp |awk '{print $2}'`
 
-  if [ "$patch_technology" = "" ]
-  then
-    patch_technology="apt"
-  fi
+if [ -f "$PATCH_PACKAGES_LIST" ]
+then
+  while read inp
+  do
+    package=`echo $inp |awk '{print $1}'`
+    patch_technology=`echo $inp |awk '{print $2}'`
 
-  if [ "$patch_technology" != "$AUPT_VERSION" ]
-  then
-    OLD_PACKAGES="$OLD_PACKAGES\tPackage: $package $patch_technology"
-    failed=1
-  fi
-done < $PATCH_PACKAGES_LIST
+    if [ "$patch_technology" = "" ]
+    then
+      patch_technology="apt"
+    fi
+
+    if [ "$patch_technology" != "$AUPT_VERSION" ]
+    then
+      OLD_PACKAGES="$OLD_PACKAGES\tPackage: $package $patch_technology"
+      failed=1
+    fi
+  done < $PATCH_PACKAGES_LIST
+fi
 
 if [ "$OLD_PACKAGES" != "" ]
 then
@@ -76,9 +78,17 @@ else
   rm -f /tmp/webosinternals-md5sums
   rm -f /tmp/webosinternals-md5sums.failed
   cat $IPKG_INFO_DIR/*.md5sums > /tmp/webosinternals-md5sums
-  sed -i -e /.var.lib.update.install-first-update.sh/d /tmp/webosinternals-md5sums
-  sed -i -e /.var.lib.update.install-first.sh/d /tmp/webosinternals-md5sums
-  sed -i -e /.usr.local.bin.wifi-mfg-labtool/d /tmp/webosinternals-md5sums
+  sed -i \
+      -e '/ \*\.\/usr\/palm\/applications\/.*\/framework_config.json/d' \
+      -e '/ \*\.\/var\/lib\/software\/tmp\/flashing-progress\.tga/d' \
+      -e '/ \*\.\/var\/lib\/update\/install-first-update\.sh/d' \
+      -e '/ \*\.\/var\/lib\/update\/install-first.sh/d' \
+      -e '/ \*\.\/usr\/local\/bin\/wifi-mfg-labtool/d' \
+      -e '/ \*\.\/var\/palm\/data\/smartkey\//d' \
+      -e '/ \*\.\/etc\/\.rootfs_RW/d' \
+      -e '/ \*\.\/lib\/modules\//d' \
+      -e '/ \*\.\/boot\//d' \
+      /tmp/webosinternals-md5sums
 
   if [ -e /usr/bin/md5sum ]
   then
@@ -130,5 +140,5 @@ else
   fi
 fi
 
-ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
+/usr/bin/ipkg -o $APPS -force-depends remove $PACKAGE
 exit $failed
