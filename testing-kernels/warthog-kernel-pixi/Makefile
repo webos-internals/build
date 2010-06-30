@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (Pixi/Pixi+)
 DEVICE = pixi
 CATEGORY = Experimental
-VERSIONS = 1.4.1-61 1.4.3-61
+VERSIONS = 1.4.1-62 1.4.3-62
 APPINFO_DESCRIPTION = A testbed of kernel patches for the Palm Pixi/Pixi+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
 Current additions include:<ul>\
@@ -26,6 +26,7 @@ CHANGELOG = ${WEBOS_VERSION}-61: Disable MODVERSIONS.<br>${WEBOS_VERSION}-58: Tu
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
+                 screenstate/screenstate.patch \
 		 makefiletune/armMakefile.diff \
 		 defconfig/defconfig.pixi.cpugov defconfig/defconfig.pixi.tcpcong warthogbuild/defconfig-nodebug-pixi.patch
 KERNEL_MODULES = compcache/compcache-0.5.4
