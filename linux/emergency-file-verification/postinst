@@ -85,6 +85,7 @@ else
       -e '/ \*\.\/var\/lib\/update\/install-first.sh/d' \
       -e '/ \*\.\/usr\/local\/bin\/wifi-mfg-labtool/d' \
       -e '/ \*\.\/var\/palm\/data\/smartkey\//d' \
+      -e '/ \*\.\/etc\/udev\/mount\.blacklist/d' \
       -e '/ \*\.\/etc\/\.rootfs_RW/d' \
       -e '/ \*\.\/lib\/modules\//d' \
       -e '/ \*\.\/boot\//d' \

@@ -1,10 +1,10 @@
 TYPE = Linux Application
 NAME = emergency-file-verification
-VERSION = 2.2.0
+VERSION = 2.2.1
 TITLE = Emergency File Verification
 MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>
 DESCRIPTION = Verifies all patch packages are installed with supported patch technology and then verifies all files are stock or modified by working aupt technology
-CHANGELOG = 2.2.0: Updated for custom kernels, logging modifications and other innocuous files.<br>2.1.0: Updated for AUPT-4 patch technology.  There is no need to remove AUPT-3 patches, but AUPT-4 is the latest version of the patching infrastructure and the patches on your device should be automatically upgraded to it at the next webOS update.
+CHANGELOG = 2.2.1: Added /etc/udev/mount.blacklist to the list of ignored files.<br>2.2.0: Updated for custom kernels, logging modifications and other innocuous files.<br>2.1.0: Updated for AUPT-4 patch technology.  There is no need to remove AUPT-3 patches, but AUPT-4 is the latest version of the patching infrastructure and the patches on your device should be automatically upgraded to it at the next webOS update.
 APP_ID = org.webosinternals.${NAME}
 SIGNER = org.webosinternals
 HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS
