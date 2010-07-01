@@ -169,16 +169,16 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	  cp build/src-$*/patches/${KERNEL_DEFCONFIG} build/src-$*/linux-${KERNEL_VERSION}/.config ; \
 	  yes '' | \
 	  ${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
-		oldconfig prepare ; \
+		oldconfig ; \
 	else \
 	  yes '' | \
 	  ${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
-		${DEFCONFIG} prepare ; \
+		${DEFCONFIG} ; \
 	fi
 	${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
 		KBUILD_BUILD_COMPILE_BY=v$* KBUILD_BUILD_COMPILE_HOST=${APP_ID} \
 		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
-		${KERNEL_IMAGE} ${KERNEL_MODULES} modules_install
+		uImage ${KERNEL_MODULES} modules_install
 	if [ -n "${EXTRA_MODULES}" ] ; then \
 	  for module in ${EXTRA_MODULES} ; do \
 	    ( cd build/src-$*/patches/$$module ; \
