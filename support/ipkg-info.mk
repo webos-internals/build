@@ -74,3 +74,12 @@ ${DOCTOR_DIR}/webosdoctor-1.4.2.jar:
 
 ${DOCTOR_DIR}/webosdoctor-1.4.3.jar:
 	  curl -L -o $@ http://palm.cdnetworks.net/rom/pixiplus/px143r0d06062010/attp143rod/webosdoctorp121ewwatt.jar
+
+${DOCTOR_DIR}/webosdoctor-1.4.5.jar:
+	mkdir -p ${DOCTOR_DIR}
+	if [ -e ${DOCTOR_DIR}/webosdoctorp100eu-wr-1.4.5.jar ] ; then \
+	  ln -s webosdoctorp100ueu-wr-1.4.5.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/pre/p145r0d06302010/eudep145rod/webosdoctorp100ueu-wr.jar; \
+	fi
+

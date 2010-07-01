@@ -59,6 +59,12 @@ ifeq ("${WEBOS_VERSION}", "1.4.3")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewwatt-${WEBOS_VERSION}.jar
 endif
 
+ifeq ("${WEBOS_VERSION}", "1.4.5")
+ifeq ("${DEVICE}","pre")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
+endif
+endif
+
 .PHONY: package
 .PHONY: head
 ifneq ("${VERSIONS}", "")
