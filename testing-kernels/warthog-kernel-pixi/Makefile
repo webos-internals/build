@@ -11,7 +11,7 @@ Current additions include:<ul>\
 <li>Modification of the lowmemnotify threshold calculation to take into account free swap space, written by rwhitby</li>\
 </ul><br>\
 All additions are disabled by default, and must be enabled by separate packages or scripts (not included in this package).<br>\
-For more information, visit <a href="${HOMEPAGE}">${HOMEPAGE}</a>
+For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-61", "log" : [ "Disable MODVERSIONS." ] }, \

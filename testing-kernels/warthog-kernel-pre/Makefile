@@ -14,7 +14,7 @@ Current additions include:<ul>\
 <li>A new <a href=http://lwn.net/Articles/334649/><b>compcache</b> compressed RAM swap kernel module</a> ported to the Palm Pre/Pre+ by uNiXpSyChO & rwhitby</li>\
 </ul><br>\
 All additions are disabled by default, and must be enabled by separate packages or scripts (not included in this package).<br>\
-For more information, visit <a href="${HOMEPAGE}">${HOMEPAGE}</a>
+For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-62", "log" : [ "Disable MODVERSIONS." ] }, \
