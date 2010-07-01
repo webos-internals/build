@@ -1,6 +1,6 @@
 TYPE = Linux Application
 NAME = emergency-file-verification
-VERSION = 2.2.1
+VERSION = 2.2.2
 TITLE = Emergency File Verification
 MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>
 DESCRIPTION = Verifies all patch packages are installed with supported patch technology and then verifies all files are stock or modified by working aupt technology
