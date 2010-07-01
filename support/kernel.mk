@@ -60,7 +60,9 @@ WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewwatt-${WEBOS_VERSION}.jar
 endif
 
 ifeq ("${WEBOS_VERSION}", "1.4.5")
-ifeq ("${DEVICE}","pre")
+ifeq ("${DEVICE}","pixi")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewweu-wr-${WEBOS_VERSION}.jar
+else
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
 endif
 endif
