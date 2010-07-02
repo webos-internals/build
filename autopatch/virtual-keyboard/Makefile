@@ -20,7 +20,7 @@ PATCH = add-onscreen-keyboard.patch
 
 include ../common.mk
 
-DEPENDS += org.websointernals.vkb-default-themes-config
+DEPENDS += org.webosinternals.vkb-default-themes-config
 
 ifeq ("${DUMMY_VERSION}", "")
 SRC_GIT = git://git.webos-internals.org/patches/virtual-keyboard.git
