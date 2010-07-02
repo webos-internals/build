@@ -13,5 +13,6 @@ cp $IPKG_OFFLINE_ROOT/etc/event.d/$APPID /etc/event.d/$APPID
 /sbin/start $APPID
 
 mkdir -p /media/internal/www
+cp $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt/etc/nginx/index.html /media/internal/www
 
 exit 0
