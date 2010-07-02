@@ -1,6 +1,6 @@
 NAME = vkb-theme-remix-glossy
 APP_ID = org.webosinternals.themes.${NAME}
-VERSION = 1.0.1
+VERSION = 1.1.1
 TITLE = Remix Glossy
 TYPE = Theme
 CATEGORY = Virtual Keyboard

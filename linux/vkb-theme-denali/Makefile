@@ -1,6 +1,6 @@
 NAME = vkb-theme-denali
 APP_ID = org.webosinternals.themes.${NAME}
-VERSION = 1.0.1
+VERSION = 1.1.1
 TITLE = Denali
 TYPE = Theme
 CATEGORY = Virtual Keyboard

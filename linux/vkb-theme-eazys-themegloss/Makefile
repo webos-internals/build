@@ -1,6 +1,6 @@
 NAME = vkb-theme-eazys-themegloss
 APP_ID = org.webosinternals.themes.${NAME}
-VERSION = 1.0.1
+VERSION = 1.1.1
 TITLE = Eazyz Theme Gloss
 TYPE = Theme
 CATEGORY = Virtual Keyboard
