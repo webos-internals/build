@@ -1,6 +1,6 @@
 NAME = vkb-theme-eazys-theme2
 APP_ID = org.webosinternals.themes.${NAME}
-VERSION = 1.0.1
+VERSION = 1.1.1
 TITLE = Eazys Theme 2
 TYPE = Theme
 CATEGORY = Virtual Keyboard

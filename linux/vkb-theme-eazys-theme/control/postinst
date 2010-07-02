@@ -1,6 +1,6 @@
 #!/bin/sh
 
-APP_DIR=$IPKG_OFFLINE_ROOT/usr/palm/applications/org.webosinternals.vkb-theme-eazys-theme
+APP_DIR=$IPKG_OFFLINE_ROOT/usr/palm/applications/org.webosinternals.themes.vkb-theme-eazys-theme
 KB_CONFIG=/media/internal/virtual-keyboard/kb_config.json
 
 tar --no-same-owner --strip-components=2 -xvzf ${APP_DIR}/additional_files.tar.gz -C /media/internal

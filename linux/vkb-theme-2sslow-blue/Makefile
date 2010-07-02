@@ -1,6 +1,6 @@
 NAME = vkb-theme-2sslow-blue
 APP_ID = org.webosinternals.themes.${NAME}
-VERSION = 1.0.1
+VERSION = 1.1.1
 TITLE = 2sslow Blue
 TYPE = Theme
 CATEGORY = Virtual Keyboard
