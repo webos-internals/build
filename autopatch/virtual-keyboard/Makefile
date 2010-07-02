@@ -1,5 +1,5 @@
 NAME = add-onscreen-keyboard
-VERSIONS = 1.4.0-4 1.4.1-4 1.4.2-4 1.4.3-4 1.4.5-1
+VERSIONS = 1.4.0-5 1.4.1-5 1.4.2-5 1.4.3-5 1.4.5-5
 META_SUB_VERSION = 5
 HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard
 TITLE = Virtual Keyboard
@@ -7,6 +7,7 @@ CATEGORY = Mojo
 ICON = http://www.webos-internals.org/images/0/0f/Icon_WebOSInternals_Keyboard.png
 DESCRIPTION = <br>Double-tapping the gesture area (near the round silver button) will bring up the on-screen keyboard if you are in a text input field. Tap with two fingers separated or Double-tap quickly.  NOTE: The keyboard takes a couple of seconds to render, be patient.  In the Emulator, tap PageUp twice.
 CHANGELOG = \
+1.x.x-5: Fixed packaging so that it works again \
 1.4.0-4 1.4.1-4 1.4.2-4 1.4.3-4 1.4.5-4: Split up theme and patch packages for quicker installation and easier updates for future changes. <br>\
 1.4.0-1: Port to webOS 1.4.0 and fix undefined bug when tapping theme selector key. <br>\
 1.3.5-4: Fixed bug causing undefined to be displayed in messaging app. <br>\
