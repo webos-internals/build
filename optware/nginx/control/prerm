@@ -10,7 +10,8 @@ cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
 find etc lib sbin var -depth -type f -exec rm -f /opt/{} \;
 find etc lib sbin var -depth -type d -exec rmdir /opt/{} \;
 
-# Clean up if nothing has been put in here
+# Clean up if nothing has been put in here including the placeholder file
+rm /media/internal/www/index.html
 rmdir /media/internal/www
 
 exit 0
