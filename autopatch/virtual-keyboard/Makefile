@@ -1,6 +1,6 @@
 NAME = add-onscreen-keyboard
 VERSIONS = 1.4.0-4 1.4.1-4 1.4.2-4 1.4.3-4 1.4.5-1
-#META_SUB_VERSION = 1
+META_SUB_VERSION = 2
 HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard
 TITLE = Virtual Keyboard
 CATEGORY = Mojo
@@ -19,6 +19,8 @@ SCREENSHOTS = [\"http://www.webos-internals.org/images/b/b9/VirtualKeyboard_1.pn
 PATCH = add-onscreen-keyboard.patch
 
 include ../common.mk
+
+DEPENDS += org.websointernals.vkb-default-themes-config
 
 ifeq ("${DUMMY_VERSION}", "")
 SRC_GIT = git://git.webos-internals.org/patches/virtual-keyboard.git
