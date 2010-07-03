@@ -1,0 +1,1 @@
+../autopatch/common.mk
