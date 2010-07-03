@@ -1,4 +1,4 @@
-TYPE = Kernel
+TYPE = Kernel Module
 APP_ID = org.webosinternals.modules.${NAME}
 SIGNER = org.webosinternals
 MAINTAINER = WebOS Internals <support@webos-internals.org>
