@@ -12,8 +12,5 @@ SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = uinput/defconfig-standard.patch
 KERNEL_UPSTART = uinput/upstart.script
 KERNEL_MODULES = drivers/input/misc/uinput.ko
-POSTINSTALLFLAGS = RestartDevice
-POSTUPDATEFLAGS = RestartDevice
-POSTREMOVEFLAGS = RestartDevice
 
 include ../../support/modules.mk
