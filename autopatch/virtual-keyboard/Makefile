@@ -1,13 +1,19 @@
 NAME = add-onscreen-keyboard
-VERSIONS = 1.4.0-5 1.4.1-5 1.4.2-5 1.4.3-5 1.4.5-5
-META_SUB_VERSION = 5
+VERSIONS = 1.4.0-7 1.4.1-7 1.4.2-7 1.4.3-7 1.4.5-7
+META_SUB_VERSION = 0
 HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard
 TITLE = Virtual Keyboard
 CATEGORY = Mojo
 ICON = http://www.webos-internals.org/images/0/0f/Icon_WebOSInternals_Keyboard.png
-DESCRIPTION = <br>Double-tapping the gesture area (near the round silver button) will bring up the on-screen keyboard if you are in a text input field. Tap with two fingers separated or Double-tap quickly.  NOTE: The keyboard takes a couple of seconds to render, be patient.  In the Emulator, tap PageUp twice.
+DESCRIPTION = <br>Double-tapping the gesture area (near the round silver button) will bring up the on-screen keyboard if you are in a text input field. Tap with two fingers separated or Double-tap quickly.  NOTE: The keyboard takes a couple of seconds to render, be patient.  In the Emulator, tap PageUp twice.  Double-tap to hide and double-tap to show. <br><br>\
+	ADD-ONS: Install the KeyBoss and Uinput packages from Preware in order to enable hard key emulation (which will add autocorrect and browser backspace support for example).
 CHANGELOG = \
-1.x.x-5: Fixed packaging so that it works again \
+1.4.x-7: Fix the re-render going from portrait->landscape->portrait. <br>\
+1.4.x-6: Render only once per stage on first meta-double-tap, meta-double-tap to close. <br>\
+				 Show an alert dialog if config file missing. <br>\
+				 Add functionality to repeat key when held. <br>\
+				 Add support for hard key emulation on special keys using KeyBoss service. <br>\
+1.4.x-5: Fixed packaging so that it works again \
 1.4.0-4 1.4.1-4 1.4.2-4 1.4.3-4 1.4.5-4: Split up theme and patch packages for quicker installation and easier updates for future changes. <br>\
 1.4.0-1: Port to webOS 1.4.0 and fix undefined bug when tapping theme selector key. <br>\
 1.3.5-4: Fixed bug causing undefined to be displayed in messaging app. <br>\
