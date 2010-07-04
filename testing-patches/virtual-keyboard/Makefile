@@ -1,6 +1,6 @@
 NAME = add-onscreen-keyboard
-VERSIONS = 1.4.0-6 1.4.1-6 1.4.2-6 1.4.3-6 1.4.5-6
-META_SUB_VERSION = 5
+VERSIONS = 1.4.0-7 1.4.1-7 1.4.2-7 1.4.3-7 1.4.5-7
+META_SUB_VERSION = 0
 HOMEPAGE = http://www.webos-internals.org/wiki/On_Screen_Keyboard
 TITLE = Virtual Keyboard
 CATEGORY = Mojo
@@ -8,6 +8,7 @@ ICON = http://www.webos-internals.org/images/0/0f/Icon_WebOSInternals_Keyboard.p
 DESCRIPTION = <br>Double-tapping the gesture area (near the round silver button) will bring up the on-screen keyboard if you are in a text input field. Tap with two fingers separated or Double-tap quickly.  NOTE: The keyboard takes a couple of seconds to render, be patient.  In the Emulator, tap PageUp twice.  Double-tap to hide and double-tap to show. <br><br>\
 	ADD-ONS: Install the KeyBoss and Uinput packages from Preware in order to enable hard key emulation (which will add autocorrect and browser backspace support for example).
 CHANGELOG = \
+1.4.x-7: Fix the re-render going from portrait->landscape->portrait. <br>\
 1.4.x-6: Render only once per stage on first meta-double-tap, meta-double-tap to close. <br>\
 				 Show an alert dialog if config file missing. <br>\
 				 Add functionality to repeat key when held. <br>\
