@@ -3,6 +3,3 @@
 rm -f /media/internal/virtual-keyboard/kb_config.json
 rm -f /media/internal/virtual-keyboard/.sounds/click1.wav
 rm -rf /media/internal/virtual-keyboard/.themes/LPC_Dark_Rounded_2e
-rm -rf /media/internal/virtual-keyboard/.themes/remix_ice
-rm -rf /media/internal/virtual-keyboard/.themes/remix_glossy
-rm -rf /media/internal/virtual-keyboard/.themes/remix_classic

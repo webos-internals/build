@@ -3,7 +3,8 @@ TITLE    = Save/Restore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.8.2
+VERSION  = 0.9.3
+DEPENDS  = org.webosinternals.unzip, org.webosinternals.zip
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:SaveRestore
@@ -12,6 +13,14 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 WebOS Internals provides Save/Retore as is without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.  The entire risk as to the quality and performance of Save/Restore is with you.  Should Save/Restore prove defective, you assume the cost of all necessary servicing, repair or correction.<br>\
 In no event will WebOS Internals or any other party be liable to you for damages, including any general, special, incidental or consequential damages arising out of the use or inability to use Save/Restore (including but not limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of Save/Restore to operate with any other programs).
 CHANGELOG = \
+0.9.3: Fixed Launcher support.<br>\
+0.9.2: Applications: Defensive Warfare (courtesy of pip smith), Preset Reset, ShareTheCost (STC), Sudoku Lite, Milage Monitor, Hero of Sparta, Score Keeper, Timesheet, Radio Hibiki, Online Tracker, Battery Monitor Plus, Quick Contacts, Crossword Lite.<br>\
+0.9.1: Fixed Launcher support. Now supports the Palm Web Browser.<br>\
+0.9.0: Now stores the archives as zip files, so the media indexer does not see the constituent files.<br>\
+0.8.6: Fixed Govnah support.<br>\
+0.8.5: Improved support for Add-to-Launcher icons (e.g. browser, launchpoints, contacts).<br>\
+0.8.4: Applications: Govnah (Now supports saving of profiles), Net2Streams Pro, Assassins Creed, Thought Bubble, Giant Fighting Robots, Jump O Clock, Real Tennis, Tiger Woods PGA Tour.<br>\
+0.8.3: Applications: Cloud Hopper. Now supports Add-to-Launcher icons (e.g. browser, launchpoints, contacts).<br>\
 0.8.2: Applications: Applications: Gangstar, wIRC (courtesy of Audermars02).<br>\
 0.8.1: Removed DOS line endings from some contributed scripts that caused startup failure.<br>\
 0.8.0: Applications: Sports Live, Football Live, US Soccer Live (all courtesy of MoreSolutions).<br>\
@@ -56,9 +65,9 @@ include ../../support/package.mk
 include ../../support/download.mk
 
 .PHONY: unpack
-unpack: build/.unpacked-${VERSION}
+unpack: build/.unpacked
 
-build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
@@ -70,12 +79,12 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/arm.built-${VERSION} build/i686.built-${VERSION}
+build/.built-${VERSION}: build/arm.built build/i686.built
 	touch $@
 
 include ../../support/cross-compile.mk
 
-build/%.built-${VERSION}: build/.unpacked-${VERSION}
+build/%.built: build/.unpacked
 	rm -rf build/$*
 	( cd build/src/src ; \
 	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc \

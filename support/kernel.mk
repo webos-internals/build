@@ -48,7 +48,7 @@ WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ueu-wr-${WEBOS_VERSION}.jar
 else
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
 endif
-COMPATIBLE_VERSIONS = 1.4.1 | 1.4.1.1
+COMPATIBLE_VERSIONS = 1.4.1 | 1.4.1.1 | 1.4.1.3
 endif
 
 ifeq ("${WEBOS_VERSION}", "1.4.2")
@@ -59,7 +59,16 @@ ifeq ("${WEBOS_VERSION}", "1.4.3")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewwatt-${WEBOS_VERSION}.jar
 endif
 
+ifeq ("${WEBOS_VERSION}", "1.4.5")
+ifeq ("${DEVICE}","pixi")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewweu-wr-${WEBOS_VERSION}.jar
+else
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
+endif
+endif
+
 .PHONY: package
+.PHONY: head
 ifneq ("${VERSIONS}", "")
 package:
 	for v in ${WEBOS_VERSIONS} ; do \
@@ -67,6 +76,11 @@ package:
 	done; \
 	for v in ${VERSIONS} ; do \
 	  VERSION=$${v} ${MAKE} VERSIONS= WEBOS_VERSION=`echo $${v} | cut -d- -f1` package ; \
+	done
+
+head:
+	for v in ${VERSIONS} ; do \
+	  VERSION=$${v} ${MAKE} VERSIONS= WEBOS_VERSION=`echo $${v} | cut -d- -f1` head ; \
 	done
 else
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
@@ -92,6 +106,10 @@ build/.built-${VERSION}:
 else
 
 include ../../support/package.mk
+
+ifeq ("$(VERSIONS)", "")
+include ../../support/head.mk
+endif
 
 include ../../support/download.mk
 

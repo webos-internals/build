@@ -18,6 +18,10 @@ ${DOCTOR_DIR}/webosdoctorp101ewwatt-1.4.2.jar:
 	mkdir -p ${DOCTOR_DIR}
 	curl -L -o $@ http://palm.cdnetworks.net/rom/preplus/p142r0d05162010/attp142rod/webosdoctorp101ewwatt.jar
 
-${DOCTOR_DIR}/webosdoctorp101ewwatt-1.4.3.jar:
+${DOCTOR_DIR}/webosdoctorp121ewwatt-1.4.3.jar:
 	mkdir -p ${DOCTOR_DIR}
 	curl -L -o $@ http://palm.cdnetworks.net/rom/pixiplus/px143r0d06062010/attp143rod/webosdoctorp121ewwatt.jar
+
+${DOCTOR_DIR}/webosdoctorp100ueu-wr-1.4.5.jar:
+	mkdir -p ${DOCTOR_DIR}
+	curl -L -o $@ http://palm.cdnetworks.net/rom/pre/p145r0d06302010/eudep145rod/webosdoctorp100ueu-wr.jar

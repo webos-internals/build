@@ -1,12 +1,12 @@
-NAME = vkb-default-themes-config
-APP_ID = org.webosinternals.${NAME}
-VERSION = 1.0.1
-TITLE = VKB Default Themes and Configuration
-TYPE = Miscellaneous
-CATEGORY = VKB Theme
+NAME = vkb-theme-autumn
+APP_ID = org.webosinternals.themes.${NAME}
+VERSION = 1.1.1
+TITLE = Autumn
+TYPE = Theme
+CATEGORY = Virtual Keyboard
 ICON = http://www.webos-internals.org/images/0/0f/Icon_WebOSInternals_Keyboard.png
-DESCRIPTION = This package contains the default themes and configuration file for the Virtual Keyboard patch.
-MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>
+DESCRIPTION = This package contains the autumn theme for the Virtual Keyboard patch.
+SCREENSHOTS = [\"http://www.webos-internals.org/images/6/65/Autumnkb.jpg\"]
 HOMEPAGE = http://www.webos-internals.org/wiki/Virtual_Keyboard_Configuration
 
 .PHONY: package

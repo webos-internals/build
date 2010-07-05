@@ -3,14 +3,25 @@ TITLE    = Govnah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.4.7
+VERSION  = 0.5.0
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
-DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature.
+DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature, load averages and memory usage.
 CHANGELOG = \
-0.4.7: Added Pixi temperature and available frequency support.<br>\
+0.5.0: Rolled up all the 0.4.x alpha releases into a new public release. Major new features include Pixi support, memory reporting and Compcache configuration.<br>\
+0.4.17: Added Compcache configuration to saved profiles.<br>\
+0.4.16: Fixed the obscure bug in applying a profile (new min greater than current max, new max less than current min).<br>\
+0.4.15: Added the UberKernel Default profile.<br>\
+0.4.14: Fixed the duplicate profiles bug.<br>\
+0.4.13: Set the Palm Default profile back to 600MHz max.<br>\
+0.4.12: Added getProfiles and setProfile methods to the service.<br>\
+0.4.11: Updates settings screen after settings are applied. Fixed serious bug in compcache enable handling. Fixed some obscure error cases (new min greater than current max, new max less than current min).<br>\
+0.4.10: Updates main screen values whenever the card is activated. New visually segmented advanced settings screen.<br>\
+0.4.9: Fixed the profile save bug, please recreate any custom profiles. Added support in the service for sticky compcache settings.<br>\
+0.4.8: Robustified parameter display and profile handling.<br>\
+0.4.7: Added Pixi temperature and available frequency support. Created default and fixed speed 600 profiles for Pixi.<br>\
 0.4.6: Now detects whether configurable compcache support is available.<br>\
 0.4.5: Added error reporting for compcache configuration.<br>\
 0.4.4: Report correct compcache memlimit.<br>\
@@ -67,7 +78,7 @@ include ../../support/cross-compile.mk
 build/%.built: build/.unpacked
 	rm -rf build/$*
 	( cd build/src/src ; \
-	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc \
+	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc CFLAGS=${CFLAGS_$*} \
 	  clobber ${NAME} \
 	)
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}

@@ -1,5 +1,0 @@
-#!/bin/sh
-
-APP_DIR=$IPKG_OFFLINE_ROOT/usr/palm/applications/org.webosinternals.vkb-default-themes-config
-
-tar --no-same-owner --strip-components=2 -xvzf ${APP_DIR}/additional_files.tar.gz -C /media/internal

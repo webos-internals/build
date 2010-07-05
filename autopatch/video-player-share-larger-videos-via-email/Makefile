@@ -3,7 +3,7 @@ PATCH = video-player/${NAME}.patch
 TITLE = Share Larger Videos Via Email
 DESCRIPTION = Increases video size limit that users can 'share via email' from the Videos app from 7MB to 25MB (gmail's attachment cap). Currently, videos over 7MB will force users to edit/shorten the video.
 CATEGORY = Video Player
-VERSIONS = 1.4.1-4 1.4.2-1 1.4.5-1
+VERSIONS = 1.4.1-4 1.4.2-1 1.4.3-1 1.4.5-1
 ICON = http://www.webos-internals.org/images/f/ff/Icon_WebOSInternals_Patches_Videoplayer.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/4/46/Video-player-share-larger-videos-via-email-1.png\",\

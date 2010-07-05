@@ -1,0 +1,10 @@
+#!/bin/sh
+
+APP_DIR=$IPKG_OFFLINE_ROOT/usr/palm/applications/org.webosinternals.themes.vkb-theme-2sslow-blue
+KB_CONFIG=/media/internal/virtual-keyboard/kb_config.json
+
+tar --no-same-owner --strip-components=2 -xvzf ${APP_DIR}/additional_files.tar.gz -C /media/internal
+
+if [ -e ${KB_CONFIG} ]; then
+  sed -i -e '/\[/a \      {"label":"2sslow Blue","value":"2sslow_blue"},' ${KB_CONFIG}
+fi
