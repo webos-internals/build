@@ -1,14 +1,14 @@
 NAME     = wirc
 TITLE    = wIRC
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.2.4
+VERSION  = 0.2.99.1
 TYPE     = Application
 CATEGORY = System Utilities
 MAINTAINER = oil, PuffTheMagic, zsoc, egaudet, rwhitby
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WIRC
 ICON     = http://www.webos-internals.org/images/1/10/Icon_WebOSInternals_wIRC.png
 DESCRIPTION = A native webOS IRC client.
-CHANGELOG = 0.2.4: Renamed appid and removes separate wircd service on install.<br>0.2.0: Service and Application combined for easier and safer install and removal.
+CHANGELOG = 0.3.0: No more service, Now a hybrid app (plugin/mojo), and all the changes that went along with that<br>Tossing the main stage will now kill the entire app, including all child stages, and any connections to servers<br>Added option to stop the screen from dimming<br>Better random colors, they now are changed based on theme<br>DCC Chat and Send support<br>Correctly parses color in messages<br>Added option to turn off join/part/quit/mode event messages<br>Changing the theme resets message color options to be visible on the current theme<br>Favorite channels support<br>More palm-dark theme updates<br>Added this scene right here<br>Added theme based color prefs<br>Added custom aliases for commands<br>Gesture+Q and Gesture+A cycle though command history<br>/ctcp requests<br>Custom ctcp replies<br>Added events preference pages<br>/ping works when autoping is off<br>Auto-prepend \# to channel names if they\'re forgotten on /join<br>Fixed bug stoping you from joining channels that didn\'t start with \#<br>Relaunch bugfix<br>Added contextual menu when you tap a message<br>Added yell and connect launch commands for very webosy cross-app integration<br>Changed how notice events and /msg commands are displayed<br>/ns aliased to /msg NickServ<br>/authserv aliased to /msg AuthServ<br>Fixed /topic command bug<br>Now handles numeric 404 event<br>Changes to app-menus on most scenes<br>Fixed bug in timestamps<br>Added format options for timestamps<br>Added standard help scene<br>Removed old about scene<br>Turning off autoping actually turns off autoping<br>Added option to set autoping interval<br>Split messages longer than 255 char<br>/part messages now work<br>Now rejoins channels with open cards on a reconnect 0.2.4: Renamed appid and removes separate wircd service on install. 0.2.0: Service and Application combined for easier and safer install and removal.
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/5/5a/Wirc.png\",\
 \"http://www.webos-internals.org/images/d/d2/Wirc_2.png\",\
@@ -19,8 +19,10 @@ LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/applications/wIRC.git
 
+D = build/$*/usr/palm/applications/${APP_ID}
+
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
+package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
 
 include ../../support/package.mk
 
@@ -38,33 +40,26 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/arm.built-${VERSION} build/i686.built-${VERSION}
+build/.built-${VERSION}: build/armv7.built-${VERSION} build/i686.built-${VERSION}
 	touch $@
 
 include ../../support/cross-compile.mk
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
-	( cd build/src/src/libircclient ; \
-	  CC=${CROSS_COMPILE_$*}gcc ./configure && \
-	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc \
-		SUBDIRS=src clean all )
 	( cd build/src/src ; \
 	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc \
-		clobber ${APP_ID} )
-	mkdir -p build/src/bin
-	mkdir -p build/$*/usr/palm/applications/${APP_ID}
-	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
-	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
-	rm -rf build/$*/usr/palm/applications/${APP_ID}/bin
-	mkdir -p build/$*/usr/palm/applications/${APP_ID}/bin
-	install -m 755 build/src/src/${APP_ID} build/$*/usr/palm/applications/${APP_ID}/bin/${APP_ID}
+		clobber ${NAME} )
+	mkdir -p ${D}
+	install -m 755 build/src/src/${NAME} ${D}
+	rm -rf build/src/src
+	cp -r build/src/* ${D}
 	touch $@
 
 build/%/CONTROL/postinst:
 	rm -f $@
 	mkdir -p build/$*/CONTROL
-	install -m 0775 build/src/control/postinst build/$*/CONTROL
+	echo "chmod +x ${D}/${NAME}" > $@
 	chmod ugo+x $@
 
 build/%/CONTROL/prerm:
