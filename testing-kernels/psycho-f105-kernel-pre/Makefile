@@ -18,7 +18,7 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = overclocking/F105-overclocking.patch \
 		 sensors/sensors_temp_omap34xx.patch \
-		 screenstate/screenstate.patch \
+		 screenstate/screenstate.patch screenstate/cap-min-freq.patch \
 		 compcache/compcache.patch memory/tmc_mem.patch \
 		 makefiletune/armMakefile.diff
 KERNEL_MODULES = compcache/compcache-0.5.4
