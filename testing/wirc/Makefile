@@ -58,7 +58,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 build/%/CONTROL/postinst:
 	rm -f $@
 	mkdir -p build/$*/CONTROL
-	echo "chmod +x /media/cryptofs/usr/palm/applications/${APP_ID}/${NAME}" > $@
+	echo "chmod +x /media/cryptofs/apps/usr/palm/applications/${APP_ID}/${NAME}" > $@
 	chmod ugo+x $@
 
 clobber::
