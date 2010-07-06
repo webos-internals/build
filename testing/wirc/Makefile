@@ -1,9 +1,9 @@
 NAME     = wirc
 TITLE    = wIRC
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.2.99.1
+VERSION  = 0.2.99.1-1
 TYPE     = Application
-CATEGORY = System Utilities
+CATEGORY = Communication
 MAINTAINER = oil, PuffTheMagic, zsoc, egaudet, rwhitby
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WIRC
 ICON     = http://www.webos-internals.org/images/1/10/Icon_WebOSInternals_wIRC.png
@@ -58,7 +58,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 build/%/CONTROL/postinst:
 	rm -f $@
 	mkdir -p build/$*/CONTROL
-	echo "chmod +x ${D}/${NAME}" > $@
+	echo "chmod +x ${IPKG_OFFLINE_ROOT}/usr/palm/applications/${APP_ID}/${NAME}" > $@
 	chmod ugo+x $@
 
 clobber::
