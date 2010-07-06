@@ -1,8 +1,9 @@
 NAME     = wirc
 TITLE    = wIRC
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.2.99.1-1
+VERSION  = 0.2.99.1-2
 TYPE     = Application
+BLDFLAGS = -p
 CATEGORY = Communication
 MAINTAINER = oil, PuffTheMagic, zsoc, egaudet, rwhitby
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WIRC
