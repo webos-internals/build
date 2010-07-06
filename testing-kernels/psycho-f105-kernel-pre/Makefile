@@ -1,18 +1,18 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = F105 Thunderchief (Palm Pre/Pre+)
 CATEGORY = Experimental
-VERSIONS = 1.4.1-68 1.4.2-68 1.4.5-68
+VERSIONS = 1.4.1-69 1.4.2-69 1.4.5-69
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br>\
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-68", "log" : [ "Fix for current_mA in TS detection." ] }, \
+{ "version" : "${WEBOS_VERSION}-69", "log" : [ "Fix for current_mA in TS detection." ] }, \
 { "version" : "${WEBOS_VERSION}-67", "log" : [ "make screenstate monitor current and voltage. bug fixes. remove brightness checking. overclocking tweaks." ] }, \
 { "version" : "${WEBOS_VERSION}-60", "log" : [ "Voltage tweaking." ] }, \
 { "version" : "${WEBOS_VERSION}-59", "log" : [ "screenstate updates. CPU IDLE update.  New freqs." ] }, \
 { "version" : "${WEBOS_VERSION}-47", "log" : [ "Initial release for 1GHz support" ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-68: Fix for current_mA in TS detection.<br>${WEBOS_VERSION}-67: make screenstate monitor current and voltage. bug fixes. remove brightness checking. overclocking tweaks.<br>${WEBOS_VERSION}-60: Voltage tweaking.<br>${WEBOS_VERSION}-59: screenstate updates. CPU IDLE update.  New freqs.<br>${WEBOS_VERSION}-47: Initial release for 1GHz support
+CHANGELOG = ${WEBOS_VERSION}-69: Fix for current_mA in TS detection.<br>${WEBOS_VERSION}-67: make screenstate monitor current and voltage. bug fixes. remove brightness checking. overclocking tweaks.<br>${WEBOS_VERSION}-60: Voltage tweaking.<br>${WEBOS_VERSION}-59: screenstate updates. CPU IDLE update.  New freqs.<br>${WEBOS_VERSION}-47: Initial release for 1GHz support
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
