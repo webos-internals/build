@@ -150,6 +150,10 @@ ifndef NAME
 PREWARE_SANITY += $(error "Please define NAME in your Makefile")
 endif
 
+ifndef GIT_TAG 
+GIT_TAG="v${VERSION}"
+endif 
+
 download: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 
 ${DL_DIR}/${NAME}-${VERSION}.tar.gz:
@@ -157,10 +161,10 @@ ${DL_DIR}/${NAME}-${VERSION}.tar.gz:
 	$(call PREWARE_SANITY)
 	rm -rf build/`basename ${SRC_GIT} .git`
 	mkdir -p build
-	( cd build ; git clone -n ${SRC_GIT} ; cd `basename ${SRC_GIT} .git` ; git checkout v${VERSION} )
+	( cd build ; git clone -n ${SRC_GIT} ; cd `basename ${SRC_GIT} .git` ; git checkout ${GIT_TAG} )
 	mkdir -p ${DL_DIR}
 	tar -C build/`basename ${SRC_GIT} .git` -zcf $@ .
-	( cd build/`basename ${SRC_GIT} .git` ; git log --pretty="format:%ct" -n 1 v${VERSION} ) | \
+	( cd build/`basename ${SRC_GIT} .git` ; git log --pretty="format:%ct" -n 1 ${GIT_TAG} ) | \
 	python -c 'import os,sys; time = int(sys.stdin.read()); os.utime("$@",(time,time));'
 	rm -rf build/`basename ${SRC_GIT} .git`
 endif
