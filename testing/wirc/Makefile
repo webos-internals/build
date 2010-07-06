@@ -46,26 +46,19 @@ build/.built-${VERSION}: build/armv7.built-${VERSION} build/i686.built-${VERSION
 include ../../support/cross-compile.mk
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
-	rm -rf build/$*
-	( cd build/src/src ; \
+	( cd build/src/src/libpdl ; rm -f *.o ; rm -f *.so ; cd .. ; \
 	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc \
 		clobber ${NAME} )
 	mkdir -p ${D}
 	install -m 755 build/src/src/${NAME} ${D}
-	rm -rf build/src/src
 	cp -r build/src/* ${D}
+	rm -rf ${D}/src
 	touch $@
 
 build/%/CONTROL/postinst:
 	rm -f $@
 	mkdir -p build/$*/CONTROL
 	echo "chmod +x ${D}/${NAME}" > $@
-	chmod ugo+x $@
-
-build/%/CONTROL/prerm:
-	rm -f $@
-	mkdir -p build/$*/CONTROL
-	install -m 0775 build/src/control/prerm build/$*/CONTROL
 	chmod ugo+x $@
 
 clobber::
