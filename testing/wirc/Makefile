@@ -58,7 +58,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 build/%/CONTROL/postinst:
 	rm -f $@
 	mkdir -p build/$*/CONTROL
-	chmod +x ${IPKG_OFFLINE_ROOT}/usr/palm/applications/${APP_ID}/${NAME}" > $@
+	echo "chmod +x \${IPKG_OFFLINE_ROOT}/usr/palm/applications/${APP_ID}/${NAME}" > $@
 	chmod ugo+x $@
 
 clobber::
