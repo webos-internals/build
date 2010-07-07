@@ -1,7 +1,7 @@
 NAME     = wirc
 TITLE    = wIRC
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.2.99.1-3
+VERSION  = 0.2.99.1-4
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = Communication
@@ -56,12 +56,6 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	cp -r build/src/* ${D}
 	rm -rf ${D}/src
 	touch $@
-
-build/%/CONTROL/postinst:
-	rm -f $@
-	mkdir -p build/$*/CONTROL
-	echo "chmod +x /media/cryptofs/apps/usr/palm/applications/${APP_ID}/${NAME}" > $@
-	chmod ugo+x $@
 
 clobber::
 	rm -rf build
