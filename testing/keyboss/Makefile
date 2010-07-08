@@ -3,13 +3,14 @@ TITLE       = KeyBoss
 APP_ID      = org.webosinternals.${NAME}
 SIGNER      = org.webosinternals
 BLDFLAGS    = -p
-VERSION     = 0.1.2
+VERSION     = 0.1.3
 TYPE        = Application
 CATEGORY    = System Utilities
 HOMEPAGE    = 
 ICON        = 
 DESCRIPTION = Become the BOSS of your keyboard. This App/Service combo is intended to give the user as much control as possible over the functionality of the hard keyboard.  It also provides ability to emulate keyboard events, for use by projects like the Virtual Keyboard. Curently the application allows you to change the repeat rate and enable KeyCaps functionality.  <br>NOTE: The KeyCaps functionality (and keyboard emulation) requires the uinput module package.  Please install the uinput module found in Preware as well.
 CHANGELOG   = \
+0.1.3: Fix double for func logic. <br>\
 0.1.2: Fix bug causing things like wallpaper to reset after reboot. <br>\
 0.1.1: Fix sym key bug. <br>\
 0.1.0: Inception
