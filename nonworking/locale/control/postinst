@@ -1,0 +1,11 @@
+#!/bin/sh
+
+mkdir -p /media/internal/.local/lib/
+
+cp -dR $IPKG_OFFLINE_ROOT/locale /media/internal/.local/lib/
+
+if [ ! -e /usr/lib/locale ]
+then
+	ln -s /media/internal/.local/lib/locale /usr/lib/locale
+fi
+
