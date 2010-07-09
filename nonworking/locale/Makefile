@@ -12,6 +12,7 @@ LOCALES = cs_CZ.utf8 de_DE.utf8 en_CA.utf8 en_GB.utf8 en_US.utf8 es_MX.utf8 \
 	  es_US.utf8 fr_CA.utf8 fr_FR.utf8 he_IL.utf8 zh_CN.utf8
 
 .PHONY: package
+package: ipkgs/${APP_ID}_${VERSION}_all.ipk
 include ../../support/package.mk
 
 .PHONY: unpack
