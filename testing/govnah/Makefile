@@ -3,13 +3,14 @@ TITLE    = Govnah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.5.5
+VERSION  = 0.5.6
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
 DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature, load averages and memory usage.
 CHANGELOG = \
+0.5.6: Improved current graphing on main screen.<br>\
 0.5.5: First pass at adding current monitoring support.<br>\
 0.5.0: Rolled up all the 0.4.x alpha releases into a new public release. Major new features include Pixi support, memory reporting and Compcache configuration.<br>\
 0.4.17: Added Compcache configuration to saved profiles.<br>\
