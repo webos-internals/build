@@ -1,0 +1,8 @@
+#!/bin/sh
+
+mkdir -p /var/palm/event.d
+
+cp $IPKG_OFFLINE_ROOT/usr/palm/applications/org.webosinternals.speechd/etc/event.d/org.webosinternals.speechd /var/palm/event.d
+
+/sbin/start org.webosinternals.speechd
+

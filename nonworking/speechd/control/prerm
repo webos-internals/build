@@ -1,0 +1,6 @@
+#!/bin/sh
+
+/sbin/stop org.webosinternals.speechd
+
+rm -f /var/palm/event.d/org.webosinternals.speechd
+
