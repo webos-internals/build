@@ -1,8 +1,8 @@
 #!/bin/sh
 
-mkdir -p /media/internal/.local/lib/
+mkdir -p /media/internal/.local/lib/locale
 
-cp -dR $IPKG_OFFLINE_ROOT/locale /media/internal/.local/lib/
+tar -C /media/internal/.local/lib/locale -zxf $IPKG_OFFLINE_ROOT/usr/palm/applications/org.webosinternals.locale/locales.tar.gz
 
 if [ ! -e /usr/lib/locale ]
 then
