@@ -1,12 +1,15 @@
 NAME    = locale
 TITLE	= Locale Support Infrastructure
 APP_ID	= org.webosinternals.${NAME}
-VERSION	= 0.1.0
+SIGNER   = org.webosinternals
+BLDFLAGS = -p
+VERSION	= 7.3.0
 CATEGORY = Infrastructure
 TYPE	= Linux Application
-MAINTAINER = hape, noradtux
+HOMEPAGE = http://www.webos-internals.org/wiki/Application:Locale
 DESCRIPTION = Provides data files to enable localization in programs using the native localization methods like Navit.
-CHANGELOG = 0.1.0: Initial release, providing ${LOCALES}
+CHANGELOG = \
+7.3.0: Initial release, providing ${LOCALES}
 LOCALES = cs_CZ.utf8 de_DE.utf8 en_CA.utf8 en_GB.utf8 en_US.utf8 es_MX.utf8 \
 	  es_US.utf8 fr_CA.utf8 fr_FR.utf8 he_IL.utf8 zh_CN.utf8
 
