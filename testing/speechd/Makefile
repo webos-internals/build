@@ -6,6 +6,7 @@ BLDFLAGS = -p
 VERSION	= 0.7.1
 TYPE    = Linux Daemon
 CATEGORY = System Utilities
+DEPENDS  = org.webosinternals.locale
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:SpeechDispatcher
 ICON     = http://www.webos-internals.org/images/7/7d/SpeechDispatcher.png
 DESCRIPTION = This daemon provides speech synthesis.  At the moment, it is only used by the Navit application and there is no dedicated application front-end, but a Mojo service and application will be developed in the future.
