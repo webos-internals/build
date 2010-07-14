@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (Pixi/Pixi+)
 DEVICE = pixi
 CATEGORY = Experimental
-VERSIONS = 1.4.1-73 1.4.3-73 1.4.5-73
+VERSIONS = 1.4.1-74 1.4.3-74 1.4.5-74
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A testbed of kernel patches for the Palm Pixi/Pixi+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
@@ -15,7 +15,7 @@ All additions are disabled by default, and must be enabled by separate packages 
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-73", "log" : [ "Incorporate sbromwich changes" ] }, \
+{ "version" : "${WEBOS_VERSION}-74", "log" : [ "Back off sbromwich changes" ] }, \
 { "version" : "${WEBOS_VERSION}-62", "log" : [ "Disable MODVERSIONS." ] }, \
 { "version" : "${WEBOS_VERSION}-58", "log" : [ "Turn off some debug options" ] }, \
 { "version" : "${WEBOS_VERSION}-50", "log" : [ "Turn on all TCP congest algos and CPU governors" ] }, \
@@ -29,7 +29,6 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
 		 makefiletune/armMakefile.diff \
-		 warthogbuild/defconfig-folk-pixi.diff \
 		 defconfig/defconfig.pixi.cpugov defconfig/defconfig.pixi.tcpcong warthogbuild/defconfig-nodebug-pixi.patch
 KERNEL_MODULES = compcache/compcache-0.5.4
 
