@@ -1,15 +1,16 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = F102A Delta Dagger (Palm Pre/Pre+)
 CATEGORY = Experimental
-VERSIONS = 1.4.1-59 1.4.2-59 1.4.5-59
+VERSIONS = 1.4.1-75 1.4.2-75 1.4.5-75
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br>\
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-75", "log" : [ "Numerous screenstate updates. IO scheduler changes. No more screen brightness checking." ] }, \
 { "version" : "${WEBOS_VERSION}-59", "log" : [ "screenstate updates for charging.  CPU IDLE update. disable mem overcommit." ] }, \
 { "version" : "${WEBOS_VERSION}-43", "log" : [ "Initial public release, rebased off UberKernel ${WEBOS_VERSION}-40" ] }, \
 ]
-CHANGELOG =  ${WEBOS_VERSION}-59: screenstate updates for charging.  CPU IDLE update. disable mem overcommit.<br>${WEBOS_VERSION}-43: Initial public release, rebased off UberKernel ${WEBOS_VERSION}-40
+CHANGELOG =  ${WEBOS_VERSION}-75: Numerous screenstate updates. IO scheduler changes. No more screen brightness checking.<br>${WEBOS_VERSION}-59: screenstate updates for charging.  CPU IDLE update. disable mem overcommit.<br>${WEBOS_VERSION}-43: Initial public release, rebased off UberKernel ${WEBOS_VERSION}-40
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
