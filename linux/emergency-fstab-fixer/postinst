@@ -1,0 +1,21 @@
+#!/bin/sh
+
+PACKAGE=org.webosinternals.emergency-fstab-fixer
+
+# Handle execution as pmPostInstall.script
+if [ -z "$IPKG_OFFLINE_ROOT" ]; then
+    IPKG_OFFLINE_ROOT=/media/cryptofs/apps
+    mount -o remount,rw /
+fi
+
+VERSION=`grep PRODUCT_VERSION_STRING /etc/palm-build-info | sed -e 's/.*=Palm webOS \([0-9.]*\).*/\1/'`
+
+if [ "${VERSION}" != "1.4.5" ] ; then
+    echo "Emergency Fstab Fixer is only required for webOS 1.4.5"
+    exit 1
+fi
+
+sed -i -e 's/utf8,shortname=mixed.*/utf8,shortname=mixed,umask=0000\t0\t0/' /etc/fstab
+
+ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
+exit 0
