@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (Pre/Pre+)
 DEVICE = pre
 CATEGORY = Experimental
-VERSIONS = 1.4.1-73 1.4.2-73 1.4.5-73
+VERSIONS = 1.4.1-76 1.4.2-76 1.4.5-76 
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A testbed of kernel patches for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
@@ -18,6 +18,7 @@ All additions are disabled by default, and must be enabled by separate packages 
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-76", "log" : [ "Back out sbromwich changes. 550Mhz is gone but 800Mhz returns" ] }, \
 { "version" : "${WEBOS_VERSION}-73", "log" : [ "Incorporate sbromwich changes" ] }, \
 { "version" : "${WEBOS_VERSION}-69", "log" : [ "Pick up new screenstate changes by uNiXpSyChO" ] }, \
 { "version" : "${WEBOS_VERSION}-62", "log" : [ "Disable MODVERSIONS" ] }, \
@@ -34,15 +35,14 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-16", "log" : [ "Improved screenstate transition detection" ] }, \
 { "version" : "${WEBOS_VERSION}-13", "log" : [ "Initial public release" ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-73: Incorporate sbromwich changes.<br>${WEBOS_VERSION}-69: Pick up new screenstate changes by uNiXpSyChO.<br>${WEBOS_VERSION}-62: Disable MODVERSIONS.<br>${WEBOS_VERSION}-58: Turn off some debug options.<br>${WEBOS_VERSION}-56: Turn on all TCP congest algos and CPU governors. And a bit more.<br>${WEBOS_VERSION}-48: Updated compcache compile flags.<br>${WEBOS_VERSION}-43: Updated with latest postinst and prerm OTA safety measures.<br>${WEBOS_VERSION}-40: Enabled lower frequencies for screenstate minimum.<br>${WEBOS_VERSION}-38: Updated gcc toolchain as well as optimized compile flags.<br>${WEBOS_VERSION}-37: Include free swap in memory calculations.<br>${WEBOS_VERSION}-35: Added compcache compressed RAM swap kernel module (not loaded by default).<br>${WEBOS_VERSION}-32: Update and cleanup of charging code in screenstate governor.<br>${WEBOS_VERSION}-21: Limit IVA2 block to 360MHz as per the mystery bug mentioned in the Palm kernel patch.<br>${WEBOS_VERSION}-16: Improved screenstate transition detection.<br>${WEBOS_VERSION}-13: Initial public release
+CHANGELOG = ${WEBOS_VERSION}-76: Back out sbromwich changes. 550Mhz is gone but 800Mhz returns.<br>${WEBOS_VERSION}-73: Incorporate sbromwich changes.<br>${WEBOS_VERSION}-69: Pick up new screenstate changes by uNiXpSyChO.<br>${WEBOS_VERSION}-62: Disable MODVERSIONS.<br>${WEBOS_VERSION}-58: Turn off some debug options.<br>${WEBOS_VERSION}-56: Turn on all TCP congest algos and CPU governors. And a bit more.<br>${WEBOS_VERSION}-48: Updated compcache compile flags.<br>${WEBOS_VERSION}-43: Updated with latest postinst and prerm OTA safety measures.<br>${WEBOS_VERSION}-40: Enabled lower frequencies for screenstate minimum.<br>${WEBOS_VERSION}-38: Updated gcc toolchain as well as optimized compile flags.<br>${WEBOS_VERSION}-37: Include free swap in memory calculations.<br>${WEBOS_VERSION}-35: Added compcache compressed RAM swap kernel module (not loaded by default).<br>${WEBOS_VERSION}-32: Update and cleanup of charging code in screenstate governor.<br>${WEBOS_VERSION}-21: Limit IVA2 block to 360MHz as per the mystery bug mentioned in the Palm kernel patch.<br>${WEBOS_VERSION}-16: Improved screenstate transition detection.<br>${WEBOS_VERSION}-13: Initial public release
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
-KERNEL_PATCHES = warthogbuild/opp6-720-opp7-1050-min-opp5.patch overclocking/defconfig-standard.patch \
+KERNEL_PATCHES = warthogbuild/opp5-720-opp6-800-opp7-1050.patch overclocking/defconfig-standard.patch \
 		 sensors/sensors_temp_omap34xx.patch sensors/defconfig-safe.patch \
 		 screenstate/screenstate.patch \
 		 warthogbuild/armMakefile.diff \
-		 warthogbuild/defconfig-folk-pre.diff \
 		 defconfig/defconfig.pre.cpugov	defconfig/defconfig.pre.tcpcong warthogbuild/defconfig-nodebug-pre.patch \
 		 compcache/compcache.patch compcache/lowmemnotify-total-memory.patch
 KERNEL_MODULES = compcache/compcache-0.5.4
