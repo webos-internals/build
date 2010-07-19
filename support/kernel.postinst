@@ -46,7 +46,7 @@ if [ "${FORCE_INSTALL}" != "1" ] ; then
   # Make sure all existing target files are in virgin condition
     echo "Verifying no existing modifications to target files ..."
     for file in `find boot lib/modules -type f -print` ; do
-	md5sum="`grep -e \*./$file$ ${SRCDIR}/md5sums | awk '{print $1}'`"
+	md5sum="`grep -h -e \*./$file$ /usr/lib/ipkg/info/kernel-*.md5sums | awk '{print $1}'`"
 	[ ! -f "/$file" ] || [ "`md5sum /$file | awk '{print $1}'`" = "$md5sum" ] || \
 	    { echo "Verification failed on /$file" ; error=1 ; }
     done

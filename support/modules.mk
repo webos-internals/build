@@ -35,36 +35,10 @@ DEFCONFIG = omap_sirloin_3430_defconfig
 KERNEL_TYPE = palm-joplin-3430
 endif
 
-ifeq ("${DEVICE}","pixi")
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp200ewwsprint-${WEBOS_VERSION}.jar
-else
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ewwsprint-${WEBOS_VERSION}.jar
-endif
 COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
 
 ifeq ("${WEBOS_VERSION}", "1.4.1")
-ifeq ("${DEVICE}","pixi")
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ueu-wr-${WEBOS_VERSION}.jar
-else
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
-endif
 COMPATIBLE_VERSIONS = 1.4.1 | 1.4.1.1 | 1.4.1.3
-endif
-
-ifeq ("${WEBOS_VERSION}", "1.4.2")
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp101ewwatt-${WEBOS_VERSION}.jar
-endif
-
-ifeq ("${WEBOS_VERSION}", "1.4.3")
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewwatt-${WEBOS_VERSION}.jar
-endif
-
-ifeq ("${WEBOS_VERSION}", "1.4.5")
-ifeq ("${DEVICE}","pixi")
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewweu-wr-${WEBOS_VERSION}.jar
-else
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
-endif
 endif
 
 ifneq ("${KERNEL_IMAGE}", "")
@@ -171,7 +145,7 @@ build/%/CONTROL/prerm:
 			../../autopatch/prerm${SUFFIX} > $@
 	chmod ugo+x $@
 
-build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
+build/arm.built-%: build/.unpacked-%
 	mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/boot
 	if [ -n "${KERNEL_DEFCONFIG}" ] ; then \
 	  cp build/src-$*/patches/${KERNEL_DEFCONFIG} build/src-$*/linux-${KERNEL_VERSION}/.config ; \
@@ -208,9 +182,6 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 		cp build/src-$*/linux-${KERNEL_VERSION}/.config \
 			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/config-2.6.24-${KERNEL_TYPE}; \
 	fi
-	unzip -p ${WEBOS_DOCTOR} resources/webOS.tar | \
-	tar -O -x -f - ./nova-cust-image-${CODENAME}.rootfs.tar.gz | \
-	tar -C build/arm/usr/palm/applications/${APP_ID}/additional_files/ -m -z -x -f - ./md5sums
 	if [ -n "${KERNEL_UPSTART}" ] ; then \
 		mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/var/palm/event.d ; \
 		install -m 755 build/src-$*/patches/${KERNEL_UPSTART} \
