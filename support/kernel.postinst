@@ -157,9 +157,9 @@ fi
 echo "Replacement kernel successfully installed"
 
 if [ "${FORCE_INSTALL}" = "1" ] ; then
-    echo "Removing recovery kernel package"
-    /usr/bin/ipkg -o ${APPS} remove ${PID}
-    rm -rf ${APPS}/usr/palm/applications/${PID}
+    echo "Removing all WebOS Internals kernel packages"
+    /usr/bin/ipkg -o ${APPS} remove org.webosinternals.kernels.*
+    rm -rf ${APPS}/usr/palm/applications/org.webosinternals.kernels.*
 fi
 
 exit 0
