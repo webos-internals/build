@@ -2,6 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = Palm Kernel (Pixi/Pixi+)
 DEVICE = pixi
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
+CATEGORY = Recovery
 FORCE_INSTALL = 1
 VERSIONS = 1.4.0-8 1.4.1-8 1.4.3-8 1.4.5-8
 APPINFO_DESCRIPTION = Use this package to reinstall the official webOS ${WEBOS_VERSION} kernel from Palm.<br>\
