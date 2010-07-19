@@ -4,13 +4,14 @@ DEVICE = pixi
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 CATEGORY = Recovery
 FORCE_INSTALL = 1
-VERSIONS = 1.4.0-7 1.4.1-7 1.4.3-7 1.4.5-7
+VERSIONS = 1.4.0-8 1.4.1-8 1.4.3-8 1.4.5-8
 APPINFO_DESCRIPTION = Use this package to reinstall the official webOS ${WEBOS_VERSION} kernel from Palm.<br>\
 This package will refuse to operate on a device with an incompatible webOS version.<br>\
 Note that only files related to the Linux kernel are restored, and these will be forcibly overwritten regardless of their current state.  No other files are modified in any way.<br>\
 In particular, any non-kernel files modified by overclocking patches or other modifications will not be restored. You should contact the maintainer of such patches for recovery procedures.<br>\
 On removal, this package does not modify any files, not does it restore any previous state of the kernel.  The sole purpose of this package is to install the official webOS ${WEBOS_VERSION} kernel from Palm and to do nothing else.
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-8", "log" : [ "Remove all WebOS Internals kernel packages" ] }, \
 { "version" : "${WEBOS_VERSION}-7", "log" : [ "Added webOS 1.4.1.3 compatibility" ] }, \
 { "version" : "${WEBOS_VERSION}-6", "log" : [ "Remove additional kernel upstart scripts" ] }, \
 { "version" : "${WEBOS_VERSION}-5", "log" : [ "Updated for the Palm Pixi/Pixi+" ] }, \
@@ -24,6 +25,7 @@ SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KE
 KERNEL_PATCHES =
 
 include ../../support/kernel.mk
+CATEGORY = Recovery
 
 build/arm.built-${VERSION}: ${WEBOS_DOCTOR}
 	rm -rf build/arm
