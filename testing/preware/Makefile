@@ -3,13 +3,14 @@ TITLE	 = Preware
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.2.1
+VERSION  = 1.2.2
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
 ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, kernels, services and plugins.  Preware is also able to access official Palm App Catalog, Web Distribution and Beta Distribution feeds.<br><b>Requires webOS 1.4.0 or later</b>.
 CHANGELOG = \
+1.2.2: Enable the Install Package feature to also work for incorrectly formatted filenames.<br>\
 1.2.1: Robustified the Install Package feature - will now run post-install scripts for all correctly formatted filenames (packageid_version_arch.ipk).<br>\
 1.2.0: Added Install Package functionality, allowing installation of packages from URLs and local files. Moved Saved Package List from the main screen to the app menu.<br>\
 1.1.7: Added support for Kernel Modules.<br>\
