@@ -1,7 +1,7 @@
 NAME     = haxedemo
 TITLE    = haXe Demo
 APP_ID   = com.eclecticdesignstudio.${NAME}
-VERSION  = 0.1
+VERSION  = 0.1.2
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = Demos
@@ -14,7 +14,7 @@ SCREENSHOTS =
 LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/haxe/demo.git
-GIT_TAG = v0.1
+GIT_TAG = v0.1.2
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
