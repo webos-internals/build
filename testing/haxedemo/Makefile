@@ -1,14 +1,14 @@
 NAME     = haxedemo
-TITLE    = haXedemo
+TITLE    = haXe Demo
 APP_ID   = com.eclecticdesignstudio.${NAME}
 VERSION  = 0.1
 TYPE     = Application
 BLDFLAGS = -p
-CATEGORY = Demo
+CATEGORY = Demos
 MAINTAINER = elyon, zsoc
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:haXedemo
 ICON     = http://www.webos-internals.org/wiki/Image:Haxedemoicon.png
-DESCRIPTION = A fun little physics demo showing off haXe on webos. Controls: tap, 1-6. <b><font color=red>THIS ONLY WORKS with webOS >=1.4.5</font></b>
+DESCRIPTION = A fun little physics demo showing off haXe on webOS. Controls: tap to make block fire onto the scene, hit 1-6 to see all 6 demonstrations. <b><font color=red>THIS ONLY WORKS with webOS >=1.4.5</font></b>
 CHANGELOG = 0.1: initial demo release.
 SCREENSHOTS = 
 LICENSE  = GPL v2 Open Source
