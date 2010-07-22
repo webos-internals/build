@@ -228,6 +228,12 @@ endif
 ifdef POSTREMOVEFLAGS
 	/bin/echo -n ", \"PostRemoveFlags\":\"${POSTREMOVEFLAGS}\"" >> $@
 endif
+ifdef MINWEBOSVERSION
+	/bin/echo -n ", \"MinWebOSVersion\":\"${MINWEBOSVERSION}\"" >> $@
+endif
+ifdef DEVICECOMPATIBILITY
+	/bin/echo -n ", \"DeviceCompatibility\":${DEVICECOMPATIBILITY}" >> $@
+endif
 	echo " }" >> $@
 	touch $@
 
