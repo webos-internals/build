@@ -2,6 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (Pixi/Pixi+)
 DEVICE = pixi
 CATEGORY = Experimental
+DEVICECOMPATIBILITY = [\"Pixi\"]
 VERSIONS = 1.4.1-74 1.4.3-74 1.4.5-74
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A testbed of kernel patches for the Palm Pixi/Pixi+, rolled into a single OTA-safe installation package.<br>\
