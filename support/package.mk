@@ -234,6 +234,15 @@ endif
 ifdef DEVICECOMPATIBILITY
 	/bin/echo -n ", \"DeviceCompatibility\":${DEVICECOMPATIBILITY}" >> $@
 endif
+ifdef PREINSTALLMESSAGE
+	/bin/echo -n ", \"PreInstallMessage\":\"${PREINSTALLMESSAGE}\"" >> $@
+endif
+ifdef PREUPDATEMESSAGE
+	/bin/echo -n ", \"PreUpdateMessage\":\"${PREUPDATEMESSAGE}\"" >> $@
+endif
+ifdef PREREMOVEMESSAGE
+	/bin/echo -n ", \"PreRemoveMessage\":\"${PREREMOVEMESSAGE}\"" >> $@
+endif
 	echo " }" >> $@
 	touch $@
 
