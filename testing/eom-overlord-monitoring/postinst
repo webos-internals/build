@@ -10,7 +10,7 @@ fi
 
 # Stop uploading stuff to Palm
 stop uploadd
-sed -i -e 's/^spawn/#spawn/' /etc/event.d/uploadd
+sed -i -e 's/^respawn/#respawn/' /etc/event.d/uploadd
 sed -i -e 's/^exec/#exec/' /etc/event.d/uploadd
 
 ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
