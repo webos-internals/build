@@ -28,11 +28,13 @@ ifeq ("${DEVICE}","pixi")
 CODENAME = pixie
 DEFCONFIG = chuck_defconfig
 KERNEL_TYPE = palm-chuck
+DEVICECOMPATIBILITY = [\"Pixi\"]
 else
 DEVICE = pre
 CODENAME = castle
 DEFCONFIG = omap_sirloin_3430_defconfig
 KERNEL_TYPE = palm-joplin-3430
+DEVICECOMPATIBILITY = [\"Pre\"]
 endif
 
 ifeq ("${DEVICE}","pixi")
