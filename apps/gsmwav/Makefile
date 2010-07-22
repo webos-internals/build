@@ -1,7 +1,7 @@
 NAME     = gsmwav
 APP_ID   = org.webosinternals.gstcodecs.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 1.1
+VERSION  = 1.1-1
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:GstCodecs
 MAINTAINER = zsoc
 TITLE   = GSM WAV Codec
@@ -14,6 +14,7 @@ LICENSE  = GPL
 SCREENSHOTS =
 
 SRC_GIT = git://git.webos-internals.org/gstcodecs/gsmwav.git
+GIT_TAG = v1.1
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
