@@ -1,7 +1,7 @@
 TYPE = Linux Application
-NAME = end-of-messages
+NAME = eom-overlord-monitoring
 VERSION = 1.0.0
-TITLE = End Of Messages
+TITLE = EOM Overlord Monitoring
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DESCRIPTION = By default, Palm uploads multiple logs to ps.palmws.com. This stops that process.
 APP_ID = org.webosinternals.${NAME}

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PACKAGE=org.webosinternals.end-of-messages
+PACKAGE=org.webosinternals.eom-overlord-monitoring
 
 # Handle execution as pmPostInstall.script
 if [ -z "$IPKG_OFFLINE_ROOT" ]; then
