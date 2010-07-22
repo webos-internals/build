@@ -16,7 +16,7 @@ SCREENSHOTS =
 SRC_GIT = git://git.webos-internals.org/gstcodecs/gsmwav.git
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk
+package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
 include ../../support/package.mk
 
 include ../../support/download.mk
@@ -27,7 +27,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	touch $@
 
-build/.built-${VERSION}: build/armv7.built-${VERSION} build/armv6.built-${VERSION}
+build/.built-${VERSION}: build/arm.built-${VERSION}
 	touch $@
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
