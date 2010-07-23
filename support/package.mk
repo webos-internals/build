@@ -228,6 +228,21 @@ endif
 ifdef POSTREMOVEFLAGS
 	/bin/echo -n ", \"PostRemoveFlags\":\"${POSTREMOVEFLAGS}\"" >> $@
 endif
+ifdef MINWEBOSVERSION
+	/bin/echo -n ", \"MinWebOSVersion\":\"${MINWEBOSVERSION}\"" >> $@
+endif
+ifdef DEVICECOMPATIBILITY
+	/bin/echo -n ", \"DeviceCompatibility\":${DEVICECOMPATIBILITY}" >> $@
+endif
+ifdef PREINSTALLMESSAGE
+	/bin/echo -n ", \"PreInstallMessage\":\"${PREINSTALLMESSAGE}\"" >> $@
+endif
+ifdef PREUPDATEMESSAGE
+	/bin/echo -n ", \"PreUpdateMessage\":\"${PREUPDATEMESSAGE}\"" >> $@
+endif
+ifdef PREREMOVEMESSAGE
+	/bin/echo -n ", \"PreRemoveMessage\":\"${PREREMOVEMESSAGE}\"" >> $@
+endif
 	echo " }" >> $@
 	touch $@
 

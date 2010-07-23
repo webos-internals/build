@@ -7,6 +7,11 @@ DESCRIPTION = Regression test for simple webOS application. No dependencies, no 
 TYPE	 = Application
 CATEGORY = Regression Tests
 FEED     = Regression Tests
+MINWEBOSVERSION = 1.4.5
+DEVICECOMPATIBILITY = [\"Pre\"]
+PREINSTALLMESSAGE = This is a PreInstallMessage
+PREUPDATEMESSAGE = This is a PreUpdateMessage
+PREREMOVEMESSAGE = This is a PreRemoveMessage
 
 .PHONY: package
 ifneq ("${VERSIONS}", "")
