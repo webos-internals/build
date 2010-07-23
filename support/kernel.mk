@@ -227,7 +227,6 @@ build/.unpacked-%: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}.tgz 
 
 ifeq ("${WEBOS_VERSION}", "1.4.3")
 
-CATEGORY = Temporary
 TEMPVER  = 1.4.1
 
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${TEMPVER}/linuxkernel-${KERNEL_VERSION}.tgz
