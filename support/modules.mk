@@ -263,32 +263,6 @@ build/.unpacked-${VERSION}: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}.t
 
 endif
 
-ifeq ("${WEBOS_VERSION}", "1.4.5")
-
-CATEGORY = Temporary
-TEMPVER  = 1.4.1
-
-KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${TEMPVER}/linuxkernel-${KERNEL_VERSION}.tgz
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${TEMPVER}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
-
-build/.unpacked-${VERSION}: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}.tgz \
-			    ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}-patch-${DEVICE}.gz \
-			    ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	rm -rf build/src-${VERSION}
-	mkdir -p build/src-${VERSION}/patches
-	tar -C build/src-${VERSION} -xf ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}.tgz
-	zcat ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}-patch-${DEVICE}.gz | \
-		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 
-	tar -C build/src-${VERSION}/patches -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	if [ -n "${KERNEL_PATCHES}" ] ; then \
-	  ( cd build/src-${VERSION}/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
-	  ( cd build/src-${VERSION}/patches ; cat ${KERNEL_PATCHES} ) | \
-		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 ; \
-	fi
-	touch $@
-
-endif
-
 ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}.tgz:
 	rm -f $@ $@.tmp
 	mkdir -p ${DL_DIR}

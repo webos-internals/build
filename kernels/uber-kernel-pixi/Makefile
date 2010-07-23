@@ -2,8 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Pixi/Pixi+)
 DEVICE   = pixi
 CATEGORY = Stable
-DEVICECOMPATIBILITY = [\"Pixi\"]
-VERSIONS = 1.4.1-58 1.4.3-58
+VERSIONS = 1.4.1-58 1.4.3-58 1.4.5-58
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pixi/Pixi+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
 Current additions include:<ul>\
@@ -20,7 +19,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-40", "log" : [ "First Pixi custom kernel" ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-50: Incorporated compile flag performance improvements.<br>\
+${WEBOS_VERSION}-58: Incorporated compile flag performance improvements.<br>\
 ${WEBOS_VERSION}-43: Updated with latest postinst and prerm OTA safety measures.<br>\
 ${WEBOS_VERSION}-40: First Pixi custom kernel
 
