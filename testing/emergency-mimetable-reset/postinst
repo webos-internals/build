@@ -5,10 +5,7 @@ PACKAGE=org.webosinternals.emergency-mimetable-reset
 # Handle execution as pmPostInstall.script
 if [ -z "$IPKG_OFFLINE_ROOT" ]; then
     IPKG_OFFLINE_ROOT=/media/cryptofs/apps
-    mount -o remount,rw /
 fi
-
-VERSION=`grep PRODUCT_VERSION_STRING /etc/palm-build-info | sed -e 's/.*=Palm webOS \([0-9.]*\).*/\1/'`
 
 /usr/bin/luna-send -n 1 luna://com.palm.applicationManager/clearMimeTable '{}'
 
