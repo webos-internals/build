@@ -3,9 +3,11 @@ PATCH = top-bar/${NAME}.patch
 TITLE = System Menu Mode Menu
 DESCRIPTION = Adds mode menu to the left corner of the top bar. This is only useful if you have Mode Switcher installed. This menu enables changing of modes manually through the menu.<br/><br/>Depends: org.webosinternals.patches.top-bar-system-menu-initial-framework
 CATEGORY = Top Bar
-VERSIONS = 1.4.0-40 1.4.1-10
+VERSIONS = 1.4.0-54 1.4.1-10 1.4.5-11
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
-SCREENSHOTS =
+SCREENSHOTS = [\
+\"http://www.webos-internals.org\",\
+\"http://www.webos-internals.org\" ]
 META_SUB_VERSION = 1
 
 include ../common.mk
@@ -13,4 +15,4 @@ DEPENDS := ${DEPENDS}, org.webosinternals.patches.top-bar-system-menu-initial-fr
 include ../modifications.mk
 
 MAINTAINER = sconix
-HOMEPAGE = http://forums.precentral.net/homebrew-apps/224544-mode-switcher.html
+HOMEPAGE = http://forums.precentral.net/webos-patches/245440-patch-top-bar-system-menus-status-today-device-menus.html
