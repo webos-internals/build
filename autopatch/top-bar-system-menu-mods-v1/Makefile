@@ -11,7 +11,7 @@ SCREENSHOTS = [\
 META_SUB_VERSION = 1
 
 include ../common.mk
-DEPENDS := ${DEPENDS}, org.webosinternals.patches.top-bar-system-menu-initial-framework
+DEPENDS := ${DEPENDS}, org.webosinternals.patches.top-bar-system-menu-initial-framework, ca.canucksoftware.systoolsmgr
 include ../modifications.mk
 
 MAINTAINER = sconix
