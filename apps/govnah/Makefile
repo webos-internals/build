@@ -3,13 +3,19 @@ TITLE    = Govnah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.5.0
+VERSION  = 0.6.1
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
 DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature, load averages and memory usage.
 CHANGELOG = \
+0.6.1: Rolled up all the 0.5.x alpha releases into a new public release. Major new features include current monitoring, and a revamped Advanced Settings screen now located in the Profiles area.<br>\
+0.5.9: Renamed the battery current display and inverted the polarity again. Disabled the compcache settings scene if compcache is not available.<br>\
+0.5.8: Fixed memory leak, suspected of causing the eventual hang bug.<br>\
+0.5.7: Revamped current draw display, including inverting the polarity. Added io schedulers and tcp congestion control (no profile support yet).<br>\
+0.5.6: Improved current graphing on main screen.<br>\
+0.5.5: First pass at adding current monitoring support.<br>\
 0.5.0: Rolled up all the 0.4.x alpha releases into a new public release. Major new features include Pixi support, memory reporting and Compcache configuration.<br>\
 0.4.17: Added Compcache configuration to saved profiles.<br>\
 0.4.16: Fixed the obscure bug in applying a profile (new min greater than current max, new max less than current min).<br>\
@@ -55,6 +61,7 @@ SRC_GIT = git://git.webos-internals.org/applications/govnah.git
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
 include ../../support/package.mk
+include ../../support/head.mk
 
 include ../../support/download.mk
 

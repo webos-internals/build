@@ -46,8 +46,11 @@ if [ "${FORCE_INSTALL}" != "1" ] ; then
   # Make sure all existing target files are in virgin condition
     echo "Verifying no existing modifications to target files ..."
     for file in `find boot lib/modules -type f -print` ; do
-	md5sum="`grep -e \*./$file$ ${SRCDIR}/md5sums | awk '{print $1}'`"
-	[ ! -f "/$file" ] || [ "`md5sum /$file | awk '{print $1}'`" = "$md5sum" ] || \
+	md5sum1="`grep    -e \*./$file$ ${SRCDIR}/md5sums                   | awk '{print $1}'`"
+	md5sum2="`grep -h -e \*./$file$ /usr/lib/ipkg/info/kernel-*.md5sums | awk '{print $1}'`"
+	[ ! -f "/$file" ] || \
+	    [ "`md5sum /$file | awk '{print $1}'`" = "$md5sum1" ] || \
+	    [ "`md5sum /$file | awk '{print $1}'`" = "$md5sum2" ] || \
 	    { echo "Verification failed on /$file" ; error=1 ; }
     done
 fi
@@ -154,9 +157,9 @@ fi
 echo "Replacement kernel successfully installed"
 
 if [ "${FORCE_INSTALL}" = "1" ] ; then
-    echo "Removing recovery kernel package"
-    /usr/bin/ipkg -o ${APPS} remove ${PID}
-    rm -rf ${APPS}/usr/palm/applications/${PID}
+    echo "Removing all WebOS Internals kernel packages"
+    /usr/bin/ipkg -o ${APPS} remove org.webosinternals.kernels.*
+    rm -rf ${APPS}/usr/palm/applications/org.webosinternals.kernels.*
 fi
 
 exit 0

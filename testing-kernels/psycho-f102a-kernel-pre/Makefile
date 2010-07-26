@@ -1,7 +1,8 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = F102A Delta Dagger (Palm Pre/Pre+)
 CATEGORY = Experimental
-VERSIONS = 1.4.1-75 1.4.2-75 1.4.5-75
+DEVICECOMPATIBILITY = [\"Pre\"]
+VERSIONS = 1.4.1-83 1.4.2-83 1.4.5-83
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br>\
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}

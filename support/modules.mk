@@ -28,11 +28,13 @@ ifeq ("${DEVICE}","pixi")
 CODENAME = pixie
 DEFCONFIG = chuck_defconfig
 KERNEL_TYPE = palm-chuck
+DEVICECOMPATIBILITY = [\"Pixi\"]
 else
 DEVICE = pre
 CODENAME = castle
 DEFCONFIG = omap_sirloin_3430_defconfig
 KERNEL_TYPE = palm-joplin-3430
+DEVICECOMPATIBILITY = [\"Pre\"]
 endif
 
 ifeq ("${DEVICE}","pixi")
@@ -237,33 +239,6 @@ build/.unpacked-%: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}.tgz 
 
 ifeq ("${WEBOS_VERSION}", "1.4.3")
 
-CATEGORY = Temporary
-TEMPVER  = 1.4.1
-
-KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${TEMPVER}/linuxkernel-${KERNEL_VERSION}.tgz
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${TEMPVER}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
-
-build/.unpacked-${VERSION}: ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}.tgz \
-			    ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}-patch-${DEVICE}.gz \
-			    ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	rm -rf build/src-${VERSION}
-	mkdir -p build/src-${VERSION}/patches
-	tar -C build/src-${VERSION} -xf ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}.tgz
-	zcat ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${TEMPVER}-patch-${DEVICE}.gz | \
-		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 
-	tar -C build/src-${VERSION}/patches -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	if [ -n "${KERNEL_PATCHES}" ] ; then \
-	  ( cd build/src-${VERSION}/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
-	  ( cd build/src-${VERSION}/patches ; cat ${KERNEL_PATCHES} ) | \
-		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 ; \
-	fi
-	touch $@
-
-endif
-
-ifeq ("${WEBOS_VERSION}", "1.4.5")
-
-CATEGORY = Temporary
 TEMPVER  = 1.4.1
 
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${TEMPVER}/linuxkernel-${KERNEL_VERSION}.tgz

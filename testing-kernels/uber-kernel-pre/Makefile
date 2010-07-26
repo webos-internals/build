@@ -2,7 +2,8 @@ NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Pre/Pre+)
 DEVICE = pre
 CATEGORY = Experimental
-VERSIONS = 1.4.1-58 1.4.2-58 1.4.5-58
+DEVICECOMPATIBILITY = [\"Pre\"]
+VERSIONS = 1.4.1-74 1.4.2-74 1.4.5-74
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
 Current additions include:<ul>\
@@ -17,6 +18,7 @@ All additions are disabled by default, and must be enabled by using the Govnah a
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-74", "log" : [ "Limited frequency to 500MHz when charging on Touchstone to prevent overheating", "Improved verification of target files for no existing modifications" ] }, \
 { "version" : "${WEBOS_VERSION}-58", "log" : [ "Limited frequency to 500MHz when charging at 1A to prevent overheating" ] }, \
 { "version" : "${WEBOS_VERSION}-50", "log" : [ "Incorporated compile flag performance improvements" ] }, \
 { "version" : "${WEBOS_VERSION}-43", "log" : [ "Updated with latest postinst and prerm OTA safety measures" ] }, \
@@ -29,6 +31,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-13", "log" : [ "Initial public release" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-74: Limited frequency to 500MHz when charging on Touchstone to prevent overheating. Improved verification of target files for no existing modifications.<br>\
 ${WEBOS_VERSION}-58: Limited frequency to 500MHz when charging at 1A to prevent overheating.<br>\
 ${WEBOS_VERSION}-50: Incorporated compile flag performance improvements.<br>\
 ${WEBOS_VERSION}-43: Updated with latest postinst and prerm OTA safety measures.<br>\

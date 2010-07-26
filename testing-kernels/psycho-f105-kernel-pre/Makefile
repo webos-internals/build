@@ -1,11 +1,15 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = F105 Thunderchief (Palm Pre/Pre+)
 CATEGORY = Experimental
-VERSIONS = 1.4.1-74 1.4.2-74 1.4.5-74
+DEVICECOMPATIBILITY = [\"Pre\"]
+VERSIONS = 1.4.1-85 1.4.2-85 1.4.5-85
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br>\
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-85", "log" : [ "added low temp reset on overheating. add nexgen-screenstate. bump DSP rate" ] }, \
+{ "version" : "${WEBOS_VERSION}-83", "log" : [ "match SR71 OPP6 voltage. repackage" ] }, \
+{ "version" : "${WEBOS_VERSION}-76", "log" : [ "re-enable memory overcommit. put 500MHz voltage back and bump up 1GHz voltage." ] }, \
 { "version" : "${WEBOS_VERSION}-74", "log" : [ "Fix for PC USB charging." ] }, \
 { "version" : "${WEBOS_VERSION}-69", "log" : [ "Fix for current_mA in TS detection." ] }, \
 { "version" : "${WEBOS_VERSION}-67", "log" : [ "make screenstate monitor current and voltage. bug fixes. remove brightness checking. overclocking tweaks." ] }, \
@@ -13,13 +17,13 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-59", "log" : [ "screenstate updates. CPU IDLE update.  New freqs." ] }, \
 { "version" : "${WEBOS_VERSION}-47", "log" : [ "Initial release for 1GHz support" ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-74: Fix for PC USB charging.<br>${WEBOS_VERSION}-69: Fix for current_mA in TS detection.<br>${WEBOS_VERSION}-67: make screenstate monitor current and voltage. bug fixes. remove brightness checking. overclocking tweaks.<br>${WEBOS_VERSION}-60: Voltage tweaking.<br>${WEBOS_VERSION}-59: screenstate updates. CPU IDLE update.  New freqs.<br>${WEBOS_VERSION}-47: Initial release for 1GHz support
+CHANGELOG = ${WEBOS_VERSION}-85: added low temp reset on overheating. add nexgen-screenstate. bump DSP rate<br>${WEBOS_VERSION}-83: match SR71 OPP6 voltage. repackage<br>${WEBOS_VERSION}-76: re-enable memory overcommit. put 500MHz voltage back and bump up 1GHz voltage.<br>${WEBOS_VERSION}-74: Fix for PC USB charging.<br>${WEBOS_VERSION}-69: Fix for current_mA in TS detection.<br>${WEBOS_VERSION}-67: make screenstate monitor current and voltage. bug fixes. remove brightness checking. overclocking tweaks.<br>${WEBOS_VERSION}-60: Voltage tweaking.<br>${WEBOS_VERSION}-59: screenstate updates. CPU IDLE update.  New freqs.<br>${WEBOS_VERSION}-47: Initial release for 1GHz support
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = overclocking/F105-overclocking.patch \
 		 sensors/sensors_temp_omap34xx.patch \
-		 screenstate/screenstate.patch screenstate/cap-min-freq.patch \
+		 psychobuild/nexgen-screenstate.patch \
 		 compcache/compcache.patch memory/tmc_mem.patch \
 		 makefiletune/armMakefile.diff
 KERNEL_MODULES = compcache/compcache-0.5.4
