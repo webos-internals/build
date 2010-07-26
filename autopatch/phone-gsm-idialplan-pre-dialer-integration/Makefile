@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = phone/${NAME}.patch
 TITLE = GSM iDialPlan Pre Dialer Integration
-DESCRIPTION = Integrates a dialplan created by iDialPlan in the Pre standard dialer. Numbers to be dialed are adapted on the fly depending on being abroad or at home. Needs the iDialPlan App for setup.
+DESCRIPTION = Integrates iDialPLan into the Pre standard dialer. v0.9: First number after a boot dials OK now; disable/enable by dialing 0000x now; 1.4.5 OK. Patch 0.9 requires iDialPLan 0.9.x. An enabled iDP takes over so called normalization of the std. dialer. Setting a dialplan for the patch can be done in the App only.
 CATEGORY = Phone
-VERSIONS = 1.3.5-37 1.4.0-38 1.4.1-7 1.4.2-1 1.4.3-1 1.4.5-1
+VERSIONS = 1.3.5-37 1.4.0-52 1.4.1-24 1.4.2-9 1.4.3-3 1.4.5-8
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
