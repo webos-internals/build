@@ -3,14 +3,24 @@ TITLE	 = Preware
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.1.4
+VERSION  = 1.2.6
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
 ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
+MINWEBOSVERSION = 1.4.0
 DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, kernels, services and plugins.  Preware is also able to access official Palm App Catalog, Web Distribution and Beta Distribution feeds.<br><b>Requires webOS 1.4.0 or later</b>.
 CHANGELOG = \
-1.1.4: Fixed hang on package download failures.<br>\
+1.2.6: Remove most of the curl download progress messages from the ipkg log (this fixes a buffer overrun crash).<br>\
+1.2.5: Added Ask At Launch option to update preference. Added Blacklist. German Translation updates. Fixed update banner problem. Fixed package with too many dependent packages problem.<br>\
+1.2.4: Added support for MinWebOSVersion, DeviceCompatibility and PreActionMessage package attributes.<br>\
+1.2.3: Enable the Install Package feature to also work for incorrectly formatted filenames.<br>\
+1.2.1: Robustified the Install Package feature - will now run post-install scripts for all correctly formatted filenames (packageid_version_arch.ipk).<br>\
+1.2.0: Added Install Package functionality, allowing installation of packages from URLs and local files. Moved Saved Package List from the main screen to the app menu.<br>\
+1.1.7: Added support for Kernel Modules.<br>\
+1.1.5: Use a gentler reboot procedure to allow open files to be flushed to disk.<br>\
+1.1.4: Fixed a subtle bug in the packaging scripts. No functional changes.<br>\
+1.1.3: Fixed hang on package download failures.<br>\
 1.1.2: Added support for the ENABLE_TESTING_FEEDS Meta-Doctor feature. Removed the tag line about eventually reaching 1.0. Minor French translation updates, courtesy of Yannick LE NY.<br>\
 1.1.1: Added languages field in package descriptions. Added preference to only show packages with English descriptions.<br>\
 1.1.0: Now defaults (selectable by a preference option) to using an alternative installation method to avoid the webOS 1.4 rescan bug which closes and stops notifications from your phone, email and messaging applications. Updated German and French translations, courtesy of Markus Leutwyler and Yannick LE NY. Fixed deletion of disabled feeds. Added service version number to the ipkgservice API. Robustified the service upgrade process.
