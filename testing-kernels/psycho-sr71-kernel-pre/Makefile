@@ -22,9 +22,10 @@ KERNEL_PATCHES = psychobuild/SR71-overclocking.patch \
 		 psychobuild/nexgen-screenstate.patch \
 		 compcache/compcache.patch memory/tmc_mem.patch \
 		 makefiletune/armMakefile.diff
-KERNEL_MODULES = compcache/compcache-0.5.4
+EXTERNAL_MODULES = compcache/compcache-0.5.4
 
 KERNEL_DEFCONFIG = psychobuild/SR71.config
 #KERNEL_UPSTART   = psychobuild/F102A.upstart
+TYPE = Kernel
 
 include ../../support/kernel.mk

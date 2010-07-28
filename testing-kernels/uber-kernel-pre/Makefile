@@ -51,6 +51,7 @@ KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch overclocking/defc
 		 makefiletune/armMakefile.diff \
 		 defconfig/defconfig.pre.cpugov \
 		 compcache/compcache.patch compcache/lowmemnotify-total-memory.patch
-KERNEL_MODULES = compcache/compcache-0.5.4
+EXTERNAL_MODULES = compcache/compcache-0.5.4
+TYPE = Kernel
 
 include ../../support/kernel.mk

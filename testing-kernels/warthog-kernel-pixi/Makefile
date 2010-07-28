@@ -32,7 +32,8 @@ SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
 		 makefiletune/armMakefile.diff \
 		 defconfig/defconfig.pixi.cpugov defconfig/defconfig.pixi.tcpcong warthogbuild/defconfig-nodebug-pixi.patch
-KERNEL_MODULES = compcache/compcache-0.5.4
+EXTERNAL_MODULES = compcache/compcache-0.5.4
+TYPE = Kernel
 
 include ../../support/kernel.mk
 

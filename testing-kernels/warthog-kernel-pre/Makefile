@@ -48,7 +48,8 @@ KERNEL_PATCHES = warthogbuild/opp5-720-opp6-800-opp7-1050.patch overclocking/def
 		 warthogbuild/armMakefile.diff \
 		 defconfig/defconfig.pre.cpugov	defconfig/defconfig.pre.tcpcong warthogbuild/defconfig-nodebug-pre.patch \
 		 compcache/compcache.patch compcache/lowmemnotify-total-memory.patch
-KERNEL_MODULES = compcache/compcache-0.5.4
+EXTERNAL_MODULES = compcache/compcache-0.5.4
+TYPE = Kernel
 
 include ../../support/kernel.mk
 
