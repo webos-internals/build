@@ -86,19 +86,17 @@ endif
 .PHONY: head
 
 ifneq ("${VERSIONS}", "")
-.PHONY: ${WEBOS-VERSIONS:%=webos-%}
-package: ${WEBOS_VERSIONS:%=webos-%} ${VERSIONS:%=package-%} 
-head: ${VERSIONS:%=head-%}
-
-${WEBOS_VERSIONS:%=webos-%}: webos-%:
-	VERSION=$*-0 ${MAKE} VERSIONS= WEBOS_VERSION=$* DUMMY_VERSION=0 package
-
-${VERSIONS:%=package-%}: package-%:
-	VERSION=$* ${MAKE} VERSIONS= WEBOS_VERSION=`echo $* | cut -d- -f1` package
-
-${VERSIONS:%=head-%}: head-%:
-	VERSION=$* ${MAKE} VERSIONS= WEBOS_VERSION=`echo $* | cut -d- -f1` head
-
+package: 
+	for v in ${WEBOS_VERSIONS} ; do \
+		VERSION=$${v}-0 ${MAKE} VERSIONS= WEBOS_VERSION=$${v} DUMMY_VERSION=0 package ; \
+	done; \
+	for v in ${VERSIONS} ; do \
+		VERSION=$${v} ${MAKE} VERSIONS= WEBOS_VERSION=`echo $${v} | cut -d- -f1` package ; \
+	done
+head: 
+	for v in ${VERSIONS} ; do \
+	 	VERSION=$${v} ${MAKE} VERSIONS= WEBOS_VERSION=`echo $${v} | cut -d- -f1` head ; \
+ 	done
 else
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
 endif
