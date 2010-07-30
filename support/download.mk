@@ -159,13 +159,29 @@ download: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 ${DL_DIR}/${NAME}-${VERSION}.tar.gz:
 	rm -f $@
 	$(call PREWARE_SANITY)
+	if [ ! -e git ] ; then \
+	  git clone --mirror -n ${SRC_GIT} git ; \
+	elif [ -h git ] ; then \
+	  true ; \
+	else \
+	  ( cd git ; git fetch -u -t ) ; \
+	fi
 	rm -rf build/`basename ${SRC_GIT} .git`
 	mkdir -p build
-	( cd build ; git clone -n ${SRC_GIT} ; cd `basename ${SRC_GIT} .git` ; git checkout ${GIT_TAG} )
+	( cd build ; git clone --reference ../git -n ${SRC_GIT} ; cd `basename ${SRC_GIT} .git` ; git checkout ${GIT_TAG} )
 	mkdir -p ${DL_DIR}
 	tar -C build/`basename ${SRC_GIT} .git` -zcf $@ .
 	( cd build/`basename ${SRC_GIT} .git` ; git log --pretty="format:%ct" -n 1 ${GIT_TAG} ) | \
 	python -c 'import os,sys; time = int(sys.stdin.read()); os.utime("$@",(time,time));'
 	rm -rf build/`basename ${SRC_GIT} .git`
+
+.PHONY: head
+head:
+	rm -f ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	$(call PREWARE_SANITY)
+	$(MAKE) GIT_TAG=HEAD download
+	$(MAKE) package
+	rm -f ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+
 endif
 
