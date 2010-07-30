@@ -1,0 +1,16 @@
+NAME = $(shell basename $(shell pwd))
+PATCH = mojo/${NAME}.patch
+TITLE = Russian layout for hardware keyboard
+DESCRIPTION = Adds russian-translit keyboard layout for the hardware keyboard. Double tap Gesture area to change ENGLISH/RUSSIAN layouts.
+CATEGORY = Mojo
+VERSIONS = 1.4.5-21
+ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
+SCREENSHOTS =
+META_SUB_VERSION = 1
+
+include ../common.mk
+
+include ../modifications.mk
+
+MAINTAINER = Shura <shura0@yandex.ru>
+HOMEPAGE = http://forums.precentral.net/webos-patches/254101-patch-russian-keyboard-layout.html

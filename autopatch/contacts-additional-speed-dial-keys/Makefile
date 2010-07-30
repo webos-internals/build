@@ -1,0 +1,16 @@
+NAME = $(shell basename $(shell pwd))
+PATCH = contacts/${NAME}.patch
+TITLE = Additional Speed Dial Keys
+DESCRIPTION = Adds back the 'Z/*' and 'B/#' speed dial keys as well as adds the '@/0', '.', and ',/_' keys.
+CATEGORY = Contacts
+VERSIONS = 1.4.0-65 1.4.1-37 1.4.2-22 1.4.3-16 1.4.5-21
+ICON = http://www.webos-internals.org/images/c/ca/Icon_WebOSInternals_Patches_Contacts.png
+SCREENSHOTS = [ \"http://www.webos-internals.org\" ]
+META_SUB_VERSION = 1
+
+include ../common.mk
+
+include ../modifications.mk
+
+MAINTAINER = CraiaSoftware
+HOMEPAGE = http://forums.precentral.net/showthread.php?p=2494994#post2494994
