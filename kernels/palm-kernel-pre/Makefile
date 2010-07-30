@@ -24,6 +24,7 @@ APPINFO_CHANGELOG = [ \
 HOMEPAGE = http://opensource.palm.com
 SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch(${DEVICE}).gz
 KERNEL_PATCHES =
+TYPE = Kernel
 
 include ../../support/kernel.mk
 CATEGORY = Recovery

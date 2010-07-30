@@ -20,9 +20,10 @@ KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch \
 		 screenstate/screenstate.patch screenstate/cap-min-freq.patch \
 		 compcache/compcache.patch memory/tmc_mem.patch \
 		 makefiletune/armMakefile.diff
-KERNEL_MODULES = compcache/compcache-0.5.4
+EXTERNAL_MODULES = compcache/compcache-0.5.4
 
 KERNEL_DEFCONFIG = psychobuild/F102A.config
 KERNEL_UPSTART   = psychobuild/F102A.upstart
+TYPE = Kernel
 
 include ../../support/kernel.mk

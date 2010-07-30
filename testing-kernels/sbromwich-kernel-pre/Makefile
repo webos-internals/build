@@ -35,6 +35,7 @@ KERNEL_PATCHES = overclocking/F105-overclocking.patch \
 		 folk/board-sirloin-headset-detect.c.diff \
 		 folk/omap_fb.c.diff \
 		 folk/omap_misc_hsuart.c.diff folk/pm_cpuidle.c.diff 
+TYPE = Kernel
 
 include ../../support/kernel.mk
 

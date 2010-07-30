@@ -29,6 +29,7 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
 		 makefiletune/armMakefile.diff
-KERNEL_MODULES = compcache/compcache-0.5.4
+EXTERNAL_MODULES = compcache/compcache-0.5.4
+TYPE = Kernel
 
 include ../../support/kernel.mk
