@@ -234,29 +234,31 @@ upload:
 testing: webos-internals-testing webos-patches-testing webos-kernels-testing optware-testing regression-testing
 
 webos-internals-testing:
-	${MAKE} SUBDIRS="testing" webos-internals-index
+	${MAKE} SUBDIRS="testing" FEED="WebOS Internals Testing" webos-internals-index
 	rsync -avr ipkgs/webos-internals/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
 	rsync -avr ipkgs/webos-internals/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
 	rsync -avr ipkgs/webos-internals/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
 
 webos-patches-testing:
-	${MAKE} PTCHDIR="testing-patches" SUFFIX=.testing webos-patches-index
+	${MAKE} PTCHDIR="testing-patches" FEED="WebOS Patches Testing" SUFFIX=.testing webos-patches-index
 	rsync -avr ipkgs/webos-patches/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 	rsync -avr ipkgs/webos-patches/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 	rsync -avr ipkgs/webos-patches/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
 
 webos-kernels-testing:
-	${MAKE} KERNDIR="testing-kernels" webos-kernels-index
+	${MAKE} KERNDIR="testing-kernels" FEED="WebOS Kernels Testing" webos-kernels-index
 	rsync -avr ipkgs/webos-kernels/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/webos-kernels/testing/
 	rsync -avr ipkgs/webos-kernels/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-kernels/testing/
 	rsync -avr ipkgs/webos-kernels/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-kernels/testing/
 
-optware-testing: optware-index
+optware-testing:
+	${MAKE} FEED="Optware Testing" optware-index
 	rsync -avr ipkgs/optware/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/optware/testing/
 	rsync -avr ipkgs/optware/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/optware/testing/
 	rsync -avr ipkgs/optware/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/optware/testing/
 
-regression-testing: regression-index
+regression-testing:
+	${MAKE} FEED="Regression Testing" regression-index
 	rsync -avr ipkgs/regression-testing/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/regression-testing/
 	rsync -avr ipkgs/regression-testing/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/regression-testing/
 	rsync -avr ipkgs/regression-testing/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/regression-testing/
