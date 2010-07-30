@@ -61,7 +61,6 @@ SRC_GIT = git://git.webos-internals.org/applications/govnah.git
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
 include ../../support/package.mk
-include ../../support/head.mk
 
 include ../../support/download.mk
 

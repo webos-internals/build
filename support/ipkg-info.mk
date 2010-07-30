@@ -73,7 +73,12 @@ ${DOCTOR_DIR}/webosdoctor-1.4.2.jar:
 	fi
 
 ${DOCTOR_DIR}/webosdoctor-1.4.3.jar:
-	  curl -L -o $@ http://palm.cdnetworks.net/rom/pixiplus/px143r0d06062010/attp143rod/webosdoctorp121ewwatt.jar
+	mkdir -p ${DOCTOR_DIR}
+	if [ -e ${DOCTOR_DIR}/webosdoctorp121ewwatt-1.4.3.jar ] ; then \
+	  ln -s webosdoctorp121ewwatt-1.4.3.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/pixiplus/px143r0d06062010/attp143rod/webosdoctorp121ewwatt.jar ; \
+	fi
 
 ${DOCTOR_DIR}/webosdoctor-1.4.5.jar:
 	mkdir -p ${DOCTOR_DIR}

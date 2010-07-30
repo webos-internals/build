@@ -23,7 +23,6 @@ SRC_GIT     = git://git.webos-internals.org/applications/keyboss.git
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
 include ../../support/package.mk
-include ../../support/head.mk
 
 include ../../support/download.mk
 
