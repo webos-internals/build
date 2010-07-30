@@ -1,20 +1,20 @@
 NAME     = gsmwav
 APP_ID   = org.webosinternals.gstcodecs.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 1.1-1
+VERSION  = 1.2
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:GstCodecs
 MAINTAINER = zsoc
 TITLE   = GSM WAV Codec
 TYPE	= Plugin
 DESCRIPTION = GSM 6.10 WAV Codec for webOS. Installing this package allows those with voicemail systems that send gsm encoded wav files via email to listen to these attachments on their webOS device. 
-CHANGELOG = 1.1: Removed superfluous dependency on WIDK package.<br>1.0: Initial Release
+CHANGELOG = 1.2: Removed superfluous dependency on WIDK package.<br>1.0: Initial Release
 CATEGORY = Audio Plugins
 ICON	= http://www.webos-internals.org/wiki/Image:Icon_WebOSInternals_Base_Plugin.png
 LICENSE  = GPL
 SCREENSHOTS =
 
 SRC_GIT = git://git.webos-internals.org/gstcodecs/gsmwav.git
-GIT_TAG = v1.1
+GIT_TAG = v1.2
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
