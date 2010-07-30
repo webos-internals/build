@@ -18,6 +18,7 @@
 #
 
 .PHONY: download
+.PHONY: head
 
 DL_DIR = ../../downloads
 DOCTOR_DIR = ../../doctors
@@ -175,13 +176,14 @@ ${DL_DIR}/${NAME}-${VERSION}.tar.gz:
 	python -c 'import os,sys; time = int(sys.stdin.read()); os.utime("$@",(time,time));'
 	rm -rf build/`basename ${SRC_GIT} .git`
 
-.PHONY: head
+ifneq ("${VERSION}", "")
 head:
 	rm -f ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	$(call PREWARE_SANITY)
 	$(MAKE) GIT_TAG=HEAD download
 	$(MAKE) package
 	rm -f ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+endif
 
 endif
 

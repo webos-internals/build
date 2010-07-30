@@ -122,10 +122,6 @@ else
 
 include ../../support/package.mk
 
-ifeq ("$(VERSIONS)", "")
-include ../../support/head.mk
-endif
-
 include ../../support/download.mk
 
 include ../../support/doctors.mk
