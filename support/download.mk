@@ -169,7 +169,7 @@ ${DL_DIR}/${NAME}-${VERSION}.tar.gz:
 	fi
 	rm -rf build/`basename ${SRC_GIT} .git`
 	mkdir -p build
-	( cd build ; git clone --reference ../git -n ${SRC_GIT} ; cd `basename ${SRC_GIT} .git` ; git checkout ${GIT_TAG} )
+	( cd build ; git clone -l ../git `basename ${SRC_GIT} .git` ; cd `basename ${SRC_GIT} .git` ; git checkout ${GIT_TAG} )
 	mkdir -p ${DL_DIR}
 	tar -C build/`basename ${SRC_GIT} .git` -zcf $@ .
 	( cd build/`basename ${SRC_GIT} .git` ; git log --pretty="format:%ct" -n 1 ${GIT_TAG} ) | \
