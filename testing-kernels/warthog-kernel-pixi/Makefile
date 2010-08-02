@@ -25,7 +25,14 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-43", "log" : [ "Updated with latest postinst and prerm OTA safety measures" ] }, \
 { "version" : "${WEBOS_VERSION}-40", "log" : [ "First Pixi custom kernel" ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-85: Build using official 1.4.5 sources.<br>${WEBOS_VERSION}-73: Incorporate sbromwich changes.<br>${WEBOS_VERSION}-62: Disable MODVERSIONS.<br>${WEBOS_VERSION}-58: Turn off some debug options.<br>${WEBOS_VERSION}-50: Turn on all TCP congest algos and CPU governors.<br>${WEBOS_VERSION}-48: Updated compcache compile flags.<br>${WEBOS_VERSION}-43: Updated with latest postinst and prerm OTA safety measures.<br>${WEBOS_VERSION}-40: First Pixi custom kernel
+CHANGELOG = ${WEBOS_VERSION}-85: Build using official 1.4.5 sources.<br>\
+${WEBOS_VERSION}-73: Incorporate sbromwich changes.<br>\
+${WEBOS_VERSION}-62: Disable MODVERSIONS.<br>\
+${WEBOS_VERSION}-58: Turn off some debug options.<br>\
+${WEBOS_VERSION}-50: Turn on all TCP congest algos and CPU governors.<br>\
+${WEBOS_VERSION}-48: Updated compcache compile flags.<br>\
+${WEBOS_VERSION}-43: Updated with latest postinst and prerm OTA safety measures.<br>\
+${WEBOS_VERSION}-40: First Pixi custom kernel
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
