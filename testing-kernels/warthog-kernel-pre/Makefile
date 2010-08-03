@@ -67,7 +67,7 @@ KERNEL_PATCHES = warthogbuild/opp5-720-opp6-800-opp7-1050.patch overclocking/def
 		 screenstate/screenstate.patch \
 		 makefiletune/armMakefile.diff \
 		 warthogbuild/smartreflex-opp.patch \
-		 defconfig/defconfig.pre.cpugov	defconfig/defconfig.pre.tcpcong warthogbuild/defconfig-nodebug-pre.patch \
+		 defconfig/defconfig.pre.cpugov	defconfig/defconfig.pre.tcpcong defconfig/defconfig-nodebug-pre.patch \
 		 compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
 		 overclocking/override.patch
 EXTERNAL_MODULES = compcache/compcache-0.5.4
