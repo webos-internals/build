@@ -3,13 +3,16 @@ TITLE    = Govnah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.6.1
+VERSION  = 0.6.6
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
 DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature, load averages and memory usage.
 CHANGELOG = \
+0.6.6: Added profile support for the voltage selection parameters.<br>\
+0.6.4: Added profile support for the cpufreq override module.<br>\
+0.6.3: Initial support for the cpufreq override module.<br>\
 0.6.1: Rolled up all the 0.5.x alpha releases into a new public release. Major new features include current monitoring, and a revamped Advanced Settings screen now located in the Profiles area.<br>\
 0.5.9: Renamed the battery current display and inverted the polarity again. Disabled the compcache settings scene if compcache is not available.<br>\
 0.5.8: Fixed memory leak, suspected of causing the eventual hang bug.<br>\
