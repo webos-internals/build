@@ -3,7 +3,7 @@ TITLE = WarthogKernel (Pre/Pre+)
 DEVICE = pre
 CATEGORY = Experimental
 DEVICECOMPATIBILITY = [\"Pre\"]
-VERSIONS = 1.4.1-94 1.4.2-94 1.4.5-94
+VERSIONS = 1.4.1-96 1.4.2-96 1.4.5-96 
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A testbed of kernel patches for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
@@ -20,6 +20,7 @@ All additions are disabled by default, and must be enabled by separate packages 
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-96", "log" : [ "Defconfig cleanup, sched_fair tweak, default AS scheduler" ] }, \
 { "version" : "${WEBOS_VERSION}-94", "log" : [ "Lowered voltage for 600 and 800Mhz. Voltage clamping now in effect" ] }, \
 { "version" : "${WEBOS_VERSION}-87", "log" : [ "Limited frequency to 500MHz when temperature exceeds configurable limits (defaults to 55C)" ] }, \
 { "version" : "${WEBOS_VERSION}-86", "log" : [ "Build using official 1.4.5 sources" ] }, \
@@ -41,7 +42,8 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-16", "log" : [ "Improved screenstate transition detection" ] }, \
 { "version" : "${WEBOS_VERSION}-13", "log" : [ "Initial public release" ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-94: Lowered voltage for 600 and 800Mhz. Voltage clamping now in effect.<br>\
+CHANGELOG = ${WEBOS_VERSION}-96: Defconfig cleanup, sched_fair tweak, default AS scheduler.<br>\
+${WEBOS_VERSION}-94: Lowered voltage for 600 and 800Mhz. Voltage clamping now in effect.<br>\
 ${WEBOS_VERSION}-87: Limited frequency to 500MHz when temperature exceeds configurable limits (defaults to 55C).<br>\
 ${WEBOS_VERSION}-86: Build using official 1.4.5 sources.<br>\
 ${WEBOS_VERSION}-77: Add unixpsycho dsp settings.<br>\
@@ -70,6 +72,8 @@ KERNEL_PATCHES = warthogbuild/opp5-720-opp6-800-opp7-1050.patch overclocking/def
 		 makefiletune/armMakefile.diff \
 		 warthogbuild/smartreflex-opp.patch \
 		 defconfig/defconfig.pre.cpugov	defconfig/defconfig.pre.tcpcong defconfig/defconfig-nodebug-pre.patch \
+		 warthogbuild/defconfig-as-pre.patch warthogbuild/defconfig-slim-pre.patch \
+		 warthogbuild/sched_fair.patch \
 		 compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
 		 overclocking/override.patch
 EXTERNAL_MODULES = compcache/compcache-0.5.4
