@@ -3,7 +3,7 @@ TITLE = WarthogKernel (Pixi/Pixi+)
 DEVICE = pixi
 CATEGORY = Experimental
 DEVICECOMPATIBILITY = [\"Pixi\"]
-VERSIONS = 1.4.1-96 1.4.3-96 1.4.5-96
+VERSIONS = 1.4.1-97 1.4.3-97 1.4.5-97
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A testbed of kernel patches for the Palm Pixi/Pixi+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
@@ -16,7 +16,7 @@ All additions are disabled by default, and must be enabled by separate packages 
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-96", "log" : [ "Defconfig cleanup, sched_fair tweak, default AS scheduler" ] }, \
+{ "version" : "${WEBOS_VERSION}-97", "log" : [ "Defconfig cleanup, sched_fair tweak, default AS scheduler" ] }, \
 { "version" : "${WEBOS_VERSION}-85", "log" : [ "Build using official 1.4.5 sources" ] }, \
 { "version" : "${WEBOS_VERSION}-74", "log" : [ "Back off sbromwich changes" ] }, \
 { "version" : "${WEBOS_VERSION}-62", "log" : [ "Disable MODVERSIONS." ] }, \
@@ -26,7 +26,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-43", "log" : [ "Updated with latest postinst and prerm OTA safety measures" ] }, \
 { "version" : "${WEBOS_VERSION}-40", "log" : [ "First Pixi custom kernel" ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-96: Defconfig cleanup, sched_fair tweak, default AS scheduler.<br>\
+CHANGELOG = ${WEBOS_VERSION}-97: Defconfig cleanup, sched_fair tweak, default AS scheduler.<br>\
 ${WEBOS_VERSION}-85: Build using official 1.4.5 sources.<br>\
 ${WEBOS_VERSION}-73: Incorporate sbromwich changes.<br>\
 ${WEBOS_VERSION}-62: Disable MODVERSIONS.<br>\
