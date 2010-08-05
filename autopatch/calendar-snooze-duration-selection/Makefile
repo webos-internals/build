@@ -3,7 +3,7 @@ PATCH = calendar/${NAME}.patch
 TITLE = Snooze Duration Selection
 DESCRIPTION = Adds a snooze duration selection to the reminder notification.
 CATEGORY = Calendar
-VERSIONS = 1.3.5-4 1.4.0-52 1.4.1-24 1.4.2-9 1.4.3-3 1.4.5-8
+VERSIONS = 1.3.5-4 1.4.0-52 1.4.1-24 1.4.2-9 1.4.3-3 1.4.5-24
 ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Calendar.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/2/2e/CalendarSnoozeDurationSelecton_1.png\",\
