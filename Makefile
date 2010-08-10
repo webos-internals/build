@@ -45,7 +45,7 @@ webos-patches-index: ipkgs/webos-patches/1.4.0/Packages ipkgs/webos-patches/1.4.
 	ln -f -s 1.4.1 ipkgs/webos-patches/1.4.1.1
 	rm -f ipkgs/webos-patches/1.4.1.3
 	ln -f -s 1.4.1 ipkgs/webos-patches/1.4.1.3
-	chmod o+x ipkgs/webos-patches/1.4.5
+	ln -f -s 1.4.5 ipkgs/webos-patches/1.4.5.1
 
 .PHONY: webos-kernels-index
 webos-kernels-index: ipkgs/webos-kernels/1.4.0/Packages ipkgs/webos-kernels/1.4.1/Packages ipkgs/webos-kernels/1.4.2/Packages ipkgs/webos-kernels/1.4.3/Packages ipkgs/webos-kernels/1.4.5/Packages
@@ -53,7 +53,7 @@ webos-kernels-index: ipkgs/webos-kernels/1.4.0/Packages ipkgs/webos-kernels/1.4.
 	ln -f -s 1.4.1 ipkgs/webos-kernels/1.4.1.1
 	rm -f ipkgs/webos-kernels/1.4.1.3
 	ln -f -s 1.4.1 ipkgs/webos-kernels/1.4.1.3
-	chmod o+x ipkgs/webos-kernels/1.4.5
+	ln -f -s 1.4.5 ipkgs/webos-kernels/1.4.5.1
 
 .PHONY: regression-index
 regression-index: ipkgs/regression-testing/1.0.0/Packages ipkgs/regression-testing/2.0.0/Packages 

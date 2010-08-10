@@ -80,6 +80,7 @@ WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewweu-wr-${WEBOS_VERSION}.jar
 else
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
 endif
+COMPATIBLE_VERSIONS = 1.4.5 | 1.4.5.1
 endif
 
 .PHONY: package
