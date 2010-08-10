@@ -9,7 +9,7 @@ TITLE   = Terminus
 TYPE	= Application
 DESCRIPTION = Linux Terminal
 
-CATEGORY = Utility
+CATEGORY = System Utilities
 ICON	 = http://www.webos-internals.org/images/b/bc/Terminus_Icon.png
 LICENSE  = GPL
 
