@@ -1,7 +1,7 @@
 NAME     = visualboyadvance
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 1.2.1
+VERSION  = 1.2.4
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:VBA
 MAINTAINER = dtzWill
 TITLE   = VisualBoyAdvance
@@ -10,14 +10,16 @@ DESCRIPTION = Port of the popular Game Boy, Game Boy Color, and Game Boy Advance
 <br><br>Please consider donating: <a href='https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=3S7ULCYRCDWS8&amp;lc=US&amp;item_name=Will%20Dietz&amp;item_number=palm%20pre&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted' target='_blank'><img src='https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif' alt='' border='0'></a>.  All donations go back into development.\
 <br><br>Requires WebOS >= 1.4.5!<br>
 CHANGELOG = \
-<b>1.2.1</b><br>Internal optimizations in rendering, faster on some games.<br>Portrait rom selector<br>Swipe to return to rom selector while playing<br>1.4.5 support!\
+<b>1.2.4</b><br> Added two skins (Wiimote2 and cfbauer2!)<br>Fix loading of duplicate skins<br>Change default skin to have a/b buttons<br>Remove unused GBA debugger code<br>Small performance tweaks \
+<br><br><b>1.2.1</b><br>Internal optimizations in rendering, faster on some games.<br>Portrait rom selector<br>Swipe to return to rom selector while playing<br>1.4.5 support!\
 <br><br><b>1.1.2</b><br>Better d-pad behavior.<br>Notifications appear appropriately depending on orientation.<br>Better experience for new users--link to wiki is now clickable<br>Updated skins (thanks to everyone who contributed!)<br>Skins no longer appear in photos\
 <br><br><b>1.1.1</b><br>Skin support! Thanks to VincentLaw, zsoc, crzisme, and nights0223 for their work!  See wiki for more info on creating your own/using community created ones<br>Support for turbo/capture bindings in custom controls<br><br><b>1.1.0</b><br>New ARM assembly implementation of emulated instructions. (small speed boost)<br>touchscreen controls! (thanks to VincentLaw and zsoc for their hard work on the graphics!)<br>new autosave feature (see wiki)<br>zip file support<br>options are now saved across sessions (orientation, mute, displaying emulation speed, etc)<br>rom selector strips file extensions, and cleans up rom names<br>rom selector hides hidden files\
 <br><br><b>1.0.6</b><br>Fixed permissions issue causing custom config generation to crash\
 <br><br><b>1.0.5</b><br>Fixed saving issues<br>Added ability to create custom keybindings (see wiki)<br>Removed annoying battery messages<br>Updated icon (thanks Spryal!)<br>Fixed name for hopefully better word-wrap in launcher\
 <br><br><b>1.0.4</b><br>Remove dependence on upstart, should fix problem with VBA not launching.<br>backported sound fixes for (slight) speed, also added code to hopefully fix freezing  on pause<br>save/load state support<br>jump-to-letter functionality in rom selector for better management of large libraries<br>sort roms case insensitively\
 <br><br><b>1.0.3</b><br>Added toggle for displaying emulation speed to help compatability report\
-<br><br><b>1.0.2</b><br>Small metadata fix.<br><br><b>1.0.1</b><br>Small performance boost, public release!\
+<br><br><b>1.0.2</b><br>Small metadata fix.\
+<br><br><b>1.0.1</b><br>Small performance boost, public release!\
 <br><br><b>1.0.0</b><br>Initial release.  Reimplemented rendering engine, rom selector.
 CATEGORY = Games
 ICON	= http://www.webos-internals.org/images/3/3c/Vba.png
@@ -46,7 +48,8 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -f $@
 	rm -rf build/$* -rf
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
-	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
+	cp -r build/src/pkg/pkg_base/* build/$*/usr/palm/applications/${APP_ID}/
+	sed -i 's/@APPID@/${APP_ID}/' build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
 	install -m 755 build/binaries/$*/vba build/$*/usr/palm/applications/${APP_ID}/
 	touch $@
