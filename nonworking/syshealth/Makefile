@@ -3,13 +3,15 @@ TITLE    = SysHealth
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.0.1
+VERSION  = 0.0.3
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:SysHealth
 ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
 DESCRIPTION = SysHealth monitors the health of your webOS device.
 CHANGELOG = \
+0.0.3: Fix postinst and prerm scripts
+0.0.2: First pass at working app.
 0.0.1: Initial skeleton version.  No functionality as yet.
 
 SCREENSHOTS = [\
