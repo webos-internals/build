@@ -3,7 +3,7 @@ TITLE = WarthogKernel (Pre/Pre+)
 DEVICE = pre
 CATEGORY = Experimental
 DEVICECOMPATIBILITY = [\"Pre\"]
-VERSIONS = 1.4.1-97 1.4.2-97 1.4.5-97 
+VERSIONS = 1.4.1-100 1.4.2-100 1.4.5-100 
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A testbed of kernel patches for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
@@ -20,7 +20,7 @@ All additions are disabled by default, and must be enabled by separate packages 
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-97", "log" : [ "Defconfig cleanup, sched_fair tweak, default AS scheduler" ] }, \
+{ "version" : "${WEBOS_VERSION}-100", "log" : [ "Defconfig cleanup, sched_fair tweak, default AS scheduler" ] }, \
 { "version" : "${WEBOS_VERSION}-94", "log" : [ "Lowered voltage for 600 and 800Mhz. Voltage clamping now in effect" ] }, \
 { "version" : "${WEBOS_VERSION}-87", "log" : [ "Limited frequency to 500MHz when temperature exceeds configurable limits (defaults to 55C)" ] }, \
 { "version" : "${WEBOS_VERSION}-86", "log" : [ "Build using official 1.4.5 sources" ] }, \
@@ -42,7 +42,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-16", "log" : [ "Improved screenstate transition detection" ] }, \
 { "version" : "${WEBOS_VERSION}-13", "log" : [ "Initial public release" ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-97: Defconfig cleanup, sched_fair tweak, default AS scheduler.<br>\
+CHANGELOG = ${WEBOS_VERSION}-100: Defconfig cleanup, sched_fair tweak, default AS scheduler.<br>\
 ${WEBOS_VERSION}-94: Lowered voltage for 600 and 800Mhz. Voltage clamping now in effect.<br>\
 ${WEBOS_VERSION}-87: Limited frequency to 500MHz when temperature exceeds configurable limits (defaults to 55C).<br>\
 ${WEBOS_VERSION}-86: Build using official 1.4.5 sources.<br>\
@@ -75,7 +75,7 @@ KERNEL_PATCHES = warthogbuild/opp5-720-opp6-800-opp7-1050.patch overclocking/def
 		 warthogbuild/defconfig-as-pre.patch warthogbuild/defconfig-slim-pre.patch \
 		 warthogbuild/sched_fair.patch \
 		 compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
-		 overclocking/override.patch
+		 warthogbuild/overclocking_override.patch
 EXTERNAL_MODULES = compcache/compcache-0.5.4
 TYPE = Kernel
 
