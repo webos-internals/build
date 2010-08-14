@@ -1,26 +1,22 @@
-NAME     = syshealth
-TITLE    = SysHealth
+NAME     = lumberjack
+TITLE    = Lumberjack
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.0.5
+VERSION  = 0.0.1
 TYPE	 = Application
 CATEGORY = System Utilities
-HOMEPAGE = http://www.webos-internals.org/wiki/Application:SysHealth
+HOMEPAGE = http://www.webos-internals.org/wiki/Application:Lumberjack
 ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
-DESCRIPTION = SysHealth monitors the health of your webOS device.
+DESCRIPTION = Lumberjack watches your logs.
 CHANGELOG = \
-0.0.5: Fixed vacuum.<br>\
-0.0.4: Pkg up scripts.<br>\
-0.0.3: Fix postinst and prerm scripts.<br>\
-0.0.2: First pass at working app.<br>\
-0.0.1: Initial skeleton version.  No functionality as yet.
+0.0.1: Initial skeleton version.  Rudimentary functionality.
 
 SCREENSHOTS = [\
  ]
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git://git.webos-internals.org/applications/syshealth.git
+SRC_GIT = git://git.webos-internals.org/applications/lumberjack.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
@@ -35,9 +31,6 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	chmod ugo+x build/src/scripts/*
-	tar -C build/src/scripts -zcf build/src/scripts.tgz .
-	rm -rf build/src/scripts
 	touch $@
 
 .PHONY: build
