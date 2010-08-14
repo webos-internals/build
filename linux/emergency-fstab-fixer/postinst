@@ -18,4 +18,8 @@ fi
 sed -i -e 's/utf8,shortname=mixed.*/utf8,shortname=mixed,umask=0000\t0\t0/' /etc/fstab
 
 ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
+
+# remove the dir
+rm -rf $IPKG_OFFLINE_ROOT/usr/palm/applications/${PACKAGE}
+
 exit 0
