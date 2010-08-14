@@ -1,6 +1,6 @@
 TYPE = Linux Application
 NAME = emergency-fstab-fixer
-VERSION = 1.0.0
+VERSION = 1.0.1
 TITLE = Emergency Fstab Fixer
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DESCRIPTION = Install this package on your webOS device immediately after updating to webOS 1.4.5 to fix a Palm OTA bug in the /etc/fstab file. See <a href=http://developer.palm.com/distribution/viewtopic.php?f=70&t=7942>http://developer.palm.com/distribution/viewtopic.php?f=70&t=7942</a> and <a href=http://developer.palm.com/distribution/viewtopic.php?f=70&t=8109>http://developer.palm.com/distribution/viewtopic.php?f=70&t=8109</a> for more details about the bug.  This fix is only required when you OTA update to webOS 1.4.5 - if you use the webOS Doctor to install webOS 1.4.5 you are not affected.
