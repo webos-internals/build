@@ -1,12 +1,12 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = screen-lock/${NAME}.patch
 TITLE = No Auto-Off While Charging
-DESCRIPTION = Adds an option to the Screen & Lock app to enable or disable auto-off while charging
+DESCRIPTION = Prevents auto-off while charging
 CATEGORY = Screen Lock
-VERSIONS = 1.3.5-23 1.4.0-12 1.4.1-1 1.4.2-1 1.4.3-1 1.4.5-5
+VERSIONS = 1.3.5-23 1.4.0-69 1.4.1-42 1.4.2-28 1.4.3-22 1.4.5-28
 ICON = http://www.webos-internals.org/images/f/fa/Icon_WebOSInternals_Patches_Screenlock.png
 SCREENSHOTS = [ \"http://www.webos-internals.org/images/d/d5/Misc-no-auto-off-while-charging-1.png\" ]
-META_SUB_VERSION = 1 
+META_SUB_VERSION = 1
 
 include ../common.mk
 
