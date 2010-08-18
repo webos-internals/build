@@ -12,7 +12,10 @@ DESCRIPTION = Lumberjack watches your logs.
 CHANGELOG = \
 0.1.0: Initial release.
 SCREENSHOTS = [\
-\"http://www.webos-internals.org/images/5/5d/Lumberjack_ss1.png\" ]
+\"http://www.webos-internals.org/images/5/5d/Lumberjack_ss1.png\",\
+\"http://www.webos-internals.org/images/6/65/Lumberjack_ss2.png\",\
+\"http://www.webos-internals.org/images/4/44/Lumberjack_ss3.png\",\
+\"http://www.webos-internals.org/images/9/96/Lumberjack_ss4.png\" ]
 LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/applications/lumberjack.git
