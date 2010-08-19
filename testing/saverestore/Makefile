@@ -86,6 +86,7 @@ build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mkdir -p build/src
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	chmod ugo+x build/src/scripts/*
+	chmod ugo+x build/src/contrib/*
 	tar -C build/src/scripts -zcf build/src/scripts.tgz .
 	rm -rf build/src/scripts
 	touch $@
