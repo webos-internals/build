@@ -3,7 +3,7 @@ TITLE    = Save/Restore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.0.3
+VERSION  = 1.0.4
 DEPENDS  = org.webosinternals.unzip, org.webosinternals.zip
 TYPE	 = Application
 CATEGORY = System Utilities
@@ -13,6 +13,7 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 WebOS Internals provides Save/Retore as is without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.  The entire risk as to the quality and performance of Save/Restore is with you.  Should Save/Restore prove defective, you assume the cost of all necessary servicing, repair or correction.<br>\
 In no event will WebOS Internals or any other party be liable to you for damages, including any general, special, incidental or consequential damages arising out of the use or inability to use Save/Restore (including but not limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of Save/Restore to operate with any other programs).
 CHANGELOG = \
+1.0.4: Fixed issue created when allowing filenames that include spaces. Fixed application names for a few scripts.<br>\
 1.0.3: Allows for filenames that include spaces.  Applications: wIRC (updated), AutoReplace Dictionary Backup, pReader, Photo Safe, YouTube (all courtsey of Audemars02); Fliq Tasks, Sorting Thoughts, bit.ly (all courtesy of djgardn2), SiDiary Exporter (courtesy of Taurec), My Pets (courtesy of rgisraelsen)<br>\
 1.0.1: Added support for Preferences-type backups, including support for Mode Switcher. Applications: Quit Smoking Tracker (courtesy of Chakat Silverstreak); NaNPlayer  (courtesy of mamouton); TealSpeed, Brothers In Arms 2, YP Mobile (all courtesy of djgardn2); My DataBank Unlimited, Movie Diary (courtesy of pip smith); Wifi Profiles, YouView, Facebook, Facebook Beta, Cronk, Internalz, ZumoDrive, Switcharoo Free, Wallpaper Switcharoo, Brightness Unlinked, WiFi Media Sync, Quick Event, LaunchPoint Speed Dial (courtesy of Audemars02); Spades, DZ.Tanks, foursquare, Geocaching for webOS BETA, Speed Brain, Pandora, Card Ace, Card Ace: Blackjack, Word Ace, WHERE, Bible (Youversion), Solitaire Collection (minego), Solitaire Collection Beta (minego), LED torch, AccuRadio, Flixster, Convert, Unit Wizard, Slacker Radio, Trapster, Weather Channel, Units, MyQ for Netflix, Terminal (all courtesy of StoneRyno)<br>\
 1.0.0: Rolled up all the 0.9.x alpha releases into a new public release.<br>\
