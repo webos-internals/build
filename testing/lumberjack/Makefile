@@ -3,13 +3,14 @@ TITLE    = Lumberjack
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.1.0
+VERSION  = 0.1.1
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Lumberjack
 ICON	 = http://www.webos-internals.org/images/3/38/Icon_WebOSInternals_Lumberjack.png
 DESCRIPTION = Lumberjack watches your logs.
 CHANGELOG = \
+0.1.1: Cleaned up thread implementation in service. <br>\
 0.1.0: Initial release.
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/5/5d/Lumberjack_ss1.png\",\
