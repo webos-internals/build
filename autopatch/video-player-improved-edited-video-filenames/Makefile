@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = video-player/${NAME}.patch
 TITLE = Improved Edited Video Filenames
-DESCRIPTION = Will output edited videos in the format[filename] _edit.mp4
+DESCRIPTION = Will output edited videos in the format _.mp4
 CATEGORY = Video Player
-VERSIONS = 1.4.0-30 1.4.1-2 1.4.2-1 1.4.3-1
+VERSIONS = 1.4.0-30 1.4.1-2 1.4.2-1 1.4.5-31
 ICON = http://www.webos-internals.org/images/f/ff/Icon_WebOSInternals_Patches_Videoplayer.png
 SCREENSHOTS =
 META_SUB_VERSION = 1

@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = calendar/${NAME}.patch
 TITLE = Snooze Duration Selection
-DESCRIPTION = Adds a snooze duration selection to the reminder notification.
+DESCRIPTION = Adds a drop down selection for the snooze duration of reminder notifications. The default snooze can be set under the calander preferences.<br/><br/>In addition there are options to disable the 'Snoozed for xx banner' that is displayed after you snooze the reminder and an option to not display the reminder icon in the dashboard after snoozeing a reminder.
 CATEGORY = Calendar
-VERSIONS = 1.3.5-4 1.4.0-52 1.4.1-24 1.4.2-9 1.4.3-3 1.4.5-24
+VERSIONS = 1.3.5-4 1.4.0-69 1.4.1-42 1.4.2-28 1.4.3-22 1.4.5-28
 ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Calendar.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/2/2e/CalendarSnoozeDurationSelecton_1.png\",\

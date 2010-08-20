@@ -1,0 +1,16 @@
+NAME = $(shell basename $(shell pwd))
+PATCH = top-bar/${NAME}.patch
+TITLE = Date As Carrier String No Year
+DESCRIPTION = Replace the carrier string with the date (without the year).
+CATEGORY = Top Bar
+VERSIONS = 1.4.2-29 1.4.3-23 1.4.5-30
+ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
+SCREENSHOTS =
+META_SUB_VERSION = 1
+
+include ../common.mk
+
+include ../modifications.mk
+
+MAINTAINER = Jason Robitaille
+HOMEPAGE = http://forums.precentral.net/webos-patches/217215-patch-date-carrier-string-5.html#post2611293
