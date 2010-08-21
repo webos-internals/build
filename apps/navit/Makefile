@@ -15,6 +15,8 @@ DEPENDS  = org.webosinternals.locale, org.webosinternals.speechd
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Navit
 ICON	 = http://www.webos-internals.org/images/4/4d/Navit_icon.png
 LICENSE  = GPL
+MINWEBOSVERSION = 1.4.5
+DEVICECOMPATIBILITY = [\"Pre\"]
 
 D = build/$*/usr/palm/applications/${APP_ID}
 
