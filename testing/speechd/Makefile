@@ -25,8 +25,7 @@ HEADLESSAPP_VERSION = 0.1.0
 
 D = build/$*/usr/palm/applications/${APP_ID}
 
-#SRC_GIT = git://git.webos-internals.org/services/speechd.git
-SRC_GIT = /home/norad/src/preware/gits/speechd
+SRC_GIT = git://git.webos-internals.org/services/speechd.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_armv6.ipk
