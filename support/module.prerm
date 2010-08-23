@@ -1,0 +1,8 @@
+#!/bin/sh                                                                                       
+
+PID=
+UPSTART_SCRIPT=
+
+rm -f /var/palm/event.d/${UPSTART_SCRIPT}
+
+exit 0

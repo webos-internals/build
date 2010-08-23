@@ -10,6 +10,7 @@ DEVICE         = pre
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_UPSTART = aufs/upstart.${DEVICE}
 EXTERNAL_MODULES  = aufs
+SUFFIX='-${DEVICE}'
 TYPE = Kernel Module
 
 include ../../support/kernel.mk
