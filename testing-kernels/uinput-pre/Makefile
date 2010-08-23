@@ -11,6 +11,7 @@ SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = uinput/defconfig-${DEVICE}.patch
 KERNEL_UPSTART = uinput/upstart.${DEVICE}
 KERNEL_MODULES = drivers/input/misc/uinput.ko
+SUFFIX='-${DEVICE}'
 TYPE = Kernel Module
 
 include ../../support/kernel.mk
