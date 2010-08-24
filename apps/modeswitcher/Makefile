@@ -2,10 +2,10 @@ NAME     = modeswitcher
 MAINTAINER = Janne Julkunen <janne.julkunen@e-lnx.org>
 TITLE    = Mode Switcher
 APP_ID   = com.palm.org.e-lnx.wee.apps.${NAME}
-VERSION  = 1.0.4
+VERSION  = 1.0.5
 TYPE     = Application
 CATEGORY = System Utilities
-HOMEPAGE = http://forums.precentral.net/homebrew-apps/224544-mode-switcher.html
+HOMEPAGE = http://forums.precentral.net/showthread.php?p=2623085
 ICON     = http://wee.e-lnx.org/webos/images/icons/modeswitcher.png
 DESCRIPTION = Mode Switcher.
 SCREENSHOTS = []
@@ -13,6 +13,7 @@ LICENSE  = BSD Open Source License
 POSTINSTALLFLAGS = RestartLuna
 POSTUPDATEFLAGS = RestartLuna
 CHANGELOG = \
+1.0.5: Fixed calendar trigger and bug in MS app handling. Also added dashboard notification dialog.<br>\
 1.0.4: Fixed MS app handling on launch.<br>\
 1.0.3: Fixed popup launcher.<br>\
 1.0.2: Corrected the version.<br>\
