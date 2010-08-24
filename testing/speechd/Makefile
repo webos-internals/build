@@ -3,7 +3,7 @@ TITLE	= Speech Dispatcher
 APP_ID	= org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	= 0.7.1-2
+VERSION	= 0.7.1-3
 TYPE    = Linux Daemon
 CATEGORY = System Utilities
 DEPENDS  = org.webosinternals.locale
@@ -11,10 +11,12 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Application:SpeechDispatcher
 ICON     = http://www.webos-internals.org/images/7/7d/SpeechDispatcher.png
 DESCRIPTION = This daemon provides speech synthesis.  At the moment, it is only used by the Navit application and there is no dedicated application front-end, but a Mojo service and application will be developed in the future.
 CHANGELOG = \
+	    0.7.1-3: Try to fix problem when updating.<br/>\
 	    0.7.1-2: Add support for Pixi.<br/>\
 	    0.7.1-1: Fade music while talking.<br/>\
 	    0.7.1: Initial release.
 APPINFO_CHANGELOG = [ \
+{ "version" : "0.7.1-3", "log" : [ "Try to fix problem when updating" ] }, \
 { "version" : "0.7.1-2", "log" : [ "Add support for Pixi" ] }, \
 { "version" : "0.7.1-1", "log" : [ "Fade music while talking" ] }, \
 { "version" : "0.7.1", "log" : [ "Initial public release" ] }, \
