@@ -3,13 +3,18 @@ TITLE       = KeyBoss
 APP_ID      = org.webosinternals.${NAME}
 SIGNER      = org.webosinternals
 BLDFLAGS    = -p
-VERSION     = 0.1.3
+VERSION     = 0.2.3
 TYPE        = Application
 CATEGORY    = System Utilities
+DEVICECOMPATIBILITY = [\"Pre\"]
 HOMEPAGE    = 
 ICON        = 
-DESCRIPTION = Become the BOSS of your keyboard. This App/Service combo is intended to give the user as much control as possible over the functionality of the hard keyboard.  It also provides ability to emulate keyboard events, for use by projects like the Virtual Keyboard. Curently the application allows you to change the repeat rate and enable KeyCaps functionality.  <br>NOTE: The KeyCaps functionality (and keyboard emulation) requires the uinput module package.  Please install the uinput module found in Preware as well.
+DESCRIPTION = Become the BOSS of your keyboard. This App/Service combo is intended to give the user as much control as possible over the functionality of the hard keyboard.  It also provides ability to emulate keyboard events, for use by projects like the Virtual Keyboard. Curently the application allows you to change the repeat rate and enable KeyCaps like functionality.  <br>NOTE: The KeyCaps functionality (and keyboard emulation) requires the userspace input module package.  Please install the userspace input module package found in Preware as well.
 CHANGELOG   = \
+0.2.3: Minor fixes and performance stability. <br>\
+0.2.2: Make upstart script start after uinput upstart script. <br>\
+0.2.1: Fix minor bug in tap timeout causing erratic behaviour with tap actions. <br>\
+0.2.0: Re-design for functionality.  Change to concept of trigger/action lists.  Smoothed out key handling code for better integration with webOS/hidd. <br>\
 0.1.3: Fix double for func logic. <br>\
 0.1.2: Fix bug causing things like wallpaper to reset after reboot. <br>\
 0.1.1: Fix sym key bug. <br>\

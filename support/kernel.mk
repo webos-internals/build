@@ -12,6 +12,7 @@ DL_DIR = ../../downloads
 POSTINSTALLFLAGS = RestartDevice
 POSTUPDATEFLAGS  = RestartDevice
 POSTREMOVEFLAGS  = RestartDevice
+UPSTART_SCRIPT=$(shell basename ${APP_ID} ${SUFFIX})
 
 HEADLESSAPP_VERSION = 0.1.0
 
@@ -160,16 +161,16 @@ endif
 ifeq ("${TYPE}", "Kernel Module")
 build/%/CONTROL/postinst:
 	mkdir -p build/arm/CONTROL
-	sed -e 's|PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' \
-			-e 's|APP_DIR=|APP_DIR=/media/cryptofs/apps/usr/palm/applications/${APP_ID}|' \
-			../../autopatch/postinst${SUFFIX} > $@
+	sed -e 's|PID=|PID="${APP_ID}"|' \
+			-e 's|UPSTART_SCRIPT=|UPSTART_SCRIPT="${UPSTART_SCRIPT}"|' \
+			../../support/module.postinst > $@
 	chmod ugo+x $@
 
 build/%/CONTROL/prerm:
 	mkdir -p build/arm/CONTROL
-	sed -e 's|PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' \
-			-e 's|APP_DIR=|APP_DIR=/media/cryptofs/apps/usr/palm/applications/${APP_ID}|' \
-			../../autopatch/prerm${SUFFIX} > $@
+	sed -e 's|PID=|PID="${APP_ID}"|' \
+			-e 's|UPSTART_SCRIPT=|UPSTART_SCRIPT="${UPSTART_SCRIPT}"|' \
+			../../support/module.prerm > $@
 	chmod ugo+x $@
 else
 build/%/CONTROL/postinst:
@@ -232,7 +233,7 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	if [ -n "${KERNEL_UPSTART}" ] ; then \
 		mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/var/palm/event.d ; \
 		install -m 755 build/src-$*/patches/${KERNEL_UPSTART} \
-			 build/arm/usr/palm/applications/${APP_ID}/additional_files/var/palm/event.d/${APP_ID} ; \
+			 build/arm/usr/palm/applications/${APP_ID}/additional_files/var/palm/event.d/${UPSTART_SCRIPT} ; \
 	fi
 	touch $@
 
