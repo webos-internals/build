@@ -76,13 +76,13 @@ endif
 build/%/CONTROL/postinst:
 	rm -f $@
 	mkdir -p build/$*/CONTROL
-	install -m 0775 build/src/all/control/postinst build/$*/CONTROL
+	install -m 0775 build/src/control/postinst build/$*/CONTROL
 	chmod ugo+x $@
 
 build/%/CONTROL/prerm:
 	rm -f $@
 	mkdir -p build/$*/CONTROL
-	install -m 0775 build/src/all/control/prerm build/$*/CONTROL
+	install -m 0775 build/src/control/prerm build/$*/CONTROL
 	chmod ugo+x $@
 
 clobber::
