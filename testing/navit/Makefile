@@ -51,7 +51,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 build/%/CONTROL/postinst:
 	rm -f $@
 	mkdir -p build/$*/CONTROL
-	install -m 0775 build/src/all/control/postinst build/$*/CONTROL
+	install -m 0775 build/src/control/postinst build/$*/CONTROL
 	chmod ugo+x $@
 
 clobber::
