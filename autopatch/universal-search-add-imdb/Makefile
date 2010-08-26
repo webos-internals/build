@@ -13,4 +13,4 @@ include ../common.mk
 include ../modifications.mk
 
 MAINTAINER = lexb <lex.brugman@gmail.com>
-HOMEPAGE =
+HOMEPAGE = http://forums.precentral.net/webos-patches/260492-patch-add-imdb-one-preware.html
