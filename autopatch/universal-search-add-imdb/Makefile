@@ -3,9 +3,9 @@ PATCH = universal-search/${NAME}.patch
 TITLE = Add IMDB
 DESCRIPTION = Add IMDB to universal search
 CATEGORY = Universal Search
-VERSIONS = 1.4.0-65 1.4.1-37 1.4.2-22 1.4.3-16 1.4.5-21
+VERSIONS = 1.4.0-74 1.4.1-48 1.4.2-34 1.4.3-28 1.4.5-36
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
-SCREENSHOTS = [ \"http://www.webos-internals.org\" ]
+SCREENSHOTS = [ \"http://www.webos-internals.org/images/e/e0/Universal-search-add-imdb-1.png\" ]
 META_SUB_VERSION = 1
 
 include ../common.mk
