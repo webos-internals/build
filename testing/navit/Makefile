@@ -3,11 +3,12 @@ TITLE	= Navit - Car navigation system
 APP_ID	= org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	= 0.2.0.3537-2
+VERSION	= 0.2.0.3540-1
 TYPE    =  Application
 CATEGORY = Utilities
 DESCRIPTION = <strong style="color:red">THIS ONLY WORKS with webOS >=1.4.5</strong><br />Navit is an open source (GPL) car navigation software for Linux systems. It will display your position on a map (in bird-view mode or as a 3D "visualization") from GPS sensor data, and can provide precise route calculation, touch screen functionality and supports Points of Interest (POI), which can be extended via an easy to use plugin system. Unlike other navigation systems, Navit maps are dynamically generated in real time  from vector data.
 CHANGELOG = \
+	    0.2.0.3540-1: update ro svn r3540 <br/> \
 	    0.2.0.3537-2: Add support for Pixi <br/> \
 	    0.2.0.3537-1: update to svn r3537; apply fix for sunrise/set calculation; use a smaller font for the next street name.<br/> \
 	    0.2.0.3490-4: Make sure the maps-directory exists <br/> \
