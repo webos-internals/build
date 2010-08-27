@@ -3,13 +3,14 @@ TITLE    = Lumberjack
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.1.1
+VERSION  = 0.2.0
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Lumberjack
 ICON	 = http://www.webos-internals.org/images/3/38/Icon_WebOSInternals_Lumberjack.png
 DESCRIPTION = Lumberjack watches your logs.
 CHANGELOG = \
+0.2.0: Searching and Timestamps. <br>\
 0.1.1: Cleaned up thread implementation in service. <br>\
 0.1.0: Initial release.
 SCREENSHOTS = [\
@@ -20,6 +21,7 @@ SCREENSHOTS = [\
 LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/applications/lumberjack.git
+GIT_TAG = v0.2.0
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
