@@ -6,10 +6,10 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Application:Snes9x
 MAINTAINER = dtzWill
 TITLE   = Snes9x
 TYPE	= Application
-DESCRIPTION = Port of the amazing Super Nintendo Entertainment System emulator.<br>Official wiki <a href='http://www.webos-internals.org/wiki/Application:Snes9x'>here</a> (Please read it!).\
+DESCRIPTION = Port of the amazing Super Nintendo Entertainment System emulator 'Snes9x', as well as using pieces of DrNokSnes.<br>Official wiki <a href='http://www.webos-internals.org/wiki/Application:Snes9x'>here</a> (Please read it!).\
 	<br><br><b>Requires WebOS >= 1.4.5!</b><br>
 CHANGELOG = \
-<br><br><b>0.0.1</b><br>First public release.
+<b>0.0.1</b><br>First public release.
 CATEGORY = Games
 ICON	= http://www.webos-internals.org/images/8/83/Snes9x_small.png
 LICENSE  = GPLv2, Snes9x License
