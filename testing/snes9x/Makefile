@@ -1,4 +1,4 @@
-NAME     = SuperNES
+NAME     = supernes
 APP_ID   = org.webosinternals.${NAME}.preware
 SIGNER   = org.webosinternals
 VERSION  = 0.0.2
@@ -9,8 +9,8 @@ TYPE	= Application
 DESCRIPTION = Port of the amazing Super Nintendo Entertainment System emulator 'Snes9x', as well as using pieces of DrNokSnes.<br>Official wiki <a href='http://www.webos-internals.org/wiki/Application:SuperNES'>here</a> (Please read it!).\
 	<br><br><b>Requires WebOS >= 1.4.5!</b><br>
 CHANGELOG = \
-<b>0.0.2</b><br>Renamed to 'SuperNES'.
-<b>0.0.1</b><br>First public release.
+<b>0.0.2</b><br>Renamed to 'SuperNES'. \
+<br><br><b>0.0.1</b><br>First public release.
 CATEGORY = Games
 ICON	= http://www.webos-internals.org/images/8/83/Snes9x_small.png
 LICENSE  = GPLv2, Snes9x License
