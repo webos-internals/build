@@ -26,6 +26,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "0.7.1", "log" : [ "Initial public release" ] }, \
 ]
 DEPENDS = org.webosinternals.locale
+MINWEBOSVERSION = 1.4.5
 
 HEADLESSAPP_VERSION = 0.1.0
 
