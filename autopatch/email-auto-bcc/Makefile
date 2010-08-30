@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = email/${NAME}.patch
 TITLE = Auto Bcc
-DESCRIPTION = Borrowed the email 'Account Name' field to store Bcc email address. Bcc address will be add to email’s “BCC” field upon create or reply.
+DESCRIPTION = Borrowed the email 'Account Name' field to store Bcc email address. Bcc address will be added to BCC field of an email upon create or reply.
 CATEGORY = Email
-VERSIONS = 1.4.3-36 1.4.5-46
+VERSIONS = 1.4.3-38 1.4.5-54
 ICON = http://www.webos-internals.org/images/2/29/Icon_WebOSInternals_Patches_Email.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/c/cd/Email-auto-bcc-1.jpg\",\
