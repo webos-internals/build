@@ -3,7 +3,7 @@ TITLE	= Speech Dispatcher
 APP_ID	= org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	= 0.7.1-4
+VERSION	= 0.7.1-5
 TYPE    = Linux Daemon
 CATEGORY = System Utilities
 DEPENDS  = org.webosinternals.locale
@@ -11,12 +11,14 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Application:SpeechDispatcher
 ICON     = http://www.webos-internals.org/images/7/7d/SpeechDispatcher.png
 DESCRIPTION = This daemon provides speech synthesis.  At the moment, it is only used by the Navit application and there is no dedicated application front-end, but a Mojo service and application will be developed in the future.
 CHANGELOG = \
-	    0.7.1-4: Upstart script was missing. Fixed<br/>\
+	    0.7.1-5: Fixed issue which prevented proper upgrading.<br/>\
+	    0.7.1-4: Upstart script was missing. Fixed.<br/>\
 	    0.7.1-3: Try to fix problem when updating.<br/>\
 	    0.7.1-2: Add support for Pixi.<br/>\
 	    0.7.1-1: Fade music while talking.<br/>\
 	    0.7.1: Initial release.
 APPINFO_CHANGELOG = [ \
+{ "version" : "0.7.1-5", "log" : [ "Fixed issue which prevented proper upgrading" ] }, \
 { "version" : "0.7.1-4", "log" : [ "Upstart script was missing. Fixed" ] }, \
 { "version" : "0.7.1-3", "log" : [ "Try to fix problem when updating" ] }, \
 { "version" : "0.7.1-2", "log" : [ "Add support for Pixi" ] }, \
@@ -24,6 +26,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "0.7.1", "log" : [ "Initial public release" ] }, \
 ]
 DEPENDS = org.webosinternals.locale
+MINWEBOSVERSION = 1.4.5
 
 HEADLESSAPP_VERSION = 0.1.0
 
