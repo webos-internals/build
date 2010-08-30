@@ -3,21 +3,26 @@ TITLE       = KeyBoss
 APP_ID      = org.webosinternals.${NAME}
 SIGNER      = org.webosinternals
 BLDFLAGS    = -p
-VERSION     = 0.2.4
+VERSION     = 0.2.5
 TYPE        = Application
 CATEGORY    = System Utilities
 HOMEPAGE    = 
 ICON        = 
-DESCRIPTION = Become the BOSS of your keyboard. This App/Service combo is intended to give the user as much control as possible over the functionality of the hard keyboard.  It also provides ability to emulate keyboard events, for use by projects like the Virtual Keyboard. Curently the application allows you to change the repeat rate and enable KeyCaps like functionality.  <br>NOTE: The KeyCaps functionality (and keyboard emulation) requires the userspace input module package.  Please install the userspace input module package found in Preware as well.
+DESCRIPTION = Become the BOSS of your keyboard. This App/Service combo is intended to give the user as much control as possible over the functionality of the hard keyboard.  It also provides ability to emulate keyboard events, for use by projects like the Virtual Keyboard. Curently the application allows you to change the repeat rate and enable KeyCaps like functionality.  <br>NOTE: The KeyCaps functionality (and keyboard emulation) requires the userspace input module package.  Please install the userspace input module package found in Preware as well. <br><br>\
+Start typing anywhere for preview header to show, tap the header to hide. <br>
 CHANGELOG   = \
-0.2.4: Add enable/disable toggle. <br>\
+0.2.5: Added preview header for testing settings. <br>\
+       Changed logic to not cycle when only 1 action active. <br>\
+			 Fixed tap action bug that missed keys in universal search. <br>\
+			 Added start/changelog scene. <br>\
+0.2.4: Added enable/disable toggle. <br>\
 0.2.3: Minor fixes and performance stability. <br>\
-0.2.2: Make upstart script start after uinput upstart script. <br>\
-0.2.1: Fix minor bug in tap timeout causing erratic behaviour with tap actions. <br>\
-0.2.0: Re-design for functionality.  Change to concept of trigger/action lists.  Smoothed out key handling code for better integration with webOS/hidd. <br>\
-0.1.3: Fix double for func logic. <br>\
-0.1.2: Fix bug causing things like wallpaper to reset after reboot. <br>\
-0.1.1: Fix sym key bug. <br>\
+0.2.2: Made upstart script start after uinput upstart script. <br>\
+0.2.1: Fixed minor bug in tap timeout causing erratic behaviour with tap actions. <br>\
+0.2.0: Re-designed for functionality.  Change to concept of trigger/action lists.  Smoothed out key handling code for better integration with webOS/hidd. <br>\
+0.1.3: Fixed double for func logic. <br>\
+0.1.2: Fixed bug causing things like wallpaper to reset after reboot. <br>\
+0.1.1: Fixed sym key bug. <br>\
 0.1.0: Inception
 SCREENSHOTS = 
 LICENSE     = GPL v2 Open Source
