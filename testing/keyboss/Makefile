@@ -6,8 +6,8 @@ BLDFLAGS    = -p
 VERSION     = 0.2.5
 TYPE        = Application
 CATEGORY    = System Utilities
-HOMEPAGE    = 
-ICON        = 
+HOMEPAGE    = http://www.webos-internals.org/wiki/KeyBoss
+ICON        = http://www.webos-internals.org/images/6/61/Icon_WebOSInternals_KeyBoss.png
 DESCRIPTION = Become the BOSS of your keyboard. This App/Service combo is intended to give the user as much control as possible over the functionality of the hard keyboard.  It also provides ability to emulate keyboard events, for use by projects like the Virtual Keyboard. Curently the application allows you to change the repeat rate and enable KeyCaps like functionality.  <br>NOTE: The KeyCaps functionality (and keyboard emulation) requires the userspace input module package.  Please install the userspace input module package found in Preware as well. <br><br>\
 Start typing anywhere for preview header to show, tap the header to hide. <br>
 CHANGELOG   = \
