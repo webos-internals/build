@@ -3,7 +3,7 @@ TITLE = WarthogKernel (Pre/Pre+)
 DEVICE = pre
 CATEGORY = Experimental
 DEVICECOMPATIBILITY = [\"Pre\"]
-VERSIONS = 1.4.1-103 1.4.2-103 1.4.5-103 
+VERSIONS = 1.4.1-106 1.4.2-106 1.4.5-106 
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A testbed of kernel patches for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
@@ -20,7 +20,7 @@ All additions are disabled by default, and must be enabled by separate packages 
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-103", "log" : [ "Charger override sysfs. Turn off additional TCP congest algos. Stick with cubic" ] }, \
+{ "version" : "${WEBOS_VERSION}-106", "log" : [ "Charger override sysfs. Turn off additional TCP congest algos. Stick with cubic" ] }, \
 { "version" : "${WEBOS_VERSION}-101", "log" : [ "Enable uinput" ] }, \
 { "version" : "${WEBOS_VERSION}-100", "log" : [ "Defconfig cleanup, sched_fair tweak, default AS scheduler" ] }, \
 { "version" : "${WEBOS_VERSION}-94", "log" : [ "Lowered voltage for 600 and 800Mhz. Voltage clamping now in effect" ] }, \
@@ -45,7 +45,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-13", "log" : [ "Initial public release" ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-103: Charger override sysfs. Turn off additional TCP congest algos. Stick with cubic.<br>\
+${WEBOS_VERSION}-106: Charger override sysfs. Turn off additional TCP congest algos. Stick with cubic.<br>\
 ${WEBOS_VERSION}-101: Enable uinput.<br>\
 ${WEBOS_VERSION}-100: Defconfig cleanup, sched_fair tweak, default AS scheduler.<br>\
 ${WEBOS_VERSION}-94: Lowered voltage for 600 and 800Mhz. Voltage clamping now in effect.<br>\
