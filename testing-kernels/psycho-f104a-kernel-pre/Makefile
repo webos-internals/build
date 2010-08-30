@@ -2,12 +2,12 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F104A Starfighter (Palm Pre/Pre+)
 CATEGORY = Experimental
 DEVICECOMPATIBILITY = [\"Pre\"]
-VERSIONS = 1.4.1-105 1.4.2-105 1.4.5-105
+VERSIONS = 1.4.1-106 1.4.2-106 1.4.5-106
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br>\
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-105", "log" : [ "new engine and afterburners." ] }, \
+{ "version" : "${WEBOS_VERSION}-106", "log" : [ "new engine and afterburners." ] }, \
 { "version" : "${WEBOS_VERSION}-83", "log" : [ "Merge with F102A codebase. Repackage." ] }, \
 { "version" : "${WEBOS_VERSION}-43", "log" : [ "Initial public release, rebased off UberKernel ${WEBOS_VERSION}-40" ] }, \
 ]
