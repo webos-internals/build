@@ -3,7 +3,7 @@ TITLE	= Navit - Car navigation system
 APP_ID	= org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	= 0.2.0.3540-1
+VERSION	= 0.2.0.3541-1
 TYPE    =  Application
 CATEGORY = Utilities
 DESCRIPTION = <p><strong style="color:red">THIS ONLY WORKS with webOS >= 1.4.5 \
@@ -18,6 +18,7 @@ DESCRIPTION = <p><strong style="color:red">THIS ONLY WORKS with webOS >= 1.4.5 \
        other navigation systems, Navit maps are dynamically generated in real \
        time from vector data.</p>
 CHANGELOG = \
+	    0.2.0.3541-1: update ro svn r3541, now officially containing the sunrise-fix <br/> \
 	    0.2.0.3540-1: update ro svn r3540 <br/> \
     	    0.2.0.3537-2: Add support for Pixi <br/> \
     	    0.2.0.3537-1: update to svn r3537; apply fix for sunrise/set calculation; use a smaller font for the next street name.<br/> \
