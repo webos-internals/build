@@ -3,7 +3,7 @@ TITLE = WarthogKernel (Pixi/Pixi+)
 DEVICE = pixi
 CATEGORY = Experimental
 DEVICECOMPATIBILITY = [\"Pixi\"]
-VERSIONS = 1.4.1-100 1.4.3-100 1.4.5-100
+VERSIONS = 1.4.1-107 1.4.3-107 1.4.5-107
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A testbed of kernel patches for the Palm Pixi/Pixi+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
@@ -16,6 +16,7 @@ All additions are disabled by default, and must be enabled by separate packages 
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-107", "log" : [ "Turn off additional TCP congest algos. Stick with cubic" ] }, \
 { "version" : "${WEBOS_VERSION}-100", "log" : [ "Defconfig cleanup, sched_fair tweak, default AS scheduler" ] }, \
 { "version" : "${WEBOS_VERSION}-85", "log" : [ "Build using official 1.4.5 sources" ] }, \
 { "version" : "${WEBOS_VERSION}-74", "log" : [ "Back off sbromwich changes" ] }, \
@@ -26,7 +27,9 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-43", "log" : [ "Updated with latest postinst and prerm OTA safety measures" ] }, \
 { "version" : "${WEBOS_VERSION}-40", "log" : [ "First Pixi custom kernel" ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-100: Defconfig cleanup, sched_fair tweak, default AS scheduler.<br>\
+CHANGELOG = \
+${WEBOS_VERSION}-107: Turn off additional TCP congest algos. Stick with cubic.<br>\
+${WEBOS_VERSION}-100: Defconfig cleanup, sched_fair tweak, default AS scheduler.<br>\
 ${WEBOS_VERSION}-85: Build using official 1.4.5 sources.<br>\
 ${WEBOS_VERSION}-73: Incorporate sbromwich changes.<br>\
 ${WEBOS_VERSION}-62: Disable MODVERSIONS.<br>\
@@ -40,7 +43,7 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
 		 makefiletune/armMakefile.diff \
-		 defconfig/defconfig.pixi.cpugov defconfig/defconfig.pixi.tcpcong defconfig/defconfig-nodebug-pixi.patch \
+		 defconfig/defconfig.pixi.cpugov defconfig/defconfig-nodebug-pixi.patch \
 		 warthogbuild/defconfig-as-pixi.patch warthogbuild/defconfig-slim-pixi.patch \
 		 warthogbuild/sched_fair.patch 
 EXTERNAL_MODULES = compcache/compcache-0.5.4
