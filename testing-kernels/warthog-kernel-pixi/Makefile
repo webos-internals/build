@@ -43,7 +43,7 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
 		 makefiletune/armMakefile.diff \
-		 defconfig/defconfig.pixi.cpugov defconfig/defconfig.pixi.tcpcong defconfig/defconfig-nodebug-pixi.patch \
+		 defconfig/defconfig.pixi.cpugov defconfig/defconfig-nodebug-pixi.patch \
 		 warthogbuild/defconfig-as-pixi.patch warthogbuild/defconfig-slim-pixi.patch \
 		 warthogbuild/sched_fair.patch 
 EXTERNAL_MODULES = compcache/compcache-0.5.4
