@@ -3,7 +3,7 @@ TITLE       = KeyBoss
 APP_ID      = org.webosinternals.${NAME}
 SIGNER      = org.webosinternals
 BLDFLAGS    = -p
-VERSION     = 0.2.5
+VERSION     = 0.2.6
 TYPE        = Application
 CATEGORY    = System Utilities
 HOMEPAGE    = http://www.webos-internals.org/wiki/KeyBoss
@@ -11,6 +11,7 @@ ICON        = http://www.webos-internals.org/images/6/61/Icon_WebOSInternals_Key
 DESCRIPTION = Become the BOSS of your keyboard. This App/Service combo is intended to give the user as much control as possible over the functionality of the hard keyboard.  It also provides ability to emulate keyboard events, for use by projects like the Virtual Keyboard. Curently the application allows you to change the repeat rate and enable KeyCaps like functionality.  <br>NOTE: The KeyCaps functionality (and keyboard emulation) requires the userspace input module package.  Please install the userspace input module package found in Preware as well. <br><br>\
 Start typing anywhere for preview header to show, tap the header to hide. <br>
 CHANGELOG   = \
+0.2.6: Fixed removal of tap action. <br>\
 0.2.5: Added preview header for testing settings. <br>\
        Changed logic to not cycle when only 1 action active. <br>\
 			 Fixed tap action bug that missed keys in universal search. <br>\
