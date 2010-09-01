@@ -2,17 +2,18 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F104A Starfighter (Palm Pre/Pre+)
 CATEGORY = Experimental
 DEVICECOMPATIBILITY = [\"Pre\"]
-VERSIONS = 1.4.1-107 1.4.2-107 1.4.5-107
+VERSIONS = 1.4.1-108 1.4.2-108 1.4.5-108
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br>\
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-108", "log" : [ "add battery scaling." ] }, \
 { "version" : "${WEBOS_VERSION}-107", "log" : [ "fix low end." ] }, \
 { "version" : "${WEBOS_VERSION}-106", "log" : [ "new engine and afterburners." ] }, \
 { "version" : "${WEBOS_VERSION}-83", "log" : [ "Merge with F102A codebase. Repackage." ] }, \
 { "version" : "${WEBOS_VERSION}-43", "log" : [ "Initial public release, rebased off UberKernel ${WEBOS_VERSION}-40" ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-107: fix low end<br>${WEBOS_VERSION}-106: new engine and afterburners.<br>${WEBOS_VERSION}-83: Merge with F102A codebase. Repackage.<br>${WEBOS_VERSION}-43: Initial public release, rebased off UberKernel ${WEBOS_VERSION}-40
+CHANGELOG = ${WEBOS_VERSION}-108: add battery scaling.<br>${WEBOS_VERSION}-107: fix low end<br>${WEBOS_VERSION}-106: new engine and afterburners.<br>${WEBOS_VERSION}-83: Merge with F102A codebase. Repackage.<br>${WEBOS_VERSION}-43: Initial public release, rebased off UberKernel ${WEBOS_VERSION}-40
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
