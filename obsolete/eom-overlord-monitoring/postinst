@@ -13,5 +13,9 @@ stop uploadd
 sed -i -e 's/^respawn/#respawn/' /etc/event.d/uploadd
 sed -i -e 's/^exec/#exec/' /etc/event.d/uploadd
 
-ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
+stop rdxd
+sed -i -e 's/^respawn/#respawn/' /etc/event.d/rdxd
+sed -i -e 's/^exec/#exec/' /etc/event.d/rdxd
+
+#ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
 exit 0
