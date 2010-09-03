@@ -1,6 +1,6 @@
 TYPE = Linux Application
 NAME = eom-overlord-monitoring
-VERSION = 1.0.2
+VERSION = 1.0.3
 TITLE = EOM Overlord Monitoring
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DESCRIPTION = By default, Palm uploads multiple logs to ps.palmws.com. This stops that process. If you install this, consider adding the "Muffle System Logging" patch from Preware too. 
