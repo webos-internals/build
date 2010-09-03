@@ -13,5 +13,8 @@ chmod +x /usr/bin/uploadd
 chmod +x /usr/bin/rdxd
 chmod +x /usr/bin/contextupload
 
-ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
+start uploadd
+start rdxd
+
+#ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
 exit 0
