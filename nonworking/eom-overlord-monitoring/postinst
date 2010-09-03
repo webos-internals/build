@@ -11,17 +11,23 @@ fi
 # Stop uploading stuff to the mothership
 # First off, stop uploadd and rdxd processes.
 # Next, kill off contextupload
+# Remove execute perms
 #
-#stop uploadd
-#sed -i -e 's/^respawn/#respawn/' /etc/event.d/uploadd
-#sed -i -e 's/^exec/#exec/' /etc/event.d/uploadd
+stop uploadd
+chmod -x /usr/bin/uploadd
 
-#stop rdxd
-#sed -i -e 's/^respawn/#respawn/' /etc/event.d/rdxd
-#sed -i -e 's/^exec/#exec/' /etc/event.d/rdxd
+stop rdxd
+chmod -x /usr/bin/rdxd
 
-#killall contextupload
-#mv /usr/bin/contextupload /usr/bin/contextupload.orig
+rm /var/log/rdxd/pending/*
+rm /var/log/rdxd/uploaded/*
+
+killall -9 contextupload
+chmod -x /usr/bin/contextupload
+
+# FIX PRIOR VERSION OF EOM.
+sed -i -e 's/^#respawn/respawn/' /etc/event.d/uploadd
+sed -i -e 's/^#exec/exec/' /etc/event.d/uploadd
 
 #ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
 exit 0
