@@ -2,11 +2,12 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F105 Thunderchief (Palm Pre/Pre+)
 CATEGORY = Experimental
 DEVICECOMPATIBILITY = [\"Pre\"]
-VERSIONS = 1.4.1-108 1.4.2-108 1.4.5-108
+VERSIONS = 1.4.1-110 1.4.2-110 1.4.5-110
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br><br>\
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-110", "log" : [ "fix cpufreq policy update." ] }, \
 { "version" : "${WEBOS_VERSION}-108", "log" : [ "add battery scaling." ] }, \
 { "version" : "${WEBOS_VERSION}-106", "log" : [ "add charger cpu scaleback override sysfs." ] }, \
 { "version" : "${WEBOS_VERSION}-99", "log" : [ "fix store_vdd1_vsel." ] }, \
@@ -24,7 +25,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-59", "log" : [ "screenstate updates. CPU IDLE update.  New freqs." ] }, \
 { "version" : "${WEBOS_VERSION}-47", "log" : [ "Initial release for 1GHz support" ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-108: add battery scaling.<br>${WEBOS_VERSION}-106: add charger cpu scaleback override sysfs.<br>${WEBOS_VERSION}-99: fix store_vdd1_vsel<br>${WEBOS_VERSION}-98: cut down on voltage. hide low vsel settings.<br>${WEBOS_VERSION}-92: Do voltage scaling immediately after Vsel change.<br>${WEBOS_VERSION}-91: added Vsel limits.<br>${WEBOS_VERSION}-88: added selectable voltage & temp scaling. removed OPP1&2 from display.<br>${WEBOS_VERSION}-85: added low temp reset on overheating. add nexgen-screenstate. bump DSP rate<br>${WEBOS_VERSION}-83: match SR71 OPP6 voltage. repackage<br>${WEBOS_VERSION}-76: re-enable memory overcommit. put 500MHz voltage back and bump up 1GHz voltage.<br>${WEBOS_VERSION}-74: Fix for PC USB charging.<br>${WEBOS_VERSION}-69: Fix for current_mA in TS detection.<br>${WEBOS_VERSION}-67: make screenstate monitor current and voltage. bug fixes. remove brightness checking. overclocking tweaks.<br>${WEBOS_VERSION}-60: Voltage tweaking.<br>
+CHANGELOG = ${WEBOS_VERSION}-110: fix cpufreq policy update.<br>${WEBOS_VERSION}-108: add battery scaling.<br>${WEBOS_VERSION}-106: add charger cpu scaleback override sysfs.<br>${WEBOS_VERSION}-99: fix store_vdd1_vsel<br>${WEBOS_VERSION}-98: cut down on voltage. hide low vsel settings.<br>${WEBOS_VERSION}-92: Do voltage scaling immediately after Vsel change.<br>${WEBOS_VERSION}-91: added Vsel limits.<br>${WEBOS_VERSION}-88: added selectable voltage & temp scaling. removed OPP1&2 from display.<br>${WEBOS_VERSION}-85: added low temp reset on overheating. add nexgen-screenstate. bump DSP rate<br>${WEBOS_VERSION}-83: match SR71 OPP6 voltage. repackage<br>${WEBOS_VERSION}-76: re-enable memory overcommit. put 500MHz voltage back and bump up 1GHz voltage.<br>${WEBOS_VERSION}-74: Fix for PC USB charging.<br>${WEBOS_VERSION}-69: Fix for current_mA in TS detection.<br>${WEBOS_VERSION}-67: make screenstate monitor current and voltage. bug fixes. remove brightness checking. overclocking tweaks.<br>${WEBOS_VERSION}-60: Voltage tweaking.<br>
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
