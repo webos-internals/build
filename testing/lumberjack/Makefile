@@ -22,7 +22,6 @@ SCREENSHOTS = [\
 LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/applications/lumberjack.git
-GIT_TAG = v0.2.0
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
