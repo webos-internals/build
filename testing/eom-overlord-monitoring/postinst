@@ -19,9 +19,6 @@ stop uploadd
 chmod -x /usr/bin/rdxd
 stop rdxd
 
-rm /var/log/rdxd/pending/*
-rm /var/log/rdxd/uploaded/*
-
 chmod -x /usr/bin/contextupload
 killall -9 contextupload
 
