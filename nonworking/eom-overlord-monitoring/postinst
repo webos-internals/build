@@ -12,13 +12,13 @@ fi
 # First off, stop uploadd and rdxd processes.
 # Next, kill off contextupload
 #
-stop uploadd
-sed -i -e 's/^respawn/#respawn/' /etc/event.d/uploadd
-sed -i -e 's/^exec/#exec/' /etc/event.d/uploadd
+#stop uploadd
+#sed -i -e 's/^respawn/#respawn/' /etc/event.d/uploadd
+#sed -i -e 's/^exec/#exec/' /etc/event.d/uploadd
 
-stop rdxd
-sed -i -e 's/^respawn/#respawn/' /etc/event.d/rdxd
-sed -i -e 's/^exec/#exec/' /etc/event.d/rdxd
+#stop rdxd
+#sed -i -e 's/^respawn/#respawn/' /etc/event.d/rdxd
+#sed -i -e 's/^exec/#exec/' /etc/event.d/rdxd
 
 #killall contextupload
 #mv /usr/bin/contextupload /usr/bin/contextupload.orig

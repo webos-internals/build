@@ -1,0 +1,18 @@
+description "EOM Uploadd"
+
+start on started uploadd
+stop on runlevel [!2]
+
+console none
+
+# Restart the web server if it exits/dies
+respawn
+
+exec stop uploadd
+
+pre-start script
+     killall contextupload
+end script
+
+# end of file
+

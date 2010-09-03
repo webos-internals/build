@@ -1,0 +1,14 @@
+description "EOM Rdxd"
+
+start on started rdxd
+stop on runlevel [!2]
+
+console none
+
+# Restart the web server if it exits/dies
+respawn
+
+exec stop rdxd
+
+# end of file
+

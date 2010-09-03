@@ -9,12 +9,12 @@ if [ -z "$IPKG_OFFLINE_ROOT" ]; then
 fi
 
 # Set things back to the way they were
-sed -i -e 's/^#respawn/respawn/' /etc/event.d/uploadd
-sed -i -e 's/^#exec/exec/' /etc/event.d/uploadd
+#sed -i -e 's/^#respawn/respawn/' /etc/event.d/uploadd
+#sed -i -e 's/^#exec/exec/' /etc/event.d/uploadd
 #start uploadd
 
-sed -i -e 's/^#respawn/respawn/' /etc/event.d/rdxd
-sed -i -e 's/^#exec/exec/' /etc/event.d/rdxd
+#sed -i -e 's/^#respawn/respawn/' /etc/event.d/rdxd
+#sed -i -e 's/^#exec/exec/' /etc/event.d/rdxd
 #start rdxd
 
 #if [ -f /usr/bin/contextupload.orig ]
