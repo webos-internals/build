@@ -1,7 +1,7 @@
 NAME     = supernes
 APP_ID   = org.webosinternals.${NAME}.preware
 SIGNER   = org.webosinternals
-VERSION  = 0.0.3
+VERSION  = 0.0.4
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:SuperNES
 MAINTAINER = dtzWill
 TITLE   = SuperNES
@@ -9,7 +9,8 @@ TYPE	= Application
 DESCRIPTION = Port of the amazing Super Nintendo Entertainment System emulator 'Snes9x', as well as using pieces of DrNokSnes.<br>Official wiki <a href='http://www.webos-internals.org/wiki/Application:SuperNES'>here</a> (Please read it!).\
 	<br><br><b>Requires WebOS >= 1.4.5!</b><br>
 CHANGELOG = \
-<b>0.0.3</b><br>Fixed save states/menu issue (hopefully). \
+<b>0.0.4</b><br>(Transparent!) Skin support, misc bug fixes. \
+<br><br><b>0.0.3</b><br>Fixed save states/menu issue (hopefully). \
 <br><br><b>0.0.2</b><br>Renamed to 'SuperNES'. \
 <br><br><b>0.0.1</b><br>First public release.
 CATEGORY = Games
