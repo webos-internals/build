@@ -3,14 +3,21 @@ TITLE	 = Preware
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.2.7
+VERSION  = 1.3.6
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
 ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 MINWEBOSVERSION = 1.4.0
-DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, kernels, services and plugins.  Preware is also able to access official Palm App Catalog, Web Distribution and Beta Distribution feeds.<br><b>Requires webOS 1.4.0 or later</b>.
+DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, kernels, services and plugins. Preware is also able to access official Palm App Catalog, Web Distribution and Beta Distribution feeds.<br><b>Requires webOS 1.4.0 or later</b>.
 CHANGELOG = \
+1.3.6: Preware now supports installation of application package files (.ipk files) directly from URLs, email attachments, and local files. Also supported are Send to Preware links on homebrew application gallery and news websites (this requires the Neato! application to also be installed). If Preware continually asks you about file associations on every single launch, even after you have answered Yes to the questions it asks, then you may have a damaged file association table and will need to run the Emergency MimeTable Reset tool and then reboot to repair it.<br>\
+1.3.5: Updated German translations.<br>\
+1.3.3: Always ask the user before modifying the file association list.<br>\
+1.3.1: Check whether Preware is the default application for handling packages, and advise the user if it is not.<br>\
+1.3.0: Added Preware to the Default Applications list to allow for installing packages from email messages and the browser.<br>\
+1.2.9: Fixed the Saved Package List swipe to delete bug.<br>\
+1.2.8: Open the My Applications app catalog screen when multiple app catalog applications need updating.<br>\
 1.2.7: Fixed the Install Package problem when running on the emulator.<br>\
 1.2.6: Remove most of the curl download progress messages from the ipkg log (this fixes a buffer overrun crash).<br>\
 1.2.5: Added Ask At Launch option to update preference. Added Blacklist. German Translation updates. Fixed update banner problem. Fixed package with too many dependent packages problem.<br>\
