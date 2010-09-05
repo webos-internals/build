@@ -1,12 +1,12 @@
 NAME     = jstop
 APP_ID   = com.palm.biz.sketchyplace.${NAME}
-VERSION  = 0.2.5
+VERSION  = 0.2.6
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:JsTop
 MAINTAINER = Daniel Freedman (azakus) <dfreedm2@uiuc.edu>
 TITLE   = JsTop
 TYPE	= Application
 DESCRIPTION = An on-phone resource monitor for javascript applications.
-CHANGELOG = 0.2.5: Back gesture unfilters, cleaner code, no more borked ever
+CHANGELOG = 0.2.6: Cleaner logs, binding applied to app-assistant, jslinted
 CATEGORY = System Utilities
 ICON	= http://www.webos-internals.org/images/c/c5/Icon_WebOSInternals_ProcessMonitor.png
 LICENSE  = BSD (NCSA/UofI) Open Source
