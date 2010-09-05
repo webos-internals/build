@@ -1,0 +1,20 @@
+#!/bin/sh
+
+PACKAGE=org.webosinternals.eom-overlord-monitoring
+
+# Handle execution as pmPostInstall.script
+if [ -z "$IPKG_OFFLINE_ROOT" ]; then
+    IPKG_OFFLINE_ROOT=/media/cryptofs/apps
+    mount -o remount,rw /
+fi
+
+# Set things back to the way they were
+chmod +x /usr/bin/uploadd
+chmod +x /usr/bin/rdxd
+chmod +x /usr/bin/contextupload
+
+start uploadd
+start rdxd
+
+#ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
+exit 0
