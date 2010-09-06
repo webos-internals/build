@@ -1,7 +1,7 @@
 NAME     = wirc
 TITLE    = wIRC
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.3.2
+VERSION  = 0.3.2-1
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = Communication
@@ -24,12 +24,12 @@ MINWEBOSVERSION = 1.4.5
 DEVICECOMPATIBILITY = [\"Pre\"]
 
 SRC_GIT = git://git.webos-internals.org/applications/wIRC.git
-GIT_TAG = v0.3.2a
+GIT_TAG = v0.3.2-puff
 
 D = build/$*/usr/palm/applications/${APP_ID}
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
+package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk
 
 include ../../support/package.mk
 
@@ -47,7 +47,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/armv7.built-${VERSION} build/i686.built-${VERSION}
+build/.built-${VERSION}: build/armv7.built-${VERSION}
 	touch $@
 
 include ../../support/cross-compile.mk
