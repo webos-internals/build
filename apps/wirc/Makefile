@@ -24,7 +24,7 @@ MINWEBOSVERSION = 1.4.5
 DEVICECOMPATIBILITY = [\"Pre\"]
 
 SRC_GIT = git://git.webos-internals.org/applications/wIRC.git
-GIT_TAG = v0.3.2
+GIT_TAG = v0.3.2a
 
 D = build/$*/usr/palm/applications/${APP_ID}
 
