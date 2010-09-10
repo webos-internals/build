@@ -13,7 +13,7 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 WebOS Internals provides Save/Retore as is without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.  The entire risk as to the quality and performance of Save/Restore is with you.  Should Save/Restore prove defective, you assume the cost of all necessary servicing, repair or correction.<br>\
 In no event will WebOS Internals or any other party be liable to you for damages, including any general, special, incidental or consequential damages arising out of the use or inability to use Save/Restore (including but not limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of Save/Restore to operate with any other programs).
 CHANGELOG = \
-1.0.8: Applications: EasyList, Cosmic Nitro, TechTray, GPS Trip Panel, Raging Thunder, What's for dinner? Lite (all courtesy of djgardn2), Crusade Of Destiny, Rednecks Vs Aliens (both courtesy of mamouton), TrackMyWork Full (courtesy of kr_ke), Sparkle (courtesy of pip smith).<br>\
+1.0.8: Applications: EasyList, Cosmic Nitro, TechTray, GPS Trip Panel, Raging Thunder, What\'s for dinner? Lite (all courtesy of djgardn2), Crusade Of Destiny, Rednecks Vs Aliens (both courtesy of mamouton), TrackMyWork Full (courtesy of kr_ke), Sparkle (courtesy of pip smith).<br>\
 1.0.6: Applications: TouchConnect+, Mobile Hotspot (both courtesy of Audemars02), SmartRunner (courtesy of djgardn2).<br>\
 1.0.5: Fixed case insensitive unzip overwrite query bug. Applications: Angry Birds.<br>\
 1.0.4: Fixed issue created when allowing filenames that include spaces. Fixed application names for a few scripts.<br>\
@@ -82,9 +82,9 @@ include ../../support/package.mk
 include ../../support/download.mk
 
 .PHONY: unpack
-unpack: build/.unpacked
+unpack: build/.unpacked-${VERSION}
 
-build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
@@ -97,12 +97,12 @@ build/.unpacked: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/arm.built build/i686.built
+build/.built-${VERSION}: build/arm.built-${VERSION} build/i686.built-${VERSION}
 	touch $@
 
 include ../../support/cross-compile.mk
 
-build/%.built: build/.unpacked
+build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	( cd build/src/src ; \
 	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc \
