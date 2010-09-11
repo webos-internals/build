@@ -10,7 +10,7 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
 DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature, load averages and memory usage.
 CHANGELOG = \
-0.6.8: Added French translations (courtesy of Yannick LE NY).<br>\
+0.6.8: Localization support and added French translations (courtesy of Yannick LE NY).<br>\
 0.6.7: Added Screenstate 500/1000 default profile for Uber1G.<br>\
 0.6.6: Added profile support for the voltage selection parameters.<br>\
 0.6.4: Added profile support for the cpufreq override module.<br>\
