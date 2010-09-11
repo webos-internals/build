@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = system/${NAME}.patch
-TITLE = Devicemenu Maxed Out Ultra
+TITLE = Device Menu Maxed Out Ultra
 DESCRIPTION = Date and battery level Bright<br/>Adds temperature<br/>Adds screen brightness control<br/>Adds media volume control<br/>Adds system volume control<br/>Adds phone submenu (radio data roaming) toggles<br/>Adds GPS toggle<br/>Adds a flashlight led toggle<br/>Airplane mode toggle<br/>Bluetooth<br/>WIFI<br/><br/>To the Devicemenu
 CATEGORY = System
-VERSIONS = 1.4.5-62
+VERSIONS = 1.4.5-63
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/7/7a/System-devicemenu-maxed-out-ultra-1.png\",\
