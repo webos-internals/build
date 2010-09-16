@@ -3,16 +3,18 @@ TITLE	= Locale Support Infrastructure
 APP_ID	= org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	= 7.3.0-1
+VERSION	= 7.3.0-2
 CATEGORY = Infrastructure
 TYPE	= Linux Application
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Locale
 DESCRIPTION = Provides data files to enable localization in programs using the native localization methods like Navit.
 CHANGELOG = \
+	    7.3.0-2: Add csz and sk \
 	    7.3.0-1: Add Italian (it_IT.utf8) \
 	    7.3.0: Initial release, providing ${LOCALES}
 LOCALES = cs_CZ.utf8 de_DE.utf8 en_CA.utf8 en_GB.utf8 en_US.utf8 es_MX.utf8 \
-	  es_US.utf8 fr_CA.utf8 fr_FR.utf8 he_IL.utf8 zh_CN.utf8 it_IT.utf8
+	  es_US.utf8 fr_CA.utf8 fr_FR.utf8 he_IL.utf8 zh_CN.utf8 it_IT.utf8 \
+	  sk_SK.utf8
 
 D = build/$*/usr/palm/applications/${APP_ID}
 
