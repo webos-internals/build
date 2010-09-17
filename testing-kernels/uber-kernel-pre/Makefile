@@ -3,7 +3,7 @@ TITLE = UberKernel (Pre/Pre+)
 DEVICE = pre
 CATEGORY = Experimental
 DEVICECOMPATIBILITY = [\"Pre\"]
-VERSIONS = 1.4.1-92 1.4.2-92 1.4.5-92
+VERSIONS = 1.4.1-112 1.4.2-112 1.4.5-112
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
 Current additions include:<ul>\
@@ -19,6 +19,7 @@ All additions are disabled by default, and must be enabled by using the Govnah a
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-112", "log" : [ "Added ability to control core voltages at each frequency", "Added ability to override screenstate charger frequency limiter", "Added a new configurable frequency limiter based on percentage battery remaining", "Reduced 1GHz voltage to save power, based on F105 testing results", "Added USB mass storage patch for XBox360 compatibility" ] }, \
 { "version" : "${WEBOS_VERSION}-92", "log" : [ "Removed 550MHz, added 1GHz" ] }, \
 { "version" : "${WEBOS_VERSION}-87", "log" : [ "Limited frequency to 500MHz when temperature exceeds configurable limits (defaults to 55 degrees)" ] }, \
 { "version" : "${WEBOS_VERSION}-74", "log" : [ "Limited frequency to 500MHz when charging on Touchstone to prevent overheating", "Improved verification of target files for no existing modifications" ] }, \
@@ -34,6 +35,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-13", "log" : [ "Initial public release" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-112: Added ability to control core voltages at each frequency. Added ability to override screenstate charger frequency limiter. Added a new configurable frequency limiter based on percentage battery remaining. Reduced 1GHz voltage to save power, based on F105 testing results. Added USB mass storage patch for XBox360 compatibility.<br>\
 ${WEBOS_VERSION}-92: Removed 550MHz, added 1GHz.<br> \
 ${WEBOS_VERSION}-87: Limited frequency to 500MHz when temperature exceeds configurable limits (defaults to 55 degrees).<br> \
 ${WEBOS_VERSION}-74: Limited frequency to 500MHz when charging on Touchstone to prevent overheating. Improved verification of target files for no existing modifications.<br>\
@@ -56,7 +58,8 @@ KERNEL_PATCHES = overclocking/600-720-800-1000-min-opp5.patch overclocking/defco
 		 makefiletune/armMakefile.diff \
 		 defconfig/defconfig.pre.cpugov \
 		 compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
-		 overclocking/override.patch overclocking/read-only-vdd1-vsel.patch
+		 overclocking/override.patch \
+		 usb/f_mass_storage.patch
 EXTERNAL_MODULES = compcache/compcache-0.5.4
 TYPE = Kernel
 
