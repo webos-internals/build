@@ -19,7 +19,7 @@ All additions are disabled by default, and must be enabled by using the Govnah a
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-113", "log" : [ "Reduced 1GHz voltage to save power, based on F105 testing results", "Added USB mass storage patch for XBox360 compatibility" ] }, \
+{ "version" : "${WEBOS_VERSION}-113", "log" : [ "Added ability to control core voltages at each frequency", "Added ability to override screenstate charger frequency limiter", "Added a new configurable frequency limiter based on percentage battery remaining", "Reduced 1GHz voltage to save power, based on F105 testing results", "Added USB mass storage patch for XBox360 compatibility" ] }, \
 { "version" : "${WEBOS_VERSION}-92", "log" : [ "Removed 550MHz, added 1GHz" ] }, \
 { "version" : "${WEBOS_VERSION}-87", "log" : [ "Limited frequency to 500MHz when temperature exceeds configurable limits (defaults to 55 degrees)" ] }, \
 { "version" : "${WEBOS_VERSION}-74", "log" : [ "Limited frequency to 500MHz when charging on Touchstone to prevent overheating", "Improved verification of target files for no existing modifications" ] }, \
@@ -35,7 +35,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-13", "log" : [ "Initial public release" ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-113: Reduced 1GHz voltage to save power, based on F105 testing results. Added USB mass storage patch for XBox360 compatibility.<br>\
+${WEBOS_VERSION}-113: Added ability to control core voltages at each frequency. Added ability to override screenstate charger frequency limiter. Added a new configurable frequency limiter based on percentage battery remaining. Reduced 1GHz voltage to save power, based on F105 testing results. Added USB mass storage patch for XBox360 compatibility.<br>\
 ${WEBOS_VERSION}-92: Removed 550MHz, added 1GHz.<br> \
 ${WEBOS_VERSION}-87: Limited frequency to 500MHz when temperature exceeds configurable limits (defaults to 55 degrees).<br> \
 ${WEBOS_VERSION}-74: Limited frequency to 500MHz when charging on Touchstone to prevent overheating. Improved verification of target files for no existing modifications.<br>\
