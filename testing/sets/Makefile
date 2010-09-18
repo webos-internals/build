@@ -1,0 +1,29 @@
+NAME     = sets
+APP_ID   = us.ryanhope.${NAME}
+VERSION  = 0.1.0
+HOMEPAGE = http://www.webos-internals.org/wiki/Application:SETS
+MAINTAINER = Ryan Hope <rmh3093@gmail.com>
+TITLE   = SETS
+TYPE	= Application
+DESCRIPTION = A visual perception puzzle / card game.
+CATEGORY = Game
+LICENSE  = GPLv2
+
+SRC_GIT = git://git.webos-internals.org/games/sets.git
+
+.PHONY: package
+package: ipkgs/${APP_ID}_${VERSION}_all.ipk
+include ../../support/package.mk
+
+include ../../support/download.mk
+
+build/.built-${VERSION} build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	rm -rf build
+	mkdir -p build/all/usr/palm/applications/${APP_ID}
+	tar -C build/all/usr/palm/applications/${APP_ID} -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	rm -rf build/all/usr/palm/applications/${APP_ID}/.git*
+	touch $@
+
+.PHONY: clobber
+clobber::
+	rm -rf build
