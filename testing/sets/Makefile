@@ -1,6 +1,6 @@
 NAME     = sets
 APP_ID   = us.ryanhope.${NAME}
-VERSION  = 0.1.0-1
+VERSION  = 0.1.1
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:SETS
 MAINTAINER = Ryan Hope <rmh3093@gmail.com>
 TITLE   = SETS
@@ -9,10 +9,10 @@ DESCRIPTION = A visual perception puzzle / card game.
 CATEGORY = Game
 LICENSE  = GPLv2
 ICON    = http://www.webos-internals.org/images/5/57/SETS-ICON.png
-SCREENSHOTS = [\"http://www.webos-internals.org/images/a/ad/Sets.png\"]
+SCREENSHOTS = [\"http://www.webos-internals.org/images/7/7c/Sets2.png\",\"http://www.webos-internals.org/images/a/ad/Sets.png\"]
 
 SRC_GIT = git://git.webos-internals.org/games/sets.git
-GIT_TAG = v0.1.0
+GIT_TAG = v0.1.1
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
