@@ -1,12 +1,12 @@
 NAME     = sets
 APP_ID   = us.ryanhope.${NAME}
-VERSION  = 0.1.1
+VERSION  = 0.1.1-1
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:SETS
 MAINTAINER = Ryan Hope <rmh3093@gmail.com>
 TITLE   = SETS
 TYPE	= Application
 DESCRIPTION = A visual perception puzzle / card game.
-CATEGORY = Game
+CATEGORY = Games
 LICENSE  = GPLv2
 ICON    = http://www.webos-internals.org/images/5/57/SETS-ICON.png
 SCREENSHOTS = [\"http://www.webos-internals.org/images/7/7c/Sets2.png\",\"http://www.webos-internals.org/images/a/ad/Sets.png\"]
