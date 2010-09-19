@@ -3,7 +3,7 @@ TITLE = WarthogKernel (Pre/Pre+)
 DEVICE = pre
 CATEGORY = Experimental
 DEVICECOMPATIBILITY = [\"Pre\"]
-VERSIONS = 1.4.1-115 1.4.2-115 1.4.5-115 
+VERSIONS = 1.4.1-116 1.4.2-116 1.4.5-116 
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A testbed of kernel patches for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
@@ -20,7 +20,7 @@ All additions are disabled by default, and must be enabled by separate packages 
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-115", "log" : [ "Renable uinput. Change VDD2 voltage" ] }, \
+{ "version" : "${WEBOS_VERSION}-116", "log" : [ "Renable uinput. Change VDD2 voltage" ] }, \
 { "version" : "${WEBOS_VERSION}-113", "log" : [ "Charger override sysfs. Turn off additional TCP congest algos. Stick with cubic. Added USB mass storage patch for XBox360 compatibility. Disable uinput. Added ability to override screenstate charger frequency limiter. Added a new configurable frequency limiter based on percentage battery remaining" ] }, \
 { "version" : "${WEBOS_VERSION}-101", "log" : [ "Enable uinput" ] }, \
 { "version" : "${WEBOS_VERSION}-100", "log" : [ "Defconfig cleanup, sched_fair tweak, default AS scheduler" ] }, \
@@ -46,7 +46,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-13", "log" : [ "Initial public release" ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-115: Renable uinput. Change VDD2 voltage.<br>\
+${WEBOS_VERSION}-116: Renable uinput. Change VDD2 voltage.<br>\
 ${WEBOS_VERSION}-113: Charger override sysfs. Turn off additional TCP congest algos. Stick with cubic. Added USB mass storage patch for XBox360 compatibility. isable uinput. Added ability to override screenstate charger frequency limiter. Added a new configurable frequency limiter based on percentage battery remaining.<br>\
 ${WEBOS_VERSION}-101: Enable uinput.<br>\
 ${WEBOS_VERSION}-100: Defconfig cleanup, sched_fair tweak, default AS scheduler.<br>\
