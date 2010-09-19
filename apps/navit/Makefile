@@ -25,6 +25,9 @@ CHANGELOG = \
 	    0.2.0.3490-4: Make sure the maps-directory exists <br/> \
 	    0.2.0.3490-3: Fixed wrong default speech engine <br/> \
 	    0.2.0.3490-2: Initial release
+SCREENSHOTS = [\"http://www.webos-internals.org/images/c/c7/NavitScreenshot2.jpg\",\
+\"http://www.webos-internals.org/images/1/1e/NavitScreenshot1.jpg\",\
+\"http://www.webos-internals.org/images/5/58/NavitScreenshot3.jpg\"]
 DEPENDS  = org.webosinternals.locale, org.webosinternals.speechd
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Navit
 ICON	 = http://www.webos-internals.org/images/4/4d/Navit_icon.png
