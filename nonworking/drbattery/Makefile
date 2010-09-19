@@ -19,8 +19,6 @@ LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/applications/drbattery.git
 
-DRBATTERYSERVICE = de.somline.drbattery
-
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
 include ../../support/package.mk
@@ -34,20 +32,6 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	sed -i.orig \
-		-e 's/"title": ".*"/"title": "${TITLE}"/g' \
-		-e 's/"id": ".*"/"id": "${APP_ID}"/g' \
-		-e 's/"version": ".*"/"version": "${VERSION}"/g' \
-		build/src/appinfo.json
-	rm -f build/src/appinfo.json.orig
-	sed -i.orig \
-		-e 's/PID="de.somline.drbattery"/PID="${APP_ID}"/g' \
-		build/src/control/postinst
-	rm -f build/src/control/postinst.orig
-	sed -i.orig \
-		-e 's/PID="de.somline.drbattery"/PID="${APP_ID}"/g' \
-		build/src/control/prerm
-	rm -f build/src/control/prerm.orig
 	touch $@
 
 .PHONY: build
@@ -68,7 +52,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/bin
-	install -m 755 build/src/src/drbattery build/$*/usr/palm/applications/${APP_ID}/bin/${DRBATTERYSERVICE}
+	install -m 755 build/src/src/drbattery build/$*/usr/palm/applications/${APP_ID}/bin/${APP_ID}
 	touch $@
 
 build/%/CONTROL/postinst:
