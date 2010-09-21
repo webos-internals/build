@@ -3,9 +3,9 @@ PATCH = mojo/${NAME}.patch
 TITLE = Russian layout for hardware keyboard
 DESCRIPTION = Adds russian-translit keyboard layout for the hardware keyboard. Double tap Gesture area to change ENGLISH/RUSSIAN layouts.
 CATEGORY = Mojo
-VERSIONS = 1.4.5-21
+VERSIONS = 1.4.5-67
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
-SCREENSHOTS =
+SCREENSHOTS = [ \"http://www.webos-internals.org/images/f/fd/Mojo-russian-layout-for-hardware-keyboard-1.png\" ]
 META_SUB_VERSION = 1
 
 include ../common.mk
