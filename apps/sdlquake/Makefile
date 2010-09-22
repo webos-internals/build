@@ -36,6 +36,7 @@ build/.built-${VERSION}: build/armv7.built-${VERSION}
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -f $@
+	mkdir -p build/$*/usr/palm/applications/${APP_ID}/
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/upstart
