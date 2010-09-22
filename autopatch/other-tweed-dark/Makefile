@@ -3,7 +3,7 @@ PATCH = other/${NAME}.patch
 TITLE = Tweed Dark
 DESCRIPTION = This patch allows the user to select the dark theme in the the preference section.
 CATEGORY = Other
-VERSIONS = 1.4.5-67
+VERSIONS = 1.4.5-70
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/d/d1/Other-tweed-dark-1.png\",\
