@@ -1,7 +1,7 @@
 NAME     = visualboyadvance
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 1.3.2
+VERSION  = 1.3.3
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:VBA
 MAINTAINER = dtzWill
 TITLE   = VisualBoyAdvance
@@ -10,7 +10,8 @@ DESCRIPTION = Port of the popular Game Boy, Game Boy Color, and Game Boy Advance
 	<br><br>Please consider purchasing this app in the <a href='http://developer.palm.com/appredirect/?packageid=org.webosinternals.visualboyadvance.beta'>App Catalog</a>!\
 	<br><br><b>Requires WebOS >= 1.4.5!</b><br>
 CHANGELOG = \
-<b>1.3.2</b><br>Transparent skin support, kinetic scrolling+scrollbar in rom selector, add reset and stretch options, set orientations correctly when in menus (for notifications), show user skin count.<br> \
+<br><b>1.3.3</b><br>Center screen in skin virtual screen<br>Fix scaling code (broken GB in previous release!)<br>Added Sonic-NKTs transparent_small skin<br>Better handling of small amount of ROMs<br>Force correct orientation when skin is on<br>Fix performance regression introduced in previous release<br>Fix crash from Rom selector<br>Be sure to show user the highlighted ROM before loading it<br>\
+<br><b>1.3.2</b><br>Transparent skin support, kinetic scrolling+scrollbar in rom selector, add reset and stretch options, set orientations correctly when in menus (for notifications), show user skin count.<br> \
 <br><b>1.3.1</b><br>Added ability to preview skins in the skin menu (thanks for the suggestion oil)<br>Fix inability to launch help from no-roms screen (thanks 2ndflood)<br>Ensure autoframeskip is turned off when the user toggles it (thanks Brawler)<br>\
 <br><b>1.3.0</b><br>Improved UI--New menu system including save states, settings, skins, and in-game help!<br>Turbo toggle<br>Autosave defaults to on<br>Support saving in Tactics Ogre (won\'t work if already started game)<br>Bug fix in rom selector<br>\
 <br><b>1.2.4</b><br>Added two skins (Wiimote2 and cfbauer2!)<br>Fix loading of duplicate skins<br>Change default skin to have a/b buttons<br>Remove unused GBA debugger code<br>Small performance tweaks \
