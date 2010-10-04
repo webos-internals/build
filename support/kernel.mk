@@ -43,8 +43,8 @@ CODENAME = pixie
 DEFCONFIG = chuck_defconfig
 KERNEL_TYPE = palm-chuck
 DEVICECOMPATIBILITY = [\"Pixi\"]
-else
-DEVICE = pre
+endif
+ifeq ("${DEVICE}","pre")
 CODENAME = castle
 DEFCONFIG = omap_sirloin_3430_defconfig
 KERNEL_TYPE = palm-joplin-3430
@@ -53,7 +53,8 @@ endif
 
 ifeq ("${DEVICE}","pixi")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp200ewwsprint-${WEBOS_VERSION}.jar
-else
+endif
+ifeq ("${DEVICE}","pre")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ewwsprint-${WEBOS_VERSION}.jar
 endif
 COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
@@ -82,6 +83,11 @@ else
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
 endif
 COMPATIBLE_VERSIONS = 1.4.5
+endif
+
+ifeq ("${WEBOS_VERSION}", "1.5.0")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
+COMPATIBLE_VERSIONS = 1.5.0 | 2.0.0
 endif
 
 .PHONY: package
