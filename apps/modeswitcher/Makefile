@@ -1,5 +1,5 @@
 NAME     = modeswitcher
-MAINTAINER = Janne Julkunen <janne.julkunen@e-lnx.org>
+MAINTAINER = sconix
 TITLE    = Mode Switcher
 APP_ID   = com.palm.org.e-lnx.wee.apps.${NAME}
 VERSION  = 1.0.7
