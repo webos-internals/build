@@ -3,7 +3,7 @@ TITLE    = Save/Restore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.0.11
+VERSION  = 1.0.12
 DEPENDS  = org.webosinternals.unzip, org.webosinternals.zip
 TYPE	 = Application
 CATEGORY = System Utilities
@@ -13,6 +13,7 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 WebOS Internals provides Save/Retore as is without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.  The entire risk as to the quality and performance of Save/Restore is with you.  Should Save/Restore prove defective, you assume the cost of all necessary servicing, repair or correction.<br>\
 In no event will WebOS Internals or any other party be liable to you for damages, including any general, special, incidental or consequential damages arising out of the use or inability to use Save/Restore (including but not limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of Save/Restore to operate with any other programs).
 CHANGELOG = \
+1.0.12: Application: NesEm. Patch: Advanced Config for System Preferences. Added executable to run Advanced Config for System Preferences to /contrib directory (see Readme.txt file in that directory for details).<br>\
 1.0.11: Robustify the Directory script.  Added a photos/videos backup script and an executable for App Launcher Advanced Config script in the /contrib (see Readme.txt file in that directory for details).<br>\
 1.0.10: Robustify postinst script. Added french translation support. Added support for saving a single directory. Robustify file-saving script to create the source directory if it does not already exist. Applications: Jacksonville, New York Times, TodoTracker (all courtesy of djgardn2), Slide RSS (courtesy of appsotutely), Scratch Word Processor (courtesy of Chakat Silverstreak), Astraware Casino (courtesy of Audemars02), Putki, SuperJump (both courtesy of pcworld), VisualBoy Advance (courtesy of rwhitby), College Football Live, International Soccer Live, UK Football Live, Womens Basketball Live (all courtesy of MoreSolutions), Angry Birds Lite, BFG Maps, BFG Maps Beta, Bluetooth Profiles, Crimson Fields, Frootrees, Lumberjack, Sparkle Lite (all courtesy of StoneRyno).<br>\
 1.0.9: Robustify the installation scripts.  Applications: Music (Remix), Music Wave Lite, Fuzzies (all courtesy of mamouton), Brain Challenge HD, TangramPuzzle Lite, TangramPuzzle (all courtesy of Audemars02).<br>\
