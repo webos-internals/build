@@ -5,7 +5,7 @@ DESCRIPTION = This patch adds a 'Tweet Link' option to the Browser Menu under Pa
 CATEGORY = Browser
 VERSIONS = 1.4.5-76
 ICON = http://www.webos-internals.org/images/4/4a/Icon_WebOSInternals_Patches_Browser.png
-SCREENSHOTS = [ \"http://www.webos-internals.org\" ]
+SCREENSHOTS = [ \"http://www.webos-internals.org/images/3/33/Browser-tweet-via-twee-and-add-to-spare-time-1.png\" ]
 META_SUB_VERSION = 1
 
 include ../common.mk
