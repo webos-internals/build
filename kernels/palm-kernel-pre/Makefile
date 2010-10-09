@@ -4,7 +4,6 @@ DEVICE = pre
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 CATEGORY = Recovery
 FORCE_INSTALL = 1
-DEVICECOMPATIBILITY = [\"Pre\"]
 VERSIONS = 1.4.0-9 1.4.1-9 1.4.2-9 1.4.5-9
 APPINFO_DESCRIPTION = Use this package to reinstall the official webOS ${WEBOS_VERSION} kernel from Palm.<br>\
 This package will refuse to operate on a device with an incompatible webOS version.<br>\
