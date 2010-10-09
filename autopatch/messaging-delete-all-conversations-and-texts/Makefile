@@ -5,9 +5,7 @@ DESCRIPTION = This patch allows you to delete your entire conversation history i
 CATEGORY = Messaging
 VERSIONS = 1.4.0-65 1.4.1-37 1.4.2-22 1.4.3-16 1.4.5-21
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
-SCREENSHOTS = [\
-\"http://www.webos-internals.org\",\
-\"http://www.webos-internals.org\" ]
+SCREENSHOTS = [ ]
 META_SUB_VERSION = 1
 
 include ../common.mk

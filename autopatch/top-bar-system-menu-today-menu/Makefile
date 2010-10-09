@@ -5,9 +5,7 @@ DESCRIPTION = Adds today menu in the center off top bar. Today menu offers a qui
 CATEGORY = Top Bar
 VERSIONS = 1.4.0-54 1.4.1-31 1.4.5-33
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
-SCREENSHOTS = [\
-\"http://www.webos-internals.org\",\
-\"http://www.webos-internals.org\" ]
+SCREENSHOTS = [ ]
 META_SUB_VERSION = 1
 
 include ../common.mk

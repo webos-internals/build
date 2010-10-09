@@ -5,7 +5,7 @@ DESCRIPTION = Adds back the 'Z/*' and 'B/Pound' speed dial keys as well as adds 
 CATEGORY = Contacts
 VERSIONS = 1.4.0-66 1.4.1-38 1.4.2-23 1.4.3-17 1.4.5-22
 ICON = http://www.webos-internals.org/images/c/ca/Icon_WebOSInternals_Patches_Contacts.png
-SCREENSHOTS = [ \"http://www.webos-internals.org\" ]
+SCREENSHOTS = [ ]
 META_SUB_VERSION = 1
 
 include ../common.mk

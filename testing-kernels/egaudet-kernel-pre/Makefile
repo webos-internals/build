@@ -2,7 +2,6 @@ NAME = $(shell basename $(shell pwd))
 TITLE = egaudet kernel (Pre/Pre+)
 DEVICE = pre
 CATEGORY = Experimental
-DEVICECOMPATIBILITY = [\"Pre\"]
 VERSIONS = 1.4.1-101 1.4.2-101 1.4.5-101
 APPINFO_DESCRIPTION = It is what it is
 APPINFO_CHANGELOG = [ \

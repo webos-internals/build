@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = F102A Delta Dagger (Palm Pre/Pre+)
 CATEGORY = Stable
-DEVICECOMPATIBILITY = [\"Pre\"]
+DEVICE = pre
 VERSIONS = 1.4.1-100 1.4.2-100 1.4.5-100
 APPINFO_DESCRIPTION = The well known warbird series kernel from uNiXpSyChO.<br>\
 <br>Features:<br>* Stable 800MHz operation<br>* Compcache set at 20MiB<br>* Screenstate Governor Only<br>* Low memory hack to remove TMC error forever<br>* Lean and Mean - totally stripped of other unused kernel functions<br><br>\

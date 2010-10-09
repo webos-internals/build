@@ -1,7 +1,6 @@
 NAME           = $(shell basename $(shell pwd))
 TITLE          = Userspace Input Module
 CATEGORY       = Input
-DEVICECOMPATIBILITY = [\"Pre\"]
 VERSIONS       = 1.4.1-97 1.4.2-97 1.4.5-97
 BLDFLAGS       = -p
 DESCRIPTION    = This is the uinput kernel module for the Pre/Pre+, which allows userpace creation of input devices.  Used by many linux projects for emulating keyboard/mouse input.
