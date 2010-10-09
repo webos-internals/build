@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = SR71 Blackbird (Palm Pre/Pre+)
 CATEGORY = Experimental
-DEVICECOMPATIBILITY = [\"Pre\"]
+DEVICE = pre
 VERSIONS = 1.4.1-111 1.4.2-111 1.4.5-111
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br><br>\
 For more information, visit ${HOMEPAGE}<br><br>\
