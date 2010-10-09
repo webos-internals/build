@@ -6,9 +6,9 @@ CATEGORY = App Launcher
 VERSIONS = 1.4.0-55 1.4.1-31 1.4.2-12 1.4.3-6 1.4.5-73
 ICON = http://www.webos-internals.org/images/b/b1/Icon_WebOSInternals_Patches_Applauncher.png
 SCREENSHOTS = [\
-\"http://www.webos-internals.org\",\
-\"http://www.webos-internals.org\",\
-\"http://www.webos-internals.org\" ]
+\"http://www.webos-internals.org/images/3/30/App-launcher-advanced-configuration-for-app-launcher-1.png\",\
+\"http://www.webos-internals.org/images/a/ae/App-launcher-advanced-configuration-for-app-launcher-2.png\",\
+\"http://www.webos-internals.org/images/8/84/App-launcher-advanced-configuration-for-app-launcher-3.png\" ]
 META_SUB_VERSION = 1
 
 include ../common.mk

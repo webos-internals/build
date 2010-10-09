@@ -5,7 +5,7 @@ DESCRIPTION = This patch will let you pick a wallpaper from the 'photo' app<br/>
 CATEGORY = Top Bar
 VERSIONS = 1.4.0-84 1.4.1-69 1.4.2-56 1.4.3-51 1.4.5-78
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
-SCREENSHOTS = [ \"http://www.webos-internals.org\" ]
+SCREENSHOTS = [ \"http://www.webos-internals.org/images/4/4f/Top-bar-topbar-full-screen-wallpaper-1.png\" ]
 META_SUB_VERSION = 1
 
 include ../common.mk
