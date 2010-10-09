@@ -1,7 +1,6 @@
 NAME           = $(shell basename $(shell pwd))
 TITLE          = Userspace Input Module
 CATEGORY       = Input
-DEVICECOMPATIBILITY = [\"Pixi\"]
 VERSIONS       = 1.4.1-97 1.4.3-97
 BLDFLAGS       = -p
 DESCRIPTION    = This is the uinput kernel module for the Pixi/Pixi+, which allows userpace creation of input devices.  Used by many linux projects for emulating keyboard/mouse input.
