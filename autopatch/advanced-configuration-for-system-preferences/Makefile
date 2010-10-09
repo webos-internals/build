@@ -5,10 +5,7 @@ DESCRIPTION = * Please note that this patch only works with default en_us locale
 CATEGORY = Advanced
 VERSIONS = 1.4.5-75
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
-SCREENSHOTS = [\
-\"http://www.webos-internals.org\",\
-\"http://www.webos-internals.org\",\
-\"http://www.webos-internals.org\" ]
+SCREENSHOTS = [ ]
 META_SUB_VERSION = 1
 
 include ../common.mk

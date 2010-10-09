@@ -5,9 +5,7 @@ DESCRIPTION = Increases the number of thumbnail photos the Photos app preloads f
 CATEGORY = Photos
 VERSIONS = 1.4.0-61 1.4.1-33 1.4.2-18 1.4.3-12 1.4.5-17
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
-SCREENSHOTS = [\
-\"http://www.webos-internals.org\",\
-\"http://www.webos-internals.org\" ]
+SCREENSHOTS = [ ]
 META_SUB_VERSION = 1
 
 include ../common.mk
