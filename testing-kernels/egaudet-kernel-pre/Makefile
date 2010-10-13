@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = egaudet kernel (Pre/Pre+)
 DEVICE = pre
 CATEGORY = Experimental
-VERSIONS = 1.4.1-101 1.4.2-101 1.4.5-101
+VERSIONS = 1.4.5-101
 APPINFO_DESCRIPTION = It is what it is
 APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-101", "log" : [ "Add prox_timeout sysfs entry to disable adjacent keys being dropped" ] }, \

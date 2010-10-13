@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = SBromwich Kernel (Pre/Pre+)
 CATEGORY = Experimental
 DEVICE = pre
-VERSIONS = 1.4.1-75 1.4.5-75
+VERSIONS = 1.4.5-75
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from sbromwich.<br>\
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}

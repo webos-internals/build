@@ -3,7 +3,7 @@ PATCH = messaging/${NAME}.patch
 TITLE = Add Select All and New Message
 DESCRIPTION = Adds the missing 'Select All' feature plus a 'Compose New' option in the context menu.
 CATEGORY = Messaging
-VERSIONS = 1.3.5-12 1.4.0-21 1.4.1-1 1.4.2-1 1.4.3-1 1.4.5-1
+VERSIONS = 1.4.5-1
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/f/f4/Messaging-add-select-all-and-new-message-1.png\",\

@@ -3,7 +3,7 @@ PATCH = sprintnav/${NAME}.patch
 TITLE = Black Background Grey Font
 DESCRIPTION = This Patch will change the background to black and the font to grey.
 CATEGORY = SprintNav
-VERSIONS = 1.3.5-3 1.4.0-24 1.4.1-5 1.4.2-1
+VERSIONS =
 ICON = http://www.webos-internals.org/images/c/c3/Icon_WebOSInternals_Patches_SprintNav.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/2/22/Sprintnav-black-background-grey-font-1.png\",\
