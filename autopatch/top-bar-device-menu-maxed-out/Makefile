@@ -3,7 +3,7 @@ PATCH = system/${NAME}.patch
 TITLE = Device Menu Maxed Out
 DESCRIPTION = Adds date and battery level to Bright<br/>Screen brightness & media volume control<br/>Phone submenu (radio data roaming) toggles<br/>GPS toggle<br/>Flashlight led toggle<br/>To the Devicemenu
 CATEGORY = System
-VERSIONS = 1.4.5-63
+VERSIONS = 1.4.5-79
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/e/ea/System-devicemenu-maxed-out-1.png\",\
