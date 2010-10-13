@@ -4,7 +4,7 @@ ICON = http://www.webos-internals.org/images/9/9e/Icon_WebOSInternals_Kernel.png
 DEPENDS = 
 FEED = WebOS Kernels
 LICENSE = GPL v2 Open Source
-WEBOS_VERSIONS = 1.4.0 1.4.1 1.4.2 1.4.3 1.4.5
+WEBOS_VERSIONS = 1.4.5
 KERNEL_VERSION = 2.6.24
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tgz
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
@@ -38,55 +38,37 @@ else
 APP_ID = org.webosinternals.modules.${NAME}
 endif
 
-ifeq ("${DEVICE}","pixi")
-CODENAME = pixie
-DEFCONFIG = chuck_defconfig
-KERNEL_TYPE = palm-chuck
-DEVICECOMPATIBILITY = [\"Pixi\"]
-endif
 ifeq ("${DEVICE}","pre")
 CODENAME = castle
 DEFCONFIG = omap_sirloin_3430_defconfig
 KERNEL_TYPE = palm-joplin-3430
 DEVICECOMPATIBILITY = [\"Pre\"]
 endif
-
 ifeq ("${DEVICE}","pixi")
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp200ewwsprint-${WEBOS_VERSION}.jar
+CODENAME = pixie
+DEFCONFIG = chuck_defconfig
+KERNEL_TYPE = palm-chuck
+DEVICECOMPATIBILITY = [\"Pixi\"]
 endif
+ifeq ("${DEVICE}","pre2")
+CODENAME = roadrunner
+DEFCONFIG = omap_sirloin_3630_defconfig
+KERNEL_TYPE = palm-joplin-3430
+DEVICECOMPATIBILITY = [\"Pre2\"]
+endif
+
 ifeq ("${DEVICE}","pre")
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ewwsprint-${WEBOS_VERSION}.jar
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
+endif
+ifeq ("${DEVICE}","pixi")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewweu-wr-${WEBOS_VERSION}.jar
+endif
+ifeq ("${DEVICE}","pre2")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp102ueu-wr-${WEBOS_VERSION}.jar
 endif
 COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
 
-ifeq ("${WEBOS_VERSION}", "1.4.1")
-ifeq ("${DEVICE}","pixi")
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ueu-wr-${WEBOS_VERSION}.jar
-else
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
-endif
-COMPATIBLE_VERSIONS = 1.4.1 | 1.4.1.1 | 1.4.1.3
-endif
-
-ifeq ("${WEBOS_VERSION}", "1.4.2")
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp101ewwatt-${WEBOS_VERSION}.jar
-endif
-
-ifeq ("${WEBOS_VERSION}", "1.4.3")
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewwatt-${WEBOS_VERSION}.jar
-endif
-
-ifeq ("${WEBOS_VERSION}", "1.4.5")
-ifeq ("${DEVICE}","pixi")
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewweu-wr-${WEBOS_VERSION}.jar
-else
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
-endif
-COMPATIBLE_VERSIONS = 1.4.5
-endif
-
 ifeq ("${WEBOS_VERSION}", "1.5.0")
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
 COMPATIBLE_VERSIONS = 1.5.0 | 2.0.0
 endif
 
@@ -255,29 +237,6 @@ build/.unpacked-%: ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.
 		patch -d build/src-$*/linux-${KERNEL_VERSION} -p1 ; \
 	fi
 	touch $@
-
-
-ifeq ("${WEBOS_VERSION}", "1.4.3")
-
-TEMPVER  = 1.4.1
-
-KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${TEMPVER}/linuxkernel-${KERNEL_VERSION}.tgz
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${TEMPVER}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
-
-build/.unpacked-${VERSION}: ${DL_DIR}/linux-${KERNEL_VERSION}-${TEMPVER}-${DEVICE}.tar.gz \
-			    ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	rm -rf build/src-${VERSION}
-	mkdir -p build/src-${VERSION}/patches
-	tar -C build/src-${VERSION} -xf ${DL_DIR}/linux-${KERNEL_VERSION}-${TEMPVER}-${DEVICE}.tar.gz
-	tar -C build/src-${VERSION}/patches -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	if [ -n "${KERNEL_PATCHES}" ] ; then \
-	  ( cd build/src-${VERSION}/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
-	  ( cd build/src-${VERSION}/patches ; cat ${KERNEL_PATCHES} ) | \
-		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 ; \
-	fi
-	touch $@
-
-endif
 
 
 ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz: \
