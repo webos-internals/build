@@ -1,7 +1,7 @@
 NAME           = $(shell basename $(shell pwd))
 TITLE          = AUFS module
 CATEGORY       = Filesystem
-VERSIONS       = 1.4.1-97 1.4.2-97 1.4.5-97
+VERSIONS       = 1.4.5-97
 BLDFLAGS       = -p
 DESCRIPTION    = This is the AUFS (Another Union FileSystem) kernel module for the Pre/Pre+.  AUFS is useful for mounting rw overlays on ro filesystems.  
 CHANGELOG      = 
