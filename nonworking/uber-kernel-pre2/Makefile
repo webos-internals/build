@@ -59,7 +59,13 @@ KERNEL_PATCHES = overclocking/600-720-800-1000-min-opp5.patch overclocking/defco
 		 compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
 		 overclocking/override.patch overclocking/defconfig-override.patch \
 		 usb/f_mass_storage.patch
+KERNEL_PATCHES = compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
+		 usb/f_mass_storage.patch
+
 EXTERNAL_MODULES = compcache/compcache-0.5.4
 TYPE = Kernel
 
 include ../../support/kernel.mk
+
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
