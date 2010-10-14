@@ -32,8 +32,11 @@ build/arm.built-${VERSION}: ${WEBOS_DOCTOR}
 	rm -rf build/arm
 	mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files
 	unzip -p $< resources/webOS.tar | \
-	tar -O -x -f - ./nova-cust-image-${CODENAME}.rootfs.tar.gz | \
-	tar -C build/arm/usr/palm/applications/${APP_ID}/additional_files/ -m -z -x -f - ./md5sums ./boot ./lib/modules
+	${TAR} -O -x -f - ./nova-cust-image-${CODENAME}.rootfs.tar.gz | \
+	${TAR} -C build/arm/usr/palm/applications/${APP_ID}/additional_files/ --wildcards -m -z -x -f - ./md5sums* ./boot ./lib/modules
+	if [ -f build/arm/usr/palm/applications/${APP_ID}/additional_files/md5sums.gz ] ; then \
+	  gunzip -f build/arm/usr/palm/applications/${APP_ID}/additional_files/md5sums.gz ; \
+	fi
 	rm -rf build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/boot.bin
 	rm -rf build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/uImage
 	rm -rf build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/dspbridge

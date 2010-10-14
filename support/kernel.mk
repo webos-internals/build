@@ -19,6 +19,12 @@ HEADLESSAPP_VERSION = 0.1.0
 KERNEL_DISCLAIMER = WebOS Internals provides this program as is without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.  The entire risk as to the quality and performance of this program is with you.  Should this program prove defective, you assume the cost of all necessary servicing, repair or correction.<br>\
 In no event will WebOS Internals or any other party be liable to you for damages, including any general, special, incidental or consequential damages arising out of the use or inability to use this program (including but not limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of this program to operate with any other programs).
 
+ifeq ($(shell uname -s),Darwin)
+TAR	= gnutar
+else
+TAR	= tar
+endif
+
 PREWARE_SANITY =
 ifneq ("$(TYPE)","Kernel")
 ifneq ("$(TYPE)","Kernel Module")
@@ -125,7 +131,7 @@ unpack: build/.unpacked-${VERSION}
 build: build/.built-${VERSION}
 
 build/.built-${VERSION}: build/arm.built-${VERSION} ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
-	tar -C build/arm/usr/palm/applications/${APP_ID} -xvf ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
+	${TAR} -C build/arm/usr/palm/applications/${APP_ID} -xvf ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
 	rm -rf build/arm/usr/palm/applications/${APP_ID}/.git
 	cp ../../support/kernel.png build/arm/usr/palm/applications/${APP_ID}/icon.png
 	echo "{" > build/arm/usr/palm/applications/${APP_ID}/appinfo.json
@@ -216,8 +222,11 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/config-2.6.24-${KERNEL_TYPE}; \
 	fi
 	unzip -p ${WEBOS_DOCTOR} resources/webOS.tar | \
-	tar -O -x -f - ./nova-cust-image-${CODENAME}.rootfs.tar.gz | \
-	tar -C build/arm/usr/palm/applications/${APP_ID}/additional_files/ -m -z -x -f - ./md5sums
+	${TAR} -O -x -f - ./nova-cust-image-${CODENAME}.rootfs.tar.gz | \
+	${TAR} -C build/arm/usr/palm/applications/${APP_ID}/additional_files/ --wildcards -m -z -x -f - ./md5sums*
+	if [ -f build/arm/usr/palm/applications/${APP_ID}/additional_files/md5sums.gz ] ; then \
+	  gunzip -f build/arm/usr/palm/applications/${APP_ID}/additional_files/md5sums.gz ; \
+	fi
 	if [ -n "${KERNEL_UPSTART}" ] ; then \
 		mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/var/palm/event.d ; \
 		install -m 755 build/src-$*/patches/${KERNEL_UPSTART} \
@@ -229,8 +238,8 @@ build/.unpacked-%: ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.
 			    ${DL_DIR}/${NAME}-%.tar.gz
 	rm -rf build/src-$*
 	mkdir -p build/src-$*/patches
-	tar -C build/src-$* -xf ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz
-	tar -C build/src-$*/patches -xf ${DL_DIR}/${NAME}-$*.tar.gz
+	${TAR} -C build/src-$* -xf ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz
+	${TAR} -C build/src-$*/patches -xf ${DL_DIR}/${NAME}-$*.tar.gz
 	if [ -n "${KERNEL_PATCHES}" ] ; then \
 	  ( cd build/src-$*/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
 	  ( cd build/src-$*/patches ; cat ${KERNEL_PATCHES} ) | \
@@ -244,7 +253,7 @@ ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz: \
 					${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz
 	rm -rf build/src-${VERSION}
 	mkdir -p build/src-${VERSION}
-	tar -C build/src-${VERSION} -xf ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz
+	${TAR} -C build/src-${VERSION} -xf ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz
 	zcat ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz | \
 		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 
 	yes '' | \
@@ -253,7 +262,7 @@ ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz: \
 	${MAKE} -C build/src-${VERSION}/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
 		KBUILD_BUILD_COMPILE_BY=v${WEBOS_VERSION} KBUILD_BUILD_COMPILE_HOST=${APP_ID} \
 		uImage 
-	tar -C build/src-${VERSION} -zcf $@ linux-${KERNEL_VERSION}
+	${TAR} -C build/src-${VERSION} -zcf $@ linux-${KERNEL_VERSION}
 
 ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz:
 	rm -f $@ $@.tmp
