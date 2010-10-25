@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Pre/Pre+)
 DEVICE = pre
 CATEGORY = Experimental
-VERSIONS = 1.5.0-119
+VERSIONS = 1.5.0-121
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
 Current additions include:<ul>\
@@ -13,11 +13,14 @@ Current additions include:<ul>\
 <li>A new <a href=http://lwn.net/Articles/334649/><b>compcache</b> compressed RAM swap kernel module</a> ported to the Palm Pre/Pre+ by uNiXpSyChO & rwhitby</li>\
 <li>The OMAP3430 internal CPU temperature sensor is made available for measuring the true CPU temperature, ported to the Palm Pre/Pre+ by ka6sox & rwhitby</li>\
 <li>All standard Linux 2.6.24 <a href=http://www.ibm.com/developerworks/linux/library/l-cpufreq-1/index.html>cpufreq governors</a> made available for selection via the Govnah application</li>\
+<li>Additions to the USB mass storage driver for XBox 360 compatibility.  Note that your USB drive may be reformatted when you plug it into an XBox 360.</li>\
+<li>Support for kernel crypto modules required by TrueCrypt</li>\
 </ul><br>\
 All additions are disabled by default, and must be enabled by using the Govnah application.<br>\
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-121", "log" : [ "Added crypto module support for TrueCrypt" ] }, \
 { "version" : "${WEBOS_VERSION}-119", "log" : [ "Robustified the battery percentage and cpu temperature checks in the early boot period." ] }, \
 { "version" : "${WEBOS_VERSION}-113", "log" : [ "Added ability to control core voltages at each frequency", "Added ability to override screenstate charger frequency limiter", "Added a new configurable frequency limiter based on percentage battery remaining", "Reduced 1GHz voltage to save power, based on F105 testing results", "Added USB mass storage patch for XBox360 compatibility" ] }, \
 { "version" : "${WEBOS_VERSION}-92", "log" : [ "Removed 550MHz, added 1GHz" ] }, \
@@ -35,6 +38,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-13", "log" : [ "Initial public release" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-121: Added crypto module support for TrueCrypt.<br>\
 ${WEBOS_VERSION}-119: Robustified the battery percentage and cpu temperature checks in the early boot period.<br>\
 ${WEBOS_VERSION}-113: Added ability to control core voltages at each frequency. Added ability to override screenstate charger frequency limiter. Added a new configurable frequency limiter based on percentage battery remaining. Reduced 1GHz voltage to save power, based on F105 testing results. Added USB mass storage patch for XBox360 compatibility.<br>\
 ${WEBOS_VERSION}-92: Removed 550MHz, added 1GHz.<br> \
@@ -53,14 +57,14 @@ ${WEBOS_VERSION}-13: Initial public release
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
-KERNEL_PATCHES = overclocking/600-720-800-1000-min-opp5.patch overclocking/defconfig-standard.patch \
-		 sensors/sensors_temp_omap34xx.patch sensors/defconfig-safe.patch \
+KERNEL_PATCHES = overclocking/webos-2.0/600-720-800-1000-min-opp5.patch overclocking/defconfig-standard.patch \
+		 sensors/sensors_temp_omap34xx.patch sensors/webos-2.0/defconfig-safe.patch \
 		 screenstate/screenstate.patch \
 		 makefiletune/armMakefile.diff \
 		 defconfig/defconfig.pre.cpugov \
 		 compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
 		 overclocking/override.patch overclocking/defconfig-override.patch \
-		 usb/f_mass_storage.patch
+		 usb/f_mass_storage.patch crypto/truecrypt-support-pre.patch
 EXTERNAL_MODULES = compcache/compcache-0.5.4
 TYPE = Kernel
 
