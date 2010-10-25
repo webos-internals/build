@@ -1,10 +1,10 @@
-NAME	= navit
-TITLE	= Navit - Car navigation system
-APP_ID	= org.webosinternals.${NAME}
+NAME     = navit
+TITLE    = Navit - Car navigation system
+APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	= 0.2.0.3617-1
-TYPE    =  Application
+VERSION	 = 0.2.0.3617-1
+TYPE     = Application
 CATEGORY = Utilities
 DESCRIPTION = <p><strong style="color:red">THIS ONLY WORKS with webOS >= 1.4.5 \
        </strong></p><p>This package does not include map-data. Please visit \
