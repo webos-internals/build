@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (Pixi/Pixi+)
 DEVICE = pixi
 CATEGORY = Experimental
-VERSIONS = 1.4.5-123
+VERSIONS = 1.4.5-124
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A testbed of kernel patches for the Palm Pixi/Pixi+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
@@ -17,7 +17,7 @@ All additions are disabled by default, and must be enabled by separate packages 
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-123", "log" : [ "Make Pixi overclocking compliant with the 7 principes of kernel design and packaging" ] }, \
+{ "version" : "${WEBOS_VERSION}-124", "log" : [ "Make Pixi overclocking compliant with the 7 principes of kernel design and packaging" ] }, \
 { "version" : "${WEBOS_VERSION}-120", "log" : [ "Added 768MHz Pixi overclocking" ] }, \
 { "version" : "${WEBOS_VERSION}-118", "log" : [ "Added 750MHz Pixi overclocking" ] }, \
 { "version" : "${WEBOS_VERSION}-113", "log" : [ "Turn off additional TCP congest algos. Stick with cubic. Added USB mass storage patch for XBox360 compatibility." ] }, \
@@ -32,7 +32,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-40", "log" : [ "First Pixi custom kernel" ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-123: Make Pixi overclocking compliant with the 7 principles of kernel design and packaging.<br>\
+${WEBOS_VERSION}-124: Make Pixi overclocking compliant with the 7 principles of kernel design and packaging.<br>\
 ${WEBOS_VERSION}-120: Added 768MHz Pixi overclocking.<br>\
 ${WEBOS_VERSION}-118: Added 750MHz Pixi overclocking.<br>\
 ${WEBOS_VERSION}-113: Turn off additional TCP congest algos. Stick with cubic. Added USB mass storage patch for XBox360 compatibility.<br>\
@@ -62,4 +62,4 @@ TYPE = Kernel
 include ../../support/kernel.mk
 
 # Override the compiler
-CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+#CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
