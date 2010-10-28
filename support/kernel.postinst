@@ -119,6 +119,9 @@ if [ "${error}" = "1" ] ; then
     exit 1
 fi
 
+echo "Disabling Palm diagnostics reporting ..."
+chmod -x /usr/bin/uploadd
+
 # Copy all the files to the target locations
 echo "Installing replacement kernel files ..."
 for file in `find boot lib/modules -type f -print` ; do
