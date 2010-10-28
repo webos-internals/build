@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Pre/Pre+)
 DEVICE = pre
 CATEGORY = Experimental
-VERSIONS = 1.5.0-123
+VERSIONS = 1.5.0-124
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
 Current additions include:<ul>\
@@ -20,6 +20,7 @@ All additions are disabled by default, and must be enabled by using the Govnah a
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-124", "log" : [ "Disable Palm diagnostics reporting when installed" ] }, \
 { "version" : "${WEBOS_VERSION}-123", "log" : [ "Enable cpu frequency debug" ] }, \
 { "version" : "${WEBOS_VERSION}-121", "log" : [ "Added crypto module support for TrueCrypt" ] }, \
 { "version" : "${WEBOS_VERSION}-119", "log" : [ "Robustified the battery percentage and cpu temperature checks in the early boot period." ] }, \
@@ -39,6 +40,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-13", "log" : [ "Initial public release" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-124: Disable Palm diagnostics reporting when installed.<br>\
 ${WEBOS_VERSION}-123: Enable cpu frequency debug.<br>\
 ${WEBOS_VERSION}-121: Added crypto module support for TrueCrypt.<br>\
 ${WEBOS_VERSION}-119: Robustified the battery percentage and cpu temperature checks in the early boot period.<br>\
