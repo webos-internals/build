@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Pixi/Pixi+)
 DEVICE   = pixi
 CATEGORY = Experimental
-VERSIONS = 1.4.5-122
+VERSIONS = 1.4.5-124
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pixi/Pixi+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
 Current additions include:<ul>\
@@ -17,6 +17,7 @@ All additions are disabled by default, and must be enabled by using the Govnah a
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-124", "log" : [ "Disable Palm diagnostics reporting when installed" ] }, \
 { "version" : "${WEBOS_VERSION}-122", "log" : [ "Make UberKernel/Pixi overclocking compliant with the 7 principes of kernel design and packaging" ] }, \
 { "version" : "${WEBOS_VERSION}-121", "log" : [ "Added 768MHz Pixi overclocking", "Added crypto module support for TrueCrypt" ] }, \
 { "version" : "${WEBOS_VERSION}-118", "log" : [ "Added 750MHz Pixi overclocking" ] }, \
@@ -27,6 +28,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-40", "log" : [ "First Pixi custom kernel" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-124: Disable Palm diagnostics reporting when installed.<br>\
 ${WEBOS_VERSION}-122: Make UberKernel/Pixi overclocking compliant with the 7 principles of kernel design and packaging.<br>\
 ${WEBOS_VERSION}-121: Added 768MHz Pixi overclocking. Added crypto module support for TrueCrypt.<br>\
 ${WEBOS_VERSION}-118: Added 750MHz Pixi overclocking.<br>\
