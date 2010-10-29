@@ -68,7 +68,8 @@ KERNEL_PATCHES = overclocking/webos-2.0/600-720-800-1000-min-opp5.patch overcloc
 		 defconfig/defconfig.pre.cpugov \
 		 compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
 		 overclocking/override.patch overclocking/defconfig-override.patch \
-		 usb/f_mass_storage.patch crypto/truecrypt-support-pre.patch
+		 usb/f_mass_storage.patch crypto/truecrypt-support-pre.patch \
+		 idcode/idcode.patch
 EXTERNAL_MODULES = compcache/compcache-0.5.4
 TYPE = Kernel
 
