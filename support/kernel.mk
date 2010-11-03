@@ -4,7 +4,15 @@ ICON = http://www.webos-internals.org/images/9/9e/Icon_WebOSInternals_Kernel.png
 DEPENDS = 
 FEED = WebOS Kernels
 LICENSE = GPL v2 Open Source
-WEBOS_VERSIONS = 1.4.5 2.0.0
+ifeq ("${DEVICE}","pre")
+WEBOS_VERSIONS = 1.4.5
+endif
+ifeq ("${DEVICE}","pixi")
+WEBOS_VERSIONS = 1.4.5
+endif
+ifeq ("${DEVICE}","pre2")
+WEBOS_VERSIONS = 2.0.0
+endif
 KERNEL_VERSION = 2.6.24
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tgz
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
