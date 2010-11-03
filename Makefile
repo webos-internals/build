@@ -40,10 +40,10 @@ palm-index: ipkgs/palm-catalog/Packages ipkgs/palm-beta/Packages ipkgs/palm-web/
 	    ipkgs/palm-catalog-updates/Packages ipkgs/palm-beta-updates/Packages ipkgs/palm-web-updates/Packages
 
 .PHONY: webos-patches-index
-webos-patches-index: ipkgs/webos-patches/1.4.5/Packages
+webos-patches-index: ipkgs/webos-patches/1.4.5/Packages ipkgs/webos-patches/2.0.0/Packages
 
 .PHONY: webos-kernels-index
-webos-kernels-index: ipkgs/webos-kernels/1.4.5/Packages
+webos-kernels-index: ipkgs/webos-kernels/1.4.5/Packages ipkgs/webos-kernels/2.0.0/Packages
 
 .PHONY: regression-index
 regression-index: ipkgs/regression-testing/1.0.0/Packages ipkgs/regression-testing/2.0.0/Packages 
