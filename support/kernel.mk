@@ -4,7 +4,7 @@ ICON = http://www.webos-internals.org/images/9/9e/Icon_WebOSInternals_Kernel.png
 DEPENDS = 
 FEED = WebOS Kernels
 LICENSE = GPL v2 Open Source
-WEBOS_VERSIONS = 1.4.5
+WEBOS_VERSIONS = 1.4.5 2.0.0
 KERNEL_VERSION = 2.6.24
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tgz
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
@@ -70,7 +70,7 @@ ifeq ("${DEVICE}","pixi")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewweu-wr-${WEBOS_VERSION}.jar
 endif
 ifeq ("${DEVICE}","pre2")
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp102ueu-wr-${WEBOS_VERSION}.jar
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp103ueu-wr-${WEBOS_VERSION}.jar
 endif
 COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
 
@@ -92,7 +92,7 @@ package:
 head: 
 	for v in ${VERSIONS} ; do \
 	 	VERSION=$${v} ${MAKE} VERSIONS= WEBOS_VERSION=`echo $${v} | cut -d- -f1` head ; \
- 	done
+	done
 else
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
 endif
