@@ -2,7 +2,7 @@ NAME     = modeswitcher
 MAINTAINER = sconix
 TITLE    = Mode Switcher
 APP_ID   = com.palm.org.e-lnx.wee.apps.${NAME}
-VERSION  = 1.0.7
+VERSION  = 1.0.8
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/showthread.php?p=2623085
@@ -13,6 +13,7 @@ LICENSE  = BSD Open Source License
 POSTINSTALLFLAGS = RestartLuna
 POSTUPDATEFLAGS = RestartLuna
 CHANGELOG = \
+1.0.8: Fixed two mode changing bugs and removed delay from display on trigger event.<br>\
 1.0.7: Fixed starting bug with faulty configuration, calendar ringtone not saving, battery trigger, large delay options, silent switch trigger and made close all apps to not close phone app.<br>\
 1.0.6: Added French translation and fixed default configuration option not having effect bug.<br>\
 1.0.5: Fixed calendar trigger and bug in MS app handling. Also added dashboard notification dialog.<br>\
