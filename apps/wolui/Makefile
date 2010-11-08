@@ -1,7 +1,7 @@
 NAME     = wolui
 APP_ID   = com.thebitguru.${NAME}
 SIGNER   = com.thebitguru
-VERSION  = 0.6.0
+VERSION  = 0.6.1
 HOMEPAGE = http://www.thebitguru.com/projects/wol
 MAINTAINER = Farhan Ahmad <farhan@thebitguru.com>
 TITLE   = Wake-on-LAN
