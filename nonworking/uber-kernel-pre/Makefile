@@ -4,7 +4,7 @@ DEVICE = pre
 CATEGORY = Experimental
 VERSIONS = 1.5.0-124
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
-<b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
+<b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
 <li>720MHz, 800MHz and 1GHz kernel operating points, based on the open source OMAP3440 kernel port, ported to the Palm Pre/Pre+ by uNiXpSyChO</li>\
 <li>Automatic temperature limiting support, written by uNiXpSyChO, ka6sox & rwhitby</li>\
