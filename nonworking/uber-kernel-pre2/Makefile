@@ -4,7 +4,7 @@ DEVICE = pre2
 CATEGORY = Experimental
 VERSIONS = 1.5.0-124
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre2, rolled into a single OTA-safe installation package.<br>\
-<b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
+<b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
 <li>Modification of the lowmemnotify threshold calculation to take into account free swap space, written by rwhitby</li>\
 <li>A new <a href=http://lwn.net/Articles/334649/><b>compcache</b> compressed RAM swap kernel module</a> ported to the Palm Pre/Pre+ by uNiXpSyChO & rwhitby</li>\
