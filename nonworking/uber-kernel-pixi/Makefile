@@ -4,7 +4,7 @@ DEVICE   = pixi
 CATEGORY = Experimental
 VERSIONS = 1.5.0-124
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pixi/Pixi+, rolled into a single OTA-safe installation package.<br>\
-<b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.<b><br>\
+<b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
 <li>748.8MHz and 768MHz kernel operating points, based on information from the Android community, ported to the Palm Pre/Pre+ by jhojho and rwhitby</li>\
 <li>Modification of the lowmemnotify threshold calculation to take into account free swap space, written by rwhitby</li>\
