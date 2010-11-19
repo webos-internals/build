@@ -2,12 +2,12 @@ NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (Pixi/Pixi+)
 DEVICE = pixi
 CATEGORY = Experimental
-VERSIONS = 1.4.5-127
+VERSIONS = 1.4.5-132
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A testbed of kernel patches for the Palm Pixi/Pixi+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
-<li>748.8, 768 & 787MHz kernel operating points, based on information from the Android community, ported to the Palm Pixi/Pixi+ by codecrumb and rwhitby</li>\
+<li>748.8, 768, 787 & 800MHz kernel operating points, based on information from the Android community, ported to the Palm Pixi/Pixi+ by codecrumb and rwhitby</li>\
 <li>Modification of the lowmemnotify threshold calculation to take into account free swap space, written by rwhitby</li>\
 <li>A new <a href=http://lwn.net/Articles/334649/><b>compcache</b> compressed RAM swap kernel module</a> ported to the Palm Pixi/Pixi+ by uNiXpSyChO & rwhitby</li>\
 <li>A new <a href=http://lwn.net/Articles/334649/><b>compcache</b> compressed RAM swap kernel module</a> ported to the Palm Pixi/Pixi+ by uNiXpSyChO & rwhitby</li>\
@@ -17,7 +17,7 @@ All additions are disabled by default, and must be enabled by separate packages 
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-127", "log" : [ "Added 787MHz Pixi overclocking. TrueCrypt support" ] }, \
+{ "version" : "${WEBOS_VERSION}-127", "log" : [ "Added 787 & 800MHz Pixi overclocking. TrueCrypt support" ] }, \
 { "version" : "${WEBOS_VERSION}-124", "log" : [ "Make Pixi overclocking compliant with the 7 principes of kernel design and packaging" ] }, \
 { "version" : "${WEBOS_VERSION}-120", "log" : [ "Added 768MHz Pixi overclocking" ] }, \
 { "version" : "${WEBOS_VERSION}-118", "log" : [ "Added 750MHz Pixi overclocking" ] }, \
@@ -33,7 +33,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-40", "log" : [ "First Pixi custom kernel" ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-127: Added 787MHz Pixi overclocking. TrueCrypt support.<br>\
+${WEBOS_VERSION}-132: Added 787 & 800MHz Pixi overclocking. TrueCrypt support.<br>\
 ${WEBOS_VERSION}-124: Make Pixi overclocking compliant with the 7 principles of kernel design and packaging.<br>\
 ${WEBOS_VERSION}-120: Added 768MHz Pixi overclocking.<br>\
 ${WEBOS_VERSION}-118: Added 750MHz Pixi overclocking.<br>\
