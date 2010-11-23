@@ -1,13 +1,13 @@
 NAME     = showprops
 APP_ID   = com.palm.org.webosinternals.${NAME}
-VERSION  = 0.1.0
+VERSION  = 0.2.0
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:ShowProperties
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 TYPE	= Application
 DESCRIPTION = A utility to display System Properties
-CHANGELOG = 0.1.0: Initial version
+CHANGELOG = 0.2.0: Added castle.xml generation.<br>0.1.0: Initial version
 CATEGORY = System Utilities
-ICON	= http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
+ICON	= http://www.webos-internals.org/images/2/2e/Icon_WebOSInternals_SaveRestore.png
 LICENSE  = GPL v2 Open Source
 SCREENSHOTS = []
 
