@@ -86,6 +86,22 @@ ifeq ("${WEBOS_VERSION}", "1.5.0")
 COMPATIBLE_VERSIONS = 1.5.0 | 2.0.0
 endif
 
+ifeq ("${WEBOS_VERSION}", "2.0.0")
+ifeq ("${DEVICE}","pre2")
+KERNEL_PATCH = http://palm.cdnetworks.net/opensource/2.0.0/kernel_patches.tar.gz
+KERNEL_SUBMISSION = patch-submission-48
+endif
+endif
+
+ifeq ("${WEBOS_VERSION}", "2.0.1")
+ifeq ("${DEVICE}","pre2")
+KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.0.0/linuxkernel-${KERNEL_VERSION}.tgz
+KERNEL_PATCH = http://palm.cdnetworks.net/opensource/2.0.0/kernel_patches.tar.gz
+KERNEL_SUBMISSION = patch-submission-54
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp103ueu-wr-2.0.0.jar
+endif
+endif
+
 .PHONY: package
 .PHONY: head
 
@@ -278,11 +294,20 @@ ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz:
 	curl -f -R -L -o $@.tmp ${KERNEL_SOURCE}
 	mv $@.tmp $@
 
+ifneq ("${KERNEL_SUBMISSION}",)
+${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz:
+	rm -f $@ $@.tmp
+	mkdir -p ${DL_DIR}
+	curl -f -R -L -o $@.tmp ${KERNEL_PATCH}
+	tar -Oxvf $@.tmp ${KERNEL_SUBMISSION} | gzip -c > $@
+	rm -f $@.tmp
+else
 ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz:
 	rm -f $@ $@.tmp
 	mkdir -p ${DL_DIR}
 	curl -f -R -L -o $@.tmp ${KERNEL_PATCH}
 	mv $@.tmp $@
+endif
 
 endif
 
