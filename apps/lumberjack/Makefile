@@ -3,13 +3,15 @@ TITLE    = Lumberjack
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.3.1
+VERSION  = 0.4.1
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Lumberjack
 ICON	 = http://www.webos-internals.org/images/3/38/Icon_WebOSInternals_Lumberjack.png
 DESCRIPTION = Lumberjack watches your logs.
 CHANGELOG = \
+0.4.1: Better Resource Monitor Graphs. Clear log file options.<br>\
+0.4.0: Added Resource Monitor. Added font size preference. Added a Changelog button to the Help scene.<br>\
 0.3.1: Exclude logging messages from dbus capture.<br>\
 0.3.0: Added DBus Capture for debugging services. Type-to-Search in get-log scene. More log level preferences.<br>\
 0.2.0: Searching and Timestamps.<br>\
