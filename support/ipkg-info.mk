@@ -29,6 +29,13 @@ ${DOCTOR_DIR}/webosdoctor-2.0.0.jar:
 	if [ -e ${DOCTOR_DIR}/webosdoctorp103ueu-wr-2.0.0.jar ] ; then \
 	  ln -s webosdoctorp103ueu-wr-2.0.0.jar $@ ; \
 	else \
-	  curl -L -o $@ http://palm.cdnetworks.net/rom/pre2/p20r0d11012010/wrep20rod/webosdoctorp103ueu-wr.jar; \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/pre2/p20r0d11182010/wrep20rod/webosdoctorp103ueu-wr.jar; \
 	fi
 
+${DOCTOR_DIR}/webosdoctor-2.0.1.jar:
+	mkdir -p ${DOCTOR_DIR}
+	if [ -e ${DOCTOR_DIR}/webosdoctorp102ueuna-wr-2.0.1.jar ] ; then \
+	  ln -s webosdoctorp102ueuna-wr-2.0.1.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/pre2/p201r0d11242010/wrep201rod/webosdoctorp102ueuna-wr.jar; \
+	fi
