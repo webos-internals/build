@@ -3,12 +3,13 @@ PATCH = phone/${NAME}.patch
 TITLE = Disable Various Phone Sounds
 DESCRIPTION = This patch will disable the end call, missed call, ignored call, and dropped call sound.
 CATEGORY = Phone
-VERSIONS = 1.4.5-1
+VERSIONS = 2.0.0-7 2.0.1-9
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
 
 include ../common.mk
+
 include ../modifications.mk
 
 MAINTAINER = mamouton <marion.mouton@gmail.com>

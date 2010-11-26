@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = browser/${NAME}.patch
 TITLE = Bad Kitty Super Mix
-DESCRIPTION = Adds Shorten URL, Tweet via Bad Kitty, Add to Relego, and Add to Spare Time options in the app menu. Disables auto-refresh in the browser. <br/><br/>Adds shortcut keys for the following:<br/>New Card: Gesture+N;<br/>Add Bookmark: Gesture+M;<br/>Add To Launcher: Gesture+L;<br/>Bookmarks: Gesture+B;<br/>History: Gesture+H;<br/>Share Page: Gesture+S;<br/><br/>Based off patches by benuk, mamouton, and fritos1406.
+DESCRIPTION = Adds Shorten URL, Tweet via Bad Kitty, Add to Relego, Add to Spare Time, and Send via Neato! options in the app menu. Disables auto-refresh in the browser. <br/><br/>Adds shortcut keys for the following:<br/>New Card: Gesture+N;<br/>Add Bookmark: Gesture+M;<br/>Add To Launcher: Gesture+L;<br/>Bookmarks: Gesture+B;<br/>History: Gesture+H;<br/>Share Page: Gesture+S;<br/><br/>Based off patches by benuk, mamouton, and fritos1406.<br/><br/>*Send via Neato! requires Neato! version 0.9.5 or higher
 CATEGORY = Browser
-VERSIONS = 1.4.5-98
+VERSIONS = 1.4.5-105
 ICON = http://www.webos-internals.org/images/4/4a/Icon_WebOSInternals_Patches_Browser.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/d/d2/Browser-bad-kitty-super-mix-1.png\",\
