@@ -11,7 +11,7 @@ ifeq ("${DEVICE}","pixi")
 WEBOS_VERSIONS = 1.4.5
 endif
 ifeq ("${DEVICE}","pre2")
-WEBOS_VERSIONS = 2.0.0
+WEBOS_VERSIONS = 2.0.0 2.0.1
 endif
 KERNEL_VERSION = 2.6.24
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tgz
@@ -78,13 +78,14 @@ ifeq ("${DEVICE}","pixi")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewweu-wr-${WEBOS_VERSION}.jar
 endif
 ifeq ("${DEVICE}","pre2")
+ifeq ("${WEBOS_VERSION}", "2.0.0")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp103ueu-wr-${WEBOS_VERSION}.jar
 endif
-COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
-
-ifeq ("${WEBOS_VERSION}", "1.5.0")
-COMPATIBLE_VERSIONS = 1.5.0 | 2.0.0
+ifeq ("${WEBOS_VERSION}", "2.0.1")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp102ueuna-wr-${WEBOS_VERSION}.jar
 endif
+endif
+COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
 
 ifeq ("${WEBOS_VERSION}", "2.0.0")
 ifeq ("${DEVICE}","pre2")
@@ -98,7 +99,6 @@ ifeq ("${DEVICE}","pre2")
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.0.0/linuxkernel-${KERNEL_VERSION}.tgz
 KERNEL_PATCH = http://palm.cdnetworks.net/opensource/2.0.0/kernel_patches.tar.gz
 KERNEL_SUBMISSION = patch-submission-54
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp103ueu-wr-2.0.0.jar
 endif
 endif
 
