@@ -3,13 +3,14 @@ TITLE    = Govnah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.7.6
+VERSION  = 0.7.7
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
 DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature, load averages and memory usage.
 CHANGELOG = \
+0.7.7: Added default profiles for the Pre 2. Updated german translations, courtesy of Markus Leutwyler (swisstomcat) and Frank Adler (Ice8lue).<br>\
 0.7.6: Updated the UberKernel Default profile.<br>\
 0.7.5: Added a Changelog button to the Help scene.<br>\
 0.7.4: Added Generate Support Email option to help scene. Added Disable Profile option to app-menu of profile list. Improved the help text.<br>\
