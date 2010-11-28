@@ -21,7 +21,10 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/5/5d/Lumberjack_ss1.png\",\
 \"http://www.webos-internals.org/images/6/65/Lumberjack_ss2.png\",\
 \"http://www.webos-internals.org/images/4/44/Lumberjack_ss3.png\",\
-\"http://www.webos-internals.org/images/9/96/Lumberjack_ss4.png\" ]
+\"http://www.webos-internals.org/images/9/96/Lumberjack_ss4.png\",\
+\"http://www.webos-internals.org/images/5/57/Lumberjack_ss5.png\",\
+\"http://www.webos-internals.org/images/8/86/Lumberjack_ss6.png\",\
+\"http://www.webos-internals.org/images/f/f6/Lumberjack_ss7.png\" ]
 LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/applications/lumberjack.git
