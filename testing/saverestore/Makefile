@@ -15,7 +15,7 @@ In no event will WebOS Internals or any other party be liable to you for damages
 CHANGELOG = \
 1.2.0: Added support for scripts that are dependent upon the webOS version.<br>\
 1.1.0: Rolled up all the beta release features for a public release.<br>\
-1.0.19: Applications: Whats for dinner? Premium (courtesy of rksand), NesEm (Updated), Dungeon Hunter (Updated), WOG O.S.K. (all courtesy of djgardn2).<br>\
+1.0.19: Applications: What's for dinner? Premium (courtesy of rksand), NesEm (Updated), Dungeon Hunter (Updated), WOG O.S.K. (all courtesy of djgardn2).<br>\
 1.0.18: No longer saves file attachments from MMS messages. You will need to manually back up those files from /attachments directory on the USB drive.<br>\
 1.0.17: Added a Changelog button to the Help scene.<br>\
 1.0.16: Patch: Advanced Config Sys Pref-World script. Applications: Astraware Boardgames, Angry Birds (Pixi) (both courtesy of Audemars02), Crosswords (courtesy of tobias funke). Added executable for ACSP-World in the contrib directory. Updated Photos script and Readme.txt file in contrib directory.<br>\
@@ -26,7 +26,7 @@ CHANGELOG = \
 1.0.11: Robustify the Directory script.  Added a photos/videos backup script and an executable for App Launcher Advanced Config script in the /contrib (see Readme.txt file in that directory for details).<br>\
 1.0.10: Robustify postinst script. Added french translation support. Added support for saving a single directory. Robustify file-saving script to create the source directory if it does not already exist. Applications: Jacksonville, New York Times, TodoTracker (all courtesy of djgardn2), Slide RSS (courtesy of appsotutely), Scratch Word Processor (courtesy of Chakat Silverstreak), Astraware Casino (courtesy of Audemars02), Putki, SuperJump (both courtesy of pcworld), VisualBoy Advance (courtesy of rwhitby), College Football Live, International Soccer Live, UK Football Live, Womens Basketball Live (all courtesy of MoreSolutions), Angry Birds Lite, BFG Maps, BFG Maps Beta, Bluetooth Profiles, Crimson Fields, Frootrees, Lumberjack, Sparkle Lite (all courtesy of StoneRyno).<br>\
 1.0.9: Robustify the installation scripts.  Applications: Music (Remix), Music Wave Lite, Fuzzies (all courtesy of mamouton), Brain Challenge HD, TangramPuzzle Lite, TangramPuzzle (all courtesy of Audemars02).<br>\
-1.0.8: Applications: EasyList, Cosmic Nitro, TechTray, GPS Trip Panel, Raging Thunder, What\'s for dinner? Lite (all courtesy of djgardn2), Crusade Of Destiny, Rednecks Vs Aliens (both courtesy of mamouton), TrackMyWork Full (courtesy of kr_ke), Sparkle (courtesy of pip smith).<br>\
+1.0.8: Applications: EasyList, Cosmic Nitro, TechTray, GPS Trip Panel, Raging Thunder, What's for dinner? Lite (all courtesy of djgardn2), Crusade Of Destiny, Rednecks Vs Aliens (both courtesy of mamouton), TrackMyWork Full (courtesy of kr_ke), Sparkle (courtesy of pip smith).<br>\
 1.0.6: Applications: TouchConnect+, Mobile Hotspot (both courtesy of Audemars02), SmartRunner (courtesy of djgardn2).<br>\
 1.0.5: Fixed case insensitive unzip overwrite query bug. Applications: Angry Birds.<br>\
 1.0.4: Fixed issue created when allowing filenames that include spaces. Fixed application names for a few scripts.<br>\
