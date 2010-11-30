@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Pre2)
 DEVICE = pre2
 CATEGORY = Experimental
-VERSIONS = 2.0.1-2
+VERSIONS = 2.0.1-3
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre2, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
@@ -17,9 +17,11 @@ All additions are disabled by default, and must be enabled by using the Govnah a
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-3", "log" : [ "Added temperature sensor" ] }, \
 { "version" : "${WEBOS_VERSION}-2", "log" : [ "Initial version" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-3: Added temperature sensor.<br>\
 ${WEBOS_VERSION}-2: Initial version.
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
@@ -33,7 +35,7 @@ KERNEL_PATCHES = overclocking/600-720-800-1000-min-opp5.patch overclocking/defco
 		 overclocking/override.patch overclocking/defconfig-override.patch \
 		 usb/f_mass_storage.patch crypto/truecrypt-support-pre.patch \
 		 idcode/idcode.patch
-KERNEL_PATCHES = sensors/sensors_temp_omap36xx.patch sensors/defconfig-safe.patch \
+KERNEL_PATCHES = sensors/webos-2.0/omap34xx_temp.patch sensors/webos-2.0/defconfig-safe.patch \
 		 makefiletune/armMakefile.diff \
 		 defconfig/defconfig.pre2.cpugov \
 		 compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
