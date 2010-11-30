@@ -15,7 +15,7 @@ In no event will WebOS Internals or any other party be liable to you for damages
 CHANGELOG = \
 1.2.0: Added support for scripts that are dependent upon the webOS version.<br>\
 1.1.0: Rolled up all the beta release features for a public release.<br>\
-1.0.19: Applications: Whats for dinner? Premium (courtesy of rksand), NesEm (Updated), Dungeon Hunter (Updated), WOG O.S.K. (all courtesy of djgardn2).<br>\
+1.0.19: Applications: What\'s for dinner? Premium (courtesy of rksand), NesEm (Updated), Dungeon Hunter (Updated), WOG O.S.K. (all courtesy of djgardn2).<br>\
 1.0.18: No longer saves file attachments from MMS messages. You will need to manually back up those files from /attachments directory on the USB drive.<br>\
 1.0.17: Added a Changelog button to the Help scene.<br>\
 1.0.16: Patch: Advanced Config Sys Pref-World script. Applications: Astraware Boardgames, Angry Birds (Pixi) (both courtesy of Audemars02), Crosswords (courtesy of tobias funke). Added executable for ACSP-World in the contrib directory. Updated Photos script and Readme.txt file in contrib directory.<br>\
