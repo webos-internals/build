@@ -231,6 +231,9 @@ endif
 ifdef MINWEBOSVERSION
 	/bin/echo -n ", \"MinWebOSVersion\":\"${MINWEBOSVERSION}\"" >> $@
 endif
+ifdef MAXWEBOSVERSION
+	/bin/echo -n ", \"MaxWebOSVersion\":\"${MAXWEBOSVERSION}\"" >> $@
+endif
 ifdef DEVICECOMPATIBILITY
 	/bin/echo -n ", \"DeviceCompatibility\":${DEVICECOMPATIBILITY}" >> $@
 endif
