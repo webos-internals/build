@@ -12,5 +12,5 @@ include ../common.mk
 
 include ../modifications.mk
 
-MAINTAINER = Jason Robitaille, WebOS Internals
+MAINTAINER = Jason Robitaille, and various WebOS Internals devs
 HOMEPAGE = http://forums.precentral.net/webos-patches/236358-patch-ad-blocker.html
