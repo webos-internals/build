@@ -3,7 +3,7 @@ TITLE    = Save/Restore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.2.1
+VERSION  = 1.2.2
 DEPENDS  = org.webosinternals.unzip, org.webosinternals.zip
 TYPE	 = Application
 CATEGORY = System Utilities
@@ -13,7 +13,7 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 WebOS Internals provides Save/Retore as is without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.  The entire risk as to the quality and performance of Save/Restore is with you.  Should Save/Restore prove defective, you assume the cost of all necessary servicing, repair or correction.<br>\
 In no event will WebOS Internals or any other party be liable to you for damages, including any general, special, incidental or consequential damages arising out of the use or inability to use Save/Restore (including but not limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of Save/Restore to operate with any other programs).
 CHANGELOG = \
-1.2.1: Applications: Ground Effect, TileStorm, TileStorm Eire.<br>\
+1.2.2: Applications: Ground Effect, TileStorm, TileStorm Eire, Rock Band.<br>\
 1.2.0: Added support for scripts that are dependent upon the webOS version.<br>\
 1.1.0: Rolled up all the beta release features for a public release.<br>\
 1.0.19: Applications: What's for dinner? Premium (courtesy of rksand), NesEm (Updated), Dungeon Hunter (Updated), WOG O.S.K. (all courtesy of djgardn2).<br>\
