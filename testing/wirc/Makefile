@@ -23,7 +23,7 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/9/9d/Wirc_5.png\" ]
 LICENSE  = GPL v2 Open Source
 MINWEBOSVERSION = 1.4.5
-DEVICECOMPATIBILITY = [\"Pre\",\"Pre2\",\"Pixi\"]
+DEVICECOMPATIBILITY = [\"Pre\",\"Pre2\"]
 
 SRC_GIT = git://git.webos-internals.org/applications/wIRC.git
 GIT_TAG = v0.3.4
@@ -31,7 +31,7 @@ GIT_TAG = v0.3.4
 D = build/$*/usr/palm/applications/${APP_ID}
 
 .PHONY: package
-package: pkgs/${APP_ID}_${VERSION}_armv6.ipk ipkgs/${APP_ID}_${VERSION}_armv7.ipk
+package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
 
 include ../../support/package.mk
 
@@ -49,7 +49,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/armv6.built-${VERSION} build/armv7.built-${VERSION}
+build/.built-${VERSION}: build/arm.built-${VERSION}
 	touch $@
 
 include ../../support/cross-compile.mk
