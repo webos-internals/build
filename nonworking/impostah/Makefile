@@ -3,7 +3,7 @@ TITLE    = Impostah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.0.1
+VERSION  = 0.0.6
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Impostah
@@ -11,7 +11,12 @@ ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInte
 DESCRIPTION = Impostah impersonates service calls.
 MINWEBOSVERSION = 2.0.0
 CHANGELOG = \
-0.0.1: Initial skeleton version.  No functionality as yet.
+0.0.6: Added support for activity configurations.<br>\
+0.0.5: Added support for backup configurations.<br>\
+0.0.4: Added support for temporary databases.<br>\
+0.0.3: Added upstart script.<br>\
+0.0.2: Lists DB kinds.<br>\
+0.0.1: Initial skeleton.
 
 SCREENSHOTS = [\
  ]
