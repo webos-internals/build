@@ -9,6 +9,7 @@ CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Impostah
 ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
 DESCRIPTION = Impostah impersonates service calls.
+MINWEBOSVERSION = 2.0.0
 CHANGELOG = \
 0.0.1: Initial skeleton version.  No functionality as yet.
 
