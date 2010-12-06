@@ -20,10 +20,10 @@ CHANGELOG = \
 0.0.1: Initial skeleton.
 
 SCREENSHOTS = [\
-"http://www.webos-internals.org/images/b/b6/Impostah_ss1.png", \
-"http://www.webos-internals.org/images/a/a3/Impostah_ss2.png", \
-"http://www.webos-internals.org/images/6/6d/Impostah_ss3.png", \
-"http://www.webos-internals.org/images/9/99/Impostah_ss4.png", \
+\"http://www.webos-internals.org/images/b/b6/Impostah_ss1.png\", \
+\"http://www.webos-internals.org/images/a/a3/Impostah_ss2.png\", \
+\"http://www.webos-internals.org/images/6/6d/Impostah_ss3.png\", \
+\"http://www.webos-internals.org/images/9/99/Impostah_ss4.png\" \
  ]
 LICENSE  = GPL v2 Open Source
 
