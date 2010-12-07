@@ -162,7 +162,7 @@ ${DL_DIR}/${NAME}-${VERSION}.tar.gz:
 	$(call PREWARE_SANITY)
 	if [ ! -e git ] ; then \
 	  git clone --mirror -n ${SRC_GIT} git ; \
-	elif [ -h git ] ; then \
+	elif [ -L git ] ; then \
 	  true ; \
 	else \
 	  ( cd git ; git fetch -u -t ) ; \
