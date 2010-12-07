@@ -3,7 +3,7 @@ TITLE    = Impostah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.2.1
+VERSION  = 0.2.2
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Impostah
@@ -11,14 +11,15 @@ ICON	 = http://www.webos-internals.org/images/a/aa/Tux_Imposter.png
 DESCRIPTION = Impostah impersonates service calls.
 MINWEBOSVERSION = 2.0.0
 CHANGELOG = \
+0.2.2: Added support for keystore exploration.<br>\
 0.2.1: Revamped the activity exploration backend.<br>\
 0.2.0: Revamped the database exploration backend.<br>\
 0.1.1: Strip comments from JSON files before parsing.<br>\
 0.1.0: Revamped the database exploration scene.<br>\
 0.0.8: Added support for multiple database locations.<br>\
 0.0.7: Set appropriate defaults for all selections.<br>\
-0.0.6: Added support for activity configurations.<br>\
-0.0.5: Added support for backup configurations.<br>\
+0.0.6: Added support for activity exploration.<br>\
+0.0.5: Added support for backup exploration.<br>\
 0.0.4: Added support for temporary databases.<br>\
 0.0.3: Added upstart script.<br>\
 0.0.2: Lists DB kinds.<br>\
