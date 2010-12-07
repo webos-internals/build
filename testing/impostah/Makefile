@@ -3,7 +3,7 @@ TITLE    = Impostah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.2.0
+VERSION  = 0.2.1
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Impostah
@@ -11,6 +11,7 @@ ICON	 = http://www.webos-internals.org/images/a/aa/Tux_Imposter.png
 DESCRIPTION = Impostah impersonates service calls.
 MINWEBOSVERSION = 2.0.0
 CHANGELOG = \
+0.2.1: Revamped the activity exploration backend.<br>\
 0.2.0: Revamped the database exploration backend.<br>\
 0.1.1: Strip comments from JSON files before parsing.<br>\
 0.1.0: Revamped the database exploration scene.<br>\
