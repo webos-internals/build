@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = misc/${NAME}.patch
 TITLE = Disable LightBar
-DESCRIPTION = Turns off the light in the notification area when a card is active. It still blinks on notifications.
+DESCRIPTION = Turns off the light in the gesture area on the Pre plus and Pre 2 when a card is active. It still blinks on notifications and lights up on touch.
 CATEGORY = Misc
-VERSIONS = 1.4.5-113 2.0.0-16 2.0.1-24
+VERSIONS = 1.4.5-114 2.0.0-17 2.0.1-26
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
