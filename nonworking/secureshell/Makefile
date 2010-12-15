@@ -13,7 +13,8 @@ CHANGELOG = \
 0.0.1: Initial release.
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/1/11/Secureshell_ss1.png\",\
-\"http://www.webos-internals.org/images/1/13/Secureshell_ss2.png\" ]
+\"http://www.webos-internals.org/images/1/13/Secureshell_ss2.png\",\
+\"http://www.webos-internals.org/images/a/a3/Secureshell_ss3.png\" ]
 LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/applications/secureshell.git
