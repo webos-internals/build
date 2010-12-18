@@ -35,6 +35,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	tar -C build/src -xf build/src/shellinabox-2.10.tar.gz
 	mv build/src/shellinabox-2.10 build/src/src
+	patch -d build/src/src -p0 < patches/vt100.js.patch
 	touch $@
 
 .PHONY: build
