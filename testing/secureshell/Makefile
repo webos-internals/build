@@ -3,13 +3,14 @@ TITLE    = Secure Shell
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.0.2
+VERSION  = 0.0.3
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:SecureShell
 ICON	 = http://www.webos-internals.org/images/7/74/Icon_WebOSInternals_Terminal.png
-DESCRIPTION = A Secure Shell for your webOS device.
+DESCRIPTION = A Secure Shell for your webOS device. Secure Shell is very raw and barely functional. We know the bugs already, and they are major and fatal, so you do not need to report them. Thanks.
 CHANGELOG = \
+0.0.3: Hacked away most of vt100.js key handling.<br>\
 0.0.2: First semi-functional version.<br>\
 0.0.1: Initial skeleton.
 SCREENSHOTS = [\
@@ -35,6 +36,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	tar -C build/src -xf build/src/shellinabox-2.10.tar.gz
 	mv build/src/shellinabox-2.10 build/src/src
+	patch -d build/src/src -p0 < patches/vt100.js.patch
 	touch $@
 
 .PHONY: build
