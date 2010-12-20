@@ -3,7 +3,7 @@ PATCH = calendar/${NAME}.patch
 TITLE = Week Numbers
 DESCRIPTION = Adds ISO 8601 week numbers in the header of day, week and month view of the calendar.
 CATEGORY = Calendar
-VERSIONS = 2.0.0-5 2.0.1-17
+VERSIONS = 2.0.0-23 2.0.1-35
 ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Calendar.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/7/7d/Calendar-week-numbers-1.png\",\
