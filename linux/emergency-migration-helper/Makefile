@@ -10,6 +10,7 @@ MAINTAINER = WebOS Internals
 CATEGORY = Utilities
 ICON = http://www.webos-internals.org/images/4/4f/Epr.png
 POSTINSTALLFLAGS=RestartLuna
+MAXWEBOSVERSION = 1.9.9
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk

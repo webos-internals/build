@@ -7,6 +7,7 @@ DESCRIPTION = This package will clean up keyboard configuration and image files 
 APP_ID = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 CATEGORY = Utilities
+MAXWEBOSVERSION = 1.9.9
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
