@@ -8,6 +8,7 @@ ICON = http://www.webos-internals.org/images/0/0f/Icon_WebOSInternals_Keyboard.p
 DESCRIPTION = This package contains the default themes and configuration file for the Virtual Keyboard patch.
 MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>
 HOMEPAGE = http://www.webos-internals.org/wiki/Virtual_Keyboard_Configuration
+MAXWEBOSVERSION = 1.9.9
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk

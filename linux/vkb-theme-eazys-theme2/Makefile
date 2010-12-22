@@ -8,6 +8,7 @@ ICON = http://www.webos-internals.org/images/0/0f/Icon_WebOSInternals_Keyboard.p
 DESCRIPTION = This package contains eazys theme 2 for the Virtual Keyboard patch.
 SCREENSHOTS = [\"http://www.webos-internals.org/images/8/83/Eazystheme2.jpg\"]
 HOMEPAGE = http://www.webos-internals.org/wiki/Virtual_Keyboard_Configuration
+MAXWEBOSVERSION = 1.9.9
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
