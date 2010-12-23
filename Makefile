@@ -41,7 +41,7 @@ palm-index: ipkgs/palm-catalog/Packages ipkgs/palm-beta/Packages ipkgs/palm-web/
 	    ipkgs/palm-catalog-updates/Packages ipkgs/palm-beta-updates/Packages ipkgs/palm-web-updates/Packages
 
 .PHONY: precentral-index
-palm-index: ipkgs/precentral/Packages
+precentral-index: ipkgs/precentral/Packages
 
 .PHONY: webos-patches-index
 webos-patches-index: ipkgs/webos-patches/1.4.5/Packages \
