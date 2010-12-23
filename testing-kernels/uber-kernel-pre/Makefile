@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Pre/Pre+)
 DEVICE = pre
 CATEGORY = Experimental
-VERSIONS = 1.4.5-124
+VERSIONS = 1.4.5-138
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
@@ -21,6 +21,8 @@ All additions are controlled by using the Govnah application.<br>\
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-138", "log" : [ "Added uinput into kernel", \
+                                                "Added ability to control adjacent key filter" ] }, \
 { "version" : "${WEBOS_VERSION}-124", "log" : [ "Disable Palm diagnostics reporting when installed" ] }, \
 { "version" : "${WEBOS_VERSION}-123", "log" : [ "Enable cpu frequency debug" ] }, \
 { "version" : "${WEBOS_VERSION}-121", "log" : [ "Added crypto module support for TrueCrypt" ] }, \
@@ -41,6 +43,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-13", "log" : [ "Initial public release" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-138: Added uinput into kernel.<br>Added ability to control adjacent key filter.<br>\
 ${WEBOS_VERSION}-124: Disable Palm diagnostics reporting when installed.<br>\
 ${WEBOS_VERSION}-123: Enable cpu frequency debug.<br>\
 ${WEBOS_VERSION}-121: Added crypto module support for TrueCrypt.<br>\
@@ -62,15 +65,16 @@ ${WEBOS_VERSION}-13: Initial public release
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
-KERNEL_PATCHES = overclocking/600-720-800-1000-min-opp5.patch overclocking/defconfig-standard.patch \
-		 sensors/sensors_temp_omap34xx.patch sensors/defconfig-safe.patch \
+KERNEL_PATCHES = overclocking/webos-${WEBOS_VERSION}/600-720-800-1000-min-opp5.patch overclocking/defconfig-standard.patch \
+		 sensors/sensors_temp_omap34xx.patch sensors/webos-${WEBOS_VERSION}/defconfig-safe.patch \
 		 screenstate/screenstate.patch \
 		 makefiletune/armMakefile.diff \
 		 defconfig/defconfig.pre.cpugov \
 		 compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
 		 overclocking/override.patch overclocking/defconfig-override.patch \
 		 usb/f_mass_storage.patch crypto/truecrypt-support-pre.patch \
-		 idcode/idcode.patch
+		 idcode/idcode.patch \
+		 keypad/maxim7359-keypad.patch uinput/defconfig-pre-y.patch
 EXTERNAL_MODULES = compcache/compcache-0.5.4
 TYPE = Kernel
 

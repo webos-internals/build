@@ -14,6 +14,22 @@ APPS=/media/cryptofs/apps
 
 SRCDIR=${APPS}/usr/palm/applications/${PID}/additional_files
 
+# Make sure all existing target files are in virgin condition
+echo "Verifying no existing modifications to kernel files ..."
+for file in `find boot -type f -print` ; do
+  md5sum1="`grep    -e \*./$file$ ${SRCDIR}/md5sums                   | awk '{print $1}'`"
+  md5sum2="`grep -h -e \*./$file$ /usr/lib/ipkg/info/kernel-*.md5sums | awk '{print $1}'`"
+  [ ! -f "/$file" ] || \
+    [ "`md5sum /$file | awk '{print $1}'`" = "$md5sum1" ] || \
+    [ "`md5sum /$file | awk '{print $1}'`" = "$md5sum2" ] || \
+    { echo "Verification failed on /$file" ; error=1 ; }
+done
+
+if [ "${error}" = "1" ] ; then
+    echo "Device kernel is not in factory condition, refusing to install module"
+    exit 1
+fi
+
 if [ -n "${UPSTART_SCRIPT}" ]; then
   echo "Installing module upstart script..."
   file=var/palm/event.d/${UPSTART_SCRIPT}
