@@ -3,14 +3,15 @@ TITLE       = KeyBoss
 APP_ID      = org.webosinternals.${NAME}
 SIGNER      = org.webosinternals
 BLDFLAGS    = -p
-VERSION     = 0.2.6
+VERSION     = 0.2.9
 TYPE        = Application
 CATEGORY    = System Utilities
 HOMEPAGE    = http://www.webos-internals.org/wiki/KeyBoss
 ICON        = http://www.webos-internals.org/images/6/61/Icon_WebOSInternals_KeyBoss.png
-DESCRIPTION = Become the BOSS of your keyboard. This App/Service combo is intended to give the user as much control as possible over the functionality of the hard keyboard.  It also provides ability to emulate keyboard events, for use by projects like the Virtual Keyboard. Curently the application allows you to change the repeat rate and enable KeyCaps like functionality.  <br>NOTE: The KeyCaps functionality (and keyboard emulation) requires the userspace input module package.  Please install the userspace input module package found in Preware as well. <br><br>\
+DESCRIPTION = Become the BOSS of your keyboard. This App/Service combo is intended to give the user as much control as possible over the functionality of the hard keyboard.  It also provides ability to emulate keyboard events, for use by projects like the Virtual Keyboard. Curently the application allows you to change the repeat rate, enable/disable the fat finger filter and enable KeyCaps like functionality.<br><br>\
 Start typing anywhere for preview header to show, tap the header to hide. <br>
 CHANGELOG   = \
+0.2.9: Added Fat Finger Filter control. <br>Added persistent settings. <br>Added ability to reset to defaults. <br>Added code to disable after unclean shutdown. <br>\
 0.2.6: Fixed removal of tap action. <br>\
 0.2.5: Added preview header for testing settings. <br>\
        Changed logic to not cycle when only 1 action active. <br>\
@@ -27,12 +28,12 @@ CHANGELOG   = \
 0.1.0: Inception
 SCREENSHOTS = 
 LICENSE     = GPL v2 Open Source
-MAINTAINER  = Eric J Gaudet <emoney_33@yahoo.com>
+MAINTAINER  = Eric Gaudet <emoney_33@yahoo.com>
 
 SRC_GIT     = git://git.webos-internals.org/applications/keyboss.git
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
+package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
 include ../../support/package.mk
 
 include ../../support/download.mk
@@ -65,6 +66,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/bin
 	install -m 755 build/src/src/${NAME} build/$*/usr/palm/applications/${APP_ID}/bin/${APP_ID}
+	install -m 755 build/src/src/restart_hidd build/$*/usr/palm/applications/${APP_ID}/bin/restart_hidd
 	touch $@
 
 build/%/CONTROL/postinst:
