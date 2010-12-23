@@ -90,14 +90,16 @@ class PackageHandler(ContentHandler):
                     self.json += "\"PostInstallFlags\":\"RestartLuna\", "
                     self.json += "\"PostRemoveFlags\":\"RestartLuna\", "
 
-                self.json += "\"Feed\":\"PreCentral\" }"
-
                 if (name == "theme"):
                     id = "net.precentral.themes." + self.title.strip().lower().replace('\\\"',"").replace("&amp;","-").replace("&#58; ","-").replace("_quick_install_2.0","").replace("_","-").replace(": ","-").replace("&","").replace("#","").replace("  "," ").replace(" ","-").replace(".","").replace("'","").replace("(","").replace(")","").replace("+","").replace("!","").replace("/","").rstrip("-") + "_" + self.version + "_all"
                     print "Filename: " + id + ".ipk"
                     self.filename = id + ".zip"
                 else:
                     print "Filename: " + self.filename
+                    self.json += "\"Location\":\"%s\", " % self.url
+
+                self.json += "\"Feed\":\"PreCentral\" }"
+
                 print "Title: " + self.title
                 print "Source: " + self.json
                 if (name == "application"):
