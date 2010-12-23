@@ -16,6 +16,8 @@ Current additions include:<ul>\
 <li>All standard Linux 2.6.24 <a href=http://www.ibm.com/developerworks/linux/library/l-cpufreq-1/index.html>cpufreq governors</a> made available for selection via the Govnah application.</li>\
 <li>Additions to the USB mass storage driver for XBox 360 compatibility.  Note that your USB drive may be reformatted when you plug it into an XBox 360.</li>\
 <li>Support for kernel crypto modules required by TrueCrypt</li>\
+<li>Userspace Input device for creating input devices from user space.  (Used by KeyBoss for example to catch/modify key input as well as Virtual Keyboard to inject hard keyboard events).</li>\
+<li>Added ability to control the adjacent key filter in the keypad drivers.</li>
 </ul><br>\
 All additions are controlled by using the Govnah application.<br>\
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
