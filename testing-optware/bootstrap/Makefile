@@ -3,11 +3,12 @@ TITLE    = Optware Bootstrap
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.5.1
+VERSION  = 1.5.2
 HOMEPAGE = http://www.webos-internals.org/wiki/Optware
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DESCRIPTION = This package is used to bootstrap the installation of packages from the Optware feed.
 CHANGELOG = \
+1.5.2: Moved loopback filesystem file to /media/cryptofs to fix USB mode.<br>\
 1.5.1: Fixed prerm script.<br>\
 1.5.0: Migration to new loopback mounted ext3 filesystem stored on the USB drive.
 TYPE	 = Optware
