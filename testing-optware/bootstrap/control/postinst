@@ -20,15 +20,21 @@ rm -f /etc/event.d/${PID} /var/palm/event.d/${PID}
 # Remove the profile script
 rm -f /etc/profile.d/optware /etc/profile.d/${PID}
 
+# Migrate legacy /media/internal/.optware/optware.ext3 to /media/cryptofs
+if [ -f /media/internal/.optware/optware.ext3 ] ; then
+    /bin/mv /media/internal/.optware/optware.ext3 /media/cryptofs/
+    /bin/rmdir /media/internal/.optware
+fi
+
 # Create the filesystem if it does not already exist
-if [ ! -e /media/internal/.optware/optware.ext3 ] ; then
-    /bin/mkdir -p /media/internal/.optware || \
-	{ echo "ERROR: Cannot create /media/internal/.optware directory" ; exit 1 ; }
+if [ ! -e /media/cryptofs/optware.ext3 ] ; then
+    /bin/mkdir -p /media/cryptofs || \
+	{ echo "ERROR: Cannot create /media/cryptofs directory" ; exit 1 ; }
     echo "Creating 64MB optware filesystem ..."
-    /bin/dd if=/dev/zero of=/media/internal/.optware/optware.ext3 bs=1024 count=65536 || \
-	{ echo "ERROR: Cannot initialise /media/internal/.optware/optware.ext3 file" ; exit 1 ; }
-    /sbin/mkfs.ext3 -F -L optware /media/internal/.optware/optware.ext3 || \
-	{ echo "ERROR: Cannot make /media/internal/.optware/optware.ext3 filesystem" ; exit 1 ; }
+    /bin/dd if=/dev/zero of=/media/cryptofs/optware.ext3 bs=1024 count=65536 || \
+	{ echo "ERROR: Cannot initialise /media/cryptofs/optware.ext3 file" ; exit 1 ; }
+    /sbin/mkfs.ext3 -F -L optware /media/cryptofs/optware.ext3 || \
+	{ echo "ERROR: Cannot make /media/cryptofs/optware.ext3 filesystem" ; exit 1 ; }
 fi
 
 # Remove any empty legacy installation directory
@@ -37,7 +43,7 @@ rmdir /var/opt || true
 # Migrate legacy /var/opt installation directory to /opt
 if [ -d /var/opt ] ; then
     /bin/umount /opt || true
-    /bin/mount /media/internal/.optware/optware.ext3 /opt || \
+    /bin/mount /media/cryptofs/optware.ext3 /opt || \
 	{ echo "ERROR: Unable to mount /opt for migration" ; exit 1 ; }
     /bin/cp -a /var/opt/* /opt/ || \
 	{ echo "ERROR: Error migrating /var/opt to /opt" ; umount /opt ; exit 1 ; }
