@@ -2,12 +2,14 @@ NAME = $(shell basename $(shell pwd))
 TITLE = SR71 Blackbird (Palm Pre/Pre+)
 CATEGORY = Experimental
 DEVICE = pre
-VERSIONS = 1.4.5-111
+VERSIONS = 1.4.5-144
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br><br>\
 For more information, visit ${HOMEPAGE}<br><br>\
-<b>WARNING: This Kernel may not boot on all devices and may cause damage!</b>
+<b>WARNING: This Kernel may not boot on all devices and may cause damage!</b>\
+<br><br>Features:<br> * 1.2GHz<br> * Ondemand Tickle gov<br> * Painfully fast!<br><br>
 DESCRIPTION = <br>${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-144", "log" : [ "added ondemand tickle gov." ] }, \
 { "version" : "${WEBOS_VERSION}-111", "log" : [ "drop voltages since girlie-Pre cant run it anyway. update to latest override module. " ] }, \
 { "version" : "${WEBOS_VERSION}-92", "log" : [ "Do voltage scaling immediately after Vsel change." ] }, \
 { "version" : "${WEBOS_VERSION}-91", "log" : [ "added selectable voltage & temp scaling." ] }, \
@@ -17,15 +19,14 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-80", "log" : [ "up voltages. add back OPP1 and OPP2 slots." ] }, \
 { "version" : "${WEBOS_VERSION}-78", "log" : [ "Initial release for 1.2GHz support. NextGen Screenstate with temp monitoring." ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-111: drop voltages since girlie-Pre cant run it anyway. update to latest override module.<br>${WEBOS_VERSION}-92: Do voltage scaling immediately after Vsel change.<br>${WEBOS_VERSION}-91: added selectable voltage & temp scaling.<br>${WEBOS_VERSION}-84: raise DSP clock. add low temp reset for screenstate.<br>${WEBOS_VERSION}-82: add more voltage to high-end. repackage for webOS 1.4.5.<br>${WEBOS_VERSION}-81: turn down the afterburners. raise voltage on 6 & 7 slots. bring back anticipatory.<br>${WEBOS_VERSION}-80: up voltages. add back OPP1 and OPP2 slots.<br>${WEBOS_VERSION}-78: Initial release for 1.2GHz support. NextGen Screenstate with temp monitoring.<br>
+CHANGELOG = ${WEBOS_VERSION}-144: added ondemand tickle gov.<br>${WEBOS_VERSION}-111: drop voltages since girlie-Pre cant run it anyway. update to latest override module.<br>${WEBOS_VERSION}-92: Do voltage scaling immediately after Vsel change.<br>${WEBOS_VERSION}-91: added selectable voltage & temp scaling.<br>${WEBOS_VERSION}-84: raise DSP clock. add low temp reset for screenstate.<br>${WEBOS_VERSION}-82: add more voltage to high-end. repackage for webOS 1.4.5.<br>${WEBOS_VERSION}-81: turn down the afterburners. raise voltage on 6 & 7 slots. bring back anticipatory.<br>${WEBOS_VERSION}-80: up voltages. add back OPP1 and OPP2 slots.<br>${WEBOS_VERSION}-78: Initial release for 1.2GHz support. NextGen Screenstate with temp monitoring.<br>
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = psychobuild/SR71-overclocking.patch \
 		 sensors/sensors_temp_omap34xx.patch \
-		 screenstate/screenstate.patch \
+		 psychobuild/ss-ovrd-tcl.patch \
 		 compcache/compcache.patch memory/tmc_mem.patch \
-		 overclocking/override.patch \
 		 makefiletune/armMakefile.diff
 EXTERNAL_MODULES = compcache/compcache-0.5.4
 
