@@ -78,11 +78,9 @@ ifeq ("${DEVICE}","pixi")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewweu-wr-${WEBOS_VERSION}.jar
 endif
 ifeq ("${DEVICE}","pre2")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp102ueuna-wr-${WEBOS_VERSION}.jar
 ifeq ("${WEBOS_VERSION}", "2.0.0")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp103ueu-wr-${WEBOS_VERSION}.jar
-endif
-ifeq ("${WEBOS_VERSION}", "2.0.1")
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp102ueuna-wr-${WEBOS_VERSION}.jar
 endif
 endif
 COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
