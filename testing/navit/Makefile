@@ -3,7 +3,7 @@ TITLE    = Navit - Car navigation system
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.5.0.3832-1
+VERSION	 = 0.5.0.3839-1
 TYPE     = Application
 CATEGORY = Utilities
 DESCRIPTION = <p><strong style="color:red">THIS ONLY WORKS with webOS >= 1.4.5 \
@@ -18,6 +18,7 @@ DESCRIPTION = <p><strong style="color:red">THIS ONLY WORKS with webOS >= 1.4.5 \
        other navigation systems, Navit maps are dynamically generated in real \
        time from vector data.</p>
 CHANGELOG = \
+	    0.5.0.3839-1: update to svn r3839. Add better debug output for GPS <br/> \
 	    0.5.0.3832-1: update to svn r3832. <br/> \
 	    0.2.0.3813-1: update to svn r3813. Now with paging for bookmarks <br/> \
 	    0.2.0.3784-1: update to svn r3784. <br/> \
