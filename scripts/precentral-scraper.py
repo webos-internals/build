@@ -77,6 +77,7 @@ class PackageHandler(ContentHandler):
             # Unsuitable packages for Preware
             if (self.title == "Preware"): return
             if (self.title == "AutoCorrect Edit"): return
+            if (self.title == "Pre Backup Utility"): return
             if (self.type  == "Patch"): return
 
             regexp = re.compile("^(.*)/([^/]+(.ipk|.zip))")
