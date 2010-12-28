@@ -120,6 +120,20 @@ ipkgs/palm-%/Packages: package-feeds
 	cp feeds/palm-$*/build/Metadata ipkgs/palm-$*/Packages
 	gzip -c ipkgs/palm-$*/Packages > ipkgs/palm-$*/Packages.gz
 
+ipkgs/precentral/Packages: package-feeds
+	rm -rf ipkgs/precentral
+	mkdir -p ipkgs/precentral
+	( find feeds/precentral -mindepth 1 -maxdepth 1 -type d -name ipkgs -print | \
+	  xargs -I % find % -name "*.ipk" -print | \
+	  xargs -I % rsync -i -a % ipkgs/precentral )
+	TAR_OPTIONS=--wildcards \
+	toolchain/ipkg-utils/ipkg-make-index \
+		-v -p ipkgs/precentral/Packages ipkgs/precentral
+	mv ipkgs/precentral/Packages ipkgs/precentral/Packages.orig
+	scripts/merge-metadata.py feeds/precentral/build/Metadata ipkgs/precentral/Packages.orig > ipkgs/precentral/Packages
+	rm -f ipkgs/precentral/Packages.orig* ipkgs/precentral/*.ipk
+	gzip -c ipkgs/precentral/Packages > ipkgs/precentral/Packages.gz
+
 ipkgs/%/Packages: package-feeds
 	rm -rf ipkgs/$*
 	mkdir -p ipkgs/$*
