@@ -74,6 +74,12 @@ class PackageHandler(ContentHandler):
 
         if ((name == "application") or (name == "theme")):
 
+            if (self.title == "Preware"):
+                return;
+
+            if (self.type == "Patch"):
+                return;
+
             regexp = re.compile("^(.*)/([^/]+(.ipk|.zip))")
             m = regexp.match(self.url)
             if (m):
