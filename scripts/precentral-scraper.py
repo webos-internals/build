@@ -74,11 +74,10 @@ class PackageHandler(ContentHandler):
 
         if ((name == "application") or (name == "theme")):
 
-            if (self.title == "Preware"):
-                return;
-
-            if (self.type == "Patch"):
-                return;
+            # Unsuitable packages for Preware
+            if (self.title == "Preware"): return
+            if (self.title == "AutoCorrect Edit"): return
+            if (self.type  == "Patch"): return
 
             regexp = re.compile("^(.*)/([^/]+(.ipk|.zip))")
             m = regexp.match(self.url)
