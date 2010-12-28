@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = AV8B Harrier II (Palm Pre/Pre+)
 CATEGORY = Experimental
 DEVICE = pre
-VERSIONS = 1.4.5-146
+VERSIONS = 1.4.5-148
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br><br>\
 Features:<br> * Dynamic voltage scaling<br> * 1GHz<br><br>\
 For more information, visit ${HOMEPAGE}
