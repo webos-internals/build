@@ -40,8 +40,9 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/b/b6/Impostah_ss1.png\", \
 \"http://www.webos-internals.org/images/a/a3/Impostah_ss2.png\", \
 \"http://www.webos-internals.org/images/6/6d/Impostah_ss3.png\", \
-\"http://www.webos-internals.org/images/9/99/Impostah_ss4.png\" \
- ]
+\"http://www.webos-internals.org/images/9/99/Impostah_ss4.png\", \
+\"http://www.webos-internals.org/images/d/d8/Impostah_ss5.png\", \
+\"http://www.webos-internals.org/images/f/f4/Impostah_ss6.png\" ]
 LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/applications/impostah.git
