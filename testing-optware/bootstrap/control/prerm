@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PID="org.webosinternals.preware"
+PID="org.webosinternals.optware"
 
 # Handle execution as pmPreRemove.script
 if [ -z "$IPKG_OFFLINE_ROOT" ]; then

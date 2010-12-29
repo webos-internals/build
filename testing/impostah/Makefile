@@ -3,7 +3,7 @@ TITLE    = Impostah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.2.9
+VERSION  = 0.3.3
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Impostah
@@ -11,6 +11,10 @@ ICON	 = http://www.webos-internals.org/images/a/aa/Tux_Imposter.png
 DESCRIPTION = Impostah impersonates service calls.
 MINWEBOSVERSION = 2.0.0
 CHANGELOG = \
+0.3.3: Added support for app catalog exploration.<br>\
+0.3.2: Added support for reporting the telephony platform.<br>\
+0.3.1: Added support for reporting the device profile.<br>\
+0.3.0: Added support for connection exploration.<br>\
 0.2.9: Dual column main scene.<br>\
 0.2.8: Added support for permission exploration.<br>\
 0.2.7: Added support for application exploration.<br>\
@@ -36,8 +40,9 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/b/b6/Impostah_ss1.png\", \
 \"http://www.webos-internals.org/images/a/a3/Impostah_ss2.png\", \
 \"http://www.webos-internals.org/images/6/6d/Impostah_ss3.png\", \
-\"http://www.webos-internals.org/images/9/99/Impostah_ss4.png\" \
- ]
+\"http://www.webos-internals.org/images/9/99/Impostah_ss4.png\", \
+\"http://www.webos-internals.org/images/d/d8/Impostah_ss5.png\", \
+\"http://www.webos-internals.org/images/f/f4/Impostah_ss6.png\" ]
 LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/applications/impostah.git
