@@ -3,7 +3,7 @@ TITLE       = KeyBoss
 APP_ID      = org.webosinternals.${NAME}
 SIGNER      = org.webosinternals
 BLDFLAGS    = -p
-VERSION     = 0.2.9
+VERSION     = 0.3.0
 TYPE        = Application
 CATEGORY    = System Utilities
 HOMEPAGE    = http://www.webos-internals.org/wiki/KeyBoss
@@ -11,7 +11,12 @@ ICON        = http://www.webos-internals.org/images/6/61/Icon_WebOSInternals_Key
 DESCRIPTION = Become the BOSS of your keyboard. This App/Service combo is intended to give the user as much control as possible over the functionality of the hard keyboard.  It also provides ability to emulate keyboard events, for use by projects like the Virtual Keyboard. Curently the application allows you to change the repeat rate, enable/disable the fat finger filter and enable KeyCaps like functionality.<br><br>\
 Start typing anywhere for preview header to show, tap the header to hide. <br>
 CHANGELOG   = \
-0.2.9: Added Fat Finger Filter control. <br>Added persistent settings. <br>Added ability to reset to defaults. <br>Added code to disable after unclean shutdown. <br>\
+0.3.0: Added Pixi support. <br>\
+       Fixed sticky settings getting mixed up. <br>\
+0.2.9: Added Fat Finger Filter control. <br>\
+       Added persistent settings. <br>\
+			 Added ability to reset to defaults. <br>\
+			 Added code to disable after unclean shutdown. <br>\
 0.2.6: Fixed removal of tap action. <br>\
 0.2.5: Added preview header for testing settings. <br>\
        Changed logic to not cycle when only 1 action active. <br>\
