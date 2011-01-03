@@ -3,14 +3,14 @@ TITLE    = Navit - Car navigation system
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.5.0.3845-1
+VERSION	 = 0.5.0.3845-2
 TYPE     = Application
 CATEGORY = Utilities
 DESCRIPTION = <p><strong style="color:red">Please read the \
-	<a href="http://www.webos-internals.org/wiki/Application:Navit\#v${VERSION}">release notes</a> \
-	before updating/installing this package!</strong></p>
+	<a href="http://en.m.webos-internals.org/wiki/Application:NavitReleaseNotes\#v${VERSION}">release notes</a> \
+	before updating/installing this package!</strong></p> \
 	<p>This package does not include map-data. Please visit \
-	the <a href="http://www.webos-internals.org/wiki/Application:Navit">\
+	the <a href="http://en.m.webos-internals.org/wiki/Application:Navit">\
        	Homepage</a> to find out how to obtain and install maps.</p><p>Navit is \
        	an open source (GPL) car navigation software for Linux systems. It will \
        	display your position on a map (in bird-view mode or as a 3D \
@@ -18,11 +18,11 @@ DESCRIPTION = <p><strong style="color:red">Please read the \
        	calculation, touch screen functionality and supports Points of Interest \
        	(POI), which can be extended via an easy to use plugin system. Unlike \
        	other navigation systems, Navit maps are dynamically generated in real \
-       	time from vector data. \
-	</p>
+       	time from vector data.</p>
 CHANGELOG = \
-	    0.5.0.3845-1: update to svn r3845. New config update handling <br/> \
-	    0.5.0.3839-1: update to svn r3839. Add better debug output for GPS <br/> \
+	    0.5.0.3845-2: fix package description. <br/> \
+	    0.5.0.3845-1: update to svn r3845. New config update handling. <br/> \
+	    0.5.0.3839-1: update to svn r3839. Add better debug output for GPS. <br/> \
 	    0.5.0.3832-1: update to svn r3832. <br/> \
 	    0.2.0.3813-1: update to svn r3813. Now with paging for bookmarks <br/> \
 	    0.2.0.3784-1: update to svn r3784. <br/> \
