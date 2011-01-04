@@ -2,22 +2,24 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F102A Delta Dagger (Palm Pre/Pre+)
 CATEGORY = Experimental
 DEVICE = pre
-VERSIONS = 1.4.5-83
-APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br>\
+VERSIONS = 1.4.5-150
+APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br>i<br>\
+Features:<br> * screenstate V2<br> * Dynamic voltage scaling<br> * 800MHz\
+<br> * Temp Scaling<br> * Low Battery scaleback<br> * No more TMC error!<br><br>\
 For more information, visit ${HOMEPAGE}
-DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
+DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-150", "log" : [ "screenstate V2. Dynamic voltage scaling. 800MHz max." ] }, \
 { "version" : "${WEBOS_VERSION}-75", "log" : [ "Numerous screenstate updates. IO scheduler changes. No more screen brightness checking." ] }, \
 { "version" : "${WEBOS_VERSION}-59", "log" : [ "screenstate updates for charging.  CPU IDLE update. disable mem overcommit." ] }, \
 { "version" : "${WEBOS_VERSION}-43", "log" : [ "Initial public release, rebased off UberKernel ${WEBOS_VERSION}-40" ] }, \
 ]
-CHANGELOG =  ${WEBOS_VERSION}-75: Numerous screenstate updates. IO scheduler changes. No more screen brightness checking.<br>${WEBOS_VERSION}-59: screenstate updates for charging.  CPU IDLE update. disable mem overcommit.<br>${WEBOS_VERSION}-43: Initial public release, rebased off UberKernel ${WEBOS_VERSION}-40
+CHANGELOG =  ${WEBOS_VERSION}-150: screenstate V2. Dynamic voltage scaling. 800MHz max.<br>${WEBOS_VERSION}-75: Numerous screenstate updates. IO scheduler changes. No more screen brightness checking.<br>${WEBOS_VERSION}-59: screenstate updates for charging.  CPU IDLE update. disable mem overcommit.<br>${WEBOS_VERSION}-43: Initial public release, rebased off UberKernel ${WEBOS_VERSION}-40
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
-KERNEL_PATCHES = overclocking/opp6-720-opp7-800-min-opp5.patch \
-		 sensors/sensors_temp_omap34xx.patch \
-		 screenstate/screenstate.patch screenstate/cap-min-freq.patch \
+KERNEL_PATCHES = sensors/sensors_temp_omap34xx.patch \
+		 psychobuild/F102A-overclocking.patch \
 		 compcache/compcache.patch memory/tmc_mem.patch \
 		 makefiletune/armMakefile.diff
 EXTERNAL_MODULES = compcache/compcache-0.5.4
