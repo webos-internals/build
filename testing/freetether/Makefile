@@ -11,8 +11,8 @@ ICON	 = http://www.webos-internals.org/images/8/84/Icon_FreeTether.png
 DESCRIPTION = freeTether is an application that allows you to share your cellular internet connection with other devices connected via USB, Bluetooth, or WiFi.<br>If you find freeTether useful, please consider making a <a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2HVTWGXCB6C7N'>donation</a> to support the developers.
 MAINTAINER = Ryan Hope <rmh3093@gmail.com>, Eric Gaudet <emoney_33@yahoo.com>
 CHANGELOG = \
-0.99.6: First testing release.<br>
-0.99.7: Bluetooth PAN Profile FIx.
+0.99.7: Bluetooth PAN Profile Fix.<br>\
+0.99.6: First testing release.
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/1/16/FreeTether_ss1.png\", \
 \"http://www.webos-internals.org/images/0/04/FreeTether_ss2.png\" \
