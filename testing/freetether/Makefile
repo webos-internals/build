@@ -3,18 +3,18 @@ TITLE    = freeTether
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.99.4
+VERSION  = 0.99.6
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:FreeTether
 ICON	 = http://www.webos-internals.org/images/8/84/Icon_FreeTether.png
-DESCRIPTION = freeTether is an application that allows you to share your cellular internet connection with other devices connected via USB, Bluetooth, or WiFi.
+DESCRIPTION = freeTether is an application that allows you to share your cellular internet connection with other devices connected via USB, Bluetooth, or WiFi.<br>If you find freeTether useful, please consider making a <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2HVTWGXCB6C7N">donation</a> to support the developers.
+MAINTAINER = Ryan Hope <rmh3093@gmail.com>, Eric Gaudet <emoney_33@yahoo.com>
 CHANGELOG = \
-0.99.4: First testing release.
+0.99.6: First testing release.
 SCREENSHOTS = [\
-\"\", \
-\"\", \
-\"\" \
+\"http://www.webos-internals.org/images/1/16/FreeTether_ss1.png\", \
+\"http://www.webos-internals.org/images/0/04/FreeTether_ss2.png\" \
  ]
 LICENSE  = GPL v2 Open Source
 
@@ -46,8 +46,8 @@ include ../../support/cross-compile.mk
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	( cd build/src/src ; \
-	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc \
-	  clobber ${NAME} \
+	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc APP_ID=${APP_ID} \
+		clobber ${NAME} \
 	)
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
