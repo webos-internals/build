@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (Pre/Pre+)
 DEVICE = pre
 CATEGORY = Experimental
-VERSIONS = 1.4.5-119
+VERSIONS = 1.4.5-138
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A testbed of kernel patches for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
@@ -75,7 +75,7 @@ ${WEBOS_VERSION}-13: Initial public release
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = warthogbuild/opp5-720-opp6-800-opp7-1050.patch overclocking/defconfig-standard.patch \
-		 sensors/sensors_temp_omap34xx.patch sensors/defconfig-safe.patch \
+		 sensors/sensors_temp_omap34xx.patch sensors/webos-1.4.5/defconfig-safe.patch \
 		 screenstate/screenstate.patch \
 		 makefiletune/armMakefile.diff \
 		 warthogbuild/smartreflex-opp.patch \
