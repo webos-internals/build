@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (Pre/Pre+)
 DEVICE = pre
 CATEGORY = Experimental
-VERSIONS = 1.4.5-119
+VERSIONS = 1.4.5-139
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A testbed of kernel patches for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
@@ -19,6 +19,7 @@ All additions are disabled by default, and must be enabled by separate packages 
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-139", "log" : [ "Bring things in line with latest UK. Add TrueCrypt support as well as disable logging." ] }, \
 { "version" : "${WEBOS_VERSION}-119", "log" : [ "Robustified the battery percentage and cpu temperature checks in the early boot period." ] }, \
 { "version" : "${WEBOS_VERSION}-117", "log" : [ "Renable uinput. Change VDD2 voltage" ] }, \
 { "version" : "${WEBOS_VERSION}-113", "log" : [ "Charger override sysfs. Turn off additional TCP congest algos. Stick with cubic. Added USB mass storage patch for XBox360 compatibility. Disable uinput. Added ability to override screenstate charger frequency limiter. Added a new configurable frequency limiter based on percentage battery remaining" ] }, \
@@ -46,6 +47,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-13", "log" : [ "Initial public release" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-139: Bring things in line with latest UK. Add TrueCrypt support as well as disable logging.<br>\
 ${WEBOS_VERSION}-119: Robustified the battery percentage and cpu temperature checks in the early boot period.<br>\
 ${WEBOS_VERSION}-117: Renable uinput. Change VDD2 voltage.<br>\
 ${WEBOS_VERSION}-113: Charger override sysfs. Turn off additional TCP congest algos. Stick with cubic. Added USB mass storage patch for XBox360 compatibility. isable uinput. Added ability to override screenstate charger frequency limiter. Added a new configurable frequency limiter based on percentage battery remaining.<br>\
@@ -75,7 +77,7 @@ ${WEBOS_VERSION}-13: Initial public release
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = warthogbuild/opp5-720-opp6-800-opp7-1050.patch overclocking/defconfig-standard.patch \
-		 sensors/sensors_temp_omap34xx.patch sensors/defconfig-safe.patch \
+		 sensors/sensors_temp_omap34xx.patch sensors/webos-${WEBOS_VERSION}/defconfig-safe.patch \
 		 screenstate/screenstate.patch \
 		 makefiletune/armMakefile.diff \
 		 warthogbuild/smartreflex-opp.patch \
@@ -83,7 +85,7 @@ KERNEL_PATCHES = warthogbuild/opp5-720-opp6-800-opp7-1050.patch overclocking/def
 		 warthogbuild/defconfig-as-pre.patch warthogbuild/defconfig-slim-pre.patch \
 		 warthogbuild/defconfig-uinput-pre.patch \
 		 warthogbuild/sched_fair.patch \
-		 usb/f_mass_storage.patch \
+		 usb/f_mass_storage.patch crypto/truecrypt-support-pre.patch \
 		 compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
 		 overclocking/override.patch overclocking/defconfig-override.patch
 EXTERNAL_MODULES = compcache/compcache-0.5.4
