@@ -3,7 +3,7 @@ TITLE    = Save/Restore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.2.8
+VERSION  = 1.2.9
 DEPENDS  = org.webosinternals.unzip, org.webosinternals.zip
 TYPE	 = Application
 CATEGORY = System Utilities
@@ -13,6 +13,7 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 WebOS Internals provides Save/Retore as is without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.  The entire risk as to the quality and performance of Save/Restore is with you.  Should Save/Restore prove defective, you assume the cost of all necessary servicing, repair or correction.<br>\
 In no event will WebOS Internals or any other party be liable to you for damages, including any general, special, incidental or consequential damages arising out of the use or inability to use Save/Restore (including but not limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of Save/Restore to operate with any other programs).
 CHANGELOG = \
+1.2.9: Added dashboard for auto-save and fixed scheduling (courtesy of ryanjduffy).<br>\
 1.2.8: Added scheduled backups (courtesy of ryanjduffy).<br>\
 1.2.7: Applications: InContact Plus, InContact (both courtesy of ryanjduffy), EVAC, Dough (both courtesy of Carl Spakler), EZ Shop List (courtesy of crabbz), Dead Runner (courtesy of Audemars02), Feeder, Reboxed, Word Whirl, Gamer Friends for PSN, Tangram, Tilt Origami, Wobble Words, ExZeus arcade, Scrabble, Quell, Tradewinds 2 (all courtesy of malpha).<br>\
 1.2.6: Applications: Angry Birds Seasons.<br>\
