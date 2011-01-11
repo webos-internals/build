@@ -292,7 +292,7 @@ ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz:
 	curl -f -R -L -o $@.tmp ${KERNEL_SOURCE}
 	mv $@.tmp $@
 
-ifneq ("${KERNEL_SUBMISSION}",)
+ifdef KERNEL_SUBMISSION
 ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz:
 	rm -f $@ $@.tmp
 	mkdir -p ${DL_DIR}
