@@ -3,7 +3,7 @@ TITLE    = Navit - Car navigation system
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.5.0.3883-2
+VERSION	 = 0.5.0.3904-1
 TYPE     = Application
 CATEGORY = Utilities
 DESCRIPTION = <p><strong style="color:red">Please read the \
@@ -20,6 +20,7 @@ DESCRIPTION = <p><strong style="color:red">Please read the \
        	other navigation systems, Navit maps are dynamically generated in real \
        	time from vector data.</p>
 CHANGELOG = \
+	    0.5.0.3904-1: Update to svn r3904. Reduce GPS lag to 15. <br/> \
 	    0.5.0.3883-2: Fix fontdisplay in menus. <br/> \
 	    0.5.0.3883-1: update to svn r3883. <br/> \
 	    0.5.0.3873-1: update to svn r3873. <br/> \
