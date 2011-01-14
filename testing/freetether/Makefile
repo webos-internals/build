@@ -3,7 +3,7 @@ TITLE    = freeTether
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.99.12
+VERSION  = 0.99.13
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:FreeTether
@@ -11,6 +11,8 @@ ICON	 = http://www.webos-internals.org/images/8/84/Icon_FreeTether.png
 DESCRIPTION = freeTether is an application that allows you to share your cellular internet connection with other devices connected via USB, Bluetooth, or WiFi.<br>If you find freeTether useful, please consider making a <a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2HVTWGXCB6C7N'>donation</a> to support the developers.
 MAINTAINER = Ryan Hope <rmh3093@gmail.com>, Eric Gaudet <emoney_33@yahoo.com>
 CHANGELOG = \
+0.99.13: Disable settings while interface active.<br>\
+         Add TCP/IP Preferences.<br>\
 0.99.12: Defaul to Open for WiFi Tethering.<br>\
          Styling tweaks.<br>\
 	 Show passphrase hint.<br>\
