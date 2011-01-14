@@ -3,13 +3,14 @@ TITLE    = Govnah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.7.15
+VERSION  = 0.7.16
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
 DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature, load averages and memory usage.
 CHANGELOG = \
+0.7.16: Added the active kernel version to the main scene.<br>\
 0.7.15: Gracefully handle governors that do not have governor-specific parameters.<br>\
 0.7.14: More aggressive error reporting.<br>\
 0.7.13: Display active kernel on the main scene.<br>\
