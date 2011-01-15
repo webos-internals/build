@@ -3,7 +3,7 @@ TITLE    = Navit - Car navigation system
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.5.0.3904-1
+VERSION	 = 0.5.0.3922-2
 TYPE     = Application
 CATEGORY = Utilities
 DESCRIPTION = <p><strong style="color:red">Please read the \
@@ -20,6 +20,8 @@ DESCRIPTION = <p><strong style="color:red">Please read the \
        	other navigation systems, Navit maps are dynamically generated in real \
        	time from vector data.</p>
 CHANGELOG = \
+	    0.5.0.3922-2: Fix a menu bug. <br/> \
+	    0.5.0.3922-1: Update to svn r3922. Featuring a new menu layout. <br/> \
 	    0.5.0.3904-1: Update to svn r3904. Reduce GPS lag to 15. <br/> \
 	    0.5.0.3883-2: Fix fontdisplay in menus. <br/> \
 	    0.5.0.3883-1: update to svn r3883. <br/> \
@@ -80,6 +82,7 @@ build/.built-${VERSION}: build/armv7.built-${VERSION} build/armv6.built-${VERSIO
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	mkdir -p ${D}
 	cp -r build/src/all/* build/src/$*/* ${D}
+	cp -r build/src/all/.fonts build/src/$*/* ${D}
 	touch $@
 
 build/%/CONTROL/postinst:
