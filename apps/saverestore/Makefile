@@ -3,7 +3,7 @@ TITLE    = Save/Restore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.1.0
+VERSION  = 1.3.0
 DEPENDS  = org.webosinternals.unzip, org.webosinternals.zip
 TYPE	 = Application
 CATEGORY = System Utilities
@@ -13,8 +13,18 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 WebOS Internals provides Save/Retore as is without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.  The entire risk as to the quality and performance of Save/Restore is with you.  Should Save/Restore prove defective, you assume the cost of all necessary servicing, repair or correction.<br>\
 In no event will WebOS Internals or any other party be liable to you for damages, including any general, special, incidental or consequential damages arising out of the use or inability to use Save/Restore (including but not limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of Save/Restore to operate with any other programs).
 CHANGELOG = \
+1.3.0: Rolled up all the beta release features for a public release.<br>\
+1.2.9: Added dashboard for auto-save and fixed scheduling (courtesy of ryanjduffy).<br>\
+1.2.8: Added scheduled backups (courtesy of ryanjduffy).<br>\
+1.2.7: Applications: InContact Plus, InContact (both courtesy of ryanjduffy), EVAC, Dough (both courtesy of Carl Spakler), EZ Shop List (courtesy of crabbz), Dead Runner (courtesy of Audemars02), Feeder, Reboxed, Word Whirl, Gamer Friends for PSN, Tangram, Tilt Origami, Wobble Words, ExZeus arcade, Scrabble, Quell, Tradewinds 2 (all courtesy of malpha).<br>\
+1.2.6: Applications: Angry Birds Seasons.<br>\
+1.2.5: Applications: DigiPay, Woodenigma, Ancient Frog.<br>\
+1.2.4: Now distinguishes internal and external databases with the same name. Affects My WebOS Apps and perhaps other scripts - please do a backup to ensure you have both databases saved correctly.<br>\
+1.2.3: Application: Pronto Dial (courtesy of malpha).<br>\
+1.2.2: Applications: Ground Effect, TileStorm, TileStorm Eire, Rock Band.<br>\
+1.2.0: Added support for scripts that are dependent upon the webOS version.<br>\
 1.1.0: Rolled up all the beta release features for a public release.<br>\
-1.0.19: Applications: Whats for dinner? Premium (courtesy of rksand), NesEm (Updated), Dungeon Hunter (Updated), WOG O.S.K. (all courtesy of djgardn2).<br>\
+1.0.19: Applications: What's for dinner? Premium (courtesy of rksand), NesEm (Updated), Dungeon Hunter (Updated), WOG O.S.K. (all courtesy of djgardn2).<br>\
 1.0.18: No longer saves file attachments from MMS messages. You will need to manually back up those files from /attachments directory on the USB drive.<br>\
 1.0.17: Added a Changelog button to the Help scene.<br>\
 1.0.16: Patch: Advanced Config Sys Pref-World script. Applications: Astraware Boardgames, Angry Birds (Pixi) (both courtesy of Audemars02), Crosswords (courtesy of tobias funke). Added executable for ACSP-World in the contrib directory. Updated Photos script and Readme.txt file in contrib directory.<br>\
@@ -25,7 +35,7 @@ CHANGELOG = \
 1.0.11: Robustify the Directory script.  Added a photos/videos backup script and an executable for App Launcher Advanced Config script in the /contrib (see Readme.txt file in that directory for details).<br>\
 1.0.10: Robustify postinst script. Added french translation support. Added support for saving a single directory. Robustify file-saving script to create the source directory if it does not already exist. Applications: Jacksonville, New York Times, TodoTracker (all courtesy of djgardn2), Slide RSS (courtesy of appsotutely), Scratch Word Processor (courtesy of Chakat Silverstreak), Astraware Casino (courtesy of Audemars02), Putki, SuperJump (both courtesy of pcworld), VisualBoy Advance (courtesy of rwhitby), College Football Live, International Soccer Live, UK Football Live, Womens Basketball Live (all courtesy of MoreSolutions), Angry Birds Lite, BFG Maps, BFG Maps Beta, Bluetooth Profiles, Crimson Fields, Frootrees, Lumberjack, Sparkle Lite (all courtesy of StoneRyno).<br>\
 1.0.9: Robustify the installation scripts.  Applications: Music (Remix), Music Wave Lite, Fuzzies (all courtesy of mamouton), Brain Challenge HD, TangramPuzzle Lite, TangramPuzzle (all courtesy of Audemars02).<br>\
-1.0.8: Applications: EasyList, Cosmic Nitro, TechTray, GPS Trip Panel, Raging Thunder, Whats for dinner? Lite (all courtesy of djgardn2), Crusade Of Destiny, Rednecks Vs Aliens (both courtesy of mamouton), TrackMyWork Full (courtesy of kr_ke), Sparkle (courtesy of pip smith).<br>\
+1.0.8: Applications: EasyList, Cosmic Nitro, TechTray, GPS Trip Panel, Raging Thunder, What's for dinner? Lite (all courtesy of djgardn2), Crusade Of Destiny, Rednecks Vs Aliens (both courtesy of mamouton), TrackMyWork Full (courtesy of kr_ke), Sparkle (courtesy of pip smith).<br>\
 1.0.6: Applications: TouchConnect+, Mobile Hotspot (both courtesy of Audemars02), SmartRunner (courtesy of djgardn2).<br>\
 1.0.5: Fixed case insensitive unzip overwrite query bug. Applications: Angry Birds.<br>\
 1.0.4: Fixed issue created when allowing filenames that include spaces. Fixed application names for a few scripts.<br>\
