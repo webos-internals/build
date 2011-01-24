@@ -3,13 +3,26 @@ TITLE    = Govnah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.7.7
+VERSION  = 0.7.20
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
 DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature, load averages and memory usage.
 CHANGELOG = \
+0.7.20: Selects correct default profiles when switching kernels.<br>\
+0.7.19: Added support for the F14 Tomcat experimental kernel.<br>\
+0.7.18: Added default profiles for experimental kernels.<br>\
+0.7.17: Now supports display of experimental kernel versions.<br>\
+0.7.16: Added the active kernel version to the main scene.<br>\
+0.7.15: Gracefully handle governors that do not have governor-specific parameters.<br>\
+0.7.14: More aggressive error reporting.<br>\
+0.7.13: Display active kernel on the main scene.<br>\
+0.7.12: Added support for screenstate-v2 governor.<br>\
+0.7.11: Fixed Profile bug.<br>\
+0.7.10: Added support for UberKernel System Voltage control.<br>\
+0.7.9: Added voltage selector scene for CPU Voltage and System Voltage vdemand governor settings.<br>\
+0.7.8: Added support for the vdemand governor.<br>\
 0.7.7: Added default profiles for the Pre 2. Updated german translations, courtesy of Markus Leutwyler (swisstomcat) and Frank Adler (Ice8lue).<br>\
 0.7.6: Updated the UberKernel Default profile.<br>\
 0.7.5: Added a Changelog button to the Help scene.<br>\
