@@ -3,14 +3,15 @@ TITLE    = Impostah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.3.8
+VERSION  = 0.4.0
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Impostah
 ICON	 = http://www.webos-internals.org/images/a/aa/Tux_Imposter.png
 DESCRIPTION = Impostah impersonates service calls.
-MINWEBOSVERSION = 2.0.0
+MINWEBOSVERSION = 1.4.5
 CHANGELOG = \
+0.4.0: Enable a subset of features for webOS 1.4.5.<br>\
 0.3.8: Added support for app databases.<br>\
 0.3.7: Added support for app cookies.<br>\
 0.3.6: Added support for web cookies.<br>\
