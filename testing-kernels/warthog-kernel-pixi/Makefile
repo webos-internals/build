@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (Pixi/Pixi+)
 DEVICE = pixi
 CATEGORY = Experimental
-VERSIONS = 1.4.5-139
+VERSIONS = 1.4.5-140
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A testbed of kernel patches for the Palm Pixi/Pixi+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
@@ -56,7 +56,6 @@ KERNEL_PATCHES = warthogbuild/pixi-acpuclock.patch \
 		 makefiletune/armMakefile.diff \
 		 defconfig/defconfig.pixi.cpugov defconfig/defconfig-nodebug-pixi.patch \
 		 warthogbuild/defconfig-as-pixi.patch warthogbuild/defconfig-slim-pixi.patch \
-		 warthogbuild/sched_fair.patch \
 		 usb/f_mass_storage.patch crypto/truecrypt-support-pixi.patch
 EXTERNAL_MODULES = compcache/compcache-0.5.4
 TYPE = Kernel
@@ -65,3 +64,5 @@ include ../../support/kernel.mk
 
 # Override the compiler
 #CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+
+#		 warthogbuild/sched_fair.patch \
