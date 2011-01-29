@@ -1,23 +1,48 @@
-NAME	= navit
-TITLE	= Navit - Car navigation system
-APP_ID	= org.webosinternals.${NAME}
+NAME     = navit
+TITLE    = Navit - Car navigation system
+APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	= 0.2.0.3541-1
-TYPE    =  Application
+VERSION	 = 0.5.0.3939-4
+TYPE     = Application
 CATEGORY = Utilities
-DESCRIPTION = <p><strong style="color:red">THIS ONLY WORKS with webOS >= 1.4.5 \
-       </strong></p><p>This package does not include map-data. Please visit \
-       the <a href="http://www.webos-internals.org/wiki/Application:Navit">\
-       Homepage</a> to find out how to obtain and install maps.</p><p>Navit is \
-       an open source (GPL) car navigation software for Linux systems. It will \
-       display your position on a map (in bird-view mode or as a 3D \
-       "visualization") from GPS sensor data, and can provide precise route \
-       calculation, touch screen functionality and supports Points of Interest \
-       (POI), which can be extended via an easy to use plugin system. Unlike \
-       other navigation systems, Navit maps are dynamically generated in real \
-       time from vector data.</p>
+DESCRIPTION = <p><strong style="color:red">Please read the \
+	<a href="http://en.m.webos-internals.org/wiki/Application:NavitReleaseNotes\#v${VERSION}">release notes</a> \
+	before updating/installing this package!</strong></p> \
+	<p>This package does not include map-data. Please visit \
+	the <a href="http://en.m.webos-internals.org/wiki/Application:Navit">\
+       	Homepage</a> to find out how to obtain and install maps.</p><p>Navit is \
+       	an open source (GPL) car navigation software for Linux systems. It will \
+       	display your position on a map (in bird-view mode or as a 3D \
+       	"visualization") from GPS sensor data, and can provide precise route \
+       	calculation, touch screen functionality and supports Points of Interest \
+       	(POI), which can be extended via an easy to use plugin system. Unlike \
+       	other navigation systems, Navit maps are dynamically generated in real \
+       	time from vector data.</p>
 CHANGELOG = \
+	    0.5.0.3939-4: Update skin and menu. <br/> \
+	    0.5.0.3939-3: Internal testing. <br/> \
+	    0.5.0.3939-2: Internal testing. <br/> \
+	    0.5.0.3939-1: Update to svn r3939. This removes the change that broke webOS 2.0 completely. Also the bookmark-menu-bug is fixed. <br/> \
+	    0.5.0.3922-2: Fix a menu bug. <br/> \
+	    0.5.0.3922-1: Update to svn r3922. Featuring a new menu layout. <br/> \
+	    0.5.0.3904-1: Update to svn r3904. Reduce GPS lag to 15. <br/> \
+	    0.5.0.3883-2: Fix fontdisplay in menus. <br/> \
+	    0.5.0.3883-1: update to svn r3883. <br/> \
+	    0.5.0.3873-1: update to svn r3873. <br/> \
+	    0.5.0.3845-2: fix package description. <br/> \
+	    0.5.0.3845-1: update to svn r3845. New config update handling. <br/> \
+	    0.5.0.3839-1: update to svn r3839. Add better debug output for GPS. <br/> \
+	    0.5.0.3832-1: update to svn r3832. <br/> \
+	    0.2.0.3813-1: update to svn r3813. Now with paging for bookmarks <br/> \
+	    0.2.0.3784-1: update to svn r3784. <br/> \
+	    0.2.0.3771-1: update to svn r3771. Noteworthy changes include better font rendering, thanks to the upstream devs :) <br/> \
+	    0.2.0.3690-1: update to svn r3690 <br/> \
+	    0.2.0.3621-1: update to svn r3621, containing some bug-fixes <br/> \
+	    0.2.0.3617-1: update to svn r3617, now with POI patch and some flaky support for the back gesture <br/> \
+	    0.2.0.3591-1: update to svn r3591, remove POI patch <br/> \
+	    0.2.0.3587-1: update to svn r3587, add POI optimization from ticket 619 <br/> \
+	    0.2.0.3582-1: update to svn r3582, gets rid of "Unknown key e17", features new navit_layout.xml from HaPe <br/> \
 	    0.2.0.3541-1: update ro svn r3541, now officially containing the sunrise-fix <br/> \
 	    0.2.0.3540-1: update ro svn r3540 <br/> \
 	    0.2.0.3537-2: Add support for Pixi <br/> \
@@ -51,17 +76,20 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	touch $@
+	>$@
 
 .PHONY: build
 build: build/.built-${VERSION}
 build/.built-${VERSION}: build/armv7.built-${VERSION} build/armv6.built-${VERSION}
-	touch $@
+	>$@
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	mkdir -p ${D}
 	cp -r build/src/all/* build/src/$*/* ${D}
-	touch $@
+	cp -r build/src/all/.fonts build/src/$*/* ${D}
+	sed -re "s/@VERSION@/${VERSION}/" ${D}/appinfo.json.in > ${D}/appinfo.json
+	rm ${D}/appinfo.json.in
+	>$@
 
 build/%/CONTROL/postinst:
 	rm -f $@
@@ -70,4 +98,4 @@ build/%/CONTROL/postinst:
 	chmod ugo+x $@
 
 clobber::
-	rm -rf build
+	rm -rf build git
