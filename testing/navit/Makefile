@@ -3,7 +3,7 @@ TITLE    = Navit - Car navigation system
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.5.0.3939-1
+VERSION	 = 0.5.0.3939-2
 TYPE     = Application
 CATEGORY = Utilities
 DESCRIPTION = <p><strong style="color:red">Please read the \
@@ -20,6 +20,7 @@ DESCRIPTION = <p><strong style="color:red">Please read the \
        	other navigation systems, Navit maps are dynamically generated in real \
        	time from vector data.</p>
 CHANGELOG = \
+	    0.5.0.3939-2: Update skin and menu. <br/> \
 	    0.5.0.3939-1: Update to svn r3939. This removes the change that broke webOS 2.0 completely. Also the bookmark-menu-bug is fixed. <br/> \
 	    0.5.0.3922-2: Fix a menu bug. <br/> \
 	    0.5.0.3922-1: Update to svn r3922. Featuring a new menu layout. <br/> \
@@ -73,18 +74,20 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	touch $@
+	>$@
 
 .PHONY: build
 build: build/.built-${VERSION}
 build/.built-${VERSION}: build/armv7.built-${VERSION} build/armv6.built-${VERSION}
-	touch $@
+	>$@
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	mkdir -p ${D}
 	cp -r build/src/all/* build/src/$*/* ${D}
 	cp -r build/src/all/.fonts build/src/$*/* ${D}
-	touch $@
+	sed -re "s/@VERSION@/${VERSION}/" ${D}/appinfo.json.in > ${D}/appinfo.json
+	rm ${D}/appinfo.json.in
+	>$@
 
 build/%/CONTROL/postinst:
 	rm -f $@
@@ -93,4 +96,4 @@ build/%/CONTROL/postinst:
 	chmod ugo+x $@
 
 clobber::
-	rm -rf build
+	rm -rf build git
