@@ -3,7 +3,7 @@ TITLE    = Navit - Car navigation system
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.5.0.3939-4
+VERSION	 = 0.5.0.4077-1
 TYPE     = Application
 CATEGORY = Utilities
 DESCRIPTION = <p><strong style="color:red">Please read the \
@@ -20,6 +20,7 @@ DESCRIPTION = <p><strong style="color:red">Please read the \
        	other navigation systems, Navit maps are dynamically generated in real \
        	time from vector data.</p>
 CHANGELOG = \
+	    0.5.0.4077-1: Update to svn r4077. Hide speedcam-warner when there is nothing to show. <br/> \
 	    0.5.0.3939-4: Update skin and menu. <br/> \
 	    0.5.0.3939-3: Internal testing. <br/> \
 	    0.5.0.3939-2: Internal testing. <br/> \
