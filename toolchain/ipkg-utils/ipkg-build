@@ -162,6 +162,8 @@ tar=tar
 sign=
 key=
 if [ "`uname -s`" = "Darwin" ] ; then
+    export COPYFILE_DISABLE=true
+    export COPY_EXTENDED_ATTRIBUTES_DISABLE=true
     tar=gnutar
 fi
 noclean=0
