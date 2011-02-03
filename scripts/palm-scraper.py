@@ -129,7 +129,8 @@ class PackageHandler(ContentHandler):
                 self.icon = self.data
                 self.getIcon = 0
             if (self.getScreenshot):
-                self.screenshots.append('"' + self.data + '"')
+                if ('"'+self.data+'"') not in self.screenshots:
+                    self.screenshots.append('"' + self.data + '"')
                 self.getScreenshot = 0
                 
         if ((name == "title") or (name == "ac:title")):
