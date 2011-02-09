@@ -1,5 +1,5 @@
 NAME     = linphone
-TITLE    = LinPhone
+TITLE    = Linphone
 APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.service
 SRV_BIN  = ${NAME}service
@@ -8,9 +8,9 @@ BLDFLAGS = -p
 VERSION  = 0.1.2
 TYPE	 = Application
 CATEGORY = System Utilities
-HOMEPAGE = http://www.webos-internals.org/wiki/Application:LinPhone
+HOMEPAGE = http://www.webos-internals.org/wiki/Application:Linphone
 ICON	 = http://www.webos-internals.org/images/7/7e/Linphone.png
-DESCRIPTION = LinPhone is an open source VoIP client.
+DESCRIPTION = Linphone is an open source VoIP client.
 CHANGELOG = \
 0.1.0: Initial version.
 
