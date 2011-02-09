@@ -34,7 +34,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-40", "log" : [ "First Pixi custom kernel" ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-166: Added 825, 835, 849 speeds. MAY EAT YOUR PHONE
+${WEBOS_VERSION}-166: Added 825, 835, 849 speeds. MAY EAT YOUR PHONE.<br>\
 ${WEBOS_VERSION}-139: Added 787 & 800MHz Pixi overclocking. TrueCrypt support.<br>\
 ${WEBOS_VERSION}-124: Make Pixi overclocking compliant with the 7 principles of kernel design and packaging.<br>\
 ${WEBOS_VERSION}-120: Added 768MHz Pixi overclocking.<br>\
