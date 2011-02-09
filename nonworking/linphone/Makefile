@@ -2,6 +2,7 @@ NAME     = linphone
 TITLE    = LinPhone
 APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.service
+SRV_BIN  = ${NAME}service
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
 VERSION  = 0.1.0
@@ -46,9 +47,11 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
-	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/service
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/bin
-	install -m 755 build/src/service/bin/$*/linphoneservice build/$*/usr/palm/applications/${APP_ID}/bin/${SRV_ID}
+	for f in build/src/service/bin/$*/* ; do \
+	  install -m 755 $$f build/$*/usr/palm/applications/${APP_ID}/bin/ ; \
+	done
 	touch $@
 
 build/%/CONTROL/postinst:
