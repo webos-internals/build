@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (Pixi/Pixi+)
 DEVICE = pixi
 CATEGORY = Experimental
-VERSIONS = 1.4.5-140
+VERSIONS = 1.4.5-166
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A testbed of kernel patches for the Palm Pixi/Pixi+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
@@ -17,6 +17,7 @@ All additions are disabled by default, and must be enabled by separate packages 
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-166", "log" : [ "Added 825, 835, 849 speeds. MAY EAT YOUR PHONE" ] }, \
 { "version" : "${WEBOS_VERSION}-133", "log" : [ "Added 787 & 800MHz Pixi overclocking. TrueCrypt support" ] }, \
 { "version" : "${WEBOS_VERSION}-124", "log" : [ "Make Pixi overclocking compliant with the 7 principes of kernel design and packaging" ] }, \
 { "version" : "${WEBOS_VERSION}-120", "log" : [ "Added 768MHz Pixi overclocking" ] }, \
@@ -33,6 +34,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-40", "log" : [ "First Pixi custom kernel" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-166: Added 825, 835, 849 speeds. MAY EAT YOUR PHONE
 ${WEBOS_VERSION}-139: Added 787 & 800MHz Pixi overclocking. TrueCrypt support.<br>\
 ${WEBOS_VERSION}-124: Make Pixi overclocking compliant with the 7 principles of kernel design and packaging.<br>\
 ${WEBOS_VERSION}-120: Added 768MHz Pixi overclocking.<br>\
