@@ -5,14 +5,14 @@ SRV_ID   = org.webosinternals.${NAME}.service
 SRV_BIN  = ${NAME}service
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.1.3
+VERSION  = 0.1.4
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Linphone
 ICON	 = http://www.webos-internals.org/images/7/7e/Linphone.png
 DESCRIPTION = Linphone is an open source VoIP client.
 CHANGELOG = \
-0.1.3: Initial version.
+0.1.4: Initial version.
 
 SCREENSHOTS = [\
  ]
@@ -21,7 +21,7 @@ LICENSE  = GPL v2 Open Source
 SRC_GIT = git://git.webos-internals.org/applications/linphone.git
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
+package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_armv6.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
 include ../../support/package.mk
 
 include ../../support/download.mk
@@ -38,7 +38,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/arm.built-${VERSION} build/i686.built-${VERSION}
+build/.built-${VERSION}: build/armv7.built-${VERSION} build/armv6.built-${VERSION} build/i686.built-${VERSION}
 	touch $@
 
 include ../../support/cross-compile.mk
