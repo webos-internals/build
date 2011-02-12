@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = browser/${NAME}.patch
-TITLE = Bookmarks List Button
-DESCRIPTION = Adds a bookmarks-list button that brings up the list view of bookmarks.
+TITLE = View Source of Webpage
+DESCRIPTION = Adds a 'View Source' option to the web browser's application menu in the 'Page' submenu. (Note: requires Internalz 1.3 or greater)
 CATEGORY = Browser
 VERSIONS = 2.0.1-45
 ICON = http://www.webos-internals.org/images/4/4a/Icon_WebOSInternals_Patches_Browser.png
@@ -13,4 +13,4 @@ include ../common.mk
 include ../modifications.mk
 
 MAINTAINER = Jason Robitaille
-HOMEPAGE = http://forums.precentral.net/webos-patches/219793-bookmarks-list-button-browser.html#post2093927
+HOMEPAGE =

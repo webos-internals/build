@@ -3,10 +3,10 @@ PATCH = top-bar/${NAME}.patch
 TITLE = No Airplane Mode
 DESCRIPTION = Removes the airplane mode toggle from the device menu.
 CATEGORY = Top Bar
-VERSIONS = 1.4.5-1
+VERSIONS = 2.0.1-45
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS =
-META_SUB_VERSION = 1 
+META_SUB_VERSION = 1
 
 include ../common.mk
 

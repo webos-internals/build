@@ -3,10 +3,10 @@ PATCH = app-launcher/${NAME}.patch
 TITLE = Advanced Options in Launcher
 DESCRIPTION = Adds additional options to the launcher's menu: turn on/off DevMode, rescan fileindexer, and rescan applications
 CATEGORY = App Launcher
-VERSIONS = 1.4.5-1
+VERSIONS = 2.0.1-45
 ICON = http://www.webos-internals.org/images/b/b1/Icon_WebOSInternals_Patches_Applauncher.png
 SCREENSHOTS =
-META_SUB_VERSION = 1 
+META_SUB_VERSION = 1
 
 include ../common.mk
 

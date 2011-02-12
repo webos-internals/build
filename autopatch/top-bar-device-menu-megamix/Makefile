@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = top-bar/${NAME}.patch
 TITLE = Device Menu Megamix
-DESCRIPTION = Removes the date and battery level, adds brightness control, adds phone submenu with radio/data/roaming toggles, adds GPS toggle, removes the airplane mode toggle, and adds a flashlight led toggle, on the device menu.
+DESCRIPTION = Removes the date and battery level, adds brightness control, adds phone submenu with radio/data/roaming toggles, adds GPS toggle, removes the VPN and airplane mode toggle, and adds a flashlight led toggle, on the device menu.
 CATEGORY = Top Bar
-VERSIONS = 1.4.5-1
+VERSIONS = 2.0.1-45
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
