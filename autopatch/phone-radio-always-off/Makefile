@@ -3,10 +3,10 @@ PATCH = phone/${NAME}.patch
 TITLE = Radio Always Off
 DESCRIPTION = Keeps the phone radio always off. Handy for developers that use their devices without cellular connection.
 CATEGORY = Phone
-VERSIONS = 1.4.5-1
+VERSIONS = 2.0.1-45
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
 SCREENSHOTS =
-META_SUB_VERSION = 1 
+META_SUB_VERSION = 1
 
 include ../common.mk
 

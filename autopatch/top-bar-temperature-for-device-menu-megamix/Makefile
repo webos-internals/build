@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = top-bar/${NAME}.patch
-TITLE = Date As Carrier String No Year
-DESCRIPTION = Replace the carrier string with the date (without the year).
+TITLE = Temperature for Device Menu Megamix
+DESCRIPTION = Will add a temperature value on the right side of the phone row of the Device Menu Megamix.
 CATEGORY = Top Bar
-VERSIONS = 1.4.5-30 2.0.1-45
+VERSIONS = 1.4.5-126 2.0.1-46
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
@@ -13,4 +13,4 @@ include ../common.mk
 include ../modifications.mk
 
 MAINTAINER = Jason Robitaille
-HOMEPAGE = http://forums.precentral.net/webos-patches/217215-patch-date-carrier-string-5.html#post2611293
+HOMEPAGE = http://forums.precentral.net/webos-patches/245717-temperature-device-menu-megamix.html
