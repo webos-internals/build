@@ -2,13 +2,13 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F105 Thunderchief (Pre/Pre+)
 CATEGORY = Experimental
 DEVICE = pre
-VERSIONS = 1.4.5-168
+VERSIONS = 1.4.5-169
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br><br>\
 Features:<br> * New screenstate v2 with vdemand<br> * 1GHz<br> * 200MHz VDD2<br> * More govenors<br><br>\
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-168", "log" : [ "split battery and temp monitoring. more 200MHz pwnage." ] }, \
+{ "version" : "${WEBOS_VERSION}-169", "log" : [ "split battery and temp monitoring. more 200MHz pwnage." ] }, \
 { "version" : "${WEBOS_VERSION}-162", "log" : [ "fix charger override." ] }, \
 { "version" : "${WEBOS_VERSION}-161", "log" : [ "fix vdd1 vsel changes. add support to change screenstate default voltages. override fixups." ] }, \
 { "version" : "${WEBOS_VERSION}-158", "log" : [ "add screenstate v2 with dynamic vdemand. add more govs. removed ondemand tickle." ] }, \
@@ -37,7 +37,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-60", "log" : [ "Voltage tweaking." ] }, \
 { "version" : "${WEBOS_VERSION}-59", "log" : [ "screenstate updates. CPU IDLE update.  New freqs." ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-168: split battery and temp monitoring. more 200MHz pwnage.<br>${WEBOS_VERSION}-162: fix charger override.<br>${WEBOS_VERSION}-161: fix vdd1 vsel changes. add support to change screenstate default voltages. override fixups.<br>${WEBOS_VERSION}-158: add screenstate v2 with dynamic vdemand. add more govs. removed ondemand tickle.<br>${WEBOS_VERSION}-143: Increase default voltages for wimpy Pres<br>${WEBOS_VERSION}-142: fix games.<br>${WEBOS_VERSION}-140: add ondemand tickle gov. kernel tweaks.<br>${WEBOS_VERSION}-131: drop SDRC hack.<br>${WEBOS_VERSION}-130: add vdd2 freq display. SDRC hack.<br>${WEBOS_VERSION}-129: allow vdd2 voltage changes in override.<br>${WEBOS_VERSION}-125: drop vdd2 voltage. minor hacks.<br>${WEBOS_VERSION}-119: overclock vdd2 to 200MHz. fix override sticky bug.<br>${WEBOS_VERSION}-110: fix cpufreq policy update.<br>${WEBOS_VERSION}-108: add battery scaling.<br>${WEBOS_VERSION}-106: add charger cpu scaleback override sysfs.<br>${WEBOS_VERSION}-99: fix store_vdd1_vsel<br>${WEBOS_VERSION}-98: cut down on voltage. hide low vsel settings.<br>${WEBOS_VERSION}-92: Do voltage scaling immediately after Vsel change.<br>${WEBOS_VERSION}-91: added Vsel limits.<br>${WEBOS_VERSION}-88: added selectable voltage & temp scaling. removed OPP1&2 from display.<br>
+CHANGELOG = ${WEBOS_VERSION}-169: split battery and temp monitoring. more 200MHz pwnage.<br>${WEBOS_VERSION}-162: fix charger override.<br>${WEBOS_VERSION}-161: fix vdd1 vsel changes. add support to change screenstate default voltages. override fixups.<br>${WEBOS_VERSION}-158: add screenstate v2 with dynamic vdemand. add more govs. removed ondemand tickle.<br>${WEBOS_VERSION}-143: Increase default voltages for wimpy Pres<br>${WEBOS_VERSION}-142: fix games.<br>${WEBOS_VERSION}-140: add ondemand tickle gov. kernel tweaks.<br>${WEBOS_VERSION}-131: drop SDRC hack.<br>${WEBOS_VERSION}-130: add vdd2 freq display. SDRC hack.<br>${WEBOS_VERSION}-129: allow vdd2 voltage changes in override.<br>${WEBOS_VERSION}-125: drop vdd2 voltage. minor hacks.<br>${WEBOS_VERSION}-119: overclock vdd2 to 200MHz. fix override sticky bug.<br>${WEBOS_VERSION}-110: fix cpufreq policy update.<br>${WEBOS_VERSION}-108: add battery scaling.<br>${WEBOS_VERSION}-106: add charger cpu scaleback override sysfs.<br>${WEBOS_VERSION}-99: fix store_vdd1_vsel<br>${WEBOS_VERSION}-98: cut down on voltage. hide low vsel settings.<br>${WEBOS_VERSION}-92: Do voltage scaling immediately after Vsel change.<br>${WEBOS_VERSION}-91: added Vsel limits.<br>${WEBOS_VERSION}-88: added selectable voltage & temp scaling. removed OPP1&2 from display.<br>
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
