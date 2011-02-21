@@ -3,13 +3,14 @@ TITLE    = Lumberjack
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.4.3
+VERSION  = 0.4.4
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Lumberjack
 ICON	 = http://www.webos-internals.org/images/3/38/Icon_WebOSInternals_Lumberjack.png
 DESCRIPTION = Lumberjack watches your logs.
 CHANGELOG = \
+0.4.4: Added swipe-delete to the Retrieve Log scene.<br>\
 0.4.3: Fixed webOS version check funkyness. Added ability to swipe-delete lines from the Follow Log scene just for Lisa, but everyone else can use it too.<br>\
 0.4.2: Updates to work with webOS2.0 and the Pre2.<br>\
 0.4.1: Better Resource Monitor Graphs. Clear log file options.<br>\
