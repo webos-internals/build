@@ -39,3 +39,11 @@ ${DOCTOR_DIR}/webosdoctor-2.0.1.jar:
 	else \
 	  curl -L -o $@ http://palm.cdnetworks.net/rom/pre2/p201r0d11242010/wrep201rod/webosdoctorp102ueuna-wr.jar; \
 	fi
+
+${DOCTOR_DIR}/webosdoctor-2.1.0.jar:
+	mkdir -p ${DOCTOR_DIR}
+	if [ -e ${DOCTOR_DIR}/webosdoctorp101ueude-wr-2.1.0.jar ] ; then \
+	  ln -s webosdoctorp101ueude-wr-2.1.0.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/preplus/p210r0d02212011/eudep210rod/webosdoctorp101ueude-wr.jar; \
+	fi
