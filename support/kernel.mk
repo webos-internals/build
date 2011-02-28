@@ -5,7 +5,7 @@ DEPENDS =
 FEED = WebOS Kernels
 LICENSE = GPL v2 Open Source
 ifeq ("${DEVICE}","pre")
-WEBOS_VERSIONS = 1.4.5
+WEBOS_VERSIONS = 1.4.5 2.1.0
 endif
 ifeq ("${DEVICE}","pixi")
 WEBOS_VERSIONS = 1.4.5
@@ -73,6 +73,9 @@ endif
 
 ifeq ("${DEVICE}","pre")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
+ifeq ("${WEBOS_VERSION}", "2.1.0")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp101ueude-wr-${WEBOS_VERSION}.jar
+endif
 endif
 ifeq ("${DEVICE}","pixi")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewweu-wr-${WEBOS_VERSION}.jar
@@ -97,6 +100,16 @@ ifeq ("${DEVICE}","pre2")
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.0.0/linuxkernel-${KERNEL_VERSION}.tgz
 KERNEL_PATCH = http://palm.cdnetworks.net/opensource/2.0.0/kernel_patches.tar.gz
 KERNEL_SUBMISSION = patch-submission-54
+endif
+endif
+
+ifeq ("${WEBOS_VERSION}", "2.1.0")
+ifeq ("${DEVICE}","pre")
+KERNEL_PATCH = http://palm.cdnetworks.net/opensource/2.1.0/linuxkernel-2.6.24.preplus.2-1-0.patch.tgz
+KERNEL_SUBMISSION = linuxkernel-2.6.24.patch
+endif
+ifeq ("${DEVICE}","pre2")
+KERNEL_PATCH = http://palm.cdnetworks.net/opensource/2.1.0/linuxkernel-2.6.24.pre2.2-1-0.patch.tgz
 endif
 endif
 
