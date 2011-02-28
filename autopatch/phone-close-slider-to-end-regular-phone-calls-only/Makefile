@@ -3,7 +3,7 @@ PATCH = phone/${NAME}.patch
 TITLE = Close Slider to End Regular Phone Calls Only
 DESCRIPTION = Allows you to end your phone calls by closing the slider on your Pre. Ignores slider when a headset (wired or bluetooth) is connected, or when using speakerphone.
 CATEGORY = Phone
-VERSIONS = 1.4.5-1
+VERSIONS = 2.1.0-4
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
@@ -12,5 +12,5 @@ include ../common.mk
 
 include ../modifications.mk
 
-MAINTAINER = KeyToss <info@keytoss.com>
+MAINTAINER = malpha <info@keytoss.com>, KeyToss
 HOMEPAGE = http://forums.precentral.net/webos-patches/209950-phone-slider-patch.html
