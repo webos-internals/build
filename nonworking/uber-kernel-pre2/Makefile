@@ -17,12 +17,10 @@ All additions are disabled by default, and must be enabled by using the Govnah a
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-3", "log" : [ "Added temperature sensor" ] }, \
-{ "version" : "${WEBOS_VERSION}-2", "log" : [ "Initial version" ] }, \
+{ "version" : "${WEBOS_VERSION}-1", "log" : [ "Initial version for webOS 2.1.0 on Pre 2" ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-3: Added temperature sensor.<br>\
-${WEBOS_VERSION}-2: Initial version.
+${WEBOS_VERSION}-1: Initial version for webOS 2.1.0 on Pre 2.
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
@@ -46,6 +44,3 @@ EXTERNAL_MODULES = compcache/compcache-0.5.4
 TYPE = Kernel
 
 include ../../support/kernel.mk
-
-# Override the compiler
-CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-

@@ -5,7 +5,7 @@ DEPENDS =
 FEED = WebOS Kernels
 LICENSE = GPL v2 Open Source
 ifeq ("${DEVICE}","pre")
-WEBOS_VERSIONS = 1.4.5 2.1.0
+WEBOS_VERSIONS = 2.1.0
 endif
 ifeq ("${DEVICE}","pixi")
 WEBOS_VERSIONS = 1.4.5
@@ -93,6 +93,8 @@ ifeq ("${DEVICE}","pre2")
 KERNEL_PATCH = http://palm.cdnetworks.net/opensource/2.0.0/kernel_patches.tar.gz
 KERNEL_SUBMISSION = patch-submission-48
 endif
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
 endif
 
 ifeq ("${WEBOS_VERSION}", "2.0.1")
@@ -101,6 +103,8 @@ KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.0.0/linuxkernel-${KERNEL
 KERNEL_PATCH = http://palm.cdnetworks.net/opensource/2.0.0/kernel_patches.tar.gz
 KERNEL_SUBMISSION = patch-submission-54
 endif
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
 endif
 
 ifeq ("${WEBOS_VERSION}", "2.1.0")
@@ -112,6 +116,8 @@ ifeq ("${DEVICE}","pre2")
 KERNEL_PATCH = http://palm.cdnetworks.net/opensource/2.1.0/linuxkernel-2.6.24.pre2.2-1-0.patch.tgz
 KERNEL_SUBMISSION = linuxkernel-2.6.24.patch
 endif
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
 endif
 
 .PHONY: package
