@@ -85,3 +85,6 @@ EXTERNAL_MODULES = compcache/compcache-0.5.4
 TYPE = Kernel
 
 include ../../support/kernel.mk
+
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-

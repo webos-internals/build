@@ -110,6 +110,7 @@ KERNEL_SUBMISSION = linuxkernel-2.6.24.patch
 endif
 ifeq ("${DEVICE}","pre2")
 KERNEL_PATCH = http://palm.cdnetworks.net/opensource/2.1.0/linuxkernel-2.6.24.pre2.2-1-0.patch.tgz
+KERNEL_SUBMISSION = linuxkernel-2.6.24.patch
 endif
 endif
 
