@@ -33,7 +33,7 @@ KERNEL_PATCHES = overclocking/600-720-800-1000-min-opp5.patch overclocking/defco
 		 overclocking/override.patch overclocking/defconfig-override.patch \
 		 usb/f_mass_storage.patch crypto/truecrypt-support-pre.patch \
 		 idcode/idcode.patch
-KERNEL_PATCHES = sensors/webos-2.0/omap34xx_temp.patch sensors/webos-2.0/defconfig-safe.patch \
+KERNEL_PATCHES = sensors/omap34xx_temp.patch sensors/defconfig-safe.patch \
 		 makefiletune/armMakefile.diff \
 		 defconfig/defconfig.pre2.cpugov \
 		 compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \

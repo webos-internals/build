@@ -31,7 +31,7 @@ ${WEBOS_VERSION}-1: Initial version for webOS 2.1.0 on Pre/Pre+.
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = overclocking/600-720-800-1000-min-opp5.patch overclocking/defconfig-standard.patch \
-		 sensors/sensors_temp_omap34xx.patch sensors/defconfig-safe.patch \
+		 sensors/omap34xx_temp.patch sensors/defconfig-safe.patch \
 		 screenstate/screenstate.patch \
 		 makefiletune/armMakefile.diff \
 		 defconfig/defconfig.pre.cpugov \
