@@ -2,15 +2,15 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F105 Thunderchief (Pre/Pre+)
 CATEGORY = Experimental
 DEVICE = pre
-VERSIONS = 2.1.0-2
+VERSIONS = 2.1.0-4
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br><br>\
 Features:<br> * New screenstate v2 with vdemand<br> * 1GHz<br> * 200MHz VDD2<br> * More govenors<br><br>\
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-2", "log" : [ "rebuild for webOS 2.1.0." ] }, \
+{ "version" : "${WEBOS_VERSION}-4", "log" : [ "rebuild for webOS 2.1.0." ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-2: rebuild for webOS 2.1.0.<br>
+CHANGELOG = ${WEBOS_VERSION}-4: rebuild for webOS 2.1.0.<br>
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
