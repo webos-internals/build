@@ -246,6 +246,9 @@ endif
 ifdef PREREMOVEMESSAGE
 	/bin/echo -n ", \"PreRemoveMessage\":\"${PREREMOVEMESSAGE}\"" >> $@
 endif
+ifdef VISIBILITY
+	/bin/echo -n ", \"Visibility\":\"${VISIBILITY}\"" >> $@
+endif
 	echo " }" >> $@
 	touch $@
 
