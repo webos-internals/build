@@ -34,8 +34,6 @@ package: ipkgs/${APP_ID}_${VERSION}_all.ipk
 endif
 endif
 
-include ../../support/package.mk
-
 WEBOS_VERSION:=$(shell echo ${VERSION} | cut -d- -f1)
 
 ifneq ("${DUMMY_VERSION}", "")
@@ -47,7 +45,11 @@ DEPENDS=
 POSTINSTALLFLAGS=
 POSTUPDATEFLAGS=
 POSTREMOVEFLAGS=
+endif
 
+include ../../support/package.mk
+
+ifneq ("${DUMMY_VERSION}", "")
 build/.built-%:
 	rm -rf build/all
 	mkdir -p build/all
