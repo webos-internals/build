@@ -143,6 +143,7 @@ ifneq ("${DUMMY_VERSION}", "")
 
 DESCRIPTION=This package is not currently available for WebOS ${WEBOS_VERSION}.  This package may be installed as a placeholder to notify you when an update is available.  NOTE: This is simply an empty package placeholder, it will not affect your device in any way
 CATEGORY=Unavailable
+VISIBILITY=Installed
 SRC_GIT=
 DEPENDS=
 POSTINSTALLFLAGS=
