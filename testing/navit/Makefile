@@ -3,13 +3,13 @@ TITLE    = Navit - Car navigation system
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.5.0.4238-1
+VERSION	 = 0.5.0.4254-1
 TYPE     = Application
 CATEGORY = Utilities
 DESCRIPTION = <p>This package does not include map-data. Please visit \
 	the <a href="http://en.m.webos-internals.org/wiki/Application:Navit">\
        	Homepage</a> to find out how to obtain and install maps.</p>
-	<p>If you are installing/upgrading this on WebOS 2.x you really should read the \
+	<p>You might want to read the \
 	<a href="http://en.m.webos-internals.org/wiki/Application:NavitReleaseNotes\#v${VERSION}">release notes</a> \
 	before updating/installing this package, any noteworthy changes are \
 	documented there.</p> \
@@ -21,6 +21,7 @@ DESCRIPTION = <p>This package does not include map-data. Please visit \
        	other navigation systems, Navit maps are dynamically generated in real \
        	time from vector data.</p>
 CHANGELOG = \
+	    0.5.0.4254-1: Update to svn r4254. Un-break WebOS 1.4.5 support. Add signal-strength-bars instead of radius. <br/> \
 	    0.5.0.4238-1: Update to svn r4238. Add support for WebOS 2.x. <br/> \
 	    0.5.0.4152-1: Update to svn r4148. Split config-files. Some bugfixes. <br/> \
 	    0.5.0.4113-3: Revert changes to vehicleprofile, this time for real. <br/> \
@@ -66,8 +67,7 @@ DEPENDS  = org.webosinternals.locale, org.webosinternals.speechd
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Navit
 ICON	 = http://www.webos-internals.org/images/4/4d/Navit_icon.png
 LICENSE  = GPL
-#MINWEBOSVERSION = 1.4.5
-MINWEBOSVERSION = 2.0.0
+MINWEBOSVERSION = 1.4.5
 
 D = build/$*/usr/palm/applications/${APP_ID}
 
