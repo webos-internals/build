@@ -2,15 +2,16 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F105 Thunderchief (Pre/Pre+)
 CATEGORY = Experimental
 DEVICE = pre
-VERSIONS = 2.1.0-4
+VERSIONS = 2.1.0-7
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br><br>\
 Features:<br> * New screenstate v2 with vdemand<br> * 1GHz<br> * 200MHz VDD2<br> * More govenors<br><br>\
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-7", "log" : [ "remove some 200Mhz pwnage. add disgusting hack for freq flopping. add delay for screen on and off." ] }, \
 { "version" : "${WEBOS_VERSION}-4", "log" : [ "rebuild for webOS 2.1.0." ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-4: rebuild for webOS 2.1.0.<br>
+CHANGELOG = ${WEBOS_VERSION}-7: remove some 200Mhz pwnage. add disgusting hack for freq flopping. add delay for screen on and off.<br>${WEBOS_VERSION}-4: rebuild for webOS 2.1.0.<br>
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
@@ -19,7 +20,7 @@ KERNEL_PATCHES = psychobuild/F105-overclocking.patch \
 		 psychobuild/ssv2-ovrd.patch \
 		 memory/tmc_mem.patch \
 		 makefiletune/armMakefile.diff
-EXTERNAL_MODULES = compcache/compcache-0.5.4
+#EXTERNAL_MODULES = compcache/compcache-0.5.4
 
 KERNEL_DEFCONFIG = psychobuild/F105.config
 #KERNEL_UPSTART   = psychobuild/F102A.upstart
