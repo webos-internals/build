@@ -14,7 +14,7 @@ CHANGELOG = ${WEBOS_VERSION}-10: webOS 2.1 build.<br>
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
-KERNEL_PATCHES = sensors/sensors_temp_omap34xx.patch \
+KERNEL_PATCHES = sensors/omap34xx_temp.patch \
 		 psychobuild/AV8B.patch \
 		 memory/tmc_mem.patch \
 		 makefiletune/armMakefile.diff
