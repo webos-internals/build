@@ -3,23 +3,34 @@ TITLE    = Navit - Car navigation system
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.5.0.3939-4
+VERSION	 = 0.5.0.4254-2
 TYPE     = Application
 CATEGORY = Utilities
-DESCRIPTION = <p><strong style="color:red">Please read the \
-	<a href="http://en.m.webos-internals.org/wiki/Application:NavitReleaseNotes\#v${VERSION}">release notes</a> \
-	before updating/installing this package!</strong></p> \
-	<p>This package does not include map-data. Please visit \
+DESCRIPTION = <p>This package does not include map-data. Please visit \
 	the <a href="http://en.m.webos-internals.org/wiki/Application:Navit">\
-       	Homepage</a> to find out how to obtain and install maps.</p><p>Navit is \
-       	an open source (GPL) car navigation software for Linux systems. It will \
-       	display your position on a map (in bird-view mode or as a 3D \
+       	Homepage</a> to find out how to obtain and install maps.</p>
+	<p>You might want to read the \
+	<a href="http://en.m.webos-internals.org/wiki/Application:NavitReleaseNotes\#v${VERSION}">release notes</a> \
+	before updating/installing this package, any noteworthy changes are \
+	documented there.</p> \
+	<p>Navit is an open source (GPL) car navigation software for Linux systems. \
+	It will display your position on a map (in bird-view mode or as a 3D \
        	"visualization") from GPS sensor data, and can provide precise route \
        	calculation, touch screen functionality and supports Points of Interest \
        	(POI), which can be extended via an easy to use plugin system. Unlike \
        	other navigation systems, Navit maps are dynamically generated in real \
        	time from vector data.</p>
 CHANGELOG = \
+	    0.5.0.4254-2: Fix signal strength display. New stable. <br/> \
+	    0.5.0.4254-1: Update to svn r4254. Un-break WebOS 1.4.5 support. Add signal-strength-bars instead of radius. <br/> \
+	    0.5.0.4238-1: Update to svn r4238. Add support for WebOS 2.x. <br/> \
+	    0.5.0.4152-1: Update to svn r4148. Split config-files. Some bugfixes. <br/> \
+	    0.5.0.4113-3: Revert changes to vehicleprofile, this time for real. <br/> \
+	    0.5.0.4113-2: Revert changes to vehicleprofile, adjust layout and OSD. <br/> \
+	    0.5.0.4113-1: Update to svn r4113. Apply some optimzations and bugfixes to graphics output. <br/> \
+	    0.5.0.4100-1: Update to svn r4100. Fix startup crash. <br/> \
+	    0.5.0.4095-1: Update to svn r4095. Fix speedcam-warner. Modified layout and vehivleprofiles. See release notes. <br/> \
+	    0.5.0.4077-1: Update to svn r4077. Hide speedcam-warner when there is nothing to show. <br/> \
 	    0.5.0.3939-4: Update skin and menu. <br/> \
 	    0.5.0.3939-3: Internal testing. <br/> \
 	    0.5.0.3939-2: Internal testing. <br/> \
