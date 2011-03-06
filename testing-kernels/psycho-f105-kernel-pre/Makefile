@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F105 Thunderchief (Pre/Pre+)
 CATEGORY = Experimental
 DEVICE = pre
-VERSIONS = 2.1.0-10
+VERSIONS = 2.1.0-11
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br><br>\
 Features:<br> * New screenstate v2 with vdemand<br> * 1GHz<br> * 200MHz VDD2<br> * More govenors<br><br>\
 For more information, visit ${HOMEPAGE}
@@ -18,9 +18,7 @@ SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = psychobuild/F105-overclocking.patch \
 		 sensors/omap34xx_temp.patch \
 		 psychobuild/ssv2-ovrd.patch \
-		 memory/tmc_mem.patch \
 		 makefiletune/armMakefile.diff
-#EXTERNAL_MODULES = compcache/compcache-0.5.4
 
 KERNEL_DEFCONFIG = psychobuild/F105.config
 #KERNEL_UPSTART   = psychobuild/F102A.upstart
