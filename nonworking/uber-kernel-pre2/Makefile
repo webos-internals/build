@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Pre2)
 DEVICE = pre2
 CATEGORY = Experimental
-VERSIONS = 2.1.0-1
+VERSIONS = 2.1.0-19
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre2, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
@@ -17,10 +17,10 @@ All additions are disabled by default, and must be enabled by using the Govnah a
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-1", "log" : [ "Initial version for webOS 2.1.0 on Pre 2" ] }, \
+{ "version" : "${WEBOS_VERSION}-19", "log" : [ "Initial version for webOS 2.1.0 on Pre 2" ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-1: Initial version for webOS 2.1.0 on Pre 2.
+${WEBOS_VERSION}-19: Initial version for webOS 2.1.0 on Pre 2.
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
