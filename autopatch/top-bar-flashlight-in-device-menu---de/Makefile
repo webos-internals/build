@@ -1,0 +1,16 @@
+NAME = $(shell basename $(shell pwd))
+PATCH = top-bar/${NAME}.patch
+TITLE = Flashlight in Device Menu - DE
+DESCRIPTION = Adds a flashlight toggle to the device menu.<br/><br/>(original code by Jason Robitaille)
+CATEGORY = Top Bar
+VERSIONS = 2.0.0-35 2.0.1-62 2.1.0-16
+ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
+SCREENSHOTS = [ \"http://www.webos-internals.org/images/e/eb/Top-bar-flashlight-in-device-menu---de-1.png\" ]
+META_SUB_VERSION = 1
+
+include ../common.mk
+
+include ../modifications.mk
+
+MAINTAINER = michote <reischuck.micha@googlemail.com>
+HOMEPAGE =
