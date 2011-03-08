@@ -4,7 +4,7 @@ TITLE = Close on hangup
 DESCRIPTION = This patch causes the Phone app to close automatically when all calls end, regardless of whether the last call was incoming or outgoing.
 CATEGORY = Phone
 VERSIONS = 1.4.5-1
-ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png	
+ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
 
