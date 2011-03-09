@@ -4,7 +4,7 @@ TITLE = Dialpad Tones Off
 DESCRIPTION = This will turn off the DTMF tones when dialing a phone number.  Note that tones are still played correctly on the other end of the call.
 CATEGORY = Phone
 VERSIONS = 1.4.5-1
-ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png	
+ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
 
