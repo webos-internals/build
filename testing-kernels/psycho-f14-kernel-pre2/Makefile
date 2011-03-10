@@ -2,17 +2,18 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F14 Tomcat (Pre2)
 DEVICE = pre2
 CATEGORY = Experimental
-VERSIONS = 2.1.0-22
+VERSIONS = 2.1.0-23
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br><br>\
 Features:<br> * screenstate<br> * Manual Voltage manipulation<br> * 1.4GHz\
 <br> * Temp Scaling<br> * Low Battery scaleback<br> * No more TMC error!<br><br>\
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-23", "log" : [ "try a new lowmem hack." ] }, \
 { "version" : "${WEBOS_VERSION}-22", "log" : [ "rebuild for webOS 2.1.0." ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-22: rebuild for webOS 2.1.0.<br>
+${WEBOS_VERSION}-23: try a new lowmem hack.<br>${WEBOS_VERSION}-22: rebuild for webOS 2.1.0.<br>
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
