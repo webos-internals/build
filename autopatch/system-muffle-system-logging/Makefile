@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = system/${NAME}.patch
 TITLE = Muffle System Logging
-DESCRIPTION = By default, webOS tends to log pretty much everything. This patch turns logging down so that it only logs errors or worse.<br/><br/>If you are on ATT, make sure you apply the Quieter PmLog Logging patch first.
+DESCRIPTION = By default, webOS tends to log pretty much everything. This patch turns logging down so that it only logs errors or worse.
 CATEGORY = System
-VERSIONS = 1.4.5-60 2.0.1-36
+VERSIONS = 1.4.5-60 2.1.0-21
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
