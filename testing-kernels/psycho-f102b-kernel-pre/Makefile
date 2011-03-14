@@ -16,7 +16,7 @@ CHANGELOG = ${WEBOS_VERSION}-25: rebuild for webOS 2.1.0<br>
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = sensors/omap34xx_temp.patch \
-		 psychobuild/F102B-overclocking.patch \
+		 psychobuild/F102B.patch \
 		 memory/tmc_mem.patch \
 		 makefiletune/armMakefile.diff
 #EXTERNAL_MODULES = compcache/compcache-0.5.4
