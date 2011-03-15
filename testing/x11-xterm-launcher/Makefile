@@ -1,14 +1,17 @@
 NAME     = xterm-launcher
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.0.5
+VERSION  = 0.1.0
 DEPENDS  = org.webosinternals.xterm-bin, org.webosinternals.xorg-server
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X
 MAINTAINER = Will Dietz (dtzWill), WebOSInternals
 TITLE   = XTerm
 TYPE	 = Application
 DESCRIPTION = Launcher for the X Window System Terminal Application
-CHANGELOG = <br>0.0.5<br>Use login shell to get proper env.<br><br>0.0.3<br>First release.
+CHANGELOG = \
+0.1.0: Now compatible with webOS 1.4.5 and later.<br>\
+0.0.5: Use login shell to get proper env.<br>\
+0.0.3: First release.
 CATEGORY = System Utilities
 ICON	= http://www.webos-internals.org/images/a/a5/X.png
 LICENSE  = MIT/X11 License
@@ -37,8 +40,11 @@ build/%.built-${VERSION}: build/.unpack
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
 	touch $@
 
-build/%/usr/palm/applications/${APP_ID}/CONTROL/control:
-	touch $@
+build/%/CONTROL/postinst:
+	rm -f $@
+	mkdir -p build/$*/CONTROL
+	install -m 0775 build/src/control/postinst build/$*/CONTROL
+	chmod ugo+x $@
 
 .PHONY: clobber
 clobber::
