@@ -1,7 +1,7 @@
 NAME     = xterm-launcher
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.1.0
+VERSION  = 0.2.0
 DEPENDS  = org.webosinternals.xterm-bin, org.webosinternals.xorg-server
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X
 MAINTAINER = Will Dietz (dtzWill), WebOSInternals
@@ -9,7 +9,7 @@ TITLE   = XTerm
 TYPE	 = Application
 DESCRIPTION = Launcher for the X Window System Terminal Application
 CHANGELOG = \
-0.1.0: Now compatible with webOS 1.4.5 and later.<br>\
+0.2.0: Now compatible with webOS 1.4.5 and later.<br>\
 0.0.5: Use login shell to get proper env.<br>\
 0.0.3: First release.
 CATEGORY = System Utilities
