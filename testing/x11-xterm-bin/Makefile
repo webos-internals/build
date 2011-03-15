@@ -1,14 +1,16 @@
 NAME     = xterm-bin
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.0.2
+VERSION  = 0.2.0
 DEPENDS  = org.webosinternals.xlib
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X
 MAINTAINER = Will Dietz (dtzWill), WebOSInternals
 TITLE   = XTerm Binaries
 TYPE	 = Linux Application
 DESCRIPTION = Binaries for the X Window System Terminal Application<br>You probably want to install the XTerm application instead of this package.
-CHANGELOG = <br>0.0.2<br>First release.
+CHANGELOG = \
+0.2.0: Now compatible with webOS 1.4.5 and later.<br>\
+0.0.2: First release.
 CATEGORY = X Window System
 ICON	= http://www.webos-internals.org/images/a/a5/X.png
 LICENSE  = MIT/X11 License
@@ -35,9 +37,6 @@ build/%.built-${VERSION}: build/.unpack
 	rm -f $@
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
-	touch $@
-
-build/%/usr/palm/applications/${APP_ID}/CONTROL/control:
 	touch $@
 
 .PHONY: clobber

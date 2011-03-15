@@ -1,7 +1,7 @@
 NAME     = xorg-server
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.1.0
+VERSION  = 0.2.0
 DEPENDS  = org.webosinternals.xlib
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X
 MAINTAINER = Will Dietz (dtzWill), WebOSInternals
@@ -9,7 +9,7 @@ TITLE   = X Window System Server Binaries
 TYPE	 = Linux Application
 DESCRIPTION = Binaries for the X Window System Server<br>You probably want to install the X Window System Server Application instead of this package.
 CHANGELOG = \
-0.1.0: Now compatible with webOS 1.4.5 and later.<br>\
+0.2.0: Now compatible with webOS 1.4.5 and later.<br>\
 0.0.4: Gesture area as control.<br>\
 0.0.3: Improve keyboard support, credit to MerlinMM for helping.  See wiki for details.<br>\
 0.0.2: First release.
@@ -41,12 +41,6 @@ build/%.built-${VERSION}: build/.unpack
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
 	touch $@
-
-build/%/CONTROL/postinst:
-	rm -f $@
-	mkdir -p build/$*/CONTROL
-	install -m 0775 build/src/control/postinst build/$*/CONTROL
-	chmod ugo+x $@
 
 .PHONY: clobber
 clobber::
