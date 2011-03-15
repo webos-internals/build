@@ -1,4 +1,4 @@
-NAME     = x11
+NAME     = xlauncher
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 VERSION  = 0.2.0
