@@ -3,9 +3,9 @@ PATCH = mojo/${NAME}.patch
 TITLE = Hebrew support for physical keyboard
 DESCRIPTION = Hebrew support for physical keyboard. Double press Sym button to switch between English/Hebrew.
 CATEGORY = Mojo
-VERSIONS = 2.0.1-37
+VERSIONS = 2.0.0-40 2.0.1-67 2.1.0-30
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
-SCREENSHOTS = [ \"http://www.webos-internals.org/images/4/45/Mojo-hebrew-support-for-physical-keyboard-1.png\" ]
+SCREENSHOTS = [ \"http://www.webos-internals.org\" ]
 META_SUB_VERSION = 1
 
 include ../common.mk

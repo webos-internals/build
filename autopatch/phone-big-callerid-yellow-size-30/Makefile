@@ -3,7 +3,7 @@ PATCH = phone/${NAME}.patch
 TITLE = Big CallerID Yellow Size 30
 DESCRIPTION = Display a BIG callerID readable without glaces. Also enlarges info in case of unlisted numbers, names and locations. Displayed on top of the photo area.
 CATEGORY = Phone
-VERSIONS = 2.0.1-43
+VERSIONS = 2.0.0-40 2.0.1-67 2.1.0-30
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/9/96/Phone-big-callerid-yellow-size-30-1.png\",\
