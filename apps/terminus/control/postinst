@@ -1,0 +1,7 @@
+#!/bin/sh
+
+APPID=us.ryanhope.terminus
+
+sed -i -e "/:${APPID}:/d" /var/palm/data/jailusers
+echo "4999:5000:${APPID}:/dev/null:${APPDIR}/jail_app.conf" >> /var/palm/data/jailusers
+echo "4999:5000:${APPID}:/dev/null:/etc/jail_native-palm.conf" >> /var/palm/data/jailusers
