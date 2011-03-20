@@ -1,7 +1,7 @@
 NAME     = wirc
 TITLE    = wIRC
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.3.8
+VERSION  = 0.3.8-1
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = Communication
@@ -26,6 +26,7 @@ SCREENSHOTS = [\
 LICENSE  = GPL v2 Open Source
 MINWEBOSVERSION = 1.4.5
 
+GIT_TAG = v0.3.8
 SRC_GIT = git://git.webos-internals.org/applications/wIRC.git
 
 D = build/$*/usr/palm/applications/${APP_ID}
