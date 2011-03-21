@@ -1,7 +1,7 @@
 NAME     = terminus
 APP_ID   = us.ryanhope.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.0.5-1
+VERSION  = 0.0.5-2
 DEPENDS  = org.webosinternals.upstartmgr
 HOMEPAGE = http://git.webos-internals.org/trac/terminus
 MAINTAINER = Ryan Hope
@@ -21,7 +21,7 @@ GIT_TAG = v0.0.5
 SRC_GIT = git://git.webos-internals.org/applications/terminus.git
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk
+package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
 include ../../support/package.mk
 
 include ../../support/download.mk
@@ -33,7 +33,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mv build/src/binaries build/binaries
 	touch $@
 
-build/.built-${VERSION}: build/armv7.built-${VERSION}
+build/.built-${VERSION}: build/arm.built-${VERSION}
 	touch $@
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
