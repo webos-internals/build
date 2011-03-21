@@ -1,7 +1,7 @@
 NAME     = terminus
 APP_ID   = us.ryanhope.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.0.5-2
+VERSION  = 0.0.6
 DEPENDS  = org.webosinternals.upstartmgr
 HOMEPAGE = http://git.webos-internals.org/trac/terminus
 MAINTAINER = Ryan Hope
@@ -15,9 +15,10 @@ CATEGORY = System Utilities
 ICON	 = http://www.webos-internals.org/images/b/bc/Terminus_Icon.png
 LICENSE  = GPL
 
-CHANGELOG = 0.0.5 Fixed the slow loading; terminus should now start instantly.
+CHANGELOG = \
+0.0.6 Fix postinst to work on webos 2.x <br>\
+0.0.5 Fixed the slow loading; terminus should now start instantly.
 
-GIT_TAG = v0.0.5
 SRC_GIT = git://git.webos-internals.org/applications/terminus.git
 
 .PHONY: package
