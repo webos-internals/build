@@ -3,9 +3,9 @@ PATCH = misc/${NAME}.patch
 TITLE = Adds 30 sec 1min to ExhibitionMode  Photo App
 DESCRIPTION = Adds 30 seconds-1 minute to ExhibitionMode Photo App (Dock-Slideshow).
 CATEGORY = Misc
-VERSIONS = 2.1.0-34
+VERSIONS = 2.1.0-35
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
-SCREENSHOTS = [ \"http://www.webos-internals.org\" ]
+SCREENSHOTS =
 META_SUB_VERSION = 1
 
 include ../common.mk
