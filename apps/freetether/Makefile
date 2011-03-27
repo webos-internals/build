@@ -3,13 +3,14 @@ TITLE    = freeTether
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.0.0
+VERSION  = 1.0.0-1
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:FreeTether
 ICON	 = http://www.webos-internals.org/images/8/84/Icon_FreeTether.png
 DESCRIPTION = freeTether is an application that allows you to share your cellular internet connection with other devices connected via USB, Bluetooth, or WiFi.<br>If you find freeTether useful, please consider making a <a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2HVTWGXCB6C7N'>donation</a> to support the developers.
 MAINTAINER = Ryan Hope <rmh3093@gmail.com>, Eric Gaudet <emoney_33@yahoo.com>
+MINWEBOSVERSION = 1.4.5
 CHANGELOG = \
 1.0.0: Move out of testing feed.<br>\
 0.99.15: Fix TCP cookie bug.<br>\
@@ -40,6 +41,7 @@ SCREENSHOTS = [\
  ]
 LICENSE  = GPL v2 Open Source
 
+GIT_TAG = v1.0.0
 SRC_GIT = git://git.webos-internals.org/applications/freetether.git
 
 .PHONY: package
