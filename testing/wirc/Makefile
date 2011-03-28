@@ -1,7 +1,7 @@
 NAME     = wirc
 TITLE    = wIRC
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.3.7
+VERSION  = 0.3.8-1
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = Communication
@@ -10,6 +10,7 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Application:WIRC
 ICON     = http://www.webos-internals.org/images/1/10/Icon_WebOSInternals_wIRC.png
 DESCRIPTION = A native webOS IRC client. <b><font color=red>THIS ONLY WORKS with webOS >=1.4.5, and you MUST run the Emergency Fstab Fixer or have corrected your /etc/fstab file by some other method.</font></b>
 CHANGELOG = \
+0.3.8: Bunch of bug fixes and webOS 2.x updates <br>\
 0.3.7: Misc bugfixes <br>\
 0.3.6: Another attempt at a fix for "wIRC stays open after closing" bug <br>\
 0.3.5: Hackish fix for "wIRC stays open after closing" bug <br>\
@@ -25,8 +26,8 @@ SCREENSHOTS = [\
 LICENSE  = GPL v2 Open Source
 MINWEBOSVERSION = 1.4.5
 
+GIT_TAG = v0.3.8
 SRC_GIT = git://git.webos-internals.org/applications/wIRC.git
-GIT_TAG = v0.3.7
 
 D = build/$*/usr/palm/applications/${APP_ID}
 

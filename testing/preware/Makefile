@@ -3,7 +3,7 @@ TITLE	 = Preware
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.5.7
+VERSION  = 1.5.8
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
@@ -11,6 +11,7 @@ ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 MINWEBOSVERSION = 1.4.0
 DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, kernels, services and plugins. Preware is also able to access official Palm App Catalog, Web Distribution and Beta Distribution feeds.<br><b>Requires webOS 1.4.0 or later</b>.
 CHANGELOG = \
+1.5.8: Moved blacklisting to feed load to speed up listing. Suggests a reload after changing the blacklist. Fixed homebrew feed/catalog feed same appid bug.<br>\
 1.5.7: Added check to make sure package has a title before trying to search it.<br>\
 1.5.6: Removed support for Visibility feed value - use a category filter to exclude Unavailable packages if desired.<br>\
 1.5.5: Added support for Visibility feed value. Fix display of screenshots from devices with a different resolution. Test fix for custom feed on network with no internet connection. Style updates for pre3 screen size.<br>\

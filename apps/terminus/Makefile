@@ -1,7 +1,7 @@
 NAME     = terminus
 APP_ID   = us.ryanhope.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.0.5
+VERSION  = 0.0.6
 DEPENDS  = org.webosinternals.upstartmgr
 HOMEPAGE = http://git.webos-internals.org/trac/terminus
 MAINTAINER = Ryan Hope
@@ -9,16 +9,20 @@ TITLE   = Terminus
 TYPE	= Application
 DESCRIPTION = Linux Terminal
 
+BLDFLAGS = -p
+
 CATEGORY = System Utilities
 ICON	 = http://www.webos-internals.org/images/b/bc/Terminus_Icon.png
 LICENSE  = GPL
 
-CHANGELOG = 0.0.5 Fixed the slow loading; terminus should now start instantly.
+CHANGELOG = \
+0.0.6 Fix postinst to work on webos 2.x <br>\
+0.0.5 Fixed the slow loading; terminus should now start instantly.
 
 SRC_GIT = git://git.webos-internals.org/applications/terminus.git
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk
+package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
 include ../../support/package.mk
 
 include ../../support/download.mk
@@ -30,7 +34,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mv build/src/binaries build/binaries
 	touch $@
 
-build/.built-${VERSION}: build/armv7.built-${VERSION}
+build/.built-${VERSION}: build/arm.built-${VERSION}
 	touch $@
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
