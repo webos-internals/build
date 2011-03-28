@@ -3,7 +3,7 @@ TITLE    = Impostah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.5.0
+VERSION  = 0.5.1
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Impostah
@@ -11,6 +11,7 @@ ICON	 = http://www.webos-internals.org/images/a/aa/Tux_Imposter.png
 DESCRIPTION = Impostah impersonates service calls.
 MINWEBOSVERSION = 1.4.5
 CHANGELOG = \
+0.5.1: Added the ability to display your registered credit card info.<br>\
 0.5.0: Added the ability to change your Palm Profile without erasing the device.<br>\
 0.4.4: Added Palm Profile to Device Info scene, including the ability to reset it.<br>\
 0.4.3: Removed allowed character restrictions on impersonate method parameters.<br>\
