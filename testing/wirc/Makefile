@@ -68,3 +68,4 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 
 clobber::
 	rm -rf build
+	rm -rf ../../downloads/${NAME}-${VERSION}.tar.gz
