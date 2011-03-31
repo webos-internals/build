@@ -3,7 +3,7 @@ TITLE    = Navit - Car navigation system
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.5.0.4353-1
+VERSION	 = 0.5.0.4397-1
 TYPE     = Application
 CATEGORY = Utilities
 DESCRIPTION = <p>This package does not include map-data. Please visit \
@@ -21,6 +21,7 @@ DESCRIPTION = <p>This package does not include map-data. Please visit \
        	other navigation systems, Navit maps are dynamically generated in real \
        	time from vector data.</p>
 CHANGELOG = \
+	    0.5.0.4397-1: Update to svn r4397. Re-enable experimental support for screen rotation on WebOS >= 2.0. <br/> \
 	    0.5.0.4353-1: Update to svn r4353. It contains smaller fixes. <br/> \
 	    0.5.0.4254-3: Change jailer-config to fix timezone-issue. <br/> \
 	    0.5.0.4254-2: Fix signal strength display. New stable. <br/> \
