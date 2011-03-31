@@ -27,7 +27,7 @@ SCREENSHOTS = [\
 LICENSE  = GPL v2 Open Source
 MINWEBOSVERSION = 1.4.5
 
-GIT_TAG = 08955dda7d3102386ed697862b02634abac902af
+GIT_TAG = v0.3.9-puff
 SRC_GIT = git://git.webos-internals.org/applications/wIRC.git
 
 D = build/$*/usr/palm/applications/${APP_ID}
@@ -58,7 +58,7 @@ include ../../support/cross-compile.mk
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src/src/libpdl ; rm -f *.o ; rm -f *.so ; cd .. ; \
-	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc USE_SSL=1\
+	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc SSL=1\
 		clobber ${NAME} )
 	mkdir -p ${D}
 	install -m 755 build/src/src/${NAME} ${D}
