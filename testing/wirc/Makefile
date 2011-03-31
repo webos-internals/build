@@ -1,7 +1,7 @@
 NAME     = wirc
 TITLE    = wIRC
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 0.3.9
+VERSION  = 0.3.09
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = Communication
@@ -68,4 +68,3 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 
 clobber::
 	rm -rf build
-	rm -rf ../../downloads/${NAME}-${VERSION}.tar.gz
