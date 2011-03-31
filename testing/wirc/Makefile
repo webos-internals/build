@@ -27,7 +27,7 @@ SCREENSHOTS = [\
 LICENSE  = GPL v2 Open Source
 MINWEBOSVERSION = 1.4.5
 
-GIT_TAG = v0.3.9
+GIT_TAG = 08955dda7d3102386ed697862b02634abac902af
 SRC_GIT = git://git.webos-internals.org/applications/wIRC.git
 
 D = build/$*/usr/palm/applications/${APP_ID}
