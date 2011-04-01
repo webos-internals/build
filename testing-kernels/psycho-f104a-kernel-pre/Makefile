@@ -1,33 +1,28 @@
 NAME = $(shell basename $(shell pwd))
-TITLE = F104A Starfighter (Palm Pre/Pre+)
+TITLE = F104A Starfighter (Pre/Pre+)
 CATEGORY = Experimental
 DEVICE = pre
-VERSIONS = 1.4.5-110
-APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br>\
+VERSIONS = 2.1.0-30
+APPINFO_DESCRIPTION = The latest experimental kernel from uNiXpSyChO.<br><br>\
+Features:<br> * Screenstate v2<br> * 1.1GHz<br> * More govenors<br><br>\
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-110", "log" : [ "fix cpufreq policy update." ] }, \
-{ "version" : "${WEBOS_VERSION}-108", "log" : [ "add battery scaling." ] }, \
-{ "version" : "${WEBOS_VERSION}-107", "log" : [ "fix low end." ] }, \
-{ "version" : "${WEBOS_VERSION}-106", "log" : [ "new engine and afterburners." ] }, \
-{ "version" : "${WEBOS_VERSION}-83", "log" : [ "Merge with F102A codebase. Repackage." ] }, \
-{ "version" : "${WEBOS_VERSION}-43", "log" : [ "Initial public release, rebased off UberKernel ${WEBOS_VERSION}-40" ] }, \
+{ "version" : "${WEBOS_VERSION}-30", "log" : [ "rebuild for webOS 2.1.0" ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-110: fix cpufreq policy update.<br>${WEBOS_VERSION}-108: add battery scaling.<br>${WEBOS_VERSION}-107: fix low end<br>${WEBOS_VERSION}-106: new engine and afterburners.<br>${WEBOS_VERSION}-83: Merge with F102A codebase. Repackage.<br>${WEBOS_VERSION}-43: Initial public release, rebased off UberKernel ${WEBOS_VERSION}-40
+CHANGELOG = ${WEBOS_VERSION}-30: rebuild for webOS 2.1.0<br>
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = psychobuild/F104A-overclocking.patch \
-		 sensors/sensors_temp_omap34xx.patch \
-		 screenstate/screenstate.patch \
-		 compcache/compcache.patch memory/tmc_mem.patch \
-		 overclocking/override.patch \
+		 sensors/omap34xx_temp.patch \
+		 psychobuild/ssv2-ovrd.patch \
+		 compcache/lowmemnotify-total-memory.patch \
+		 psychobuild/preempt.patch \
 		 makefiletune/armMakefile.diff
-EXTERNAL_MODULES = compcache/compcache-0.5.4
 
 KERNEL_DEFCONFIG = psychobuild/F104A.config
-KERNEL_UPSTART   = psychobuild/F104A.upstart
+#KERNEL_UPSTART   = psychobuild/F104A.upstart
 TYPE = Kernel
 
 include ../../support/kernel.mk
