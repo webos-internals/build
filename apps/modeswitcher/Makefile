@@ -24,7 +24,7 @@ CHANGELOG = \
 1.0.1: Fixed a small bug.<br>\
 1.0.0: Initial release.
 
-SRC_GIT = git://git.webos-internals.org/applications/modeswitcher.git
+SRC_GIT = git://git.webos-internals.org/applications/oldmodeswitcher.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
