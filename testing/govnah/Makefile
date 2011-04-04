@@ -3,13 +3,15 @@ TITLE    = Govnah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.7.25
+VERSION  = 0.7.27
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
 DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature, load averages and memory usage.
 CHANGELOG = \
+0.7.27: Display raw value as well as actual voltage for cpu and system.<br>\
+0.7.26: Updated default profile for the F104A experimental kernel.<br>\
 0.7.25: Added support for 10MB, 12MB and 14MB compcache limits.<br>\
 0.7.24: Added support for 8MB compcache lower limit.<br>\
 0.7.23: Added support for Pre 2 screenstate in SR71.<br>\
@@ -65,6 +67,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	rm -rf build/src/bin build/src/*.script
 	touch $@
 
 .PHONY: build
