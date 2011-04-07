@@ -1,6 +1,6 @@
 NAME     = wirc
 TITLE    = wIRC
-APP_ID   = org.webosinternals.${NAME}
+APP_ID   = org.webosinternals.${EXTRAID}${NAME}
 VERSION  = 0.3.10
 TYPE     = Application
 BLDFLAGS = -p
@@ -27,6 +27,10 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/9/9d/Wirc_5.png\" ]
 LICENSE  = GPL v2 Open Source
 MINWEBOSVERSION = 1.4.5
+
+ifeq ($(SSL),)
+	SSL=1
+endif
 
 GIT_TAG = v0.3.10
 SRC_GIT = git://git.webos-internals.org/applications/wIRC.git
@@ -59,7 +63,7 @@ include ../../support/cross-compile.mk
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src/src/libpdl ; rm -f *.o ; rm -f *.so ; cd .. ; \
-	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc SSL=1\
+	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc SSL=${SSL}\
 		clobber ${NAME} )
 	mkdir -p ${D}
 	install -m 755 build/src/src/${NAME} ${D}

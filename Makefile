@@ -223,7 +223,13 @@ upload:
 	rsync -avr ipkgs/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/
 	rsync -avr ipkgs/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/
 
-testing: webos-internals-testing webos-patches-testing webos-kernels-testing optware-testing
+testing: webos-internals-testing webos-patches-testing webos-kernels-testing optware-testing webos-internals-catalog
+
+webos-internals-catalog:
+	${MAKE} SUBDIRS="catalog" FEED="WebOS Internals Palm Catalog" webos-internals-index
+	rsync -avr ipkgs/webos-internals/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/catalog/
+	rsync -avr ipkgs/webos-internals/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/catalog/
+	rsync -avr ipkgs/webos-internals/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/catalog/
 
 webos-internals-testing:
 	${MAKE} SUBDIRS="testing" FEED="WebOS Internals Testing" webos-internals-index
