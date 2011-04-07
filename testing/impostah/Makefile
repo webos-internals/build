@@ -3,7 +3,7 @@ TITLE    = Impostah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.5.5
+VERSION  = 0.5.6
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Impostah
@@ -11,6 +11,7 @@ ICON	 = http://www.webos-internals.org/images/a/aa/Tux_Imposter.png
 DESCRIPTION = Impostah impersonates service calls.
 MINWEBOSVERSION = 1.4.5
 CHANGELOG = \
+0.5.6: Fixed the palm profile token expiry.<br>\
 0.5.5: Added the ability to restore from backups.<br>\
 0.5.4: Added the ability to display backup manifests.<br>\
 0.5.3: Added debugging of the web service requests and responses.<br>\
