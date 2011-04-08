@@ -1,7 +1,7 @@
 NAME     = wirc
 TITLE    = wIRC
 APP_ID   = org.webosinternals.${EXTRAID}${NAME}
-VERSION  = 0.3.10
+VERSION  = 0.3.11
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = Communication
@@ -32,7 +32,7 @@ ifeq ($(SSL),)
 	SSL=1
 endif
 
-GIT_TAG = v0.3.10
+GIT_TAG = v0.3.11
 SRC_GIT = git://git.webos-internals.org/applications/wIRC.git
 
 D = build/$*/usr/palm/applications/${APP_ID}
@@ -46,6 +46,9 @@ include ../../support/download.mk
 
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
+
+.PHONY: post-unpack
+post-unpack: build/.unpacked-${VERSION}
 
 build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
@@ -61,7 +64,7 @@ build/.built-${VERSION}: build/arm.built-${VERSION}
 
 include ../../support/cross-compile.mk
 
-build/%.built-${VERSION}: build/.unpacked-${VERSION}
+build/%.built-${VERSION}: post-unpack
 	( cd build/src/src/libpdl ; rm -f *.o ; rm -f *.so ; cd .. ; \
 	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc SSL=${SSL}\
 		clobber ${NAME} )
