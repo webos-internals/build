@@ -1,7 +1,7 @@
 NAME     = wirc
 TITLE    = wIRC
 APP_ID   = org.webosinternals.${EXTRAID}${NAME}
-VERSION  = 0.3.11
+VERSION  = 0.3.11-1
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = Communication
@@ -10,6 +10,7 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Application:WIRC
 ICON     = http://www.webos-internals.org/images/1/10/Icon_WebOSInternals_wIRC.png
 DESCRIPTION = A native webOS IRC client. <b><font color=red>THIS ONLY WORKS with webOS >=1.4.5, and you MUST run the Emergency Fstab Fixer or have corrected your /etc/fstab file by some other method.</font></b>
 CHANGELOG = \
+0.3.11: Get appid from mojo instead of hardcoding it <br>\
 0.3.10: Plugin bug fix and Font Style Preference <br>\
 0.3.9: Add ability to run without SSL support for initial catalog submission <br>\
 0.3.8: Bunch of bug fixes and webOS 2.x updates <br>\
@@ -32,7 +33,7 @@ ifeq ($(SSL),)
 	SSL=1
 endif
 
-GIT_TAG = v0.3.11
+GIT_TAG = v0.3.11-1
 SRC_GIT = git://git.webos-internals.org/applications/wIRC.git
 
 D = build/$*/usr/palm/applications/${APP_ID}
