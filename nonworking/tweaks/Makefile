@@ -4,7 +4,7 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.prefs
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.1.5
+VERSION  = 1.0.0
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Tweaks
@@ -12,7 +12,7 @@ ICON	 = http://www.webos-internals.org/images/2/2e/Tweaks-icon.png
 DESCRIPTION = Tweaks for your webOS device.
 MINWEBOSVERSION = 2.0.0
 CHANGELOG = \
-0.1.5: Initial public release.
+1.0.0: Initial public release.
 
 SCREENSHOTS = [\
 ]
