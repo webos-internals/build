@@ -3,7 +3,7 @@ TITLE    = freeTether
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.1.1
+VERSION  = 1.1.2
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:FreeTether
@@ -12,6 +12,7 @@ DESCRIPTION = freeTether is an application that allows you to share your cellula
 MAINTAINER = Ryan Hope <rmh3093@gmail.com>, Eric Gaudet <emoney_33@yahoo.com>
 MINWEBOSVERSION = 1.4.5
 CHANGELOG = \
+1.1.2: Make sure custom TCP prefs are used on startup<br>\
 1.1.1: Added options to auto-tether interfaces on app startup<br>\
 1.1.0: Set "default" gateway/router IP to 192.168.100.1<br>\
        Add help overlay to all options<br>\
@@ -47,7 +48,7 @@ SCREENSHOTS = [\
  ]
 LICENSE  = GPL v2 Open Source
 
-GIT_TAG = v1.1.1
+GIT_TAG = v1.1.2
 SRC_GIT = git://git.webos-internals.org/applications/freetether.git
 
 .PHONY: package
