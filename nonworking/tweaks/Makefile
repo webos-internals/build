@@ -15,7 +15,7 @@ CHANGELOG = \
 1.0.0: Initial public release.
 
 SCREENSHOTS = [\
-]
+\"http://www.webos-internals.org/images/d/de/Tweaks_ss1.png\" ]
 
 LICENSE  = GPL v2 Open Source
 
