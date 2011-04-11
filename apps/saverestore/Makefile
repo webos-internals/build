@@ -3,7 +3,7 @@ TITLE    = Save/Restore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.3.0
+VERSION  = 1.3.8
 DEPENDS  = org.webosinternals.unzip, org.webosinternals.zip
 TYPE	 = Application
 CATEGORY = System Utilities
@@ -13,6 +13,12 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 WebOS Internals provides Save/Retore as is without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.  The entire risk as to the quality and performance of Save/Restore is with you.  Should Save/Restore prove defective, you assume the cost of all necessary servicing, repair or correction.<br>\
 In no event will WebOS Internals or any other party be liable to you for damages, including any general, special, incidental or consequential damages arising out of the use or inability to use Save/Restore (including but not limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of Save/Restore to operate with any other programs).
 CHANGELOG = \
+1.3.8: Applications: Angry Birds Rio, Supersonic. Updated Device Info and Backup scripts in Contrib directory for webOS 2.0 changes.  Added Max webOS 1.4.5 version to Advanced Patches scripts (all courtesy of Audemars02).<br>\
+1.3.6: Applications: Airplanes, Beat Box, BibleZ (pro), BibleZ, Bubbles (free), Buka, Buka (Lite), gpsDashboard Free, gpsDashboard, Helicopter 3D, Hit the dots, Hyperspace Tournament, Labyrinth Lite, Metronome, Navit, Puzzle Paint (Lite), Puzzle Paint, Radiant, Radiant (Lite), Relego, Rhythm News, Solitaire, SuperNES, Wetter.com, World Time (Lite), World Time (Pro), zcorder (all courtesy of pcworld), Brothers In Arms 2 (updated), InterfaceLift, Worms (all courtesy of djgardn2), Go To Demo, Go To Lite, Go To tool (all courtesy of markpowers), Azkend, Heroes of Kalevala, Just Draw (all courtesy of sunmorgus), SiteStatus (courtesy of pcimino).<br>\
+1.3.5: Applications: Done, Count Down Clock, Geocaching for Webos, Astraware Mahjong, ICE - In Case of Emergency, Fling, Amigo, Bahnfahren, Dict.cc Translator, Forums, Free Klondike Solitaire, Glow Hockey, Glow Hockey FREE, Leo Dictionary, Nodoze, Plasma Cannon, Precentral News (unofficial), Premote , Raging Thunder 2, Rockus Racer Expansion Pack, Snake, Space Sheep, Space Sheep Lite, SWR3-Elchradio, Telmap O2 Germany, Znax.<br>\
+1.3.4: Applications: Clipboard for webOS (UPDATED), A+ Student Organizer Trial (both courtesy of Audemars02), Poker Session Tracker (courtesy of iamthedood), ColorHarmony (courtesy of rretsiem), Backgammon, Bible Reader, Blink, Blink (free), Chess for webOS, chess.com, ColorJunction, DasTelefonbuch, Galcon, Labyrinth, Mazer, Palm Developer Day 2010 Schedule, Pandablast, Plumbers Nightmare (Lite), PreJvm, Simple Bible, Tile Breaker, Tile Breaker (Lite), Titan Stopwatch, TuneIn by RadioTime, Virus Defense, Virus Defense (Lite), VLC Remote, VLC Remote (free), webOS Blog, webOS roundup, YouTube Mini, YouTube Mini (Free) (all courtesy of pcworld).<br>\
+1.3.3: Keep the device awake during scheduled auto-save (courtesy of MetaView). Applications: Clipboard for webOS, Carbon Beta (courtesy of Audemars02).<br>\
+1.3.1: Applications: Backup (Contrib), Device Info (Contrib), Launcher (Updated for 2.0), Need for Speed (Spanish), Carbon, Foursquare (beta), Ace Casino, Definitive Saved by the Bell Quiz Full, freeTether (all courtesy of Audemars02), Baseball Live, Basketball Live, Women's College Basketball Live, Women's Basketball Live, US Soccer Live, UK Football Live, Sports Live, International Soccer Live, Hockey Live, Football Live, Euro Football Live, College Football Live, College Basketball Live (all courtesy of MoreSolutions), TapNote (courtesy of One Crayon).<br>\
 1.3.0: Rolled up all the beta release features for a public release.<br>\
 1.2.9: Added dashboard for auto-save and fixed scheduling (courtesy of ryanjduffy).<br>\
 1.2.8: Added scheduled backups (courtesy of ryanjduffy).<br>\
