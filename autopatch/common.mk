@@ -74,6 +74,9 @@ build/.built-${VERSION}: build/.unpacked-${VERSION} build/.meta-${META_VERSION} 
 	rm -rf build/all
 	mkdir -p build/all/usr/palm/applications/${APP_ID}
 	install -m 644 build/src-${VERSION}/${PATCH} build/all/usr/palm/applications/${APP_ID}/
+ifneq ("${TWEAKS}", "")
+	cp build/src-${VERSION}/${TWEAKS} build/all/usr/palm/applications/${APP_ID}/
+endif
 	rm -f build/all/usr/palm/applications/${APP_ID}/package_list
 	touch build/all/usr/palm/applications/${APP_ID}/package_list
 	for f in `lsdiff --strip=1 build/src-${VERSION}/${PATCH}` ; do \
