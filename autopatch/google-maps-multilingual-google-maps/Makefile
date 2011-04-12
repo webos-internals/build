@@ -7,9 +7,9 @@ CATEGORY = Google Maps
 VERSIONS = 2.1.0-65
 ICON = http://www.webos-internals.org/images/f/f1/Icon_WebOSInternals_Patch_Plus.png
 SCREENSHOTS = [\
-\"http://www.webos-internals.org\",\
-\"http://www.webos-internals.org\",\
-\"http://www.webos-internals.org\" ]
+\"http://www.webos-internals.org/images/b/b9/Google-maps-multilingual-google-maps-1.png\",\
+\"http://www.webos-internals.org/images/e/e4/Google-maps-multilingual-google-maps-2.png\",\
+\"http://www.webos-internals.org/images/d/d4/Google-maps-multilingual-google-maps-3.png\" ]
 META_SUB_VERSION = 1
 
 include ../common.mk
