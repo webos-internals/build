@@ -1,0 +1,19 @@
+NAME = $(shell basename $(shell pwd))
+PATCH = google-maps/${NAME}.patch
+TITLE = Multilingual Google Maps
+DESCRIPTION = Changes Google Maps defaults to selected language. make sure you load the app twice for the changes to take affect
+CATEGORY = Google Maps
+VERSIONS = 2.1.0-64
+ICON = http://www.webos-internals.org/images/c/c3/Icon_WebOSInternals_Patches_SprintNav.png
+SCREENSHOTS = [\
+\"http://www.webos-internals.org/images/b/b9/Google-maps-multilingual-google-maps-1.png\",\
+\"http://www.webos-internals.org/images/e/e4/Google-maps-multilingual-google-maps-2.png\",\
+\"http://www.webos-internals.org/images/d/d4/Google-maps-multilingual-google-maps-3.png\" ]
+META_SUB_VERSION = 1
+
+include ../common.mk
+
+include ../modifications.mk
+
+MAINTAINER = Avner Arbel / palmpreacher <preacher@palmpreacher.com>
+HOMEPAGE = www.palmpreacher.com
