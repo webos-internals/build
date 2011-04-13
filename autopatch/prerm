@@ -79,7 +79,7 @@ remove_tweaks() {
     echo "----------------------------------" | tee -a $PATCH_LOG
     echo "Actually removing the tweaks!" | tee -a $PATCH_LOG
     echo "----------------------------------" | tee -a $PATCH_LOG
-    rm -f $TWEAKS_PREFERENCES_DIR/$TWEAKS_NAME 2>&1 | tee -a $PATCH_LOG
+    rm -f $TWEAKS_PREFERENCES_DIR/`basename $APP_DIR`.json 2>&1 | tee -a $PATCH_LOG
   fi
 }
 

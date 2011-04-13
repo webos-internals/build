@@ -140,7 +140,7 @@ install_tweaks() {
     echo "Actually installing the tweaks!" | tee -a $PATCH_LOG
     echo "----------------------------------" | tee -a $PATCH_LOG
     mkdir -p $TWEAKS_PREFERENCES_DIR 2>&1 | tee -a $PATCH_LOG
-    cp $APP_DIR/$TWEAKS_NAME $TWEAKS_PREFERENCES_DIR/$TWEAKS_NAME 2>&1 | tee -a $PATCH_LOG
+    cp $APP_DIR/$TWEAKS_NAME $TWEAKS_PREFERENCES_DIR/`basename $APP_DIR`.json 2>&1 | tee -a $PATCH_LOG
   fi
 }
 
