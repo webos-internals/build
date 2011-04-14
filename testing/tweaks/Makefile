@@ -36,6 +36,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	rm -rf build/src/*.script
 	touch $@
 
 .PHONY: build
@@ -55,6 +56,12 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	cp -r build/src/package/* build/$*/usr/palm/packages/${APP_ID}/
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/package
 	touch $@
+
+build/%/CONTROL/prerm:
+	rm -f $@
+	mkdir -p build/$*/CONTROL
+	install -m 0775 build/src/control/prerm build/$*/CONTROL
+	chmod ugo+x $@
 
 clobber::
 	rm -rf build
