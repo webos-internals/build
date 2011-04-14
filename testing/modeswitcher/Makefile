@@ -5,13 +5,15 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.srv
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 2.0.0
+VERSION  = 2.0.1
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/showthread.php?p=2935803&posted=1#post2919102
 ICON     = http://www.webos-internals.org/images/7/73/Icon_Mode-Switcher.png
 DESCRIPTION = Mode Switcher.
-CHANGELOG = 2.0.0: Initial release.
+CHANGELOG = \
+2.0.1: Bug fix release, see wiki for details.<br>\
+2.0.0: Initial release.
 SCREENSHOTS = []
 LICENSE  = BSD Open Source License
 POSTINSTALLFLAGS = RestartLuna
