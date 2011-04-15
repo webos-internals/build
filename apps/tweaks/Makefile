@@ -4,7 +4,7 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.prefs
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.1.0
+VERSION  = 1.2.0
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Tweaks
@@ -12,6 +12,7 @@ ICON	 = http://www.webos-internals.org/images/2/2e/Tweaks-icon.png
 DESCRIPTION = Tweaks for your webOS device.
 MINWEBOSVERSION = 2.0.0
 CHANGELOG = \
+1.2.0: Work around the fatal webOS 2.x db permissions bug.  Remove and reinstall Tweaks *twice* to fix it.<br>\
 1.1.0: Allow for the tweaks json file to override the owner value.<br>\
 1.0.0: Initial public release.
 
@@ -35,6 +36,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	rm -rf build/src/*.script
 	touch $@
 
 .PHONY: build
@@ -54,6 +56,12 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	cp -r build/src/package/* build/$*/usr/palm/packages/${APP_ID}/
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/package
 	touch $@
+
+build/%/CONTROL/prerm:
+	rm -f $@
+	mkdir -p build/$*/CONTROL
+	install -m 0775 build/src/control/prerm build/$*/CONTROL
+	chmod ugo+x $@
 
 clobber::
 	rm -rf build
