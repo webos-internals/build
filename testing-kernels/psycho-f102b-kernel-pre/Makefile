@@ -2,17 +2,18 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F102B Delta Dagger (Pre/Pre+)
 CATEGORY = Experimental
 DEVICE = pre
-VERSIONS = 2.1.0-26
+VERSIONS = 2.1.0-37
 APPINFO_DESCRIPTION = The latest beta kernel from uNiXpSyChO.<br><br>\
 Features:<br> * screenstate V2<br> * Dynamic voltage scaling<br> * 800MHz\
-<br> * Temp Scaling<br> * Low Battery scaleback<br> * No more TMC error!<br><br>\
+<br> * Temp Scaling<br> * Low Battery scaleback<br> * No more TMC error!<br> * Lean and fast. No bloat!<br><br>\
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-37", "log" : [ "screenstate fixes. improve voltage reset on freq change. move LCD on/off code to correct place. RC6." ] }, \
 { "version" : "${WEBOS_VERSION}-26", "log" : [ "add preemption. RC5." ] }, \
 { "version" : "${WEBOS_VERSION}-25", "log" : [ "rebuild for webOS 2.1.0" ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-26: add preemption. RC5.<br>${WEBOS_VERSION}-25: rebuild for webOS 2.1.0<br>
+CHANGELOG = ${WEBOS_VERSION}-37: screenstate fixes. improve voltage reset on freq change. move LCD on/off code to correct place. RC6.<br>${WEBOS_VERSION}-26: add preemption. RC5.<br>${WEBOS_VERSION}-25: rebuild for webOS 2.1.0<br>
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
