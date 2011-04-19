@@ -65,7 +65,7 @@ build/.built-${VERSION}: build/arm.built-${VERSION}
 
 include ../../support/cross-compile.mk
 
-build/%.built-${VERSION}: post-unpack
+build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src/src/libpdl ; rm -f *.o ; rm -f *.so ; cd .. ; \
 	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc SSL=${SSL}\
 		clobber ${NAME} )
