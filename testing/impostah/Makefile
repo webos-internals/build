@@ -8,7 +8,7 @@ TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Impostah
 ICON	 = http://www.webos-internals.org/images/a/aa/Tux_Imposter.png
-DESCRIPTION = Impostah impersonates service calls.
+DESCRIPTION = Impostah is an app for those who know what do to with it. It does many things, many of which are too complex to explain in this short description.
 MINWEBOSVERSION = 1.4.5
 CHANGELOG = \
 0.8.3: Improved the activation scene button labels.<br>\
