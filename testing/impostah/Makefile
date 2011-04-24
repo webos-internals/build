@@ -3,7 +3,7 @@ TITLE    = Impostah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.8.0
+VERSION  = 0.8.1
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Impostah
@@ -11,6 +11,7 @@ ICON	 = http://www.webos-internals.org/images/a/aa/Tux_Imposter.png
 DESCRIPTION = Impostah impersonates service calls.
 MINWEBOSVERSION = 1.4.5
 CHANGELOG = \
+0.8.1: Simplified the activation scene user interface. Added automatic MCC and MNC override for activation.<br>\
 0.8.0: Added the language and country selectors for profile creation. Added the activation scene (split from the palm profile scene). Added the ability to check email availability. Added the ability to override the MCC and MNC, without a SIM inserted.<br>\
 0.7.0: Added the ability to install free (not paid) geo-restricted apps.<br>\
 0.6.2: Added load and save for JSON overrides files.<br>\
