@@ -40,3 +40,6 @@ build/.unpacked build/.built: ${DL_DIR}/${NAME}-feed.xml
 .PHONY: clobber
 clobber::
 	rm -rf build
+
+.PHONY: clean
+clean::
