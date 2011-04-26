@@ -256,25 +256,51 @@ distclean: clobber
 clobber: clean clobber-subdirs clobber-patches clobber-kernels clobber-optware clobber-feeds
 	rm -rf ipkgs
 
+clobber-testing:
+	${MAKE} SUBDIRS="testing" PTCHDIR="testing-patches" KERNDIR="testing-kernels" OPTWDIR="testing-optware" clobber
+
+clean: clean-subdirs clean-patches clean-kernels clean-optware clean-feeds
+	find . -name "*~" -delete
+
+clean-testing:
+	${MAKE} SUBDIRS="testing" PTCHDIR="testing-patches" KERNDIR="testing-kernels" OPTWDIR="testing-optware" clean
+
 clobber-subdirs:
 	find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
+
+clean-subdirs:
+	find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print | \
+	xargs -I % ${MAKE} -C % clean
 
 clobber-kernels:
 	find ${KERNDIR} -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
 
+clean-kernels:
+	find ${KERNDIR} -mindepth 1 -maxdepth 1 -type d -print | \
+	xargs -I % ${MAKE} -C % clean
+
 clobber-patches:
 	find ${PTCHDIR} -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
+
+clean-patches:
+	find ${PTCHDIR} -mindepth 1 -maxdepth 1 -type d -print | \
+	xargs -I % ${MAKE} -C % clean
 
 clobber-optware:
 	find ${OPTWDIR} -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
 
+clean-optware:
+	find ${OPTWDIR} -mindepth 1 -maxdepth 1 -type d -print | \
+	xargs -I % ${MAKE} -C % clean
+
 clobber-feeds:
 	find feeds -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
 
-clean:
-	find . -name "*~" -delete
+clean-feeds:
+	find feeds -mindepth 1 -maxdepth 1 -type d -print | \
+	xargs -I % ${MAKE} -C % clean

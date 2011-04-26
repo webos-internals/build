@@ -256,3 +256,6 @@ endif
 clobber::
 	rm -rf ipkgs
 
+.PHONY: clean
+clean::
+	rm -rf build/src build/src-* build/arm build/armv6 build/armv7 build/i686
