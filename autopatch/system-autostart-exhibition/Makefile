@@ -1,11 +1,11 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = system/${NAME}.patch
-TWEAKS =
+TWEAKS = system/${NAME}.json
 TITLE = Autostart Exhibition
 DESCRIPTION = Autostart Exhibition mode from the Exhibition app which ordinarily launches into the Preferences screen
 CATEGORY = System
-VERSIONS = 2.1.0-81
-ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
+VERSIONS = 2.1.0-82
+ICON = http://www.webos-internals.org/images/f/f1/Icon_WebOSInternals_Patch_Plus.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
 
