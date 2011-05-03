@@ -5,13 +5,15 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.srv
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 2.0.5
+VERSION  = 2.0.7
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/showthread.php?p=2935803&posted=1#post2919102
 ICON     = http://www.webos-internals.org/images/7/73/Icon_Mode-Switcher.png
 DESCRIPTION = Mode Switcher.
 CHANGELOG = \
+2.0.7: Fixed modifier modes getting closed when closing mode bug.<br>\
+2.0.6: Couple small bug fixes, see wiki for details.<br>\
 2.0.5: Several bug fixes and few logic fixes, see wiki for details.<br>\
 2.0.4: Small bug fixes, see wiki for details.<br>\
 2.0.3: Small bug fix for bluetooth trigger and added new help system.<br>\
