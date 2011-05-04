@@ -19,7 +19,8 @@ CHANGELOG = \
 0.3.5: Hackish fix for "wIRC stays open after closing" bug <br>\
 0.3.4: Bugfixes. <br>\
 0.3.3: TLS encryption, random bug fixes <br>\
-0.3.2: Bugfixes and beta SSL support. <br>\
+0.3.2: Bugfixes and beta SSL support.
+
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/5/5a/Wirc.png\",\
 \"http://www.webos-internals.org/images/d/d2/Wirc_2.png\",\
