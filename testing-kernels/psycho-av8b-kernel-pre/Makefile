@@ -2,34 +2,37 @@ NAME = $(shell basename $(shell pwd))
 TITLE = AV8B Harrier II (Pre/Pre+)
 CATEGORY = Experimental
 DEVICE = pre
-VERSIONS = 2.1.0-42
-APPINFO_DESCRIPTION = The latest experimental kernel from uNiXpSyChO.<br><br>\
-Features:<br> * vDemand governor<br> * Dynamic voltage scaling<br> * 1GHz fulltime<br><br>\
+VERSIONS = 1.4.5-176
+APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br><br>\
+Features:<br> * Dynamic voltage scaling<br> * 1GHz<br><br>\
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-42", "log" : [ "fix load calc. revert mem test patch." ] }, \
-{ "version" : "${WEBOS_VERSION}-39", "log" : [ "Code cleanup." ] }, \
-{ "version" : "${WEBOS_VERSION}-28", "log" : [ "revert extra freq lockage. set gov start policy correctly." ] }, \
-{ "version" : "${WEBOS_VERSION}-27", "log" : [ "add low-latency sdio. add vdemand stats in sysfs. smooth out voltage scaling." ] }, \
-{ "version" : "${WEBOS_VERSION}-16", "log" : [ "lock down freq. tmc memory hack." ] }, \
-{ "version" : "${WEBOS_VERSION}-11", "log" : [ "try to start high speed for broken profiles." ] }, \
-{ "version" : "${WEBOS_VERSION}-10", "log" : [ "webOS 2.1 build." ] }, \
+{ "version" : "${WEBOS_VERSION}-176", "log" : [ "backport some vdemand fixes." ] }, \
+{ "version" : "${WEBOS_VERSION}-173", "log" : [ "bug fixes for vdemand driver." ] }, \
+{ "version" : "${WEBOS_VERSION}-171", "log" : [ "force some preemption. change IO sched. add PPP comp." ] }, \
+{ "version" : "${WEBOS_VERSION}-170", "log" : [ "split battery, charger, and temp monitoring for friendlier battery polling." ] }, \
+{ "version" : "${WEBOS_VERSION}-164", "log" : [ "remove scaling sysfs." ] }, \
+{ "version" : "${WEBOS_VERSION}-163", "log" : [ "remove debug hack." ] }, \
+{ "version" : "${WEBOS_VERSION}-160", "log" : [ "increase default voltages." ] }, \
+{ "version" : "${WEBOS_VERSION}-159", "log" : [ "add charger scaleback and override. vdemand cleanup. fix out of bound array." ] }, \
+{ "version" : "${WEBOS_VERSION}-146", "log" : [ "bring DSP back inline. added vsel reset. align voltages from feedback." ] }, \
+{ "version" : "${WEBOS_VERSION}-137", "log" : [ "added temp limiter. fixed cpu speed drop on DSP run. major overhaul." ] }, \
+{ "version" : "${WEBOS_VERSION}-136", "log" : [ "Initial release. Dynamic voltage scaling based on CPU load. vdemand gov." ] }, \
 ]
-CHANGELOG = \
-${WEBOS_VERSION}-42: fix load calc. revert mem test patch.<br>${WEBOS_VERSION}-39: Code cleanup.<br>${WEBOS_VERSION}-28: revert extra freq lockage. set gov start policy correctly.<br>${WEBOS_VERSION}-27: add low-latency sdio. add vdemand stats in sysfs. smooth out voltage scaling.<br>${WEBOS_VERSION}-16: lock down freq. tmc memory hack.<br>${WEBOS_VERSION}-11: try to start high speed for broken profiles.<br>${WEBOS_VERSION}-10: webOS 2.1 build.<br>
+CHANGELOG = ${WEBOS_VERSION}-176: backport some vdemand fixes<br>${WEBOS_VERSION}-173: bug fixes for vdemand driver.<br>${WEBOS_VERSION}-171: force some preemption. change IO sched. add PPP comp.<br>${WEBOS_VERSION}-170: split battery, charger, and temp monitoring for friendlier battery polling.<br>${WEBOS_VERSION}-164: remove scaling sysfs.<br>${WEBOS_VERSION}-163: remove debug hack.<br>${WEBOS_VERSION}-160: increase default voltages.<br>${WEBOS_VERSION}-159: add charger scaleback and override. vdemand cleanup. fix out of bound array.<br>${WEBOS_VERSION}-146: bring DSP back inline. added vsel reset. align voltages from feedback.<br>${WEBOS_VERSION}-137: added temp limiter. fixed cpu speed drop on DSP run. major overhaul.<br>${WEBOS_VERSION}-136: Initial release. Dynamic voltage scaling based on CPU load. vdemand gov.<br>
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
-KERNEL_PATCHES = sensors/omap34xx_temp.patch \
+KERNEL_PATCHES = sensors/sensors_temp_omap34xx.patch \
 		 psychobuild/AV8B.patch \
-		 compcache/lowmemnotify-total-memory.patch \
-		 psychobuild/sdio.patch \
-		 psychobuild/iosched-deadline.patch \
-		 psychobuild/preempt.patch \
-		 psychobuild/comptune.patch
+		 compcache/compcache.patch memory/tmc_mem.patch \
+		 makefiletune/armMakefile.diff
+EXTERNAL_MODULES = compcache/compcache-0.5.4
 
 KERNEL_DEFCONFIG = psychobuild/AV8B.config
+KERNEL_UPSTART   = psychobuild/F102A.upstart
 TYPE = Kernel
 
 include ../../support/kernel.mk
+
