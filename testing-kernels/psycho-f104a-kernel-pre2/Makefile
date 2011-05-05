@@ -18,6 +18,7 @@ KERNEL_PATCHES = psychobuild/F104-pre2.patch \
 		 sensors/omap34xx_temp.patch \
 		 psychobuild/ssv3-ovrd.patch \
 		 compcache/lowmemnotify-total-memory.patch \
+		 compcache/compcache.patch \
 		 psychobuild/preempt.patch \
 		 makefiletune/armMakefile.diff
 
