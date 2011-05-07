@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-TITLE = F104A Starfighter (Pre/Pre+)
+TITLE = F104A Starfighter (Pre2)
 CATEGORY = Experimental
 DEVICE = pre2
 VERSIONS = 2.0.1-15
