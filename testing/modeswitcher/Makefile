@@ -5,7 +5,7 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.srv
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 2.1.0
+VERSION  = 2.1.1
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/showthread.php?p=2935803&posted=1#post2919102
@@ -13,6 +13,7 @@ ICON     = http://www.webos-internals.org/images/7/73/Icon_Mode-Switcher.png
 DESCRIPTION = Mode Switcher.
 MINWEBOSVERSION = 2.0.0
 CHANGELOG = \
+2.1.1: Removed buggy and unneeded options from mode trigger.<br>\
 2.1.0: First public release of Mode Switcher 2.x, see wiki for more information.<br>\
 2.0.9: Small UI change and removed the unneeded trigger blocking setting.<br>\
 2.0.8: Cleanups for the app and few functional changes, see wiki for details.<br>\
