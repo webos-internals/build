@@ -5,7 +5,7 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.srv
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 2.2.1
+VERSION  = 2.2.2
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/showthread.php?p=2935803&posted=1#post2919102
@@ -13,6 +13,7 @@ ICON     = http://www.webos-internals.org/images/7/73/Icon_Mode-Switcher.png
 DESCRIPTION = Mode Switcher.
 MINWEBOSVERSION = 2.0.0
 CHANGELOG = \
+2.2.2: Fixed few bugs introduced in 2.2.0 release, see wiki for details.<br>\
 2.2.1: Fixed extensions name collision bug.<br>\
 2.2.0: New extensions and features, see wiki for details.<br>\
 2.1.3: Couple small bug fixes, see wiki for details.<br>\
@@ -31,8 +32,8 @@ CHANGELOG = \
 2.0.0: Initial release.
 SCREENSHOTS = []
 LICENSE  = BSD Open Source License
-POSTINSTALLFLAGS = RestartLuna
-POSTUPDATEFLAGS = RestartLuna
+POSTINSTALLFLAGS = RestartDevice
+POSTUPDATEFLAGS = RestartDevice
 
 SRC_GIT = git://git.webos-internals.org/applications/modeswitcher.git
 
