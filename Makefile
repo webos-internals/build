@@ -54,9 +54,7 @@ webos-patches-index: ipkgs/webos-patches/1.4.5/Packages \
 
 .PHONY: webos-kernels-index
 webos-kernels-index: ipkgs/webos-kernels/2.0.0/Packages ipkgs/webos-kernels/2.0.1/Packages \
-		     ipkgs/webos-kernels/2.1.0/Packages
-	rm -f ipkgs/webos-kernels/2.1.2
-	ln -s 2.1.0 ipkgs/webos-kernels/2.1.2
+		     ipkgs/webos-kernels/2.1.0/Packages ipkgs/webos-kernels/2.1.2/Packages
 	rm -f ipkgs/webos-kernels/unknown
 	ln -s 2.1.0 ipkgs/webos-kernels/unknown
 
