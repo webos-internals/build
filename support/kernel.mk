@@ -13,7 +13,14 @@ endif
 ifeq ("${DEVICE}","pre2")
 WEBOS_VERSIONS = 2.0.0 2.0.1
 endif
+ifeq ("${DEVICE}","veer")
+WEBOS_VERSIONS = 2.1.2
+endif
+ifeq ("${DEVICE}","veer")
+KERNEL_VERSION = 2.6.29
+else
 KERNEL_VERSION = 2.6.24
+endif
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tgz
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
 DL_DIR = ../../downloads
@@ -70,6 +77,12 @@ DEFCONFIG = omap_sirloin_3630_defconfig
 KERNEL_TYPE = palm-joplin-3430
 DEVICECOMPATIBILITY = [\"Pre2\"]
 endif
+ifeq ("${DEVICE}","veer")
+CODENAME = broadway
+DEFCONFIG = shank_defconfig
+KERNEL_TYPE = palm-shank
+DEVICECOMPATIBILITY = [\"Veer\"]
+endif
 
 ifeq ("${DEVICE}","pre")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
@@ -88,6 +101,9 @@ endif
 ifeq ("${WEBOS_VERSION}", "2.1.0")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp103ueuna-wr-${WEBOS_VERSION}.jar
 endif
+endif
+ifeq ("${DEVICE}","veer")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp160unaatt-${WEBOS_VERSION}.jar
 endif
 COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
 
