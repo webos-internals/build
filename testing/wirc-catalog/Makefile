@@ -1,6 +1,6 @@
 EXTRAID = appcat.
 SSL=0
-include ../wirc/Makefile
+include ../../apps/wirc/Makefile
 
 build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build

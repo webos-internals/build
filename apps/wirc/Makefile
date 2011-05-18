@@ -1,7 +1,7 @@
 NAME     = wirc
 TITLE    = wIRC
 APP_ID   = org.webosinternals.${EXTRAID}${NAME}
-VERSION  = 0.3.11-2
+VERSION  = 0.3.11-3
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = Communication
@@ -71,6 +71,9 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc SSL=${SSL}\
 		clobber ${NAME} )
 	mkdir -p ${D}
+	${CROSS_COMPILE_$*}strip --strip-debug build/src/src/wirc
+	${CROSS_COMPILE_$*}strip --strip-debug build/src/src/libssl.so
+	${CROSS_COMPILE_$*}strip --strip-debug build/src/src/libpdl/libpdl.so
 	install -m 755 build/src/src/${NAME} ${D}
 	cp -r build/src/* ${D}
 	rm -rf ${D}/src
