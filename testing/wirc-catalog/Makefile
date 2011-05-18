@@ -1,4 +1,4 @@
-EXTRAID = appcat.
+EXTRAID = catalog.
 SSL=0
 include ../../apps/wirc/Makefile
 

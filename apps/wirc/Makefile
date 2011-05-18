@@ -1,7 +1,7 @@
 NAME     = wirc
 TITLE    = wIRC
 APP_ID   = org.webosinternals.${EXTRAID}${NAME}
-VERSION  = 0.3.11-3
+VERSION  = 0.3.11-4
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = Communication
