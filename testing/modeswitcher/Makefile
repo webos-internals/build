@@ -5,7 +5,7 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.srv
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 2.2.3
+VERSION  = 2.2.5
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/showthread.php?p=2935803&posted=1#post2919102
@@ -13,6 +13,8 @@ ICON     = http://www.webos-internals.org/images/7/73/Icon_Mode-Switcher.png
 DESCRIPTION = Mode Switcher.
 MINWEBOSVERSION = 2.0.0
 CHANGELOG = \
+2.2.5: Fixed email and messaging settings not working bug.<br>\
+2.2.4: Fixed two bugs related to mode actions, see wiki for details.<br>\
 2.2.3: Fixed bug that caused initial configuration to fail on new installs.<br>\
 2.2.2: Fixed few bugs introduced in 2.2.0 release, see wiki for details.<br>\
 2.2.1: Fixed extensions name collision bug.<br>\
