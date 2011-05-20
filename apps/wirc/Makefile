@@ -1,7 +1,7 @@
 NAME     = wirc
 TITLE    = wIRC
 APP_ID   = org.webosinternals.${EXTRAID}${NAME}
-VERSION  = 0.3.12-1
+VERSION  = 0.3.13
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = Communication
@@ -34,7 +34,7 @@ ifeq ($(SSL),)
 	SSL=1
 endif
 
-GIT_TAG = v0.3.12
+GIT_TAG = v0.3.13
 SRC_GIT = git://git.webos-internals.org/applications/wIRC.git
 
 D = build/$*/usr/palm/applications/${APP_ID}
