@@ -9,7 +9,7 @@ Features:<br> * Screenstate V2<br> * Dynamic voltage scaling<br> * Stable 800MHz
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-178", "log" : [ "Added webOS 1.4.5.1 compatibility", "Shows console on boot" ] }, \
+{ "version" : "${WEBOS_VERSION}-178", "log" : [ "Added webOS 1.4.5.1 compatibility" ] }, \
 { "version" : "${WEBOS_VERSION}-177", "log" : [ "Released to stable." ] }, \
 { "version" : "${WEBOS_VERSION}-175", "log" : [ "fix screwup on vdemand poll." ] }, \
 { "version" : "${WEBOS_VERSION}-174", "log" : [ "screenstate fixes." ] }, \
@@ -25,7 +25,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-43", "log" : [ "Initial public release, rebased off UberKernel ${WEBOS_VERSION}-40" ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-178: Added webOS 1.4.5.1 compatibility. Shows console on boot.<br>\
+${WEBOS_VERSION}-178: Added webOS 1.4.5.1 compatibility.<br>\
 ${WEBOS_VERSION}-177: Released to stable.<br>\
 ${WEBOS_VERSION}-174: screenstate fixes.<br>\
 ${WEBOS_VERSION}-172: split temp and battery monitoring. RC4.<br>\
@@ -44,8 +44,7 @@ SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = sensors/sensors_temp_omap34xx.patch \
 		 psychobuild/F102A-overclocking.patch \
 		 compcache/compcache.patch memory/tmc_mem.patch \
-		 makefiletune/armMakefile.diff \
-		 psychobuild/fbconsole.patch
+		 makefiletune/armMakefile.diff
 EXTERNAL_MODULES = compcache/compcache-0.5.4
 
 KERNEL_DEFCONFIG = psychobuild/F102A.config
