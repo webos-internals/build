@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Pixi/Pixi+)
 DEVICE   = pixi
 CATEGORY = Stable
-VERSIONS = 1.4.5-157
+VERSIONS = 1.4.5-178
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pixi/Pixi+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
@@ -19,6 +19,7 @@ All additions are disabled by default, and must be enabled by using the Govnah a
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-178", "log" : [ "Added webOS 1.4.5.1 compatibility" ] }, \
 { "version" : "${WEBOS_VERSION}-157", "log" : [ "Added 806MHz Pixi overclocking" ] }, \
 { "version" : "${WEBOS_VERSION}-149", "log" : [ "Added uinput into kernel", "Added ability to control adjacent key filter" ] }, \
 { "version" : "${WEBOS_VERSION}-128", "log" : [ "Added 787MHz Pixi overclocking" ] }, \
@@ -33,6 +34,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-40", "log" : [ "First Pixi custom kernel" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-178: Added webOS 1.4.5.1 compatibility.<br>\
 ${WEBOS_VERSION}-157: Added 806MHz Pixi overclocking.<br>\
 ${WEBOS_VERSION}-149: Added uinput into kernel. Added ability to control adjacent key filter.<br>\
 ${WEBOS_VERSION}-128: Added 787MHz Pixi overclocking.<br>\
