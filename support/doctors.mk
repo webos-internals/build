@@ -6,6 +6,14 @@ ${DOCTOR_DIR}/webosdoctorp121ewweu-wr-1.4.5.jar:
 	mkdir -p ${DOCTOR_DIR}
 	curl -L -o $@ http://palm.cdnetworks.net/rom/pixiplus/px145r0d06302010/wrep145rod/webosdoctorp121ewweu-wr.jar
 
+${DOCTOR_DIR}/webosdoctorp101ewwverizonwireless-1.4.5.1.jar:
+	mkdir -p ${DOCTOR_DIR}
+	curl -L -o $@ http://palm.cdnetworks.net/rom/preplus/p1451r0d05182011/ver1z0np1451rod/webosdoctorp101ewwverizonwireless.jar
+
+${DOCTOR_DIR}/webosdoctorp121ewwverizonwireless-1.4.5.1.jar:
+	mkdir -p ${DOCTOR_DIR}
+	curl -L -o $@ http://palm.cdnetworks.net/rom/pixiplus/px1451r0d05182011/ver1z0np1451rod/webosdoctorp121ewwverizonwireless.jar
+
 ${DOCTOR_DIR}/webosdoctorp103ueu-wr-2.0.0.jar:
 	mkdir -p ${DOCTOR_DIR}
 	curl -L -o $@ http://palm.cdnetworks.net/rom/pre2/p20r0d11182010/wrep20rod/webosdoctorp103ueu-wr.jar

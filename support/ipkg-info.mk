@@ -24,6 +24,14 @@ ${DOCTOR_DIR}/webosdoctor-1.4.5.jar:
 	  curl -L -o $@ http://palm.cdnetworks.net/rom/pre/p145r0d06302010/eudep145rod/webosdoctorp100ueu-wr.jar; \
 	fi
 
+${DOCTOR_DIR}/webosdoctor-1.4.5.1.jar:
+	mkdir -p ${DOCTOR_DIR}
+	if [ -e ${DOCTOR_DIR}/webosdoctorp101ewwverizonwireless-1.4.5.1.jar ] ; then \
+	  ln -s webosdoctorp101ewwverizonwireless-1.4.5.1.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/preplus/p1451r0d05182011/ver1z0np1451rod/webosdoctorp101ewwverizonwireless.jar; \
+	fi
+
 ${DOCTOR_DIR}/webosdoctor-2.0.0.jar:
 	mkdir -p ${DOCTOR_DIR}
 	if [ -e ${DOCTOR_DIR}/webosdoctorp103ueu-wr-2.0.0.jar ] ; then \

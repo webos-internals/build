@@ -5,13 +5,13 @@ DEPENDS =
 FEED = WebOS Kernels
 LICENSE = GPL v2 Open Source
 ifeq ("${DEVICE}","pre")
-WEBOS_VERSIONS = 2.1.0
+WEBOS_VERSIONS = 1.4.5 2.1.0
 endif
 ifeq ("${DEVICE}","pixi")
 WEBOS_VERSIONS = 1.4.5
 endif
 ifeq ("${DEVICE}","pre2")
-WEBOS_VERSIONS = 2.0.0 2.0.1
+WEBOS_VERSIONS = 2.0.1 2.1.0
 endif
 ifeq ("${DEVICE}","veer")
 WEBOS_VERSIONS = 2.1.2
@@ -106,6 +106,10 @@ ifeq ("${DEVICE}","veer")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp160unaatt-${WEBOS_VERSION}.jar
 endif
 COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
+
+ifeq ("${WEBOS_VERSION}", "1.4.5")
+COMPATIBLE_VERSIONS = 1.4.5 | 1.4.5.1
+endif
 
 ifeq ("${WEBOS_VERSION}", "2.0.0")
 ifeq ("${DEVICE}","pre2")
