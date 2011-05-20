@@ -24,7 +24,7 @@ For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 ifeq (${WEBOS_VERSION},1.4.5)
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-178", "log" : [ "Added webOS 1.4.5.1 compatibility", "Shows console on boot" ] }, \
+{ "version" : "${WEBOS_VERSION}-178", "log" : [ "Added webOS 1.4.5.1 compatibility" ] }, \
 { "version" : "${WEBOS_VERSION}-158", "log" : [ "Removed superfluous vdd2 entries" ] }, \
 { "version" : "${WEBOS_VERSION}-138", "log" : [ "Added uinput into kernel", "Added ability to control adjacent key filter" ] }, \
 { "version" : "${WEBOS_VERSION}-124", "log" : [ "Disable Palm diagnostics reporting when installed" ] }, \
@@ -47,7 +47,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-13", "log" : [ "Initial public release" ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-178: Added webOS 1.4.5.1 compatibility. Shows console on boot.<br>\
+${WEBOS_VERSION}-178: Added webOS 1.4.5.1 compatibility.<br>\
 ${WEBOS_VERSION}-158: Removed superfluous vdd2 entries.<br>\
 ${WEBOS_VERSION}-138: Added uinput into kernel. Added ability to control adjacent key filter.<br>\
 ${WEBOS_VERSION}-124: Disable Palm diagnostics reporting when installed.<br>\
@@ -92,8 +92,7 @@ KERNEL_PATCHES = overclocking/600-720-800-1000-min-opp5.patch overclocking/defco
 		 overclocking/override.patch overclocking/defconfig-override.patch \
 		 usb/f_mass_storage.patch crypto/truecrypt-support-pre.patch \
 		 idcode/idcode.patch \
-		 keypad/maxim7359-keypad.patch uinput/defconfig-pre-y.patch \
-		 psychobuild/fbconsole.patch
+		 keypad/maxim7359-keypad.patch uinput/defconfig-pre-y.patch
 EXTERNAL_MODULES = compcache/compcache-0.5.4
 else
 KERNEL_PATCHES = overclocking/600-720-800-1000-min-opp5.patch overclocking/defconfig-standard.patch \
