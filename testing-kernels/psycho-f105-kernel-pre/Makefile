@@ -2,11 +2,15 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F105 Thunderchief (Pre/Pre+)
 CATEGORY = Experimental
 DEVICE = pre
-VERSIONS = 1.4.5-179
+VERSIONS = 2.1.0-56 1.4.5-179
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br><br>\
 Features:<br> * New screenstate v2 with vdemand<br> * 1GHz<br> * 200MHz VDD2<br> * More govenors<br><br>\
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br>
+HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
+SRC_GIT = git://git.webos-internals.org/kernels/patches.git
+
+ifeq (${WEBOS_VERSION},1.4.5)
 APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-179", "log" : [ "backport some fixes from 2.1.0 branch.  change sysfs display from jiffies to secs." ] }, \
 { "version" : "${WEBOS_VERSION}-171", "log" : [ "force some preemption. change IO sched. add PPP comp." ] }, \
@@ -41,8 +45,6 @@ APPINFO_CHANGELOG = [ \
 ]
 CHANGELOG = ${WEBOS_VERSION}-179: backport some fixes from 2.1.0 branch.  change sysfs display from jiffies to secs.<br>${WEBOS_VERSION}-171: force some preemption. change IO sched. add PPP comp.<br>${WEBOS_VERSION}-169: split battery and temp monitoring. more 200MHz pwnage.<br>${WEBOS_VERSION}-162: fix charger override.<br>${WEBOS_VERSION}-161: fix vdd1 vsel changes. add support to change screenstate default voltages. override fixups.<br>${WEBOS_VERSION}-158: add screenstate v2 with dynamic vdemand. add more govs. removed ondemand tickle.<br>${WEBOS_VERSION}-143: Increase default voltages for wimpy Pres<br>${WEBOS_VERSION}-142: fix games.<br>${WEBOS_VERSION}-140: add ondemand tickle gov. kernel tweaks.<br>${WEBOS_VERSION}-131: drop SDRC hack.<br>${WEBOS_VERSION}-130: add vdd2 freq display. SDRC hack.<br>${WEBOS_VERSION}-129: allow vdd2 voltage changes in override.<br>${WEBOS_VERSION}-125: drop vdd2 voltage. minor hacks.<br>${WEBOS_VERSION}-119: overclock vdd2 to 200MHz. fix override sticky bug.<br>${WEBOS_VERSION}-110: fix cpufreq policy update.<br>${WEBOS_VERSION}-108: add battery scaling.<br>${WEBOS_VERSION}-106: add charger cpu scaleback override sysfs.<br>${WEBOS_VERSION}-99: fix store_vdd1_vsel<br>${WEBOS_VERSION}-98: cut down on voltage. hide low vsel settings.<br>${WEBOS_VERSION}-92: Do voltage scaling immediately after Vsel change.<br>${WEBOS_VERSION}-91: added Vsel limits.<br>
 
-HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
-SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = psychobuild/F105-overclocking.patch \
 		 sensors/sensors_temp_omap34xx.patch \
 		 psychobuild/ssv2-ovrd.patch \
@@ -52,8 +54,37 @@ KERNEL_PATCHES = psychobuild/F105-overclocking.patch \
 		 makefiletune/armMakefile.diff
 EXTERNAL_MODULES = compcache/compcache-0.5.4
 
-KERNEL_DEFCONFIG = psychobuild/F105.config
 KERNEL_UPSTART   = psychobuild/F102A.upstart
+
+else
+
+APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-56", "log" : [ "misc changes to defaults." ] }, \
+{ "version" : "${WEBOS_VERSION}-53", "log" : [ "Allow 1s charger poll." ] }, \
+{ "version" : "${WEBOS_VERSION}-51", "log" : [ "raise readahead. increase HZ." ] }, \
+{ "version" : "${WEBOS_VERSION}-41", "log" : [ "cleanup compiler warnings. screenstate and override fixes." ] }, \
+{ "version" : "${WEBOS_VERSION}-35", "log" : [ "remove debugging code." ] }, \
+{ "version" : "${WEBOS_VERSION}-33", "log" : [ "fix unaligned access in voltage array. screenstate fixups. code cleanup. fix sysfs voltage input for voltage array (Govnah will happier)." ] }, \
+{ "version" : "${WEBOS_VERSION}-17", "log" : [ "nullify unused bridge driver function, FTW." ] }, \
+{ "version" : "${WEBOS_VERSION}-16", "log" : [ "make screenstate dumb again. remove constraints. tmc memory hack." ] }, \
+{ "version" : "${WEBOS_VERSION}-8", "log" : [ "remove some 200Mhz pwnage. add disgusting hack for freq flopping. add delay for screen on and off." ] }, \
+{ "version" : "${WEBOS_VERSION}-4", "log" : [ "rebuild for webOS 2.1.0." ] }, \
+]
+CHANGELOG = ${WEBOS_VERSION}-56: misc changes to defaults.<br>${WEBOS_VERSION}-53: Allow 1s charger poll.<br>${WEBOS_VERSION}-51: raise readahead. increase HZ.<br>${WEBOS_VERSION}-41: cleanup compiler warnings. screenstate and override fixes.<br>${WEBOS_VERSION}-35: remove debugging code.<br>${WEBOS_VERSION}-33: fix unaligned access in voltage array. screenstate fixups. code cleanup. fix sysfs voltage input for voltage array (Govnah will happier).<br>${WEBOS_VERSION}-17: nullify unused bridge driver function, FTW.<br>${WEBOS_VERSION}-16: make screenstate dumb again. remove constraints. tmc memory hack.<br>${WEBOS_VERSION}-8: remove some 200Mhz pwnage. add disgusting hack for freq flopping. add delay for screen on and off.<br>${WEBOS_VERSION}-4: rebuild for webOS 2.1.0.<br>
+
+KERNEL_PATCHES = psychobuild/F105-overclocking.patch \
+                 sensors/omap34xx_temp.patch \
+                 psychobuild/ssv2-ovrd.patch \
+                 compcache/lowmemnotify-total-memory.patch \
+                 psychobuild/fbconsole.patch \
+                 psychobuild/F105-logo.patch \
+                 psychobuild/250_hz.patch \
+                 psychobuild/iosched_blk.patch \
+                 psychobuild/comptune.patch
+
+endif
+
+KERNEL_DEFCONFIG = psychobuild/F105.config
 TYPE = Kernel
 
 include ../../support/kernel.mk
