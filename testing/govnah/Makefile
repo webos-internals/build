@@ -3,13 +3,14 @@ TITLE    = Govnah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.8.1
+VERSION  = 0.8.2
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
 DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature, load averages and memory usage.
 CHANGELOG = \
+0.8.2: Small fix in profile for the Pre 2 SR71 experimental kernel.<br>\
 0.8.1: Only set new voltages if the user actually changes them.<br>\
 0.8.0: On settings save, only set those parameters that have been modified by the user.<br>\
 0.7.30: Updated the units for charger and vdemand polling rates.<br>\
