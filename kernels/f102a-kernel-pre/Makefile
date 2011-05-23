@@ -2,13 +2,14 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F102A Delta Dagger (Pre/Pre+)
 CATEGORY = Stable
 DEVICE = pre
-VERSIONS = 1.4.5-178
+VERSIONS = 1.4.5-182
 APPINFO_DESCRIPTION = The well known warbird series kernel from uNiXpSyChO.<br><br>\
 Features:<br> * Screenstate V2<br> * Dynamic voltage scaling<br> * Stable 800MHz\
 <br> * Temp Scaling<br> * Low Battery scaleback<br> * No more TMC error!<br><br>\
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-182", "log" : [ "reenable vdemand poll sysfs" ] }, \
 { "version" : "${WEBOS_VERSION}-178", "log" : [ "Added webOS 1.4.5.1 compatibility" ] }, \
 { "version" : "${WEBOS_VERSION}-177", "log" : [ "Released to stable." ] }, \
 { "version" : "${WEBOS_VERSION}-175", "log" : [ "fix screwup on vdemand poll." ] }, \
@@ -25,6 +26,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-43", "log" : [ "Initial public release, rebased off UberKernel ${WEBOS_VERSION}-40" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-182: reenable vdemand poll sysfs.<br>\
 ${WEBOS_VERSION}-178: Added webOS 1.4.5.1 compatibility.<br>\
 ${WEBOS_VERSION}-177: Released to stable.<br>\
 ${WEBOS_VERSION}-174: screenstate fixes.<br>\
