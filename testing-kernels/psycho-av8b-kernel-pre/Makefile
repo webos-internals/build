@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = AV8B Harrier II (Pre/Pre+)
 CATEGORY = Experimental
 DEVICE = pre
-VERSIONS = 1.4.5-180 2.1.0-65
+VERSIONS = 1.4.5-180 2.1.0-66
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br><br>\
 Features:<br> * Dynamic voltage scaling<br> * 1GHz<br><br>\
 For more information, visit ${HOMEPAGE}
@@ -41,6 +41,7 @@ KERNEL_UPSTART   = psychobuild/F102A.upstart
 else
 
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-66", "log" : [ "lower vdemand poll default." ] }, \
 { "version" : "${WEBOS_VERSION}-65", "log" : [ "temp fix for charger scaleback. allow voltage change without lock." ] }, \
 { "version" : "${WEBOS_VERSION}-64", "log" : [ "revert charger fix." ] }, \
 { "version" : "${WEBOS_VERSION}-63", "log" : [ "nullify DSP func. dont override voltages on freq scaleback. fix charger detection. fix battery percent sysfs. fix vdemand poll rate. add more locking. dont munge voltages on unknown policy change. drop DSP freq." ] }, \
@@ -54,7 +55,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-10", "log" : [ "webOS 2.1 build." ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-65: temp fix for charger scaleback. allow voltage change without lock.<br>${WEBOS_VERSION}-64: revert charger fix.<br>${WEBOS_VERSION}-63: nullify DSP func. dont override voltages on freq scaleback. fix charger detection. fix battery percent sysfs. fix vdemand poll rate. add more locking. dont munge voltages on unknown policy change. drop DSP freq.<br>${WEBOS_VERSION}-61: make vdemand gov use other freqs, not locked anymore to 1GHz. use VSEL to voltage scale. change polling to msecs.<br>${WEBOS_VERSION}-42: fix load calc. revert mem test patch.<br>${WEBOS_VERSION}-39: Code cleanup.<br>${WEBOS_VERSION}-28: revert extra freq lockage. set gov start policy correctly.<br>${WEBOS_VERSION}-27: add low-latency sdio. add vdemand stats in sysfs. smooth out voltage scaling.<br>${WEBOS_VERSION}-16: lock down freq. tmc memory hack.<br>${WEBOS_VERSION}-11: try to start high speed for broken profiles.<br>${WEBOS_VERSION}-10: webOS 2.1 build.<br>
+${WEBOS_VERSION}-66: lower vdemand poll default.<br>${WEBOS_VERSION}-65: temp fix for charger scaleback. allow voltage change without lock.<br>${WEBOS_VERSION}-64: revert charger fix.<br>${WEBOS_VERSION}-63: nullify DSP func. dont override voltages on freq scaleback. fix charger detection. fix battery percent sysfs. fix vdemand poll rate. add more locking. dont munge voltages on unknown policy change. drop DSP freq.<br>${WEBOS_VERSION}-61: make vdemand gov use other freqs, not locked anymore to 1GHz. use VSEL to voltage scale. change polling to msecs.<br>${WEBOS_VERSION}-42: fix load calc. revert mem test patch.<br>${WEBOS_VERSION}-39: Code cleanup.<br>${WEBOS_VERSION}-28: revert extra freq lockage. set gov start policy correctly.<br>${WEBOS_VERSION}-27: add low-latency sdio. add vdemand stats in sysfs. smooth out voltage scaling.<br>${WEBOS_VERSION}-16: lock down freq. tmc memory hack.<br>${WEBOS_VERSION}-11: try to start high speed for broken profiles.<br>${WEBOS_VERSION}-10: webOS 2.1 build.<br>
 
 KERNEL_PATCHES = sensors/omap34xx_temp.patch \
                  psychobuild/AV8B.patch \
