@@ -252,6 +252,7 @@ build/%/CONTROL/prerm:
 endif
 
 build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
+	rm -rf build/arm
 	mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/boot
 	if [ -n "${KERNEL_DEFCONFIG}" ] ; then \
 	  cp build/src-$*/patches/${KERNEL_DEFCONFIG} build/src-$*/linux-${KERNEL_VERSION}/.config ; \
