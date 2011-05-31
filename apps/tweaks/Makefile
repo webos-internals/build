@@ -4,7 +4,7 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.prefs
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.3.1
+VERSION  = 1.3.2
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Tweaks
@@ -12,6 +12,7 @@ ICON	 = http://www.webos-internals.org/images/2/2e/Tweaks-icon.png
 DESCRIPTION = Tweaks for your webOS device.
 MINWEBOSVERSION = 2.0.0
 CHANGELOG = \
+1.3.2: Promotional release to support sconix, no new features.<br>\
 1.3.1: Fixed text field tweaks not count as new tweaks bug.<br>\
 1.3.0: Added support for basic text field widget.<br>\
 1.2.0: Work around the fatal webOS 2.x db permissions bug.  Remove and reinstall Tweaks *twice* to fix it.<br>\
