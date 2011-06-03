@@ -5,7 +5,7 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.srv
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 2.3.3
+VERSION  = 2.3.4
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/showthread.php?p=2935803&posted=1#post2919102
@@ -13,6 +13,7 @@ ICON     = http://www.webos-internals.org/images/7/73/Icon_Mode-Switcher.png
 DESCRIPTION = Mode Switcher.
 MINWEBOSVERSION = 2.0.0
 CHANGELOG = \
+2.3.4: Public release of 2.3.x with few bug fixes, see wiki for details.<br>\
 2.3.3: Fixed bug in applying settings and fine tuned bluetooth trigger.<br>\
 2.3.2: Fixed couple bugs regarding the service, see wiki for details.<br>\
 2.3.1: Fixed the security unsecure settings not taking effect.<br>\
