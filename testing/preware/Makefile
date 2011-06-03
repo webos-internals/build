@@ -3,7 +3,7 @@ TITLE	 = Preware
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.6.1
+VERSION  = 1.6.2
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
@@ -11,7 +11,7 @@ ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 MINWEBOSVERSION = 1.4.0
 DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, kernels, services and plugins. Preware is also able to access official Palm App Catalog, Web Distribution and Beta Distribution feeds.<br><b>Requires webOS 1.4.0 or later</b>.
 CHANGELOG = \
-1.6.1: Added the clock themes feed (disabled by default).<br>\
+1.6.2: Added the clock themes feed (disabled by default).<br>\
 1.6.0: webOS 2.x Just Type integration. Fixed package list ordering bug. Layout fixes for Pixi/Veer.<br>\
 1.5.9: Fixed parse errors resulting from packages with very large descriptions. Fixed problems with updates to app catalog apps.<br>\
 1.5.8: Moved blacklisting to feed load to speed up listing. Suggests a reload after changing the blacklist. Fixed homebrew feed/catalog feed same appid bug.<br>\
