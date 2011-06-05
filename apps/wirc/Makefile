@@ -1,11 +1,11 @@
 NAME     = wirc
 TITLE    = wIRC
 APP_ID   = org.webosinternals.${EXTRAID}${NAME}
-VERSION  = 0.3.13
+VERSION  = 0.3.14-1
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = Communication
-MAINTAINER = oil, PuffTheMagic, zsoc, egaudet, rwhitby
+MAINTAINER = oil, PuffTheMagic
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WIRC
 ICON     = http://www.webos-internals.org/images/1/10/Icon_WebOSInternals_wIRC.png
 DESCRIPTION = A native webOS IRC client. <b><font color=red>THIS ONLY WORKS with webOS >=1.4.5, and you MUST run the Emergency Fstab Fixer or have corrected your /etc/fstab file by some other method.</font></b>
@@ -34,8 +34,10 @@ ifeq ($(SSL),)
 	SSL=1
 endif
 
-GIT_TAG = v0.3.13
+GIT_TAG = 8199f86261c29f858f13870eb42d66ff37ceeb89
 SRC_GIT = git://git.webos-internals.org/applications/wIRC.git
+
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
 
 D = build/$*/usr/palm/applications/${APP_ID}
 
@@ -72,8 +74,6 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		clobber ${NAME} )
 	mkdir -p ${D}
 	${CROSS_COMPILE_$*}strip --strip-debug build/src/src/wirc
-	${CROSS_COMPILE_$*}strip --strip-debug build/src/src/libssl.so
-	${CROSS_COMPILE_$*}strip --strip-debug build/src/src/libpdl/libpdl.so
 	install -m 755 build/src/src/${NAME} ${D}
 	cp -r build/src/* ${D}
 	rm -rf ${D}/src
