@@ -34,7 +34,7 @@ ifeq ($(SSL),)
 	SSL=1
 endif
 
-GIT_TAG = 8199f86261c29f858f13870eb42d66ff37ceeb89
+GIT_TAG = v0.3.14
 SRC_GIT = git://git.webos-internals.org/applications/wIRC.git
 
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
