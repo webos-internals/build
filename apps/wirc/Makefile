@@ -74,7 +74,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc SSL=${SSL}\
 		clobber ${NAME} )
 	mkdir -p ${D}
-	${CROSS_COMPILE_$*}strip --strip-debug build/src/src/wirc
+	${CROSS_COMPILE_$*}strip build/src/src/wirc
 	install -m 755 build/src/src/${NAME} ${D}
 	cp -r build/src/* ${D}
 	rm -rf ${D}/src
