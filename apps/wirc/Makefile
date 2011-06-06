@@ -38,8 +38,6 @@ endif
 GIT_TAG = v0.4.0
 SRC_GIT = git://git.webos-internals.org/applications/wIRC.git
 
-CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
-
 D = build/$*/usr/palm/applications/${APP_ID}
 
 .PHONY: package
@@ -68,6 +66,8 @@ build/.built-${VERSION}: build/arm.built-${VERSION}
 	touch $@
 
 include ../../support/cross-compile.mk
+
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src/src/libpdl ; rm -f *.o ; rm -f *.so ; cd .. ; \
