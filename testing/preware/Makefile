@@ -98,8 +98,7 @@ include ../../support/cross-compile.mk
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	( cd build/src/src ; \
-	  ${MAKE} VERSION=${VERSION} STAGING_DIR=${STAGING_DIR_$*} \
-	  CC=${CROSS_COMPILE_$*}gcc CFLAGS=${CFLAGS_$*} LDFLAGS=${LDFLAGS_$*} \
+	  ${MAKE} VERSION=${VERSION} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc CFLAGS=${CFLAGS_$*} \
 	  clobber ipkgservice \
 	)
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
