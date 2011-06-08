@@ -3,7 +3,7 @@ TITLE	 = Preware
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.6.3
+VERSION  = 1.6.4
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
@@ -11,6 +11,7 @@ ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 MINWEBOSVERSION = 1.4.0
 DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, kernels, services and plugins. Preware is also able to access official Palm App Catalog, Web Distribution and Beta Distribution feeds.<br><b>Requires webOS 1.4.0 or later</b>.
 CHANGELOG = \
+1.6.4: Fixed a problem when loading the saved packages list.<br>\
 1.6.3: WebOS Internals has been formally notified by Richard Kerris (HP Vice President of Worldwide Developer Relations) that open access to the webOS app catalog feed (including the beta and web feeds) is no longer available to third party developers or applications. Please direct any questions about this decision (which is final and permanent) to HP, not to WebOS Internals. Removed all HP webOS app catalog feeds from new installations of Preware.<br>\
 1.6.2: Added the clock themes feed (disabled by default).<br>\
 1.6.0: webOS 2.x Just Type integration. Fixed package list ordering bug. Layout fixes for Pixi/Veer.<br>\
@@ -97,7 +98,8 @@ include ../../support/cross-compile.mk
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	( cd build/src/src ; \
-	  ${MAKE} VERSION=${VERSION} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc CFLAGS=${CFLAGS_$*} \
+	  ${MAKE} VERSION=${VERSION} STAGING_DIR=${STAGING_DIR_$*} \
+	  CC=${CROSS_COMPILE_$*}gcc CFLAGS=${CFLAGS_$*} LDFLAGS=${LDFLAGS_$*} \
 	  clobber ipkgservice \
 	)
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
