@@ -10,7 +10,7 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
 DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature, load averages and memory usage.
 CHANGELOG = \
-0.8.9: Add battery temperature support for Veer and TouchPad<br>\
+0.8.11: Add battery temperature support for Veer and TouchPad<br>\
 0.8.8: Added battery current support for the TouchPad.<br>\
 0.8.6: Added battery current support for the Veer.<br>\
 0.8.5: Added more detail in the help for various settings.<br>\
