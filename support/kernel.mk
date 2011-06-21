@@ -22,7 +22,6 @@ else
 KERNEL_VERSION = 2.6.24
 endif
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tgz
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
 DL_DIR = ../../downloads
 POSTINSTALLFLAGS = RestartDevice
 POSTUPDATEFLAGS  = RestartDevice
@@ -109,6 +108,7 @@ COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
 
 ifeq ("${WEBOS_VERSION}", "1.4.5")
 COMPATIBLE_VERSIONS = 1.4.5 | 1.4.5.1
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
 endif
 
 ifeq ("${WEBOS_VERSION}", "2.0.0")
@@ -141,6 +141,16 @@ KERNEL_SUBMISSION = linuxkernel-2.6.24.patch
 endif
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
+
+ifeq ("${WEBOS_VERSION}", "2.1.2")
+ifeq ("${DEVICE}","veer")
+KERNEL_SOURCE = http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.29.tar.gz
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
+KERNEL_SUBMISSION = linuxkernel-${KERNEL_VERSION}.patch/kerneldiffs-2.1.2.txt
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
 endif
 
 .PHONY: package
