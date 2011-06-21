@@ -1,7 +1,7 @@
 NAME     = wirc
 TITLE    = wIRC
 APP_ID   = org.webosinternals.${EXTRAID}${NAME}
-VERSION  = 0.4.2
+VERSION  = 0.4.2-1
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = Communication
@@ -35,13 +35,13 @@ ifeq ($(SSL),)
 	SSL=1
 endif
 
-GIT_TAG = v0.4.2
+GIT_TAG = v0.4.2-1
 SRC_GIT = git://git.webos-internals.org/applications/wIRC.git
 
 D = build/$*/usr/palm/applications/${APP_ID}
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
+package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
 
 include ../../support/package.mk
 
@@ -62,12 +62,12 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/arm.built-${VERSION}
+build/.built-${VERSION}: build/arm.built-${VERSION} build/i686.built-${VERSION}
 	touch $@
 
 include ../../support/cross-compile.mk
 
-CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+#CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src/src/libpdl ; rm -f *.o ; rm -f *.so ; cd .. ; \
