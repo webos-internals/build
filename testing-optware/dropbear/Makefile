@@ -24,13 +24,13 @@ include ../../support/package.mk
 include ../../support/download.mk
 
 build/%.built-${VERSION} : build/%.unpacked-${VERSION}
-	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/etc/default
-	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/etc/init.d
-	rm -f  build/$*/usr/palm/applications/${APP_ID}/opt/bin/dbclient
-	rm -f  build/$*/usr/palm/applications/${APP_ID}/opt/sbin/dropbear
-	rm -f  build/$*/usr/palm/applications/${APP_ID}/opt/sbin/dropbearconvert
-	rm -f  build/$*/usr/palm/applications/${APP_ID}/opt/sbin/dropbearkey
-	mkdir -p build/$*/upstart
+	rm -rf   build/$*/usr/palm/applications/${APP_ID}/opt/etc/default
+	rm -rf   build/$*/usr/palm/applications/${APP_ID}/opt/etc/init.d
+	rm -f    build/$*/usr/palm/applications/${APP_ID}/opt/bin/dbclient
+	rm -f    build/$*/usr/palm/applications/${APP_ID}/opt/sbin/dropbear
+	rm -f    build/$*/usr/palm/applications/${APP_ID}/opt/sbin/dropbearconvert
+	rm -f    build/$*/usr/palm/applications/${APP_ID}/opt/sbin/dropbearkey
+	mkdir -p build/$*/usr/palm/applications/${APP_ID}/upstart
 	install -m 644 upstart/${APP_ID} build/$*/usr/palm/applications/${APP_ID}/upstart/${APP_ID}
 	touch $@
 
