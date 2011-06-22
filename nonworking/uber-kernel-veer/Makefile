@@ -23,13 +23,13 @@ ${WEBOS_VERSION}-1: Initial version.
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
-# KERNEL_PATCHES = makefiletune/armMakefile.diff \
-# 		 defconfig/defconfig.pre2.cpugov \
-# 		 compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
-# 		 usb/f_mass_storage.patch crypto/truecrypt-support-pre.patch \
-# 		 idcode/idcode.patch
+KERNEL_PATCHES = makefiletune/armMakefile.diff \
+		 defconfig/defconfig.pre2.cpugov \
+		 usb/f_mass_storage.patch crypto/truecrypt-support-pre.patch \
+		 idcode/idcode.patch
 
-EXTERNAL_MODULES = compcache/compcache-0.5.4
+# compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
+# EXTERNAL_MODULES = compcache/compcache-0.5.4
 TYPE = Kernel
 
 include ../../support/kernel.mk

@@ -145,7 +145,7 @@ endif
 
 ifeq ("${WEBOS_VERSION}", "2.1.2")
 ifeq ("${DEVICE}","veer")
-KERNEL_SOURCE = http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.29.tar.gz
+KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.1.1/linuxkernel-${KERNEL_VERSION}.tgz
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
 KERNEL_SUBMISSION = linuxkernel-${KERNEL_VERSION}.patch/kerneldiffs-2.1.2.txt
 # Override the compiler
