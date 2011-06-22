@@ -3,11 +3,11 @@ TITLE	 = Dropbear
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
 OPT_VER  = 0.52-5
-VERSION  = 0.52-11
+VERSION  = 0.52-12
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Dropbear
 TYPE	 = Optware
 DESCRIPTION = Dropbear is a compact SSH server and client, which enables secure root access via wifi only, on port 22, with secure ssh key authentication only (passwords are completely disabled by default).  See the Homepage link for mandatory configuration instructions.  Note that you must set a root password to use dropbear, even though password authentication is disabled by default.  For this reason, openssh is recommended ahead of dropbear.
-CHANGELOG = 0.52-11: Moved upstart script from /etc/event.d/ to /var/palm/event.d/ to handle apps and data erases better.
+CHANGELOG = 0.52-12: Moved upstart script from /etc/event.d/ to /var/palm/event.d/ to handle apps and data erases better.
 CHANGELOG += 0.52-10: Made compatible with the Emergency Service Enabler to survive doctoring.
 CHANGELOG += <br>0.52-9: Updated for future webOS compatibility.
 CHANGELOG += <br>0.52-8: Initial version.
@@ -31,7 +31,7 @@ build/%.built-${VERSION} : build/%.unpacked-${VERSION}
 	rm -f  build/$*/usr/palm/applications/${APP_ID}/opt/sbin/dropbearconvert
 	rm -f  build/$*/usr/palm/applications/${APP_ID}/opt/sbin/dropbearkey
 	mkdir -p build/$*/upstart
-	install -m 644 upstart/${APP_ID} build/$*/upstart/${APP_ID}
+	install -m 644 upstart/${APP_ID} build/$*/usr/palm/applications/${APP_ID}/upstart/${APP_ID}
 	touch $@
 
 include ../../support/optware.mk
