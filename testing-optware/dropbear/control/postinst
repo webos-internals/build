@@ -14,6 +14,9 @@ APPS=/media/cryptofs/apps
 
 APPDIR=$APPS/usr/palm/applications/$APPID
 
+# Remove any legacy upstart script
+rm -f /etc/event.d/${APPID}
+
 # Symlink files into /opt
 cd $APPDIR/opt
 find bin etc sbin -type d -exec mkdir -p /opt/{} \;
@@ -22,12 +25,6 @@ ln -sf /opt/sbin/dropbearmulti /opt/bin/dbclient
 ln -sf /opt/sbin/dropbearmulti /opt/sbin/dropbear
 ln -sf /opt/sbin/dropbearmulti /opt/sbin/dropbearconvert
 ln -sf /opt/sbin/dropbearmulti /opt/sbin/dropbearkey
-
-# Disable any legacy dropbear server that was installed manually
-if [ -f /etc/event.d/optware-dropbear ]; then
-    /sbin/stop optware-dropbear
-    rm -f /etc/event.d/optware-dropbear
-fi
 
 /opt/bin/update-alternatives --install /opt/bin/scp scp /opt/sbin/dropbearmulti 50
 /opt/bin/update-alternatives --install /opt/bin/ssh ssh /opt/sbin/dropbearmulti 50
