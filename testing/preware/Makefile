@@ -3,7 +3,7 @@ TITLE	 = Preware
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.6.6
+VERSION  = 1.6.8
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
@@ -11,6 +11,8 @@ ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 MINWEBOSVERSION = 1.4.0
 DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, kernels, services and plugins. Preware is also able to access official Palm App Catalog, Web Distribution and Beta Distribution feeds.<br><b>Requires webOS 1.4.0 or later</b>.
 CHANGELOG = \
+1.6.8: Enabled back tap on header for all devices.<br>\
+1.6.7: Fixed full-screen formatting of ipkg log screen.<br>\
 1.6.6: Preware is now fully compatible with the TouchPad, using the full screen area.<br>\
 1.6.5: Now useable on devices without a back gesture. Set the wget user-agent to Preware when retrieving indexes and packages.<br>\
 1.6.4: Fixed a problem when loading the saved packages list.<br>\
