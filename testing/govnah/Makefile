@@ -3,13 +3,15 @@ TITLE    = Govnah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.8.12
+VERSION  = 0.9.1
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
 DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature, load averages and memory usage.
 CHANGELOG = \
+0.9.1: Added the Palm Default profile for the TouchPad.<br>\
+0.9.0: Added support for the TouchPad, using the full screen area. Added CPU high temperature scaleback speed support.<br>\
 0.8.12: Add battery temperature support for Veer and TouchPad<br>\
 0.8.8: Added battery current support for the TouchPad.<br>\
 0.8.6: Added battery current support for the Veer.<br>\
