@@ -21,6 +21,7 @@ SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = psychobuild/F104A-pre2.patch \
 		 sensors/omap34xx_temp.patch \
 		 psychobuild/ssv3-ovrd.patch \
+		 psychobuild/ssv3-ovrd-pre2.patch \
 		 compcache/lowmemnotify-total-memory.patch \
 		 compcache/compcache.patch \
 		 psychobuild/fbconsole.patch \
