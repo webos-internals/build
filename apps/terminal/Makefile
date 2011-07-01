@@ -1,6 +1,7 @@
 NAME     = terminal
 TITLE	 = Terminal
 APP_ID   = org.webosinternals.${NAME}
+MAXWEBOSVERSION = 1.4.5
 BLDFLAGS = -p
 VERSION  = 0.3.1
 TYPE	 = Application

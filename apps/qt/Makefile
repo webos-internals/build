@@ -1,6 +1,7 @@
 NAME     = qt
 TITLE    = Qt Framework
 APP_ID   = net.griffin.${NAME}
+MAXWEBOSVERSION = 1.4.5
 VERSION  = 4.6.2
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Qt
 MAINTAINER = Griffin INet Inc. <darron@griffin.net>

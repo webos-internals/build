@@ -1,6 +1,7 @@
 NAME     = qtcanvas
 TITLE    = Qt Canvas
 APP_ID   = net.griffin.${NAME}
+MAXWEBOSVERSION = 1.4.5
 VERSION  = 4.6.2
 DEPENDS  = net.griffin.qt
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Qt
