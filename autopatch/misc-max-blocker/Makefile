@@ -1,9 +1,10 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = misc/${NAME}.patch
+TWEAKS =
 TITLE = Max Blocker
 DESCRIPTION = This is a super set to Ad Blocker. It blocks ads, tracking etc.<br/><br/>If you find that this breaks an app for you, try uninstalling it and using Ad Blocker instead. <br/><br/>WARNING: Only install Max Blocker OR Ad Blocker, not both. Failure to heed this will result in Santa putting you on the naughty list.
 CATEGORY = Misc
-VERSIONS = 2.0.0-38 2.0.1-65 2.1.0-19
+VERSIONS = 1.4.5-160 2.0.0-52 2.0.1-82 2.1.0-108 3.0.0-
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
