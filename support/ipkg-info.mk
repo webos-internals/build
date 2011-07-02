@@ -63,3 +63,11 @@ ${DOCTOR_DIR}/webosdoctor-2.1.2.jar:
 	else \
 	  curl -L -o $@ http://palm.cdnetworks.net/rom/veer/p212r0d05132011/attp212rod/webosdoctorp160unaatt.jar; \
 	fi
+
+${DOCTOR_DIR}/webosdoctor-3.0.0.jar:
+	mkdir -p ${DOCTOR_DIR}
+	if [ -e ${DOCTOR_DIR}/webosdoctorp300hstnhwifi.jar ] ; then \
+	  ln -s webosdoctorp300hstnhwifi.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/touchpad/wd300wifi/webosdoctorp300hstnhwifi.jar; \
+	fi
