@@ -2,8 +2,14 @@
 
 APPID=mobi.optware.openssh-sftp-server
 
+APPS=/media/cryptofs/apps
+
+[ -d ${APPS} ] || { echo "Requires webOS 1.3.5 or later" ; exit 1 ; }
+
+APPDIR=${APPS}/usr/palm/applications/${APPID}
+
 # Remove files from /opt
-cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
+cd ${APPDIR}/opt
 find libexec -depth -type f -exec rm -f /opt/{} \;
 find libexec -depth -type d -exec rmdir /opt/{} \;
 
