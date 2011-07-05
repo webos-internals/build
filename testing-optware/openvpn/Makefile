@@ -3,10 +3,11 @@ TITLE	 = OpenVPN
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
 OPT_VER  = 2.1.1-1
-VERSION  = 2.1.1-4
+VERSION  = 2.1.1-5
 HOMEPAGE = http://www.openvpn.net/
-DESCRIPTION = OpenVPN is a full-featured open source SSL VPN solution.
+DESCRIPTION = OpenVPN is a full-featured open source SSL VPN solution.  You must supply a valid /opt/etc/openvpn/openvpn.conf configuration file.
 CHANGELOG = \
+2.1.1-5: Fixed the upstart script.<br>\
 2.1.1-4: Moved upstart script from /etc/event.d/ to /var/palm/event.d/ to handle apps and data erases better.<br>\
 2.1.1-3: Made compatible with the Emergency Service Enabler to survive doctoring.
 TYPE	 = Optware
