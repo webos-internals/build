@@ -5,7 +5,7 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.srv
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 2.3.8
+VERSION  = 2.3.9
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/showthread.php?p=2935803&posted=1#post2919102
@@ -14,6 +14,7 @@ DESCRIPTION = Mode Switcher.
 MINWEBOSVERSION = 2.0.0
 MAXWEBOSVERSION = 2.9.9
 CHANGELOG = \
+2.3.9: Fixed a normal modes changing bug when triggered at the same time.<br>\
 2.3.8: Fixed a bug that made settings fetching fail on Veer.<br>\
 2.3.7: Fixed a bug that caused an error in certain situation.<br>\
 2.3.6: Fixed calendar event trigger and few other bugs, see wiki for details.<br>\
