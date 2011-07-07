@@ -52,7 +52,9 @@ webos-patches-index: ipkgs/webos-patches/1.4.5/Packages \
 	rm -f ipkgs/webos-patches/2.1.2
 	ln -s 2.1.0 ipkgs/webos-patches/2.1.2
 	rm -f ipkgs/webos-patches/unknown
-	ln -s 2.1.0 ipkgs/webos-patches/unknown
+	ln -s 3.0.0 ipkgs/webos-patches/unknown
+	rm -f ipkgs/webos-patches/3.0.2
+	ln -s 3.0.0 ipkgs/webos-patches/3.0.2
 
 .PHONY: webos-kernels-index
 webos-kernels-index: ipkgs/webos-kernels/1.4.5/Packages \
@@ -62,7 +64,9 @@ webos-kernels-index: ipkgs/webos-kernels/1.4.5/Packages \
 	rm -f ipkgs/webos-kernels/1.4.5.1
 	ln -s 1.4.5 ipkgs/webos-kernels/1.4.5.1
 	rm -f ipkgs/webos-kernels/unknown
-	ln -s 2.1.0 ipkgs/webos-kernels/unknown
+	ln -s 3.0.0 ipkgs/webos-kernels/unknown
+	rm -f ipkgs/webos-kernels/3.0.2
+	ln -s 3.0.0 ipkgs/webos-kernels/3.0.2
 
 .PHONY: legacy-webos-kernels
 legacy-webos-kernels:
