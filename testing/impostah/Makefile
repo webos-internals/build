@@ -3,7 +3,7 @@ TITLE    = Impostah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.9.5
+VERSION  = 0.9.6
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Impostah
@@ -11,6 +11,7 @@ ICON	 = http://www.webos-internals.org/images/a/aa/Tux_Imposter.png
 DESCRIPTION = Impostah is an app for those who know what do to with it. It does many things, most of which are too complex to explain in this short description.
 MINWEBOSVERSION = 1.4.5
 CHANGELOG = \
+0.9.6: Fixed a profile merging bug.<br>\
 0.9.5: Added the ability to set the locationHost system preference.<br>\
 0.9.4: Added the ability to list all devices registered with your HP webOS account.<br>\
 0.9.3: Added the ability to list all installed app catalog apps.<br>\
