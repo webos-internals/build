@@ -1,5 +1,5 @@
 NAME     = lunaservice
-APP_ID	 = mobi.optware.lunaservice
+APP_ID	 = org.webosinternals.toolchain.lunaservice
 VERSION  = 0.0.1-1
 HOMEPAGE = http://git.webos-internals.org/?p=libraries/lunaservice.git;a=summary
 LICENSE  = LGPL Open Source

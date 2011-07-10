@@ -1,5 +1,5 @@
 NAME     = glib
-APP_ID	 = mobi.optware.glib
+APP_ID	 = org.webosinternals.toolchain.glib
 VERSION  = 2.20.4-1
 LICENSE  = LGPL Open Source
 
