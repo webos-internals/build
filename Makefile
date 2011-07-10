@@ -222,9 +222,7 @@ toolchain: toolchain/ipkg-utils/ipkg-make-index \
 	   toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu \
 	   staging/usr/include/mjson/json.h \
 	   staging/usr/include/lunaservice.h \
-	   staging/usr/include/glib.h \
-	   staging/usr/include/openssl/crypto.h \
-	   staging/usr/include/curl/curl.h
+	   staging/usr/include/glib.h
 
 toolchain/cs09q1armel/build/arm-2009q1:
 	${MAKE} -C toolchain/cs09q1armel unpack
@@ -243,14 +241,6 @@ staging/usr/include/lunaservice.h:
 
 staging/usr/include/glib.h:
 	${MAKE} -C toolchain/glib stage
-
-staging/usr/include/openssl/crypto.h:
-	${MAKE} -C toolchain/openssl stage
-	${MAKE} -C toolchain/openssl-dev stage
-
-staging/usr/include/curl/curl.h:
-	${MAKE} -C toolchain/libcurl stage
-	${MAKE} -C toolchain/libcurl-dev stage
 
 upload:
 	rsync -avr ipkgs/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/
