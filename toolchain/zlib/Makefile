@@ -18,11 +18,6 @@ stage: build/.staged-${VERSION}
 build/.staged-${VERSION}: build/armv7.staged-${VERSION} build/armv6.staged-${VERSION} build/i686.staged-${VERSION}
 	touch $@
 
-ifeq ($(shell uname -s),Darwin)
-build/i686.staged-${VERSION}:
-	@true
-endif
-
 build/%.staged-${VERSION} : build/%.built-${VERSION}
 	mkdir -p ../../staging/$*/usr/include
 	cp -rp build/$*/usr/include/* ../../staging/$*/usr/include/

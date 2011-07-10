@@ -11,6 +11,8 @@ TOOLCHAIN_DIR_arm   = /opt/PalmPDK/arm-gcc/bin
 TOOLCHAIN_DIR_i686  = $(error "Unable to build for i686 on MacOSX")
 build/i686.built-${VERSION}:
 	@true
+build/i686.staged-${VERSION}:
+	@true
 ipkgs/${APP_ID}_${VERSION}_i686.ipk:
 	@echo "Unable to build for i686 on MacOSX"
 else

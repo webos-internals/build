@@ -47,7 +47,9 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src ; \
 	  CC=${CROSS_COMPILE_$*}gcc \
 	  ./Configure shared no-zlib no-asm linux-elf; \
-	  ${MAKE} clean all )
+	  ${MAKE} \
+		AR="${CROSS_COMPILE_$*}ar r" RANLIB=${CROSS_COMPILE_$*}ranlib \
+		clean all )
 	mkdir -p build/$*/usr/include/openssl
 	install -m 644 build/src/include/${NAME}/* build/$*/usr/include/openssl/
 	mkdir -p build/$*/usr/lib
