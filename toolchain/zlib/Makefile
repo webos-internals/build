@@ -18,6 +18,11 @@ stage: build/.staged-${VERSION}
 build/.staged-${VERSION}: build/armv7.staged-${VERSION} build/armv6.staged-${VERSION} build/i686.staged-${VERSION}
 	touch $@
 
+ifeq ($(shell uname -s),Darwin)
+build/i686.staged-${VERSION}:
+	@true
+endif
+
 build/%.staged-${VERSION} : build/%.built-${VERSION}
 	mkdir -p ../../staging/$*/usr/include
 	cp -rp build/$*/usr/include/* ../../staging/$*/usr/include/
@@ -50,9 +55,12 @@ include ../../support/cross-compile.mk
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	( cd build/src ; \
-	  CC=${CROSS_COMPILE_$*}gcc \
+	  CC=${CROSS_COMPILE_$*}gcc LDSHARED="${CROSS_COMPILE_$*}gcc -shared -Wl,-soname,libz.so.1" \
+	  AR="${CROSS_COMPILE_$*}ar rc" RANLIB="${CROSS_COMPILE_$*}ranlib" \
 	  ./configure --shared; \
-	  ${MAKE} clean all )
+	  ${MAKE} LDFLAGS="-L. libz.1.2.3.so" LIBS=libz.1.2.3.so \
+		SHAREDLIB=libz.so SHAREDLIBV=libz.1.2.3.so SHAREDLIBM=libz.1.so \
+		clean all )
 	mkdir -p build/$*/usr/include
 	install -m 644 build/src/zlib.h build/$*/usr/include/
 	install -m 644 build/src/zconf.h build/$*/usr/include/
