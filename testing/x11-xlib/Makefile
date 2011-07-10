@@ -1,6 +1,7 @@
 NAME     = xlib
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
+MAXWEBOSVERSION = 2.9.9
 VERSION  = 0.2.0
 DEPENDS  = 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X

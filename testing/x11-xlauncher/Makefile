@@ -1,6 +1,7 @@
 NAME     = xlauncher
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
+MAXWEBOSVERSION = 2.9.9
 VERSION  = 0.2.0
 DEPENDS  = org.webosinternals.xorg-server
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X
