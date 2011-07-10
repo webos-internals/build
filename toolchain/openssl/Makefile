@@ -15,8 +15,7 @@ include ../../support/download.mk
 .PHONY: stage
 stage: build/.staged-${VERSION}
 
-build/.staged-${VERSION}: build/armv7.staged-${VERSION}
-#build/.staged-${VERSION}: build/armv7.staged-${VERSION} build/armv6.staged-${VERSION} build/i686.staged-${VERSION}
+build/.staged-${VERSION}: build/armv7.staged-${VERSION} build/armv6.staged-${VERSION} build/i686.staged-${VERSION}
 	touch $@
 
 build/%.staged-${VERSION} : build/%.built-${VERSION}
