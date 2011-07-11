@@ -1,0 +1,20 @@
+#!/bin/sh
+
+DISTRO=ubuntu-natty
+
+NAME=${DISTRO}-chroot
+
+APPID=org.webosinternals.${NAME}
+
+if [ -d /media/ext3fs/{NAME} ] ; then
+    echo "Will not overwrite an existing chroot directory"
+    exit 1
+fi
+
+if [ -d /media/ext3fs ] ; then
+    mkdir -p /media/ext3fs/${NAME} || exit 1
+    tar zxf /media/cryptofs/apps/usr/palm/applications/${APPID}/armel-rootfs-${DISTRO}.tgz || exit 1
+    rm -f /media/cryptofs/apps/usr/palm/applications/${APPID}/armel-rootfs-${DISTRO}.tgz || exit 1
+fi
+
+exit 0
