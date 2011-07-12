@@ -3,10 +3,12 @@ TITLE	 = Nginx Web Server
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
 OPT_VER  = 1.0.2-1
-VERSION  = 1.0.2-2
+VERSION  = 1.0.2-4
 HOMEPAGE = http://nginx.org/
 DESCRIPTION = nginx (pronounced “engine X”) is a lightweight, high-performance Web server/reverse proxy and e-mail (IMAP/POP3) proxy, licensed under a BSD-like license.
 CHANGELOG = \
+1.0.2-4: Switch to using try_files and to remove firewall access upon stop.<br>\
+1.0.2-3: Remove openssl and zlib dependencies.<br>\
 1.0.2-2: Moved upstart script from /etc/event.d/ to /var/palm/event.d/ to handle apps and data erases better.<br>\
 1.0.2-1: Update to v1.0.2.<br>\
 0.7.67-6: Fixed the hanging problem.<br>\
@@ -15,7 +17,7 @@ CHANGELOG = \
 TYPE	 = Optware
 CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/9/9e/Icon_NGiNX.png
-DEPENDS	 = mobi.optware.pcre, mobi.optware.openssl, mobi.optware.zlib
+DEPENDS	 = mobi.optware.pcre
 
 SRC_OPTWARE = ${NAME}_${OPT_VER}
 
