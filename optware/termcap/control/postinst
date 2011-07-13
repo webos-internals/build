@@ -1,0 +1,11 @@
+#!/bin/sh
+
+APPID=mobi.optware.libtermcap
+
+# Symlink files into /opt
+cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
+find lib -type d -exec mkdir -p /opt/{} \;
+find lib -type f -exec ln -sf $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt/{} /opt/{} \;
+ln -sf libtermcap.a /opt/lib/libtermcap.a
+
+exit 0
