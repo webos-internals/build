@@ -8,13 +8,6 @@ APPS=/media/cryptofs/apps
 
 APPDIR=${APPS}/usr/palm/applications/${APPID}
 
-rm -f /var/palm/event.d/${APPID}
-
-# **** Do I need these??? ****
-
-/opt/bin/update-alternatives --remove scp /opt/bin/openssh-scp
-/opt/bin/update-alternatives --remove ssh /opt/bin/openssh-ssh
-
 # Remove files from /opt
 cd ${APPDIR}/opt
 find bin etc libexec sbin var -depth -type f -exec rm -f /opt/{} \;
