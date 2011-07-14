@@ -3,8 +3,9 @@ TITLE    = screen
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
 OPT_VER  = 4.0.3-2
-VERSION  = 4.0.3-2
-CHANGELOG = 4.0.3-2: Initial Load into Preware.
+VERSION  = 4.0.3-3
+CHANGELOG = 4.0.3-3: Fixed post install locations for Preware Installation
+4.0.3-2: Initial Load into Preware.
 HOMEPAGE = http://www.gnu.org/s/screen/
 TYPE     = Optware
 CATEGORY = Utilities

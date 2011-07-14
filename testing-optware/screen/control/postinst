@@ -9,19 +9,18 @@ APPS=/media/cryptofs/apps
 APPDIR=${APPS}/usr/palm/applications/${APPID}
 
 # Remove any legacy upstart script
-#if [ -f /etc/event.d/${APPID} ] ; then
-#  mount -o remount,rw /
-#  rm -f /etc/event.d/${APPID}
-#fi
+if [ -f /etc/event.d/${APPID} ] ; then
+  mount -o remount,rw /
+  rm -f /etc/event.d/${APPID}
+fi
 
 # Symlink files into /opt
 cd ${APPDIR}/opt
-find sbin -type d -exec mkdir -p /opt/{} \;
-find sbin -type f -exec ln -sf ${APPDIR}/opt/{} /opt/{} \;
+find bin etc libexec sbin var -type d -exec mkdir -p /opt/{} \;
+find bin etc libexec sbin var -type f -exec ln -sf ${APPDIR}/opt/{} /opt/{} \;
 
-rm -f /var/palm/event.d/${APPID}
-mkdir -p /var/palm/event.d/
-cp ${APPDIR}/upstart/${APPID} /var/palm/event.d/${APPID}
-/sbin/start ${APPID}
+/opt/bin/update-alternatives --install /opt/bin/screen screen /opt/bin/screen 80
+
+mkdir -p /opt/etc/screen
 
 exit 0

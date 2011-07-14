@@ -8,13 +8,18 @@ APPS=/media/cryptofs/apps
 
 APPDIR=${APPS}/usr/palm/applications/${APPID}
 
-/sbin/stop $APPID
+# The emulator already has an ssh server running, so we didn't start our own.
+if [ "`uname -m`" != "i686" ]; then
+    /sbin/stop ${APPID}
+fi
 
 rm -f /var/palm/event.d/${APPID}
 
+/opt/bin/update-alternatives --remove screen /opt/bin/screen
+
 # Remove files from /opt
 cd ${APPDIR}/opt
-find sbin -depth -type f -exec rm -f /opt/{} \;
-find sbin -depth -type d -exec rmdir /opt/{} \;
+find bin etc libexec sbin var -depth -type f -exec rm -f /opt/{} \;
+find bin etc libexec sbin var -depth -type d -exec rmdir /opt/{} \;
 
 exit 0
