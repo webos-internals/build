@@ -1,7 +1,7 @@
 NAME     = upstartmanager
 APP_ID   = org.webosinternals.${NAME}
 VERSION  = 0.1.2
-MAXWEBOSVERSION = 1.4.5
+MAXWEBOSVERSION = 1.9.9
 DEPENDS = org.webosinternals.upstartmgr
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UpstartManager
 MAINTAINER = Chris Jowett (cryptk) <cryptk@gmail.com>
