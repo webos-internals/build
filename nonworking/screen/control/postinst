@@ -16,11 +16,8 @@ fi
 
 # Symlink files into /opt
 cd ${APPDIR}/opt
-find bin etc libexec sbin var -type d -exec mkdir -p /opt/{} \;
-find bin etc libexec sbin var -type f -exec ln -sf ${APPDIR}/opt/{} /opt/{} \;
+find bin man share info -type d -exec mkdir -p /opt/{} \;
+find bin man share info -type f -exec ln -sf ${APPDIR}/opt/{} /opt/{} \;
 
-/opt/bin/update-alternatives --install /opt/bin/screen screen /opt/bin/screen 80
-
-mkdir -p /opt/etc/screen
 
 exit 0
