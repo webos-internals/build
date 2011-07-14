@@ -47,6 +47,9 @@ if [ -d /var/opt ] && [ -e /media/ext3fs/opt ] ; then
 	{ echo "ERROR: Error removing legacy /var/opt" ; exit 1 ; }
 fi
 
+# Remove an empty /var/opt directory first
+/bin/rmdir /var/opt || true
+
 # Migrate legacy /var/opt installation directory to /media/cryptosfs/optware.ext3
 if [ -d /var/opt ] && [ -e /media/cryptofs/optware.ext3 ] ; then
     /bin/umount /opt || true
