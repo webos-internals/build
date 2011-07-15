@@ -3,6 +3,7 @@ TITLE = XServer
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 VERSION  = 0.6.7
+MINWEBOSVERSION = 2.0.0
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X

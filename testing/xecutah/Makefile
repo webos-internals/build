@@ -4,6 +4,7 @@ APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
 VERSION  = 0.6.6
+MINWEBOSVERSION = 2.0.0
 DEPENDS  = org.webosinternals.xserver, org.webosinternals.xterm
 TYPE	 = Application
 CATEGORY = System Utilities
