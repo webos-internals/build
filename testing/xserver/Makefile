@@ -12,7 +12,8 @@ MAINTAINER = WebOS Internals
 DESCRIPTION = ${APPINFO_DESCRIPTION}
 APPINFO_DESCRIPTION = XServer is used to display X Windows applications on webOS.<br>\
 Due to webOS security constraints, this application cannot run directly.<br>\
-You must use <b>Xecutah</b> to run the XServer and other X Window System applications on webOS.
+You must use <b>Xecutah</b> to run the XServer and other X Window System applications on webOS.<br>\
+Requires webOS 2.0 or later.
 CHANGELOG = \
 0.6.7: Force phones to portrait mode.<br>\
 0.6.6: Initial testing release.
