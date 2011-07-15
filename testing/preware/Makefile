@@ -3,7 +3,7 @@ TITLE	 = Preware
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.7.1
+VERSION  = 1.7.2
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
@@ -11,6 +11,7 @@ ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 MINWEBOSVERSION = 1.4.0
 DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, kernels, services and plugins.<br><b>Requires webOS 1.4.0 or later</b>.
 CHANGELOG = \
+1.7.2: Replaced the word phone with the word device in all messages.<br>\
 1.7.1: Fixed fullscreen screenshot resizing on touchpad rotate (courtesy of Appsotutely). Fixed dependent packages spinner location (courtesy of chpwn).<br>\
 1.7.0: Rolled up all the beta release features for a TouchPad-compatible public release.<br>\
 1.6.8: Enabled back tap on header for all devices.<br>\
