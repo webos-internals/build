@@ -14,6 +14,7 @@ DESCRIPTION = Xecutah allows you to start an X Window System server in a webOS c
 Due to webOS security constraints, such applications cannot run directly.<br>\
 The XServer requires <a href=https://developer.palm.com/content/resources/develop/webos_3_0_developer_beta.html>webOS 3.0 Developer Beta</a> firmware for correct operation on the TouchPad.
 CHANGELOG = \
+0.6.7: Made the Developer Beta firmware requirement even more explicit.<br>\
 0.6.6: First testing release.
 SCREENSHOTS = [\
  ]
