@@ -2,7 +2,7 @@ NAME = xserver
 TITLE = XServer
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.6.5
+VERSION  = 0.6.6
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X
@@ -13,9 +13,9 @@ APPINFO_DESCRIPTION = XServer is used to display X Windows applications on webOS
 Due to webOS security constraints, this application cannot run directly.<br>\
 You must use <b>Xecutah</b> to run the XServer and other X Window System applications on webOS.
 CHANGELOG = \
-0.6.5: Initial testing release.
+0.6.6: Initial testing release.
 APPINFO_CHANGELOG = [ \
-{ "version" : "0.6.5",  "log" : [ "Initial testing release" ] } \
+{ "version" : "0.6.6",  "log" : [ "Initial testing release" ] } \
 ]
 LICENSE  = GPL v2 Open Source
 
