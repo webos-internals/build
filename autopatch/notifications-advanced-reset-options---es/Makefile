@@ -1,11 +1,12 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = notifications/${NAME}.patch
+TWEAKS =
 TITLE = Advanced Reset Options - ES
-DESCRIPTION = On power button hold, it goes straight to the reset options, with airplane mode, java restart, and luna restart added, and skips the swap-battery/shutdown prompt. Spanish language.
+DESCRIPTION = On power button hold, the options will be airplaine mode, luna restart, device restart, shut down, and cancel. Spanish language.
 CATEGORY = Notifications
-VERSIONS = 1.4.5-30 2.0.1-45 2.1.0-3
+VERSIONS = 1.4.5-30 2.0.1-45 2.1.0-3 3.0.0-17
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
-SCREENSHOTS =
+SCREENSHOTS = [ \"http://www.webos-internals.org\" ]
 META_SUB_VERSION = 1
 
 include ../common.mk
@@ -13,4 +14,4 @@ include ../common.mk
 include ../modifications.mk
 
 MAINTAINER = Jason Robitaille
-HOMEPAGE = http://forums.precentral.net/webos-patches/223829-patch-advanced-reset-options-5.html#post2611264
+HOMEPAGE = http://forums.precentral.net/webos-patches/288393-patch-touchpad-advanced-reset-options.html
