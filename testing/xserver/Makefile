@@ -52,7 +52,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION} ${DL_DIR}/headlessapp-${HEA
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
 	tar -C build/$*/usr/palm/applications/${APP_ID} -xf ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/.git
-	tar -C build/src/$* -cf - | \
+	tar -C build/src/$* -cf - . | \
 	tar -C build/$*/usr/palm/applications/${APP_ID}/ -xf -
 	tar -C build/src -cf - icon.png xecutah.sh set_keymap_later.sh | \
 	tar -C build/$*/usr/palm/applications/${APP_ID}/ -xf -
