@@ -60,7 +60,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION} ${DL_DIR}/headlessapp-${HEA
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/.git
 	tar -C build/src/$* -cf - . | \
 	tar -C build/$*/usr/palm/applications/${APP_ID}/ -xf -
-	tar -C build/src -cf - icon.png xecutah.sh set_keymap_later.sh | \
+	tar -C build/src -cf - control upstart icon.png xecutah.sh set_keymap_later.sh | \
 	tar -C build/$*/usr/palm/applications/${APP_ID}/ -xf -
 	echo "{" > build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "\"title\": \"${TITLE}\"," >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
