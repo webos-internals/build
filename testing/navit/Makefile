@@ -3,7 +3,7 @@ TITLE    = Navit - Car navigation system
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.5.0.4446-1
+VERSION	 = 0.5.0.4637-1
 TYPE     = Application
 CATEGORY = Utilities
 DESCRIPTION = <p>This package does not include map-data. Please visit \
@@ -21,6 +21,7 @@ DESCRIPTION = <p>This package does not include map-data. Please visit \
        	other navigation systems, Navit maps are dynamically generated in real \
        	time from vector data.</p>
 CHANGELOG = \
+	    0.5.0.4637-1: Update to svn r4637. Did some adjustments to screnn rotation for HP TouchPad. Besides that, way too many changes ... <br/> \
 	    0.5.0.4446-1: Update to svn r4446. Fix back gesture. <br/> \
 	    0.5.0.4442-1: Update to svn r4442. Fix crash on exit. <br/> \
 	    0.5.0.4438-1: Update to svn r4438. Hopefully restabelize. <br/> \
@@ -83,7 +84,7 @@ D = build/$*/usr/palm/applications/${APP_ID}
 SRC_GIT = git://git.webos-internals.org/applications/navit.git
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_armv6.ipk
+package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk #ipkgs/${APP_ID}_${VERSION}_armv6.ipk
 include ../../support/package.mk
 
 .PHONY: unpack
@@ -99,7 +100,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 
 .PHONY: build
 build: build/.built-${VERSION}
-build/.built-${VERSION}: build/armv7.built-${VERSION} build/armv6.built-${VERSION}
+build/.built-${VERSION}: build/armv7.built-${VERSION} #build/armv6.built-${VERSION}
 	>$@
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
@@ -117,4 +118,4 @@ build/%/CONTROL/postinst:
 	chmod ugo+x $@
 
 clobber::
-	rm -rf build git
+	rm -rf build ../../downloads/navit-hybrid-hybrid.tar.gz
