@@ -2,23 +2,23 @@ NAME = xserver
 TITLE = XServer
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.7.0
+VERSION  = 0.7.1
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X
-ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
+ICON	 = http://www.webos-internals.org/images/a/a5/X.png
 MAINTAINER = WebOS Internals
 DESCRIPTION = ${APPINFO_DESCRIPTION}
 APPINFO_DESCRIPTION = XServer is used to display X Windows applications on webOS.<br>\
 Due to webOS security constraints, this application cannot run directly.<br>\
 You must use <b>Xecutah</b> to run the XServer and other X Window System applications on webOS.
 CHANGELOG = \
-0.7.0: New upstart-based execution architecture to support legacy webOS versions.<br>\
+0.7.1: New upstart-based execution architecture to support legacy webOS versions.<br>\
 0.6.8: Enable sticky modifiers on phone devices.<br>\
 0.6.7: Force phones to portrait mode.<br>\
 0.6.6: Initial testing release.
 APPINFO_CHANGELOG = [ \
-{ "version" : "0.7.0",  "log" : [ "New upstart-based execution architecture to support legacy webOS versions" ] }, \
+{ "version" : "0.7.1",  "log" : [ "New upstart-based execution architecture to support legacy webOS versions" ] }, \
 { "version" : "0.6.8",  "log" : [ "Enable sticky modifiers on phone devices" ] }, \
 { "version" : "0.6.7",  "log" : [ "Force phones to portrait mode" ] }, \
 { "version" : "0.6.6",  "log" : [ "Initial testing release" ] } \
@@ -79,6 +79,18 @@ endif
 	echo "\"noWindow\": true" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "}" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	touch $@
+
+build/%/CONTROL/postinst:
+	rm -f $@
+	mkdir -p build/$*/CONTROL
+	install -m 0775 build/src/control/postinst build/$*/CONTROL
+	chmod ugo+x $@
+
+build/%/CONTROL/prerm:
+	rm -f $@
+	mkdir -p build/$*/CONTROL
+	install -m 0775 build/src/control/prerm build/$*/CONTROL
+	chmod ugo+x $@
 
 clobber::
 	rm -rf build
