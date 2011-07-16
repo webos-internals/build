@@ -2,7 +2,7 @@ NAME = xserver
 TITLE = XServer
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.6.7
+VERSION  = 0.6.8
 MINWEBOSVERSION = 2.0.0
 TYPE	 = Application
 CATEGORY = System Utilities
@@ -15,9 +15,11 @@ Due to webOS security constraints, this application cannot run directly.<br>\
 You must use <b>Xecutah</b> to run the XServer and other X Window System applications on webOS.<br>\
 Requires webOS 2.0 or later.
 CHANGELOG = \
+0.6.8: Enable sticky modifiers on phone devices.<br>\
 0.6.7: Force phones to portrait mode.<br>\
 0.6.6: Initial testing release.
 APPINFO_CHANGELOG = [ \
+{ "version" : "0.6.8",  "log" : [ "Enable sticky modifiers on phone devices" ] }, \
 { "version" : "0.6.7",  "log" : [ "Force phones to portrait mode" ] }, \
 { "version" : "0.6.6",  "log" : [ "Initial testing release" ] } \
 ]
