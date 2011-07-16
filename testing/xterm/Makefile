@@ -2,8 +2,7 @@ NAME = xterm
 TITLE = XTerm
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.6.6
-MINWEBOSVERSION = 2.0.0
+VERSION  = 0.7.0
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X
@@ -12,11 +11,12 @@ MAINTAINER = WebOS Internals
 DESCRIPTION = ${APPINFO_DESCRIPTION}
 APPINFO_DESCRIPTION = XTerm is used to provide a Linux command-line interface on webOS.<br>\
 Due to webOS security constraints, this application cannot run directly.<br>\
-You must use <b>Xecutah</b> to run the XServer and other X Window System applications on webOS.<br>\
-Requires webOS 2.0 or later.
+You must use <b>Xecutah</b> to run the XServer and other X Window System applications on webOS.
 CHANGELOG = \
+0.7.0: New upstart-based execution architecture to support legacy webOS versions.<br>\
 0.6.6: Initial testing release.
 APPINFO_CHANGELOG = [ \
+{ "version" : "0.7.0",  "log" : [ "New upstart-based execution architecture to support legacy webOS versions" ] }, \
 { "version" : "0.6.6",  "log" : [ "Initial testing release" ] } \
 ]
 LICENSE  = GPL v2 Open Source
@@ -61,7 +61,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION} ${DL_DIR}/headlessapp-${HEA
 	echo "{" > build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "\"title\": \"${TITLE}\"," >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "\"id\": \"${APP_ID}\"," >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
-	echo "\"version\": \"${WEBOS_VERSION}\"," >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
+	echo "\"version\": \"${VERSION}\"," >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "\"vendor\": \"WebOS Internals\"," >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "\"type\": \"web\"," >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "\"main\": \"index.html\"," >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
