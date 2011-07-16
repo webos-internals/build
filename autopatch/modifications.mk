@@ -1,4 +1,4 @@
-SRC_GIT = git://gitorious.org/webos-internals/modifications.git
+SRC_GIT = git://github.com/webos-internals/patches.git
 
 build/.unpacked-${VERSION}: ${DL_DIR}/modifications-${VERSION}.tar.gz
 	rm -rf build/src-${VERSION}
