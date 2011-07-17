@@ -50,7 +50,7 @@ build/.built-${VERSION}: build/arm.built-${VERSION} # build/i686.built-${VERSION
 
 include ../../support/cross-compile.mk
 
-build/${NAME}.tgz: build/.unpacked-${VERSION}
+build/${NAME}.tgz:
 	rm -f build/${NAME}.tgz
 	( cd build ; rootstock --no-root --fqdn ${NAME} --dist natty )
 	mv build/armel-rootfs*.tgz build/${NAME}.tgz
