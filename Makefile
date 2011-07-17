@@ -49,6 +49,8 @@ webos-patches-index: ipkgs/webos-patches/1.4.5/Packages \
 		     ipkgs/webos-patches/2.1.0/Packages ipkgs/webos-patches/3.0.0/Packages
 	rm -f ipkgs/webos-patches/1.4.5.1
 	ln -s 1.4.5 ipkgs/webos-patches/1.4.5.1
+	rm -f ipkgs/webos-patches/2.1.1
+	ln -s 2.1.0 ipkgs/webos-patches/2.1.1
 	rm -f ipkgs/webos-patches/2.1.2
 	ln -s 2.1.0 ipkgs/webos-patches/2.1.2
 	rm -f ipkgs/webos-patches/unknown
