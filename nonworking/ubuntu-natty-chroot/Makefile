@@ -46,13 +46,21 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
 	( cd build/$*/usr/palm/applications/${APP_ID} ; \
-	  sudo rootstock \
+	  rootstock --no-root \
 		--fqdn ${NAME} \
 		--login webos \
 		--password webos \
-		--seed xterm \
 		--dist natty )
+	mv build/$*/usr/palm/applications/${APP_ID}/armel-rootfs*.tgz \
+		build/$*/usr/palm/applications/${APP_ID}/${NAME}.tgz 
+	cp files/* build/$*/usr/palm/applications/${APP_ID}/
 	touch $@
+
+build/%/CONTROL/postinst:
+	rm -f $@
+	mkdir -p build/$*/CONTROL
+	install -m 0775 postinst build/$*/CONTROL
+	chmod ugo+x $@
 
 clobber::
 	rm -rf build
