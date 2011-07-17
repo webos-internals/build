@@ -34,7 +34,6 @@ KERNEL_PATCHES = sensors/sensors_temp_omap34xx.patch \
                  psychobuild/sdio.patch \
                  psychobuild/sio.patch \
                  psychobuild/cpu_alignment.patch \
-		 psychobuild/preempt.patch \
 		 psychobuild/fbconsole.patch \
 		 psychobuild/AV8B-logo.patch \
 		 compcache/compcache.patch memory/tmc_mem.patch \
