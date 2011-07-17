@@ -18,18 +18,20 @@ APPDIR=${APPS}/usr/palm/applications/${APPID}
 # Remove the upstart script
 rm -f /var/palm/event.d/${APPID}
 
-if [ -d /media/ext3fs/${NAME} ] ; then
-    echo "Will not overwrite existing chroot directory at /media/ext3fs/${NAME}"
+if [ ! -d /media/ext3fs ] ; then
+    echo "This package requires a dedicated ext3fs partition created by the WebOS Internals Meta-Doctor"
     exit 1
 fi
 
-if [ -d /media/ext3fs ] ; then
+if [ -d /media/ext3fs/${NAME} ] ; then
+    echo "Will not overwrite existing chroot directory at /media/ext3fs/${NAME}"
+else
     mkdir -p /media/ext3fs/${NAME} || exit 1
     tar -C /media/ext3fs/${NAME} -z -x -f ${APPDIR}/${NAME}.tgz || exit 1
-
-    # Install the upstart script
-    mkdir -p /var/palm/event.d
-    cp ${APPDIR}/upstart/${APPID} /var/palm/event.d/${APPID}
 fi
+
+# Install the upstart script
+mkdir -p /var/palm/event.d
+cp ${APPDIR}/upstart/${APPID} /var/palm/event.d/${APPID}
 
 exit 0
