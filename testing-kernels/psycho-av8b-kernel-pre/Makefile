@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = AV8B Harrier II (Pre/Pre+)
 CATEGORY = Experimental
 DEVICE = pre
-VERSIONS = 1.4.5-180 2.1.0-70
+VERSIONS = 1.4.5-186 2.1.0-70
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br><br>\
 Features:<br> * Dynamic voltage scaling<br> * 1GHz<br><br>\
 For more information, visit ${HOMEPAGE}
@@ -13,6 +13,7 @@ SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 ifeq (${WEBOS_VERSION},1.4.5)
 
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-186", "log" : [ "add cpu-based alignment handling. deadline scheduler tweak. add preemption. add low-latency sdio. add SIO IO scheduler." ] }, \
 { "version" : "${WEBOS_VERSION}-180", "log" : [ "minor fixes and tweaks. add vdemand poll sysfs back with msecs." ] }, \
 { "version" : "${WEBOS_VERSION}-176", "log" : [ "backport some vdemand fixes." ] }, \
 { "version" : "${WEBOS_VERSION}-173", "log" : [ "bug fixes for vdemand driver." ] }, \
@@ -26,10 +27,14 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-137", "log" : [ "added temp limiter. fixed cpu speed drop on DSP run. major overhaul." ] }, \
 { "version" : "${WEBOS_VERSION}-136", "log" : [ "Initial release. Dynamic voltage scaling based on CPU load. vdemand gov." ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-180: minor fixes and tweaks. add vdemand poll sysfs back with msecs.<br>${WEBOS_VERSION}-176: backport some vdemand fixes<br>${WEBOS_VERSION}-173: bug fixes for vdemand driver.<br>${WEBOS_VERSION}-171: force some preemption. change IO sched. add PPP comp.<br>${WEBOS_VERSION}-170: split battery, charger, and temp monitoring for friendlier battery polling.<br>${WEBOS_VERSION}-164: remove scaling sysfs.<br>${WEBOS_VERSION}-163: remove debug hack.<br>${WEBOS_VERSION}-160: increase default voltages.<br>${WEBOS_VERSION}-159: add charger scaleback and override. vdemand cleanup. fix out of bound array.<br>${WEBOS_VERSION}-146: bring DSP back inline. added vsel reset. align voltages from feedback.<br>${WEBOS_VERSION}-137: added temp limiter. fixed cpu speed drop on DSP run. major overhaul.<br>${WEBOS_VERSION}-136: Initial release. Dynamic voltage scaling based on CPU load. vdemand gov.<br>
+CHANGELOG = ${WEBOS_VERSION}-186: add cpu-based alignment handling. deadline scheduler tweak. add preemption. add low-latency sdio. add SIO IO scheduler.<br>${WEBOS_VERSION}-180: minor fixes and tweaks. add vdemand poll sysfs back with msecs.<br>${WEBOS_VERSION}-176: backport some vdemand fixes<br>${WEBOS_VERSION}-173: bug fixes for vdemand driver.<br>${WEBOS_VERSION}-171: force some preemption. change IO sched. add PPP comp.<br>${WEBOS_VERSION}-170: split battery, charger, and temp monitoring for friendlier battery polling.<br>${WEBOS_VERSION}-164: remove scaling sysfs.<br>${WEBOS_VERSION}-163: remove debug hack.<br>${WEBOS_VERSION}-160: increase default voltages.<br>${WEBOS_VERSION}-159: add charger scaleback and override. vdemand cleanup. fix out of bound array.<br>${WEBOS_VERSION}-146: bring DSP back inline. added vsel reset. align voltages from feedback.<br>${WEBOS_VERSION}-137: added temp limiter. fixed cpu speed drop on DSP run. major overhaul.<br>${WEBOS_VERSION}-136: Initial release. Dynamic voltage scaling based on CPU load. vdemand gov.<br>
 
 KERNEL_PATCHES = sensors/sensors_temp_omap34xx.patch \
 		 psychobuild/AV8B.patch \
+                 psychobuild/sdio.patch \
+                 psychobuild/sio.patch \
+                 psychobuild/cpu_alignment.patch \
+		 psychobuild/preempt.patch \
 		 psychobuild/fbconsole.patch \
 		 psychobuild/AV8B-logo.patch \
 		 compcache/compcache.patch memory/tmc_mem.patch \
