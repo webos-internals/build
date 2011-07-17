@@ -42,25 +42,20 @@ build/.built-${VERSION}: build/arm.built-${VERSION} # build/i686.built-${VERSION
 
 include ../../support/cross-compile.mk
 
-build/%.built-${VERSION}: build/.unpacked-${VERSION}
+build/${NAME}.tgz: build/.unpacked-${VERSION}
+	rm -f build/${NAME}.tgz
+	( cd build ; rootstock --no-root --fqdn ${NAME} --dist natty )
+	mv build/armel-rootfs*.tgz build/${NAME}.tgz
+
+build/%.built-${VERSION}: build/${NAME}.tgz
 	rm -rf build/$*
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
-	( cd build/$*/usr/palm/applications/${APP_ID} ; \
-	  rootstock --no-root \
-		--fqdn ${NAME} \
-		--login webos \
-		--password webos \
-		--dist natty )
-	mv build/$*/usr/palm/applications/${APP_ID}/armel-rootfs*.tgz \
-		build/$*/usr/palm/applications/${APP_ID}/${NAME}.tgz 
-	cp files/* build/$*/usr/palm/applications/${APP_ID}/
+	install -m 644 build/${NAME}.tgz build/$*/usr/palm/applications/${APP_ID}/${NAME}.tgz 
+	mkdir -p build/$*/usr/palm/applications/${APP_ID}/upstart
+	install -m 644 upstart/${APP_ID} build/$*/usr/palm/applications/${APP_ID}/upstart/
+	mkdir -p build/$*/usr/palm/applications/${APP_ID}/bin
+	install -m 755 bin/*.sh build/$*/usr/palm/applications/${APP_ID}/bin/
 	touch $@
-
-build/%/CONTROL/postinst:
-	rm -f $@
-	mkdir -p build/$*/CONTROL
-	install -m 0775 postinst build/$*/CONTROL
-	chmod ugo+x $@
 
 clobber::
 	rm -rf build
