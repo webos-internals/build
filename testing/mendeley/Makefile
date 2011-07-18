@@ -1,18 +1,16 @@
 NAME     = mendeley
 TITLE    = Mendeley
 APP_ID   = us.ryanhope.${NAME}
-VERSION  = 0.0.1
+VERSION  = 0.0.2
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = Productivity
 MAINTAINER = Ryan Hope <PuffTheMagic>
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Mendeley
-ICON     = http://http://git.webos-internals.org/enyo/mendeley/plain/images/icon-64.png
+ICON     = http://git.webos-internals.org/enyo/mendeley/plain/images/icon-64.png
 DESCRIPTION = A native webOS/Enyo Mendeley client for the HP Touchpad. <b><font color=red>THIS PROGRAM IS HIGHLY ALPHA; IT IS IN CONSTANT FLUX AND THE OPEN MENDELEY API IS CONSTANTLY CHANGING. EXPECT BUGS!</font></b>
 
-SCREENSHOTS = [\
-\"http://www.webos-internals.org/wiki/File:Mendeley1.png\"\
-]
+SCREENSHOTS = [\"http://www.webos-internals.org/wiki/File:Mendeley1.png\"]
 LICENSE  = GPL v2 Open Source
 MINWEBOSVERSION = 3.0.0
 
