@@ -1,6 +1,6 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = advanced/${NAME}.patch
-TITLE = Advanced System Prefs - Messaging Prefs
+TITLE = Advanced System Prefs - Messaging Prefs (Veer)
 DESCRIPTION = * Requires Advanced System Prefs Framework patch to function properly!<br/><br/>Adds per account notification configuration for messaging app. Also adds support for notification settings for SMS received from unknown contacts and per contact notification configuration.
 CATEGORY = Advanced
 VERSIONS = 2.1.0-119

@@ -1,0 +1,16 @@
+NAME = $(shell basename $(shell pwd))
+PATCH = advanced/${NAME}.patch
+TITLE = Advanced System Prefs - Phone Prefs (Veer)
+DESCRIPTION = * Requires Advanced System Prefs Framework patch to function properly!<br/><br/>Adds additional preferences for phone app. Also adds support for notification settings for phone calls received from unknown contacts and per contact notification configuration.
+CATEGORY = Advanced
+VERSIONS = 2.1.0-119
+ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
+SCREENSHOTS = [ \"http://www.webos-internals.org/images/8/8d/AdvancedSystemPrefsPhone_1.jpg\",\"http://www.webos-internals.org/images/8/80/AdvancedSystemPrefsPhone_2.jpg\" ]
+META_SUB_VERSION = 1
+
+include ../common.mk
+
+include ../modifications.mk
+
+MAINTAINER = sconix
+HOMEPAGE = http://forums.precentral.net/enlightened-linux-solutions/269550-patch-advanced-system-prefs-2-x.html
