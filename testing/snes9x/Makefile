@@ -10,7 +10,7 @@ DESCRIPTION = Port of the amazing Super Nintendo Entertainment System emulator '
 	<br><br><b>Requires WebOS >= 1.4.5!</b><br>
 CHANGELOG = \
 <b>0.0.7</b><br>Fix screen scaling issue in landscape.<br>Fix orientation issues (cardmode, notifications on wrong side).<br>Added reset button.<br>Added stretch (ignore aspect ratio) option.<br>Allow changing orientation with skin activated.<br>Added 'rpg2' skin. \
-<br><br><b>0.0.6</b><br>Added skins (RPG, dpad, land_trans alternatives), thanks to Sonic-NKT and ncinerate!<br>Fixed color issues when display skins.<br>Removed \'default_snes\' for now until it\'s fixed. \
+<br><br><b>0.0.6</b><br>Added skins (RPG, dpad, land_trans alternatives), thanks to Sonic-NKT and ncinerate!<br>Fixed color issues when display skins.<br>Removed 'default_snes' for now until its fixed. \
 <br><br><b>0.0.5</b><br>Added jjcitron landscape skin. \
 <br><br><b>0.0.4</b><br>(Transparent!) Skin support, misc bug fixes. \
 <br><br><b>0.0.3</b><br>Fixed save states/menu issue (hopefully). \
