@@ -3,7 +3,7 @@ TITLE    = Impostah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.9.7
+VERSION  = 0.9.8
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Impostah
@@ -11,6 +11,7 @@ ICON	 = http://www.webos-internals.org/images/a/aa/Tux_Imposter.png
 DESCRIPTION = Impostah is an app for those who know what do to with it. It does many things, most of which are too complex to explain in this short description.
 MINWEBOSVERSION = 1.4.5
 CHANGELOG = \
+0.9.8: Restart the UpdateDaemon on locationHost change.<br>\
 0.9.7: Fixed an account server URL caching bug.<br>\
 0.9.6: Fixed a profile merging bug.<br>\
 0.9.5: Added the ability to set the locationHost system preference.<br>\
