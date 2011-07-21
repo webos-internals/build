@@ -1,7 +1,7 @@
 NAME     = mendeley
 TITLE    = Mendeley
 APP_ID   = us.ryanhope.${NAME}
-VERSION  = 0.0.2
+VERSION  = 0.0.3
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = Productivity
