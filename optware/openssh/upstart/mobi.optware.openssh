@@ -1,6 +1,6 @@
 description "OpenSSH Daemon"
 
-start on stopped finish
+start on stopped finish and started org.webosinternals.optware
 stop on runlevel [!2]
 
 console none

@@ -1,0 +1,20 @@
+#!/bin/sh
+
+LAUNCHER3DIR=/var/luna/preferences/launcher3
+INDEXFILE=${LAUNCHER3DIR}/launcher_fixed.msave
+
+SETTINGSID=`sed -n -e 's|.*_SETTINGS_{\(.*\)}|\1|p' < ${INDEXFILE}`
+
+sed -i  -e 's|^num_pages=.*|num_pages=4|' \
+	-e '/^[456]\\/d' \
+	-e '/^size=/d' \
+	${INDEXFILE}
+echo "4\\filepath=${LAUNCHER3DIR}//page_ReorderablePage_SETTINGS_{${SETTINGSID}}" >> ${INDEXFILE}
+echo "4\\pageindex=3" >> ${INDEXFILE}
+echo "4\\pagetype=ReorderablePage" >> ${INDEXFILE}
+echo "size=4" >> ${INDEXFILE}
+
+rm -f ${LAUNCHER3DIR}/page_ReorderablePage_GAMES_*
+rm -f ${LAUNCHER3DIR}/page_ReorderablePage_HOMEBREW_*
+
+exit 0
