@@ -2,7 +2,6 @@ NAME = add-launcher-tabs
 TITLE = Add Launcher Tabs
 APP_ID = org.webosinternals.${NAME}
 SIGNER = org.webosinternals
-BLDFLAGS = -p
 VERSION = 3.0.0
 TYPE = Linux Application
 CATEGORY = Utilities
