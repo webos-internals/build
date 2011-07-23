@@ -172,7 +172,7 @@ endif
 ifeq ("${WEBOS_VERSION}", "3.0.0")
 ifeq ("${DEVICE}","touchpad")
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
-KERNEL_SUBMISSION = linuxkernel-${KERNEL_VERSION}.patch/kerneldiffs.txt
+KERNEL_SUBMISSION = kernelpatch-3.0.0.txt
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
 endif
