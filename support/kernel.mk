@@ -16,10 +16,17 @@ endif
 ifeq ("${DEVICE}","veer")
 WEBOS_VERSIONS = 2.1.2
 endif
+ifeq ("${DEVICE}","touchpad")
+WEBOS_VERSIONS = 3.0.0
+endif
+ifeq ("${DEVICE}","touchpad")
+KERNEL_VERSION = 2.6.35
+else
 ifeq ("${DEVICE}","veer")
 KERNEL_VERSION = 2.6.29
 else
 KERNEL_VERSION = 2.6.24
+endif
 endif
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tgz
 DL_DIR = ../../downloads
@@ -82,6 +89,12 @@ DEFCONFIG = shank_defconfig
 KERNEL_TYPE = palm-shank
 DEVICECOMPATIBILITY = [\"Veer\"]
 endif
+ifeq ("${DEVICE}","touchpad")
+CODENAME = topaz
+DEFCONFIG = tenderloin_defconfig
+KERNEL_TYPE = palm-tenderloin
+DEVICECOMPATIBILITY = [\"TouchPad\"]
+endif
 
 ifeq ("${DEVICE}","pre")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
@@ -103,6 +116,9 @@ endif
 endif
 ifeq ("${DEVICE}","veer")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp160unaatt-${WEBOS_VERSION}.jar
+endif
+ifeq ("${DEVICE}","touchpad")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp300hstnhwifi-${WEBOS_VERSION}.jar
 endif
 COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
 
@@ -148,6 +164,15 @@ ifeq ("${DEVICE}","veer")
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.1.1/linuxkernel-${KERNEL_VERSION}.tgz
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
 KERNEL_SUBMISSION = linuxkernel-${KERNEL_VERSION}.patch/kerneldiffs-2.1.2.txt
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
+endif
+
+ifeq ("${WEBOS_VERSION}", "3.0.0")
+ifeq ("${DEVICE}","touchpad")
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
+KERNEL_SUBMISSION = linuxkernel-${KERNEL_VERSION}.patch/kerneldiffs.txt
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
 endif
