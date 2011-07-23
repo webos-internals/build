@@ -26,3 +26,5 @@ KERNEL_PATCHES = makefiletune/armMakefile.diff \
 TYPE = Kernel
 
 include ../../support/kernel.mk
+
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
