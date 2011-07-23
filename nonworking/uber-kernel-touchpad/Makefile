@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
-TITLE = UberKernel (Veer)
-DEVICE = veer
+TITLE = UberKernel (TouchPad)
+DEVICE = touchpad
 CATEGORY = Experimental
-VERSIONS = 2.1.2-1
-APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the HP Veer, rolled into a single OTA-safe installation package.<br>\
+VERSIONS = 3.0.0-1
+APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the HP TouchPad, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
 <li>Support for kernel crypto modules required by TrueCrypt</li>\
@@ -19,9 +19,8 @@ ${WEBOS_VERSION}-1: Initial version.
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
-# KERNEL_PATCHES = makefiletune/armMakefile.diff \
-# 		 crypto/truecrypt-support-veer.patch
-KERNEL_PATCHES = crypto/truecrypt-support-veer.patch
+KERNEL_PATCHES = makefiletune/armMakefile.diff \
+		 crypto/truecrypt-support-touchpad.patch
 
 TYPE = Kernel
 
