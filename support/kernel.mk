@@ -314,11 +314,11 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/modules.*
 	if [ -n "${KERNEL_IMAGE}" ]; then \
 		cp build/src-$*/linux-${KERNEL_VERSION}/arch/arm/boot/uImage \
-			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/uImage-2.6.24-${KERNEL_TYPE}; \
+			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/uImage-${KERNEL_VERSION}-${KERNEL_TYPE}; \
 		cp build/src-$*/linux-${KERNEL_VERSION}/System.map \
-			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/System.map-2.6.24-${KERNEL_TYPE}; \
+			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/System.map-${KERNEL_VERSION}-${KERNEL_TYPE}; \
 		cp build/src-$*/linux-${KERNEL_VERSION}/.config \
-			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/config-2.6.24-${KERNEL_TYPE}; \
+			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/config-${KERNEL_VERSION}-${KERNEL_TYPE}; \
 	fi
 	unzip -p ${WEBOS_DOCTOR} resources/webOS.tar | \
 	${TAR} -O -x -f - ./nova-cust-image-${CODENAME}.rootfs.tar.gz | \
