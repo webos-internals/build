@@ -1,9 +1,10 @@
 NAME = $(shell basename $(shell pwd))
-TITLE = UberKernel (TouchPad)
+TITLE = WarthogKernel (TouchPad)
 DEVICE = touchpad
 CATEGORY = Experimental
 VERSIONS = 3.0.0-1
-APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the HP TouchPad, rolled into a single OTA-safe installation package.<br>\
+APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
+A collection of all the best kernel improvements for the HP TouchPad, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
 <li>Support for kernel crypto modules required by TrueCrypt</li>\
@@ -17,7 +18,7 @@ APPINFO_CHANGELOG = [ \
 CHANGELOG = \
 ${WEBOS_VERSION}-1: Initial version.
 
-HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
+HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = makefiletune/armMakefile.diff \
 		 crypto/truecrypt-support-touchpad.patch
