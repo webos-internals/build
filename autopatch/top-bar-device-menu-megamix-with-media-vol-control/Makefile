@@ -10,7 +10,7 @@ SCREENSHOTS = [ \"http://www.webos-internals.org/images/f/f9/Top-bar-device-menu
 META_SUB_VERSION = 1
 
 include ../common.mk
-DEPENDS := ${DEPENDS}, ca.canucksoftware.systoolsmgr,org.webosinternals.patches.top-bar-device-menu-megamix
+DEPENDS := ${DEPENDS}, ca.canucksoftware.systoolsmgr
 include ../modifications.mk
 
 MAINTAINER = xanthinealkaloid, Jason Robitaille

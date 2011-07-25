@@ -3,11 +3,12 @@ TITLE    = Navit Maps
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.0.1-2
+VERSION	 = 0.0.2-1
 TYPE     = Application
 CATEGORY = Utilities
 DESCRIPTION = <p>This application will manage and download maps from OpenStreetMap for Navit.</p>
 CHANGELOG = \
+	    0.0.2-1: We are getting more confident about this application :). New feature: Just-Type support and Navit can now be used as the default application for routing. <br/> \
 	    0.0.1-2: First release. Consider this to be alpha quality software. It may eat your data etc., so do not use it if you rely on a working Navit.
 #SCREENSHOTS = [\"http://www.webos-internals.org/images/c/c7/NavitScreenshot2.jpg\",\
 #\"http://www.webos-internals.org/images/1/1e/NavitScreenshot1.jpg\",\

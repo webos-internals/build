@@ -6,20 +6,23 @@ FEED = WebOS Kernels
 LICENSE = GPL v2 Open Source
 ifeq ("${DEVICE}","pre")
 WEBOS_VERSIONS = 1.4.5 2.1.0
+KERNEL_VERSION = 2.6.24
 endif
 ifeq ("${DEVICE}","pixi")
 WEBOS_VERSIONS = 1.4.5
+KERNEL_VERSION = 2.6.24
 endif
 ifeq ("${DEVICE}","pre2")
 WEBOS_VERSIONS = 2.0.1 2.1.0
+KERNEL_VERSION = 2.6.24
 endif
 ifeq ("${DEVICE}","veer")
 WEBOS_VERSIONS = 2.1.2
-endif
-ifeq ("${DEVICE}","veer")
 KERNEL_VERSION = 2.6.29
-else
-KERNEL_VERSION = 2.6.24
+endif
+ifeq ("${DEVICE}","touchpad")
+WEBOS_VERSIONS = 3.0.0
+KERNEL_VERSION = 2.6.35
 endif
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tgz
 DL_DIR = ../../downloads
@@ -82,6 +85,12 @@ DEFCONFIG = shank_defconfig
 KERNEL_TYPE = palm-shank
 DEVICECOMPATIBILITY = [\"Veer\"]
 endif
+ifeq ("${DEVICE}","touchpad")
+CODENAME = topaz
+DEFCONFIG = tenderloin_defconfig
+KERNEL_TYPE = palm-tenderloin
+DEVICECOMPATIBILITY = [\"TouchPad\"]
+endif
 
 ifeq ("${DEVICE}","pre")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
@@ -103,6 +112,9 @@ endif
 endif
 ifeq ("${DEVICE}","veer")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp160unaatt-${WEBOS_VERSION}.jar
+endif
+ifeq ("${DEVICE}","touchpad")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp300hstnhwifi-${WEBOS_VERSION}.jar
 endif
 COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
 
@@ -148,6 +160,15 @@ ifeq ("${DEVICE}","veer")
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.1.1/linuxkernel-${KERNEL_VERSION}.tgz
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
 KERNEL_SUBMISSION = linuxkernel-${KERNEL_VERSION}.patch/kerneldiffs-2.1.2.txt
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
+endif
+
+ifeq ("${WEBOS_VERSION}", "3.0.0")
+ifeq ("${DEVICE}","touchpad")
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
+KERNEL_SUBMISSION = kernelpatch-3.0.0.txt
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
 endif
@@ -293,11 +314,11 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/modules.*
 	if [ -n "${KERNEL_IMAGE}" ]; then \
 		cp build/src-$*/linux-${KERNEL_VERSION}/arch/arm/boot/uImage \
-			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/uImage-2.6.24-${KERNEL_TYPE}; \
+			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/uImage-${KERNEL_VERSION}-${KERNEL_TYPE}; \
 		cp build/src-$*/linux-${KERNEL_VERSION}/System.map \
-			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/System.map-2.6.24-${KERNEL_TYPE}; \
+			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/System.map-${KERNEL_VERSION}-${KERNEL_TYPE}; \
 		cp build/src-$*/linux-${KERNEL_VERSION}/.config \
-			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/config-2.6.24-${KERNEL_TYPE}; \
+			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/config-${KERNEL_VERSION}-${KERNEL_TYPE}; \
 	fi
 	unzip -p ${WEBOS_DOCTOR} resources/webOS.tar | \
 	${TAR} -O -x -f - ./nova-cust-image-${CODENAME}.rootfs.tar.gz | \
