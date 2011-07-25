@@ -13,18 +13,18 @@ All additions are disabled by default, and must be enabled by using the Govnah a
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-2", "log" : [ "Initial version" ] }, \
+{ "version" : "${WEBOS_VERSION}-3", "log" : [ "Initial version" ] }, \
 ]
 CHANGELOG = \
 ${WEBOS_VERSION}-2: Initial version.
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
-# KERNEL_PATCHES = makefiletune/armMakefile.diff \
+#KERNEL_PATCHES = makefiletune/armMakefile.diff \
 # 		 identification/mkcompile_h.patch \
 # 		 crypto/truecrypt-support-veer.patch
 KERNEL_PATCHES = identification/mkcompile_h.patch \
-		 crypto/truecrypt-support-veer.patch
+ 		 crypto/truecrypt-support-veer.patch
 
 TYPE = Kernel
 
