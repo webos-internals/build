@@ -373,11 +373,12 @@ ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz:
 
 ifdef KERNEL_SUBMISSION
 ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz:
-	rm -f $@ $@.tmp
+	rm -f $@ $@.tmp1 $@.tmp2
 	mkdir -p ${DL_DIR}
-	curl -f -R -L -o $@.tmp ${KERNEL_PATCH}
-	tar -Oxvf $@.tmp ${KERNEL_SUBMISSION} | gzip -c > $@
-	rm -f $@.tmp
+	curl -f -R -L -o $@.tmp1 ${KERNEL_PATCH}
+	tar -Oxvf $@.tmp1 ${KERNEL_SUBMISSION} | gzip -c > $@.tmp2
+	rm -f $@.tmp1
+	mv $@.tmp2 $@
 else
 ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz:
 	rm -f $@ $@.tmp
