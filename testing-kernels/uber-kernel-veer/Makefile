@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Veer)
 DEVICE = veer
 CATEGORY = Experimental
-VERSIONS = 2.1.2-2
+VERSIONS = 2.1.2-7
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the HP Veer, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
@@ -12,17 +12,15 @@ All additions are disabled by default, and must be enabled by using the Govnah a
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-2", "log" : [ "Initial version" ] }, \
+{ "version" : "${WEBOS_VERSION}-7", "log" : [ "Initial version" ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-2: Initial version.
+${WEBOS_VERSION}-7: Initial version.
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
-# KERNEL_PATCHES = makefiletune/armMakefile.diff \
-# 		 identification/mkcompile_h.patch \
-# 		 crypto/truecrypt-support-veer.patch
-KERNEL_PATCHES = identification/mkcompile_h.patch \
+KERNEL_PATCHES = makefiletune/armMakefile.diff \
+		 identification/mkcompile_h.patch \
 		 crypto/truecrypt-support-veer.patch
 
 TYPE = Kernel
