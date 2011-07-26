@@ -160,7 +160,7 @@ ifeq ("${DEVICE}","veer")
 COMPATIBLE_VERSIONS = 2.1.2 | 2.2.1
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.1.1/linuxkernel-${KERNEL_VERSION}.tgz
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
-KERNEL_SUBMISSION = linuxkernel-${KERNEL_VERSION}.patch/kerneldiffs-2.1.2.txt
+KERNEL_SUBMISSION = linuxkernel-${KERNEL_VERSION}.patch/kerneldiffs.txt
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
 endif
