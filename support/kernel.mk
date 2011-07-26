@@ -157,6 +157,7 @@ endif
 
 ifeq ("${WEBOS_VERSION}", "2.1.2")
 ifeq ("${DEVICE}","veer")
+COMPATIBLE_VERSIONS = 2.1.2 | 2.2.1
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.1.1/linuxkernel-${KERNEL_VERSION}.tgz
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
 KERNEL_SUBMISSION = linuxkernel-${KERNEL_VERSION}.patch/kerneldiffs-2.1.2.txt
@@ -167,6 +168,7 @@ endif
 
 ifeq ("${WEBOS_VERSION}", "3.0.0")
 ifeq ("${DEVICE}","touchpad")
+COMPATIBLE_VERSIONS = 3.0.0 | 3.0.2
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
 KERNEL_SUBMISSION = kernelpatch-3.0.0.txt
 # Override the compiler
