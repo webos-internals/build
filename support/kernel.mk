@@ -339,8 +339,8 @@ build/.unpacked-%: ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.
 			    ${DL_DIR}/${NAME}-%.tar.gz
 	rm -rf build/src-$*
 	mkdir -p build/src-$*/patches
-	${TAR} -C build/src-$* -xf ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz
-	${TAR} -C build/src-$*/patches -xf ${DL_DIR}/${NAME}-$*.tar.gz
+	${TAR} -C build/src-$* -zxf ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz
+	${TAR} -C build/src-$*/patches -zxf ${DL_DIR}/${NAME}-$*.tar.gz
 	if [ -n "${KERNEL_PATCHES}" ] ; then \
 	  ( cd build/src-$*/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
 	  ( cd build/src-$*/patches ; cat ${KERNEL_PATCHES} ) | \
@@ -354,7 +354,7 @@ ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz: \
 					${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz
 	rm -rf build/src-${VERSION}
 	mkdir -p build/src-${VERSION}
-	${TAR} -C build/src-${VERSION} -xf ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz
+	${TAR} -C build/src-${VERSION} -zxf ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz
 	zcat ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz | \
 		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 
 	yes '' | \
