@@ -157,9 +157,10 @@ endif
 
 ifeq ("${WEBOS_VERSION}", "2.1.2")
 ifeq ("${DEVICE}","veer")
+COMPATIBLE_VERSIONS = 2.1.2 | 2.2.1
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.1.1/linuxkernel-${KERNEL_VERSION}.tgz
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
-KERNEL_SUBMISSION = linuxkernel-${KERNEL_VERSION}.patch/kerneldiffs-2.1.2.txt
+KERNEL_SUBMISSION = linuxkernel-${KERNEL_VERSION}.patch/kerneldiffs.txt
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
 endif
@@ -167,6 +168,7 @@ endif
 
 ifeq ("${WEBOS_VERSION}", "3.0.0")
 ifeq ("${DEVICE}","touchpad")
+COMPATIBLE_VERSIONS = 3.0.0 | 3.0.2
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
 KERNEL_SUBMISSION = kernelpatch-3.0.0.txt
 # Override the compiler
@@ -371,11 +373,12 @@ ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz:
 
 ifdef KERNEL_SUBMISSION
 ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz:
-	rm -f $@ $@.tmp
+	rm -f $@ $@.tmp1 $@.tmp2
 	mkdir -p ${DL_DIR}
-	curl -f -R -L -o $@.tmp ${KERNEL_PATCH}
-	tar -Oxvf $@.tmp ${KERNEL_SUBMISSION} | gzip -c > $@
-	rm -f $@.tmp
+	curl -f -R -L -o $@.tmp1 ${KERNEL_PATCH}
+	tar -Oxvf $@.tmp1 ${KERNEL_SUBMISSION} | gzip -c > $@.tmp2
+	rm -f $@.tmp1
+	mv $@.tmp2 $@
 else
 ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz:
 	rm -f $@ $@.tmp
