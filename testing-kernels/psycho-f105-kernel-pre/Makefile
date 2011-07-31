@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F105 Thunderchief (Pre/Pre+)
 CATEGORY = Experimental
 DEVICE = pre
-VERSIONS = 2.1.0-68 1.4.5-184
+VERSIONS = 2.1.0-71 1.4.5-184
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br><br>\
 Features:<br> * New screenstate v2 with vdemand<br> * 1GHz<br> * 200MHz VDD2<br> * More govenors<br><br>\
 For more information, visit ${HOMEPAGE}
@@ -61,6 +61,7 @@ KERNEL_UPSTART   = psychobuild/F102A.upstart
 else
 
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-71", "log" : [ "add SIO scheduler. add SSv3." ] }, \
 { "version" : "${WEBOS_VERSION}-68", "log" : [ "re-order locking." ] }, \
 { "version" : "${WEBOS_VERSION}-62", "log" : [ "drop high temp alarm. code cleanup. fix battery percent scaleback sysfs." ] }, \
 { "version" : "${WEBOS_VERSION}-56", "log" : [ "misc changes to defaults." ] }, \
@@ -74,16 +75,18 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-8", "log" : [ "remove some 200Mhz pwnage. add disgusting hack for freq flopping. add delay for screen on and off." ] }, \
 { "version" : "${WEBOS_VERSION}-4", "log" : [ "rebuild for webOS 2.1.0." ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-68: re-order locking.<br>${WEBOS_VERSION}-62: drop high temp alarm. code cleanup. fix battery percent scaleback sysfs.<br>${WEBOS_VERSION}-56: misc changes to defaults.<br>${WEBOS_VERSION}-53: Allow 1s charger poll.<br>${WEBOS_VERSION}-51: raise readahead. increase HZ.<br>${WEBOS_VERSION}-41: cleanup compiler warnings. screenstate and override fixes.<br>${WEBOS_VERSION}-35: remove debugging code.<br>${WEBOS_VERSION}-33: fix unaligned access in voltage array. screenstate fixups. code cleanup. fix sysfs voltage input for voltage array (Govnah will happier).<br>${WEBOS_VERSION}-17: nullify unused bridge driver function, FTW.<br>${WEBOS_VERSION}-16: make screenstate dumb again. remove constraints. tmc memory hack.<br>${WEBOS_VERSION}-8: remove some 200Mhz pwnage. add disgusting hack for freq flopping. add delay for screen on and off.<br>${WEBOS_VERSION}-4: rebuild for webOS 2.1.0.<br>
+CHANGELOG = ${WEBOS_VERSION}-71: add SIO scheduler. add SSv3.<br>${WEBOS_VERSION}-68: re-order locking.<br>${WEBOS_VERSION}-62: drop high temp alarm. code cleanup. fix battery percent scaleback sysfs.<br>${WEBOS_VERSION}-56: misc changes to defaults.<br>${WEBOS_VERSION}-53: Allow 1s charger poll.<br>${WEBOS_VERSION}-51: raise readahead. increase HZ.<br>${WEBOS_VERSION}-41: cleanup compiler warnings. screenstate and override fixes.<br>${WEBOS_VERSION}-35: remove debugging code.<br>${WEBOS_VERSION}-33: fix unaligned access in voltage array. screenstate fixups. code cleanup. fix sysfs voltage input for voltage array (Govnah will happier).<br>${WEBOS_VERSION}-17: nullify unused bridge driver function, FTW.<br>${WEBOS_VERSION}-16: make screenstate dumb again. remove constraints. tmc memory hack.<br>${WEBOS_VERSION}-8: remove some 200Mhz pwnage. add disgusting hack for freq flopping. add delay for screen on and off.<br>${WEBOS_VERSION}-4: rebuild for webOS 2.1.0.<br>
 
 KERNEL_PATCHES = psychobuild/F105-overclocking.patch \
                  sensors/omap34xx_temp.patch \
-                 psychobuild/ssv2-ovrd.patch \
+                 psychobuild/ssv3-ovrd.patch \
+                 psychobuild/ssv3-ovrd-pre.patch \
                  compcache/lowmemnotify-total-memory.patch \
                  psychobuild/fbconsole.patch \
                  psychobuild/F105-logo.patch \
                  psychobuild/250_hz.patch \
                  psychobuild/iosched_blk.patch \
+                 psychobuild/sio.patch \
                  psychobuild/comptune.patch
 
 endif
