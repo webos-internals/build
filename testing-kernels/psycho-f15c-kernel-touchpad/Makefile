@@ -15,7 +15,8 @@ ${WEBOS_VERSION}-19: Initial release. autogroup process scheduling. CPU HW based
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
-KERNEL_PATCHES = psychobuild/F15.patch \
+KERNEL_PATCHES = identification/mkcompile_h.patch \
+		 psychobuild/F15.patch \
 		 psychobuild/fbconsole.patch \
 		 psychobuild/F15-logo.patch \
 		 psychobuild/iosched-deadline.patch \
