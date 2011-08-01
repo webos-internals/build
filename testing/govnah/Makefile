@@ -3,13 +3,14 @@ TITLE    = Govnah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.9.3
+VERSION  = 0.9.4
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
 DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature, load averages and memory usage.
 CHANGELOG = \
+0.9.4: Added support for TouchPad overclocking.<br>\
 0.9.3: Added the missing device stylesheet.<br>\
 0.9.2: Added back buttons for devices without a gesture area.<br>\
 0.9.1: Added the Palm Default profile for the TouchPad.<br>\
