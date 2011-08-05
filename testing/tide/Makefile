@@ -64,9 +64,13 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	touch $@
 
 build/%/CONTROL/prerm:
-	rm -f $@
 	mkdir -p build/$*/CONTROL
 	install -m 0775 build/src/control/prerm build/$*/CONTROL
+	chmod ugo+x $@
+
+build/%/CONTROL/postinst:
+	mkdir -p build/$*/CONTROL
+	install -m 0775 build/src/control/postinst build/$*/CONTROL
 	chmod ugo+x $@
 
 clobber::
