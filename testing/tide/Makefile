@@ -6,7 +6,7 @@ SIGNER   = org.webosinternals
 BLDFLAGS = -p
 BASEVER  = 0.0.18
 GIT_TAG  = v${BASEVER}-1
-VERSION  = ${BASEVER}-2
+VERSION  = ${BASEVER}-3
 TYPE	 = Application
 CATEGORY = Development
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Tide
@@ -48,7 +48,7 @@ build/.built-${VERSION}: build/all.built-${VERSION}
 	touch $@
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
-	fm -rf build/$*
+	rm -rf build/$*
 	cd build/src; rm -rf ace; mv ace-build ace
 	#make clean ace/build/src/ace.js;\
 	#rm -rf `cat excludes.txt`;\
