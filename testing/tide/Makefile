@@ -4,7 +4,7 @@ APP_ID   = us.ryanhope.${NAME}
 SRV_ID   = us.ryanhope.${NAME}.fileio
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-BASEVER  = 0.0.18
+BASEVER  = 0.0.18-1
 GIT_TAG  = v${BASEVER}
 VERSION  = ${BASEVER}
 TYPE	 = Application
@@ -35,7 +35,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mkdir -p build/src
 	#cp -r ~/workspace/editah/* build/src
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	cd build/src; git submodule update --init --recursive
+	#cd build/src; git submodule update --init --recursive
 	mkdir build/src/control
 	mv build/src/pmPostInstall.script build/src/control/postinst
 	mv build/src/pmPreRemove.script build/src/control/prerm
@@ -49,11 +49,12 @@ build/.built-${VERSION}: build/all.built-${VERSION}
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
-	cd build/src;\
-	make clean ace/build/src/ace.js;\
-	rm -rf `cat excludes.txt`;\
-	rm -rf Makefile;\
-	rm -rf `find . -name ".git*"`
+	cd build/src
+	mv build/src/ace-build build/src/ace
+	#make clean ace/build/src/ace.js;\
+	#rm -rf `cat excludes.txt`;\
+	#rm -rf Makefile;\
+	#rm -rf `find . -name ".git*"`
 	mkdir -p build/$*/usr/palm/services
 	cp -r build/src/node-service build/$*/usr/palm/services/${SRV_ID}
 	mkdir -p build/$*/usr/palm/packages
