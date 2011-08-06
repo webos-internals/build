@@ -1,0 +1,17 @@
+NAME = $(shell basename $(shell pwd))
+PATCH = other/${NAME}.patch
+TWEAKS =
+TITLE = test patch 2
+DESCRIPTION = This is a test patch, please do not install it.
+CATEGORY = Other
+VERSIONS = 1.4.5-165
+ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
+SCREENSHOTS =
+META_SUB_VERSION = 1
+
+include ../common.mk
+
+include ../modifications.mk
+
+MAINTAINER = cryptk
+HOMEPAGE =
