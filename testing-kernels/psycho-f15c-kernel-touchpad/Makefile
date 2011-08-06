@@ -23,7 +23,7 @@ KERNEL_PATCHES = identification/mkcompile_h.patch \
 		 psychobuild/fbconsole.patch \
 		 psychobuild/F15-logo.patch \
 		 psychobuild/iosched-deadline.patch \
-		 psychobuild/iosched-blk.patch \
+		 psychobuild/iosched_blk.patch \
 		 psychobuild/comptune.patch \
 		 psychobuild/cpu_alignment.patch \
 		 psychobuild/cpu_gov.patch \
