@@ -43,7 +43,7 @@ CHANGELOG = ${WEBOS_VERSION}-72: Rebuild for webOS 2.1.0<br>
 
 KERNEL_PATCHES = psychobuild/SR71-overclocking.patch \
 		 sensors/omap34xx_temp.patch \
-		 psychobuild/ss-ovrd-tcl.patch \
+		 psychobuild/ssv2-ovrd.patch \
 		 compcache/lowmemnotify-total-memory.patch \
 		 makefiletune/armMakefile.diff
 
