@@ -6,13 +6,53 @@ SIGNER   = org.webosinternals
 BLDFLAGS = -p
 BASEVER  = 0.0.20
 GIT_TAG  = v${BASEVER}
-VERSION  = ${BASEVER}
+VERSION  = ${BASEVER}-1
 TYPE	 = Application
 CATEGORY = Development
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Tide
 ICON	 = http://www.webos-internals.org/images/0/02/Icon-64.png
 DESCRIPTION = A code editor (and soon more) for your TouchPad.
 MINWEBOSVERSION = 3.0.0
+
+CHANGELOG = \
+<pre>\
+*   v0.0.20 - Add pref to set default path for file dialogs\
+\
+*   v0.0.19 - Mostly working scroller (still needs a little work)\
+            - Add back text selection (no copy/cut/paste yet)\
+\
+*   v0.0.18 - Add highlight support for Scala, OCaml, SCAD, Groovy\
+            - Add pref to show/hide gutter\
+\
+*   v0.0.17 - More file dialog fixes\
+\
+*   v0.0.16 - Improved BT keyboard support\
+            - Fixed save file dialog\
+\
+*   v0.0.15 - Backfill changelog\
+\
+*   v0.0.14 - Add this awesome changelog\
+\
+*   v0.0.13 - Saving files works\
+            - Hidden files toggle works\
+\
+*   v0.0.11 - Unjail node service\
+\
+*   v0.0.10 - File dialog improvements\
+            - Auto set syntax highlight mode\
+              based on file extension\
+\
+*    v0.0.8 - Remove demo documents\
+\
+*    v0.0.5 - Working prefs menu\
+            - Properly size editor area\
+            - Use fullscreen mode\
+            - Add nice buttons to toolbar\
+\
+*    v0.0.3 - Disable text highlighting for better scrolling\
+            - Switch name from Editah to Tide\
+            - Add more demo docs\
+</pre>
 
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/1/14/Tide_2011-31-07_141616.png\" ]
