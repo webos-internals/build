@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = SR71 Blackbird (Pre/Pre+)
 CATEGORY = Experimental
 DEVICE = pre
-VERSIONS = 2.1.0-72 1.4.5-144
+VERSIONS = 2.1.0-73 1.4.5-144
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br><br>\
 For more information, visit ${HOMEPAGE}<br><br>\
 <b>WARNING: This Kernel may not boot on all devices and may cause damage!</b>\
