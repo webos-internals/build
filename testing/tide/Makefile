@@ -6,7 +6,7 @@ SIGNER   = org.webosinternals
 BLDFLAGS = -p
 BASEVER  = 0.0.20
 GIT_TAG  = v${BASEVER}
-VERSION  = ${BASEVER}-5
+VERSION  = ${BASEVER}-6
 TYPE	 = Application
 CATEGORY = Development
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Tide
@@ -16,7 +16,7 @@ MINWEBOSVERSION = 3.0.0
 
 CHANGELOG = \
 <table cellspacing='12px'>\
-<tr><td align='right'>v0.0.21</td><td>- Fix spinner issue for file dialog with no files</td></tr>
+<tr><td align='right'>v0.0.21</td><td>- Fix spinner issue for file dialog with no files</td></tr>\
 <td></td><td>- Add cut/copy/paste menu buttons (keybindings to come)</td></tr>\
 <tr><td align='right'>v0.0.20</td><td>- Add pref to set default path for file dialogs</td></tr>\
 <tr><td align='right'>v0.0.19</td><td>- Mostly working scroller (still needs a little work)</td></tr>\
