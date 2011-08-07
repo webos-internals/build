@@ -6,7 +6,7 @@ SIGNER   = org.webosinternals
 BLDFLAGS = -p
 BASEVER  = 0.0.20
 GIT_TAG  = v${BASEVER}
-VERSION  = ${BASEVER}-4
+VERSION  = ${BASEVER}-5
 TYPE	 = Application
 CATEGORY = Development
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Tide
@@ -15,42 +15,33 @@ DESCRIPTION = A code editor (and soon more) for your TouchPad.
 MINWEBOSVERSION = 3.0.0
 
 CHANGELOG = \
-<pre>*   v0.0.20 - Add pref to set default path for file dialogs</pre>\
-<br>\
-<pre>*   v0.0.19 - Mostly working scroller (still needs a little work)</pre>\
-<pre>            - Add back text selection (no copy/cut/paste yet)</pre>\
-<br>\
-<pre>*   v0.0.18 - Add highlight support for Scala, OCaml, SCAD, Groovy</pre>\
-<pre>            - Add pref to show/hide gutter</pre>\
-<br>\
-<pre>*   v0.0.17 - More file dialog fixes</pre>\
-<br>\
-<pre>*   v0.0.16 - Improved BT keyboard support</pre>\
-<pre>            - Fixed save file dialog</pre>\
-<br>\
-<pre>*   v0.0.15 - Backfill changelog</pre>\
-<br>\
-<pre>*   v0.0.14 - Add this awesome changelog</pre>\
-<br>\
-<pre>*   v0.0.13 - Saving files works</pre>\
-<pre>            - Hidden files toggle works</pre>\
-<br>\
-<pre>*   v0.0.11 - Unjail node service</pre>\
-<br>\
-<pre>*   v0.0.10 - File dialog improvements</pre>\
-<pre>            - Auto set syntax highlight mode</pre>\
-<pre>              based on file extension</pre>\
-<br>\
-<pre>*    v0.0.8 - Remove demo documents</pre>\
-<br>\
-<pre>*    v0.0.5 - Working prefs menu</pre>\
-<pre>            - Properly size editor area</pre>\
-<pre>            - Use fullscreen mode</pre>\
-<pre>            - Add nice buttons to toolbar</pre>\
-<br>\
-<pre>*    v0.0.3 - Disable text highlighting for better scrolling</pre>\
-<pre>            - Switch name from Editah to Tide</pre>\
-<pre>            - Add more demo docs</pre>
+<table cellspacing='12px'>\
+<tr><td align='right'>v0.0.21</td><td>- Fix spinner issue for file dialog with no files</td></tr>
+<td></td><td>- Add cut/copy/paste menu buttons (keybindings to come)</td></tr>\
+<tr><td align='right'>v0.0.20</td><td>- Add pref to set default path for file dialogs</td></tr>\
+<tr><td align='right'>v0.0.19</td><td>- Mostly working scroller (still needs a little work)</td></tr>\
+<td></td><td>- Add back text selection (no copy/cut/paste yet)</td></tr>\
+<tr><td align='right'>v0.0.18</td><td>- Add highlight support for Scala, OCaml, SCAD, Groovy</td></tr>\
+<td></td><td>- Add pref to show/hide gutter</td></tr>\
+<tr><td align='right'>v0.0.17</td><td>- More file dialog fixes</td></tr>\
+<tr><td align='right'>v0.0.16</td><td>- Improved BT keyboard support</td></tr>\
+<td></td><td>- Fixed save file dialog</td></tr>\
+<tr><td align='right'>v0.0.15</td><td>- Backfill changelog</td></tr>\
+<tr><td align='right'>v0.0.14</td><td>- Add this awesome changelog</td></tr>\
+<tr><td align='right'>v0.0.13</td><td>- Saving files works</td></tr>\
+<td></td><td>- Hidden files toggle works</td></tr>\
+<tr><td align='right'>v0.0.11</td><td>- Unjail node service</td></tr>\
+<tr><td align='right'>v0.0.10</td><td>- File dialog improvements</td></tr>\
+<td></td><td>- Auto set syntax highlight mode based on file extension</td></tr>\
+<tr><td align='right'> v0.0.8</td><td>- Remove demo documents</td></tr>\
+<tr><td align='right'> v0.0.5</td><td>- Working prefs menu</td></tr>\
+<td></td><td>- Properly size editor area</td></tr>\
+<td></td><td>- Use fullscreen mode</td></tr>\
+<td></td><td>- Add nice buttons to toolbar</td></tr>\
+<tr><td align='right'> v0.0.3</td><td>- Disable text highlighting for better scrolling</td></tr>\
+<td></td><td>- Switch name from Editah to Tide</td></tr>\
+<td></td><td>- Add more demo docs</td></tr>\
+</table>
 
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/1/14/Tide_2011-31-07_141616.png\" ]
