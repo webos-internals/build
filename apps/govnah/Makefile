@@ -3,13 +3,28 @@ TITLE    = Govnah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.8.3
+VERSION  = 1.0.0
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
 DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature, load averages and memory usage.
 CHANGELOG = \
+1.0.0: Full support for all released webOS devices.<br>\
+0.9.9: Added back button to graph scene for TouchPad.<br>\
+0.9.8: Robustified the dual core handling on reset.<br>\
+0.9.7: Fixed back button in preferences scene.<br>\
+0.9.6: Added dual core support. Removed unimplemented dashboard preference. Removed manual settings preference.<br>\
+0.9.5: Added profile support for IO schedulers.<br>\
+0.9.4: Added support for TouchPad overclocking.<br>\
+0.9.3: Added the missing device stylesheet.<br>\
+0.9.2: Added back buttons for devices without a gesture area.<br>\
+0.9.1: Added the Palm Default profile for the TouchPad.<br>\
+0.9.0: Added support for the TouchPad, using the full screen area. Added CPU high temperature scaleback speed support.<br>\
+0.8.12: Add battery temperature support for Veer and TouchPad<br>\
+0.8.8: Added battery current support for the TouchPad.<br>\
+0.8.6: Added battery current support for the Veer.<br>\
+0.8.5: Added more detail in the help for various settings.<br>\
 0.8.3: Small fix in profile for the Pre AV8B experimental kernel and the Pre F102A stable kernel.<br>\
 0.8.2: Small fix in profile for the Pre 2 SR71 experimental kernel.<br>\
 0.8.1: Only set new voltages if the user actually changes them.<br>\
