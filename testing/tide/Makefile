@@ -4,7 +4,7 @@ APP_ID   = us.ryanhope.${NAME}
 SRV_ID   = us.ryanhope.${NAME}.fileio
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-BASEVER  = 0.0.21
+BASEVER  = 0.0.22
 GIT_TAG  = v${BASEVER}
 VERSION  = ${BASEVER}
 TYPE	 = Application
@@ -16,6 +16,7 @@ MINWEBOSVERSION = 3.0.0
 
 CHANGELOG = \
 <table cellspacing='12px'>\
+<tr><td align='right'>v0.0.22</td><td>- Smaller toolbar</td></tr>\
 <tr><td align='right'>v0.0.21</td><td>- Fix spinner issue for file dialog with no files</td></tr>\
 <td></td><td>- Add cut/copy/paste menu buttons (keybindings to come)</td></tr>\
 <td></td><td>- VSlider fixes/enhancements</td></tr>\
@@ -45,7 +46,7 @@ CHANGELOG = \
 </table>
 
 SCREENSHOTS = [\
-\"http://www.webos-internals.org/images/1/14/Tide_2011-31-07_141616.png\" ]
+\"http://www.webos-internals.org/images/d/d0/Tide_2011-07-08_164058.png\" ]
 
 LICENSE  = GPL v2 Open Source
 
