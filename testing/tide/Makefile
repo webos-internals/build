@@ -15,44 +15,42 @@ DESCRIPTION = A code editor (and soon more) for your TouchPad.
 MINWEBOSVERSION = 3.0.0
 
 CHANGELOG = \
-<pre>\
-*   v0.0.20 - Add pref to set default path for file dialogs\
-\
-*   v0.0.19 - Mostly working scroller (still needs a little work)\
-            - Add back text selection (no copy/cut/paste yet)\
-\
-*   v0.0.18 - Add highlight support for Scala, OCaml, SCAD, Groovy\
-            - Add pref to show/hide gutter\
-\
-*   v0.0.17 - More file dialog fixes\
-\
-*   v0.0.16 - Improved BT keyboard support\
-            - Fixed save file dialog\
-\
-*   v0.0.15 - Backfill changelog\
-\
-*   v0.0.14 - Add this awesome changelog\
-\
-*   v0.0.13 - Saving files works\
-            - Hidden files toggle works\
-\
-*   v0.0.11 - Unjail node service\
-\
-*   v0.0.10 - File dialog improvements\
-            - Auto set syntax highlight mode\
-              based on file extension\
-\
-*    v0.0.8 - Remove demo documents\
-\
-*    v0.0.5 - Working prefs menu\
-            - Properly size editor area\
-            - Use fullscreen mode\
-            - Add nice buttons to toolbar\
-\
-*    v0.0.3 - Disable text highlighting for better scrolling\
-            - Switch name from Editah to Tide\
-            - Add more demo docs\
-</pre>
+<pre>*   v0.0.20 - Add pref to set default path for file dialogs</pre><br>\
+<br>\
+<pre>*   v0.0.19 - Mostly working scroller (still needs a little work)</pre><br>\
+<pre>            - Add back text selection (no copy/cut/paste yet)</pre><br>\
+<br>\
+<pre>*   v0.0.18 - Add highlight support for Scala, OCaml, SCAD, Groovy</pre><br>\
+<pre>            - Add pref to show/hide gutter</pre><br>\
+<br>\
+<pre>*   v0.0.17 - More file dialog fixes</pre><br>\
+<br>\
+<pre>*   v0.0.16 - Improved BT keyboard support</pre><br>\
+<pre>            - Fixed save file dialog</pre><br>\
+<br>\
+<pre>*   v0.0.15 - Backfill changelog</pre><br>\
+<br>\
+<pre>*   v0.0.14 - Add this awesome changelog</pre><br>\
+<br>\
+<pre>*   v0.0.13 - Saving files works</pre><br>\
+<pre>            - Hidden files toggle works</pre><br>\
+<br>\
+<pre>*   v0.0.11 - Unjail node service</pre><br>\
+<br>\
+<pre>*   v0.0.10 - File dialog improvements</pre><br>\
+<pre>            - Auto set syntax highlight mode</pre><br>\
+<pre>              based on file extension</pre><br>\
+<br>\
+<pre>*    v0.0.8 - Remove demo documents</pre><br>\
+<br>\
+<pre>*    v0.0.5 - Working prefs menu</pre><br>\
+<pre>            - Properly size editor area</pre><br>\
+<pre>            - Use fullscreen mode</pre><br>\
+<pre>            - Add nice buttons to toolbar</pre><br>\
+<br>\
+<pre>*    v0.0.3 - Disable text highlighting for better scrolling</pre><br>\
+<pre>            - Switch name from Editah to Tide</pre><br>\
+<pre>            - Add more demo docs</pre>
 
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/1/14/Tide_2011-31-07_141616.png\" ]
