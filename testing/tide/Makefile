@@ -4,9 +4,9 @@ APP_ID   = us.ryanhope.${NAME}
 SRV_ID   = us.ryanhope.${NAME}.fileio
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-BASEVER  = 0.0.20
+BASEVER  = 0.0.21
 GIT_TAG  = v${BASEVER}
-VERSION  = ${BASEVER}-6
+VERSION  = ${BASEVER}
 TYPE	 = Application
 CATEGORY = Development
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Tide
@@ -18,6 +18,7 @@ CHANGELOG = \
 <table cellspacing='12px'>\
 <tr><td align='right'>v0.0.21</td><td>- Fix spinner issue for file dialog with no files</td></tr>\
 <td></td><td>- Add cut/copy/paste menu buttons (keybindings to come)</td></tr>\
+<td></td><td>- VSlider fixes/enhancements</td></tr>\
 <tr><td align='right'>v0.0.20</td><td>- Add pref to set default path for file dialogs</td></tr>\
 <tr><td align='right'>v0.0.19</td><td>- Mostly working scroller (still needs a little work)</td></tr>\
 <td></td><td>- Add back text selection (no copy/cut/paste yet)</td></tr>\
