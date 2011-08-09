@@ -16,8 +16,8 @@ fi
 
 # Symlink files into /opt
 cd ${APPDIR}/opt
-find bin include lib -type d -exec mkdir -p /opt/{} \;
-find bin include lib -type f -exec ln -sf ${APPDIR}/opt/{} /opt/{} \;
+find man share info -type d -exec mkdir -p /opt/{} \;
+find man share info -type f -exec ln -sf ${APPDIR}/opt/{} /opt/{} \;
 
 
 exit 0
