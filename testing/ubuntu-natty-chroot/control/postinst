@@ -38,6 +38,11 @@ else
     tar -C /media/ext3fs/${NAME} -z -x -f ${APPDIR}/${NAME}.tgz || exit 1
 fi
 
+#Add non-privleged user to chroot
+
+chroot /usr/sbin/addgroup webos --GID 1002
+chroot /usr/sbin/adduser webos --UID 1000 --GID 1002 --disabled-password --gecos 'webOS User,,,'
+
 # Install the upstart script
 mkdir -p /var/palm/event.d
 cp ${APPDIR}/upstart/${APPID} /var/palm/event.d/${APPID}
