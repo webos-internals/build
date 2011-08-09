@@ -8,7 +8,7 @@ A collection of all the best kernel improvements for the HP Veer, rolled into a 
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
 <li>Support for kernel crypto modules required by TrueCrypt</li>\
-<li>Overclock to 1.024GHz</li>\
+<li>Overclock to 1.018GHz</li>\
 </ul><br>\
 All additions are disabled by default, and must be enabled by using the Govnah application.<br>\
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
