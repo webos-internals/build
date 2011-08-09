@@ -4,7 +4,7 @@ APP_ID   = us.ryanhope.${NAME}
 SRV_ID   = us.ryanhope.${NAME}.fileio
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-BASEVER  = 0.0.23
+BASEVER  = 0.0.24
 GIT_TAG  = v${BASEVER}
 VERSION  = ${BASEVER}
 TYPE	 = Application
@@ -16,6 +16,7 @@ MINWEBOSVERSION = 3.0.0
 
 CHANGELOG = \
 <table cellspacing='12px'>\
+<tr><td align='right'>v0.0.23</td><td>- Add editor font selector in prefs</td></tr>\
 <tr><td align='right'>v0.0.23</td><td>- Spinner+scrim when opening/saving files</td></tr>\
 <td></td><td>- File dialog starts in path of last opened file</td></tr>\
 <tr><td align='right'>v0.0.22</td><td>- Smaller toolbar</td></tr>\
