@@ -10,7 +10,7 @@ APPDIR=${APPS}/usr/palm/applications/${APPID}
 
 # Symlink files into /opt
 cd ${APPDIR}/opt
-find lib include -type d -exec mkdir -p /opt/{} \;
-find lib include -type f -exec ln -sf ${APPDIR}/opt/{} /opt/{} \;
+find etc lib include -type d -exec mkdir -p /opt/{} \;
+find etc lib include -type f -exec ln -sf ${APPDIR}/opt/{} /opt/{} \;
 
 exit 0

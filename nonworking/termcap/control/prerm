@@ -10,7 +10,7 @@ APPDIR=${APPS}/usr/palm/applications/${APPID}
 
 # Remove files from /opt
 cd ${APPDIR}/opt
-find lib include -depth -type f -exec rm -f /opt/{} \;
-find lib include -depth -type d -exec rmdir /opt/{} \;
+find etc lib include -depth -type f -exec rm -f /opt/{} \;
+find etc lib include -depth -type d -exec rmdir /opt/{} \;
 
 exit 0

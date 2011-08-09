@@ -23,7 +23,7 @@ include ../../support/download.mk
 include ../../support/optware.mk
 
 build/%.built-${VERSION} : build/%.unpacked-${VERSION}
-	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/man
-	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/etc
-	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/var
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/lib
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/include
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/bin
 	touch $@
