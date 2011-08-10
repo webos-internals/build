@@ -155,7 +155,7 @@ check_for_ota() {
        [ "`grep $file $IPKG_OFFLINE_ROOT/usr/lib/ipkg/info/*.list`" = "" ]
     then
       echo "Check for md5sum in $IPKG_INFO_DIR" | tee -a $PATCH_LOG
-      palm_md5sum=`grep -h $file $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`
+      palm_md5sum=`grep -h $file $IPKG_INFO_DIR/*.md5sums | awk '{print $1}'`
       echo "  md5sum: $palm_md5sum" >> $PATCH_LOG
     fi
 
@@ -353,7 +353,7 @@ do
   echo "palm md5sum:      $palm_md5sum" >> $PATCH_LOG
   if [ ! -f $file ] && [ ! -s $file.webosinternals.orig ] || [ "$orig_md5sum" = "" ] || \
      [ "$orig_md5sum" = "$file_md5sum" ] || [ "$palm_md5sum" = "$file_md5sum" ] || \
-     [ "`grep -h $file $IPKG_INFO_DIR/*md5sums | awk '{print $1}'`" = "$file_md5sum" ]
+     [ "`grep -h $file $IPKG_INFO_DIR/*.md5sums | awk '{print $1}'`" = "$file_md5sum" ]
   then
     echo "Remove backup" >> $PATCH_LOG
     tmpvar=`echo $file | tr '/' '.'`
