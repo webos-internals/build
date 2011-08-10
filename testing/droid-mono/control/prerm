@@ -1,0 +1,5 @@
+#!/bin/sh
+
+rm /usr/share/fonts/DejaVu*
+
+exit 0
