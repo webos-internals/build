@@ -1,15 +1,15 @@
-NAME     = dejavu
-TITLE	 = DejaVu Fonts - ALL
-APP_ID   = org.webosinternals.fonts.${NAME}
-VERSION  = 2.33-1
+NAME     = liberation
+TITLE	 = Liberation Fonts - Mono
+APP_ID   = org.webosinternals.fonts.${NAME}-mono
+VERSION  = 1.07.0
 BLDFLAGS = -p
 TYPE	 = Unknown
 CATEGORY = Font
 POSTINSTALLFLAGS = RestartLuna
-DESCRIPTION = The DejaVu fonts are a font family based on the Vera Fonts. Its purpose is to provide a wider range of characters while maintaining the original look and feel through the process of collaborative development.
+DESCRIPTION = The Liberation(tm) Fonts is a font family which aims at metric compatibility with Arial, Times New Roman, and Courier New.
 ICON	 = http://www.webos-internals.org/images/d/d4/X-font-ttf.png
 
-SRC_BZ2 = http://downloads.sourceforge.net/project/${NAME}/${NAME}/${VERSION}/${NAME}-fonts-ttf-${VERSION}.tar.bz2
+SRC_TGZ = https://fedorahosted.org/releases/l/i/${NAME}-fonts/${NAME}-fonts-ttf-${VERSION}.tar.gz
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
@@ -20,10 +20,10 @@ include ../../support/download.mk
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
 
-build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.bz2
+build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/all
-	tar -C build -j -x -f $<
+	tar -C build -z -x -f $<
 	mv build/${NAME}-fonts-ttf-${VERSION} build/src
 	touch $@
 
@@ -36,7 +36,7 @@ build/.built-${VERSION}: build/all.built-${VERSION}
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
-	cp -r build/src/ttf/* build/$*/usr/palm/applications/${APP_ID}/
+	cp -r build/src/LiberationMono-Regular.ttf build/$*/usr/palm/applications/${APP_ID}/
 	touch $@
 
 clobber::

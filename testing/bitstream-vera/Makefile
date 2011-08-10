@@ -1,10 +1,11 @@
 NAME     = bitstream-vera
-TITLE	 = Bitstream Vera
+TITLE	 = Bitstream Vera Fonts - ALL
 APP_ID   = org.webosinternals.fonts.${NAME}
-VERSION  = 1.10
+VERSION  = 1.10-1
 BLDFLAGS = -p
 TYPE	 = Unknown
 CATEGORY = Font
+POSTINSTALLFLAGS = RestartLuna
 DESCRIPTION = Bitstream Vera Fonts
 ICON	 = http://www.webos-internals.org/images/d/d4/X-font-ttf.png
 

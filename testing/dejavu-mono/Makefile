@@ -1,6 +1,6 @@
 NAME     = dejavu
-TITLE	 = DejaVu Fonts - ALL
-APP_ID   = org.webosinternals.fonts.${NAME}
+TITLE	 = DejaVu Fonts - Mono
+APP_ID   = org.webosinternals.fonts.${NAME}-mono
 VERSION  = 2.33-1
 BLDFLAGS = -p
 TYPE	 = Unknown
@@ -36,7 +36,7 @@ build/.built-${VERSION}: build/all.built-${VERSION}
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
-	cp -r build/src/ttf/* build/$*/usr/palm/applications/${APP_ID}/
+	cp -r build/src/ttf/DejaVuSansMono.ttf build/$*/usr/palm/applications/${APP_ID}/
 	touch $@
 
 clobber::
