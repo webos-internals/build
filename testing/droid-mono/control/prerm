@@ -1,5 +1,5 @@
 #!/bin/sh
 
-rm /usr/share/fonts/DejaVu*
+rm /usr/share/fonts/DroidSansMono.ttf
 
 exit 0

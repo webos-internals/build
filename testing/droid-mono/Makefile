@@ -1,6 +1,6 @@
 NAME     = droid
-TITLE	 = Droid Fonts - ALL
-APP_ID   = org.webosinternals.fonts.${NAME}
+TITLE	 = Droid Fonts - Mono
+APP_ID   = org.webosinternals.fonts.${NAME}-mono
 VERSION  = 1.0
 BLDFLAGS = -p
 TYPE	 = Unknown
@@ -36,7 +36,7 @@ build/.built-${VERSION}: build/all.built-${VERSION}
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
-	cp -r build/src/*.ttf build/$*/usr/palm/applications/${APP_ID}/
+	cp -r build/src/DroidSansMono.ttf build/$*/usr/palm/applications/${APP_ID}/
 	touch $@
 
 clobber::
