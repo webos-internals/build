@@ -56,7 +56,7 @@ build/.built-${VERSION}: build/all.built-${VERSION}
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
-	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
+	cp -r build/src/enjo-app/* build/$*/usr/palm/applications/${APP_ID}/
 	mkdir -p build/$*/usr/palm/services/${SRV_ID}
 	cp -r build/src/node-service/* build/$*/usr/palm/services/${SRV_ID}/
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/node-service
