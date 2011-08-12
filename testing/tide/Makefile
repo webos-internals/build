@@ -4,7 +4,7 @@ APP_ID   = us.ryanhope.${NAME}
 SRV_ID   = us.ryanhope.${NAME}.fileio
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-BASEVER  = 0.0.25
+BASEVER  = 0.0.26
 GIT_TAG  = v${BASEVER}
 VERSION  = ${BASEVER}
 TYPE	 = Application
@@ -16,6 +16,9 @@ MINWEBOSVERSION = 3.0.0
 
 CHANGELOG = \
 <table cellspacing='12px'>\
+<tr><td align='right'>v0.0.26</td><td>- Fix improper label in prefs scene</td></tr>\
+<td></td><td>- Use system clipboard</td></tr>\
+<td></td><td>- Cut/Copy/Paste support for BT keyboard</td></tr>\
 <tr><td align='right'>v0.0.25</td><td>- Show Bitstream, DejaVu, Droid and/or Liberation mono fonts in prefs if installed</td></tr>\
 <td></td><td>- Page Up/Down buttons by vslider</td></tr>\
 <tr><td align='right'>v0.0.24</td><td>- Add editor font selector in prefs</td></tr>\
