@@ -1,15 +1,19 @@
-NAME     = liberation
-TITLE	 = Liberation Fonts - ALL
+BASE     = liberation
+NAME     = ${BASE}-serif
+TITLE	 = Liberation Serif Fonts
 APP_ID   = org.webosinternals.fonts.${NAME}
-VERSION  = 1.07.0
+SRC_VER  = 1.07.0
+VERSION  = ${SRC_VER}-2
 BLDFLAGS = -p
-TYPE	 = Unknown
-CATEGORY = Font
+TYPE	 = Font
+CATEGORY = Sans
 POSTINSTALLFLAGS = RestartLuna
+POSTUPDATEFLAGS  = RestartLuna
+POSTREMOVEFLAGS  = RestartLuna
 DESCRIPTION = The Liberation(tm) Fonts is a font family which aims at metric compatibility with Arial, Times New Roman, and Courier New.
 ICON	 = http://www.webos-internals.org/images/d/d4/X-font-ttf.png
 
-SRC_TGZ = https://fedorahosted.org/releases/l/i/${NAME}-fonts/${NAME}-fonts-ttf-${VERSION}.tar.gz
+SRC_TGZ = https://fedorahosted.org/releases/l/i/${BASE}-fonts/${BASE}-fonts-ttf-${SRC_VER}.tar.gz
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
@@ -24,7 +28,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/all
 	tar -C build -z -x -f $<
-	mv build/${NAME}-fonts-ttf-${VERSION} build/src
+	mv build/${BASE}-fonts-ttf-${SRC_VER} build/src
 	touch $@
 
 .PHONY: build
@@ -36,7 +40,7 @@ build/.built-${VERSION}: build/all.built-${VERSION}
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
-	cp -r build/src/*.ttf build/$*/usr/palm/applications/${APP_ID}/
+	cp -r build/src/*Serif*.ttf build/$*/usr/palm/applications/${APP_ID}/
 	touch $@
 
 clobber::

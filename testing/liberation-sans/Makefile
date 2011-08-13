@@ -1,6 +1,6 @@
 BASE     = liberation
-NAME     = ${BASE}-mono
-TITLE	 = Liberation Mono Fonts
+NAME     = ${BASE}-sans
+TITLE	 = Liberation Sans Fonts
 APP_ID   = org.webosinternals.fonts.${NAME}
 SRC_VER  = 1.07.0
 VERSION  = ${SRC_VER}-2
@@ -40,7 +40,7 @@ build/.built-${VERSION}: build/all.built-${VERSION}
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
-	cp -r build/src/*Mono*.ttf build/$*/usr/palm/applications/${APP_ID}/
+	cp -r build/src/*Sans*.ttf build/$*/usr/palm/applications/${APP_ID}/
 	touch $@
 
 clobber::
