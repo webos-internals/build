@@ -1,15 +1,19 @@
-NAME     = bitstream-vera
-TITLE	 = Bitstream Vera Fonts - ALL
+BASE     = dejavu
+NAME     = ${BASE}-sans
+TITLE	 = DejaVu Sans Fonts
 APP_ID   = org.webosinternals.fonts.${NAME}
-VERSION  = 1.10-1
+SRC_VER  = 2.33
+VERSION  = ${SRC_VER}-2
 BLDFLAGS = -p
-TYPE	 = Unknown
-CATEGORY = Font
+TYPE	 = Font
+CATEGORY = Sans
 POSTINSTALLFLAGS = RestartLuna
-DESCRIPTION = Bitstream Vera Fonts
+POSTUPDATEFLAGS  = RestartLuna
+POSTREMOVEFLAGS  = RestartLuna
+DESCRIPTION = The DejaVu fonts are a font family based on the Vera Fonts. Its purpose is to provide a wider range of characters while maintaining the original look and feel through the process of collaborative development.
 ICON	 = http://www.webos-internals.org/images/d/d4/X-font-ttf.png
 
-SRC_BZ2 = http://ftp.gnome.org/pub/GNOME/sources/ttf-${NAME}/${VERSION}/ttf-${NAME}-${VERSION}.tar.bz2
+SRC_BZ2 = http://downloads.sourceforge.net/project/${BASE}/${BASE}/${SRC_VER}/${BASE}-fonts-ttf-${SRC_VER}.tar.bz2
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
@@ -24,7 +28,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.bz2
 	rm -rf build
 	mkdir -p build/all
 	tar -C build -j -x -f $<
-	mv build/ttf-${NAME}-${VERSION} build/src
+	mv build/${BASE}-fonts-ttf-${SRC_VER} build/src
 	touch $@
 
 .PHONY: build
@@ -36,7 +40,8 @@ build/.built-${VERSION}: build/all.built-${VERSION}
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
-	cp -r build/src/Vera*.ttf build/$*/usr/palm/applications/${APP_ID}/
+	rm -f build/src/ttf/*Mono*.ttf
+	cp -r build/src/ttf/*Sans*.ttf build/$*/usr/palm/applications/${APP_ID}/
 	touch $@
 
 clobber::

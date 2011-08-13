@@ -1,6 +1,6 @@
 #!/bin/sh
 
-APPID=org.webosinternals.fonts.bitstream-vera
+APPID=org.webosinternals.fonts.dejavu-serif
 
 APPS=/media/cryptofs/apps
 
@@ -8,6 +8,6 @@ APPS=/media/cryptofs/apps
 
 APPDIR=${APPS}/usr/palm/applications/${APPID}
 
-cp ${APPDIR}/* /usr/share/fonts/
+cd /usr/share/fonts; ln -s ${APPDIR}/* .
 
 exit 0

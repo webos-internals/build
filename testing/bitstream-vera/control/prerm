@@ -1,5 +1,0 @@
-#!/bin/sh
-
-rm /usr/share/fonts/Vera*
-
-exit 0
