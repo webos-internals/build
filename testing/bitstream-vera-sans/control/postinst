@@ -1,6 +1,6 @@
 #!/bin/sh
 
-APPID=org.webosinternals.fonts.bitstream-vera-mono
+APPID=org.webosinternals.fonts.bitstream-vera-sans
 
 APPS=/media/cryptofs/apps
 

@@ -1,12 +1,12 @@
 BASE     = bitstream-vera
-NAME     = ${BASE}-mono
-TITLE	 = Bitstream Vera Mono Fonts
+NAME     = ${BASE}-sans
+TITLE	 = Bitstream Vera Sans Fonts
 APP_ID   = org.webosinternals.fonts.${NAME}
 SRC_VER  = 1.10
 VERSION  = ${SRC_VER}-2
 BLDFLAGS = -p
 TYPE	 = Font
-CATEGORY = Mono
+CATEGORY = Sans
 POSTINSTALLFLAGS = RestartLuna
 POSTUPDATEFLAGS  = RestartLuna
 POSTREMOVEFLAGS  = RestartLuna
@@ -40,7 +40,8 @@ build/.built-${VERSION}: build/all.built-${VERSION}
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
-	cp -r build/src/VeraMo*.ttf build/$*/usr/palm/applications/${APP_ID}/
+	rm -f build/src/VeraSe*.ttf; rm -f build/src/VeraMo*.ttf
+	cp -r build/src/Vera*.ttf build/$*/usr/palm/applications/${APP_ID}/
 	touch $@
 
 clobber::
