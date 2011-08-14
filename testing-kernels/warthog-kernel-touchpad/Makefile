@@ -10,10 +10,10 @@ Current additions include:<ul>\
 <li>Support for kernel crypto modules required by TrueCrypt</li>\
 <li>Fix tick skew. BFQ IO scheduler. 300Hz</li>\
 <li>Overclock to 1.512GHz & 1.728GHz</li>\
-<li>CIFS & NFS module support<li>\
+<li>CIFS & NFS module support</li>\
 </ul><br>\
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
-DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
+DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br><br>
 APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-39", "log" : [ "300Hz clock. CIFS & NFS modules" ] }, \
 { "version" : "${WEBOS_VERSION}-29", "log" : [ "Back off to 1.728GHz" ] }, \
