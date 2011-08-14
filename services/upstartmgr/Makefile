@@ -1,6 +1,6 @@
 NAME     = upstartmgr
 APP_ID   = org.webosinternals.${NAME}
-MAXWEBOSVERSION = 1.4.5
+MAXWEBOSVERSION = 1.9.9
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
 VERSION  = 0.0.8

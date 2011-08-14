@@ -2,6 +2,7 @@ NAME     = myflashlight
 APP_ID   = net.vertigostudios.${NAME}
 MAXWEBOSVERSION = 2.9.9
 VERSION  = 0.2.7
+MAXWEBOSVERSION = 1.9.9
 HOMEPAGE = http://forums.precentral.net/vertigo-studios/187407-my-flashlight-7-1-a.html
 MAINTAINER = PreGame
 DEPENDS = net.vertigostudios.ledmanager
