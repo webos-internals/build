@@ -37,7 +37,7 @@ ifeq ($(SSL),)
 	SSL=1
 endif
 
-GIT_TAG = v0.4.5
+GIT_TAG = v0.4.6
 SRC_GIT = git://git.webos-internals.org/applications/wIRC.git
 
 D = build/$*/usr/palm/applications/${APP_ID}

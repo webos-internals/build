@@ -26,6 +26,7 @@ fi
 if [ -f $APP_DIR/$PATCH_NAME ]
 then 
   FILE_LIST=`$LSDIFF --strip=1 $APP_DIR/$PATCH_NAME`
+  TWEAKS_NAME=`basename $PATCH_NAME .patch`.json
 fi
 
 if [ "$BSPATCH_FILE" != "" ]
@@ -39,6 +40,7 @@ IPKG_INFO_DIR=/usr/lib/ipkg/info
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
 PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
 PATCH_LOG=/media/internal/webos-patches.log
+TWEAKS_PREFERENCES_DIR=/media/cryptofs/apps/usr/palm/services/org.webosinternals.tweaks.prefs/preferences
 VERSION=aupt-4
 
 remount_rw() {
@@ -127,6 +129,18 @@ install_patch() {
       echo "----------------------------------" | tee -a $PATCH_LOG
       $PATCH_EXEC -p1 -d / --no-backup-if-mismatch < ${APP_DIR}/$PATCH_NAME 2>&1 | tee -a $PATCH_LOG || do_failure
     fi
+  fi
+}
+
+install_tweaks() {
+  if [ -f ${APP_DIR}/$TWEAKS_NAME ]
+  then
+    echo "" | tee -a $PATCH_LOG
+    echo "----------------------------------" | tee -a $PATCH_LOG
+    echo "Actually installing the tweaks!" | tee -a $PATCH_LOG
+    echo "----------------------------------" | tee -a $PATCH_LOG
+    mkdir -p $TWEAKS_PREFERENCES_DIR 2>&1 | tee -a $PATCH_LOG
+    cp $APP_DIR/$TWEAKS_NAME $TWEAKS_PREFERENCES_DIR/`basename $APP_DIR`.json 2>&1 | tee -a $PATCH_LOG
   fi
 }
 
@@ -229,6 +243,12 @@ then
   echo "  $APP_DIR/$PATCH_NAME" >> $PATCH_LOG
 fi
 
+if [ -f $APP_DIR/$TWEAKS_NAME ]
+then
+  echo "Contains tweaks file" >> $PATCH_LOG
+  echo "  $APP_DIR/$TWEAKS_NAME" >> $PATCH_LOG
+fi
+
 if [ -f $APP_DIR/$BSPATCH_NAME ]
 then
   echo "Contains binary patch" >> $PATCH_LOG
@@ -279,7 +299,7 @@ fi
 
 if [ ! -x $BSPATCH_EXEC ]
 then
-  echo "ERROR: Cannot find $LSDIFF" | tee -a $PATCH_LOG 1>&2
+  echo "ERROR: Cannot find $BSPATCH_EXEC" | tee -a $PATCH_LOG 1>&2
   do_failure
 fi
 
@@ -389,6 +409,7 @@ sed -i -e /`basename $APP_DIR`/d $PATCH_PACKAGES_LIST
 basename "$APP_DIR $VERSION">> $PATCH_PACKAGES_LIST
 
 install_additional_files
+install_tweaks
 install_patch
 
 echo "SUCCESS" | tee -a $PATCH_LOG
