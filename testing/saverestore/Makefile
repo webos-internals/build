@@ -3,7 +3,7 @@ TITLE    = Save/Restore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.5.2
+VERSION  = 1.5.3
 DEPENDS  = org.webosinternals.unzip, org.webosinternals.zip
 TYPE	 = Application
 CATEGORY = System Utilities
@@ -13,7 +13,8 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 WebOS Internals provides Save/Retore as is without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.  The entire risk as to the quality and performance of Save/Restore is with you.  Should Save/Restore prove defective, you assume the cost of all necessary servicing, repair or correction.<br>\
 In no event will WebOS Internals or any other party be liable to you for damages, including any general, special, incidental or consequential damages arising out of the use or inability to use Save/Restore (including but not limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of Save/Restore to operate with any other programs).
 CHANGELOG = \
-1.5.1: Applications: intervalGym, Jamwam Jog, Power Nap, ZenSearch (all courtesy of irateb), Need For Speed Hot Pursuit (TouchPad) (courtesy of A.Stice), FlightView, Gowalla, Open Table, Robotek HD, Slice It HD, Spare Time, Wall Switch (all courtesy of Audemars02).<br>\
+1.5.3: Added AppNote for Robotek HD script to indicate restore only works with the same device.<br>\
+1.5.2: Applications: intervalGym, Jamwam Jog, Power Nap, ZenSearch (all courtesy of irateb), Need For Speed Hot Pursuit (TouchPad) (courtesy of A.Stice), FlightView, Gowalla, Open Table, Robotek HD, Slice It HD, Spare Time, Wall Switch (all courtesy of Audemars02).<br>\
 1.5.1: Applications: Trip Traq - HBLR, Trip Traq - BART, Pane Free, Multi Pane (all courtesy of appsotutely), Clock In, Clock In Trial, Gizmo, BeamOut, Days Gone By, Days To Come (all courtesy of djgardn2), DORK 1 (courtesy of lordbah), FitTrack Trial, MiniSquadron (both courtesy of malpha), Super Ads (courtesy of Audemars02).<br>\
 1.5.0: Applications: SecuStore 2, SecuStore 2 (Trial).<br>\
 1.4.8: Added back buttons for devices with no back gesture.<br>\
