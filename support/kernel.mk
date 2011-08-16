@@ -1,3 +1,5 @@
+.NOTPARALLEL:
+
 SIGNER = org.webosinternals
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 ICON = http://www.webos-internals.org/images/9/9e/Icon_WebOSInternals_Kernel.png
@@ -313,6 +315,10 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 		${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
 		${DEFCONFIG} ; \
 	fi
+	${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
+		KBUILD_BUILD_COMPILE_BY=v$* KBUILD_BUILD_COMPILE_HOST=${APP_ID} \
+		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
+		${KERNEL_IMAGE} ${KERNEL_MODULES} modules
 	${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
 		KBUILD_BUILD_COMPILE_BY=v$* KBUILD_BUILD_COMPILE_HOST=${APP_ID} \
 		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
