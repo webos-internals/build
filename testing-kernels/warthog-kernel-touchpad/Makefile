@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (TouchPad)
 DEVICE = touchpad
 CATEGORY = Experimental
-VERSIONS = 3.0.2-39
+VERSIONS = 3.0.2-40
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A collection of highly experimental kernel improvements for the HP TouchPad, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
@@ -10,12 +10,11 @@ Current additions include:<ul>\
 <li>Support for kernel crypto modules required by TrueCrypt</li>\
 <li>Fix tick skew. BFQ IO scheduler. 300Hz</li>\
 <li>Overclock to 1.512GHz & 1.728GHz</li>\
-<li>CIFS & NFS module support</li>\
 </ul><br>\
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br><br>
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-39", "log" : [ "300Hz clock. CIFS & NFS modules" ] }, \
+{ "version" : "${WEBOS_VERSION}-40", "log" : [ "300Hz clock." ] }, \
 { "version" : "${WEBOS_VERSION}-29", "log" : [ "Back off to 1.728GHz" ] }, \
 { "version" : "${WEBOS_VERSION}-27", "log" : [ "CPU align. BFQ CGROUP. OC 1.512 & 1.782GHz" ] }, \
 { "version" : "${WEBOS_VERSION}-21", "log" : [ "Overclock by unixpsycho. BFQ as default" ] }, \
@@ -24,7 +23,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-3", "log" : [ "Initial version" ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-39: 300Hz clock. CIFS & NFS modules<br>\
+${WEBOS_VERSION}-40: 300Hz clock.<br>\
 ${WEBOS_VERSION}-29: Back off to 1.728GHz<br>\
 ${WEBOS_VERSION}-27: CPU align. BFQ CGROUP. OC 1.512 & 1.782GHz<br>\
 ${WEBOS_VERSION}-21: Overclock by unixpsycho. BFQ as default<br>\
@@ -46,8 +45,9 @@ KERNEL_PATCHES = makefiletune/armMakefile.diff \
 		 identification/mkcompile_h.patch \
 		 warthogbuild/ident-touchpad.patch \
 		 crypto/hw-support-touchpad.patch \
-		 crypto/truecrypt-support-touchpad.patch \
-		 warthogbuild/cifs.patch warthogbuild/nfs.patch
+		 crypto/truecrypt-support-touchpad.patch
+
+#		 defconfig/defconfig-nodebug-touchpad.patch \
 
 TYPE = Kernel
 
