@@ -37,6 +37,7 @@ build/.built-${VERSION}: build/armv7.built-${VERSION}
 
 build/%.built-${VERSION}: build/.unpack
 	rm -f $@
+	cp build/src/${APP_ID}.tweaks.json build/$*/usr/palm/services/org.webosinternals.tweaks.prefs/
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
 	touch $@
