@@ -3,7 +3,7 @@ TITLE    = Xecutah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.8.1
+VERSION  = 0.8.2
 DEPENDS  = org.webosinternals.xserver, org.webosinternals.xterm
 TYPE	 = Application
 CATEGORY = System Utilities
@@ -13,6 +13,7 @@ DESCRIPTION = Xecutah allows you to start an X Window System server in a webOS c
 Due to webOS security constraints, such applications cannot run directly.<br>\
 The XServer requires <a href=https://developer.palm.com/content/resources/develop/webos_3_0_developer_beta.html>webOS 3.0 Developer Beta</a> firmware for correct operation on the TouchPad.
 CHANGELOG = \
+0.8.2: Hold down the keyboard button (bottom right), choose XS and the keyboard will fit in the screen and not cover up the input area.<br>\
 0.8.1: Removed the 3.0.2 warning text, and the request acknowledged button.<br>\
 0.8.0: Added support for running a Ubuntu session (if installed).<br>\
 0.7.2: New upstart-based execution architecture to support legacy webOS versions.<br>\
