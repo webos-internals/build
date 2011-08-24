@@ -2,7 +2,7 @@ NAME = xterm
 TITLE = XTerm
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.7.5
+VERSION  = 0.7.6
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X
@@ -13,11 +13,11 @@ APPINFO_DESCRIPTION = XTerm is used to provide a Linux command-line interface on
 Due to webOS security constraints, this application cannot run directly.<br>\
 You must use <b>Xecutah</b> to run the XServer and other X Window System applications on webOS.
 CHANGELOG = \
-0.7.5: Add ability to change xterm colors via tweaks (thanks to rrix!)<br>\
+0.7.6: Add ability to change xterm colors via tweaks (thanks to rrix!)<br>\
 0.7.2: New upstart-based execution architecture to support legacy webOS versions.<br>\
 0.6.6: Initial testing release.
 APPINFO_CHANGELOG = [ \
-{ "version" : "0.7.5",  "log" : [ "Add ability to change xterm colors via tweaks (thanks to rrix!)" ] }, \
+{ "version" : "0.7.6",  "log" : [ "Add ability to change xterm colors via tweaks (thanks to rrix!)" ] }, \
 { "version" : "0.7.2",  "log" : [ "New upstart-based execution architecture to support legacy webOS versions" ] }, \
 { "version" : "0.6.6",  "log" : [ "Initial testing release" ] } \
 ]
@@ -58,7 +58,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION} ${DL_DIR}/headlessapp-${HEA
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/.git
 	tar -C build/src/$* -cf - . | \
 	tar -C build/$*/usr/palm/applications/${APP_ID}/ -xf -
-	tar -C build/src -cf - control upstart icon.png xecutah.sh | \
+	tar -C build/src -cf - control upstart icon.png xecutah.sh get_colors.inc | \
 	tar -C build/$*/usr/palm/applications/${APP_ID}/ -xf -
 	echo "{" > build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "\"title\": \"${TITLE}\"," >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
