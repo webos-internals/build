@@ -2,7 +2,7 @@ NAME = xterm
 TITLE = XTerm
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.7.2
+VERSION  = 0.7.4
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X
@@ -13,9 +13,11 @@ APPINFO_DESCRIPTION = XTerm is used to provide a Linux command-line interface on
 Due to webOS security constraints, this application cannot run directly.<br>\
 You must use <b>Xecutah</b> to run the XServer and other X Window System applications on webOS.
 CHANGELOG = \
+0.7.4: Add ability to change xterm colors via tweaks (thanks to rrix!)<br>\
 0.7.2: New upstart-based execution architecture to support legacy webOS versions.<br>\
 0.6.6: Initial testing release.
 APPINFO_CHANGELOG = [ \
+{ "version" : "0.7.4",  "log" : [ "Add ability to change xterm colors via tweaks (thanks to rrix!)" ] }, \
 { "version" : "0.7.2",  "log" : [ "New upstart-based execution architecture to support legacy webOS versions" ] }, \
 { "version" : "0.6.6",  "log" : [ "Initial testing release" ] } \
 ]
@@ -75,6 +77,7 @@ endif
 	echo "\"noWindow\": true" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "}" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 
+	mkdir -p build/$*/usr/palm/services/org.webosinternals.tweaks.prefs/preferences
 	cp build/src/${APP_ID}.tweaks.json build/$*/usr/palm/services/org.webosinternals.tweaks.prefs/preferences
 	touch $@
 
