@@ -20,7 +20,6 @@ CHANGELOG = \
 0.6.7: Force phones to portrait mode.<br>\
 0.6.6: Initial testing release.
 APPINFO_CHANGELOG = [ \
-
 { "version" : "0.7.4",  "log" : [ "Add support to change virtual keyboard type (size, or none) with tweaks." ] }, \
 { "version" : "0.7.3",  "log" : [ "Greatly improved support for touchpad virtual keyboard" ] }, \
 { "version" : "0.7.2",  "log" : [ "New upstart-based execution architecture to support legacy webOS versions" ] }, \
