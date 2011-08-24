@@ -80,6 +80,8 @@ ifdef APPINFO_CHANGELOG
 endif
 	echo "\"noWindow\": true" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "}" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
+	mkdir -p build/$*/usr/palm/services/org.webosinternals.tweaks.prefs/preferences
+	cp build/src/${APP_ID}.tweaks.json build/$*/usr/palm/services/org.webosinternals.tweaks.prefs/preferences
 	touch $@
 
 build/%/CONTROL/postinst:
