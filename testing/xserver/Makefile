@@ -2,7 +2,7 @@ NAME = xserver
 TITLE = XServer
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.7.3
+VERSION  = 0.7.4
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X
@@ -13,12 +13,15 @@ APPINFO_DESCRIPTION = XServer is used to display X Windows applications on webOS
 Due to webOS security constraints, this application cannot run directly.<br>\
 You must use <b>Xecutah</b> to run the XServer and other X Window System applications on webOS.
 CHANGELOG = \
+0.7.4: Add support to change virtual keyboard type (size, or none) with tweaks.<br>\
 0.7.3: Greatly improved support for touchpad virtual keyboard.<br>\
 0.7.2: New upstart-based execution architecture to support legacy webOS versions.<br>\
 0.6.8: Enable sticky modifiers on phone devices.<br>\
 0.6.7: Force phones to portrait mode.<br>\
 0.6.6: Initial testing release.
 APPINFO_CHANGELOG = [ \
+
+{ "version" : "0.7.4",  "log" : [ "Add support to change virtual keyboard type (size, or none) with tweaks." ] }, \
 { "version" : "0.7.3",  "log" : [ "Greatly improved support for touchpad virtual keyboard" ] }, \
 { "version" : "0.7.2",  "log" : [ "New upstart-based execution architecture to support legacy webOS versions" ] }, \
 { "version" : "0.6.8",  "log" : [ "Enable sticky modifiers on phone devices" ] }, \
