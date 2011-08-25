@@ -26,6 +26,10 @@ ifeq ("${DEVICE}","touchpad")
 WEBOS_VERSIONS = 3.0.0 3.0.2
 KERNEL_VERSION = 2.6.35
 endif
+ifeq ("${DEVICE}","pre3")
+WEBOS_VERSIONS = 2.2.0
+KERNEL_VERSION = 2.6.32
+endif
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tgz
 DL_DIR = ../../downloads
 POSTINSTALLFLAGS = RestartDevice
@@ -92,6 +96,12 @@ CODENAME = topaz
 DEFCONFIG = tenderloin_defconfig
 KERNEL_TYPE = palm-tenderloin
 DEVICECOMPATIBILITY = [\"TouchPad\"]
+endif
+ifeq ("${DEVICE}","pre3")
+CODENAME = mantaray
+DEFCONFIG = rib_defconfig
+KERNEL_TYPE = palm-rib
+DEVICECOMPATIBILITY = [\"Pre3\"]
 endif
 
 ifeq ("${DEVICE}","pre")
@@ -168,6 +178,16 @@ COMPATIBLE_VERSIONS = 2.1.1 | 2.1.2 | 2.2.1
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.1.1/linuxkernel-${KERNEL_VERSION}.tgz
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
 KERNEL_SUBMISSION = linuxkernel-${KERNEL_VERSION}.patch/kerneldiffs.txt
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
+endif
+
+ifeq ("${WEBOS_VERSION}", "2.2.0")
+ifeq ("${DEVICE}","pre3")
+COMPATIBLE_VERSIONS = 2.2.0
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/2.2.0/linuxkernel-${KERNEL_VERSION}.patch.tar.gz
+KERNEL_SUBMISSION = kernelpatch-2.2.0.txt
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
 endif
