@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (Veer)
 DEVICE = veer
 CATEGORY = Experimental
-VERSIONS = 2.1.2-15
+VERSIONS = 2.1.2-16
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A collection of all the best kernel improvements for the HP Veer, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
@@ -14,13 +14,13 @@ All additions are disabled by default, and must be enabled by using the Govnah a
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-15", "log" : [ "OC to 1.11GHz" ] }, \
+{ "version" : "${WEBOS_VERSION}-16", "log" : [ "OC to 1.11GHz. Boot capped at 1GHz" ] }, \
 { "version" : "${WEBOS_VERSION}-14", "log" : [ "Overclock to 1.018GHz. Undervolt lower speeds. 300HZ clock. Anticipatory IO scheduler" ] }, \
 { "version" : "${WEBOS_VERSION}-8", "log" : [ "Forward port old defconfigs" ] }, \
 { "version" : "${WEBOS_VERSION}-3", "log" : [ "Initial version" ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-15: OC to 1.11GHz<br>\
+${WEBOS_VERSION}-16: OC to 1.11GHz. Boot capped at 1GHz<br>\
 ${WEBOS_VERSION}-14: Overclock to 1.018GHz. Undervolt lower speeds. 300HZ clock. Anticipatory IO scheduler<br>\
 ${WEBOS_VERSION}-8: Forward port old defconfigs.<br>\
 ${WEBOS_VERSION}-3: Initial version.
