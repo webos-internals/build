@@ -3,7 +3,7 @@ TITLE    = Navit - Car navigation system
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.5.0.4663-2
+VERSION	 = 0.5.0.4718-1
 TYPE     = Application
 CATEGORY = Utilities
 DESCRIPTION = <p>This package does not include map-data. Please visit \
@@ -21,7 +21,8 @@ DESCRIPTION = <p>This package does not include map-data. Please visit \
        	other navigation systems, Navit maps are dynamically generated in real \
        	time from vector data.</p>
 CHANGELOG = \
-	    0.5.0-4663-2: Support for Navit Maps 0.0.2-3. <br/> \
+	    0.5.0.4718-1: Update to svn r4718. Fixed a bug which could cause random crashes. Improved support for tunnel-extrapolation. See Release-Notes for details. <br/> \
+	    0.5.0.4663-2: Support for Navit Maps 0.0.2-3. <br/> \
 	    0.5.0.4663-1: Update to svn r4663. Extensions to command-line. <br/> \
 	    0.5.0.4657-2: Add support for new invocation method of navit-maps.<br/> \
 	    0.5.0.4657-1: Update to svn r4657.<br/> \
