@@ -1,16 +1,17 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = calendar/${NAME}.patch
+TWEAKS =
 TITLE = Default to Month View
 DESCRIPTION = This will set the default view of the Calendar application to Month view.
 CATEGORY = Calendar
-VERSIONS = 2.0.0-37 2.0.1-64 2.1.0-18
+VERSIONS = 2.0.0-37 2.0.1-64 2.1.0-18 3.0.2-16
 ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Calendar.png
-SCREENSHOTS = [ \"http://www.webos-internals.org/images/b/b2/Default-to-month-view.png\" ]
+SCREENSHOTS = [ \"http://www.webos-internals.org\" ]
 META_SUB_VERSION = 2
 
 include ../common.mk
 
 include ../modifications.mk
 
-MAINTAINER = matthewn, NightHammer
-HOMEPAGE =
+MAINTAINER = djgardn2, matthewn, NightHammer
+HOMEPAGE = http://forums.precentral.net/webos-patches/291356-patch-touchpad-open-calendar-month-view.html
