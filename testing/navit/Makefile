@@ -3,12 +3,12 @@ TITLE    = Navit - Car navigation system
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.5.0.4718-1
+VERSION	 = 0.5.0.4718-2
 TYPE     = Application
 CATEGORY = Utilities
 DESCRIPTION = <p>This package does not include map-data. Please visit \
 	the <a href="http://en.m.webos-internals.org/wiki/Application:Navit">\
-       	Homepage</a> to find out how to obtain and install maps.</p>
+       	Homepage</a> to find out how to obtain and install maps.</p> \
 	<p>You might want to read the \
 	<a href="http://en.m.webos-internals.org/wiki/Application:NavitReleaseNotes\#v${VERSION}">release notes</a> \
 	before updating/installing this package, any noteworthy changes are \
@@ -21,6 +21,7 @@ DESCRIPTION = <p>This package does not include map-data. Please visit \
        	other navigation systems, Navit maps are dynamically generated in real \
        	time from vector data.</p>
 CHANGELOG = \
+	    0.5.0.4718-2: Fix package description. <br/> \
 	    0.5.0.4718-1: Update to svn r4718. Fixed a bug which could cause random crashes. Improved support for tunnel-extrapolation. Workaround for the -1° - 1° GPS bug. See Release-Notes for details. <br/> \
 	    0.5.0.4663-2: Support for Navit Maps 0.0.2-3. <br/> \
 	    0.5.0.4663-1: Update to svn r4663. Extensions to command-line. <br/> \
