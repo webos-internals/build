@@ -40,7 +40,7 @@ fi
 # Create a non-privileged user in the chroot
 if ! `grep -q ${USERNAME} /media/ext3fs/${NAME}/etc/passwd` ; then
     chroot /media/ext3fs/${NAME} /usr/sbin/adduser ${USERNAME} \
-	--disabled-password --home=/home/${USERNAME} --gecos '${USERNAME},,,'
+	--disabled-password --home=/home/${USERNAME} --gecos "${USERNAME},,,"
 fi
 
 # Install the upstart script
