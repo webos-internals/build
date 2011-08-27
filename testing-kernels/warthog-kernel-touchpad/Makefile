@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (TouchPad)
 DEVICE = touchpad
 CATEGORY = Experimental
-VERSIONS = 3.0.2-40
+VERSIONS = 3.0.2-41
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A collection of highly experimental kernel improvements for the HP TouchPad, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
@@ -14,7 +14,7 @@ Current additions include:<ul>\
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br><br>
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-40", "log" : [ "300Hz clock." ] }, \
+{ "version" : "${WEBOS_VERSION}-41", "log" : [ "300Hz clock." ] }, \
 { "version" : "${WEBOS_VERSION}-29", "log" : [ "Back off to 1.728GHz" ] }, \
 { "version" : "${WEBOS_VERSION}-27", "log" : [ "CPU align. BFQ CGROUP. OC 1.512 & 1.782GHz" ] }, \
 { "version" : "${WEBOS_VERSION}-21", "log" : [ "Overclock by unixpsycho. BFQ as default" ] }, \
@@ -23,7 +23,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-3", "log" : [ "Initial version" ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-40: 300Hz clock.<br>\
+${WEBOS_VERSION}-41: 300Hz clock.<br>\
 ${WEBOS_VERSION}-29: Back off to 1.728GHz<br>\
 ${WEBOS_VERSION}-27: CPU align. BFQ CGROUP. OC 1.512 & 1.782GHz<br>\
 ${WEBOS_VERSION}-21: Overclock by unixpsycho. BFQ as default<br>\
@@ -34,8 +34,6 @@ ${WEBOS_VERSION}-3: Initial version.
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = makefiletune/armMakefile.diff \
-		 defconfig/defconfig-nodebug-touchpad.patch \
-		 warthogbuild/defconfig-slim-touchpad.patch \
 		 warthogbuild/tp-overclock.patch \
 		 bfq/bfq-iosched.patch \
 		 warthogbuild/tp-tickskew.patch \
@@ -48,6 +46,7 @@ KERNEL_PATCHES = makefiletune/armMakefile.diff \
 		 crypto/truecrypt-support-touchpad.patch
 
 #		 defconfig/defconfig-nodebug-touchpad.patch \
+#		 warthogbuild/defconfig-slim-touchpad.patch \
 
 TYPE = Kernel
 
