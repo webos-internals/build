@@ -2,7 +2,7 @@ NAME     = hulu-fix
 TITLE	 = Hulu Fix
 APP_ID   = org.webosinternals.${NAME}
 MAINTAINER = PuffTheMagic
-VERSION  = 2.0
+VERSION  = 3.0
 BLDFLAGS = -p
 TYPE	 = Patch
 CATEGORY = Misc
@@ -11,7 +11,9 @@ POSTUPDATEFLAGS  = RestartLuna
 POSTREMOVEFLAGS  = RestartLuna
 DESCRIPTION = Make Hulu work!
 
-CHANGELOG = 2.0 - Fix fs read-only issue
+CHANGELOG = <BR>\
+2.0 - Fix fs read-only issue<BR>\
+3.0 - Use LNX instead of WIN
 
 SRC_BZ2 =
 
