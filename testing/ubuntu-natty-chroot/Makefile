@@ -11,9 +11,11 @@ ICON	 = http://www.webos-internals.org/images/5/5e/Icon_WebOSInternals_Ubuntu.pn
 DESCRIPTION = ${APPINFO_DESCRIPTION}
 APPINFO_DESCRIPTION = A minimal Ubuntu 11.04 chroot. Requires a dedicated ext3fs partition to be set up using the WebOS Internals Meta-Doctor.
 CHANGELOG = \
+11.04-4: Check that the ext3fs is mounted before installing. Add a non-privileged webos user in the chroot.<br>\
 11.04-3: Fixed pre-remove script.<br>\
 11.04-2: Initial testing release.
 APPINFO_CHANGELOG = [ \
+{ "version" : "11.04-4",  "log" : [ "Check that the ext3fs is mounted before installing", "Add a non-privileged webos user in the chroot" ] }, \
 { "version" : "11.04-3",  "log" : [ "Fixed pre-remove script" ] }, \
 { "version" : "11.04-2",  "log" : [ "Initial testing release" ] } \
 ]
@@ -28,7 +30,7 @@ LICENSE  = GPL v2 Open Source
 
 include ../../support/download.mk
 
-HEADLESSAPP_VERSION = 0.1.0
+HEADLESSAPP_VERSION = 0.2.0
 
 include ../../support/headlessapp.mk
 

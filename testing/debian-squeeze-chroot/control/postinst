@@ -6,6 +6,8 @@ NAME=${DISTRO}-chroot
 
 APPID=org.webosinternals.${NAME}
 
+USERNAME=webos
+
 APPS=/media/cryptofs/apps
 
 [ -d ${APPS} ] || { echo "Requires webOS 1.3.5 or later" ; exit 1 ; }
@@ -23,11 +25,22 @@ if [ ! -d /media/ext3fs ] ; then
     exit 1
 fi
 
+if ! `grep -q ext3fs /proc/mounts` ; then
+    echo "You must ensure a dedicated ext3fs partition is mounted before installing this package"
+    exit 1
+fi
+
 if [ -d /media/ext3fs/${NAME} ] ; then
     echo "Will not overwrite existing chroot directory at /media/ext3fs/${NAME}"
 else
     mkdir -p /media/ext3fs/${NAME} || exit 1
     tar -C /media/ext3fs/${NAME} -z -x -f ${APPDIR}/${NAME}.tgz || exit 1
+fi
+
+# Create a non-privileged user in the chroot
+if ! `grep -q ${USERNAME} /media/ext3fs/${NAME}/etc/passwd` ; then
+    chroot /media/ext3fs/${NAME} /usr/sbin/adduser ${USERNAME} \
+	--disabled-password --home=/home/${USERNAME} --gecos '${USERNAME},,,'
 fi
 
 # Install the upstart script
