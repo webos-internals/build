@@ -1,0 +1,14 @@
+#!/bin/sh
+
+APPID=org.webosinternals.hulu-fix
+
+APPS=/media/cryptofs/apps
+
+APPDIR=${APPS}/usr/palm/applications/${APPID}
+
+cd /;
+if `md5sum -c ${APPDIR}/md5sum -s`; then
+	cp ${APPDIR}/libflashplayer.so /usr/lib/BrowserServerPlugins/
+fi
+
+exit 0
