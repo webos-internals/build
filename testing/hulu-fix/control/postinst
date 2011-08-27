@@ -1,0 +1,15 @@
+#!/bin/sh
+
+APPID=org.webosinternals.hulu-fix
+
+APPS=/media/cryptofs/apps
+
+[ -d ${APPS} ] || { echo "Requires webOS 1.3.5 or later" ; exit 1 ; }
+
+APPDIR=${APPS}/usr/palm/applications/${APPID}
+
+cp /usr/lib/BrowserServerPlugins/libflashplayer.so ${APPDIR};
+sed -i 's/WEB 10/WIN 10/' /usr/lib/BrowserServerPlugins/libflashplayer.so;
+md5sum /usr/lib/BrowserServerPlugins/libflashplayer.so > ${APPDIR}/md5sum
+
+exit 0
