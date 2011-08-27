@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DISTRO=ubuntu-natty
+DISTRO=debian-squeeze
 
 NAME=${DISTRO}-chroot
 

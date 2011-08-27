@@ -1,30 +1,25 @@
-NAME     = ubuntu-natty-chroot
-TITLE    = Ubuntu 11.04 Chroot
+NAME     = debian-squeeze-chroot
+TITLE    = Debian 6.0.2 Chroot
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
+MAINTAINER = pezman726 <pezman726@gmail.com>
 BLDFLAGS = -p
-VERSION  = 11.04-3
+VERSION  = 6.0.2-1
 TYPE	 = Linux Application
 CATEGORY = Utilities
-HOMEPAGE = http://www.webos-internals.org/wiki/UbuntuChroot
-ICON	 = http://www.webos-internals.org/images/5/5e/Icon_WebOSInternals_Ubuntu.png
+HOMEPAGE = http://www.webos-internals.org/wiki/DebianChroot
+ICON	 = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Debian.png
 DESCRIPTION = ${APPINFO_DESCRIPTION}
-APPINFO_DESCRIPTION = A minimal Ubuntu 11.04 chroot. Requires a dedicated ext3fs partition to be set up using the WebOS Internals Meta-Doctor.
+APPINFO_DESCRIPTION = A minimal Debian 6.0.2 chroot that works on ARMv6 and ARMv7 CPUs. Requires a dedicated ext3fs partition to be set up using the WebOS Internals Meta-Doctor.
 CHANGELOG = \
-11.04-3: Fixed pre-remove script.<br>\
-11.04-2: Initial testing release.
+6.0.2-1: Initial testing release.
 APPINFO_CHANGELOG = [ \
-{ "version" : "11.04-3",  "log" : [ "Fixed pre-remove script" ] }, \
-{ "version" : "11.04-2",  "log" : [ "Initial testing release" ] } \
+{ "version" : "6.0.2-1",  "log" : [ "Initial testing release" ] } \
 ]
 
 SCREENSHOTS = [\
  ]
 LICENSE  = GPL v2 Open Source
-
-# Also requires upstart changes from:
-# http://gyp.blogs.balabit.com/2011/01/using-upstart-in-a-chroot/
-# http://git.balabit.hu/?p=gyp/upstart-dummy.git;a=summary
 
 include ../../support/download.mk
 
@@ -54,7 +49,7 @@ include ../../support/cross-compile.mk
 
 build/${NAME}.tgz:
 	rm -f build/${NAME}.tgz
-	( cd build ; rootstock --no-root --fqdn ${NAME} --dist natty )
+	( cd build ; ../rootstock --no-root --fqdn ${NAME} --dist squeeze --mirror http://ftp.us.debian.org/debian/ --components main contrib)
 	mv build/armel-rootfs*.tgz build/${NAME}.tgz
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION} build/${NAME}.tgz ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
