@@ -37,7 +37,7 @@ SRC_GIT = git://git.webos-internals.org/x11/xlauncher.git
 
 include ../../support/download.mk
 
-HEADLESSAPP_VERSION = 0.1.0
+HEADLESSAPP_VERSION = 0.2.0
 
 include ../../support/headlessapp.mk
 
