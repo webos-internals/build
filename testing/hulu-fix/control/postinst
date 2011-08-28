@@ -8,8 +8,7 @@ APPS=/media/cryptofs/apps
 
 APPDIR=${APPS}/usr/palm/applications/${APPID}
 
-cp /usr/lib/BrowserServerPlugins/libflashplayer.so ${APPDIR};
-sed -i 's/WEB 10/WIN 10/' /usr/lib/BrowserServerPlugins/libflashplayer.so;
-md5sum /usr/lib/BrowserServerPlugins/libflashplayer.so > ${APPDIR}/md5sum
+mount -o remount,rw /
+sed -i 's/WEB 10/LNX 10/' /usr/lib/BrowserServerPlugins/libflashplayer.so
 
 exit 0
