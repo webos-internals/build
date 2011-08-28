@@ -2,7 +2,7 @@ NAME     = hulu-fix
 TITLE	 = Hulu Fix
 APP_ID   = org.webosinternals.${NAME}
 MAINTAINER = PuffTheMagic
-VERSION  = 3.0
+VERSION  = 3.0-1
 BLDFLAGS = -p
 TYPE	 = Patch
 CATEGORY = Misc
@@ -27,6 +27,7 @@ include ../../support/download.mk
 unpack: build/.unpacked-${VERSION}
 
 build/.unpacked-${VERSION}:
+	touch $@
 
 .PHONY: build
 build: build/.built-${VERSION}
