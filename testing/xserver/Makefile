@@ -2,7 +2,7 @@ NAME = xserver
 TITLE = XServer
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.7.6
+VERSION  = 0.8.0
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X
@@ -13,6 +13,7 @@ APPINFO_DESCRIPTION = XServer is used to display X Windows applications on webOS
 Due to webOS security constraints, this application cannot run directly.<br>\
 You must use <b>Xecutah</b> to run the XServer and other X Window System applications on webOS.
 CHANGELOG = \
+0.8.0: Add basic RANDR support, fix some keyboard issues.<br>\
 0.7.6: Add support for bluetooth Control, Alt, and arrow keys. (Alt is 'Symbol' on HP BT keyboard).<br>\
 0.7.5: Fix timing issue that sometimes results in keymappings not being set.<br>\
 0.7.4: Add support to change virtual keyboard type (size, or none) with tweaks.<br>\
@@ -22,6 +23,7 @@ CHANGELOG = \
 0.6.7: Force phones to portrait mode.<br>\
 0.6.6: Initial testing release.
 APPINFO_CHANGELOG = [ \
+{ "version" : "0.8.0",  "log" : [ "Add basic RANDR support, fix some keyboard issues." ] },\
 { "version" : "0.7.6",  "log" : [ "Add support for bluetooth Control, Alt, and arrow keys. (Alt is 'Symbol' on HP BT keyboard)." ] },\
 { "version" : "0.7.5",  "log" : [ "Fix timing issue that sometimes results in keymappings not being set." ] },\
 { "version" : "0.7.4",  "log" : [ "Add support to change virtual keyboard type (size, or none) with tweaks." ] }, \
