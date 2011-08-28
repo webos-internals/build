@@ -3,7 +3,7 @@ TITLE	 = Preware
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.7.3
+VERSION  = 1.7.5
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
@@ -11,6 +11,8 @@ ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 MINWEBOSVERSION = 1.4.0
 DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, kernels, services and plugins.<br><b>Requires webOS 1.4.0 or later</b>.
 CHANGELOG = \
+1.7.5: Fixed list rendering on TouchPad (courtesy of chpwn).<br>\
+1.7.4: Removed catalog feed specific preferences (show only free/show only english).<br>\
 1.7.3: Added support for font packages.<br>\
 1.7.2: Replaced the word phone with the word device in all messages.<br>\
 1.7.1: Fixed fullscreen screenshot resizing on touchpad rotate (courtesy of Appsotutely). Fixed dependent packages spinner location (courtesy of chpwn).<br>\
