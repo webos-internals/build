@@ -5,7 +5,7 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.srv
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 2.3.9
+VERSION  = 2.4.0
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/showthread.php?p=2935803&posted=1#post2919102
@@ -14,6 +14,7 @@ DESCRIPTION = Mode Switcher.
 MINWEBOSVERSION = 2.0.0
 MAXWEBOSVERSION = 2.9.9
 CHANGELOG = \
+2.4.0: Fixed a small problem that caused fetching of settings fail on Pre3.<br>\
 2.3.9: Fixed a normal modes changing bug when triggered at the same time.<br>\
 2.3.8: Fixed a bug that made settings fetching fail on Veer.<br>\
 2.3.7: Fixed a bug that caused an error in certain situation.<br>\
@@ -92,6 +93,8 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/cfg
 	cp build/src/c-service/*.json build/$*/usr/palm/applications/${APP_ID}/cfg/
 	cp build/src/c-service/*.service build/$*/usr/palm/applications/${APP_ID}/cfg/
+	cp build/src/node-service/*.json build/$*/usr/palm/applications/${APP_ID}/cfg/
+	cp build/src/node-service/*.service build/$*/usr/palm/applications/${APP_ID}/cfg/
 	install -m 755 build/src/c-service/impersonate build/$*/usr/palm/applications/${APP_ID}/bin/
 	mkdir -p build/$*/usr/palm/packages/${APP_ID}
 	cp -r build/src/package/* build/$*/usr/palm/packages/${APP_ID}/
