@@ -19,7 +19,7 @@ WEBOS_VERSIONS = 2.0.1 2.1.0
 KERNEL_VERSION = 2.6.24
 endif
 ifeq ("${DEVICE}","veer")
-WEBOS_VERSIONS = 2.1.2
+WEBOS_VERSIONS = 2.1.1 2.1.2
 KERNEL_VERSION = 2.6.29
 endif
 ifeq ("${DEVICE}","touchpad")
@@ -123,7 +123,12 @@ WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp103ueuna-wr-${WEBOS_VERSION}.jar
 endif
 endif
 ifeq ("${DEVICE}","veer")
+ifeq ("${WEBOS_VERSION}", "2.1.1")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp160una-wr-${WEBOS_VERSION}.jar
+endif
+ifeq ("${WEBOS_VERSION}", "2.1.2")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp160unaatt-${WEBOS_VERSION}.jar
+endif
 endif
 ifeq ("${DEVICE}","touchpad")
 ifeq ("${WEBOS_VERSION}", "3.0.0")
@@ -172,10 +177,19 @@ endif
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
 endif
 
+ifeq ("${WEBOS_VERSION}", "2.1.1")
+ifeq ("${DEVICE}","veer")
+COMPATIBLE_VERSIONS = 2.1.1
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
+KERNEL_SUBMISSION = linuxkernel-${KERNEL_VERSION}.patch/kerneldiffs.txt
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
+endif
+
 ifeq ("${WEBOS_VERSION}", "2.1.2")
 ifeq ("${DEVICE}","veer")
-COMPATIBLE_VERSIONS = 2.1.1 | 2.1.2 | 2.2.1
-KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.1.1/linuxkernel-${KERNEL_VERSION}.tgz
+COMPATIBLE_VERSIONS = 2.1.2 | 2.2.1
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
 KERNEL_SUBMISSION = linuxkernel-${KERNEL_VERSION}.patch/kerneldiffs.txt
 # Override the compiler
