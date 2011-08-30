@@ -43,7 +43,7 @@ KERNEL_PATCHES = overclocking/600-1000-1100-pre2.patch overclocking/defconfig-st
 		 makefiletune/armMakefile.diff \
 		 compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \
 		 usb/f_mass_storage.patch crypto/truecrypt-support-pre2.patch \
-		 idcode/idcode.patch console/enable-console.patch
+		 idcode/idcode.patch
 
 EXTERNAL_MODULES = compcache/compcache-0.5.4
 TYPE = Kernel
