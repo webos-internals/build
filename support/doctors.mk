@@ -30,6 +30,10 @@ ${DOCTOR_DIR}/webosdoctorp103ueuna-wr-2.1.0.jar:
 	mkdir -p ${DOCTOR_DIR}
 	curl -L -o $@ http://palm.cdnetworks.net/rom/pre2/p210sfr03082011/wrep210rod/webosdoctorp103ueuna-wr.jar
 
+${DOCTOR_DIR}/webosdoctorp160una-wr-2.1.1.jar:
+	mkdir -p ${DOCTOR_DIR}
+	curl -L -o $@ http://palm.cdnetworks.net/rom/veer/p211r0d06292011/wrp211rod/webosdoctorp160unawr.jar
+
 ${DOCTOR_DIR}/webosdoctorp160unaatt-2.1.2.jar:
 	mkdir -p ${DOCTOR_DIR}
 	curl -L -o $@ http://palm.cdnetworks.net/rom/veer/p212r0d05132011/attp212rod/webosdoctorp160unaatt.jar
