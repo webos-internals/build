@@ -1,11 +1,11 @@
 NAME     = showprops
 APP_ID   = com.palm.org.webosinternals.${NAME}
-VERSION  = 0.2.5
+VERSION  = 0.3.0
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:ShowProperties
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 TYPE	= Application
 DESCRIPTION = A utility to display System Properties
-CHANGELOG = 0.2.5: Added TouchPad tokens.<br>0.2.4: Added PROXCAL token.<br>0.2.3: Fixed quoting of XML output.<br>0.2.2: Added overwrite action to comms board swap output.<br>0.2.0: Added castle.xml generation.<br>0.1.0: Initial version
+CHANGELOG = 0.3.0: Added Pre 3 tokens.<br>0.2.5: Added TouchPad tokens.<br>0.2.4: Added PROXCAL token.<br>0.2.3: Fixed quoting of XML output.<br>0.2.2: Added overwrite action to comms board swap output.<br>0.2.0: Added castle.xml generation.<br>0.1.0: Initial version
 CATEGORY = System Utilities
 ICON	= http://www.webos-internals.org/images/2/2e/Icon_WebOSInternals_SaveRestore.png
 LICENSE  = GPL v2 Open Source
