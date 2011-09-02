@@ -38,6 +38,10 @@ ${DOCTOR_DIR}/webosdoctorp160unaatt-2.1.2.jar:
 	mkdir -p ${DOCTOR_DIR}
 	curl -L -o $@ http://palm.cdnetworks.net/rom/veer/p212r0d05132011/attp212rod/webosdoctorp160unaatt.jar
 
+${DOCTOR_DIR}/webosdoctorp220manta-wr-2.2.0.jar:
+	mkdir -p ${DOCTOR_DIR}
+	curl -L -o $@ http://palm.cdnetworks.net/rom/manta/p220r0d08222011/wdmantarow/webosdoctorp220mantawr.jar
+
 ${DOCTOR_DIR}/webosdoctorp300hstnhwifi-3.0.0.jar:
 	mkdir -p ${DOCTOR_DIR}
 	curl -L -o $@ http://palm.cdnetworks.net/rom/touchpad/wd300wifi/webosdoctorp300hstnhwifi.jar
