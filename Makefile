@@ -231,7 +231,8 @@ toolchain: toolchain/ipkg-utils/ipkg-make-index \
 	   staging/usr/include/glib.h \
 	   staging/usr/include/zlib.h \
 	   staging/usr/include/openssl/crypto.h \
-	   staging/usr/include/curl/curl.h
+	   staging/usr/include/curl/curl.h \
+	   staging/usr/include/fuse/fuse.h
 
 toolchain/cs09q1armel/build/arm-2009q1:
 	${MAKE} -C toolchain/cs09q1armel unpack
@@ -265,6 +266,9 @@ staging/usr/include/zlib.h:
 
 staging/usr/include/curl/curl.h:
 	${MAKE} -C toolchain/libcurl stage
+
+staging/usr/include/fuse/fuse.h:
+	${MAKE} -C toolchain/fuse stage
 
 upload:
 	rsync -avr ipkgs/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/
