@@ -53,6 +53,9 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	)
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
+	sed -i.orig -e 's|src=".*/enyo|src="/usr/palm/frameworks/enyo/1.0/framework/enyo|' \
+		build/$*/usr/palm/applications/${APP_ID}/enyo.html
+	rm -f build/$*/usr/palm/applications/${APP_ID}/enyo.html.orig
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
 	mkdir -p build/$*/usr/palm/services/${APP_ID}.node
 	cp -r build/src/node-service/* build/$*/usr/palm/services/${APP_ID}.node/
