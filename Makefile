@@ -224,6 +224,8 @@ toolchain: toolchain/ipkg-utils/ipkg-make-index \
 	   toolchain/cs09q1armel/build/arm-2009q1 \
 	   toolchain/cs07q3armel/build/arm-2007q3 \
 	   toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu \
+	   staging/usr/include/SDL/SDL.h \
+	   staging/usr/include/PDL.h \
 	   staging/usr/include/mjson/json.h \
 	   staging/usr/include/lunaservice.h \
 	   staging/usr/include/glib.h \
@@ -239,6 +241,12 @@ toolchain/cs07q3armel/build/arm-2007q3:
 
 toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu:
 	${MAKE} -C toolchain/i686-unknown-linux-gnu unpack
+
+staging/usr/include/SDL/SDL.h:
+	${MAKE} -C toolchain/libsdl stage
+
+staging/usr/include/PDL.h:
+	${MAKE} -C toolchain/libpdl stage
 
 staging/usr/include/mjson/json.h:
 	${MAKE} -C toolchain/mjson stage
