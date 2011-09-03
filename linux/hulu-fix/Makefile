@@ -4,12 +4,13 @@ APP_ID   = org.webosinternals.${NAME}
 MAINTAINER = PuffTheMagic
 VERSION  = 3.0-1
 BLDFLAGS = -p
-TYPE	 = Patch
-CATEGORY = Misc
+TYPE	 = Linux Application
+CATEGORY = Utilities
 POSTINSTALLFLAGS = RestartLuna
 POSTUPDATEFLAGS  = RestartLuna
 POSTREMOVEFLAGS  = RestartLuna
 DESCRIPTION = Make Hulu work!
+MINWEBOSVERSION = 3.0.0
 
 CHANGELOG = <BR>\
 2.0 - Fix fs read-only issue<BR>\
