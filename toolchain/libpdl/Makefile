@@ -42,7 +42,7 @@ build/.built-${VERSION}: build/armv7.built-${VERSION} build/armv6.built-${VERSIO
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	( cd build/src ; \
-	  CC=${CROSS_COMPILE_$*}gcc ${MAKE} clobber ${NAME}.so )
+	  ${MAKE} CC=${CROSS_COMPILE_$*}gcc clobber ${NAME}.so )
 	mkdir -p build/$*/usr/include/
 	install -m 644 build/src/PDL.h build/$*/usr/include/
 	mkdir -p build/$*/usr/lib
