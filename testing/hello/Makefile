@@ -3,7 +3,7 @@ TITLE	 = Hello!
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.5.2
+VERSION  = 1.5.3
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Hello
@@ -11,6 +11,7 @@ ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInte
 MINWEBOSVERSION = 2.2.0
 DESCRIPTION = An example demonstration app for services, plugins, touch-to-share information exchange and homebrew multi-platform packaging of both mojo and enyo.  Run Hello! concurrently on each of a TouchPad and a Pre 3, and then touch to share to see the demonstration.
 CHANGELOG = \
+1.5.3: Fixed enyo path during packaging.<br>\
 1.5.2: Fixed the remove script. Upgrade, then reboot, then remove.<br>\
 1.5.0: First public release.
 LICENSE  = GPL v2 Open Source
