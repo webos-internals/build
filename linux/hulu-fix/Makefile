@@ -21,37 +21,35 @@ SRC_BZ2 =
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
 include ../../support/package.mk
-
 include ../../support/download.mk
+
 
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
 
 build/.unpacked-${VERSION}:
+	rm -rf build
+	mkdir -p build
 	touch $@
+
+build/all/CONTROL/postinst: build/.unpacked-${VERSION}
+	mkdir -p build/all/CONTROL
+	cp postinst build/all/CONTROL/postinst
+	chmod ugo+x $@
+
+build/all/CONTROL/prerm: build/.unpacked-${VERSION}
+	mkdir -p build/all/CONTROL
+	cp prerm build/all/CONTROL/prerm
+	chmod ugo+x $@
 
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/all.built-${VERSION}
+build/.built-${VERSION}: build/.unpacked-${VERSION}
+	rm -rf build/all
+	mkdir -p build/all/usr/palm/applications/${APP_ID}
 	touch $@
 
-build/%.built-${VERSION}: build/.unpacked-${VERSION}
-	rm -rf build/$*
-	mkdir -p build/$*/usr/palm/applications/${APP_ID}
-	touch $@
-
+.PHONY: clobber
 clobber::
 	rm -rf build
-
-build/%/CONTROL/postinst:
-	rm -f $@
-	mkdir -p build/$*/CONTROL
-	install -m 0775 control/postinst build/$*/CONTROL
-	chmod ugo+x $@
-
-build/%/CONTROL/prerm:
-	rm -f $@
-	mkdir -p build/$*/CONTROL
-	install -m 0775 control/prerm build/$*/CONTROL
-	chmod ugo+x $@
