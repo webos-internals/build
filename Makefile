@@ -224,12 +224,15 @@ toolchain: toolchain/ipkg-utils/ipkg-make-index \
 	   toolchain/cs09q1armel/build/arm-2009q1 \
 	   toolchain/cs07q3armel/build/arm-2007q3 \
 	   toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu \
+	   staging/usr/include/SDL/SDL.h \
+	   staging/usr/include/PDL.h \
 	   staging/usr/include/mjson/json.h \
 	   staging/usr/include/lunaservice.h \
 	   staging/usr/include/glib.h \
 	   staging/usr/include/zlib.h \
 	   staging/usr/include/openssl/crypto.h \
-	   staging/usr/include/curl/curl.h
+	   staging/usr/include/curl/curl.h \
+	   staging/usr/include/fuse/fuse.h
 
 toolchain/cs09q1armel/build/arm-2009q1:
 	${MAKE} -C toolchain/cs09q1armel unpack
@@ -239,6 +242,12 @@ toolchain/cs07q3armel/build/arm-2007q3:
 
 toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu:
 	${MAKE} -C toolchain/i686-unknown-linux-gnu unpack
+
+staging/usr/include/SDL/SDL.h:
+	${MAKE} -C toolchain/libsdl stage
+
+staging/usr/include/PDL.h:
+	${MAKE} -C toolchain/libpdl stage
 
 staging/usr/include/mjson/json.h:
 	${MAKE} -C toolchain/mjson stage
@@ -257,6 +266,9 @@ staging/usr/include/zlib.h:
 
 staging/usr/include/curl/curl.h:
 	${MAKE} -C toolchain/libcurl stage
+
+staging/usr/include/fuse/fuse.h:
+	${MAKE} -C toolchain/fuse stage
 
 upload:
 	rsync -avr ipkgs/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/
