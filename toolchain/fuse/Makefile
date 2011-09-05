@@ -1,11 +1,11 @@
 NAME     = fuse
 TITLE    = fuse
 APP_ID   = org.webosinternals.toolchain.${NAME}
-SRC_VER  = 2.8.5
-VERSION  = 2.8.5
+SRC_VER  = 2.7.2
+VERSION  = 2.7.2
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 
-SRC_TGZ = http://downloads.sourceforge.net/project/fuse/fuse-2.X/2.8.5/fuse-2.8.5.tar.gz
+SRC_TGZ = http://downloads.sourceforge.net/project/${NAME}/${NAME}-2.X/${VERSION}/${NAME}-${VERSION}.tar.gz
 
 .PHONY: package
 package: build/.built-${VERSION}
