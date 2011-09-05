@@ -5,7 +5,7 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.srv
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 2.4.0
+VERSION  = 2.4.1
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/showthread.php?p=2935803&posted=1#post2919102
@@ -14,6 +14,7 @@ DESCRIPTION = Mode Switcher.
 MINWEBOSVERSION = 2.0.0
 MAXWEBOSVERSION = 2.9.9
 CHANGELOG = \
+2.4.1: Fixed wireless trigger and added fix for the UI on Pre3.<br>\
 2.4.0: Fixed a small problem that caused fetching of settings fail on Pre3.<br>\
 2.3.9: Fixed a normal modes changing bug when triggered at the same time.<br>\
 2.3.8: Fixed a bug that made settings fetching fail on Veer.<br>\
