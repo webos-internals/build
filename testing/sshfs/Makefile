@@ -22,7 +22,7 @@ include ../../support/download.mk
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
 
-build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${SRC_VER}.tar.gz
 	rm -rf build
 	mkdir -p build/armv6 build/armv7 build/i686
 	tar -C build -z -x -f $<
