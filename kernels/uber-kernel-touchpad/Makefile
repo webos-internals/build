@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (TouchPad)
 DEVICE = touchpad
 CATEGORY = Stable
-VERSIONS = 3.0.2-36
+VERSIONS = 3.0.2-52
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the HP TouchPad, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
@@ -16,12 +16,14 @@ All additions are controlled by using the Govnah application.<br>\
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-52", "log" : [ "Added UTF8 support" ] }, \
 { "version" : "${WEBOS_VERSION}-36", "log" : [ "Added NFS and CIFS support" ] }, \
 { "version" : "${WEBOS_VERSION}-22", "log" : [ "Added BFQ IO scheduler support" ] }, \
 { "version" : "${WEBOS_VERSION}-20", "log" : [ "Added 1.5 GHz overclocking support" ] }, \
 { "version" : "${WEBOS_VERSION}-8", "log" : [ "Initial version" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-52: Added UTF8 support.<br>\
 ${WEBOS_VERSION}-36: Added NFS and CIFS support.<br>\
 ${WEBOS_VERSION}-22: Added BFQ IO scheduler support.<br>\
 ${WEBOS_VERSION}-20: Added 1.5 GHz overclocking support.<br>\
