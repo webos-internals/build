@@ -1,0 +1,17 @@
+#!/bin/sh
+
+PACKAGE=org.webosinternals.rmsslcerts
+
+# Handle execution as pmPostInstall.script
+if [ -z "$IPKG_OFFLINE_ROOT" ]; then
+    IPKG_OFFLINE_ROOT=/media/cryptofs/apps
+    mount -o remount,rw /
+fi
+
+# Set things back to the way they were
+mv /etc/ssl/UNTRUSTED/DigiNotarRootCA_NL.pem /etc/ssl/certs/trustedcerts
+mv /etc/ssl/UNTRUSTED/c0cafbd2.0 /etc/ssl/certs/trustedcerts
+chmod 644 /etc/ssl/certs/trustedcerts/DigiNotarRootCA_NL.pem
+
+#ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
+exit 0
