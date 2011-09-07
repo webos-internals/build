@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = SR71 Blackbird (Pre/Pre+)
 CATEGORY = Experimental
 DEVICE = pre
-VERSIONS = 2.1.0-73 1.4.5-144
+VERSIONS = 2.1.0-77 1.4.5-144
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br><br>\
 For more information, visit ${HOMEPAGE}<br><br>\
 <b>WARNING: This Kernel may not boot on all devices and may cause damage!</b>\
@@ -37,13 +37,16 @@ EXTERNAL_MODULES = compcache/compcache-0.5.4
 else
 
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-77", "log" : [ "add 200MHZ VDD2.  last hurrah for Pre." ] }, \
 { "version" : "${WEBOS_VERSION}-73", "log" : [ "Rebuild for webOS 2.1.0." ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-73: Rebuild for webOS 2.1.0<br>
+CHANGELOG = ${WEBOS_VERSION}-77: add 200MHZ VDD2.  last hurrah for Pre.<br>${WEBOS_VERSION}-73: Rebuild for webOS 2.1.0<br>
 
 KERNEL_PATCHES = psychobuild/SR71-overclocking.patch \
 		 sensors/omap34xx_temp.patch \
 		 psychobuild/ssv2-ovrd.patch \
+		 psychobuild/fbconsole.patch \
+		 psychobuild/SR71-logo.patch \
 		 compcache/lowmemnotify-total-memory.patch \
 		 makefiletune/armMakefile.diff
 

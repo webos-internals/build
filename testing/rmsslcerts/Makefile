@@ -1,22 +1,18 @@
-NAME     = hulu-fix
-TITLE	 = Hulu Fix
+NAME     = rmsslcerts
+TITLE	 = Remove Untrusted SSL Certs
 APP_ID   = org.webosinternals.${NAME}
-VERSION  = 3.1
+VERSION  = 1.0
 BLDFLAGS = -p
 TYPE	 = Linux Application
 CATEGORY = Utilities
-MAINTAINER = PuffTheMagic
-ICON = http://www.webos-internals.org/images/d/da/Icon_Hulu_Patch.png
-DESCRIPTION = Make Hulu work!
-POSTINSTALLFLAGS = RestartLuna
-POSTUPDATEFLAGS  = RestartLuna
-POSTREMOVEFLAGS  = RestartLuna
-MINWEBOSVERSION = 3.0.0
+MAINTAINER = WebOS Internals
+ICON = 
+DESCRIPTION = This removes untrusted SSL certs from the system. Google for more info.
+POSTINSTALLFLAGS = RestartDevice
+MINWEBOSVERSION = 2.0.0
 
 CHANGELOG = \
-3.1: Added an icon.<br>\
-3.0: Use LNX instead of WIN.<br>\
-2.0: Fix fs read-only issue
+1.0: Remove DigiNotar cert
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
