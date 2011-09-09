@@ -4,10 +4,9 @@ TWEAKS =
 TITLE = TimeStamp in Memo
 DESCRIPTION = This adds a TimeStamp option, located in the top left pull down menu for the memo that is open.
 CATEGORY = Memos
-VERSIONS = 1.4.5-168
+VERSIONS = 1.4.5-168 2.1.0-159
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS = [\
-\"http://www.webos-internals.org\",\
 \"http://www.webos-internals.org\",\
 \"http://www.webos-internals.org\" ]
 META_SUB_VERSION = 1

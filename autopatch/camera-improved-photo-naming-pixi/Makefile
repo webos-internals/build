@@ -1,9 +1,10 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = camera/${NAME}.patch
+TWEAKS =
 TITLE = Improved Photo Naming PIXI
 DESCRIPTION = Will output images from the camera in the format: PIXI_YYYY-MM-DD-hhmmss.jpg
 CATEGORY = Camera
-VERSIONS = 1.4.5-1 2.0.1-48 2.1.0-3
+VERSIONS = 2.1.0-3 2.2.0-19
 ICON = http://www.webos-internals.org/images/c/c5/Icon_WebOSInternals_Patches_Camera.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
