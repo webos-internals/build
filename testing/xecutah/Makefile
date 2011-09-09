@@ -11,7 +11,7 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Application:Xecutah
 ICON	 = http://www.webos-internals.org/images/a/a5/X.png
 DESCRIPTION = Xecutah allows you to start an X Window System server in a webOS card, and run other X applications on that server.<br>\
 Due to webOS security constraints, such applications cannot run directly.<br>\
-The XServer requires <a href=https://developer.palm.com/content/resources/develop/webos_3_0_developer_beta.html>webOS 3.0 Developer Beta</a> firmware for correct operation on the TouchPad.
+The XServer requires webOS 3.0.2 or later for correct operation on the TouchPad.
 CHANGELOG = \
 0.8.4: Added support for running a Debian session (if installed).<br>\
 0.8.3: Keyboard size and XTerm colours are now controlled using the Tweaks app.<br>\
