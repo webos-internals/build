@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F102A Delta Dagger (Pre/Pre+)
 CATEGORY = Stable
 DEVICE = pre
-VERSIONS = 1.4.5-184 2.1.0-54
+VERSIONS = 1.4.5-184 2.1.0-71
 APPINFO_DESCRIPTION = The well known warbird series kernel from uNiXpSyChO.<br><br>\
 Features:<br> * Screenstate V2<br> * Dynamic voltage scaling<br> * Stable 800MHz\
 <br> * Temp Scaling<br> * Low Battery scaleback<br> * No more TMC error!<br><br>\
@@ -57,12 +57,12 @@ KERNEL_DEFCONFIG = psychobuild/F102A.config
 else
 
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-54", "log" : [ "re-add vdemand poll in msecs." ] }, \
+{ "version" : "${WEBOS_VERSION}-71", "log" : [ "re-add vdemand poll in msecs." ] }, \
 { "version" : "${WEBOS_VERSION}-37", "log" : [ "screenstate fixes. improve voltage reset on freq change. move LCD on/off code to correct place. RC6." ] }, \
 { "version" : "${WEBOS_VERSION}-26", "log" : [ "add preemption. RC5." ] }, \
 { "version" : "${WEBOS_VERSION}-25", "log" : [ "rebuild for webOS 2.1.0" ] }, \
 ]
-CHANGELOG = ${WEBOS_VERSION}-54: re-add vdemand poll in msecs.<br>${WEBOS_VERSION}-37: screenstate fixes. improve voltage reset on freq change. move LCD on/off code to correct place. RC6.<br>${WEBOS_VERSION}-26: add preemption. RC5.<br>${WEBOS_VERSION}-25: rebuild for webOS 2.1.0<br>
+CHANGELOG = ${WEBOS_VERSION}-71: re-add vdemand poll in msecs.<br>${WEBOS_VERSION}-37: screenstate fixes. improve voltage reset on freq change. move LCD on/off code to correct place. RC6.<br>${WEBOS_VERSION}-26: add preemption. RC5.<br>${WEBOS_VERSION}-25: rebuild for webOS 2.1.0<br>
 
 KERNEL_PATCHES = sensors/omap34xx_temp.patch \
                  psychobuild/F102B-overclocking.patch \
