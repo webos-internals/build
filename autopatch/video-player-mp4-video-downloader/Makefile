@@ -1,10 +1,10 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = video-player/${NAME}.patch
 TWEAKS =
-TITLE = Edit Any Videos Metadata
-DESCRIPTION = Will let you edit the metadata (title and description) of any video.
+TITLE = MP4 Video Downloader
+DESCRIPTION = Adds a button to the video player to save any currently playing online mp4 video to /media/internal/downloads/
 CATEGORY = Video Player
-VERSIONS = 1.4.5-29 2.1.0-3 2.2.0-21
+VERSIONS = 2.2.0-21
 ICON = http://www.webos-internals.org/images/f/ff/Icon_WebOSInternals_Patches_Videoplayer.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
@@ -14,4 +14,4 @@ include ../common.mk
 include ../modifications.mk
 
 MAINTAINER = Jason Robitaille
-HOMEPAGE = http://forums.precentral.net/webos-patches/235050-patch-edit-any-videos-metadata.html
+HOMEPAGE = http://forums.precentral.net/webos-patches/298388-patch-mp4-video-downloader.html
