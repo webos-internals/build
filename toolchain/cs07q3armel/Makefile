@@ -20,7 +20,8 @@
 NAME     = arm
 VERSION	 = 2007q3-51-arm-none-linux-gnueabi-i686-pc-linux-gnu
 
-SRC_BZ2  = http://www.codesourcery.com/sgpp/lite/arm/portal/package1787/public/arm-none-linux-gnueabi/${NAME}-${VERSION}.tar.bz2
+# SRC_BZ2  = http://www.codesourcery.com/sgpp/lite/arm/portal/package1787/public/arm-none-linux-gnueabi/${NAME}-${VERSION}.tar.bz2
+SRC_BZ2  = http://sources.nslu2-linux.org/sources/arm-none-linux-gnueabi/${NAME}-${VERSION}.tar.bz2
 include ../../support/download.mk
 
 .PHONY: unpack
