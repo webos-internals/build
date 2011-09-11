@@ -5,6 +5,7 @@ CATEGORY = Experimental
 VERSIONS = 3.0.0-19 3.0.2-55
 APPINFO_DESCRIPTION = The latest experimental kernel from uNiXpSyChO.<br><br>\
 Features:<br> * 1.9GHz<br> * Screenstate (gone for now)<br> * autogroup process scheduling<br> * CFS<br> * BFQ<br> * Various tweaks<br><br>\
+<br><b>NOTE: CPU core 2 will mostly stay idle. This is by webOS default, NOT a kernel problem. If you want to test this, run a Sunspider benchmark. Do not report CPU core 2 bugs.</b><br><br>
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
