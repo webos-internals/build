@@ -3,7 +3,7 @@ TITLE    = Navit - Car navigation system
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.5.0.4767-1
+VERSION	 = 0.5.0.4776-2
 TYPE     = Application
 CATEGORY = Utilities
 DESCRIPTION = <p>This package does not include map-data. Please visit \
@@ -21,6 +21,7 @@ DESCRIPTION = <p>This package does not include map-data. Please visit \
        	other navigation systems, Navit maps are dynamically generated in real \
        	time from vector data.</p>
 CHANGELOG = \
+	    0.5.0.4776-2: Update to svn r4776. Adjust OSDs for TouchPad and Pre3. Please report if it breaks older devices. <br/> \
 	    0.5.0.4767-1: Update to svn r4767. Also use the GPS workaround for webOS 2.2. <br/> \
 	    0.5.0.4754-1: Update to svn r4754. Try different approach for GPS-timeout. <br/> \
 	    0.5.0.4718-3: Fix permissions to enable Pre3 support. <br/> \
