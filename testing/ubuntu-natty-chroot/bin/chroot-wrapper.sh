@@ -5,8 +5,8 @@ CHROOT=/media/ext3fs/ubuntu-natty-chroot
 cp /etc/resolv.conf ${CHROOT}/etc/resolv.conf
 
 mount --bind /dev ${CHROOT}/dev
-mount -t devpts none ${CHROOT}/dev/pts
-mount -t proc none ${CHROOT}/proc
+mount --bind /dev/pts ${CHROOT}/dev/pts
+mount --bind /proc ${CHROOT}/proc
 mount --bind /sys ${CHROOT}/sys
 mount --bind /tmp ${CHROOT}/tmp
 

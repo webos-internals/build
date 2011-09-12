@@ -4,7 +4,7 @@ APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 MAINTAINER = pezman726 <pezman726@gmail.com>
 BLDFLAGS = -p
-VERSION  = 6.0.2-2
+VERSION  = 6.0.2-3
 TYPE	 = Linux Application
 CATEGORY = Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/DebianChroot
@@ -12,9 +12,11 @@ ICON	 = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Debian.pn
 DESCRIPTION = ${APPINFO_DESCRIPTION}
 APPINFO_DESCRIPTION = A minimal Debian 6.0.2 chroot that works on ARMv6 and ARMv7 CPUs. Requires a dedicated ext3fs partition to be set up using the WebOS Internals Meta-Doctor.
 CHANGELOG = \
+6.0.2-3: Change mount -t to --bind for /proc and /dev/pts.<br>\
 6.0.2-2: Check that the ext3fs is mounted before installing. Add a non-privileged webos user in the chroot.<br>\
 6.0.2-1: Initial testing release.
 APPINFO_CHANGELOG = [ \
+{ "version" : "6.0.2-3",  "log" : [ "Change mount -t to --bind for /proc and /dev/pts" ] }, \
 { "version" : "6.0.2-2",  "log" : [ "Check that the ext3fs is mounted before installing", "Add a non-privileged webos user in the chroot" ] }, \
 { "version" : "6.0.2-1",  "log" : [ "Initial testing release" ] } \
 ]
