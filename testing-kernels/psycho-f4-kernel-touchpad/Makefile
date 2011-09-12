@@ -4,7 +4,7 @@ DEVICE = touchpad
 CATEGORY = Experimental
 VERSIONS = 3.0.2-56
 APPINFO_DESCRIPTION = The latest experimental kernel from uNiXpSyChO.<br><br>\
-Features:<br> * 1.8GHz<br> * Full-time dual-core<br> * autogroup process scheduling<br> * CFS<br> * BFQ, V(R), SIO<br> * CIFS, NFS, iSCSI, ATA over Ethernet<br><br>\
+Features:<br> * 1.8GHz<br> * Full-time dual-core<br> * autogroup process scheduling<br> * CFS<br> * BFQ, V(R), SIO<br> * CIFS, NFS, iSCSI, ATA over Ethernet<br> * EXT4<br><br>\
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
