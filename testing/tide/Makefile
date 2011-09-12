@@ -4,7 +4,7 @@ APP_ID   = us.ryanhope.${NAME}
 SRV_ID   = us.ryanhope.${NAME}.fileio
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-BASEVER  = 0.0.26
+BASEVER  = 0.0.27
 GIT_TAG  = v${BASEVER}
 VERSION  = ${BASEVER}
 TYPE	 = Application
@@ -16,6 +16,8 @@ MINWEBOSVERSION = 3.0.0
 
 CHANGELOG = \
 <table cellspacing='12px'>\
+<tr><td align='right'>v0.0.27</td><td>- Search/Replace/Replace All</td></tr>\
+<td></td><td>- New icons</td></tr>\
 <tr><td align='right'>v0.0.26</td><td>- Fix improper label in prefs scene</td></tr>\
 <td></td><td>- Use system clipboard</td></tr>\
 <td></td><td>- Cut/Copy/Paste support for BT keyboard</td></tr>\
