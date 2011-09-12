@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Pre2)
 DEVICE = pre2
 CATEGORY = Experimental
-VERSIONS = 2.0.1-76 2.1.0-76
+VERSIONS = 2.1.0-76
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre2, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
@@ -49,6 +49,3 @@ EXTERNAL_MODULES = compcache/compcache-0.5.4
 TYPE = Kernel
 
 include ../../support/kernel.mk
-
-# Override the compiler
-CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
