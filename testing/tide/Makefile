@@ -56,7 +56,8 @@ CHANGELOG = \
 </table>
 
 SCREENSHOTS = [\
-\"http://www.webos-internals.org/images/d/d0/Tide_2011-07-08_164058.png\" ]
+\"http://www.webos-internals.org/images/d/d0/Tide_2011-07-08_164058.png\",\
+\"http://www.webos-internals.org/images/6/6a/Tide_2011-11-09_190404.png\" ]
 
 LICENSE  = GPL v2 Open Source
 
