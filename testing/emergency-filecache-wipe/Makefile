@@ -1,6 +1,6 @@
 TYPE = Linux Application
 NAME = emergency-filecache-wipe
-VERSION = 1.0.0
+VERSION = 1.1.0
 TITLE = Emergency Filecache Wipe
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 DESCRIPTION = Install this package on your webOS device to completely clear the file cache on your device.  Make sure you reboot the device immediately afterwards. All emails, attachments, contact photos and media thumbnails will be downloaded again or recreated over a period of time. The Pivot magazine issue for the current month will be lost but will update to the latest edition over a period of time.
