@@ -4,7 +4,7 @@ DEVICE = pixi
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 CATEGORY = Recovery
 FORCE_INSTALL = 1
-VERSIONS = 1.4.5-10
+VERSIONS = 1.4.5-10 1.4.5.1-10
 APPINFO_DESCRIPTION = Use this package to reinstall the official webOS ${WEBOS_VERSION} kernel from Palm.<br>\
 This package will refuse to operate on a device with an incompatible webOS version.<br>\
 Note that only files related to the Linux kernel are restored, and these will be forcibly overwritten regardless of their current state.  No other files are modified in any way.<br>\

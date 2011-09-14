@@ -106,12 +106,18 @@ endif
 
 ifeq ("${DEVICE}","pre")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
+ifeq ("${WEBOS_VERSION}", "1.4.5.1")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp101ewwverizonwireless-${WEBOS_VERSION}.jar
+endif
 ifeq ("${WEBOS_VERSION}", "2.1.0")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp101ueude-wr-${WEBOS_VERSION}.jar
 endif
 endif
 ifeq ("${DEVICE}","pixi")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewweu-wr-${WEBOS_VERSION}.jar
+ifeq ("${WEBOS_VERSION}", "1.4.5.1")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewwverizonwireless-${WEBOS_VERSION}.jar
+endif
 endif
 ifeq ("${DEVICE}","pre2")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp102ueuna-wr-${WEBOS_VERSION}.jar
@@ -146,7 +152,10 @@ endif
 COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
 
 ifeq ("${WEBOS_VERSION}", "1.4.5")
-COMPATIBLE_VERSIONS = 1.4.5 | 1.4.5.1
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
+endif
+
+ifeq ("${WEBOS_VERSION}", "1.4.5.1")
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
 endif
 
