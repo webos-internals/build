@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Pre/Pre+)
 DEVICE = pre
 CATEGORY = Stable
-VERSIONS = 1.4.5-178 2.1.0-18
+VERSIONS = 1.4.5-178 1.4.5.1-178 2.1.0-18
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
@@ -22,7 +22,14 @@ Current additions include:<ul>\
 All additions are controlled by using the Govnah application.<br>\
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
+WEBOS_1.4.5 = 0
 ifeq (${WEBOS_VERSION},1.4.5)
+WEBOS_1.4.5 = 1
+endif
+ifeq (${WEBOS_VERSION},1.4.5.1)
+WEBOS_1.4.5 = 1
+endif
+ifeq (${WEBOS_1.4.5},1)
 APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-178", "log" : [ "Added webOS 1.4.5.1 compatibility" ] }, \
 { "version" : "${WEBOS_VERSION}-158", "log" : [ "Removed superfluous vdd2 entries" ] }, \
@@ -82,7 +89,7 @@ endif
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
-ifeq (${WEBOS_VERSION},1.4.5)
+ifeq (${WEBOS_1.4.5},1)
 KERNEL_PATCHES = overclocking/600-720-800-1000-min-opp5.patch overclocking/defconfig-standard.patch \
 		 sensors/sensors_temp_omap34xx.patch sensors/defconfig-safe.patch \
 		 screenstate/screenstate.patch \
