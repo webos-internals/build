@@ -8,7 +8,6 @@ CATEGORY = Utilities
 MAINTAINER = WebOS Internals
 ICON = 
 DESCRIPTION = This enables secure search options in the webOS mobile browser. (Phones only for now).
-POSTINSTALLFLAGS = RestartDevice
 MINWEBOSVERSION = 2.0.0
 DEVICECOMPATIBILITY = [\"Pre\", \"Pre2\", \"Pre3\", \"Veer\", \"Pixi\"]
 
