@@ -1,0 +1,23 @@
+#!/bin/sh
+
+PACKAGE=org.webosinternals.emergency-filecache-wipe
+
+# Handle execution as pmPostInstall.script
+if [ -z "$IPKG_OFFLINE_ROOT" ]; then
+    IPKG_OFFLINE_ROOT=/media/cryptofs/apps
+fi
+
+# Delete the file cache
+find /var/file-cache -type f -delete
+
+# Remove the flag files for the filecache types
+rm -f /var/cache/configurator/_etc_palm_filecache_types_*
+
+# Recreate the filecache types
+luna-send -n 1 palm://com.palm.configurator/run '{"types":["filecache"]}'
+
+# Remove the Pivot edition database entry to make it download again
+luna-send -a com.palm.configurator -n 1 luna://com.palm.db/del '{"query": { "from":"com.palm.appcatalog.editioninfo:3"}}'
+
+ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
+exit 0
