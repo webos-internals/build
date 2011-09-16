@@ -11,7 +11,7 @@ MAINTAINER = WebOS Internals
 DESCRIPTION = ${APPINFO_DESCRIPTION}
 APPINFO_DESCRIPTION = XTerm is used to provide a Linux command-line interface on webOS.<br>\
 Due to webOS security constraints, this application cannot run directly.<br>\
-You must use <b>Xecutah</b> to run the XServer and other X Window System applications on webOS.
+You must use <b>Xecutah</b> to run the XTerm and XServer applications on webOS.
 CHANGELOG = \
 0.9.0: First public feed release.<br>\
 0.7.7: Set default colors to green-on-black, not black-on-black.<br>\
