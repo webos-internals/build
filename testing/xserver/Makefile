@@ -94,6 +94,7 @@ endif
 ifdef APPINFO_CHANGELOG
 	echo '"changeLog": ${APPINFO_CHANGELOG},' >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 endif
+	echo '"uiRevision": "2",' >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "\"noWindow\": true" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "}" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	mkdir -p build/$*/usr/palm/services/org.webosinternals.tweaks.prefs/preferences
