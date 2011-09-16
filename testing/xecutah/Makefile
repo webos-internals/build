@@ -3,7 +3,7 @@ TITLE    = Xecutah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.8.5
+VERSION  = 0.9.0
 DEPENDS  = org.webosinternals.xserver, org.webosinternals.xterm
 TYPE	 = Application
 CATEGORY = System Utilities
@@ -13,6 +13,7 @@ DESCRIPTION = Xecutah allows you to start an X Window System server in a webOS c
 Due to webOS security constraints, such applications cannot run directly.<br>\
 The XServer requires webOS 3.0.2 or later for correct operation on the TouchPad.
 CHANGELOG = \
+0.9.0: First public feed release.<br>\
 0.8.5: Added documentation of Ctrl and Esc on the TouchPad keyboard and Ctrl on phones.<br>\
 0.8.4: Added support for running a Debian session (if installed).<br>\
 0.8.3: Keyboard size and XTerm colours are now controlled using the Tweaks app.<br>\
