@@ -40,7 +40,6 @@ SRC_GIT = git://git.webos-internals.org/services/speechd.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk 
-	#ipkgs/${APP_ID}_${VERSION}_armv6.ipk
 include ../../support/package.mk
 
 .PHONY: unpack
@@ -59,7 +58,6 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 .PHONY: build
 build: build/.built-${VERSION}
 build/.built-${VERSION}: build/armv7.built-${VERSION} 
-	#build/armv6.built-${VERSION}
 	touch $@
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION} ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
