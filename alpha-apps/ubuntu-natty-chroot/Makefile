@@ -60,8 +60,12 @@ include ../../support/cross-compile.mk
 
 build/${NAME}.tgz:
 	rm -f build/${NAME}.tgz
-	( cd build ; rootstock --no-root --fqdn ${NAME} --dist natty )
-	mv build/armel-rootfs*.tgz build/${NAME}.tgz
+	if [ -f ${NAME}.tgz ] ; then \
+	  ln -s ../${NAME}.tgz build/${NAME}.tgz ; \
+	else \
+	  ( cd build ; rootstock --no-root --fqdn ${NAME} --dist natty ) ; \
+	  mv build/armel-rootfs*.tgz build/${NAME}.tgz ; \
+	fi
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION} build/${NAME}.tgz ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
 	rm -rf build/$*
