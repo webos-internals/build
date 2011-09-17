@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F14 Tomcat (Pre2)
 DEVICE = pre2
 CATEGORY = Experimental
-VERSIONS = 2.0.1-68 2.1.0-38
+VERSIONS = 2.1.0-38
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br><br>\
 Features:<br> * Screenstate-v1<br> * Manual Voltage manipulation<br> * 1.4GHz\
 <br> * Temp Scaling<br> * Low Battery scaleback<br> * No more TMC error!<br><br>\

@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F104A Starfighter (Pre2)
 CATEGORY = Experimental
 DEVICE = pre2
-VERSIONS = 2.0.1-70 2.1.0-70
+VERSIONS = 2.1.0-70
 APPINFO_DESCRIPTION = The latest experimental kernel from uNiXpSyChO.<br><br>\
 Features:<br> * Screenstate v3<br> * 1.1GHz<br> * More govenors<br><br>\
 For more information, visit ${HOMEPAGE}<br>
