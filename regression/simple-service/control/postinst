@@ -1,8 +1,0 @@
-#!/bin/sh
-
-echo "Simple Service Postinst Standard Output"
-echo "Simple Service Postinst Standard Error" 1>&2
-
-echo "Simple Service Postinst File Output" > /tmp/foo
-
-exit 0

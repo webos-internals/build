@@ -1,8 +1,0 @@
-#!/bin/sh
-
-echo "Simple Service Prerm Standard Output"
-echo "Simple Service Prerm Standard Error" 1>&2
-
-echo "Simple Service Prerm File Output" > /tmp/foo
-
-exit 0

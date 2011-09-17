@@ -1,6 +1,0 @@
-#!/bin/sh
-
-echo "Pre-Remove Script Failure Prerm Standard Output"
-echo "Pre-Remove Script Failure Prerm Standard Error" 1>&2
-
-exit 1

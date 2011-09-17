@@ -1,6 +1,0 @@
-#!/bin/sh
-
-echo "Pre-Remove Script Failure Postinst Standard Output"
-echo "Pre-Remove Script Failure Postinst Standard Error" 1>&2
-
-exit 0
