@@ -25,7 +25,6 @@ SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = identification/mkcompile_h.patch \
 		 psychobuild/F4.patch \
 		 psychobuild/u1.patch \
-		 memory/tmc_mem.patch \
 		 psychobuild/fbconsole.patch \
 		 psychobuild/F4-logo.patch \
 		 psychobuild/comptune.patch \
