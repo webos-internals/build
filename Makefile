@@ -292,25 +292,25 @@ optware-testing:
 alpha: alpha-apps alpha-patches alpha-kernels alpha-optware
 
 alpha-apps:
-	${MAKE} SUBDIRS="alpha/apps" FEED="WebOS Internals Alpha" webos-internals-index
+	${MAKE} SUBDIRS="alpha-apps" FEED="WebOS Internals Alpha" webos-internals-index
 	rsync -avr ipkgs/webos-internals/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/alpha/apps/
 	rsync -avr ipkgs/webos-internals/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/alpha/apps/
 	rsync -avr ipkgs/webos-internals/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/alpha/apps/
 
 alpha-patches:
-	${MAKE} PTCHDIR="alpha/patches" FEED="WebOS Patches Alpha" SUFFIX=.alpha webos-patches-index
+	${MAKE} PTCHDIR="alpha-patches" FEED="WebOS Patches Alpha" SUFFIX=.alpha webos-patches-index
 	rsync -avr ipkgs/webos-patches/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/alpha/patches/
 	rsync -avr ipkgs/webos-patches/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/alpha/patches/
 	rsync -avr ipkgs/webos-patches/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/alpha/patches/
 
 alpha-kernels:
-	${MAKE} KERNDIR="alpha/kernels" FEED="WebOS Kernels Alpha" webos-kernels-index
+	${MAKE} KERNDIR="alpha-kernels" FEED="WebOS Kernels Alpha" webos-kernels-index
 	rsync -avr ipkgs/webos-kernels/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/alpha/kernels/
 	rsync -avr ipkgs/webos-kernels/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/alpha/kernels/
 	rsync -avr ipkgs/webos-kernels/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/alpha/kernels/
 
 alpha-optware:
-	${MAKE} OPTWDIR="alpha/optware" FEED="Optware Alpha" optware-index
+	${MAKE} OPTWDIR="alpha-optware" FEED="Optware Alpha" optware-index
 	rsync -avr ipkgs/optware/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/alpha/optware/
 	rsync -avr ipkgs/optware/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/alpha/optware/
 	rsync -avr ipkgs/optware/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/alpha/optware/
@@ -318,25 +318,25 @@ alpha-optware:
 beta: beta-apps beta-patches beta-kernels beta-optware
 
 beta-apps:
-	${MAKE} SUBDIRS="beta/apps" FEED="WebOS Internals Beta" webos-internals-index
+	${MAKE} SUBDIRS="beta-apps" FEED="WebOS Internals Beta" webos-internals-index
 	rsync -avr ipkgs/webos-internals/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/beta/apps/
 	rsync -avr ipkgs/webos-internals/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/beta/apps/
 	rsync -avr ipkgs/webos-internals/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/beta/apps/
 
 beta-patches:
-	${MAKE} PTCHDIR="beta/patches" FEED="WebOS Patches Beta" SUFFIX=.beta webos-patches-index
+	${MAKE} PTCHDIR="beta-patches" FEED="WebOS Patches Beta" SUFFIX=.beta webos-patches-index
 	rsync -avr ipkgs/webos-patches/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/beta/patches/
 	rsync -avr ipkgs/webos-patches/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/beta/patches/
 	rsync -avr ipkgs/webos-patches/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/beta/patches/
 
 beta-kernels:
-	${MAKE} KERNDIR="beta/kernels" FEED="WebOS Kernels Beta" webos-kernels-index
+	${MAKE} KERNDIR="beta-kernels" FEED="WebOS Kernels Beta" webos-kernels-index
 	rsync -avr ipkgs/webos-kernels/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/beta/kernels/
 	rsync -avr ipkgs/webos-kernels/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/beta/kernels/
 	rsync -avr ipkgs/webos-kernels/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/beta/kernels/
 
 beta-optware:
-	${MAKE} OPTWDIR="beta/optware" FEED="Optware Beta" optware-index
+	${MAKE} OPTWDIR="beta-optware" FEED="Optware Beta" optware-index
 	rsync -avr ipkgs/optware/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/beta/optware/
 	rsync -avr ipkgs/optware/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/beta/optware/
 	rsync -avr ipkgs/optware/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/beta/optware/
@@ -352,10 +352,10 @@ clobber-testing:
 	${MAKE} SUBDIRS="testing" PTCHDIR="testing-patches" KERNDIR="testing-kernels" OPTWDIR="testing-optware" clobber
 
 alpha-clobber:
-	${MAKE} SUBDIRS="alpha/apps" PTCHDIR="alpha/patches" KERNDIR="alpha/kernels" OPTWDIR="alpha/optware" clobber
+	${MAKE} SUBDIRS="alpha-apps" PTCHDIR="alpha-patches" KERNDIR="alpha-kernels" OPTWDIR="alpha-optware" clobber
 
 beta-clobber:
-	${MAKE} SUBDIRS="beta/apps" PTCHDIR="beta/patches" KERNDIR="beta/kernels" OPTWDIR="beta/optware" clobber
+	${MAKE} SUBDIRS="beta-apps" PTCHDIR="beta-patches" KERNDIR="beta-kernels" OPTWDIR="beta-optware" clobber
 
 clean: clean-subdirs clean-patches clean-kernels clean-optware clean-feeds
 	find . -name "*~" -delete
@@ -364,10 +364,10 @@ clean-testing:
 	${MAKE} SUBDIRS="testing" PTCHDIR="testing-patches" KERNDIR="testing-kernels" OPTWDIR="testing-optware" clean
 
 alpha-clean:
-	${MAKE} SUBDIRS="alpha/apps" PTCHDIR="alpha/patches" KERNDIR="alpha/kernels" OPTWDIR="alpha/optware" clean
+	${MAKE} SUBDIRS="alpha-apps" PTCHDIR="alpha-patches" KERNDIR="alpha-kernels" OPTWDIR="alpha-optware" clean
 
 beta-clean:
-	${MAKE} SUBDIRS="beta/apps" PTCHDIR="beta/patches" KERNDIR="beta/kernels" OPTWDIR="beta/optware" clean
+	${MAKE} SUBDIRS="beta-apps" PTCHDIR="beta-patches" KERNDIR="beta-kernels" OPTWDIR="beta-optware" clean
 
 clobber-subdirs:
 	find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print | \
