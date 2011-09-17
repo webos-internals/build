@@ -43,6 +43,12 @@ if ! `grep -q ${USERNAME} /media/ext3fs/${NAME}/etc/passwd` ; then
 	--disabled-password --home=/home/${USERNAME} --gecos "${USERNAME},,,"
 fi
 
+# Fix dbus/upstart in the chroot
+if [ -z "`chroot /media/ext3fs/${NAME} /usr/sbin/dpkg-divert --list /sbin/initctl`" ] ; then
+    chroot /media/ext3fs/${NAME} /usr/sbin/dpkg-divert --local --rename --add /sbin/initctl
+    chroot /media/ext3fs/${NAME} ln -s /bin/true /sbin/initctl
+fi
+
 # Install the upstart script
 mkdir -p /var/palm/event.d
 cp ${APPDIR}/upstart/${APPID} /var/palm/event.d/${APPID}
