@@ -1,3 +1,0 @@
-description "Ubuntu Natty Chroot"
-
-exec /media/cryptofs/apps/usr/palm/applications/org.webosinternals.ubuntu-natty-chroot/bin/start-xterm.sh
