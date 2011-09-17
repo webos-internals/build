@@ -289,7 +289,7 @@ optware-testing:
 	rsync -avr ipkgs/optware/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/optware/testing/
 	rsync -avr ipkgs/optware/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/optware/testing/
 
-.PHONY alpha alpha-apps alpha-patches alpha-kernels alpha-optware
+.PHONY: alpha alpha-apps alpha-patches alpha-kernels alpha-optware
 alpha: alpha-apps alpha-patches alpha-kernels alpha-optware
 
 alpha-apps:
@@ -316,7 +316,7 @@ alpha-optware:
 	rsync -avr ipkgs/optware/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/alpha/optware/
 	rsync -avr ipkgs/optware/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/alpha/optware/
 
-.PHONY beta beta-apps beta-patches beta-kernels beta-optware
+.PHONY: beta beta-apps beta-patches beta-kernels beta-optware
 beta: beta-apps beta-patches beta-kernels beta-optware
 
 beta-apps:
