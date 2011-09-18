@@ -263,22 +263,6 @@ upload:
 	rsync -avr ipkgs/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/
 	rsync -avr ipkgs/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/
 
-testing: webos-internals-testing webos-kernels-testing
-
-webos-internals-testing:
-	${MAKE} SUBDIRS="testing" FEED="WebOS Internals Testing" webos-internals-index
-	cp support/testing-feeds-announcement.txt ipkgs/webos-internals/all/Packages
-	gzip -c ipkgs/webos-internals/all/Packages > ipkgs/webos-internals/all/Packages.gz
-	rsync -avr ipkgs/webos-internals/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
-	rsync -avr ipkgs/webos-internals/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
-	rsync -avr ipkgs/webos-internals/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
-
-webos-kernels-testing:
-	${MAKE} KERNDIR="testing-kernels" FEED="WebOS Kernels Testing" webos-kernels-index
-	rsync -avr ipkgs/webos-kernels/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-kernels/testing/
-	rsync -avr ipkgs/webos-kernels/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-kernels/testing/
-	rsync -avr ipkgs/webos-kernels/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/webos-kernels/testing/
-
 .PHONY: alpha alpha-apps alpha-patches alpha-kernels alpha-optware
 alpha: alpha-apps alpha-patches alpha-kernels alpha-optware
 
