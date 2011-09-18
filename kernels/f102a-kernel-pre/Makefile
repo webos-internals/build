@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F102A Delta Dagger (Pre/Pre+)
 CATEGORY = Stable
 DEVICE = pre
-VERSIONS = 1.4.5-184 2.1.0-71
+VERSIONS = 1.4.5-184 1.4.5.1-184 2.1.0-71
 APPINFO_DESCRIPTION = The well known warbird series kernel from uNiXpSyChO.<br><br>\
 Features:<br> * Screenstate V2<br> * Dynamic voltage scaling<br> * Stable 800MHz\
 <br> * Temp Scaling<br> * Low Battery scaleback<br> * No more TMC error!<br><br>\
@@ -11,7 +11,7 @@ DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br>
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 
-ifeq (${WEBOS_VERSION},1.4.5)
+ifeq ($(findstring 1.4.5,${WEBOS_VERSION}),1.4.5)
 
 APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-184", "log" : [ "reenable vdemand poll sysfs" ] }, \

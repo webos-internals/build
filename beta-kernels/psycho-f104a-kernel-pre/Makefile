@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F104A Starfighter (Pre/Pre+)
 CATEGORY = Experimental
 DEVICE = pre
-VERSIONS = 1.4.5-185 2.1.0-71
+VERSIONS = 1.4.5-185 1.4.5.1-185 2.1.0-71
 APPINFO_DESCRIPTION = The latest experimental kernel from uNiXpSyChO.<br><br>\
 Features:<br> * Screenstate v2<br> * 1.1GHz<br> * More govenors<br><br>\
 For more information, visit ${HOMEPAGE}<br>
@@ -10,7 +10,7 @@ DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}<br>
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 
-ifeq (${WEBOS_VERSION},1.4.5)
+ifeq ($(findstring 1.4.5,${WEBOS_VERSION}),1.4.5)
 
 APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-185", "log" : [ "add SSv2." ] }, \
