@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export DISPLAY=${DISPLAY:-:0.0}
+export DISPLAY=${1:-:0.0}
 
 NAME=ubuntu-natty-chroot
 

@@ -3,7 +3,7 @@ TITLE    = Ubuntu 11.04 Chroot
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 11.04-7
+VERSION  = 11.04-8
 TYPE	 = Linux Application
 CATEGORY = Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/UbuntuChroot
@@ -11,6 +11,7 @@ ICON	 = http://www.webos-internals.org/images/5/5e/Icon_WebOSInternals_Ubuntu.pn
 DESCRIPTION = ${APPINFO_DESCRIPTION}
 APPINFO_DESCRIPTION = A minimal Ubuntu 11.04 chroot. Requires a dedicated ext3fs partition to be set up using the WebOS Internals Meta-Doctor.
 CHANGELOG = \
+11.04-8: Move to an event based start.<br>\
 11.04-7: Added multi-card support.<br>\
 11.04-6: Added a fix for upstart/dbus handling in the chroot.<br>\
 11.04-5: Change mount -t to --bind for /proc and /dev/pts.<br>\
@@ -18,6 +19,7 @@ CHANGELOG = \
 11.04-3: Fixed pre-remove script.<br>\
 11.04-2: Initial testing release.
 APPINFO_CHANGELOG = [ \
+{ "version" : "11.04-8",  "log" : [ "Move to an event based start." ] },\
 { "version" : "11.04-7",  "log" : [ "Added multi-card support." ] },\
 { "version" : "11.04-6",  "log" : [ "Added a fix for upstart/dbus handling in the chroot" ] }, \
 { "version" : "11.04-5",  "log" : [ "Change mount -t to --bind for /proc and /dev/pts" ] }, \
@@ -94,6 +96,7 @@ endif
 ifdef APPINFO_CHANGELOG
 	echo '"changeLog": ${APPINFO_CHANGELOG},' >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 endif
+	echo '"uiRevision": "2",' >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "\"noWindow\": true" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "}" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	touch $@
