@@ -1,0 +1,6 @@
+description "Ubuntu Natty Chroot"
+
+env DISPLAY=:0.0
+export DISPLAY
+
+exec /media/cryptofs/apps/usr/palm/applications/org.webosinternals.ubuntu-natty-chroot/bin/start-xterm.sh

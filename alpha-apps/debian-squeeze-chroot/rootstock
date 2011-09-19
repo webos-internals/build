@@ -1,0 +1,1260 @@
+#!/bin/sh
+#
+#  Copyright (c) 2009, 2010 Canonical
+#
+#  Author: Oliver Grawert <ogra@canonical.com>
+#          Ricardo Salveti <ricardo.salveti@canonical.com>
+#
+#  This program is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License as
+#  published by the Free Software Foundation; either version 2 of the
+#  License, or (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+#  USA
+#
+######################################################################
+# This script creates a tgz file of an armel rootfs you can untar in #
+# a partition for your target hardware (beagleboard, EVM or freescale#
+# board were tested with this yet)                                   #
+# See https://wiki.ubuntu.com/ARM/RootfsFromScratch for more details #
+######################################################################
+#
+# TODO: - install langpacks for selected locale
+#
+######################################################################
+
+set -e
+
+trap cleanup 1 2 3 6 15
+
+PROGRAM="$(basename $0)"
+VERSION="0.1.99.4"
+
+unset IS_DEBIAN
+
+log()
+{
+    [ $QUIET ] || echo "$*"
+    echo "$*" >> $LOG
+}
+
+error()
+{
+    echo "$*" | tee -a $LOG
+}
+
+cleanup()
+{
+    log "I: Cleaning up..."
+
+    # kill debootstrap if its running
+    if [ -e ${DBPID} ];then
+        DPID=$(cat ${DBPID})
+        kill -9 $DPID >/dev/null 2>&1
+        log "I: Killed debootstrap... "
+    fi
+
+    # kill qemu if its running
+    if [ -e ${QEMUPID} ];then
+        QPID=$(cat ${QEMUPID})
+        kill -9 $QPID >/dev/null 2>&1
+        log "I: Killed qemu... "
+    fi
+
+    # kill chroot environment if its running
+    if [ -e ${CHRPID} ];then
+        CPID=$(cat ${CHRPID})
+        kill -9 $CPID >/dev/null 2>&1
+        log "I: Killed chroot... "
+    fi
+
+    for i in 1 2 3 4 5; do
+        echo -n '.'
+        sleep 1
+    done
+    echo
+
+    # unmount qemu image
+    umount_image
+
+    # unmount tmpfs for swap
+    umount_swap
+
+    savelog
+
+    # wipe builddir
+    rm -rf $BUILDDIR
+    echo "I: Done"
+    exit 0
+}
+
+usage()
+{
+cat <<EOF
+Usage: $PROGRAM -f <hostname> [OPTION]...
+Generates Ubuntu armel rootfs tarballs and/or qemu image, to be
+uncompressed onto a root device.
+
+Note that it does not set up a kernel, modules or bootloader for you.
+Kernel and bootloader need to be set up in a device specific manner,
+modules should be copied to the filesystem after it was uncompressed
+on the target device.
+
+It also uses a virtual machine and can take long to build your
+filesystem, please be patient and make sure to have enough CPU power
+on the host machine.
+
+Options:
+
+Required:
+
+-f --fqdn <hostname>
+    Hostname to be used for the target system
+
+Additional:
+
+-l --login <login name>
+    Login ID of the admin user created during setup
+-p --password <password>
+    Password of the admin user created during setup
+-h --help
+    Display this help
+-n --fullname <quoted string>
+    Full Name of the admin user created during setup
+    (default: "Ubuntu System User")
+-s --seed <csv list>
+    List of packages to install (i.e. ubuntu-desktop)
+-i --imagesize <size>M/G
+    Size of the target filesystem to be created (i.e. 500M)
+    (default: 1G)
+-g --manifest <path to file>
+    Manifest file with list of packages to install (one per line)
+-m --mirror <url>
+    apt mirror to use (i.e. http://ports.ubuntu.com/ubuntu-ports)
+    (default: http://ports.ubuntu.com/ubuntu-ports)
+-c --components <csv list>
+    Archive components
+    (default: main,universe)
+-d --dist (jaunty, karmic, lucid or maverick)
+    Specify Release to build
+    (default: `lsb_release -cs`)
+-t --timezone <timezone>
+    Timezone for the system (i.e. Europe/Berlin)
+    (default: buildsystem timezone)
+-x --locale <locale.encoding>
+    Language used in the installed system (i.e. en_US.UTF-8)
+    (default: buildsystem locale)
+--script <filename>
+    Run this script at the end of the installation process
+--serial <devicename>
+    Create a serial tty of <devicename> inside the rootfs for login (i.e. ttyS0)
+--doswap
+    Do create a swapfile in tmpfs for the virtual machine
+--swapsize <size in megabyte>
+    Use a different size for the swapfile used by the virtual machine
+    (default: 256M)
+--version
+    Print version number
+
+Keyboard:
+
+--kblayout <layout>
+    Keyboard layout (i.e. us)
+    (default: buildsystem kblayout)
+--kbmodel <model>
+    Keyboard model (i.e. pc105)
+    (default: buildsystem kbmodel)
+--kbvariant <variant>
+    Keyboard variant (i.e. nodeadkeys)
+    (default: buildsystem kbvariant)
+--kboptions <options>
+    Additional keyboard options
+    (default: buildsystem kboptions)
+
+Output:
+
+--keepimage
+    Keep the qemu image instead of deleting it (disabled for native)
+--notarball
+    Do not roll a tarball of the rootfs (autosets --keepimage)
+
+Extra parameters:
+
+-q --quiet
+    Quiet operation, only write to log
+
+Advanced:
+
+--kernel-image <http url to kernel .deb>
+    install board specfic kernel package from http accessible deb package inside rootfs
+--copy-package-cache
+    save a snapshot of all packages used for a build locally to re-use them
+    in a subsequent offline build with the --restore-package-cache option
+--restore-package-cache
+    use precached packages from a former build run with --copy-package-cache
+--clean-package-cache
+    empty the package cache of a former --copy-package-cache run
+--extra-mirror
+    additional mirror to use
+--no-root
+    run rootstock without requiring root access (slower as uses a full vm)
+
+Examples:
+
+Xubuntu-Desktop (as root): rootstock -f host -l user -p temppwd -i 2G -s xubuntu-desktop
+
+Minimal Ubuntu (as user): rootstock -f host -l user -p temppwd -i 512M --no-root -s ubuntu-minimal
+
+Report bugs at https://launchpad.net/project-rootstock/+filebug
+
+For Known Issues, please read https://wiki.ubuntu.com/ARM/RootStock/KnownIssues.
+EOF
+    exit 0
+}
+
+print_version()
+{
+cat <<EOF
+$PROGRAM $VERSION
+
+Copyright (C) 2009, 2010 Canonical
+License: GNU GPL version 2 or later <http://gnu.org/licenses/gpl.html>.
+
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Written by Oliver Grawert <ogra@canonical.com> and Ricardo Salveti <ricardo.salveti@canonical.com>.
+EOF
+}
+
+savelog()
+{
+    if [ -z "$NOSAVELOG" ];then
+        mv $LOG $DIR/
+        echo "I: A logfile was saved as $DIR/${PROGRAM}-$STAMP.log"
+    fi
+}
+
+create_qemu_image()
+{
+    log "I: Creating temporary qemu Image to be used as rootfs"
+    LANG=C qemu-img create $IMAGENAME ${IMAGESIZE}k >>$LOG 2>&1
+    LANG=C mkfs.ext3 -F $IMAGENAME >>$LOG 2>&1
+}
+
+create_rootfs_image()
+{
+    # create the ext3 image to be used later with qemu
+    log "I: Creating ext3 Image from the rootfs"
+    if ! ERROR=$(genext2fs -b $IMAGESIZE -i $BYTEINODE -d $ROOTFS $IMAGENAME 2>&1);then
+        error "E: $ERROR"
+        cleanup
+    fi
+    tune2fs -j $IMAGENAME >>$LOG 2>&1
+    # fsck is expected to return != 0
+    ! fsck.ext3 -y -f $IMAGENAME >>$LOG 2>&1
+}
+
+mount_image()
+{
+    log "I: Mounting temporary Image"
+    if [ ! -d $MOUNTPOINT ];then
+        mkdir -p $MOUNTPOINT >>$LOG 2>&1
+    fi
+    if [ "$NOROOT" ];then
+        fuseext2 -o rw+,direct_io -s $IMAGENAME $MOUNTPOINT >>$LOG 2>&1
+    elif [ ! "$IS_NATIVE" ];then
+        mount -o loop $IMAGENAME $MOUNTPOINT >>$LOG 2>&1
+    fi
+}
+
+umount_image()
+{
+    if grep -q ${MOUNTPOINT} /proc/mounts; then
+        log "I: Umounting temporary Image"
+        if [ "$NOROOT" ];then
+            fusermount -z -u $MOUNTPOINT >>$LOG 2>&1
+        else
+            # be sure we unmount everything
+            if grep -q ${MOUNTPOINT}/dev/pts /proc/mounts; then
+                umount -f ${MOUNTPOINT}/dev/pts
+            fi
+            if grep -q ${MOUNTPOINT}/proc /proc/mounts; then
+                umount -f ${MOUNTPOINT}/proc
+            fi
+            if grep -q ${MOUNTPOINT}/sys /proc/mounts; then
+                umount -f ${MOUNTPOINT}/sys
+            fi
+            if [ ! "$IS_NATIVE" ]; then
+                umount -l $MOUNTPOINT >>$LOG 2>&1
+            fi
+        fi
+    fi
+}
+
+umount_swap()
+{
+    if [ -n "$TMPMOUNT" ];then
+        if $(mount |grep -q $TMPMOUNT);then
+            umount -l $TMPMOUNT
+        fi
+    fi
+}
+
+run_first_stage()
+{
+    log "I: Running first stage"
+
+    mkfifo $DBFIFO
+
+    EXTRAOPTS=""
+    TARBALL=$CACHEDIR/debootstrap.tgz
+    DMIRROR="$MIRROR"
+    DEFOPTS="--foreign --arch=armel"
+
+    if [ "$RESTORE_PACKAGE_CACHE" ];then
+        if [ ! -d $CACHEDIR ] || [ ! -f $TARBALL ];then
+            error "E: Error, no pre-cached packages found !"
+            error "E: please run rootstock with --copy-package-cache first"
+            NOSAVELOG=1
+            cleanup
+        fi
+        log "I: using pre-cached packages"
+        EXTRAOPTS="--unpack-tarball=$TARBALL"
+        DMIRROR="file://$CACHEDIR"
+    fi
+
+    if [ "$COPY_PACKAGE_CACHE" ];then
+        log "I: pre-caching debootstrap packages"
+        EXTRAOPTS="--keep-debootstrap-dir --make-tarball=$TARBALL"
+        mkdir -p $CACHEDIR
+
+        LANG=C fakeroot debootstrap $DEFOPTS $EXTRAOPTS $DIST $ROOTFS $DMIRROR >$DBFIFO 2>&1 &
+        echo $! > $DBPID
+        while read line; do
+            log "${line}"
+        done <$DBFIFO
+
+        EXTRAOPTS="--unpack-tarball=$TARBALL"
+    fi
+
+    # recreate to avoid interrupted syscall
+    rm -f $DBFIFO
+    mkfifo $DBFIFO
+
+    # using fakeroot so we're able to create the base rootfs as user
+    LANG=C fakeroot debootstrap $DEFOPTS $EXTRAOPTS $DIST $ROOTFS $DMIRROR >$DBFIFO 2>&1 &
+
+    echo $! > $DBPID
+    while read line; do
+        log "${line}"
+    done <$DBFIFO
+
+    if [ "$COPY_PACKAGE_CACHE" ];then
+        mkdir -p $CACHEDIR/dists/$DIST
+        cp $ROOTFS/var/lib/apt/lists/*Release $CACHEDIR/dists/$DIST/Release
+    fi
+
+    if [ ! "$(which qemu-arm-static)" -a ! "$IS_NATIVE" ] || [ "$NOROOT" ];then
+        SECOND_STAGE="/debootstrap/debootstrap --second-stage"
+    else
+        if [ ! "$IS_NATIVE" ];then
+            mkdir -p $ROOTFS/usr/bin/
+            cp $(which qemu-arm-static) $ROOTFS/usr/bin/
+        fi
+        chroot $ROOTFS debootstrap/debootstrap --second-stage >$DBFIFO 2>&1 &
+        SECOND_STAGE=""
+
+		echo $! > $DBPID
+		while read line; do
+			log "${line}"
+		done <$DBFIFO
+    fi
+
+    rm -f $DBFIFO
+    rm -f $DBPID
+
+    log "I: First stage install done"
+}
+
+run_vm()
+{
+    # get kernel
+    log "I: Getting Virtual Machine kernel from the server"
+    get_vm_kernel
+
+    log "I: Switching to Virtual Machine for second stage processing"
+    VMCPU="cortex-a8"
+    if [ -n "$SWAPFILE" ];then
+        SWAPDEV="-hdb $SWAPFILE"
+    fi
+    QEMUOPTS="-M versatilepb ${VMCPU:+-cpu $VMCPU} -kernel ${BUILDDIR}/qemu-vmlinuz -no-reboot -nographic -pidfile ${QEMUPID} -drive file=${IMAGENAME},aio=native,cache=none ${SWAPDEV} -m 256"
+    APPEND="console=ttyAMA0,115200n8 root=/dev/sda rw mem=256M init=/bin/installer quiet"
+    if [ ! "$NOROOT" ];then
+        APPEND="${APPEND} devtmpfs.mount=0"
+    fi
+
+    # XXX: run qemu at least 2 times, workaround for qemu bug LP #604872
+    QEMURUN=0
+    while [ "$QEMURUN" -lt 2 ] && [ ! "$QEMUDONE" ];do
+        rm -f $QEMUFIFO
+        mkfifo $QEMUFIFO
+
+        ! qemu-system-arm $QEMUOPTS -append "${APPEND}" >$QEMUFIFO 2>&1 &
+        if [ "$QEMURUN" -gt 0 ];then
+            error "W: Bad Bad Qemu, trying second stage one more time (LP #604872)"
+        fi
+        QEMURUN=$(($QEMURUN+1))
+        while read line; do
+            if [ "$(echo $line|grep panic)" ];then
+                log "${line}"
+                error "E: Second stage build in Virtual Machine failed !"
+                error "E: Please see the log to see what went wrong."
+                cleanup
+            fi
+            if [ "$line" ] && [ ! "$(echo $line|grep 'Uncompressing Linux')" ] && \
+                [ ! "$(echo $line|grep 'unknown LCD panel')" ] && \
+                [ ! "$(echo $line|grep 'Restarting system')" ];then
+                log "${line}"
+            fi
+            if [ "$(echo $line|grep 'Restarting system')" ];then
+                QEMUDONE=1
+            fi
+        done <$QEMUFIFO
+    done;
+
+    if [ ! "$QEMUDONE" ];then
+        error "E: Failed to run the second stage in the Virtual Machine !"
+        cleanup
+    fi
+
+    rm -f $QEMUPID
+
+    log "I: Virtual Machine done"
+}
+
+run_chroot()
+{
+    log "I: Using Chroot for installer"
+
+    mkfifo $CHRFIFO
+
+    # mounting required mount points
+    mount -t proc none ${ROOTFS}/proc
+    mkdir -p ${ROOTFS}/dev/pts
+    mount -t devpts devpts ${ROOTFS}/dev/pts
+
+    # do the work
+    chroot $ROOTFS /bin/installer >$CHRFIFO 2>&1 || {
+        error "E: Second stage build in chroot failed !"
+        error "E: Please see the log to see what went wrong."
+        rm -f $CHRPID
+        (cleanup)
+        exit 1
+    } &
+
+    PID=$!
+    echo $PID > $CHRPID
+    while read line; do
+        if [ ! "$(echo $line|grep 'qemu: Unsupported syscall')" ] && \
+            [ ! "$(echo $line|grep 'Unsupported ioctl:')" ];then
+            log "${line}"
+        else
+            echo "${line}" >> $LOG
+        fi
+    done <$CHRFIFO
+
+    wait $PID
+
+    umount -f ${ROOTFS}/dev/pts
+    umount -f ${ROOTFS}/proc
+
+    rm -f $CHRFIFO
+    rm -f $CHRPID
+
+    log "I: Chroot done"
+}
+
+setup_serial()
+{
+    log "I: Setting up serial tty in image"
+
+    if [ "$DIST" = "jaunty" ] || [ "$DIST" = "lenny" ];then
+        test -d $ROOTFS/etc/event.d/|| mkdir -p $ROOTFS/etc/event.d/
+        cat > $ROOTFS/etc/event.d/$SERIAL_TTYS <<EOF
+start on runlevel 2
+start on runlevel 3
+start on runlevel 4
+start on runlevel 5
+
+stop on runlevel 0
+stop on runlevel 1
+stop on runlevel 6
+
+respawn
+exec /sbin/getty 115200 $SERIAL_TTYS
+EOF
+    else
+        test -d $ROOTFS/etc/init/|| mkdir -p $ROOTFS/etc/init/
+        cat > $ROOTFS/etc/init/$SERIAL_TTYS.conf <<EOF
+start on stopped rc RUNLEVEL=[2345]
+stop on runlevel [!2345]
+
+respawn
+exec /sbin/getty 115200 $SERIAL_TTYS
+EOF
+    fi
+}
+
+use_swap()
+{
+    # if normal user, use swap as a file
+    if [ "$NOROOT" ]; then
+        SWAPFILE=$BUILDDIR/swapfile
+        log "I: Creating a normal swapfile for VM (non-root)"
+    else
+        TMPMOUNT=$BUILDDIR/tmpfs
+        SWAPFILE=$TMPMOUNT/swapfile
+        log "I: Creating swapfile in tmpfs for VM"
+        mkdir -p $TMPMOUNT >>$LOG 2>&1
+        mount -t tmpfs -o size=$(($SWAPSIZE*1048576)) tmpfs $TMPMOUNT >>$LOG 2>&1
+    fi
+
+    dd if=/dev/zero of=$SWAPFILE bs=1048576 count=$(($SWAPSIZE-8)) >>$LOG 2>&1
+    mkswap -f $SWAPFILE >>$LOG 2>&1
+    SWAPCMD="swapon /dev/sdb"
+}
+
+setup_kernel_image()
+{
+    log "I: Downloading kernel image (deb) from external site"
+
+    KERNEL_IMG=${KERNEL_URL##*/}
+    test -d $ROOTFS/tmp/ || mkdir -p $ROOTFS/tmp/
+
+    if [ "$RESTORE_PACKAGE_CACHE" ] && \
+        [ -f "$CACHEDIR/kernel/$KERNEL_IMG" ];then
+        log "I: Found cached $KERNEL_IMG, skipping download"
+        cp $CACHEDIR/kernel/$KERNEL_IMG $ROOTFS/tmp
+    else
+        KERNELDIR=$(mktemp -d)
+        wget --directory-prefix=$KERNELDIR --quiet $KERNEL_URL
+        log "I: $KERNEL_IMG download complete"
+        cp $KERNELDIR/$KERNEL_IMG $ROOTFS/tmp
+
+        if [ "$COPY_PACKAGE_CACHE" ];then
+            mkdir -p $CACHEDIR/kernel
+            cp $KERNELDIR/$KERNEL_IMG $CACHEDIR/kernel
+        fi
+        rm -rfd $KERNELDIR
+    fi
+
+    #Hack dpkg -i fails, no postinstall script is run anyways, so lets just extract it.
+    KERNEL_IMAGE_CMD="dpkg -x /tmp/$KERNEL_IMG /"
+
+    KERNEL_IMG_REL=${KERNEL_IMG##*linux-image-}
+    KERNEL_IMG_REL=$(echo $KERNEL_IMG_REL | awk -F_ '{print $1}')
+
+    KERNEL_IMAGE_CREATE_INITRAMFS="update-initramfs -c -k $KERNEL_IMG_REL"
+}
+
+get_vm_kernel()
+{
+    if [ "$RESTORE_PACKAGE_CACHE" ];then
+        cp $CACHEDIR/vmkernel/qemu-vmlinuz $BUILDDIR/qemu-vmlinuz
+    else
+        KERNEL="http://ports.ubuntu.com/ubuntu-ports/dists/lucid/main/installer-armel/current/images/versatile/netboot/vmlinuz"
+        LANG=C wget -O $BUILDDIR/qemu-vmlinuz $KERNEL >>$LOG 2>&1
+        if [ "$COPY_PACKAGE_CACHE" ];then
+            mkdir -p $CACHEDIR/vmkernel/
+            cp $BUILDDIR/qemu-vmlinuz $CACHEDIR/vmkernel/
+        fi
+    fi
+}
+
+extract_kernel_image()
+{
+    mount_image
+
+    if ls $MOUNTPOINT/boot/vmlinuz-* >/dev/null 2>&1;then
+        log "I: Found vmlinuz at the rootfs, copying it to $DIR"
+        cp $MOUNTPOINT/boot/vmlinuz-* $DIR
+    fi
+
+    if ls $MOUNTPOINT/boot/initrd.img-* >/dev/null 2>&1;then
+        log "I: Found initrd.img at the rootfs, copying it to $DIR"
+        cp $MOUNTPOINT/boot/initrd.img-* $DIR
+    fi
+
+    umount_image
+}
+
+clean_package_cache()
+{
+    log "I: Removing cached files"
+    rm -rfv $CACHEDIR/* >> $LOG 2>&1
+    # just runs cleanup if we don't need to create a rootfs
+    if [ ! "${FQDN}" ];then
+        NOSAVELOG=1
+        cleanup
+    fi
+}
+
+save_package_cache()
+{
+    log "I: caching packages for later use"
+
+    mount_image
+
+    mkdir -p $CACHEDIR
+    cp -up $MOUNTPOINT/var/cache/apt/archives/*.deb $CACHEDIR/ || true
+
+    mkdir -p $CACHEDIR/lists
+    cp -p $MOUNTPOINT/var/lib/apt/lists/* $CACHEDIR/lists/ || true
+
+    if [ "$NOROOT" ];then
+        rm -f $MOUNTPOINT/var/cache/apt/archives/*.deb
+    else
+        chroot $MOUNTPOINT apt-get clean
+    fi
+
+    umount_image
+}
+
+restore_package_cache()
+{
+    log "I: Restoring cached packages (may take a while)..."
+
+    mkdir -p $ROOTFS/var/cache/apt/archives
+    cp -vp $CACHEDIR/*.deb $ROOTFS/var/cache/apt/archives/ >> $LOG 2>&1
+    mkdir -p $ROOTFS/var/lib/apt/lists/
+    cp -vp $CACHEDIR/lists/* $ROOTFS/var/lib/apt/lists/ >> $LOG 2>&1 || true
+    APT_UPDATE=""
+    APT_FORCE="--allow-unauthenticated"
+}
+
+add_extra_mirror()
+{
+    EXRA_MIRROR_CMD="echo \"deb ${EXTRAMIRROR} ${DIST} ${COMPONENTS}\" >>/etc/apt/sources.list"
+}
+
+roll_tarball()
+{
+    # create a rootfs tgz
+    log "I: Creating tarball from rootfs"
+
+    mount_image
+
+    cd $MOUNTPOINT >>$LOG 2>&1
+    LANG=C tar czvf ../armel-rootfs-$STAMP.tgz . >>$LOG 2>&1
+    mv ../armel-rootfs-$STAMP.tgz $DIR >>$LOG 2>&1
+
+    echo "I: ARM rootfs created as $DIR/armel-rootfs-$STAMP.tgz"
+
+    cd - >/dev/null 2>&1
+
+    umount_image
+}
+
+save_qemu_img()
+{
+    cp $IMAGENAME $DIR
+    if [ "$SUDO_USER" ]; then
+        chown $SUDO_USER $DIR/qemu-armel-$STAMP.img
+    fi
+    echo "I: Qemu image saved as $DIR/qemu-armel-$STAMP.img"
+}
+
+# target system name
+FQDN=""
+
+# target user
+NEWUSER=""
+FULLNAME="Ubuntu System User"
+PASSWD=""
+
+# target package selection
+SELECTION="" # change here to install ubuntu-desktop
+# kbytes
+IMAGESIZE="1048576" # 1G, make this 3G for an ubuntu-desktop install
+BYTEINODE="4096"
+
+# default to the build system locale
+. /etc/environment
+. /etc/default/locale
+NEWLOCALE=$LANG
+
+# default to the build system keyboard setup
+KBDATA="/etc/default/console-setup"
+XKBL=$(grep XKBLAYOUT ${KBDATA}|tr -d '"'|cut -d '=' -f2)
+XKBM=$(grep XKBMODEL ${KBDATA}|tr -d '"'|cut -d '=' -f2)
+XKBV=$(grep XKBVARIANT ${KBDATA}|tr -d '"'|cut -d '=' -f2)
+XKBO=$(grep XKBOPTIONS ${KBDATA}|tr -d '"'|cut -d '=' -f2)
+
+# default to the build system timezone
+TZONE=$(cat /etc/timezone)
+
+# target apt setup
+DIST=$(lsb_release -cs)
+MIRROR="http://ports.ubuntu.com/ubuntu-ports"
+COMPONENTS="main universe"
+
+# user-specified script
+USER_SCRIPT=""
+
+# builder defaults
+DEFGROUPS="admin,adm,dialout,cdrom,floppy,audio,dip,video"
+STAMP=$(date +%Y%m%d%H%M)
+BUILDDIR=$(mktemp -d)
+MOUNTPOINT="${BUILDDIR}/tmpmount"
+ROOTFS="${BUILDDIR}/rootfs"
+IMAGENAME="${BUILDDIR}/qemu-armel-$STAMP.img"
+QEMUPID="${BUILDDIR}/qemu.pid"
+QEMUFIFO="${BUILDDIR}/qemufifo"
+DBPID="${BUILDDIR}/debootstrap.pid"
+DBFIFO="${BUILDDIR}/dbfifo"
+CHRFIFO="${BUILDDIR}/chrootfifo"
+CHRPID="${BUILDDIR}/chroot.pid"
+DIR="$(pwd)"
+NOSWAP=1
+SWAPSIZE=256
+
+# general defaults
+LOG="$BUILDDIR/${PROGRAM}-$STAMP.log"
+
+PACKAGE_CLEANUP="apt-get clean"
+PACKAGE_CLEANUP_SUB="${PACKAGE_CLEANUP}"
+APT_UPDATE="apt-get update"
+APT_FORCE=""
+EXRA_MIRROR_CMD=""
+
+# parse commandline options
+GETOPT=`getopt -o hf:l:p:n:i:g:m:c:t:x:d:q --long help,fqdn:,login:,\
+password:,fullname:,seed:,imagesize:,manifest:,mirror:,components:,timezone:,\
+kblayout:,kbmodel:,kbvariant:,kboptions:,locale:,keepimage,notarball,script:,\
+serial:,doswap,swapsize:,dist:,quiet,kernel-image:,copy-package-cache,\
+restore-package-cache,clean-package-cache,extra-mirror:,no-root,version \
+-n "$PROGRAM" -- "$@"`
+if [ $? != 0 ]; then usage; exit 1; fi
+eval set -- "$GETOPT"
+while true ; do
+    case $1 in
+        -h|--help)
+            usage
+            shift
+            ;;
+        -f|--fqdn)
+            FQDN="$2"
+            shift 2
+            ;;
+        -l|--login)
+            NEWUSER="$2"
+            shift 2
+            ;;
+        -p|--password)
+            PASSWD="$2"
+            shift 2
+            ;;
+        -n|--fullname)
+            FULLNAME="$2"
+            shift 2
+            ;;
+        -s|--seed)
+            SELECTION="$(echo $2|tr ',' ' ')"
+            shift 2
+            ;;
+        -i|--imagesize)
+            if [ "$(echo $2|grep '^[0-9]*M$')" ];then
+                IMAGESIZE="$((1024*${2%M}))"
+            elif [ "$(echo $2|grep '^[0-9]*G$')" ];then
+                IMAGESIZE="$((1024*1024*${2%G}))"
+            else
+                echo "E: Size needs to be in gigabyte or megabyte (M|G)"
+                exit 1
+            fi
+            shift 2
+            ;;
+        -g|--manifest)
+            SELECTION="$(cat "${2}" | sed ':a;N;$!ba;s/\n/ /g')"
+            shift 2
+            ;;
+        -m|--mirror)
+            MIRROR="$2"
+            shift 2
+            DEB_MIRROR=1
+            ;;
+        -c|--components)
+            COMPONENTS="$(echo $2|tr ',' ' ')"
+            shift 2
+            DEB_COMPONENTS=1
+            ;;
+        -t|--timezone)
+            if [ ! "$(echo $2|grep '/')" ];then
+                echo "E: Need a proper timezone"
+                usage
+            fi
+            TZONE="$2"
+            shift 2
+            ;;
+        --kblayout)
+            XKBL="$2"
+            shift 2
+            ;;
+        --kbmodel)
+            XKBM="$2"
+            shift 2
+            ;;
+        --kbvariant)
+            XKBV="$2"
+            shift 2
+            ;;
+        --kboptions)
+            XKBO="$2"
+            shift 2
+            ;;
+        -x|--locale)
+            if [ ! "$(echo $2|grep '_')" ];then
+                echo "E: Need a proper locale"
+                usage
+            fi
+            NEWLOCALE="$2"
+            shift 2
+            ;;
+        --keepimage)
+            KEEPIMAGE=1
+            shift
+            ;;
+        --notarball)
+            NOTARBALL=1
+            KEEPIMAGE=1
+            shift
+            ;;
+        --script)
+            USER_SCRIPT="$2"
+            shift 2
+            ;;
+        --serial)
+            SERIAL_TTYS="$2"
+            SERIAL=1
+            shift 2
+            ;;
+        --doswap)
+            NOSWAP=""
+            shift
+            ;;
+        --swapsize)
+            SWAPSIZE="$2"
+            shift 2
+            ;;
+        -d|--dist)
+            DIST="$2"
+            shift 2
+            ;;
+        -q|--quiet)
+            QUIET=1
+            shift
+            ;;
+        --kernel-image)
+            KERNEL_IMAGE=1
+            KERNEL_URL="$2"
+            shift 2
+            ;;
+        --copy-package-cache)
+            COPY_PACKAGE_CACHE=1
+            PACKAGE_CLEANUP=""
+            PACKAGE_CLEANUP_SUB=""
+            shift
+            ;;
+        --restore-package-cache)
+            RESTORE_PACKAGE_CACHE=1
+            APT_UPDATE=""
+            shift
+            ;;
+        --clean-package-cache)
+            CLEAN_PACKAGE_CACHE=1
+            shift
+            ;;
+        --extra-mirror)
+            EXTRAMIRROR=$2
+            shift 2
+            ;;
+        --no-root)
+            if [ "$(id -u)" -eq 0 ];then
+                echo "You are root, why would you like to run with --no-root?"
+                exit 2
+            fi
+            NOROOT=1
+            shift
+            ;;
+        --version)
+            print_version
+            exit 0
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            echo "Internal error!";
+            exit 1
+            ;;
+    esac
+done
+
+# check if we have at least hostname
+if [ ! "${FQDN}" ] && [ ! "$CLEAN_PACKAGE_CACHE" ];then
+    usage
+fi
+
+if [ "$DIST" = "lenny" ] || [ "$DIST" = "squeeze" ] || [ "$DIST" = "sid" ];then
+
+    if [ ! $DEB_MIRROR ] && [ ! $DEB_COMPONENTS };then
+		echo "for debian add: --mirror http://ftp.us.debian.org/debian/"
+		echo "and add: --components \"main contrib\""
+		usage
+	fi
+    IS_DEBIAN=1
+fi
+
+# we need root
+if [ $(id -u) != 0 ] && [ ! "$NOROOT" ];then
+    echo "You should run $PROGRAM as root unless you explicitly request it by giving --no-root"
+    exit 2
+fi
+
+# check if we're doing native arm work
+ARCH=$(uname -m)
+if echo $ARCH | grep -q "^armv[5-7].*"; then
+    IS_NATIVE=1
+    KEEPIMAGE=""
+
+    # check if we're able to run the desired arm code
+    if [ "$ARCH" = "armv5tel" ] && [ "$DIST" != "jaunty" ];then
+        echo "Only jaunty is supported for armv5"
+        exit 2
+    elif [ "$ARCH" = "armv6l" ] && [ "$DIST" != "jaunty" ] && \
+                    [ "$DIST" != "karmic" ];then
+        echo "Only jaunty and karmic are supported for armv6"
+        exit 2
+    fi
+fi
+
+# in case the user request to skip tarball and we're native
+if [ "$IS_NATIVE" ] && [ "$NOTARBALL" ];then
+    echo "In a native run only a tarball is generated, so requesting --notarball makes rootstock create nothing"
+    exit 2
+fi
+
+log "I: Running on a $ARCH machine"
+
+# set up the cache DIR and clean it if needed
+if [ "$NOROOT" ];then
+    CACHEDIR="${HOME}/.cache/rootstock/archives"
+else
+    CACHEDIR="/var/cache/rootstock/archives"
+fi
+if [ "$CLEAN_PACKAGE_CACHE" ];then
+    clean_package_cache
+fi
+
+# find if we should run full vm or just user emulation
+if [ "$NOROOT" ] || [ ! "$(which qemu-arm-static)" -a ! "$IS_NATIVE" ];then
+    log "I: Second stage will run inside a full virtual machine"
+    RUNVM=1
+else
+    # when running in a chroot environment swap is useless
+    NOSWAP=1
+fi
+
+if [ "$RUNVM" ] && [ ! $(which qemu-system-arm) ];then
+    echo "qemu not installed, please use:"
+    echo "sudo apt-get install qemu"
+    echo "(or on ubuntu > karmic sudo apt-get install qemu-kvm-extras)"
+    echo "to install the qemu package !"
+    exit 1
+fi
+
+if [ ! $(which debootstrap) ];then
+    echo "debootstrap not installed, please use:"
+    echo "sudo apt-get install debootstrap"
+    echo "to install the debootstrap package !"
+    exit 1
+fi
+
+if [ ! -f /usr/share/debootstrap/scripts/$DIST ];then
+  echo "Your debootstrap installation does not seem to have support for the $DIST distribution"
+  exit 5
+fi
+
+# process vars
+AREA=${TZONE%%/*}
+ZONE=${TZONE#*/}
+
+# generate the user password
+PW=$(perl -e 'print crypt($ARGV[0], "qemuonarm")', $PASSWD)
+
+# set up the rootfs
+if [ ! "$NOROOT" ]; then
+    ROOTFS=$MOUNTPOINT
+    if [ ! "$IS_NATIVE" ];then
+        # if we're root and not native, use qemu and mount the image as loop
+        create_qemu_image
+        mount_image
+    fi
+fi
+if [ ! -d $ROOTFS ];then
+    mkdir -p $ROOTFS >>$LOG 2>&1
+fi
+
+run_first_stage
+
+# restore cached packages from host machine
+if [ "$RESTORE_PACKAGE_CACHE" ];then
+    restore_package_cache
+fi
+
+if [ "$EXTRAMIRROR" ];then
+    add_extra_mirror
+fi
+
+# basic fstab
+echo "proc /proc proc defaults 0 0" >$ROOTFS/etc/fstab
+if [ "$KEEPIMAGE" ];then
+    echo "/dev/sda / auto errors=remount-ro 0 1" >>$ROOTFS/etc/fstab
+fi
+
+if [ -e /etc/apt/apt.conf.d/proxy ];then
+    mkdir -p $ROOTFS/etc/apt/apt.conf.d
+    cp /etc/apt/apt.conf.d/proxy $ROOTFS/etc/apt/apt.conf.d/proxy
+fi
+
+if [ "$http_proxy" ];then
+    # try to translate name to IP so it can be used inside qemu (mDNS)
+    PROXY_ADDR=$(echo $http_proxy | sed -e "s/\(.*\/\/\)\?\(.*@\)\?//" -e "s/:.*//")
+    PROXY_IP=$(getent hosts $PROXY_ADDR | head -n 1 | awk -F' ' '{print $1}')
+    if [ "$PROXY_IP" ];then
+        PROXY=$(echo $http_proxy | sed -e "s/$PROXY_ADDR:/$PROXY_IP:/")
+    else
+        # could not translate, using original content
+        PROXY=$http_proxy
+    fi
+fi
+
+# set up basic networking
+NETWORKDIR="$ROOTFS/etc/network"
+INTERFACES="$NETWORKDIR/interfaces"
+mkdir -p $NETWORKDIR
+
+echo "auto lo" >$INTERFACES
+echo "iface lo inet loopback" >>$INTERFACES
+
+# set up resolver
+HOSTS="$ROOTFS/etc/hosts"
+echo "127.0.0.1 localhost" >$HOSTS
+echo "127.0.1.1 ${FQDN}" >>$HOSTS
+
+echo "${FQDN}" >$ROOTFS/etc/hostname
+
+if [ "$KERNEL_IMAGE" ];then
+    setup_kernel_image
+fi
+
+# write installer script to image
+cat > $BUILDDIR/installer <<EOF
+#!/bin/bash
+set -e
+
+export MALLOC_CHECK_=0 # workaround for LP: #520465
+export PATH
+export LC_ALL=C
+export DEBIAN_FRONTEND=noninteractive
+export http_proxy="${PROXY}"
+
+if [ -f "/debootstrap/debootstrap" ];then
+    echo "I: Fixing root fs permission"
+    chown -R 0:0 /
+
+    echo "I: Running second stage"
+    ${SECOND_STAGE}
+fi
+
+if [ "$RUNVM" ];then
+    echo "I: Starting basic services in VM"
+
+    mount -t proc proc /proc
+    mount -t sysfs sys /sys
+    mkdir -p /dev/pts
+    mount -t devpts devpts /dev/pts
+
+    udevd --daemon &
+    hostname -F /etc/hostname
+fi
+
+dpkg-divert --add --local --divert /usr/sbin/invoke-rc.d.rootstock --rename /usr/sbin/invoke-rc.d
+cp /bin/true /usr/sbin/invoke-rc.d
+
+${SWAPCMD}
+
+#if which dpkg-vendor >/dev/null 2>&1 && [ "`dpkg-vendor --query vendor`" = Ubuntu ]; then
+#  echo "deb ${MIRROR} ${DIST} ${COMPONENTS}" >/etc/apt/sources.list
+#  echo "deb ${MIRROR} ${DIST}-updates ${COMPONENTS}" >>/etc/apt/sources.list
+#else
+
+if [ "$IS_DEBIAN" ];then
+  echo "deb ${MIRROR} ${DIST} ${COMPONENTS}" >/etc/apt/sources.list
+  echo "deb http://security.debian.org/ ${DIST}/updates ${COMPONENTS}" >>/etc/apt/sources.list
+else
+  echo "deb ${MIRROR} ${DIST} ${COMPONENTS}" >/etc/apt/sources.list
+  echo "deb ${MIRROR} ${DIST}-updates ${COMPONENTS}" >>/etc/apt/sources.list
+fi
+
+${EXRA_MIRROR_CMD}
+
+if [ "$RUNVM" ];then
+    ifconfig lo up
+    ifconfig eth0 up
+    dhclient eth0
+fi
+
+which locale-gen >/dev/null 2>&1 && locale-gen --no-purge en_GB.UTF-8 || true
+which locale-gen >/dev/null 2>&1 && locale-gen --no-purge ${NEWLOCALE} || true
+echo LANG=${NEWLOCALE} >>/etc/default/locale
+
+sed -i -e 's/^XKBMODEL=.*\$/XKBMODEL="${XKBM}"/' /etc/default/console-setup || true
+sed -i -e 's/^XKBLAYOUT=.*\$/XKBLAYOUT="${XKBL}"/' /etc/default/console-setup || true
+sed -i -e 's/^XKBVARIANT=.*\$/XKBVARIANT="${XKBV}"/' /etc/default/console-setup || true
+sed -i -e 's/^XKBOPTIONS=.*\$/XKBOPTIONS="${XKBO}"/' /etc/default/console-setup || true
+
+echo ${AREA}/${ZONE} > /etc/timezone
+cp -f /usr/share/zoneinfo/${AREA}/${ZONE} /etc/localtime || true
+
+groupadd fuse || true
+
+${APT_UPDATE}
+
+${PACKAGE_CLEANUP}
+
+PKGCOUNT=\$(LANG=C apt-get -s install ${SELECTION} |grep "newly installed"|cut -d ',' -f2|tr -d ' [a-z]')
+echo "packagecount=\${PKGCOUNT:-1}"
+[ -z "${SELECTION}" ] || apt-get -y ${APT_FORCE} install ${SELECTION}
+
+groupadd admin || true
+echo '%admin  ALL=(ALL) ALL' >>/etc/sudoers
+
+if [ "${NEWUSER}" ] && [ "${PASSWD}" ];then
+    if ! ERROR=\$(useradd -G "${DEFGROUPS}" -s /bin/bash -m -p ${PW} -c "${FULLNAME}" ${NEWUSER} 2>&1);then
+        echo "E: Failed to add user '${NEWUSER}'"
+        echo "E: \$ERROR"
+        echo "E: Besides possible user name conflicts, while adding the user" \
+             "a new group is created with the same name as the user, so" \
+             "avoid using existing group names"
+        exit 1
+    fi
+else
+    echo "I: Enabling firstboot configuration (as no user/password" \
+         "definition was found at the argument list)"
+    PACKAGE="oem-config"
+    if [ -n "\$(dpkg -l xserver-xorg 2>/dev/null|grep ^ii)" ];then
+        if [ \$(which gdm) ];then
+            PACKAGE="oem-config-gtk"
+        elif [ \$(which kdm) ];then
+            PACKAGE="oem-config-kde"
+        fi
+    fi
+    #apt-get install -y --no-install-recommends \$PACKAGE
+    #touch /var/lib/oem-config/run
+    #rm /usr/lib/ubiquity/plugins/ubi-tasks.py*
+fi
+
+${KERNEL_IMAGE_CMD}
+${KERNEL_IMAGE_CREATE_INITRAMFS}
+
+${PACKAGE_CLEANUP_SUB}
+
+if [ "$IS_DEBIAN" ];then
+
+passwd <<ROOTPASSWD
+root
+root
+ROOTPASSWD
+
+#if which dpkg-vendor >/dev/null 2>&1 && [ "`dpkg-vendor --query vendor`" = Ubuntu ]; then
+else
+  passwd -l root || true
+fi
+
+rm -f /usr/sbin/invoke-rc.d
+dpkg-divert --remove --rename /usr/sbin/invoke-rc.d
+
+if [ -x /rootstock-user-script ]; then
+    echo "I: Running user custom script"
+    /rootstock-user-script
+    rm -f /rootstock-user-script
+fi
+
+if [ "$RUNVM" ];then
+    mount -n -o remount,ro -t ext3 /dev/sda / || true
+    rm /bin/installer && reboot -fp
+fi
+
+EOF
+
+# copy over user script
+if [ "$USER_SCRIPT" ]; then
+    cp "$USER_SCRIPT" "$ROOTFS/rootstock-user-script"
+fi
+
+if [ "$SERIAL" ];then
+    setup_serial
+fi
+
+if [ ! "$NOSWAP" ];then
+    use_swap
+fi
+
+mv $BUILDDIR/installer $ROOTFS/bin/ >>$LOG 2>&1
+chmod +x $ROOTFS/bin/installer >>$LOG 2>&1
+
+# runs the second stage
+if [ "$RUNVM" ];then
+    if [ "$NOROOT" ];then
+        # if user, creates the ext3 fs for qemu, based on the rootfs
+        create_rootfs_image
+    else
+        umount_image
+    fi
+    run_vm
+else
+    run_chroot
+    umount_image
+fi
+
+# cache packages on host machine
+if [ "$COPY_PACKAGE_CACHE" ];then
+    save_package_cache
+fi
+
+# save vmlinuz and initrd.img for further usage
+extract_kernel_image
+
+# build a rootfs tarball
+if [ ! "$NOTARBALL" ];then
+    roll_tarball
+fi
+
+# save a qemu image
+if [ "$KEEPIMAGE" ];then
+    save_qemu_img
+fi
+
+# log, clean up and save a log
+log "I: Rootstock finished successfully"
+cleanup

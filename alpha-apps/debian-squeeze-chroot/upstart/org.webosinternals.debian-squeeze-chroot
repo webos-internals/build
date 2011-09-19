@@ -1,0 +1,6 @@
+description "Debian 6.0.2 Chroot"
+
+env DISPLAY=:0.0
+export DISPLAY
+
+exec /media/cryptofs/apps/usr/palm/applications/org.webosinternals.debian-squeeze-chroot/bin/start-xterm.sh
