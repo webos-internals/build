@@ -10,7 +10,8 @@ DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br>
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 
-ifeq (${WEBOS_VERSION},1.4.5)
+ifeq ($(findstring 1.4.5,${WEBOS_VERSION}),1.4.5)
+
 APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-184", "log" : [ "fix bug where user cant change sysfs entries." ] }, \
 { "version" : "${WEBOS_VERSION}-183", "log" : [ "drop high temp alarm. fix battery percent scaleback sysfs." ] }, \

@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = AV8B Harrier II (Pre/Pre+)
 CATEGORY = Stable
 DEVICE = pre
-VERSIONS = 1.4.5-186 2.1.0-71
+VERSIONS = 1.4.5-186 1.4.5.1-186 2.1.0-71
 APPINFO_DESCRIPTION = The latest bleeding-edge kernel from uNiXpSyChO.<br><br>\
 Features:<br> * Dynamic voltage scaling at full speed<br> * 1GHz<br> * Overtemp scaling<br> * SIO IO scheduler<br> * Low latency SDIO<br> * Charger Scaleback<br> * Full speed DSP<br> * a slew of other tweaks<br><br>\
 For more information, visit ${HOMEPAGE}
@@ -10,7 +10,7 @@ DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br>
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 
-ifeq (${WEBOS_VERSION},1.4.5)
+ifeq ($(findstring 1.4.5,${WEBOS_VERSION}),1.4.5)
 
 APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-186", "log" : [ "add cpu-based alignment handling. deadline scheduler tweak. add preemption. add low-latency sdio. add SIO IO scheduler." ] }, \
