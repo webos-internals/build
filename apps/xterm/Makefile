@@ -27,7 +27,7 @@ APPINFO_CHANGELOG = [ \
 ]
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git://git.webos-internals.org/x11/xterm-launcher.git
+SRC_GIT = git://git.webos-internals.org/x11/xterm.git
 
 include ../../support/download.mk
 

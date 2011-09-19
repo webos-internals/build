@@ -43,7 +43,7 @@ APPINFO_CHANGELOG = [ \
 ]
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git://git.webos-internals.org/x11/xlauncher.git
+SRC_GIT = git://git.webos-internals.org/x11/xserver.git
 
 include ../../support/download.mk
 
