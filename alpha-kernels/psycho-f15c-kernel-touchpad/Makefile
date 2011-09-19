@@ -2,13 +2,14 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F15C Eagle (TouchPad)
 DEVICE = touchpad
 CATEGORY = Experimental
-VERSIONS = 3.0.2-61
-APPINFO_DESCRIPTION = The latest experimental kernel from uNiXpSyChO.<br><br>\
+VERSIONS = 3.0.2-62
+APPINFO_DESCRIPTION = The latest <b>alpha test</b> kernel from uNiXpSyChO.<br><br>\
 Features:<br> * 1.9GHz<br> * autogroup process scheduling<br> * CFS<br> * BFQ and SIO<br> * EXT4<br> * Various tweaks<br>\
 <br><b>NOTE: CPU core 2 will mostly stay idle. This is by webOS default, NOT a kernel problem. If you want to test this, run a Sunspider benchmark. Do not report CPU core 2 bugs.</b><br><br>\
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-62", "log" : [ "use the git implementation of SHA-1. remove optimized SHA1 routines. Improve the performance of memcpy and memmove of the general version. more overclock of L2. make powersave do something." ] }, \
 { "version" : "${WEBOS_VERSION}-61", "log" : [ "fix hanging sysfs." ] }, \
 { "version" : "${WEBOS_VERSION}-59", "log" : [ "add strict dualcore method." ] }, \
 { "version" : "${WEBOS_VERSION}-55", "log" : [ "various fixes. updates to ARM cache." ] }, \
@@ -27,6 +28,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-19", "log" : [ "Initial release. autogroup process scheduling. CPU HW based alignment. deadline tweak." ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-62: use the git implementation of SHA-1. remove optimized SHA1 routines. Improve the performance of memcpy and memmove of the general version. more overclock of L2. make powersave do something.<br>\
 ${WEBOS_VERSION}-61: fix hanging sysfs.<br>\
 ${WEBOS_VERSION}-59: add strict dualcore method.<br>\
 ${WEBOS_VERSION}-55: various fixes. updates to ARM cache.<br>\
@@ -50,11 +52,16 @@ KERNEL_PATCHES = identification/mkcompile_h.patch \
 		 psychobuild/F15C.patch \
 		 psychobuild/fbconsole.patch \
 		 psychobuild/F15-logo.patch \
-		 psychobuild/iosched_blk.patch \
-		 psychobuild/comptune.patch \
+		 psychobuild/comptune2.patch \
 		 psychobuild/cpu_alignment.patch \
 		 psychobuild/cpu_gov.patch \
+		 psychobuild/iosched_blk.patch \
 		 psychobuild/iosched-bundle.patch \
+		 psychobuild/iosched-deadline.patch \
+		 psychobuild/add_avail_freqs.patch \
+		 psychobuild/jhash3.patch \
+		 psychobuild/sha1.patch \
+		 psychobuild/memcpy.patch \
 		 psychobuild/autogroup.patch
 
 TYPE = Kernel
