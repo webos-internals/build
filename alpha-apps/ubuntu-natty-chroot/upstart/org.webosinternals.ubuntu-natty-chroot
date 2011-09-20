@@ -1,8 +1,0 @@
-description "Ubuntu Natty Chroot"
-
-start on org.webosinternals.ubuntu-natty-chroot
-
-script
-	/sbin/initctl emit org.webosinternals.xserver "$@"
-	exec /media/cryptofs/apps/usr/palm/applications/org.webosinternals.ubuntu-natty-chroot/bin/start-xterm.sh "$@"
-end script
