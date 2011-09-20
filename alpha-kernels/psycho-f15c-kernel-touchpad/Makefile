@@ -2,13 +2,14 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F15C Eagle (TouchPad)
 DEVICE = touchpad
 CATEGORY = Experimental
-VERSIONS = 3.0.2-63
+VERSIONS = 3.0.2-64
 APPINFO_DESCRIPTION = The latest <b>alpha test</b> kernel from uNiXpSyChO.<br><br>\
 Features:<br> * 1.9GHz<br> * autogroup process scheduling<br> * CFS<br> * BFQ and SIO<br> * EXT4<br> * Various tweaks<br>\
 <br><b>NOTE: CPU core 2 will mostly stay idle. This is by webOS default, NOT a kernel problem. If you want to test this, run a Sunspider benchmark. Do not report CPU core 2 bugs.</b><br><br>\
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-64", "log" : [ "add selectable L2 boost via l2_boost sysfs param." ] }, \
 { "version" : "${WEBOS_VERSION}-63", "log" : [ "revert some L2 overclock, will make selectable later. tweak block req." ] }, \
 { "version" : "${WEBOS_VERSION}-62", "log" : [ "use the git implementation of SHA-1. remove optimized SHA1 routines. Improve the performance of memcpy and memmove of the general version. more overclock of L2. make powersave do something." ] }, \
 { "version" : "${WEBOS_VERSION}-61", "log" : [ "fix hanging sysfs." ] }, \
@@ -29,6 +30,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-19", "log" : [ "Initial release. autogroup process scheduling. CPU HW based alignment. deadline tweak." ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-64: add selectable L2 boost via l2_boost sysfs param.<br>\
 ${WEBOS_VERSION}-63: revert some L2 overclock, will make selectable later. tweak block req.<br>\
 ${WEBOS_VERSION}-62: use the git implementation of SHA-1. remove optimized SHA1 routines. Improve the performance of memcpy and memmove of the general version. more overclock of L2. make powersave do something.<br>\
 ${WEBOS_VERSION}-61: fix hanging sysfs.<br>\
