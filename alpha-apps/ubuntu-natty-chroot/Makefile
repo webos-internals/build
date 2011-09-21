@@ -104,6 +104,8 @@ endif
 	echo "\"noWindow\": true" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "}" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	touch $@
+	mkdir -p build/$*/usr/palm/applications/${APP_ID}/usr/sbin
+	install -m 744 usr/sbin/*.sh build/$*/usr/palm/applications/${APP_ID}/usr/sbin/
 
 clobber::
 	rm -rf build
