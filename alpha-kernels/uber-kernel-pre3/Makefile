@@ -6,8 +6,8 @@ VERSIONS = 2.2.0-5
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre3, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
-<li>Modification of the lowmemnotify threshold calculation to take into account free swap space, written by rwhitby. This reduces the occurrence of the Too Many Cards error.</li>\
-<li>A new <a href=http://lwn.net/Articles/334649/><b>compcache</b> compressed RAM swap kernel module</a> ported to the Palm Pre/Pre+ by uNiXpSyChO & rwhitby. This effectively increases your available swap space, at the expense of access speed.</li>\
+<li>Modification of the lowmemnotify threshold calculation to take into account free swap space. This reduces the occurrence of the Too Many Cards error.</li>\
+<li>A new <a href=http://lwn.net/Articles/334649/><b>compcache</b> compressed RAM swap kernel module</a> ported to the Palm Pre 3. This effectively increases your available swap space, at the expense of access speed.</li>\
 <li>Support for kernel crypto modules required by TrueCrypt</li>\
 </ul><br>\
 All additions are controlled by using the Govnah application.<br>\
