@@ -32,7 +32,6 @@ KERNEL_PATCHES = makefiletune/armMakefile.diff \
  		 warthogbuild/defconfig-feat-pre3.patch \
  		 identification/mkcompile_h.patch \
  		 warthogbuild/ident-pre3.patch \
- 		 psychobuild/fbconsole.patch \
  		 crypto/hw-support-pre3.patch \
  		 crypto/truecrypt-support-pre3.patch \
  		 compcache/lowmemnotify-total-memory.patch
