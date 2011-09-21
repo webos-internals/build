@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (Pre3)
 DEVICE = pre3
 CATEGORY = Experimental
-VERSIONS = 2.2.0-6
+VERSIONS = 2.2.0-7
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A collection of all the best kernel improvements for the HP Pre3, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
@@ -14,19 +14,18 @@ All additions are disabled by default, and must be enabled by using the Govnah a
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-6", "log" : [ "TMC fix. nodebug. memcpy. CPU align" ] }, \
+{ "version" : "${WEBOS_VERSION}-7", "log" : [ "TMC fix. nodebug. memcpy. CPU align" ] }, \
 { "version" : "${WEBOS_VERSION}-4", "log" : [ "Fix tick skew. BFQ as default IO scheduler. 300Hz. compcache" ] }, \
 { "version" : "${WEBOS_VERSION}-1", "log" : [ "Initial version" ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-6: TMC fix. nodebug. memcpy. CPU align.<br>\
+${WEBOS_VERSION}-7: TMC fix. nodebug. memcpy. CPU align.<br>\
 ${WEBOS_VERSION}-4: Fix tick skew. BFQ as default IO scheduler. 300Hz. compcache<br>\
 ${WEBOS_VERSION}-1: Initial version.
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = makefiletune/armMakefile.diff \
- 		 defconfig/defconfig-nodebug-pre3.patch \
  		 bfq/bfq-iosched.patch \
  		 warthogbuild/pre3-tickskew.patch \
  		 warthogbuild/pre3-300hz.patch \
