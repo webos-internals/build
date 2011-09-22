@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Pre3)
 DEVICE = pre3
-CATEGORY = Experimental
+CATEGORY = Stable
 VERSIONS = 2.2.0-5
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre3, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
@@ -30,8 +30,6 @@ KERNEL_PATCHES = makefiletune/armMakefile.diff \
 		 compcache/lowmemnotify-total-memory.patch \
 		 crypto/hw-support-pre3.patch \
 		 crypto/truecrypt-support-pre3.patch
-
-#		 psychobuild/fbconsole.patch \
 
 EXTERNAL_MODULES = compcache/compcache-1.0.0
 TYPE = Kernel
