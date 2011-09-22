@@ -2,7 +2,7 @@ NAME = xterm
 TITLE = XTerm
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.9.4
+VERSION  = 0.9.5
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X
@@ -13,7 +13,7 @@ APPINFO_DESCRIPTION = XTerm is used to provide a Linux command-line interface on
 Due to webOS security constraints, this application cannot run directly.<br>\
 You must use <b>Xecutah</b> to run the XTerm and XServer applications on webOS.
 CHANGELOG = \
-0.9.4: Preserve the environment (including the DISPLAY variable) inside the terminal login.<br>\
+0.9.5: Preserve the environment (including the DISPLAY variable) inside the terminal login.<br>\
 0.9.3: Added support for starting multiple applications in separate cards.<br>\
 0.9.2: Move to an event based start.<br>\
 0.9.1: Added multi-card support.<br>\
@@ -23,7 +23,7 @@ CHANGELOG = \
 0.7.2: New upstart-based execution architecture to support legacy webOS versions.<br>\
 0.6.6: Initial testing release.
 APPINFO_CHANGELOG = [ \
-{ "version" : "0.9.4",  "log" : [ "Preserve the environment (including the DISPLAY variable) inside the terminal login" ] },\
+{ "version" : "0.9.5",  "log" : [ "Preserve the environment (including the DISPLAY variable) inside the terminal login" ] },\
 { "version" : "0.9.3",  "log" : [ "Added support for starting multiple applications in separate cards" ] },\
 { "version" : "0.9.2",  "log" : [ "Move to an event based start" ] },\
 { "version" : "0.9.1",  "log" : [ "Added multi-card support" ] },\
