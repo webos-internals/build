@@ -3,7 +3,7 @@ TITLE    = Ubuntu 11.04 Chroot
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 11.04-11
+VERSION  = 11.04-12
 TYPE	 = Linux Application
 CATEGORY = Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/UbuntuChroot
@@ -11,6 +11,7 @@ ICON	 = http://www.webos-internals.org/images/5/5e/Icon_WebOSInternals_Ubuntu.pn
 DESCRIPTION = ${APPINFO_DESCRIPTION}
 APPINFO_DESCRIPTION = A minimal Ubuntu 11.04 chroot. Requires a dedicated ext3fs partition to be set up using the WebOS Internals Meta-Doctor.
 CHANGELOG = \
+11.04-11: fix XApps.sh name and location<br>\
 11.04-11: Fixed Xapps Shim<br>\
 11.04-10: Added XApps Shim<br>\
 11.04-9: Added support for starting multiple applications in separate cards.<br>\
@@ -107,7 +108,7 @@ endif
 	echo "}" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	touch $@
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/usr/sbin
-	install -m 744 usr/sbin/*.sh build/$*/usr/palm/applications/${APP_ID}/usr/sbin/
+	install -m 744 usr/sbin/XApps.sh build/$*/usr/palm/applications/${APP_ID}/usr/sbin/
 
 clobber::
 	rm -rf build

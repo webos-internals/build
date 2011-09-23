@@ -50,7 +50,7 @@ if [ -z "`chroot /media/ext3fs/${NAME} /usr/sbin/dpkg-divert --list /sbin/initct
 fi
 
 # Install Xapps Shim
-cp ${APPDIR}/usr/sbin/Xapps.sh /media/ext3fs/${NAME}/usr/sbin/.
+cp ${APPDIR}/usr/sbin/XApps.sh /media/ext3fs/${NAME}/usr/sbin/XApps.sh
 
 # Install the upstart script
 mkdir -p /var/palm/event.d
