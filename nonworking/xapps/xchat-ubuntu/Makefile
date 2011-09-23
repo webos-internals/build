@@ -26,7 +26,7 @@ LICENSE  = GPL v2 Open Source
 # http://gyp.blogs.balabit.com/2011/01/using-upstart-in-a-chroot/
 # http://git.balabit.hu/?p=gyp/upstart-dummy.git;a=summary
 
-include ../../support/download.mk
+include ../../../support/download.mk
 
 HEADLESSAPP_VERSION = 0.2.0
 
