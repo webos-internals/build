@@ -3,7 +3,7 @@ TITLE    = Xchat-XApp-Ubuntu
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.0.2
+VERSION  = 0.0.3
 TYPE	 = Linux Application
 CATEGORY = Communications
 HOMEPAGE = http://www.webos-internals.org/wiki/UbuntuChroot
@@ -12,7 +12,8 @@ DESCRIPTION = ${APPINFO_DESCRIPTION}
 APPINFO_DESCRIPTION = A XApp to launch Xchat. Requires Ubuntu-Natty-Chroot.
 CHANGELOG = \
 0.0.1-1: Initial test.<br>\
-0.0.2: Fixed names and paths<br>\ 
+0.0.2: Fixed names and paths<br>\
+0.0.3: added extra ../ to includes<br>\ 
 APPINFO_CHANGELOG = [ \
 { "version" : "0.0.1-1",  "log" : [ "Initial test" ] } \
 ]
@@ -29,11 +30,11 @@ include ../../support/download.mk
 
 HEADLESSAPP_VERSION = 0.2.0
 
-include ../../support/headlessapp.mk
+include ../../../support/headlessapp.mk
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk # ipkgs/${APP_ID}_${VERSION}_i686.ipk
-include ../../support/package.mk
+include ../../../support/package.mk
 
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
@@ -50,7 +51,7 @@ build: build/.built-${VERSION}
 build/.built-${VERSION}: build/arm.built-${VERSION} # build/i686.built-${VERSION}
 	touch $@
 
-include ../../support/cross-compile.mk
+include ../../../support/cross-compile.mk
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}  ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
 	rm -rf build/$*
