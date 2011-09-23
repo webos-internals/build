@@ -3,7 +3,7 @@ TITLE    = Navit - Car navigation system
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.5.0.4786-1
+VERSION	 = 0.5.0.4787-1
 TYPE     = Application
 CATEGORY = Utilities
 DESCRIPTION = <p>This package does not include map-data. Please visit \
@@ -21,6 +21,7 @@ DESCRIPTION = <p>This package does not include map-data. Please visit \
        	other navigation systems, Navit maps are dynamically generated in real \
        	time from vector data.</p>
 CHANGELOG = \
+	    0.5.0.4787-1: Update to svn r4787. Small change in house number search. <br/> \
 	    0.5.0.4786-1: Update to svn r4786. Add missing country-flags. <br/> \
 	    0.5.0.4784-1: Update to svn r4784. Enable tunnel-extrapolation by default (see release notes!). <br/> \
 	    0.5.0.4776-2: Update to svn r4776. Adjust OSDs for TouchPad and Pre3. Please report if it breaks older devices. <br/> \
