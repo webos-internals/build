@@ -1,0 +1,22 @@
+#!/bin/bash
+
+APP_NAME=$1
+APP_INSTALL_LOG_DIR=/var/log/
+INSTALLER_LOG=xapps_installer.log
+ERROR_LOG= xapps_installer_error.log
+UPDATE_LOG=update.log
+
+rm ${APP_INSTALL_LOG_DIR}${ERROR_LOG}
+
+if `apt-get update > #{APP_INSTALL_LOG_DIR}${UPDATE_LOG}`
+then 
+    if `apt-get install ${APP_NAME} &2>1 \
+       >> ${APP_INSTALL_LOG_DIR}${INSTALLER_LOG}`
+    then
+        echo 'Install Succeeded' >> ${APP_INSTALL_LOG_DIR}${INSTALLER_LOG}
+    else 
+        echo 'Installer Failed ' >> ${APP_INSTALL_LOG_DIR}${ERROR_LOG}
+    fi
+else
+    echo 'apt-get update failed' >> ${APP_INSTALL_LOG_DIR}${ERROR_LOG}
+fi

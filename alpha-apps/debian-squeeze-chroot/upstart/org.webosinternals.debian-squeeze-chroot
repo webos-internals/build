@@ -1,8 +1,0 @@
-description "Debian 6.0.2 Chroot"
-
-start on org.webosinternals.debian-squeeze-chroot
-
-script
-	/sbin/initctl emit org.webosinternals.xserver "$@"
-	exec /media/cryptofs/apps/usr/palm/applications/org.webosinternals.debian-squeeze-chroot/bin/start-xterm.sh "$@"
-end script

@@ -70,37 +70,37 @@ endif
 ifeq ("${DEVICE}","pre")
 CODENAME = castle
 DEFCONFIG = omap_sirloin_3430_defconfig
-KERNEL_TYPE = palm-joplin-3430
+KERNEL_TYPE = 2.6.24-palm-joplin-3430
 DEVICECOMPATIBILITY = [\"Pre\"]
 endif
 ifeq ("${DEVICE}","pixi")
 CODENAME = pixie
 DEFCONFIG = chuck_defconfig
-KERNEL_TYPE = palm-chuck
+KERNEL_TYPE = 2.6.24-palm-chuck
 DEVICECOMPATIBILITY = [\"Pixi\"]
 endif
 ifeq ("${DEVICE}","pre2")
 CODENAME = roadrunner
 DEFCONFIG = omap_sirloin_3630_defconfig
-KERNEL_TYPE = palm-joplin-3430
+KERNEL_TYPE = 2.6.24-palm-joplin-3430
 DEVICECOMPATIBILITY = [\"Pre2\"]
 endif
 ifeq ("${DEVICE}","veer")
 CODENAME = broadway
 DEFCONFIG = shank_defconfig
-KERNEL_TYPE = palm-shank
+KERNEL_TYPE = 2.6.29-palm-shank
 DEVICECOMPATIBILITY = [\"Veer\"]
 endif
 ifeq ("${DEVICE}","touchpad")
 CODENAME = topaz
 DEFCONFIG = tenderloin_defconfig
-KERNEL_TYPE = palm-tenderloin
+KERNEL_TYPE = 2.6.35-palm-tenderloin
 DEVICECOMPATIBILITY = [\"TouchPad\"]
 endif
 ifeq ("${DEVICE}","pre3")
 CODENAME = mantaray
 DEFCONFIG = rib_defconfig
-KERNEL_TYPE = palm-rib
+KERNEL_TYPE = 2.6.32.9-palm-rib
 DEVICECOMPATIBILITY = [\"Pre3\"]
 endif
 
@@ -377,20 +377,24 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	      ${MAKE} -C $(shell pwd)/build/src-$*/patches/$$module ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
 		KERNEL_BUILD_PATH=$(shell pwd)/build/src-$*/linux-${KERNEL_VERSION} DEVICE=${DEVICE} \
 		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
-		modules modules_install ) ; \
+		modules ; \
+	      ${MAKE} -C $(shell pwd)/build/src-$*/patches/$$module ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
+		KERNEL_BUILD_PATH=$(shell pwd)/build/src-$*/linux-${KERNEL_VERSION} DEVICE=${DEVICE} \
+		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
+		modules_install ) ; \
 	  done \
 	fi
-	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/build
-	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/source
-	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/*.bin
-	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/modules.*
+	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_TYPE}/build
+	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_TYPE}/source
+	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_TYPE}/*.bin
+	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_TYPE}/modules.*
 	if [ -n "${KERNEL_IMAGE}" ]; then \
 		cp build/src-$*/linux-${KERNEL_VERSION}/arch/arm/boot/uImage \
-			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/uImage-${KERNEL_VERSION}-${KERNEL_TYPE}; \
+			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/uImage-${KERNEL_TYPE}; \
 		cp build/src-$*/linux-${KERNEL_VERSION}/System.map \
-			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/System.map-${KERNEL_VERSION}-${KERNEL_TYPE}; \
+			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/System.map-${KERNEL_TYPE}; \
 		cp build/src-$*/linux-${KERNEL_VERSION}/.config \
-			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/config-${KERNEL_VERSION}-${KERNEL_TYPE}; \
+			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/config-${KERNEL_TYPE}; \
 	fi
 	unzip -p ${WEBOS_DOCTOR} resources/webOS.tar | \
 	${TAR} -O -x -f - ./nova-cust-image-${CODENAME}.rootfs.tar.gz | \

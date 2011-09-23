@@ -1,0 +1,3 @@
+description "Debian 6.0.2 Chroot"
+
+exec /media/cryptofs/apps/usr/palm/applications/org.webosinternals.debian-squeeze-chroot/bin/start-xterm.sh

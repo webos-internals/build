@@ -1,35 +1,47 @@
-NAME     = debian-squeeze-chroot
-TITLE    = Debian 6.0.2 Chroot
+NAME     = ubuntu-natty-chroot
+TITLE    = Ubuntu 11.04 Chroot
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-MAINTAINER = pezman726 <pezman726@gmail.com>
 BLDFLAGS = -p
-VERSION  = 6.0.2-6
+VERSION  = 11.04-12
 TYPE	 = Linux Application
 CATEGORY = Utilities
-HOMEPAGE = http://www.webos-internals.org/wiki/DebianChroot
-ICON	 = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Debian.png
+HOMEPAGE = http://www.webos-internals.org/wiki/UbuntuChroot
+ICON	 = http://www.webos-internals.org/images/5/5e/Icon_WebOSInternals_Ubuntu.png
 DESCRIPTION = ${APPINFO_DESCRIPTION}
-APPINFO_DESCRIPTION = A minimal Debian 6.0.2 chroot that works on ARMv6 and ARMv7 CPUs. Requires a dedicated ext3fs partition to be set up using the WebOS Internals Meta-Doctor.
+APPINFO_DESCRIPTION = A minimal Ubuntu 11.04 chroot. Requires a dedicated ext3fs partition to be set up using the WebOS Internals Meta-Doctor.
 CHANGELOG = \
-6.0.2-6: Added support for starting multiple applications in separate cards.<br>\
-6.0.2-5: Move to an event based start.<br>\
-6.0.2-4: Added multi-card support.<br>\
-6.0.2-3: Change mount -t to --bind for /proc and /dev/pts.<br>\
-6.0.2-2: Check that the ext3fs is mounted before installing. Add a non-privileged webos user in the chroot.<br>\
-6.0.2-1: Initial testing release.
+11.04-11: fix XApps.sh name and location<br>\
+11.04-11: Fixed Xapps Shim<br>\
+11.04-10: Added XApps Shim<br>\
+11.04-9: Added support for starting multiple applications in separate cards.<br>\
+11.04-8: Move to an event based start.<br>\
+11.04-7: Added multi-card support.<br>\
+11.04-6: Added a fix for upstart/dbus handling in the chroot.<br>\
+11.04-5: Change mount -t to --bind for /proc and /dev/pts.<br>\
+11.04-4: Check that the ext3fs is mounted before installing. Add a non-privileged webos user in the chroot.<br>\
+11.04-3: Fixed pre-remove script.<br>\
+11.04-2: Initial testing release.
 APPINFO_CHANGELOG = [ \
-{ "version" : "6.0.2-6",  "log" : [ "Added support for starting multiple applications in separate cards." ] },\
-{ "version" : "6.0.2-5",  "log" : [ "Move to an event based start." ] },\
-{ "version" : "6.0.2-4",  "log" : [ "Added multi-card support." ] },\
-{ "version" : "6.0.2-3",  "log" : [ "Change mount -t to --bind for /proc and /dev/pts" ] }, \
-{ "version" : "6.0.2-2",  "log" : [ "Check that the ext3fs is mounted before installing", "Add a non-privileged webos user in the chroot" ] }, \
-{ "version" : "6.0.2-1",  "log" : [ "Initial testing release" ] } \
+{ "version" : "11.04-11", "log" : [ "Fixed Xapps Shim."] },\
+{ "version" : "11.04-10", "log" : [ "Added Xapps Shim." ] },\
+{ "version" : "11.04-9",  "log" : [ "Added support for starting multiple applications in separate cards." ] },\
+{ "version" : "11.04-8",  "log" : [ "Move to an event based start." ] },\
+{ "version" : "11.04-7",  "log" : [ "Added multi-card support." ] },\
+{ "version" : "11.04-6",  "log" : [ "Added a fix for upstart/dbus handling in the chroot" ] }, \
+{ "version" : "11.04-5",  "log" : [ "Change mount -t to --bind for /proc and /dev/pts" ] }, \
+{ "version" : "11.04-4",  "log" : [ "Check that the ext3fs is mounted before installing", "Add a non-privileged webos user in the chroot" ] }, \
+{ "version" : "11.04-3",  "log" : [ "Fixed pre-remove script" ] }, \
+{ "version" : "11.04-2",  "log" : [ "Initial testing release" ] } \
 ]
 
 SCREENSHOTS = [\
  ]
 LICENSE  = GPL v2 Open Source
+
+# Also requires upstart changes from:
+# http://gyp.blogs.balabit.com/2011/01/using-upstart-in-a-chroot/
+# http://git.balabit.hu/?p=gyp/upstart-dummy.git;a=summary
 
 include ../../support/download.mk
 
@@ -62,7 +74,7 @@ build/${NAME}.tgz:
 	if [ -f ${NAME}.tgz ] ; then \
 	  ln -s ../${NAME}.tgz build/${NAME}.tgz ; \
 	else \
-	  ( cd build ; ../rootstock --no-root --fqdn ${NAME} --dist squeeze --mirror http://ftp.us.debian.org/debian/ --components main contrib) ; \
+	  ( cd build ; rootstock --no-root --fqdn ${NAME} --dist natty ) ; \
 	  mv build/armel-rootfs*.tgz build/${NAME}.tgz ; \
 	fi
 
@@ -95,6 +107,8 @@ endif
 	echo "\"noWindow\": true" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "}" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	touch $@
+	mkdir -p build/$*/usr/palm/applications/${APP_ID}/usr/sbin
+	install -m 744 usr/sbin/XApps.sh build/$*/usr/palm/applications/${APP_ID}/usr/sbin/
 
 clobber::
 	rm -rf build
