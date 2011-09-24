@@ -15,7 +15,7 @@ WEBOS_VERSIONS = 1.4.5
 KERNEL_VERSION = 2.6.24
 endif
 ifeq ("${DEVICE}","pre2")
-WEBOS_VERSIONS = 2.0.1 2.1.0
+WEBOS_VERSIONS = 2.1.0
 KERNEL_VERSION = 2.6.24
 endif
 ifeq ("${DEVICE}","veer")
@@ -23,7 +23,7 @@ WEBOS_VERSIONS = 2.1.1 2.1.2
 KERNEL_VERSION = 2.6.29
 endif
 ifeq ("${DEVICE}","touchpad")
-WEBOS_VERSIONS = 3.0.0 3.0.2
+WEBOS_VERSIONS = 3.0.2
 KERNEL_VERSION = 2.6.35
 endif
 ifeq ("${DEVICE}","pre3")
