@@ -89,10 +89,17 @@ endif
 			fi; \
 		fi; \
 	done
+ifdef FILES
+	if [ -e build/src-${VERSION}/${FILES} ]; then \
+		mkdir -p build/all/usr/palm/applications/${APP_ID}/additional_files; \
+		tar -C build/all/usr/palm/applications/${APP_ID}/additional_files -xzf build/src-${VERSION}/${FILES}; \
+	fi
+else
 	if [ -e additional_files.tar.gz ]; then \
 		mkdir -p build/all/usr/palm/applications/${APP_ID}/additional_files; \
 		tar -C build/all/usr/palm/applications/${APP_ID}/additional_files -xzf additional_files.tar.gz; \
 	fi
+endif
 	if [ -d build/src-${VERSION}/additional_files ]; then \
 		cp -r build/src-${VERSION}/additional_files build/all/usr/palm/applications/${APP_ID}/; \
 	fi
