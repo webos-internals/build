@@ -25,14 +25,24 @@ APPDIR=${APPS}/usr/palm/applications/${APPID}
 rm -f /var/palm/event.d/${APPID}
 
 # verify our shim is installed
-if ! `/usr/sbin/chroot ${chroot_path} ls /usr/sbin/Xapps.sh`
+
+if ! [ -e  ${CHROOT_PATH}/usr/sbin/XApps.sh ]
+
 then
     echo 'XApps.sh not present'
     exit 1
 fi
 
-# add our application
+# remove our application
 chroot ${CHROOT_PATH}/usr/sbin/XApps.sh remove ${XAPP_NAME}
+
+if 'wc -l ${CHROOT_PATH}/var/log/xapps/XApps_error.log > 0'
+
+then
+    echo < ${CHROOT_PATH}/var/log/xapps/XApps_error.log
+   exit 1
+fi
+
 
 # We intentionally do not remove the chroot contents.
 

@@ -46,9 +46,22 @@ fi
 # make sure we get latest app
 chroot ${CHROOT_PATH}/usr/sbin/XApps.sh update
 
+if 'wc -l ${CHROOT_PATH}/var/log/xapps/XApps_error.log > 0'
+
+then
+    echo < ${CHROOT_PATH}/var/log/xapps/XApps_error.log
+   exit 1
+fi
+
 # add our application
 chroot ${CHROOT_PATH}/usr/sbin/XApps.sh install ${XAPP_NAME}
 
+if 'wc -l ${CHROOT_PATH}/var/log/xapps/XApps_error.log > 0'
+
+then
+    echo < ${CHROOT_PATH}/var/log/xapps/XApps_error.log
+   exit 1
+fi
 
 touch /var/luna/preferences/ran-postinst
 
