@@ -3,8 +3,8 @@
 ACTION=$1
 APP_NAME=$2
 APP_INSTALL_LOG_DIR=/var/log/
-INSTALLER_LOG=xapps_installer.log
-ERROR_LOG=xapps_installer_error.log
+INSTALLER_LOG=XApps_installer.log
+ERROR_LOG=XApps_installer_error.log
 UPDATE_LOG=update.log
 DATE=date +%Y%m%d%H%M%S
 
