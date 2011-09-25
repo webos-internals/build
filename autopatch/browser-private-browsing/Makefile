@@ -1,11 +1,11 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = browser/${NAME}.patch
-TWEAKS =
+TWEAKS = browser/${NAME}.json
 TITLE = Private Browsing
-DESCRIPTION = Adds an option to the webOS browser that will prevent adding new items to the browser history.  It can be toggled with a menu item.Now changes the toolbar to red so you can tell when it is on, and it will now stay on when you open a link in a new window.
+DESCRIPTION = Adds an option to the webOS browser that will prevent adding new items to the browser history.  It can be toggled with a menu item.  When enabled the browser toolbar will be turned red to make it obvious that it is on.The default behavior for a new card can be set using Tweaks.  A card opened from an open card will inherit the setting from the original card instead of applying the default.This patch also adds google secure as a browser option.
 CATEGORY = Browser
-VERSIONS = 1.4.5-136 2.1.0-17 2.2.0-17 3.0.2-7
-ICON = http://www.webos-internals.org/images/4/4a/Icon_WebOSInternals_Patches_Browser.png
+VERSIONS = 1.4.5-136 2.1.0-17 2.2.0-17 3.0.2-34
+ICON = http://www.webos-internals.org/images/3/37/Icon_WebOSInternals_Patches_Plus_Browser.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
 
@@ -13,5 +13,5 @@ include ../common.mk
 
 include ../modifications.mk
 
-MAINTAINER = minego
+MAINTAINER = minego (Micah N Gorrell) <patches@minego.net>
 HOMEPAGE =

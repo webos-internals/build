@@ -3,7 +3,7 @@ TITLE	= Speech Dispatcher
 APP_ID	= org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	= 0.7.1-6
+VERSION	= 0.7.1-10.2
 TYPE    = Linux Daemon
 CATEGORY = System Utilities
 DEPENDS  = org.webosinternals.locale
@@ -11,6 +11,7 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Application:SpeechDispatcher
 ICON     = http://www.webos-internals.org/images/7/7d/SpeechDispatcher.png
 DESCRIPTION = This daemon provides speech synthesis.  At the moment, it is only used by the Navit application and there is no dedicated application front-end, but a Mojo service and application will be developed in the future.
 CHANGELOG = \
+	    0.7.1-10: Try to make this work on Pre3. <br/> \
 	    0.7.1-6: Add support for sk_SK.utf8.<br/>\
 	    0.7.1-5: Fixed issue which prevented proper upgrading.<br/>\
 	    0.7.1-4: Upstart script was missing. Fixed.<br/>\
@@ -19,6 +20,7 @@ CHANGELOG = \
 	    0.7.1-1: Fade music while talking.<br/>\
 	    0.7.1: Initial release.
 APPINFO_CHANGELOG = [ \
+{ "version" : "0.7.1-10", "log" : [ "Try to make this work on Pre3" ] }, \
 { "version" : "0.7.1-6", "log" : [ "Add support for sk_SK.utf8" ] }, \
 { "version" : "0.7.1-5", "log" : [ "Fixed issue which prevented proper upgrading" ] }, \
 { "version" : "0.7.1-4", "log" : [ "Upstart script was missing. Fixed" ] }, \
@@ -37,7 +39,7 @@ D = build/$*/usr/palm/applications/${APP_ID}
 SRC_GIT = git://git.webos-internals.org/services/speechd.git
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_armv6.ipk
+package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk 
 include ../../support/package.mk
 
 .PHONY: unpack
@@ -55,7 +57,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 
 .PHONY: build
 build: build/.built-${VERSION}
-build/.built-${VERSION}: build/armv7.built-${VERSION} build/armv6.built-${VERSION}
+build/.built-${VERSION}: build/armv7.built-${VERSION} 
 	touch $@
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION} ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
