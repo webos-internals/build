@@ -3,11 +3,12 @@ TITLE    = Navit Maps
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.0.5-1
+VERSION	 = 0.0.5-2
 TYPE     = Application
 CATEGORY = Utilities
 DESCRIPTION = <p>This application will manage and download maps from OpenStreetMap for Navit.</p>
 CHANGELOG = \
+	    0.0.5-2: Show correct version in appinfo. <br/> \
 	    0.0.5-1: Add some spinners to indicate action. <br/> \
 	    0.0.4-1: Use dynamic map-definitions from maps.navit-project.org instead of the old hard-coded ones. <br/> \
 	    0.0.3-2: Fix viewport on Pre3 (aka make the black bar at the bottom disappear). <br/> \
