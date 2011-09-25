@@ -8,6 +8,12 @@ APPID=org.webosinternals.${NAME}
 
 APPS=/media/cryptofs/apps
 
+CHROOT_NAME=ubuntu-natty-chroot
+
+CHROOT_PATH=/media/ext3fs/${CHROOT_NAME}
+
+XAPP_NAME=xchat
+
 [ -d ${APPS} ] || { echo "Requires webOS 1.3.5 or later" ; exit 1 ; }
 
 APPDIR=${APPS}/usr/palm/applications/${APPID}
@@ -17,6 +23,16 @@ APPDIR=${APPS}/usr/palm/applications/${APPID}
 
 # Remove the upstart script
 rm -f /var/palm/event.d/${APPID}
+
+# verify our shim is installed
+if ! `/usr/sbin/chroot ${chroot_path} ls /usr/sbin/Xapps.sh`
+then
+    echo 'XApps.sh not present'
+    exit 1
+fi
+
+# add our application
+chroot ${CHROOT_PATH}/usr/sbin/XApps.sh remove ${XAPP_NAME}
 
 # We intentionally do not remove the chroot contents.
 

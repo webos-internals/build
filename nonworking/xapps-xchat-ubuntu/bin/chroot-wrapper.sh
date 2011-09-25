@@ -10,7 +10,7 @@ mount -t proc none ${CHROOT}/proc
 mount --bind /sys ${CHROOT}/sys
 mount --bind /tmp ${CHROOT}/tmp
 
-chroot ${CHROOT} sudo -u webos /usr/bin/xchat
+chroot ${CHROOT} /usr/bin/sudo -u webos /usr/bin/xchat
 
 umount ${CHROOT}/tmp
 umount ${CHROOT}/sys

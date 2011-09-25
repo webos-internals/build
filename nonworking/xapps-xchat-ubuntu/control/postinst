@@ -1,6 +1,7 @@
 #!/bin/sh
 CHROOT_NAME=ubuntu-natty-chroot
 CHROOT_PATH=/media/ext3fs/${CHROOT_NAME}
+XAPP_NAME=xchat
 
 NAME=xapps-xchat-ubuntu
 
@@ -28,12 +29,29 @@ if ! `grep -q ext3fs /proc/mounts` ; then
     exit 1
 fi
 
-chroot ${CHROOT_PATH}/usr/sbin/XApps.sh update &
+#verify that chroot is indeed ubuntu and the right version
+if ! 'grep "natty" ${CHROOT_PATH}/etc/apt/sources.list'
+then 
+    echo 'natty chroot not present'
+    exit 1
+fi
+
+# verify our shim is installed
+if ! `/usr/sbin/chroot ${chroot_path} ls /usr/sbin/XApps.sh`
+then 
+    echo 'XApps.sh not present'
+    exit 1
+fi
+
+# make sure we get latest app
+chroot ${CHROOT_PATH}/usr/sbin/XApps.sh update
+
+# add our application
+chroot ${CHROOT_PATH}/usr/sbin/XApps.sh install ${XAPP_NAME}
+
 
 touch /var/luna/preferences/ran-postinst
-if `/usr/sbin/chroot ${chroot_path} /usr/bin/sudo -u webos ls /usr/sbin/Xapps.sh`
-then
-fi    
+
 touch /var/luna/preferences/${APPID}
 # Install the upstart script
 mkdir -p /var/palm/event.d
