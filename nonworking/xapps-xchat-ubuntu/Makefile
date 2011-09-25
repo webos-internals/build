@@ -1,5 +1,5 @@
 NAME     = xapps-xchat-ubuntu
-TITLE    = XApps-Xchat-Ubuntu
+TITLE    = XApps-XChat-Ubuntu
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
@@ -14,7 +14,8 @@ CHANGELOG = \
 0.0.1-1: Initial test.<br>\
 0.0.2: Fixed names and paths<br>\
 0.0.3: added extra ../ to includes<br>\ 
-0.0.4: removed unnecessary bits<br>\
+0.0.4: removed unnecessary bits<br>
+
 APPINFO_CHANGELOG = [ \
 { "version" : "0.0.1-1",  "log" : [ "Initial test" ] } \
 ]
