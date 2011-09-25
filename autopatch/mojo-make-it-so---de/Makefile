@@ -1,10 +1,10 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = mojo/${NAME}.patch
 TWEAKS =
-TITLE = Just Type - DE
-DESCRIPTION = Changes 'Einfach lostippen...' to 'Just type...' for german TouchPad
+TITLE = Make It So - DE
+DESCRIPTION = Changes 'Einfach lostippen...' to 'Make it so...' for german Pre3.
 CATEGORY = Mojo
-VERSIONS = 2.2.0-33 3.0.2-33
+VERSIONS = 2.2.0-38
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
