@@ -6,7 +6,7 @@ BLDFLAGS = -p
 VERSION  = 0.0.4
 TYPE	 = Linux Application
 CATEGORY = Communications
-HOMEPAGE = http://www.webos-internals.org/wiki/UbuntuChroot
+HOMEPAGE = http://www.webos-internals.org/wiki/Applications/XApps
 ICON	 = http://www.webos-internals.org/images/3/3e/Icon_XChat_X_Ubuntu.png
 DESCRIPTION = ${APPINFO_DESCRIPTION}
 APPINFO_DESCRIPTION = A XApp to launch Xchat. Requires Ubuntu-Natty-Chroot.
@@ -43,11 +43,11 @@ include ../../support/package.mk
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
 
-build/.unpacked-${VERSION}:${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	rm -rf build
-	mkdir -p build
-	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	touch $@
+#build/.unpacked-${VERSION}:${DL_DIR}/${NAME}-${VERSION}.tar.gz
+#	rm -rf build
+#	mkdir -p build
+#	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+#	touch $@
 
 .PHONY: build
 build: build/.built-${VERSION}
@@ -57,12 +57,12 @@ build/.built-${VERSION}: build/arm.built-${VERSION} # build/i686.built-${VERSION
 
 include ../../support/cross-compile.mk
 
-build/%.built-${VERSION}: build/.unpacked-${VERSION}  ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
+build/%.built-${VERSION}:   ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
 	rm -rf build/$*
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
 	tar -C build/$*/usr/palm/applications/${APP_ID} -xf ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/.git
-	install -m 644 build/${NAME}.tgz build/$*/usr/palm/applications/${APP_ID}/${NAME}.tgz 
+#	install -m 644 build/${NAME}.tgz build/$*/usr/palm/applications/${APP_ID}/${NAME}.tgz 
 	install -m 644 icon.png build/$*/usr/palm/applications/${APP_ID}/icon.png
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/upstart
 	install -m 644 upstart/${APP_ID} build/$*/usr/palm/applications/${APP_ID}/upstart/
