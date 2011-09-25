@@ -46,7 +46,7 @@ unpack: build/.unpacked-${VERSION}
 build/.unpacked-${VERSION}:${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build
-tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	touch $@
 
 .PHONY: build
