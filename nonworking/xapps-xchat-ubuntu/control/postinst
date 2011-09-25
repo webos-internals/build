@@ -1,0 +1,60 @@
+#!/bin/sh
+CHROOT_NAME=ubuntu-natty-chroot
+CHROOT_PATH=/media/ext3fs/${CHROOT_NAME}
+XAPP_NAME=xchat
+
+NAME=xapps-xchat-ubuntu
+
+APPID=org.webosinternals.${NAME}
+
+APPS=/media/cryptofs/apps
+
+[ -d ${APPS} ] || { echo "Requires webOS 1.3.5 or later" ; exit 1 ; }
+
+APPDIR=${APPS}/usr/palm/applications/${APPID}
+
+# Stop the service if running
+/sbin/stop ${APPID} || true
+
+# Remove the upstart script
+rm -f /var/palm/event.d/${APPID}
+
+if [ ! -d /media/ext3fs ] ; then
+    echo "This package requires a dedicated ext3fs partition created by the WebOS Internals Meta-Doctor"
+    exit 1
+fi
+
+if ! `grep -q ext3fs /proc/mounts` ; then
+    echo "You must ensure a dedicated ext3fs partition is mounted before installing this package"
+    exit 1
+fi
+
+#verify that chroot is indeed ubuntu and the right version
+if ! 'grep "natty" ${CHROOT_PATH}/etc/apt/sources.list'
+then 
+    echo 'natty chroot not present'
+    exit 1
+fi
+
+# verify our shim is installed
+if ! `/usr/sbin/chroot ${chroot_path} ls /usr/sbin/Xapps.sh`
+then 
+    echo 'XApps.sh not present'
+    exit 1
+fi
+
+# make sure we get latest app
+chroot ${CHROOT_PATH}/usr/sbin/XApps.sh update
+
+# add our application
+chroot ${CHROOT_PATH}/usr/sbin/XApps.sh install ${XAPP_NAME}
+
+
+touch /var/luna/preferences/ran-postinst
+
+touch /var/luna/preferences/${APPID}
+# Install the upstart script
+mkdir -p /var/palm/event.d
+cp ${APPDIR}/upstart/${APPID} /var/palm/event.d/${APPID}
+
+exit 0
