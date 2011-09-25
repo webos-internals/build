@@ -43,11 +43,6 @@ include ../../support/package.mk
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
 
-#build/.unpacked-${VERSION}:${DL_DIR}/${NAME}-${VERSION}.tar.gz
-#	rm -rf build
-#	mkdir -p build
-#	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-#	touch $@
 
 .PHONY: build
 build: build/.built-${VERSION}
@@ -85,8 +80,6 @@ endif
 	echo "\"noWindow\": true" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "}" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	touch $@
-	#mkdir -p build/$*/usr/palm/applications/${APP_ID}/usr/sbin
-	#install -m 744 usr/sbin/*.sh build/$*/usr/palm/applications/${APP_ID}/usr/sbin/
 
 clobber::
 	rm -rf build
