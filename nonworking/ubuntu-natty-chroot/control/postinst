@@ -10,6 +10,10 @@ USERNAME=webos
 
 APPS=/media/cryptofs/apps
 
+CHROOT_NAME=ubuntu-natty-chroot
+
+CHROOT_PATH=/media/ext3fs/${CHROOT_NAME}
+
 [ -d ${APPS} ] || { echo "Requires webOS 1.3.5 or later" ; exit 1 ; }
 
 APPDIR=${APPS}/usr/palm/applications/${APPID}
@@ -50,7 +54,9 @@ if [ -z "`chroot /media/ext3fs/${NAME} /usr/sbin/dpkg-divert --list /sbin/initct
 fi
 
 # Install Xapps Shim
-cp ${APPDIR}/usr/sbin/XApps.sh /media/ext3fs/${NAME}/usr/sbin/XApps.sh
+cp ${APPDIR}/usr/sbin/XApps.sh ${CHROOT_PATH}/usr/sbin/XApps.sh
+
+chmod 744 ${CHROOT_PATH}/usr/sbin/XApps.sh
 
 # Install the upstart script
 mkdir -p /var/palm/event.d
