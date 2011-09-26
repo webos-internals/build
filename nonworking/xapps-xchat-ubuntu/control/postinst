@@ -30,38 +30,31 @@ if ! `grep -q ext3fs /proc/mounts` ; then
 fi
 
 #verify that chroot is indeed ubuntu and the right version
-if ! 'grep "natty" ${CHROOT_PATH}/etc/apt/sources.list'
-then 
-    echo "natty chroot not present"
-    exit 1
-fi
+#if ! 'grep "natty" ${CHROOT_PATH}/etc/apt/sources.list';
+#then 
+#    echo "natty chroot not present"
+#    exit 1
+#fi
 
-# verify our shim is installed
-if ! [ -e ${CHROOT_PATH}/usr/sbin/xapps.sh ]
-then 
-    echo "xapps.sh not present"
-    exit 1
-fi
+# install new app
 
-# make sure we get latest app
-chroot ${CHROOT_PATH}/usr/sbin/xapps.sh update
+cp /etc/resolv.conf ${CHROOT}/etc/resolv.conf
 
-if 'wc -l ${CHROOT_PATH}/var/log/xapps_error.log > 0'
-
-then
-    echo < ${CHROOT_PATH}/var/log/xapps_error.log
-   exit 1
-fi
+mount --bind /dev ${CHROOT_PATH}/dev
+mount --bind /dev/pts ${CHROOT_PATH}/dev/pts
+mount --bind /proc ${CHROOT_PATH}/proc
+mount --bind /sys ${CHROOT_PATH}/sys
+mount --bind /tmp ${CHROOT_PATH}/tmp
 
 # add our application
-chroot ${CHROOT_PATH}/usr/sbin/xapps.sh install ${XAPP_NAME} 
+chroot ${CHROOT_PATH}/usr/bin/apt-get install ${XAPP_NAME}  --force-yes -y
 
-if 'wc -l ${CHROOT_PATH}/var/log/xapps_error.log > 0'
+umount ${CHROOT_PATH}/tmp
+umount ${CHROOT_PATH}/sys
+umount ${CHROOT_PATH}/proc
+umount ${CHROOT_PATH}/dev/pts
+umount ${CHROOT_PATH}/dev
 
-then
-    echo < ${CHROOT_PATH}/var/log/xapps_error.log
-   exit 1
-fi
 
 touch /var/luna/preferences/ran-postinst
 

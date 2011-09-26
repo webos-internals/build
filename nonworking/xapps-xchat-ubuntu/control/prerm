@@ -24,24 +24,24 @@ APPDIR=${APPS}/usr/palm/applications/${APPID}
 # Remove the upstart script
 rm -f /var/palm/event.d/${APPID}
 
-# verify our shim is installed
+# remove our application
 
-if ! [ -e  ${CHROOT_PATH}/usr/sbin/xapps.sh ]
+cp /etc/resolv.conf ${CHROOT_PATH}/etc/resolv.conf
 
-then
-    echo 'xapps.sh not present'
-    exit 1
-fi
+mount --bind /dev ${CHROOT_PATH}/dev
+mount --bind /dev/pts ${CHROOT_PATH}/dev/pts
+mount --bind /proc ${CHROOT_PATH}/proc
+mount --bind /sys ${CHROOT_PATH}/sys
+mount --bind /tmp ${CHROOT_PATH}/tmp
 
 # remove our application
-chroot ${CHROOT_PATH}/usr/sbin/xapps.sh remove ${XAPP_NAME}
+chroot ${CHROOT_PATH} /usr/bin/apt-get remove ${XAPP_NAME}  -y
 
-if 'wc -l ${CHROOT_PATH}/var/log/xapps_error.log > 0'
-
-then
-    echo < ${CHROOT_PATH}/var/log/xapps_error.log
-   exit 1
-fi
+umount ${CHROOT_PATH}/tmp
+umount ${CHROOT_PATH}/sys
+umount ${CHROOT_PATH}/proc
+umount ${CHROOT_PATH}/dev/pts
+umount ${CHROOT_PATH}/dev
 
 
 # We intentionally do not remove the chroot contents.
