@@ -30,7 +30,7 @@ case ${ACTION} in
              ;;
 
        remove)
-              if `apt-get remove ${APP_NAME}  \
+              if `apt-get remove ${APP_NAME} -y \
               >> ${APP_INSTALL_LOG_DIR}${INSTALLER_LOG} 2>&1`
               then                  
                    echo '[${DATE}] Remove  Succeeded ${APP_NAME}' >> ${APP_INSTALL_LOG_DIR}${INSTALLER_LOG}
