@@ -11,10 +11,10 @@ ICON	 = http://www.webos-internals.org/images/3/3e/Icon_XChat_X_Ubuntu.png
 DESCRIPTION = ${APPINFO_DESCRIPTION}
 APPINFO_DESCRIPTION = A XApp to launch Xchat. Requires Ubuntu-Natty-Chroot.
 CHANGELOG = \
-0.0.1-1: Initial test.<br>\
+0.0.4: removed unnecessary bits<br> \
+0.0.3: added extra ../ to includes<br>\
 0.0.2: Fixed names and paths<br>\
-0.0.3: added extra ../ to includes<br>\ 
-0.0.4: removed unnecessary bits<br>
+0.0.1-1: Initial test.<br>
 
 APPINFO_CHANGELOG = [ \
 { "version" : "0.0.4",  "log" : [ "first Alpha release" ] } \
@@ -26,10 +26,6 @@ SCREENSHOTS = [\
 LICENSE  = GPL v2 Open Source
 
 DEPENDS = org.webos-internals.ubuntu-natty-chroot, org.webos-internals.xecutah
-
-# Also requires upstart changes from:
-# http://gyp.blogs.balabit.com/2011/01/using-upstart-in-a-chroot/
-# http://git.balabit.hu/?p=gyp/upstart-dummy.git;a=summary
 
 include ../../support/download.mk
 
