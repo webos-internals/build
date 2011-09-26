@@ -21,7 +21,7 @@ CHANGELOG = \
 11.04-3: Fixed pre-remove script.<br>\
 11.04-2: Initial testing release.
 APPINFO_CHANGELOG = [ \
-{ "version" : "11.04-13", "log" : [ "Added support for managing individual X Applications from webOS"] },\
+{ "version" : "11.04-13", "log" : [ "Added support for managing individual X Applications from Xecutah"] },\
 { "version" : "11.04-9",  "log" : [ "Added support for starting multiple applications in separate cards" ] },\
 { "version" : "11.04-8",  "log" : [ "Move to an event based start" ] },\
 { "version" : "11.04-7",  "log" : [ "Added multi-card support" ] },\
