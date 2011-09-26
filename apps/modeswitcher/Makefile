@@ -5,7 +5,7 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.srv
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 2.4.2
+VERSION  = 2.5.2
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/showthread.php?p=2935803&posted=1#post2919102
@@ -14,6 +14,7 @@ DESCRIPTION = Mode Switcher.
 MINWEBOSVERSION = 2.0.0
 MAXWEBOSVERSION = 2.9.9
 CHANGELOG = \
+2.5.2: Fixed modes importing to work on all webOS versions.<br>\
 2.5.0: Fixed modes exporting on Pre3 and small fix for wireless trigger.<br>\
 2.4.6: Triggers should now work better and be much more reliable than before.<br>\
 2.4.2: Fixed typo and wallpaper config for Pre3, re-config wallpapers!<br>\
