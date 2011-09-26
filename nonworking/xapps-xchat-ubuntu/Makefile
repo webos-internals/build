@@ -1,9 +1,9 @@
-NAME     = xapps-xchat-ubuntu
-TITLE    = XApps-XChat-Ubuntu
+NAME     = xapps-xchat-ubuntu-natty
+TITLE    = XApps-XChat-Ubuntu-Natty
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.0.5.3
+VERSION  = 0.0.5.4
 TYPE	 = Linux Application
 CATEGORY = Communications
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Xapps
@@ -11,13 +11,14 @@ ICON	 = http://www.webos-internals.org/images/3/3e/Icon_XChat_X_Ubuntu.png
 DESCRIPTION = ${APPINFO_DESCRIPTION}
 APPINFO_DESCRIPTION = A XApp to launch XChat. Requires Ubuntu-Natty-Chroot.
 CHANGELOG = \
+0.0.5.4: removed need for shim, prerm is broken<br> \
 0.0.4: removed unnecessary bits<br> \
 0.0.3: added extra ../ to includes<br>\
 0.0.2: Fixed names and paths<br>\
 0.0.1-1: Initial test.<br>
 
 APPINFO_CHANGELOG = [ \
-{ "version" : "0.0.5",  "log" : [ "first Alpha release" ] } \
+{ "version" : "0.0.5.4",  "log" : [ "first Alpha release" ] } \
 { "version" : "0.0.1-1",  "log" : [ "Initial test" ] } \
 ]
 
@@ -54,11 +55,12 @@ build/%.built-${VERSION}:   ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
 	tar -C build/$*/usr/palm/applications/${APP_ID} -xf ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/.git
 #	install -m 644 build/${NAME}.tgz build/$*/usr/palm/applications/${APP_ID}/${NAME}.tgz 
-	install -m 644 icon.png build/$*/usr/palm/applications/${APP_ID}/icon.png
+#	install -m 644 icon.png build/$*/usr/palm/applications/${APP_ID}/icon.png
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/upstart
 	install -m 644 upstart/${APP_ID} build/$*/usr/palm/applications/${APP_ID}/upstart/
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/control
 	install -m 644 control/* build/$*/usr/palm/applications/${APP_ID}/control/
+	chmod ugo+x control/*	
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/bin
 	install -m 755 bin/*.sh build/$*/usr/palm/applications/${APP_ID}/bin/
 	echo "{" > build/$*/usr/palm/applications/${APP_ID}/appinfo.json
