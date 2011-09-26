@@ -26,20 +26,20 @@ rm -f /var/palm/event.d/${APPID}
 
 # verify our shim is installed
 
-if ! [ -e  ${CHROOT_PATH}/usr/sbin/XApps.sh ]
+if ! [ -e  ${CHROOT_PATH}/usr/sbin/xapps.sh ]
 
 then
-    echo 'XApps.sh not present'
+    echo 'xapps.sh not present'
     exit 1
 fi
 
 # remove our application
-chroot ${CHROOT_PATH}/usr/sbin/XApps.sh remove ${XAPP_NAME}
+chroot ${CHROOT_PATH}/usr/sbin/xapps.sh remove ${XAPP_NAME}
 
-if 'wc -l ${CHROOT_PATH}/var/log/xapps/XApps_error.log > 0'
+if 'wc -l ${CHROOT_PATH}/var/log/xapps/xapps_error.log > 0'
 
 then
-    echo < ${CHROOT_PATH}/var/log/xapps/XApps_error.log
+    echo < ${CHROOT_PATH}/var/log/xapps/xapps_error.log
    exit 1
 fi
 

@@ -37,29 +37,29 @@ then
 fi
 
 # verify our shim is installed
-if ! [ -e ${CHROOT_PATH}/usr/sbin/XApps.sh ]
+if ! [ -e ${CHROOT_PATH}/usr/sbin/xapps.sh ]
 then 
-    echo 'XApps.sh not present'
+    echo 'xapps.sh not present'
     exit 1
 fi
 
 # make sure we get latest app
-chroot ${CHROOT_PATH}/usr/sbin/XApps.sh update
+chroot ${CHROOT_PATH}/usr/sbin/xapps.sh update
 
-if 'wc -l ${CHROOT_PATH}/var/log/xapps/XApps_error.log > 0'
+if 'wc -l ${CHROOT_PATH}/var/log/xapps/xapps_error.log > 0'
 
 then
-    echo < ${CHROOT_PATH}/var/log/xapps/XApps_error.log
+    echo < ${CHROOT_PATH}/var/log/xapps/xapps_error.log
    exit 1
 fi
 
 # add our application
-chroot ${CHROOT_PATH}/usr/sbin/XApps.sh install ${XAPP_NAME}
+chroot ${CHROOT_PATH}/usr/sbin/xapps.sh install ${XAPP_NAME}
 
-if 'wc -l ${CHROOT_PATH}/var/log/xapps/XApps_error.log > 0'
+if 'wc -l ${CHROOT_PATH}/var/log/xapps/xapps_error.log > 0'
 
 then
-    echo < ${CHROOT_PATH}/var/log/xapps/XApps_error.log
+    echo < ${CHROOT_PATH}/var/log/xapps/xapps_error.log
    exit 1
 fi
 
