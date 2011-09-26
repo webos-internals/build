@@ -37,7 +37,7 @@ then
 fi
 
 # verify our shim is installed
-if ! `/usr/sbin/chroot ${chroot_path} ls /usr/sbin/XApps.sh`
+if ! [ -e ${CHROOT_PATH}/usr/sbin/XApps.sh ]
 then 
     echo 'XApps.sh not present'
     exit 1
