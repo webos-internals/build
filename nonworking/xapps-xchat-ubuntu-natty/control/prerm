@@ -46,4 +46,4 @@ umount ${CHROOT_PATH}/dev
 
 # We intentionally do not remove the chroot contents.
 
-exit 0
+#exit 0
