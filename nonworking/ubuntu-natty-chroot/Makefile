@@ -11,9 +11,7 @@ ICON	 = http://www.webos-internals.org/images/5/5e/Icon_WebOSInternals_Ubuntu.pn
 DESCRIPTION = ${APPINFO_DESCRIPTION}
 APPINFO_DESCRIPTION = A minimal Ubuntu 11.04 chroot. Requires a dedicated ext3fs partition to be set up using the WebOS Internals Meta-Doctor.
 CHANGELOG = \
-11.04-13: fix XApps.sh name and location<br>\
-11.04-11: Fixed Xapps Shim<br>\
-11.04-10: Added XApps Shim<br>\
+11.04-13: Added support for managing individual X Applications from webOS. <br>\
 11.04-9: Added support for starting multiple applications in separate cards.<br>\
 11.04-8: Move to an event based start.<br>\
 11.04-7: Added multi-card support.<br>\
@@ -23,12 +21,10 @@ CHANGELOG = \
 11.04-3: Fixed pre-remove script.<br>\
 11.04-2: Initial testing release.
 APPINFO_CHANGELOG = [ \
-{ "version" : "11.04-13", "log" : [ "Fixed XApps Shim name."] },\
-{ "version" : "11.04-11", "log" : [ "Fixed Xapps Shim."] },\
-{ "version" : "11.04-10", "log" : [ "Added Xapps Shim." ] },\
-{ "version" : "11.04-9",  "log" : [ "Added support for starting multiple applications in separate cards." ] },\
-{ "version" : "11.04-8",  "log" : [ "Move to an event based start." ] },\
-{ "version" : "11.04-7",  "log" : [ "Added multi-card support." ] },\
+{ "version" : "11.04-13", "log" : [ "Added support for managing individual X Applications from webOS"] },\
+{ "version" : "11.04-9",  "log" : [ "Added support for starting multiple applications in separate cards" ] },\
+{ "version" : "11.04-8",  "log" : [ "Move to an event based start" ] },\
+{ "version" : "11.04-7",  "log" : [ "Added multi-card support" ] },\
 { "version" : "11.04-6",  "log" : [ "Added a fix for upstart/dbus handling in the chroot" ] }, \
 { "version" : "11.04-5",  "log" : [ "Change mount -t to --bind for /proc and /dev/pts" ] }, \
 { "version" : "11.04-4",  "log" : [ "Check that the ext3fs is mounted before installing", "Add a non-privileged webos user in the chroot" ] }, \
