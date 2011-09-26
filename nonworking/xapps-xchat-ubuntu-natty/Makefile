@@ -60,7 +60,6 @@ build/%.built-${VERSION}:   ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
 	install -m 644 upstart/${APP_ID} build/$*/usr/palm/applications/${APP_ID}/upstart/
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/control
 	install -m 644 control/* build/$*/usr/palm/applications/${APP_ID}/control/
-	chmod ugo+x control/*	
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/bin
 	install -m 755 bin/*.sh build/$*/usr/palm/applications/${APP_ID}/bin/
 	echo "{" > build/$*/usr/palm/applications/${APP_ID}/appinfo.json
