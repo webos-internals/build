@@ -6,7 +6,7 @@ BLDFLAGS = -p
 VERSION  = 0.0.4
 TYPE	 = Linux Application
 CATEGORY = Communications
-HOMEPAGE = http://www.webos-internals.org/wiki/Applications/XApps
+HOMEPAGE = http://www.webos-internals.org/wiki/Application:Xapps
 ICON	 = http://www.webos-internals.org/images/3/3e/Icon_XChat_X_Ubuntu.png
 DESCRIPTION = ${APPINFO_DESCRIPTION}
 APPINFO_DESCRIPTION = A XApp to launch Xchat. Requires Ubuntu-Natty-Chroot.
@@ -17,6 +17,7 @@ CHANGELOG = \
 0.0.4: removed unnecessary bits<br>
 
 APPINFO_CHANGELOG = [ \
+{ "version" : "0.0.4",  "log" : [ "first Alpha release" ] } \
 { "version" : "0.0.1-1",  "log" : [ "Initial test" ] } \
 ]
 
