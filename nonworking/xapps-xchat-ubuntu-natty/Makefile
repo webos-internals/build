@@ -10,17 +10,18 @@ ICON	 = http://www.webos-internals.org/images/3/3e/Icon_XChat_X_Ubuntu.png
 DESCRIPTION = ${APPINFO_DESCRIPTION}
 APPINFO_DESCRIPTION = A XApp to launch XChat. Requires Ubuntu-Natty-Chroot.
 CHANGELOG = \
+0.5.15: Major Cleanup of prem and Postinst<br>\
 0.5.7: leave app in chroot alone, just disconnect from webOS<br> \
 0.5.4: removed need for shim, prerm is broken<br> \
 0.4: removed unnecessary bits<br> \
 0.3: added extra ../ to includes<br>\
 0.2: Fixed names and paths<br>\
-0.1-1: Initial test.<br>
+0.1-1: Initial test.<br>\
 
 APPINFO_CHANGELOG = [ \
-{ "version" : "0.5.15", "log" : [ "major cleanup of prerm and postinst" ] } \
-{ "version" : "0.5.4",  "log" : [ "first Alpha release" ] } \
-{ "version" : "0.1-1",  "log" : [ "Initial test" ] } \
+{ "version" : "0.5.15", "log" : [ "major cleanup of prerm and postinst" ] }\
+{ "version" : "0.5.4",  "log" : [ "first Alpha release" ] }\
+{ "version" : "0.1-1",  "log" : [ "Initial test" ] }\
 ]
 
 SCREENSHOTS = [\
@@ -70,12 +71,12 @@ build/%.built-${VERSION}:   ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
 	echo "\"type\": \"web\"," >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "\"main\": \"index.html\"," >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "\"icon\": \"icon.png\"," >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
-ifdef APPINFO_DESCRIPTION
-	echo '"message": "${APPINFO_DESCRIPTION}",' >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
-endif
-ifdef APPINFO_CHANGELOG
-	echo '"changeLog": ${APPINFO_CHANGELOG},' >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
-endif
+#ifdef APPINFO_DESCRIPTION
+#	echo '"message": "${APPINFO_DESCRIPTION}",' >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
+#endif
+#ifdef APPINFO_CHANGELOG
+#	echo '"changeLog": ${APPINFO_CHANGELOG},' >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
+#endif
 	echo '"uiRevision": "2",' >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "\"noWindow\": true" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "}" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
