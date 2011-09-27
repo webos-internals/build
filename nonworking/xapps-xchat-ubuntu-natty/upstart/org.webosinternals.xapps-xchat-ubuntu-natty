@@ -1,4 +1,4 @@
-description "XApps-XChat-Ubuntu"
+description "XApps-XChat-Ubuntu-Natty"
 
 start on org.webosinternals.xapps-xchat-ubuntu-natty
 
