@@ -2,8 +2,8 @@ NAME     = xapps-xchat-ubuntu-natty
 TITLE    = XApps-XChat-Ubuntu-Natty
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-BLDFLAGS = -p
-VERSION  = 0.5.4
+BLDFLAGS = 
+VERSION  = 0.5.5
 TYPE	 = Linux Application
 CATEGORY = Communications
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Xapps
@@ -18,8 +18,8 @@ CHANGELOG = \
 0.1-1: Initial test.<br>
 
 APPINFO_CHANGELOG = [ \
-{ "version" : "0.0.5.4",  "log" : [ "first Alpha release" ] } \
-{ "version" : "0.0.1-1",  "log" : [ "Initial test" ] } \
+{ "version" : "0.5.4",  "log" : [ "first Alpha release" ] } \
+{ "version" : "0.1-1",  "log" : [ "Initial test" ] } \
 ]
 
 SCREENSHOTS = [\

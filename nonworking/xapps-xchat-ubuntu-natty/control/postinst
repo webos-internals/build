@@ -29,13 +29,6 @@ if ! `grep -q ext3fs /proc/mounts` ; then
     exit 1
 fi
 
-#verify that chroot is indeed ubuntu and the right version
-#if ! 'grep "natty" ${CHROOT_PATH}/etc/apt/sources.list';
-#then 
-#    echo "natty chroot not present"
-#    exit 1
-#fi
-
 # install new app
 
 cp /etc/resolv.conf ${CHROOT}/etc/resolv.conf
@@ -55,11 +48,6 @@ umount ${CHROOT_PATH}/sys
 umount ${CHROOT_PATH}/proc
 umount ${CHROOT_PATH}/dev/pts
 umount ${CHROOT_PATH}/dev
-
-
-touch /var/luna/preferences/ran-postinst
-
-touch /var/luna/preferences/${APPID}
 
 # Install the upstart script
 mkdir -p /var/palm/event.d
