@@ -27,7 +27,7 @@ WEBOS_VERSIONS = 3.0.2
 KERNEL_VERSION = 2.6.35
 endif
 ifeq ("${DEVICE}","pre3")
-WEBOS_VERSIONS = 2.2.0
+WEBOS_VERSIONS = 2.2.0 2.2.3
 KERNEL_VERSION = 2.6.32
 endif
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tgz
@@ -132,6 +132,9 @@ ifeq ("${DEVICE}","pre3")
 ifeq ("${WEBOS_VERSION}", "2.2.0")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp220manta-wr-${WEBOS_VERSION}.jar
 endif
+ifeq ("${WEBOS_VERSION}", "2.2.3")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp223mantaatt-${WEBOS_VERSION}.jar
+endif
 endif
 ifeq ("${DEVICE}","veer")
 ifeq ("${WEBOS_VERSION}", "2.1.1")
@@ -213,7 +216,7 @@ endif
 
 ifeq ("${WEBOS_VERSION}", "2.2.0")
 ifeq ("${DEVICE}","pre3")
-COMPATIBLE_VERSIONS = 2.2.0
+COMPATIBLE_VERSIONS = 2.2.0 | 2.2.3
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/2.2.0/linuxkernel-${KERNEL_VERSION}.patch.tar.gz
 KERNEL_SUBMISSION = kernelpatch-2.2.0.txt
 # Override the compiler
