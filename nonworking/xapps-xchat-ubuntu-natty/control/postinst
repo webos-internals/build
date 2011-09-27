@@ -3,7 +3,7 @@ CHROOT_NAME=ubuntu-natty-chroot
 CHROOT_PATH=/media/ext3fs/${CHROOT_NAME}
 XAPP_NAME=xchat
 
-NAME=xapps-xchat-ubuntu
+NAME=xapps-xchat-ubuntu-natty
 
 APPID=org.webosinternals.${NAME}
 
@@ -47,7 +47,7 @@ mount --bind /sys ${CHROOT_PATH}/sys
 mount --bind /tmp ${CHROOT_PATH}/tmp
 
 # add our application
-chroot ${CHROOT_PATH}/usr/bin/apt-get install ${XAPP_NAME}  --force-yes -y
+chroot ${CHROOT_PATH} /usr/bin/apt-get install ${XAPP_NAME}  --force-yes -y
 
 umount ${CHROOT_PATH}/tmp
 umount ${CHROOT_PATH}/sys
@@ -59,6 +59,7 @@ umount ${CHROOT_PATH}/dev
 touch /var/luna/preferences/ran-postinst
 
 touch /var/luna/preferences/${APPID}
+
 # Install the upstart script
 mkdir -p /var/palm/event.d
 cp ${APPDIR}/upstart/${APPID} /var/palm/event.d/${APPID}

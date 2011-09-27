@@ -2,7 +2,7 @@
 
 DISTRO=ubuntu-natty
 
-NAME=xapp-xchat
+NAME=xapp-xchat-ubuntu-natty
 
 APPID=org.webosinternals.${NAME}
 
