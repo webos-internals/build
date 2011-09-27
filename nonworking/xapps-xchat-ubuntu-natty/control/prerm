@@ -2,7 +2,7 @@
 
 DISTRO=ubuntu-natty
 
-NAME=xapp-xchat-ubuntu-natty
+NAME=xapps-xchat-ubuntu-natty
 
 APPID=org.webosinternals.${NAME}
 
@@ -43,7 +43,6 @@ umount ${CHROOT_PATH}/sys
 umount ${CHROOT_PATH}/proc
 umount ${CHROOT_PATH}/dev/pts
 umount ${CHROOT_PATH}/dev
-
 
 # We intentionally do not remove the chroot contents.
 
