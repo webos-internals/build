@@ -35,7 +35,8 @@ mount --bind /sys ${CHROOT_PATH}/sys
 mount --bind /tmp ${CHROOT_PATH}/tmp
 
 # remove our application
-chroot ${CHROOT_PATH} /usr/bin/apt-get remove ${XAPP_NAME}  -y
+export PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin
+chroot ${CHROOT_PATH} /usr/bin/apt-get remove --force-yes -y ${XAPP_NAME}
 
 umount ${CHROOT_PATH}/tmp
 umount ${CHROOT_PATH}/sys
@@ -46,4 +47,4 @@ umount ${CHROOT_PATH}/dev
 
 # We intentionally do not remove the chroot contents.
 
-#exit 0
+exit 0

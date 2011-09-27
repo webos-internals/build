@@ -47,7 +47,8 @@ mount --bind /sys ${CHROOT_PATH}/sys
 mount --bind /tmp ${CHROOT_PATH}/tmp
 
 # add our application
-chroot ${CHROOT_PATH} /usr/bin/apt-get install ${XAPP_NAME}  --force-yes -y
+export PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin
+chroot ${CHROOT_PATH} /usr/bin/apt-get install --force-yes -y ${XAPP_NAME}
 
 umount ${CHROOT_PATH}/tmp
 umount ${CHROOT_PATH}/sys
