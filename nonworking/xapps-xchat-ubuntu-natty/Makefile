@@ -55,7 +55,7 @@ build/%.built-${VERSION}:   ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
 	tar -C build/$*/usr/palm/applications/${APP_ID} -xf ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/.git
 #	install -m 644 build/${NAME}.tgz build/$*/usr/palm/applications/${APP_ID}/${NAME}.tgz 
-#	install -m 644 icon.png build/$*/usr/palm/applications/${APP_ID}/icon.png
+	install -m 644 icon.png build/$*/usr/palm/applications/${APP_ID}/icon.png
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/upstart
 	install -m 644 upstart/${APP_ID} build/$*/usr/palm/applications/${APP_ID}/upstart/
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/control
