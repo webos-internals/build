@@ -1,0 +1,26 @@
+.change-log #data .palm-divider.labeled .label
+{
+	text-transform: lowercase;
+}
+.change-log #data
+{
+	font-size: 18px;
+}
+.change-log #data .text
+{
+	padding-top: 4px;
+	padding-left: 17px;
+	padding-right: 15px;
+	padding-bottom: 10px;
+}
+.change-log #data ul
+{
+	margin: 0px;
+	padding-left: 37px;
+	padding-right: 15px;
+	padding-bottom: 10px;
+}
+.change-log #data ul.changelog
+{
+	font-size: 15px;
+}
