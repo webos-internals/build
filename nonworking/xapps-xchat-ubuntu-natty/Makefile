@@ -3,7 +3,7 @@ TITLE    = XApps-XChat-Ubuntu-Natty
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.0.5.4
+VERSION  = 0.5.4
 TYPE	 = Linux Application
 CATEGORY = Communications
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Xapps
@@ -11,11 +11,11 @@ ICON	 = http://www.webos-internals.org/images/3/3e/Icon_XChat_X_Ubuntu.png
 DESCRIPTION = ${APPINFO_DESCRIPTION}
 APPINFO_DESCRIPTION = A XApp to launch XChat. Requires Ubuntu-Natty-Chroot.
 CHANGELOG = \
-0.0.5.4: removed need for shim, prerm is broken<br> \
-0.0.4: removed unnecessary bits<br> \
-0.0.3: added extra ../ to includes<br>\
-0.0.2: Fixed names and paths<br>\
-0.0.1-1: Initial test.<br>
+0.5.4: removed need for shim, prerm is broken<br> \
+0.4: removed unnecessary bits<br> \
+0.3: added extra ../ to includes<br>\
+0.2: Fixed names and paths<br>\
+0.1-1: Initial test.<br>
 
 APPINFO_CHANGELOG = [ \
 { "version" : "0.0.5.4",  "log" : [ "first Alpha release" ] } \
