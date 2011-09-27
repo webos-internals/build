@@ -1,11 +1,11 @@
 #!/bin/sh
 CHROOT_NAME=ubuntu-natty-chroot
 CHROOT_PATH=/media/ext3fs/${CHROOT_NAME}
-XAPP_NAME=xchat
+XAPP_NAME="xchat"
 
-NAME=xapps-xchat-ubuntu-natty
+NAME="xapps-xchat-ubuntu-natty"
 
-APPID=org.webosinternals.${NAME}
+APPID="org.webosinternals.${NAME}"
 
 APPS=/media/cryptofs/apps
 
@@ -31,7 +31,7 @@ fi
 
 # install new app
 
-cp /etc/resolv.conf ${CHROOT}/etc/resolv.conf
+cp /etc/resolv.conf ${CHROOT_PATH}/etc/resolv.conf
 
 mount --bind /dev ${CHROOT_PATH}/dev
 mount --bind /dev/pts ${CHROOT_PATH}/dev/pts
