@@ -46,7 +46,7 @@ precentral-index: ipkgs/precentral/Packages
 .PHONY: webos-patches-index
 webos-patches-index: ipkgs/webos-patches/1.4.5/Packages \
 		     ipkgs/webos-patches/2.1.0/Packages ipkgs/webos-patches/2.2.0/Packages \
-		     ipkgs/webos-patches/3.0.2/Packages
+		     ipkgs/webos-patches/2.2.3/Packages ipkgs/webos-patches/3.0.2/Packages
 	rm -f ipkgs/webos-patches/1.4.5.1
 	ln -s 1.4.5 ipkgs/webos-patches/1.4.5.1
 	rm -f ipkgs/webos-patches/2.1.1
@@ -64,7 +64,7 @@ webos-patches-index: ipkgs/webos-patches/1.4.5/Packages \
 webos-kernels-index: ipkgs/webos-kernels/1.4.5/Packages ipkgs/webos-kernels/1.4.5.1/Packages \
 		     ipkgs/webos-kernels/2.1.0/Packages ipkgs/webos-kernels/2.1.1/Packages \
 		     ipkgs/webos-kernels/2.1.2/Packages ipkgs/webos-kernels/2.2.0/Packages \
-		     ipkgs/webos-kernels/3.0.2/Packages
+		     ipkgs/webos-kernels/2.2.3/Packages ipkgs/webos-kernels/3.0.2/Packages
 	rm -f ipkgs/webos-kernels/3.0.3
 	ln -s 3.0.2 ipkgs/webos-kernels/3.0.3
 	rm -f ipkgs/webos-kernels/3.0.4

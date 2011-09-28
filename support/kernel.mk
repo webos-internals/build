@@ -27,7 +27,7 @@ WEBOS_VERSIONS = 3.0.2
 KERNEL_VERSION = 2.6.35
 endif
 ifeq ("${DEVICE}","pre3")
-WEBOS_VERSIONS = 2.2.0
+WEBOS_VERSIONS = 2.2.0 2.2.3
 KERNEL_VERSION = 2.6.32
 endif
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tgz
@@ -132,6 +132,9 @@ ifeq ("${DEVICE}","pre3")
 ifeq ("${WEBOS_VERSION}", "2.2.0")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp220manta-wr-${WEBOS_VERSION}.jar
 endif
+ifeq ("${WEBOS_VERSION}", "2.2.3")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp223mantaatt-${WEBOS_VERSION}.jar
+endif
 endif
 ifeq ("${DEVICE}","veer")
 ifeq ("${WEBOS_VERSION}", "2.1.1")
@@ -213,7 +216,17 @@ endif
 
 ifeq ("${WEBOS_VERSION}", "2.2.0")
 ifeq ("${DEVICE}","pre3")
-COMPATIBLE_VERSIONS = 2.2.0
+COMPATIBLE_VERSIONS = 2.2.0 | 2.2.3
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/2.2.0/linuxkernel-${KERNEL_VERSION}.patch.tar.gz
+KERNEL_SUBMISSION = kernelpatch-2.2.0.txt
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
+endif
+
+ifeq ("${WEBOS_VERSION}", "2.2.3")
+ifeq ("${DEVICE}","pre3")
+COMPATIBLE_VERSIONS = 2.2.3
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/2.2.0/linuxkernel-${KERNEL_VERSION}.patch.tar.gz
 KERNEL_SUBMISSION = kernelpatch-2.2.0.txt
 # Override the compiler
@@ -409,19 +422,19 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	fi
 	touch $@
 
-# Special case for 3.0.2 based on 3.0.0 kernel source
-# build/.unpacked-3.0.2-%: ${DL_DIR}/linux-${KERNEL_VERSION}-3.0.0-${DEVICE}.tar.gz \
-# 			    ${DL_DIR}/${NAME}-3.0.2-%.tar.gz
-# 	rm -rf build/src-3.0.2-$*
-# 	mkdir -p build/src-3.0.2-$*/patches
-# 	${TAR} -C build/src-3.0.2-$* -zxf ${DL_DIR}/linux-${KERNEL_VERSION}-3.0.0-${DEVICE}.tar.gz
-# 	${TAR} -C build/src-3.0.2-$*/patches -zxf ${DL_DIR}/${NAME}-3.0.2-$*.tar.gz
-# 	if [ -n "${KERNEL_PATCHES}" ] ; then \
-# 	  ( cd build/src-3.0.2-$*/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
-# 	  ( cd build/src-3.0.2-$*/patches ; cat ${KERNEL_PATCHES} ) | \
-# 		patch -d build/src-3.0.2-$*/linux-${KERNEL_VERSION} -p1 ; \
-# 	fi
-# 	touch $@
+# Special case for 2.2.3 based on 2.2.0 kernel source
+build/.unpacked-2.2.3-%: ${DL_DIR}/linux-${KERNEL_VERSION}-2.2.0-${DEVICE}.tar.gz \
+			    ${DL_DIR}/${NAME}-2.2.3-%.tar.gz
+	rm -rf build/src-2.2.3-$*
+	mkdir -p build/src-2.2.3-$*/patches
+	${TAR} -C build/src-2.2.3-$* -zxf ${DL_DIR}/linux-${KERNEL_VERSION}-2.2.0-${DEVICE}.tar.gz
+	${TAR} -C build/src-2.2.3-$*/patches -zxf ${DL_DIR}/${NAME}-2.2.3-$*.tar.gz
+	if [ -n "${KERNEL_PATCHES}" ] ; then \
+	  ( cd build/src-2.2.3-$*/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
+	  ( cd build/src-2.2.3-$*/patches ; cat ${KERNEL_PATCHES} ) | \
+		patch -d build/src-2.2.3-$*/linux-${KERNEL_VERSION} -p1 ; \
+	fi
+	touch $@
 
 build/.unpacked-%: ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz \
 			    ${DL_DIR}/${NAME}-%.tar.gz
