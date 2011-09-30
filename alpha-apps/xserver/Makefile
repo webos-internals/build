@@ -2,7 +2,7 @@ NAME = xserver
 TITLE = XServer
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 0.9.3
+VERSION  = 0.9.4
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X
@@ -13,6 +13,7 @@ APPINFO_DESCRIPTION = XServer is used to display X Windows applications on webOS
 Due to webOS security constraints, this application cannot run directly.<br>\
 You must use <b>Xecutah</b> to run the XServer and other X Window System applications on webOS.
 CHANGELOG = \
+0.9.4: Use Meta_L instead of Alt_L for compat.<br> \
 0.9.3: Added support for starting multiple applications in separate cards.<br>\
 0.9.2: Move to an event based start.<br>\
 0.9.1: Added multi-card support.<br>\
@@ -30,6 +31,7 @@ CHANGELOG = \
 0.6.7: Force phones to portrait mode.<br>\
 0.6.6: Initial testing release.
 APPINFO_CHANGELOG = [ \
+{ "version" : "0.9.4",  "log" : [ "Use Meta_L instead of Alt_L for compat." ] },\
 { "version" : "0.9.3",  "log" : [ "Added support for starting multiple applications in separate cards." ] },\
 { "version" : "0.9.2",  "log" : [ "Move to an event based start." ] },\
 { "version" : "0.9.1",  "log" : [ "Added multi-card support." ] },\

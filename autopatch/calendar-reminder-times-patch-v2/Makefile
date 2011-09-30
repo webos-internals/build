@@ -1,9 +1,10 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = calendar/${NAME}.patch
+TWEAKS =
 TITLE = Reminder Times Patch v2
-DESCRIPTION = Adds additional reminder time options to calendar events and integrates the patches 'Edit Item as New' and 'Wrap Location Field'.
+DESCRIPTION = Adds additional reminder time options to calendar events.
 CATEGORY = Calendar
-VERSIONS = 1.4.5-18
+VERSIONS = 1.4.5-18 2.1.0-179
 ICON = http://www.webos-internals.org/images/d/d4/Icon_WebOSInternals_Patches_Calendar.png
 SCREENSHOTS =
 META_SUB_VERSION = 1

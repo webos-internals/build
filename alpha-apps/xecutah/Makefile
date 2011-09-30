@@ -3,7 +3,7 @@ TITLE    = Xecutah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.9.3
+VERSION  = 0.9.5
 DEPENDS  = org.webosinternals.xserver, org.webosinternals.xterm
 TYPE	 = Application
 CATEGORY = System Utilities
@@ -13,6 +13,7 @@ DESCRIPTION = Xecutah allows you to start an X Window System server in a webOS c
 Due to webOS security constraints, such applications cannot run directly.<br>\
 The XServer requires webOS 3.0.2 or later for correct operation on the TouchPad.
 CHANGELOG = \
+0.9.5: Added support for XApps:XChat-Ubuntu-Natty XChat X11 application<br>\
 0.9.3: Added support for starting multiple applications in separate cards. An XServer is now started automatically for each application instance.<br>\
 0.9.0: First public feed release.<br>\
 0.8.5: Added documentation of Ctrl and Esc on the TouchPad keyboard and Ctrl on phones.<br>\

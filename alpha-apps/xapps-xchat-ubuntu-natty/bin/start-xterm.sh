@@ -2,7 +2,7 @@
 export DISPLAY=${1:-:0.0}
 
 
-NAME=xapps-xchat-ubuntu
+NAME=xapps-xchat-ubuntu-natty
 
 APPID=org.webosinternals.${NAME}
 

@@ -4,7 +4,7 @@ TWEAKS =
 TITLE = Greek accented layout for hardware keyboard
 DESCRIPTION = Adds Greek to hardware keyboard. Double press SYM to change language to Greek. This patch adds support for accents over Greek lowercase letters and also diaeresis. For accents use q+vowel and for diaeresis Q+i/y. Credits to shura for making the original keyboard and to A24 for making the first Greek keyboard.
 CATEGORY = Mojo
-VERSIONS = 2.1.0-170 2.2.0-29
+VERSIONS = 2.1.0-170 2.2.0-29 2.2.3-29
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org\",\

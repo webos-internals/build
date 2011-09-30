@@ -2,13 +2,15 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F15C Eagle (TouchPad)
 DEVICE = touchpad
 CATEGORY = Experimental
-VERSIONS = 3.0.2-64
+VERSIONS = 3.0.2-71
 APPINFO_DESCRIPTION = The latest <b>alpha test</b> kernel from uNiXpSyChO.<br><br>\
 Features:<br> * 1.9GHz<br> * autogroup process scheduling<br> * CFS<br> * BFQ and SIO<br> * EXT4<br> * Various tweaks<br>\
 <br><b>NOTE: CPU core 2 will mostly stay idle. This is by webOS default, NOT a kernel problem. If you want to test this, run a Sunspider benchmark. Do not report CPU core 2 bugs.</b><br><br>\
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-71", "log" : [ "add turbo mode. make powersaver do the correct thing. online or offline cpu when changing sysfs." ] }, \
+{ "version" : "${WEBOS_VERSION}-70", "log" : [ "fix power save logic when enabled/disabled. remove unscalable freqs and voltages in arrays when setting in sysfs." ] }, \
 { "version" : "${WEBOS_VERSION}-64", "log" : [ "add selectable L2 boost via l2_boost sysfs param." ] }, \
 { "version" : "${WEBOS_VERSION}-63", "log" : [ "revert some L2 overclock, will make selectable later. tweak block req." ] }, \
 { "version" : "${WEBOS_VERSION}-62", "log" : [ "use the git implementation of SHA-1. remove optimized SHA1 routines. Improve the performance of memcpy and memmove of the general version. more overclock of L2. make powersave do something." ] }, \
@@ -30,6 +32,8 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-19", "log" : [ "Initial release. autogroup process scheduling. CPU HW based alignment. deadline tweak." ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-71: add turbo mode. make powersaver do the correct thing. online or offline cpu when changing sysfs.<br>\
+${WEBOS_VERSION}-70: fix power save logic when enabled/disabled. remove unscalable freqs and voltages in arrays when setting in sysfs.<br>\
 ${WEBOS_VERSION}-64: add selectable L2 boost via l2_boost sysfs param.<br>\
 ${WEBOS_VERSION}-63: revert some L2 overclock, will make selectable later. tweak block req.<br>\
 ${WEBOS_VERSION}-62: use the git implementation of SHA-1. remove optimized SHA1 routines. Improve the performance of memcpy and memmove of the general version. more overclock of L2. make powersave do something.<br>\
@@ -54,6 +58,8 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = identification/mkcompile_h.patch \
 		 psychobuild/F15C.patch \
+		 psychobuild/add_avail_freqs.patch \
+		 psychobuild/override.patch \
 		 psychobuild/fbconsole.patch \
 		 psychobuild/F15-logo.patch \
 		 psychobuild/comptune2.patch \
@@ -62,10 +68,16 @@ KERNEL_PATCHES = identification/mkcompile_h.patch \
 		 psychobuild/iosched_blk.patch \
 		 psychobuild/iosched-bundle.patch \
 		 psychobuild/iosched-deadline.patch \
-		 psychobuild/add_avail_freqs.patch \
+		 psychobuild/sched-p1.patch \
+		 psychobuild/sched-p2.patch \
+		 psychobuild/cache-p1.patch \
+		 psychobuild/clock-p1.patch \
+		 psychobuild/mmc-p1.patch \
+		 psychobuild/mmc-p2.patch \
 		 psychobuild/jhash3.patch \
 		 psychobuild/sha1.patch \
 		 psychobuild/memcpy.patch \
+		 memory/tmc_mem.patch \
 		 psychobuild/autogroup.patch
 
 TYPE = Kernel

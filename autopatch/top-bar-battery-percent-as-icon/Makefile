@@ -4,7 +4,7 @@ TWEAKS =
 TITLE = Battery Percent as Icon
 DESCRIPTION = This will replace the battery icon in the top bar with a color-coded percent number.Charging = Teal.100%-70% = Green.69%-45% = Yellow.44%-20% = Orange.19%-0% = Red.
 CATEGORY = Top Bar
-VERSIONS = 2.1.0-11 2.2.0-17
+VERSIONS = 2.1.0-11 2.2.0-17 2.2.3-17
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS = [ \"http://www.webos-internals.org/images/0/0f/Top-bar-battery-percent-as-icon-1.png\" ]
 META_SUB_VERSION = 1
