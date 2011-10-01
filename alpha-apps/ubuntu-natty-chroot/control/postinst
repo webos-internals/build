@@ -10,6 +10,10 @@ USERNAME=webos
 
 APPS=/media/cryptofs/apps
 
+CHROOT_HOSTNAME='hostname'-Ubuntu
+
+CHROOT_PATH=/media/ext3fs/${NAME}
+
 [ -d ${APPS} ] || { echo "Requires webOS 1.3.5 or later" ; exit 1 ; }
 
 APPDIR=${APPS}/usr/palm/applications/${APPID}
@@ -48,6 +52,10 @@ if [ -z "`chroot /media/ext3fs/${NAME} /usr/sbin/dpkg-divert --list /sbin/initct
     chroot /media/ext3fs/${NAME} /usr/sbin/dpkg-divert --local --rename --add /sbin/initctl
     chroot /media/ext3fs/${NAME} ln -s /bin/true /sbin/initctl
 fi
+
+# Add hostname from host + distro name
+
+echo ${CHROOT_HOSTNAME} > ${CHROOT_PATH}/etc/hostname 
 
 # Install the upstart script
 mkdir -p /var/palm/event.d
