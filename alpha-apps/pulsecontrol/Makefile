@@ -5,7 +5,7 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.srv
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.1.0
+VERSION  = 0.2.0
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/webos-internals/301721-pulseaudio-settings.html
@@ -14,13 +14,14 @@ DESCRIPTION = PulseAudio Settings.
 MINWEBOSVERSION = 3.0.2
 MAXWEBOSVERSION = 3.0.2
 CHANGELOG = \
+0.2.0: Enabled wireless connection monitoring.<br>\
 0.1.0: Initial release.
 SCREENSHOTS = []
 LICENSE  = BSD Open Source License
 POSTINSTALLFLAGS = RestartDevice
 POSTUPDATEFLAGS = RestartDevice
 
-DEPENDS = org.webosinternals.patches.enable-pulseaudio-control
+DEPENDS = org.webosinternals.patches.system-enable-pulseaudio-control
 
 SRC_GIT = git://git.webos-internals.org/applications/pulsecontrol.git
 
