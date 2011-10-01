@@ -4,7 +4,7 @@ APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 MAINTAINER = pezman726 <pezman726@gmail.com>
 BLDFLAGS = -p
-VERSION  = 6.0.2-6
+VERSION  = 6.0.2-7
 TYPE	 = Linux Application
 CATEGORY = Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/DebianChroot
@@ -12,6 +12,7 @@ ICON	 = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Debian.pn
 DESCRIPTION = ${APPINFO_DESCRIPTION}
 APPINFO_DESCRIPTION = A minimal Debian 6.0.2 chroot that works on ARMv6 and ARMv7 CPUs. Requires a dedicated ext3fs partition to be set up using the WebOS Internals Meta-Doctor.
 CHANGELOG = \
+6.0.2-7 Added hostname support ('hostname'-Ubuntu), Copy /etc/hosts to chroot<br>\
 6.0.2-6: Added support for starting multiple applications in separate cards.<br>\
 6.0.2-5: Move to an event based start.<br>\
 6.0.2-4: Added multi-card support.<br>\
@@ -19,6 +20,7 @@ CHANGELOG = \
 6.0.2-2: Check that the ext3fs is mounted before installing. Add a non-privileged webos user in the chroot.<br>\
 6.0.2-1: Initial testing release.
 APPINFO_CHANGELOG = [ \
+{ "version" : "6.0.2-7",  "log" : [ "Added hostname support ('hostname'-Ubuntu)","Copy /etc/hosts to chroot" ] },\
 { "version" : "6.0.2-6",  "log" : [ "Added support for starting multiple applications in separate cards." ] },\
 { "version" : "6.0.2-5",  "log" : [ "Move to an event based start." ] },\
 { "version" : "6.0.2-4",  "log" : [ "Added multi-card support." ] },\
