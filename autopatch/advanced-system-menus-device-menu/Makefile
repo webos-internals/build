@@ -1,5 +1,6 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = advanced/${NAME}.patch
+FILES = advanced/${NAME}.tar.gz
 TITLE = Advanced System Menus - Device Menu
 DESCRIPTION = * Requires Advanced System Menus Framework patch to function properly!<br/><br/>Removes date from the device menu and adds Device, Security, Network, Phone, Data and GPS control. Also slightly modifies the battery information shown in the device menu. Menu can be edited to remove items that are not wanted to be shown.
 CATEGORY = Advanced

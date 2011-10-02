@@ -1,5 +1,6 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = email/${NAME}.patch
+TWEAKS = email/${NAME}.json
 TITLE = Mimic Outlook Formatting on Email Reply/Forward
 DESCRIPTION = <br/><br/>This patch modifies the formatting of email replies/forwards so that they mimic the formatting of Outlook. The wanted formatting needs to be selected in Tweaks.
 CATEGORY = Email

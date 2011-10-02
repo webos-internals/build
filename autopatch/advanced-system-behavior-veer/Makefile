@@ -1,5 +1,6 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = advanced/${NAME}.patch
+TWEAKS = advanced/${NAME}.json
 TITLE = Advanced System Behavior (Veer)
 DESCRIPTION = The Advanced System Behavior patch has been designed to try and give webOS a more consistent and standardized feel. In addition, the Advanced Systems Behavior patch adds some unique / custom functionality to webOS that you may find useful. For more information see the homepage link and wiki for this patch.
 CATEGORY = Advanced

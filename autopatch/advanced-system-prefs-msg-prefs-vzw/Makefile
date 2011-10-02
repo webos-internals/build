@@ -1,5 +1,6 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = advanced/${NAME}.patch
+FILES = advanced/${NAME}.tar.gz
 TITLE = Advanced System Prefs - Messaging Prefs - VZW
 DESCRIPTION = * Requires Advanced System Prefs Framework patch to function properly!<br/><br/>Adds per account notification configuration for messaging app. Also adds support for notification settings for SMS received from unknown contacts and per contact notification configuration.
 CATEGORY = Advanced

@@ -1,5 +1,6 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = advanced/${NAME}.patch
+FILES = advanced/${NAME}.tar.gz
 TITLE = Advanced System Prefs - Calendar Prefs (Veer)
 DESCRIPTION = * Requires Advanced System Prefs Framework patch to function properly!<br/><br/>Adds snooze settings and basic additional functionality for calendar app.
 CATEGORY = Advanced

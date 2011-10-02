@@ -1,6 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = advanced/${NAME}.patch
 FILES = advanced/${NAME}.tar.gz
+TWEAKS = advanced/${NAME}.json
 TITLE = Advanced System Prefs - Phone Prefs
 DESCRIPTION = * Requires Advanced System Prefs Framework patch to function properly!<br/><br/>Adds additional preferences for phone app. Also adds support for notification settings for phone calls received from unknown contacts and per contact notification configuration.
 CATEGORY = Advanced

@@ -1,5 +1,6 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = advanced/${NAME}.patch
+FILES = advanced/${NAME}.tar.gz
 TITLE = Advanced System Menus - App Menu
 DESCRIPTION = * Requires Advanced System Menus Framework patch to be installed to function properly!<br/><br/>Modifies app menu to be full width. This way it covers whole top bar preventing top bar menus pressed while app is in foreground. The background of the app menu is transparent so you can still see the top bar but can access the app menu by pressing anywhere on the top bar which makes it accessible more easily when using phone with one hand.<br/><br/>Depends: org.webosinternals.patches.top-bar-system-menu-initial-framework
 CATEGORY = Advanced

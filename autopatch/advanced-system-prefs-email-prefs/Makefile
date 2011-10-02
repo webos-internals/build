@@ -1,5 +1,6 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = advanced/${NAME}.patch
+FILES = advanced/${NAME}.tar.gz
 TITLE = Advanced System Prefs - Email Prefs
 DESCRIPTION = * Requires Advanced System Prefs Framework patch to function properly!<br/><br/>Adds per account notification configuration for email app. Also adds support for notification settings for emails received from unknown contacts.
 CATEGORY = Advanced

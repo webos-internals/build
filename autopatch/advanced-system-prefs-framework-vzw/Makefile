@@ -1,5 +1,6 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = advanced/${NAME}.patch
+FILES = advanced/${NAME}.tar.gz
 TITLE = Advanced System Prefs - Framework - VZW
 DESCRIPTION = Adds support for per contact and unknown contacts notification settings. This patch is required by all of the system prefs patches.
 CATEGORY = Advanced

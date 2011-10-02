@@ -1,5 +1,6 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = advanced/${NAME}.patch
+FILES = advanced/${NAME}.tar.gz
 TITLE = Advanced System Menus - Today Menu (VZW)
 DESCRIPTION = * Requires Advanced System Menus Framework patch to function properly!<br/><br/>Adds today menu in the center off top bar. Today menu offers a quick view of your calendar events for the current day and for the next day. Menu can be edited to show events only from certain calendars.
 CATEGORY = Advanced

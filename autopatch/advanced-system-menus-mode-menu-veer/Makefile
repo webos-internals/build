@@ -1,5 +1,6 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = advanced/${NAME}.patch
+FILES = advanced/${NAME}.tar.gz
 TITLE = Advanced System Menus - Mode Menu (Veer)
 DESCRIPTION = * Requires Advanced System Menus Framework patch to be installed to function properly!<br/><br/>Adds mode menu to the left corner of the top bar. This is only useful if you have Mode Switcher installed. This menu enables changing of modes manually through the menu.
 CATEGORY = Advanced
