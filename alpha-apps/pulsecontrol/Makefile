@@ -5,7 +5,7 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.srv
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.2.0
+VERSION  = 0.3.0
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/webos-internals/301721-pulseaudio-settings.html
@@ -14,6 +14,7 @@ DESCRIPTION = PulseAudio Settings.
 MINWEBOSVERSION = 3.0.2
 MAXWEBOSVERSION = 3.0.2
 CHANGELOG = \
+0.3.0: Made the app work in Pre3 and polished the user interface.<br>\
 0.2.0: Enabled wireless connection monitoring.<br>\
 0.1.0: Initial release.
 SCREENSHOTS = []
