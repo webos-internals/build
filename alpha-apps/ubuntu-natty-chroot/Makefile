@@ -11,7 +11,7 @@ ICON	 = http://www.webos-internals.org/images/5/5e/Icon_WebOSInternals_Ubuntu.pn
 DESCRIPTION = ${APPINFO_DESCRIPTION}
 APPINFO_DESCRIPTION = A minimal Ubuntu 11.04 chroot. Requires a dedicated ext3fs partition to be set up using the WebOS Internals Meta-Doctor.
 CHANGELOG = \
-11.04-10: Added hostname support ('hostname'-Ubuntu), Copy /etc/hosts to chroot<br>\
+11.04-10: Added hostname support ('hostname'-Ubuntu), copies /etc/hosts into the chroot.<br>\
 11.04-9: Added support for starting multiple applications in separate cards.<br>\
 11.04-8: Move to an event based start.<br>\
 11.04-7: Added multi-card support.<br>\
@@ -21,10 +21,10 @@ CHANGELOG = \
 11.04-3: Fixed pre-remove script.<br>\
 11.04-2: Initial testing release.
 APPINFO_CHANGELOG = [ \
-{ "version" : "11.04-10",  "log" : [ "Added hostname support ('hostname'-Ubuntu), Copy /etc/hosts to chroot" ] },\
-{ "version" : "11.04-9",  "log" : [ "Added support for starting multiple applications in separate cards." ] },\
-{ "version" : "11.04-8",  "log" : [ "Move to an event based start." ] },\
-{ "version" : "11.04-7",  "log" : [ "Added multi-card support." ] },\
+{ "version" : "11.04-10", "log" : [ "Added hostname support ('hostname'-Ubuntu), copies /etc/hosts into the chroot" ] },\
+{ "version" : "11.04-9",  "log" : [ "Added support for starting multiple applications in separate cards" ] },\
+{ "version" : "11.04-8",  "log" : [ "Move to an event based start" ] },\
+{ "version" : "11.04-7",  "log" : [ "Added multi-card support" ] },\
 { "version" : "11.04-6",  "log" : [ "Added a fix for upstart/dbus handling in the chroot" ] }, \
 { "version" : "11.04-5",  "log" : [ "Change mount -t to --bind for /proc and /dev/pts" ] }, \
 { "version" : "11.04-4",  "log" : [ "Check that the ext3fs is mounted before installing", "Add a non-privileged webos user in the chroot" ] }, \
