@@ -150,16 +150,16 @@ install_additional_files() {
     for i in `find $APP_DIR/additional_files -type f`
     do
       file=${i#$APP_DIR/additional_files}
-			if [ -f $file ]
-			then
-        echo "ERROR: Additional file already exists" | tee -a $PATCH_LOG 1>&2
-        echo "  file: /$file" | tee -a $PATCH_LOG 1>&2
-        do_failure
-			else
+#			if [ -f $file ]
+#			then
+#        echo "ERROR: Additional file already exists" | tee -a $PATCH_LOG 1>&2
+#        echo "  file: /$file" | tee -a $PATCH_LOG 1>&2
+#        do_failure
+#			else
 	      echo "Installing file $file" | tee -a $PATCH_LOG
   	    mkdir -p `dirname $file`
     	  cp $i $file
-			fi
+#			fi
     done
   fi
 }
