@@ -227,6 +227,7 @@ endif
 ifeq ("${WEBOS_VERSION}", "2.2.3")
 ifeq ("${DEVICE}","pre3")
 COMPATIBLE_VERSIONS = 2.2.3
+KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tar.gz
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/2.2.0/linuxkernel-${KERNEL_VERSION}.patch.tar.gz
 KERNEL_SUBMISSION = kernelpatch-2.2.0.txt
 # Override the compiler
@@ -422,6 +423,7 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	fi
 	touch $@
 
+ifeq (true,false)
 # Special case for 2.2.3 based on 2.2.0 kernel source
 build/.unpacked-2.2.3-%: ${DL_DIR}/linux-${KERNEL_VERSION}-2.2.0-${DEVICE}.tar.gz \
 			    ${DL_DIR}/${NAME}-2.2.3-%.tar.gz
@@ -435,6 +437,7 @@ build/.unpacked-2.2.3-%: ${DL_DIR}/linux-${KERNEL_VERSION}-2.2.0-${DEVICE}.tar.g
 		patch -d build/src-2.2.3-$*/linux-${KERNEL_VERSION} -p1 ; \
 	fi
 	touch $@
+endif
 
 build/.unpacked-%: ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz \
 			    ${DL_DIR}/${NAME}-%.tar.gz
