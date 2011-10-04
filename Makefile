@@ -96,7 +96,7 @@ ipkgs/webos-patches/%/Packages: package-webos-patches
 	rm -rf ipkgs/webos-patches/$*
 	mkdir -p ipkgs/webos-patches/$*
 	( find ${PTCHDIR} -mindepth 2 -maxdepth 2 -type d -name ipkgs -print | \
-	  xargs -I % find % -name "*_$*-*_all.ipk" -print | \
+	  xargs -I % find % -name "*_$*-*_*.ipk" -print | \
 	  xargs -I % rsync -i -a % ipkgs/webos-patches/$* )
 	TAR_OPTIONS=--wildcards \
 	toolchain/ipkg-utils/ipkg-make-index \
