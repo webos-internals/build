@@ -3,7 +3,6 @@ TITLE = UberKernel (Pre3)
 DEVICE = pre3
 CATEGORY = Stable
 VERSIONS = 2.2.0-5 2.2.3-5
-VERSIONS = 2.2.3-5
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre3, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 This package is compatible only with webOS 2.2.0 build 3171 (the build for which the webOS Doctor exists). If you have a device with a different build number, you will need to doctor it before installing this package.<br>\
