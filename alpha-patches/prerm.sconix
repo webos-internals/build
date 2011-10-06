@@ -4,9 +4,9 @@
 # These are expected to be set at packaging time
 #
 
-APP_DIR=
-PATCH_NAME=
-BSPATCH_FILE=
+APP_DIR=/media/cryptofs/apps/usr/palm/applications/org.test.patch
+PATCH_NAME=test.patch
+BSPATCH_FILE=/usr/lib/pulse-0.9.22/modules/module-card-restore.so
 
 #
 # Here starts the part where all the magic happens
@@ -107,6 +107,7 @@ get_palm_md5sum() {
     palm_md5sum=`echo ${md5sum_line} | awk '{print $1}'`
   else
     echo "File not found in *.md5sums, checking cryptofs files" >> ${PATCH_LOG_FILE}
+    echo >> ${PATCH_LOG_FILE}
 
     check_cryptofs_lists
   fi
@@ -131,7 +132,7 @@ check_cryptofs_lists() {
     fi
 
     if [ ! -z "${md5sum_line}" ]; then
-      echo "Found md5sum from cryptofs lists" >> ${PATCH_LOG_FILE}
+      echo "Found md5sum from cryptofs list files" >> ${PATCH_LOG_FILE}
       echo "  ${md5sum_line}" >> ${PATCH_LOG_FILE}
 
       tmpvar=`echo "${file}" | tr '/' '.'`
@@ -219,8 +220,14 @@ verify_binary_patch() {
 
       file_md5sum=`md5sum ${file} | awk '{print $1}'`
 
-      if [ -z "${palm_md5sum}" ] || [ "${file_md5sum}" == "${palm_md5sum}" ]; then
+      if [ -z "${palm_md5sum}" ]; then
         FAIL_LIST="${FAIL_LIST} ${file}"
+
+        bspatch_already_unapplied="yes"
+      elif [ "${file_md5sum}" == "${palm_md5sum}" ]; then
+        echo | tee -a ${PATCH_LOG_FILE}
+        echo "Interestingly, the file is already unpatched" | tee -a ${PATCH_LOG_FILE}
+        echo | tee -a ${PATCH_LOG_FILE}
 
         bspatch_already_unapplied="yes"
       else
@@ -258,6 +265,13 @@ verify_additional_files() {
 
       if [ ! -z "${palm_md5sum}" ]; then
         FAIL_LIST="${FAIL_LIST} ${file}"
+      fi
+
+      if [ ! -f ${file} ]; then
+        echo | tee -a ${PATCH_LOG_FILE}
+        echo "Interestingly, the additional file is already removed" | tee -a ${PATCH_LOG_FILE}
+        echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE}
+        echo | tee -a ${PATCH_LOG_FILE}
       fi
     done
   fi
@@ -347,10 +361,12 @@ remove_binary_patch() {
 
       file=${BSPATCH_FILE}
 
+      echo "Restoring file: ${file}" | tee -a ${PATCH_LOG_FILE}
+
       get_bck_file
 
       if [ -f ${bck_file} ]; then
-        cp -f ${bckg_file} ${file} 2>&1 | tee -a ${PATCH_LOG_FILE}
+        cp -f ${bck_file} ${file} 2>&1 | tee -a ${PATCH_LOG_FILE}
       fi
     fi
   fi
@@ -372,6 +388,7 @@ remove_additional_files() {
       get_bck_file
 
       if [ -f ${bck_file} ] && [ ! -s ${bck_file} ]; then
+
         rm -f ${file} 2>&1 | tee -a ${PATCH_LOG_FILE}
       fi
     done
@@ -440,7 +457,7 @@ clean_backup_files() {
     if [ ! -f ${file} ] && [ ! -s ${bck_file} ] || [ ! -f ${bck_file} ] || \
        [ "${file_md5sum}" = "${orig_md5sum}" ] || [ "${file_md5sum}" = "${palm_md5sum}" ]
     then
-      if [ -f ${bck_file} ]; then
+      if [ -f ${bck_file} ]; then
         rm -f ${bck_file}
       fi
 

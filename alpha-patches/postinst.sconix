@@ -4,9 +4,9 @@
 # These are expected to be set at packaging time
 #
 
-APP_DIR=
-PATCH_NAME=
-BSPATCH_FILE=
+APP_DIR=/media/cryptofs/apps/usr/palm/applications/org.test.patch
+PATCH_NAME=test.patch
+BSPATCH_FILE=/usr/lib/pulse-0.9.22/modules/module-card-restore.so
 
 #
 # Here starts the part where all the magic happens
@@ -115,6 +115,7 @@ get_palm_md5sum() {
     palm_md5sum=`echo ${md5sum_line} | awk '{print $1}'`
   else
     echo "File not found in *.md5sums, checking cryptofs files" >> ${PATCH_LOG_FILE}
+    echo >> ${PATCH_LOG_FILE}
 
     check_cryptofs_lists
   fi
@@ -139,7 +140,7 @@ check_cryptofs_lists() {
     fi
 
     if [ ! -z "${md5sum_line}" ]; then
-      echo "Found md5sum from cryptofs lists" >> ${PATCH_LOG_FILE}
+      echo "Found md5sum from cryptofs list files" >> ${PATCH_LOG_FILE}
       echo "  ${md5sum_line}" >> ${PATCH_LOG_FILE}
 
       tmpvar=`echo "${file}" | tr '/' '.'`
@@ -298,6 +299,7 @@ verify_additional_files() {
         if [ -z "${palm_md5sum}" ] && [ "${file_md5sum}" = "${tmp_md5sum}" ]; then
           echo | tee -a ${PATCH_LOG_FILE}
           echo "Interestingly, the additional file already exists" | tee -a ${PATCH_LOG_FILE}
+          echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE}
           echo | tee -a ${PATCH_LOG_FILE}
 
           FILE_LIST="${FILE_LIST} ${file}"
@@ -391,6 +393,8 @@ install_binary_patch() {
       echo | tee -a ${PATCH_LOG_FILE}
 
       file=${BSPATCH_FILE}
+
+      echo "Patching file: ${file}" | tee -a ${PATCH_LOG_FILE}
 
       rm -f /var/webosinternals-*
       cp ${BSPATCH_FILE} /var/webosinternals-orig
