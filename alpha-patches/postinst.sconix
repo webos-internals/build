@@ -242,20 +242,18 @@ verify_binary_patch() {
       else
         get_bck_orig
 
-        bsfile_md5sum=""
-
         if [ ! -z ${orig_file} ]; then
           rm -f /var/webosinternals-*
           cp ${orig_file} /var/webosinternals-orig
 
           ${BSPATCH_EXEC} /var/webosinternals-orig /var/webosinternals-patched ${APP_DIR}/${BSPATCH_NAME} 2>&1
 
-          bsfile_md5sum=`md5sum /var/webosinternals-patched | awk '{print $1}'`
+          tmp_md5sum=`md5sum /var/webosinternals-patched | awk '{print $1}'`
 
           rm -f /var/webosinternals-*
         fi
 
-        if [ "${file_md5sum}" = "${bsfile_md5sum}" ]; then
+        if [ "${file_md5sum}" = "${tmp_md5sum}" ]; then
           echo | tee -a ${PATCH_LOG_FILE}
           echo "Interestingly, the file is already patched" | tee -a ${PATCH_LOG_FILE}
           echo | tee -a ${PATCH_LOG_FILE}
@@ -566,6 +564,7 @@ fi
 #
 
 verify_text_patch
+
 verify_binary_patch
 
 verify_additional_files
@@ -573,6 +572,7 @@ verify_additional_files
 create_backup_files
 
 install_text_patch
+
 install_binary_patch
 
 install_additional_files

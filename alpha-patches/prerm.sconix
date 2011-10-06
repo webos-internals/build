@@ -192,12 +192,14 @@ verify_text_patch() {
 
         patch_already_unapplied="yes"
       else
-        for i in `${PATCH_EXEC} -s -f -R -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} 2>&1 | awk '{print $12}'` ; do
-          file=/${i}
-
-          FAIL_LIST="${FAIL_LIST} ${file}"
+        for file in `${PATCH_EXEC} -s -f -R -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} 2>&1 | awk '{print $12}'` ; do
+          FAIL_LIST="${FAIL_LIST} /${file}"
         done
       fi
+    fi
+
+    if [ "${FAIL_LIST}" == "${FILE_LIST}" ]; then
+      patch_already_unapplied="yes"
     fi
   fi
 }
@@ -217,14 +219,12 @@ verify_binary_patch() {
 
       file_md5sum=`md5sum ${file} | awk '{print $1}'`
 
-      if [ -z "${palm_md5sum}" ]; then
+      if [ -z "${palm_md5sum}" ] || [ "${file_md5sum}" == "${palm_md5sum}" ]; then
         FAIL_LIST="${FAIL_LIST} ${file}"
-      elif [ "${file_md5sum}" == "${palm_md5sum}" ]; then
+
         bspatch_already_unapplied="yes"
       else
         get_bck_file
-
-        bsfile_md5sum=""
 
         if [ -f ${bck_file} ]; then
           rm -f /var/webosinternals-*
@@ -232,13 +232,15 @@ verify_binary_patch() {
 
           ${BSPATCH_EXEC} /var/webosinternals-orig /var/webosinternals-patched ${APP_DIR}/${BSPATCH_NAME} 2>&1
 
-          bsfile_md5sum=`md5sum /var/webosinternals-patched | awk '{print $1}'`
+          tmp_md5sum=`md5sum /var/webosinternals-patched | awk '{print $1}'`
 
           rm -f /var/webosinternals-*
         fi
 
-        if [ "${file_md5sum}" != "${bsfile_md5sum}" ]; then
+        if [ "${file_md5sum}" != "${tmp_md5sum}" ]; then
           FAIL_LIST="${FAIL_LIST} ${file}"
+
+          bspatch_already_unapplied="yes"
         fi
       fi
     fi
@@ -262,11 +264,11 @@ verify_additional_files() {
 }
 
 check_for_ota_update() {
-  echo  >> ${PATCH_LOG_FILE}
+  echo >> ${PATCH_LOG_FILE}
   echo "----------------------------------" >> ${PATCH_LOG_FILE}
   echo "Checking md5sums" >> ${PATCH_LOG_FILE}
   echo "----------------------------------" >> ${PATCH_LOG_FILE}
-  echo  >> ${PATCH_LOG_FILE}
+  echo >> ${PATCH_LOG_FILE}
 
   for file in ${FILE_LIST} ; do
     if [ -f ${file} ]; then
@@ -287,7 +289,7 @@ check_for_ota_update() {
 
         cp -f ${file} ${bck_file}
 
-        FAIL_LIST="${FAIL_LIST# ${file}"
+        FAIL_LIST="${FAIL_LIST# ${file}}"
 
         RESTORE_LIST="${RESTORE_LIST} ${file}"
       elif [ "${palm_md5sum}" != "${orig_md5sum}" ]; then
@@ -296,18 +298,18 @@ check_for_ota_update() {
         echo "  palm_md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
         echo "  orig_md5sum: ${orig_md5sum}" >> ${PATCH_LOG_FILE}
 
-        if [ -f ${bck_file} ]; then
-          rm -f ${bck_file}
-        fi
+        cp -f ${file} ${bck_file}
 
-        FAIL_LIST="${FAIL_LIST# ${file}"
+        FAIL_LIST="${FAIL_LIST# ${file}}"
+
+        RESTORE_LIST="${RESTORE_LIST} ${file}"
       fi
     else
       echo >> ${PATCH_LOG_FILE}
       echo "File has been completely removed, assuming OTA" >> ${PATCH_LOG_FILE}
       echo "  file: ${file}" >> ${PATCH_LOG_FILE}
 
-      FAIL_LIST="${FAIL_LIST# ${file}"
+      FAIL_LIST="${FAIL_LIST# ${file}}"
     fi
   done
 
@@ -348,7 +350,7 @@ remove_binary_patch() {
       get_bck_file
 
       if [ -f ${bck_file} ]; then
-        mv ${bckg_file} ${file}
+        cp -f ${bckg_file} ${file} 2>&1 | tee -a ${PATCH_LOG_FILE}
       fi
     fi
   fi
@@ -369,12 +371,8 @@ remove_additional_files() {
 
       get_bck_file
 
-      if [ -f ${bck_file} ]; then
-        mv ${bck_file} ${file}
-      fi
-
-      if [ ! -s ${file} ]; then
-        rm ${file}
+      if [ -f ${bck_file} ] && [ ! -s ${bck_file} ]; then
+        rm -f ${file} 2>&1 | tee -a ${PATCH_LOG_FILE}
       fi
     done
   fi
@@ -525,6 +523,7 @@ echo | tee -a ${PATCH_LOG_FILE} 1>&2
 #
 
 verify_text_patch
+
 verify_binary_patch
 
 verify_additional_files
@@ -532,13 +531,12 @@ verify_additional_files
 check_for_ota_update
 
 remove_text_patch
+
 remove_binary_patch
 
 remove_additional_files
 
 remove_tweaks_preferences
-
-clean_for_ota_update
 
 clean_backup_files
 
