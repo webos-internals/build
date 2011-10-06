@@ -5,7 +5,7 @@ CATEGORY = Stable
 VERSIONS = 2.2.0-5 2.2.3-5
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre3, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
-This package is compatible only with webOS 2.2.0 build 3171 (the build for which the webOS Doctor exists). If you have a device with a different build number, you will need to doctor it before installing this package.<br>\
+This package is compatible only with webOS 2.2.0 build 3171 or webOS 2.2.3 - if you have a device with a different build number, you will need to doctor it before installing this package.<br>\
 Current additions include:<ul>\
 <li>Modification of the lowmemnotify threshold calculation to take into account free swap space. This reduces the occurrence of the Too Many Cards error.</li>\
 <li>A new <a href=http://lwn.net/Articles/334649/><b>compcache</b> compressed RAM swap kernel module</a> ported to the Palm Pre 3. This effectively increases your available swap space, at the expense of access speed.</li>\
