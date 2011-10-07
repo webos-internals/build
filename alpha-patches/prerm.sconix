@@ -172,14 +172,12 @@ verify_text_patch() {
 
         patch_already_unapplied="yes"
       else
-        for file in `${PATCH_EXEC} -s -f -R -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} 2>&1 | awk '{print $12}'` ; do
+        for i in `${PATCH_EXEC} -s -f -R -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} 2>&1` ; do
+          file=`echo ${i} | awk '{print $12}'`
+
           FAIL_LIST="${FAIL_LIST} /${file}"
         done
       fi
-    fi
-
-    if [ "${FAIL_LIST}" == "${FILE_LIST}" ]; then
-      patch_already_unapplied="yes"
     fi
   fi
 }
@@ -205,7 +203,7 @@ verify_binary_patch() {
         FAIL_LIST="${FAIL_LIST} ${file}"
 
         bspatch_already_unapplied="yes"
-      elif [ "${file_md5sum}" == "${palm_md5sum}" ]; then
+      elif [ "${file_md5sum}" = "${palm_md5sum}" ]; then
         echo | tee -a ${PATCH_LOG_FILE}
         echo "Interestingly, the binary file is already unpatched" | tee -a ${PATCH_LOG_FILE}
         echo | tee -a ${PATCH_LOG_FILE}

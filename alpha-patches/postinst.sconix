@@ -163,14 +163,16 @@ verify_text_patch() {
     FILE_LIST=`${LSDIFF_EXEC} ${APP_DIR}/${PATCH_NAME}`
 
     for file in ${FILE_LIST} ; do
-      get_palm_md5sum
+      if [ -f ${file} ]; then
+        get_palm_md5sum
 
-      if [ -f ${file} ] && [ -z "${palm_md5sum}" ]; then
-        echo  | tee -a ${PATCH_LOG_FILE} 1>&2
-        echo "ERROR: Failed to find md5sum for the file" | tee -a ${PATCH_LOG_FILE} 1>&2
-        echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE} 1>&2
+        if [ -z "${palm_md5sum}" ]; then
+          echo  | tee -a ${PATCH_LOG_FILE} 1>&2
+          echo "ERROR: Failed to find md5sum for the file" | tee -a ${PATCH_LOG_FILE} 1>&2
+          echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE} 1>&2
 
-        do_install_failure
+          do_install_failure
+        fi
       fi
     done
 
@@ -249,7 +251,7 @@ verify_binary_patch() {
           FILE_LIST="${FILE_LIST} ${file}"
         else
           echo  | tee -a ${PATCH_LOG_FILE} 1>&2
-          echo "ERROR: File must be stock to binary patch" | tee -a ${PATCH_LOG_FILE} 1>&2
+          echo "ERROR: File must be stock to be binary patched" | tee -a ${PATCH_LOG_FILE} 1>&2
           echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE} 1>&2
           echo "  md5sum: ${file_md5sum}" | tee -a ${PATCH_LOG_FILE} 1>&2
           echo "  palm_md5sum: ${palm_md5sum}" | tee -a ${PATCH_LOG_FILE} 1>&2
