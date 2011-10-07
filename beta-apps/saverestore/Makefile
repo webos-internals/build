@@ -3,7 +3,7 @@ TITLE    = Save/Restore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.5.6
+VERSION  = 1.5.7
 DEPENDS  = org.webosinternals.unzip, org.webosinternals.zip
 TYPE	 = Application
 CATEGORY = System Utilities
@@ -13,6 +13,7 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 WebOS Internals provides Save/Retore as is without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.  The entire risk as to the quality and performance of Save/Restore is with you.  Should Save/Restore prove defective, you assume the cost of all necessary servicing, repair or correction.<br>\
 In no event will WebOS Internals or any other party be liable to you for damages, including any general, special, incidental or consequential damages arising out of the use or inability to use Save/Restore (including but not limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of Save/Restore to operate with any other programs).
 CHANGELOG = \
+1.5.7: Application: Bug Village.<br>\
 1.5.6: Application: podFrenzy (courtesy of Audemars02).<br>\
 1.5.5: Application: Angry Birds Seasons HD (courtesy of Audemars02).<br>\
 1.5.4: Applications: Launcher (3.0 update), Beyond Ynth, Sparkle HD, Quell HD (all courtesy of Audemars02), Blocked (courtesy of stickb0y).<br>\
