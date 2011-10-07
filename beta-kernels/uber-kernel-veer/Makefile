@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Veer)
 DEVICE = veer
-CATEGORY = Stable
+CATEGORY = Experimental
 VERSIONS = 2.1.1-19 2.1.2-19
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the HP Veer, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
