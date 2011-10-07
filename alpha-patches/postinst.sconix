@@ -6,7 +6,7 @@
 
 APP_DIR=/media/cryptofs/apps/usr/palm/applications/org.test.patch
 PATCH_NAME=test.patch
-BSPATCH_FILE=/usr/lib/pulse-0.9.22/modules/module-remap-sink.so
+BSPATCH_FILE=/usr/lib/pulse-0.9.22/modules/module-suspend-on-idle.so
 
 #
 # Here starts the part where all the magic happens
@@ -99,22 +99,27 @@ get_bck_orig() {
 }
 
 get_palm_md5sum() {
+  cur_version=""
   palm_md5sum=""
 
-  control_line=""
   md5sums_line=`grep -h "*.${file}$" ${IPKG_INFO_DIR}/*.md5sums`
 
   if [ ! -z "${md5sums_line}" ]; then
-    echo "Found md5sum from palm md5sum files" >> ${PATCH_LOG_FILE}
-    echo "  ${md5sums_line}" >> ${PATCH_LOG_FILE}
-
     palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
+
+    echo "Found md5sum from palm md5sum files" >> ${PATCH_LOG_FILE}
+    echo "  md5sum: ${palm_md5sums}" >> ${PATCH_LOG_FILE}
   else
     echo "File not found in md5sums, checking cryptofs files" >> ${PATCH_LOG_FILE}
 
     check_cryptofs_lists
 
-    if [ -z "${md5sums_line}" ]; then
+    if [ ! -z "${md5sums_line}" ]; then
+	    palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
+
+      echo "Found md5sum from cryptofs list files" >> ${PATCH_LOG_FILE}
+      echo "  md5sum: ${palm_md5sums}" >> ${PATCH_LOG_FILE}
+    else
       echo "File not found in cryptofs files, not patcheable file" >> ${PATCH_LOG_FILE}
       echo "  file: ${file}" >> ${PATCH_LOG_FILE}
     fi
@@ -125,6 +130,8 @@ check_cryptofs_lists() {
   file_line=`grep "^${file#${IPKG_OFFLINE_ROOT}}$" ${IPKG_OFFLINE_ROOT}/${IPKG_INFO_DIR}/*.list`
 
   if [ ! -z "${file_line}" ]; then
+    get_bck_orig
+
     list_file=`echo "${file_line}" | cut -d ':' -f 1`
 
     package=`basename ${list_file} .list`
@@ -133,25 +140,14 @@ check_cryptofs_lists() {
 
     cur_version=`grep "^Version:" ${control_file} | awk '{print $2}'`
 
-    ctl_version=`grep "^${file} " ${PATCH_CONTROL_DIR}/file_control | awk '{print $2}'`
+    control_line=`grep "^${package} ${file} " ${PATCH_CONTROL_DIR}/file_control`
 
-    if [ "${cur_version}" != "${ctl_version}" ]; then
+    ctl_version=`echo ${control_line} | awk '{print $3}'`
+
+    if [ -z ${orig_file} ] || [ "${cur_version}" != "${ctl_version}" ]; then
       md5sums_line=`md5sum ${file} | awk '{print $1}'`" *.${file}"
     else
-      md5sums_line=`grep -h "*.${file}$" ${PATCH_CONTROL_DIR}/file_md5sums`
-
-      if [ -z "${md5sums_line}" ] && [ -z "${orig_file}" ]; then
-        md5sums_line=`md5sum ${file} | awk '{print $1}'`" *.${file}"
-      fi
-    fi
-
-    if [ ! -z "${md5sums_line}" ]; then
-      echo "Found md5sum from cryptofs list files" >> ${PATCH_LOG_FILE}
-      echo "  ${md5sums_line}" >> ${PATCH_LOG_FILE}
-
-      palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
-
-      control_line="${file} ${cur_version}"
+      md5sums_line=`md5sum ${orig_file} | awk '{print $1}'`" *.${file}"
     fi
   fi
 }
@@ -310,68 +306,6 @@ verify_additional_files() {
   fi
 }
 
-create_backup_files() {
-  echo >> ${PATCH_LOG_FILE}
-  echo "----------------------------------" >> ${PATCH_LOG_FILE}
-  echo "Creating md5sums list" >> ${PATCH_LOG_FILE}
-  echo "----------------------------------" >> ${PATCH_LOG_FILE}
-  echo >> ${PATCH_LOG_FILE}
-
-  for file in ${FILE_LIST} ; do
-    get_bck_orig
-
-    get_palm_md5sum
-
-    if [ -z ${orig_file} ]; then
-      if [ ! -f ${file} ]; then
-        echo "Created file, generating empty backup file" >>${PATCH_LOG_FILE}
-        echo "  ${bck_file}" >> ${PATCH_LOG_FILE}
-
-        mkdir -p `dirname ${file}`
-
-        touch ${bck_file}
-      else
-        echo "Modified file, backing up the original file" >> ${PATCH_LOG_FILE}
-        echo "  ${bck_file}" >> ${PATCH_LOG_FILE}
-
-        cp ${file} ${bck_file}
-      fi
-
-      if [ ! -f ${bck_file} ]; then
-        echo  | tee -a ${PATCH_LOG_FILE} 1>&2
-        echo "ERROR: Failed to make a backup file" | tee -a ${PATCH_LOG_FILE} 1>&2
-        echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE} 1>&2
-
-        do_install_failure
-
-        exit 1
-      fi
-
-      orig_md5sum=`md5sum ${bck_file} | awk '{print $1}'`
-
-      if [ ! -s ${bck_file} ] || [ "${orig_md5sum}" = "${palm_md5sum}" ]; then
-        tmpvar=`echo "${file}" | tr '/' '.'`
-
-        sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_list
-        echo "${file} ${VERSION}" >> ${PATCH_CONTROL_DIR}/file_list
-
-        if [ ! -z "${control_line}" ]; then
-          sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_control
-          echo "${control_line}" >> ${PATCH_CONTROL_DIR}/file_control
-        fi
-
-        if [ ! -z "${md5sums_line}" ]; then
-          sed -i -e /"*.${tmpvar}$"/d ${PATCH_CONTROL_DIR}/file_md5sums
-          echo "${md5sums_line}" >> ${PATCH_CONTROL_DIR}/file_md5sums
-        fi
-      fi
-    fi
-  done
-
-  sed -i -e /`basename ${APP_DIR}`/d ${PATCH_PACKAGES_LIST}
-  basename "${APP_DIR} ${VERSION}">> ${PATCH_PACKAGES_LIST}
-}
-
 install_text_patch() {
   if [ -f ${APP_DIR}/${PATCH_NAME} ]; then
     cp -f ${APP_DIR}/${PATCH_NAME} ${PATCH_CONTROL_DIR}/${PATCH_NAME}
@@ -379,7 +313,7 @@ install_text_patch() {
     if [ "${patch_already_applied}" != "yes" ]; then
       echo | tee -a ${PATCH_LOG_FILE}
       echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
-      echo "Applying text patch!" | tee -a ${PATCH_LOG_FILE}
+      echo "Applying text patch" | tee -a ${PATCH_LOG_FILE}
       echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
       echo | tee -a ${PATCH_LOG_FILE}
 
@@ -393,7 +327,7 @@ install_binary_patch() {
     if [ "${bspatch_already_applied}" != "yes" ]; then
       echo | tee -a ${PATCH_LOG_FILE}
       echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
-      echo "Applying binary patch!" | tee -a ${PATCH_LOG_FILE}
+      echo "Applying binary patch" | tee -a ${PATCH_LOG_FILE}
       echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
       echo | tee -a ${PATCH_LOG_FILE}
 
@@ -416,7 +350,7 @@ install_additional_files() {
   if [ -d ${APP_DIR}/additional_files ]; then
     echo | tee -a ${PATCH_LOG_FILE}
     echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
-    echo "Installing additional files!" | tee -a ${PATCH_LOG_FILE}
+    echo "Installing additional files" | tee -a ${PATCH_LOG_FILE}
     echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
     echo | tee -a ${PATCH_LOG_FILE}
 
@@ -436,7 +370,7 @@ install_tweaks_preferences() {
   if [ -f ${APP_DIR}/${TWEAKS_NAME} ]; then
     echo | tee -a ${PATCH_LOG_FILE}
     echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
-    echo "Installing tweaks json!" | tee -a ${PATCH_LOG_FILE}
+    echo "Installing tweaks json file" | tee -a ${PATCH_LOG_FILE}
     echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
     echo | tee -a ${PATCH_LOG_FILE}
 
@@ -444,6 +378,91 @@ install_tweaks_preferences() {
 
     cp -f ${APP_DIR}/${TWEAKS_NAME} ${TWEAKS_PREFERENCES_DIR}/`basename ${APP_DIR}`.json 2>&1 | tee -a ${PATCH_LOG_FILE}
   fi
+}
+
+check_ota_update() {
+  echo >> ${PATCH_LOG_FILE}
+  echo "----------------------------------" >> ${PATCH_LOG_FILE}
+  echo "Checking md5sums for ota" >> ${PATCH_LOG_FILE}
+  echo "----------------------------------" >> ${PATCH_LOG_FILE}
+  echo >> ${PATCH_LOG_FILE}
+
+  for file in ${FILE_LIST} ; do
+    get_bck_orig
+
+    get_palm_md5sum
+
+    if [ ! -z ${orig_file} ]; then
+      file_md5sum=`md5sum ${file} | awk '{print $1}'`
+
+      if [ "${file_md5sum}" = "${palm_md5sum}" ]; then
+        echo "File matches current Palm md5sum, assuming OTA" >> ${PATCH_LOG_FILE}
+        echo "  file: ${file}" >> ${PATCH_LOG_FILE}
+
+        rm -f ${orig_file}
+      fi
+    fi
+  done
+}
+
+create_backup_files() {
+  echo >> ${PATCH_LOG_FILE}
+  echo "----------------------------------" >> ${PATCH_LOG_FILE}
+  echo "Creating backup files" >> ${PATCH_LOG_FILE}
+  echo "----------------------------------" >> ${PATCH_LOG_FILE}
+  echo >> ${PATCH_LOG_FILE}
+
+  for file in ${FILE_LIST} ; do
+    get_bck_orig
+
+    get_palm_md5sum
+
+    if [ -z ${orig_file} ]; then
+      if [ ! -f ${file} ]; then
+        echo "Created file, generating empty backup file" >>${PATCH_LOG_FILE}
+        echo "  file: ${file}" >> ${PATCH_LOG_FILE}
+
+        mkdir -p `dirname ${file}`
+
+        touch ${bck_file}
+      else
+        echo "Modified file, backing up the original file" >> ${PATCH_LOG_FILE}
+        echo "  file: ${file}" >> ${PATCH_LOG_FILE}
+
+        cp ${file} ${bck_file}
+      fi
+    fi
+
+    if [ ! -z "${palm_md5sum}" ]; then
+      appid=`basename ${APP_DIR}`
+
+      tmpvar=`echo "${appid} ${file}" | tr '/' '.'`
+
+      sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_md5sums
+      echo "${appid} ${file} ${palm_md5sum}" >> ${PATCH_CONTROL_DIR}/file_md5sums
+    fi
+
+    orig_md5sum=`md5sum ${bck_file} | awk '{print $1}'`
+
+    if [ ! -f ${file} ] && [ ! -s ${bck_file} ] || \
+      [ "${file_md5sum}" = "${palm_md5sum}" ] || [ "${orig_md5sum}" = "${palm_md5sum}" ]
+    then
+      tmpvar=`echo "${file}" | tr '/' '.'`
+
+      sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_list
+      echo "${file} ${VERSION}" >> ${PATCH_CONTROL_DIR}/file_list
+
+      if [ ! -z "${cur_version}" ]; then
+        tmpvar=`echo "${package} ${file} " | tr '/' '.'`
+
+        sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_control
+        echo "${package} ${file} ${cur_version}" >> ${PATCH_CONTROL_DIR}/file_control
+      fi
+    fi
+  done
+
+  sed -i -e /`basename ${APP_DIR}`/d ${PATCH_PACKAGES_LIST}
+  basename "${APP_DIR} ${VERSION}">> ${PATCH_PACKAGES_LIST}
 }
 
 #
@@ -575,6 +594,8 @@ verify_text_patch
 verify_binary_patch
 
 verify_additional_files
+
+check_ota_update
 
 create_backup_files
 

@@ -6,7 +6,7 @@
 
 APP_DIR=/media/cryptofs/apps/usr/palm/applications/org.test.patch
 PATCH_NAME=test.patch
-BSPATCH_FILE=/usr/lib/pulse-0.9.22/modules/module-remap-sink.so
+BSPATCH_FILE=/usr/lib/pulse-0.9.22/modules/module-suspend-on-idle.so
 
 #
 # Here starts the part where all the magic happens
@@ -91,22 +91,27 @@ get_bck_file() {
 }
 
 get_palm_md5sum() {
+  cur_version=""
   palm_md5sum=""
 
-  control_line=""
   md5sums_line=`grep -h "*.${file}$" ${IPKG_INFO_DIR}/*.md5sums`
 
   if [ ! -z "${md5sums_line}" ]; then
-    echo "Found md5sum from palm md5sum files" >> ${PATCH_LOG_FILE}
-    echo "  ${md5sums_line}" >> ${PATCH_LOG_FILE}
-
     palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
+
+    echo "Found md5sum from palm md5sum files" >> ${PATCH_LOG_FILE}
+    echo "  md5sum: ${palm_md5sums}" >> ${PATCH_LOG_FILE}
   else
     echo "File not found in md5sums, checking cryptofs files" >> ${PATCH_LOG_FILE}
 
     check_cryptofs_lists
 
-    if [ -z "${md5sums_line}" ]; then
+    if [ ! -z "${md5sums_line}" ]; then
+	    palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
+
+      echo "Found md5sum from cryptofs list files" >> ${PATCH_LOG_FILE}
+      echo "  md5sum: ${palm_md5sums}" >> ${PATCH_LOG_FILE}
+    else
       echo "File not found in cryptofs files, not patcheable file" >> ${PATCH_LOG_FILE}
       echo "  file: ${file}" >> ${PATCH_LOG_FILE}
     fi
@@ -117,6 +122,8 @@ check_cryptofs_lists() {
   file_line=`grep "^${file#${IPKG_OFFLINE_ROOT}}$" ${IPKG_OFFLINE_ROOT}/${IPKG_INFO_DIR}/*.list`
 
   if [ ! -z "${file_line}" ]; then
+    get_bck_file
+
     list_file=`echo "${file_line}" | cut -d ':' -f 1`
 
     package=`basename ${list_file} .list`
@@ -125,42 +132,16 @@ check_cryptofs_lists() {
 
     cur_version=`grep "^Version:" ${control_file} | awk '{print $2}'`
 
-    ctl_version=`grep "^${file} " ${PATCH_CONTROL_DIR}/file_control | awk '{print $2}'`
+    control_line=`grep "^${package} " ${PATCH_CONTROL_DIR}/file_control`
 
-    if [ "${cur_version}" != "${ctl_version}" ]; then
+    ctl_version=`echo ${control_line} | awk '{print $2}'`
+
+    if [ -z ${orig_file} ] || [ "${cur_version}" != "${ctl_version}" ]; then
       md5sums_line=`md5sum ${file} | awk '{print $1}'`" *.${file}"
     else
-      md5sums_line=`grep -h "*.${file}$" ${PATCH_CONTROL_DIR}/file_md5sums`
-
-      if [ -z "${md5sums_line}" ] && [ -z "${orig_file}" ]; then
-        md5sums_line=`md5sum ${file} | awk '{print $1}'`" *.${file}"
-      fi
-    fi
-
-    if [ ! -z "${md5sums_line}" ]; then
-      echo "Found md5sum from cryptofs list files" >> ${PATCH_LOG_FILE}
-      echo "  ${md5sums_line}" >> ${PATCH_LOG_FILE}
-
-      palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
-
-      control_line="${file} ${cur_version}"
+      md5sums_line=`md5sum ${orig_file} | awk '{print $1}'`" *.${file}"
     fi
   fi
-}
-
-get_package_versions() {
-  cur_version=""
-  ctl_version=""
-
-  list_file=`echo "${file_line}" | cut -d ':' -f 1`
-
-  package=`basename ${list_file} .list`
-
-  control_file=`dirname ${list_file}`/${package}.control
-
-  cur_version=`grep "^Version:" ${control_file} | awk '{print $2}'`
-
-  ctl_version=`grep "^${file} " ${PATCH_CONTROL_DIR}/file_control | awk '{print $2}'`
 }
 
 verify_text_patch() {
@@ -283,10 +264,84 @@ verify_additional_files() {
   fi
 }
 
-check_for_ota_update() {
+remove_text_patch() {
+  if [ -f ${APP_DIR}/${PATCH_NAME} ]; then
+    if [ -f ${PATCH_CONTROL_DIR}/${PATCH_NAME} ]; then
+      rm -f ${PATCH_CONTROL_DIR}/${PATCH_NAME}
+    fi
+
+    if [ "${patch_already_unapplied}" != "yes" ]; then
+      echo | tee -a ${PATCH_LOG_FILE}
+      echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
+      echo "Unapplying text patch" | tee -a ${PATCH_LOG_FILE}
+      echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
+      echo | tee -a ${PATCH_LOG_FILE}
+
+      ${PATCH_EXEC} -R -p 1 -d / --no-backup-if-mismatch < ${APP_DIR}/${PATCH_NAME} 2>&1 | tee -a ${PATCH_LOG_FILE}
+    fi
+  fi
+}
+
+remove_binary_patch() {
+  if [ -f ${APP_DIR}/${BSPATCH_NAME} ]; then
+    if [ "${bspatch_already_unapplied}" != "yes" ]; then
+      echo | tee -a ${PATCH_LOG_FILE}
+      echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
+      echo "Unapplying binary patch" | tee -a ${PATCH_LOG_FILE}
+      echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
+      echo | tee -a ${PATCH_LOG_FILE}
+
+      file=${BSPATCH_FILE}
+
+      echo "restoring file ${file#/}" | tee -a ${PATCH_LOG_FILE}
+
+      get_bck_file
+
+      if [ -f ${bck_file} ]; then
+        cp -f ${bck_file} ${file} 2>&1 | tee -a ${PATCH_LOG_FILE}
+      fi
+    fi
+  fi
+}
+
+remove_additional_files() {
+  if [ -d ${APP_DIR}/additional_files ]; then
+    echo | tee -a ${PATCH_LOG_FILE}
+    echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
+    echo "Removing additional files" | tee -a ${PATCH_LOG_FILE}
+    echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
+    echo | tee -a ${PATCH_LOG_FILE}
+
+    for i in `find ${APP_DIR}/additional_files -type f` ; do
+      file=${i#${APP_DIR}/additional_files}
+
+      echo "reverting file ${file#/}" | tee -a ${PATCH_LOG_FILE}
+
+      get_bck_file
+
+      if [ -f ${bck_file} ] && [ ! -s ${bck_file} ]; then
+        rm -f ${file} 2>&1 | tee -a ${PATCH_LOG_FILE}
+      fi
+    done
+  fi
+}
+
+remove_tweaks_preferences() {
+  if [ -f ${APP_DIR}/${TWEAKS_NAME} ]; then
+    echo | tee -a ${PATCH_LOG_FILE}
+    echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
+    echo "Removing tweaks json file" | tee -a ${PATCH_LOG_FILE}
+    echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
+    echo | tee -a ${PATCH_LOG_FILE}
+
+    rm -f ${TWEAKS_PREFERENCES_DIR}/`basename ${APP_DIR}`.json 2>&1 | tee -a ${PATCH_LOG_FILE}
+  fi
+}
+
+check_ota_update() {
   echo >> ${PATCH_LOG_FILE}
   echo "----------------------------------" >> ${PATCH_LOG_FILE}
-  echo "Checking md5sums" >> ${PATCH_LOG_FILE}
+  echo "Checking md5sums for ota" >> ${PATCH_LOG_FILE}
   echo "----------------------------------" >> ${PATCH_LOG_FILE}
   echo >> ${PATCH_LOG_FILE}
 
@@ -298,7 +353,7 @@ check_for_ota_update() {
 
       file_md5sum=`md5sum ${file} | awk '{print $1}'`
 
-      orig_md5sum=`grep -h ${file} ${PATCH_CONTROL_DIR}/file_md5sums | awk '{print $1}'`
+      orig_md5sum=`grep -h ${file} ${PATCH_CONTROL_DIR}/file_md5sums | awk '{print $3}'`
 
       if [ -z "${palm_md5sum}" ]; then
         CREATED_LIST="${CREATED_LIST} ${file}"
@@ -338,85 +393,10 @@ check_for_ota_update() {
   fi
 }
 
-remove_text_patch() {
-  if [ -f ${APP_DIR}/${PATCH_NAME} ]; then
-    if [ -f ${PATCH_CONTROL_DIR}/${PATCH_NAME} ]; then
-      rm -f ${PATCH_CONTROL_DIR}/${PATCH_NAME}
-    fi
-
-    if [ "${patch_already_unapplied}" != "yes" ]; then
-      echo | tee -a ${PATCH_LOG_FILE}
-      echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
-      echo "Unapplying text patch!" | tee -a ${PATCH_LOG_FILE}
-      echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
-      echo | tee -a ${PATCH_LOG_FILE}
-
-      ${PATCH_EXEC} -R -p 1 -d / --no-backup-if-mismatch < ${APP_DIR}/${PATCH_NAME} 2>&1 | tee -a ${PATCH_LOG_FILE}
-    fi
-  fi
-}
-
-remove_binary_patch() {
-  if [ -f ${APP_DIR}/${BSPATCH_NAME} ]; then
-    if [ "${bspatch_already_unapplied}" != "yes" ]; then
-      echo | tee -a ${PATCH_LOG_FILE}
-      echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
-      echo "Unapplying binary patch!" | tee -a ${PATCH_LOG_FILE}
-      echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
-      echo | tee -a ${PATCH_LOG_FILE}
-
-      file=${BSPATCH_FILE}
-
-      echo "restoring file ${file#/}" | tee -a ${PATCH_LOG_FILE}
-
-      get_bck_file
-
-      if [ -f ${bck_file} ]; then
-        cp -f ${bck_file} ${file} 2>&1 | tee -a ${PATCH_LOG_FILE}
-      fi
-    fi
-  fi
-}
-
-remove_additional_files() {
-  if [ -d ${APP_DIR}/additional_files ]; then
-    echo | tee -a ${PATCH_LOG_FILE}
-    echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
-    echo "Removing additional files!" | tee -a ${PATCH_LOG_FILE}
-    echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
-    echo | tee -a ${PATCH_LOG_FILE}
-
-    for i in `find ${APP_DIR}/additional_files -type f` ; do
-      file=${i#${APP_DIR}/additional_files}
-
-      echo "reverting file ${file#/}" | tee -a ${PATCH_LOG_FILE}
-
-      get_bck_file
-
-      if [ -f ${bck_file} ] && [ ! -s ${bck_file} ]; then
-
-        rm -f ${file} 2>&1 | tee -a ${PATCH_LOG_FILE}
-      fi
-    done
-  fi
-}
-
-remove_tweaks_preferences() {
-  if [ -f ${APP_DIR}/${TWEAKS_NAME} ]; then
-    echo | tee -a ${PATCH_LOG_FILE}
-    echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
-    echo "Removing tweaks json!" | tee -a ${PATCH_LOG_FILE}
-    echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
-    echo | tee -a ${PATCH_LOG_FILE}
-
-    rm -f ${TWEAKS_PREFERENCES_DIR}/`basename ${APP_DIR}`.json 2>&1 | tee -a ${PATCH_LOG_FILE}
-  fi
-}
-
 clean_backup_files() {
   echo "" >> ${PATCH_LOG_FILE}
   echo "----------------------------------" >> ${PATCH_LOG_FILE}
-  echo "Cleaning up backups..." >> ${PATCH_LOG_FILE}
+  echo "Cleaning up backup files" >> ${PATCH_LOG_FILE}
   echo "----------------------------------" >> ${PATCH_LOG_FILE}
   echo "" >> ${PATCH_LOG_FILE}
 
@@ -461,23 +441,27 @@ clean_backup_files() {
       orig_md5sum=`md5sum ${bck_file} | awk '{print $1}'`
     fi
 
-    if [ ! -f ${file} ] && [ ! -s ${bck_file} ] || [ ! -f ${bck_file} ] || \
+    if [ ! -z "${palm_md5sum}" ]; then
+      appid=`basename ${APP_DIR}`
+
+      tmpvar=`echo "${appid} ${file}" | tr '/' '.'`
+
+      sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_md5sums
+    fi
+
+    if [ ! -f ${file} ] && [ ! -s ${bck_file} ] || \
        [ "${file_md5sum}" = "${orig_md5sum}" ] || [ "${file_md5sum}" = "${palm_md5sum}" ]
     then
-      if [ -f ${bck_file} ]; then
-        rm -f ${bck_file}
-      fi
+      rm -f ${bck_file} >/dev/null 2>&1
 
       tmpvar=`echo ${file} | tr '/' '.'`
 
       sed -i -e /"^${tmpvar} ${VERSION}$"/d ${PATCH_CONTROL_DIR}/file_list
 
-      if [ ! -z "${control_line}" ]; then
-        sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_control
-      fi
+      if [ ! -z "${cur_version}" ]; then
+        tmpvar=`echo "${package} ${file}" | tr '/' '.'`
 
-      if [ ! -z "${md5sums_line}" ]; then
-        sed -i -e /"*.${tmpvar}$"/d ${PATCH_CONTROL_DIR}/file_md5sums
+        sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_control
       fi
     fi
   done
@@ -558,7 +542,7 @@ verify_binary_patch
 
 verify_additional_files
 
-check_for_ota_update
+check_ota_update
 
 remove_text_patch
 
