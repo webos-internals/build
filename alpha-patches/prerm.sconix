@@ -89,17 +89,13 @@ uninstallation_failed() {
 get_bck_file() {
   bck_file=`dirname ${file}`"/.webosinternals.orig."`basename ${file}`
 
-  if [ -f ${file}.webosinternals.orig ]; then
-    if [ -f ${bck_file} ]; then
-      rm -f ${file}.webosinternals.orig
-    else
-      mv ${file}.webosinternals.orig
+  if [ -f ${file}.webosinternals.orig ] && [ ! -f ${bck_file} ]; then
+    cp ${file}.webosinternals.orig ${bck_file}
 
-      tmpvar=`echo "${file}" | tr '/' '.'`
+    tmpvar=`echo "${file}" | tr '/' '.'`
 
-      sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_list
-      echo "${file} ${VERSION}" >> ${PATCH_CONTROL_DIR}/file_list
-    fi
+    sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_list
+    echo "${file} ${VERSION}" >> ${PATCH_CONTROL_DIR}/file_list
   fi
 }
 
