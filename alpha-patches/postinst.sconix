@@ -435,6 +435,27 @@ create_backup_files() {
       fi
     fi
 
+    file_md5sum=`md5sum ${file} | awk '{print $1}'`
+
+    orig_md5sum=`md5sum ${bck_file} | awk '{print $1}'`
+
+    if [ ! -f ${file} ] && [ ! -s ${bck_file} ] || \
+      [ "${file_md5sum}" = "${palm_md5sum}" ] || 
+      [ "${orig_md5sum}" = "${palm_md5sum}" ]
+    then
+      tmpvar=`echo "${file}" | tr '/' '.'`
+
+      sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_list
+      echo "${file} ${VERSION}" >> ${PATCH_CONTROL_DIR}/file_list
+    fi
+
+    if [ ! -z "${cur_version}" ]; then
+      tmpvar=`echo "${package} ${file} " | tr '/' '.'`
+
+      sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_control
+      echo "${package} ${file} ${cur_version}" >> ${PATCH_CONTROL_DIR}/file_control
+    fi
+
     if [ ! -z "${palm_md5sum}" ]; then
       appid=`basename ${APP_DIR}`
 
@@ -442,24 +463,6 @@ create_backup_files() {
 
       sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_md5sums
       echo "${appid} ${file} ${palm_md5sum}" >> ${PATCH_CONTROL_DIR}/file_md5sums
-    fi
-
-    orig_md5sum=`md5sum ${bck_file} | awk '{print $1}'`
-
-    if [ ! -f ${file} ] && [ ! -s ${bck_file} ] || \
-      [ "${file_md5sum}" = "${palm_md5sum}" ] || [ "${orig_md5sum}" = "${palm_md5sum}" ]
-    then
-      tmpvar=`echo "${file}" | tr '/' '.'`
-
-      sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_list
-      echo "${file} ${VERSION}" >> ${PATCH_CONTROL_DIR}/file_list
-
-      if [ ! -z "${cur_version}" ]; then
-        tmpvar=`echo "${package} ${file} " | tr '/' '.'`
-
-        sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_control
-        echo "${package} ${file} ${cur_version}" >> ${PATCH_CONTROL_DIR}/file_control
-      fi
     fi
   done
 

@@ -176,6 +176,10 @@ verify_text_patch() {
           file=`echo ${i} | awk '{print $12}'`
 
           FAIL_LIST="${FAIL_LIST} /${file}"
+
+          if [ "${FAIL_LIST}" == "${FILE_LIST}" ]; then
+            patch_already_unapplied="yes"
+          fi
         done
       fi
     fi
@@ -439,28 +443,29 @@ clean_backup_files() {
       orig_md5sum=`md5sum ${bck_file} | awk '{print $1}'`
     fi
 
+    if [ ! -f ${file} ] && [ ! -s ${bck_file} ] || \
+       [ "${file_md5sum}" = "${orig_md5sum}" ] || 
+       [ "${file_md5sum}" = "${palm_md5sum}" ]
+    then
+      rm -f ${bck_file} >/dev/null 2>&1
+
+      tmpvar=`echo "${file}" | tr '/' '.'`
+
+      sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_list
+    fi
+
+    if [ ! -z "${cur_version}" ]; then
+      tmpvar=`echo "${package} ${file}" | tr '/' '.'`
+
+      sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_control
+    fi
+
     if [ ! -z "${palm_md5sum}" ]; then
       appid=`basename ${APP_DIR}`
 
       tmpvar=`echo "${appid} ${file}" | tr '/' '.'`
 
       sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_md5sums
-    fi
-
-    if [ ! -f ${file} ] && [ ! -s ${bck_file} ] || \
-       [ "${file_md5sum}" = "${orig_md5sum}" ] || [ "${file_md5sum}" = "${palm_md5sum}" ]
-    then
-      rm -f ${bck_file} >/dev/null 2>&1
-
-      tmpvar=`echo ${file} | tr '/' '.'`
-
-      sed -i -e /"^${tmpvar} ${VERSION}$"/d ${PATCH_CONTROL_DIR}/file_list
-
-      if [ ! -z "${cur_version}" ]; then
-        tmpvar=`echo "${package} ${file}" | tr '/' '.'`
-
-        sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_control
-      fi
     fi
   done
 
