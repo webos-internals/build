@@ -86,15 +86,20 @@ installation_failed() {
   do_install_failure
 }
 
-get_bck_orig() {
-  orig_file=""
-
+get_bck_file() {
   bck_file=`dirname ${file}`"/.webosinternals.orig."`basename ${file}`
 
-  if [ -f ${bck_file} ]; then
-    orig_file="${bck_file}"
-  elif [ -f ${file}.webosinternals.orig ]; then
-    orig_file="${file}.webosinternals.orig"
+  if [ -f ${file}.webosinternals.orig ]; then
+    if [ -f ${bck_file} ]; then
+      rm -f ${file}.webosinternals.orig
+    else
+      mv ${file}.webosinternals.orig
+
+      tmpvar=`echo "${file}" | tr '/' '.'`
+
+      sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_list
+      echo "${file} ${VERSION}" >> ${PATCH_CONTROL_DIR}/file_list
+    fi
   fi
 }
 
@@ -108,7 +113,7 @@ get_palm_md5sum() {
     palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
 
     echo "Found md5sum from palm md5sum files" >> ${PATCH_LOG_FILE}
-    echo "  md5sum: ${palm_md5sums}" >> ${PATCH_LOG_FILE}
+    echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
   else
     echo "File not found in md5sums, checking cryptofs files" >> ${PATCH_LOG_FILE}
 
@@ -118,7 +123,7 @@ get_palm_md5sum() {
 	    palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
 
       echo "Found md5sum from cryptofs list files" >> ${PATCH_LOG_FILE}
-      echo "  md5sum: ${palm_md5sums}" >> ${PATCH_LOG_FILE}
+      echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
     else
       echo "File not found in cryptofs files, not patcheable file" >> ${PATCH_LOG_FILE}
       echo "  file: ${file}" >> ${PATCH_LOG_FILE}
@@ -130,7 +135,7 @@ check_cryptofs_lists() {
   file_line=`grep "^${file#${IPKG_OFFLINE_ROOT}}$" ${IPKG_OFFLINE_ROOT}/${IPKG_INFO_DIR}/*.list`
 
   if [ ! -z "${file_line}" ]; then
-    get_bck_orig
+    get_bck_file
 
     list_file=`echo "${file_line}" | cut -d ':' -f 1`
 
@@ -138,16 +143,16 @@ check_cryptofs_lists() {
 
     control_file=`dirname ${list_file}`/${package}.control
 
-    cur_version=`grep "^Version:" ${control_file} | awk '{print $2}'`
+    cur_version=`grep "^Version: " ${control_file} | awk '{print $2}'`
 
     control_line=`grep "^${package} ${file} " ${PATCH_CONTROL_DIR}/file_control`
 
     ctl_version=`echo ${control_line} | awk '{print $3}'`
 
-    if [ -z ${orig_file} ] || [ "${cur_version}" != "${ctl_version}" ]; then
+    if [ ! -f ${bck_file} ] || [ "${cur_version}" != "${ctl_version}" ]; then
       md5sums_line=`md5sum ${file} | awk '{print $1}'`" *.${file}"
     else
-      md5sums_line=`md5sum ${orig_file} | awk '{print $1}'`" *.${file}"
+      md5sums_line=`md5sum ${bck_file} | awk '{print $1}'`" *.${file}"
     fi
   fi
 }
@@ -228,11 +233,11 @@ verify_binary_patch() {
       if [ "${file_md5sum}" = "${palm_md5sum}" ]; then
         FILE_LIST="${FILE_LIST} ${file}"
       else
-        get_bck_orig
+        get_bck_file
 
-        if [ ! -z ${orig_file} ]; then
+        if [ -f ${bck_file} ]; then
           rm -f /var/webosinternals-*
-          cp ${orig_file} /var/webosinternals-orig
+          cp ${bck_file} /var/webosinternals-orig
 
           ${BSPATCH_EXEC} /var/webosinternals-orig /var/webosinternals-patched ${APP_DIR}/${BSPATCH_NAME} 2>&1
 
@@ -390,18 +395,18 @@ check_ota_update() {
   echo >> ${PATCH_LOG_FILE}
 
   for file in ${FILE_LIST} ; do
-    get_bck_orig
+    get_bck_file
 
     get_palm_md5sum
 
-    if [ ! -z ${orig_file} ]; then
+    if [ -f ${bck_file} ]; then
       file_md5sum=`md5sum ${file} | awk '{print $1}'`
 
       if [ "${file_md5sum}" = "${palm_md5sum}" ]; then
         echo "File matches current Palm md5sum, assuming OTA" >> ${PATCH_LOG_FILE}
         echo "  file: ${file}" >> ${PATCH_LOG_FILE}
 
-        rm -f ${orig_file}
+        rm -f ${bck_file}
       fi
     fi
   done
@@ -415,11 +420,11 @@ create_backup_files() {
   echo >> ${PATCH_LOG_FILE}
 
   for file in ${FILE_LIST} ; do
-    get_bck_orig
+    get_bck_file
 
     get_palm_md5sum
 
-    if [ -z ${orig_file} ]; then
+    if [ ! -f ${bck_file} ]; then
       if [ ! -f ${file} ]; then
         echo "Created file, generating empty backup file" >>${PATCH_LOG_FILE}
         echo "  file: ${file}" >> ${PATCH_LOG_FILE}
@@ -435,12 +440,20 @@ create_backup_files() {
       fi
     fi
 
-    file_md5sum=`md5sum ${file} | awk '{print $1}'`
+    if [ ! -f ${file} ]; then
+      file_md5sum=""
+    else
+      file_md5sum=`md5sum $file | awk '{print $1}'`
+    fi
 
-    orig_md5sum=`md5sum ${bck_file} | awk '{print $1}'`
+    if [ ! -f ${bck_file} ]; then
+      orig_md5sum=""
+    else
+      orig_md5sum=`md5sum ${bck_file} | awk '{print $1}'`
+    fi
 
     if [ ! -f ${file} ] && [ ! -s ${bck_file} ] || \
-      [ "${file_md5sum}" = "${palm_md5sum}" ] || 
+      [ "${file_md5sum}" = "${palm_md5sum}" ] || \
       [ "${orig_md5sum}" = "${palm_md5sum}" ]
     then
       tmpvar=`echo "${file}" | tr '/' '.'`
