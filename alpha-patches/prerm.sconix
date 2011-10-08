@@ -88,6 +88,19 @@ uninstallation_failed() {
 
 get_bck_file() {
   bck_file=`dirname ${file}`"/.webosinternals.orig."`basename ${file}`
+
+  if [ -f ${file}.webosinternals.orig ]; then
+    if [ -f ${bck_file} ]; then
+      rm -f ${file}.webosinternals.orig
+    else
+      mv ${file}.webosinternals.orig
+
+      tmpvar=`echo "${file}" | tr '/' '.'`
+
+      sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_list
+      echo "${file} ${VERSION}" >> ${PATCH_CONTROL_DIR}/file_list
+    fi
+  fi
 }
 
 get_palm_md5sum() {
@@ -100,7 +113,7 @@ get_palm_md5sum() {
     palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
 
     echo "Found md5sum from palm md5sum files" >> ${PATCH_LOG_FILE}
-    echo "  md5sum: ${palm_md5sums}" >> ${PATCH_LOG_FILE}
+    echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
   else
     echo "File not found in md5sums, checking cryptofs files" >> ${PATCH_LOG_FILE}
 
@@ -110,7 +123,7 @@ get_palm_md5sum() {
 	    palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
 
       echo "Found md5sum from cryptofs list files" >> ${PATCH_LOG_FILE}
-      echo "  md5sum: ${palm_md5sums}" >> ${PATCH_LOG_FILE}
+      echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
     else
       echo "File not found in cryptofs files, not patcheable file" >> ${PATCH_LOG_FILE}
       echo "  file: ${file}" >> ${PATCH_LOG_FILE}
@@ -130,16 +143,16 @@ check_cryptofs_lists() {
 
     control_file=`dirname ${list_file}`/${package}.control
 
-    cur_version=`grep "^Version:" ${control_file} | awk '{print $2}'`
+    cur_version=`grep "^Version: " ${control_file} | awk '{print $2}'`
 
-    control_line=`grep "^${package} " ${PATCH_CONTROL_DIR}/file_control`
+    control_line=`grep "^${package} ${file} " ${PATCH_CONTROL_DIR}/file_control`
 
-    ctl_version=`echo ${control_line} | awk '{print $2}'`
+    ctl_version=`echo ${control_line} | awk '{print $3}'`
 
-    if [ -z ${orig_file} ] || [ "${cur_version}" != "${ctl_version}" ]; then
+    if [ ! -f ${bck_file} ] || [ "${cur_version}" != "${ctl_version}" ]; then
       md5sums_line=`md5sum ${file} | awk '{print $1}'`" *.${file}"
     else
-      md5sums_line=`md5sum ${orig_file} | awk '{print $1}'`" *.${file}"
+      md5sums_line=`md5sum ${bck_file} | awk '{print $1}'`" *.${file}"
     fi
   fi
 }
@@ -176,11 +189,11 @@ verify_text_patch() {
           file=`echo ${i} | awk '{print $12}'`
 
           FAIL_LIST="${FAIL_LIST} /${file}"
-
-          if [ "${FAIL_LIST}" == "${FILE_LIST}" ]; then
-            patch_already_unapplied="yes"
-          fi
         done
+
+        if [ "${FAIL_LIST}" == "${FILE_LIST}" ]; then
+          patch_already_unapplied="yes"
+        fi
       fi
     fi
   fi
@@ -355,12 +368,11 @@ check_ota_update() {
 
       file_md5sum=`md5sum ${file} | awk '{print $1}'`
 
-      orig_md5sum=`grep -h ${file} ${PATCH_CONTROL_DIR}/file_md5sums | awk '{print $3}'`
+      orig_md5sum=`grep -h " ${file} " ${PATCH_CONTROL_DIR}/file_md5sums | awk '{print $3}'`
 
       if [ -z "${palm_md5sum}" ]; then
         CREATED_LIST="${CREATED_LIST} ${file}"
       elif [ "${palm_md5sum}" = "${file_md5sum}" ]; then
-        echo >> ${PATCH_LOG_FILE}
         echo "File matches current Palm md5sum, assuming OTA" >> ${PATCH_LOG_FILE}
         echo "  file: ${file}" >> ${PATCH_LOG_FILE}
 
@@ -370,7 +382,6 @@ check_ota_update() {
 
         RESTORE_LIST="${RESTORE_LIST} ${file}"
       elif [ "${palm_md5sum}" != "${orig_md5sum}" ]; then
-        echo >> ${PATCH_LOG_FILE}
         echo "The md5sum of file has changed, assuming OTA" >> ${PATCH_LOG_FILE}
         echo "  palm_md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
         echo "  orig_md5sum: ${orig_md5sum}" >> ${PATCH_LOG_FILE}
@@ -382,7 +393,6 @@ check_ota_update() {
         RESTORE_LIST="${RESTORE_LIST} ${file}"
       fi
     else
-      echo >> ${PATCH_LOG_FILE}
       echo "File has been completely removed, assuming OTA" >> ${PATCH_LOG_FILE}
       echo "  file: ${file}" >> ${PATCH_LOG_FILE}
 
@@ -396,15 +406,14 @@ check_ota_update() {
 }
 
 clean_backup_files() {
-  echo "" >> ${PATCH_LOG_FILE}
+  echo >> ${PATCH_LOG_FILE}
   echo "----------------------------------" >> ${PATCH_LOG_FILE}
   echo "Cleaning up backup files" >> ${PATCH_LOG_FILE}
   echo "----------------------------------" >> ${PATCH_LOG_FILE}
-  echo "" >> ${PATCH_LOG_FILE}
+  echo >> ${PATCH_LOG_FILE}
 
   for file in ${CREATED_LIST} ; do
     if [ -f ${file} ]; then
-      echo >> ${PATCH_LOG_FILE}
       echo "Removing created file or old Palm file" >> ${PATCH_LOG_FILE}
       echo "  file: ${file}" >>${PATCH_LOG_FILE}
 
@@ -416,7 +425,6 @@ clean_backup_files() {
 
   for file in ${RESTORE_LIST} ; do
     if [ -f ${file} ]; then
-      echo >> ${PATCH_LOG_FILE}
       echo "Restoring unmodified or updated Palm file" >> ${PATCH_LOG_FILE}
       echo "  file: ${file}" >>${PATCH_LOG_FILE}
 
@@ -444,10 +452,20 @@ clean_backup_files() {
     fi
 
     if [ ! -f ${file} ] && [ ! -s ${bck_file} ] || \
-       [ "${file_md5sum}" = "${orig_md5sum}" ] || 
+       [ "${file_md5sum}" = "${orig_md5sum}" ] || \
        [ "${file_md5sum}" = "${palm_md5sum}" ]
     then
-      rm -f ${bck_file} >/dev/null 2>&1
+      if [ -f ${bck_file} ]; then
+        if [ ! -s ${bck_file} ]; then
+          echo "Removing unneeded generated backup file" >>${PATCH_LOG_FILE}
+          echo "  file: ${bck_file}" >>${PATCH_LOG_FILE}
+        else
+          echo "Removing unneeded backup of original file" >>${PATCH_LOG_FILE}
+          echo "  file: ${bck_file}" >>${PATCH_LOG_FILE}
+        fi
+
+        rm -f ${bck_file}
+      fi
 
       tmpvar=`echo "${file}" | tr '/' '.'`
 
