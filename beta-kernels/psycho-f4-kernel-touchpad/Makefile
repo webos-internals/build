@@ -2,12 +2,13 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F4 Phantom (TouchPad)
 DEVICE = touchpad
 CATEGORY = Experimental
-VERSIONS = 3.0.2-73
+VERSIONS = 3.0.2-78
 APPINFO_DESCRIPTION = The latest beta kernel from uNiXpSyChO.<br><br>\
 Features:<br> * 1.8GHz<br> * Full-time dual-core<br> * autogroup process scheduling<br> * CFS<br> * BFQ, V(R), SIO<br> * CIFS, NFS, iSCSI, ATA over Ethernet<br> * EXT4<br><br>\
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-78", "log" : [ "update sysfs for Govnah support." ] }, \
 { "version" : "${WEBOS_VERSION}-73", "log" : [ "online or offline cpu when changing sysfs. fix power save logic when enabled/disabled. remove unscalable freqs and voltages in arrays when setting in sysfs. make powersaver do the correct thing. merge override modules." ] }, \
 { "version" : "${WEBOS_VERSION}-60", "log" : [ "revert: increase bus bandwidth." ] }, \
 { "version" : "${WEBOS_VERSION}-57", "log" : [ "increase bus bandwidth." ] }, \
@@ -20,6 +21,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-44", "log" : [ "Initial release. UTF8, ATA over Ethernet added. sysfs to enable or disable turbo_mode (fulltime dualcore)." ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-78: update sysfs for Govnah support.<br>\
 ${WEBOS_VERSION}-73: online or offline cpu when changing sysfs. fix power save logic when enabled/disabled. remove unscalable freqs and voltages in arrays when setting in sysfs. make powersaver do the correct thing. merge override modules.<br>\
 ${WEBOS_VERSION}-60: revert: increase bus bandwidth.<br>\
 ${WEBOS_VERSION}-57: increase bus bandwidth.<br>\
@@ -36,21 +38,20 @@ SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = identification/mkcompile_h.patch \
 		 psychobuild/F4.patch \
 		 psychobuild/override.patch \
-		 psychobuild/cache-p1.patch \
-		 psychobuild/sched-p1.patch \
-		 psychobuild/msm-fb-power.patch \
-		 psychobuild/clock-p1.patch \
-		 psychobuild/mmc-p1.patch \
-		 psychobuild/mmc-p2.patch \
-		 psychobuild/fbconsole.patch \
 		 psychobuild/F4-logo.patch \
+		 psychobuild/fbconsole.patch \
 		 psychobuild/comptune.patch \
 		 psychobuild/cpu_alignment.patch \
 		 psychobuild/iosched-bundle.patch \
 		 psychobuild/iosched-deadline.patch \
-		 psychobuild/jhash3.patch \
+		 psychobuild/cache-p1.patch \
+		 psychobuild/sched-p1.patch \
+		 psychobuild/clock-p1.patch \
+		 psychobuild/mmc-p1.patch \
+		 psychobuild/mmc-p2.patch \
 		 memory/tmc_mem.patch \
-		 psychobuild/autogroup.patch
+		 psychobuild/autogroup.patch \
+		 psychobuild/jhash3.patch
 
 TYPE = Kernel
 
