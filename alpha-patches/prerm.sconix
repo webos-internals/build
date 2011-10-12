@@ -5,7 +5,13 @@
 #
 
 APP_DIR=/media/cryptofs/apps/usr/palm/applications/org.test.patch
+
+FILES_DIR=additional_files
+
 PATCH_NAME=test.patch
+
+TWEAKS_NAME=
+
 BSPATCH_FILE=/usr/lib/pulse-0.9.22/modules/module-suspend-on-idle.so
 
 #
@@ -46,10 +52,6 @@ if [ ! -z ${BSPATCH_FILE} ]; then
   BSPATCH_NAME=`basename ${BSPATCH_FILE}`.bspatch
 fi
 
-if [ -f ${APP_DIR}/${PATCH_NAME} ]; then
-  TWEAKS_NAME=`basename ${PATCH_NAME} .patch`.json
-fi
-
 #
 # Helper functions that do all the needed heavy work
 #
@@ -81,22 +83,21 @@ uninstallation_failed() {
   echo "----------------------------------" >> ${PATCH_LOG_FILE}
   echo >> ${PATCH_LOG_FILE}
 
-  ${PATCH_EXEC} -s -R -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} | tee -a ${PATCH_LOG_FILE} 1>&2
+  if [ -f ${APP_DIR}/${PATCH_NAME} ]; then
+    ${PATCH_EXEC} -s -R -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} | tee -a ${PATCH_LOG_FILE} 1>&2
+  fi
 
   do_remove_failure
 }
 
 get_bck_file() {
-  bck_file=`dirname ${file}`"/.webosinternals.orig."`basename ${file}`
+  bck_file="${file}.webosinternals.orig"
 
-  if [ -f ${file}.webosinternals.orig ] && [ ! -f ${bck_file} ]; then
-    cp ${file}.webosinternals.orig ${bck_file}
+#  bck_file=`dirname ${file}`"/.webosinternals.orig."`basename ${file}`
 
-    tmpvar=`echo "${file}" | tr '/' '.'`
-
-    sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_list
-    echo "${file} ${VERSION}" >> ${PATCH_CONTROL_DIR}/file_list
-  fi
+#  if [ -f ${file}.webosinternals.orig ] && [ ! -f ${bck_file} ]; then
+#    bck_file="${file}.webosinternals.orig"
+#  fi
 }
 
 get_palm_md5sum() {
@@ -116,7 +117,7 @@ get_palm_md5sum() {
     check_cryptofs_lists
 
     if [ ! -z "${md5sums_line}" ]; then
-	    palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
+      palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
 
       echo "Found md5sum from cryptofs list files" >> ${PATCH_LOG_FILE}
       echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
@@ -154,7 +155,7 @@ check_cryptofs_lists() {
 }
 
 verify_text_patch() {
-  if [ ! -z ${PATCH_NAME} ]; then
+  if [ -f ${APP_DIR}/${PATCH_NAME} ]; then
     FILE_LIST=`${LSDIFF_EXEC} ${APP_DIR}/${PATCH_NAME}`
 
     echo >> ${PATCH_LOG_FILE}
@@ -187,7 +188,7 @@ verify_text_patch() {
           FAIL_LIST="${FAIL_LIST} /${file}"
         done
 
-        if [ "${FAIL_LIST}" == "${FILE_LIST}" ]; then
+        if [ "${FAIL_LIST}" = "${FILE_LIST}" ]; then
           patch_already_unapplied="yes"
         fi
       fi
@@ -247,21 +248,21 @@ verify_binary_patch() {
 }
 
 verify_additional_files() {
-  if [ -d ${APP_DIR}/additional_files ]; then
+  if [ -d ${APP_DIR}/${FILES_DIR} ]; then
     echo >> ${PATCH_LOG_FILE}
     echo "----------------------------------" >> ${PATCH_LOG_FILE}
     echo "Checking additional files" >> ${PATCH_LOG_FILE}
     echo "----------------------------------" >> ${PATCH_LOG_FILE}
     echo >> ${PATCH_LOG_FILE}
 
-    for i in `find ${APP_DIR}/additional_files -type f` ; do
-      file=${i#${APP_DIR}/additional_files}
+    for i in `find ${APP_DIR}/${FILES_DIR} -type f` ; do
+      file=${i#${APP_DIR}/${FILES_DIR}}
 
       FILE_LIST="${FILE_LIST} ${file}"
 
       get_palm_md5sum
 
-      if [ ! -z "${palm_md5sum}" ]; then
+      if [ "${FILES_DIR}" != "files" ] && [ ! -z "${palm_md5sum}" ]; then
         FAIL_LIST="${FAIL_LIST} ${file}"
       fi
 
@@ -316,22 +317,26 @@ remove_binary_patch() {
 }
 
 remove_additional_files() {
-  if [ -d ${APP_DIR}/additional_files ]; then
+  if [ -d ${APP_DIR}/${FILES_DIR} ]; then
     echo | tee -a ${PATCH_LOG_FILE}
     echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
     echo "Removing additional files" | tee -a ${PATCH_LOG_FILE}
     echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
     echo | tee -a ${PATCH_LOG_FILE}
 
-    for i in `find ${APP_DIR}/additional_files -type f` ; do
-      file=${i#${APP_DIR}/additional_files}
+    for i in `find ${APP_DIR}/${FILES_DIR} -type f` ; do
+      file=${i#${APP_DIR}/${FILES_DIR}}
 
       echo "reverting file ${file#/}" | tee -a ${PATCH_LOG_FILE}
 
       get_bck_file
 
-      if [ -f ${bck_file} ] && [ ! -s ${bck_file} ]; then
-        rm -f ${file} 2>&1 | tee -a ${PATCH_LOG_FILE}
+      if [ -f ${bck_file} ]; then
+        if [ ! -s ${bck_file} ]; then
+          rm -f ${file} 2>&1 | tee -a ${PATCH_LOG_FILE}
+        elif [ "${FILES_DIR}" = "files" ]; then
+          mv -f ${bck_file} ${file} 2>&1 | tee -a ${PATCH_LOG_FILE}
+        fi
       fi
     done
   fi
@@ -511,7 +516,7 @@ if [ -f ${APP_DIR}/${BSPATCH_NAME} ]; then
   echo "  ${BSPATCH_FILE}" >> ${PATCH_LOG_FILE}
 fi
 
-if [ -d ${APP_DIR}/additional_files ]; then
+if [ -d ${APP_DIR}/${FILES_DIR} ]; then
   echo "Contains additional files" >> ${PATCH_LOG_FILE}
 fi
 
@@ -544,7 +549,7 @@ if [ ! -d ${APP_DIR} ]; then
   do_install_failure
 fi
 
-if [ ! -f ${APP_DIR}/${PATCH_NAME} ] && [ ! -f ${APP_DIR}/${BSPATCH_NAME} ] && [ ! -d ${APP_DIR}/additional_files ]; then
+if [ ! -f ${APP_DIR}/${PATCH_NAME} ] && [ ! -f ${APP_DIR}/${BSPATCH_NAME} ] && [ ! -d ${APP_DIR}/${FILES_DIR} ]; then
   echo "ERROR: Cannot find patch file, bspatch file or additonal_files!" | tee -a ${PATCH_LOG_FILE} 1>&2
   do_install_failure
 fi

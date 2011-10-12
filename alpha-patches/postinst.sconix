@@ -5,7 +5,13 @@
 #
 
 APP_DIR=/media/cryptofs/apps/usr/palm/applications/org.test.patch
+
+FILES_DIR=additional_files
+
 PATCH_NAME=test.patch
+
+TWEAKS_NAME=
+
 BSPATCH_FILE=/usr/lib/pulse-0.9.22/modules/module-suspend-on-idle.so
 
 #
@@ -46,10 +52,6 @@ if [ ! -z ${BSPATCH_FILE} ]; then
   BSPATCH_NAME=`basename ${BSPATCH_FILE}`.bspatch
 fi
 
-if [ -f ${APP_DIR}/${PATCH_NAME} ]; then
-  TWEAKS_NAME=`basename ${PATCH_NAME} .patch`.json
-fi
-
 #
 # Helper functions that do all the needed heavy work
 #
@@ -81,22 +83,21 @@ installation_failed() {
   echo "----------------------------------" >> ${PATCH_LOG_FILE}
   echo >> ${PATCH_LOG_FILE}
 
-  ${PATCH_EXEC} -f -s -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} | tee -a ${PATCH_LOG_FILE} 1>&2
+  if [ -f ${APP_DIR}/${PATCH_NAME} ]; then
+    ${PATCH_EXEC} -f -s -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} | tee -a ${PATCH_LOG_FILE} 1>&2
+  fi
 
   do_install_failure
 }
 
 get_bck_file() {
-  bck_file=`dirname ${file}`"/.webosinternals.orig."`basename ${file}`
+  bck_file="${file}.webosinternals.orig"
 
-  if [ -f ${file}.webosinternals.orig ] && [ ! -f ${bck_file} ]; then
-    cp ${file}.webosinternals.orig ${bck_file}
+#  bck_file=`dirname ${file}`"/.webosinternals.orig."`basename ${file}`
 
-    tmpvar=`echo "${file}" | tr '/' '.'`
-
-    sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_list
-    echo "${file} ${VERSION}" >> ${PATCH_CONTROL_DIR}/file_list
-  fi
+#  if [ -f ${file}.webosinternals.orig ] && [ ! -f ${bck_file} ]; then
+#    bck_file="${file}.webosinternals.orig"
+#  fi
 }
 
 get_palm_md5sum() {
@@ -116,7 +117,7 @@ get_palm_md5sum() {
     check_cryptofs_lists
 
     if [ ! -z "${md5sums_line}" ]; then
-	    palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
+      palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
 
       echo "Found md5sum from cryptofs list files" >> ${PATCH_LOG_FILE}
       echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
@@ -145,7 +146,7 @@ check_cryptofs_lists() {
 
     ctl_version=`echo ${control_line} | awk '{print $3}'`
 
-    if [ ! -f ${bck_file} ] || [ "${cur_version}" != "${ctl_version}" ]; then
+    if [ ! -f ${bck_file} ] || [ "${cur_version}" != "${ctl_version}" ]; then
       md5sums_line=`md5sum ${file} | awk '{print $1}'`" *.${file}"
     else
       md5sums_line=`md5sum ${bck_file} | awk '{print $1}'`" *.${file}"
@@ -171,6 +172,7 @@ verify_text_patch() {
           echo  | tee -a ${PATCH_LOG_FILE} 1>&2
           echo "ERROR: Failed to find md5sum for the file" | tee -a ${PATCH_LOG_FILE} 1>&2
           echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE} 1>&2
+          echo  | tee -a ${PATCH_LOG_FILE} 1>&2
 
           do_install_failure
         fi
@@ -222,6 +224,7 @@ verify_binary_patch() {
         echo  | tee -a ${PATCH_LOG_FILE} 1>&2
         echo "ERROR: Failed to find md5sum for the file" | tee -a ${PATCH_LOG_FILE} 1>&2
         echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE} 1>&2
+        echo  | tee -a ${PATCH_LOG_FILE} 1>&2
 
         do_install_failure
       fi
@@ -256,6 +259,7 @@ verify_binary_patch() {
           echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE} 1>&2
           echo "  md5sum: ${file_md5sum}" | tee -a ${PATCH_LOG_FILE} 1>&2
           echo "  palm_md5sum: ${palm_md5sum}" | tee -a ${PATCH_LOG_FILE} 1>&2
+          echo  | tee -a ${PATCH_LOG_FILE} 1>&2
 
           do_install_failure
         fi
@@ -264,6 +268,7 @@ verify_binary_patch() {
       echo  | tee -a ${PATCH_LOG_FILE} 1>&2
       echo "ERROR: File to be binary patched does not exist" | tee -a ${PATCH_LOG_FILE} 1>&2
       echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE} 1>&2
+      echo  | tee -a ${PATCH_LOG_FILE} 1>&2
 
       do_install_failure
     fi
@@ -271,15 +276,15 @@ verify_binary_patch() {
 }
 
 verify_additional_files() {
-  if [ -d ${APP_DIR}/additional_files ]; then
+  if [ -d ${APP_DIR}/${FILES_DIR} ]; then
     echo >> ${PATCH_LOG_FILE}
     echo "----------------------------------" >> ${PATCH_LOG_FILE}
     echo "Checking additional files" >> ${PATCH_LOG_FILE}
     echo "----------------------------------" >> ${PATCH_LOG_FILE}
     echo >> ${PATCH_LOG_FILE}
 
-    for i in `find ${APP_DIR}/additional_files -type f` ; do
-      file=${i#${APP_DIR}/additional_files}
+    for i in `find ${APP_DIR}/${FILES_DIR} -type f` ; do
+      file=${i#${APP_DIR}/${FILES_DIR}}
 
       if [ ! -f ${file} ]; then
         FILE_LIST="${FILE_LIST} ${file}"
@@ -297,10 +302,18 @@ verify_additional_files() {
           echo | tee -a ${PATCH_LOG_FILE}
 
           FILE_LIST="${FILE_LIST} ${file}"
+        elif [ "${FILES_DIR}" = "files" ] && [ "${file_md5sum}" = "${palm_md5sum}" ]; then
+          echo | tee -a ${PATCH_LOG_FILE}
+          echo "File already exists, but is not additional file" | tee -a ${PATCH_LOG_FILE}
+          echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE}
+          echo | tee -a ${PATCH_LOG_FILE}
+
+          FILE_LIST="${FILE_LIST} ${file}"
         else
           echo  | tee -a ${PATCH_LOG_FILE} 1>&2
-          echo "ERROR: Additional file already exists" | tee -a ${PATCH_LOG_FILE} 1>&2
+          echo "ERROR: Additional file already exists in system" | tee -a ${PATCH_LOG_FILE} 1>&2
           echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE} 1>&2
+          echo  | tee -a ${PATCH_LOG_FILE} 1>&2
 
           do_install_failure
         fi
@@ -350,21 +363,21 @@ install_binary_patch() {
 }
 
 install_additional_files() {
-  if [ -d ${APP_DIR}/additional_files ]; then
+  if [ -d ${APP_DIR}/${FILES_DIR} ]; then
     echo | tee -a ${PATCH_LOG_FILE}
     echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
     echo "Installing additional files" | tee -a ${PATCH_LOG_FILE}
     echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
     echo | tee -a ${PATCH_LOG_FILE}
 
-    for i in `find ${APP_DIR}/additional_files -type f` ; do
-      file=${i#${APP_DIR}/additional_files}
+    for i in `find ${APP_DIR}/${FILES_DIR} -type f` ; do
+      file=${i#${APP_DIR}/${FILES_DIR}}
 
       echo "installing file ${file#/}" | tee -a ${PATCH_LOG_FILE}
 
       mkdir -p `dirname ${file}`
 
-      cp -f ${APP_DIR}/additional_files/${file} ${file}
+      cp -f ${APP_DIR}/${FILES_DIR}/${file} ${file}
     done
   fi
 }
@@ -459,7 +472,7 @@ create_backup_files() {
     fi
 
     if [ ! -z "${cur_version}" ]; then
-      tmpvar=`echo "${package} ${file} " | tr '/' '.'`
+      tmpvar=`echo "${package} ${file}" | tr '/' '.'`
 
       sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_control
       echo "${package} ${file} ${cur_version}" >> ${PATCH_CONTROL_DIR}/file_control
@@ -504,7 +517,7 @@ if [ -f ${APP_DIR}/${BSPATCH_NAME} ]; then
   echo "  ${BSPATCH_FILE}" >> ${PATCH_LOG_FILE}
 fi
 
-if [ -d ${APP_DIR}/additional_files ]; then
+if [ -d ${APP_DIR}/${FILES_DIR} ]; then
   echo "Contains additional files" >> ${PATCH_LOG_FILE}
 fi
 
@@ -537,7 +550,7 @@ if [ ! -d ${APP_DIR} ]; then
   do_install_failure
 fi
 
-if [ ! -f ${APP_DIR}/${PATCH_NAME} ] && [ ! -f ${APP_DIR}/${BSPATCH_NAME} ] && [ ! -d ${APP_DIR}/additional_files ]; then
+if [ ! -f ${APP_DIR}/${PATCH_NAME} ] && [ ! -f ${APP_DIR}/${BSPATCH_NAME} ] && [ ! -d ${APP_DIR}/${FILES_DIR} ]; then
   echo "ERROR: Cannot find patch file, bspatch file or additonal_files!" | tee -a ${PATCH_LOG_FILE} 1>&2
   do_install_failure
 fi
