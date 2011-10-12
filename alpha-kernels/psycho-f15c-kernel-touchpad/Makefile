@@ -2,13 +2,14 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F15C Eagle (TouchPad)
 DEVICE = touchpad
 CATEGORY = Experimental
-VERSIONS = 3.0.2-78
+VERSIONS = 3.0.2-79
 APPINFO_DESCRIPTION = The latest <b>alpha test</b> kernel from uNiXpSyChO.<br><br>\
 Features:<br> * 1.9GHz<br> * autogroup process scheduling<br> * CFS<br> * BFQ and SIO<br> * EXT4<br> * Various tweaks<br>\
 <br><b>NOTE: CPU core 2 will mostly stay idle. This is by webOS default, NOT a kernel problem. If you want to test this, run a Sunspider benchmark. Do not report CPU core 2 bugs.</b><br><br>\
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-79", "log" : [ "add load polling for power saver (will run 2 cpus based on load). exclude powerd when in power saver. disable power saver when turbo mode enabled and vice versa." ] }, \
 { "version" : "${WEBOS_VERSION}-78", "log" : [ "misc scheduler patches. update to make Govnah happy." ] }, \
 { "version" : "${WEBOS_VERSION}-74", "log" : [ "make BFQ default. add missing NAS protocols." ] }, \
 { "version" : "${WEBOS_VERSION}-71", "log" : [ "add turbo mode. make powersaver do the correct thing. online or offline cpu when changing sysfs." ] }, \
@@ -34,6 +35,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-19", "log" : [ "Initial release. autogroup process scheduling. CPU HW based alignment. deadline tweak." ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-79: add load polling for power saver (will run 2 cpus based on load). exclude powerd when in power saver. disable power saver when turbo mode enabled and vice versa.<br>\
 ${WEBOS_VERSION}-78: misc scheduler patches. update to make Govnah happy.<br>\
 ${WEBOS_VERSION}-74: make BFQ default. add missing NAS protocols.<br>\
 ${WEBOS_VERSION}-71: add turbo mode. make powersaver do the correct thing. online or offline cpu when changing sysfs.<br>\
