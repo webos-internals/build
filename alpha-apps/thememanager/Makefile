@@ -14,7 +14,7 @@ MINWEBOSVERSION = 3.0.0
 CHANGELOG = \
 0.1.2: Initial alpha release.
 
-DEPENDS = org.webosinternals.patch, org.webosinternals.lsdiff
+DEPENDS = org.webosinternals.patch, org.webosinternals.lsdiff, org.webosinternals.unzip
 
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/b/b9/Theme_manager.png\" ]

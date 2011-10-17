@@ -2,7 +2,7 @@ NAME     = modeswitcher
 MAINTAINER = sconix
 TITLE    = Mode Switcher - Legacy
 APP_ID   = com.palm.org.e-lnx.wee.apps.${NAME}
-VERSION  = 1.1.0
+VERSION  = 1.1.1
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/showthread.php?p=2623085
@@ -15,6 +15,7 @@ POSTUPDATEFLAGS = RestartLuna
 MINWEBOSVERSION = 1.0.0
 MAXWEBOSVERSION = 1.9.9
 CHANGELOG = \
+1.1.1: Updated all googled docs import/export connections use https which should fix the login problems.<br>\
 1.1.0: Changed title and prevented install on WebOS 2.x since Mode Switcher 2.x is now out.<br>\
 1.0.9: Small change to display trigger, removed experimental code, fixed no match calendar trigger functionality.<br>\
 1.0.8: Fixed two mode changing bugs and removed delay from display on trigger event.<br>\
