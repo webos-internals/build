@@ -14,6 +14,8 @@ TWEAKS_NAME=
 
 BSPATCH_FILE=/usr/lib/pulse-0.9.22/modules/module-suspend-on-idle.so
 
+PACKAGES_FILE=package_list
+
 #
 # Here starts the part where all the magic happens
 #
@@ -65,6 +67,8 @@ do_remove_failure() {
   echo "*** FAILED ***" | tee -a ${PATCH_LOG_FILE}
   echo | tee -a ${PATCH_LOG_FILE}
 
+  rm -f /var/webosinternals.md5sums >/dev/null 2>&1
+
   exit 1
 }
 
@@ -72,6 +76,8 @@ do_remove_success() {
   echo | tee -a ${PATCH_LOG_FILE}
   echo "*** SUCCESS ***" | tee -a ${PATCH_LOG_FILE}
   echo | tee -a ${PATCH_LOG_FILE}
+
+  rm -f /var/webosinternals.md5sums >/dev/null 2>&1
 
   exit 0
 }
@@ -104,27 +110,72 @@ get_palm_md5sum() {
   cur_version=""
   palm_md5sum=""
 
-  md5sums_line=`grep -h "*.${file}$" ${IPKG_INFO_DIR}/*.md5sums`
+  check_cache_file
 
   if [ ! -z "${md5sums_line}" ]; then
     palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
 
-    echo "Found md5sum from palm md5sum files" >> ${PATCH_LOG_FILE}
+    echo "Found md5sum from the cache file" >> ${PATCH_LOG_FILE}
     echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
   else
-    echo "File not found in md5sums, checking cryptofs files" >> ${PATCH_LOG_FILE}
+    echo "File not found from cache file, checking packages file" >> ${PATCH_LOG_FILE}
 
-    check_cryptofs_lists
+    check_packages_file
 
     if [ ! -z "${md5sums_line}" ]; then
       palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
 
-      echo "Found md5sum from cryptofs list files" >> ${PATCH_LOG_FILE}
+      echo "Found md5sum via the packages file" >> ${PATCH_LOG_FILE}
       echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
+
+      echo ${md5sums_line} >>/var/webosinternals.md5sums
     else
-      echo "File not found in cryptofs files, not patcheable file" >> ${PATCH_LOG_FILE}
-      echo "  file: ${file}" >> ${PATCH_LOG_FILE}
+      echo "File not found via packages file, checking cryptofs lists" >> ${PATCH_LOG_FILE}
+
+      check_cryptofs_lists
+
+      if [ ! -z "${md5sums_line}" ]; then
+        palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
+
+        echo "Found md5sum from the cryptofs lists" >> ${PATCH_LOG_FILE}
+        echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
+
+        echo ${md5sums_line} >>/var/webosinternals.md5sums
+      else
+        echo "File not found in cryptofs lists, checking palm md5sum files" >> ${PATCH_LOG_FILE}
+
+        md5sums_line=`grep -h "*.${file}$" ${IPKG_INFO_DIR}/*.md5sums`
+
+        if [ ! -z "${md5sums_line}" ]; then
+          palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
+
+          echo "Found md5sum from md5sums files" >> ${PATCH_LOG_FILE}
+          echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
+
+          echo ${md5sums_line} >>/var/webosinternals.md5sums
+        fi
+      fi
     fi
+  fi
+}
+
+check_cache_file() {
+  md5sums_line=""
+
+  if [ -f "/var/webosinternals.md5sums" ]; then
+    md5sums_line=`grep ${file} /var/webosinternals.md5sums`
+  fi
+}
+
+check_packages_file() {
+  if [ -f ${APP_DIR}/${PACKAGES_FILE} ]; then
+    for p in `cat ${APP_DIR}/${PACKAGES_FILE}` ; do
+      md5sums_line=`grep ${file} ${IPKG_INFO_DIR}/${p}.md5sums`
+
+      if [ ! -z "${md5sums_line}" ]; then
+        break;
+      fi
+    done
   fi
 }
 
@@ -414,22 +465,22 @@ clean_backup_files() {
   echo >> ${PATCH_LOG_FILE}
 
   for file in ${CREATED_LIST} ; do
+    get_bck_file
+
     if [ -f ${file} ]; then
       echo "Removing created file or old Palm file" >> ${PATCH_LOG_FILE}
       echo "  file: ${file}" >>${PATCH_LOG_FILE}
 
-      get_bck_file
-
-      rm -f ${file} ${bck_file}
+      rm -f ${file}
     fi
   done
 
   for file in ${RESTORE_LIST} ; do
-    if [ -f ${file} ]; then
+    get_bck_file
+
+    if [ -f ${bck_file} ]; then
       echo "Restoring unmodified or updated Palm file" >> ${PATCH_LOG_FILE}
       echo "  file: ${file}" >>${PATCH_LOG_FILE}
-
-      get_bck_file
 
       mv -f ${bck_file} ${file}
     fi
@@ -553,6 +604,8 @@ if [ ! -f ${APP_DIR}/${PATCH_NAME} ] && [ ! -f ${APP_DIR}/${BSPATCH_NAME} ] && [
   echo "ERROR: Cannot find patch file, bspatch file or additonal_files!" | tee -a ${PATCH_LOG_FILE} 1>&2
   do_install_failure
 fi
+
+rm -f /var/webosinternals.md5sums >/dev/null 2>&1
 
 #
 # The main function that controls all the magic stuff
