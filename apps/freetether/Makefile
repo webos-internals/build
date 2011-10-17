@@ -3,15 +3,20 @@ TITLE    = freeTether
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.1.3
+VERSION  = 1.2.0
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:FreeTether
 ICON	 = http://www.webos-internals.org/images/8/84/Icon_FreeTether.png
-DESCRIPTION = freeTether is an application that allows you to share your cellular internet connection with other devices connected via USB, Bluetooth, or WiFi.<br>If you find freeTether useful, please consider making a <a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2HVTWGXCB6C7N'>donation</a> to support the developers.
+DESCRIPTION = <b><font color=red>THIS APP DISABLES AND HIDES MOBILE HOTSPOT WHEN INSTALLED</font></b>freeTether is an application that allows you to share your cellular internet connection with other devices connected via USB, Bluetooth, or WiFi.<br>If you find freeTether useful, please consider making a <a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2HVTWGXCB6C7N'>donation</a> to support the developers.
 MAINTAINER = Ryan Hope <rmh3093@gmail.com>, Eric Gaudet <emoney_33@yahoo.com>
 MINWEBOSVERSION = 1.4.5
 CHANGELOG = \
+1.2.0: Backs up and hides Mobile Hotspot on install<br>\
+       Make freeTethers service persistent instead of dynamic<br>\
+       Pre3 screen size fix<br>\
+       Remove bt and usb interfaces from bridge when disabled<br>\
+       Restore previous states when app is closed with out disabling first<br>\
 1.1.3: Add advanced usb prefs back, only visible if secret passphrase is typed.<br>\
 1.1.2: Make sure custom TCP prefs are used on startup<br>\
 1.1.1: Added options to auto-tether interfaces on app startup<br>\
@@ -49,7 +54,6 @@ SCREENSHOTS = [\
  ]
 LICENSE  = GPL v2 Open Source
 
-GIT_TAG = v1.1.3
 SRC_GIT = git://git.webos-internals.org/applications/freetether.git
 
 .PHONY: package
@@ -83,9 +87,11 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	)
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
-	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
-	mkdir -p build/$*/usr/palm/applications/${APP_ID}/bin
-	install -m 755 build/src/src/${NAME} build/$*/usr/palm/applications/${APP_ID}/bin/${APP_ID}
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/src/*.c
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/src/*.o
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/src/*.h
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/src/*.so
+	rm -rf build/$*/usr/palm/applications/${APP_ID}/src/Makefile
 	touch $@
 
 build/%/CONTROL/postinst:
