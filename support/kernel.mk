@@ -247,7 +247,7 @@ endif
 
 ifeq ("${WEBOS_VERSION}", "3.0.2")
 ifeq ("${DEVICE}","touchpad")
-COMPATIBLE_VERSIONS = 3.0.2 | 3.0.3
+COMPATIBLE_VERSIONS = 3.0.2
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/3.0.2/linuxkernel-${KERNEL_VERSION}.patches.tgz
 KERNEL_SUBMISSION = kernelpatch-3.0.2.txt
 # Override the compiler
