@@ -233,11 +233,8 @@ verify_text_patch() {
 
         patch_already_unapplied="yes"
       else
-        for i in `${PATCH_EXEC} -s -f -R -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} 2>&1` ; do
-          file=`echo ${i} | awk '{print $12}'`
-
-          FAIL_LIST="${FAIL_LIST} /${file}"
-        done
+        FAIL_LIST=" "`${PATCH_EXEC} -s -f -R -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} 2>&1 | \
+          awk '{print "/"$12}' | sed s:".rej$":"":`
 
         if [ "${FAIL_LIST}" = "${FILE_LIST}" ]; then
           patch_already_unapplied="yes"
@@ -487,6 +484,10 @@ clean_backup_files() {
   done
 
   for file in ${FILE_LIST} ; do
+    if [ -f ${file}.rej ]; then
+      rm -f ${file}.rej
+    fi
+
     get_bck_file
 
     get_palm_md5sum
