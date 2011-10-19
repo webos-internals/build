@@ -101,5 +101,5 @@ ${DOCTOR_DIR}/webosdoctor-3.0.4.jar:
 	if [ -e ${DOCTOR_DIR}/webosdoctorp304hstnhwifi-3.0.4.jar ] ; then \
 	  ln -s webosdoctorp304hstnhwifi-3.0.4.jar $@ ; \
 	else \
-	  curl -L -o $@ http://palm.cdnetworks.net/rom/touchpad/p304rod10182011/wd304wifi/webosdoctorp304hstnhwifi.jar \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/touchpad/p304rod10182011/wd304wifi/webosdoctorp304hstnhwifi.jar; \
 	fi
