@@ -3,13 +3,14 @@ TITLE    = Govnah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.2.0
+VERSION  = 1.2.1
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
 DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature, load averages and memory usage.
 CHANGELOG = \
+1.2.1: Added support for TouchPad webOS 3.0.4 kernel defaults.<br>\
 1.2.0: Added support for the new TouchPad governors.<br>\
 1.1.1: Added Veer 1.2GHz support.<br>\
 1.1.0: Added recognition of the F4 kernel.<br>\
