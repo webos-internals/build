@@ -8,7 +8,6 @@ In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A collection of highly experimental kernel improvements for the HP TouchPad, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
-<li>Support for kernel crypto modules required by TrueCrypt</li>\
 <li>Fix tick skew. BFQ IO scheduler. 300Hz</li>\
 <li>Overclock to 1.512GHz & 1.728GHz</li>\
 </ul><br>\
@@ -42,13 +41,11 @@ KERNEL_PATCHES = makefiletune/armMakefile.diff \
 		 warthogbuild/tp-tickskew.patch \
 		 warthogbuild/tp-300hz.patch \
 		 psychobuild/cpu_alignment.patch \
- 		 psychobuild/memcpy.patch \
+		 psychobuild/memcpy.patch \
 		 warthogbuild/defconfig-feat-touchpad.patch \
 		 identification/mkcompile_h.patch \
 		 filesystems/nfs.patch filesystems/cifs.patch \
-		 warthogbuild/ident-touchpad.patch \
-		 crypto/hw-support-touchpad.patch \
-		 crypto/truecrypt-support-touchpad.patch
+		 warthogbuild/ident-touchpad.patch
 
 #		 defconfig/defconfig-nodebug-touchpad.patch \
 #		 warthogbuild/defconfig-slim-touchpad.patch \

@@ -11,7 +11,6 @@ Current additions include:<ul>\
 <li>All standard Linux 2.6.35 <a href=http://www.ibm.com/developerworks/linux/library/l-cpufreq-1/index.html>cpufreq governors</a> made available for selection via the Govnah application.</li>\
 <li>A new <a href=http://lwn.net/Articles/275978/><b>Budget Fair Queueing (BFQ)</b> IO scheduler</a> made available for selection via the Govnah application.</li>\
 <li>Modification of the lowmemnotify threshold calculation to take into account free swap space. This reduces the occurrence of the Too Many Cards error.</li>\
-<li>Support for kernel crypto modules required by TrueCrypt.</li>\
 <li>Support for NFS and CIFS (Samba) network filesystems.</li>\
 </ul><br>\
 All additions are controlled by using the Govnah application.<br>\
@@ -41,8 +40,6 @@ KERNEL_PATCHES = makefiletune/armMakefile.diff \
 		 overclocking/touchpad-acpuclock.patch \
 		 bfq/bfq-iosched.patch bfq/defconfig-bfq.patch \
 		 overclocking/defconfig-safe-touchpad.patch \
-		 crypto/hw-support-touchpad.patch \
-		 crypto/truecrypt-support-touchpad.patch \
 		 filesystems/nfs.patch filesystems/cifs.patch
 
 TYPE = Kernel
