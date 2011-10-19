@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (TouchPad)
 DEVICE = touchpad
-CATEGORY = Experimental
+CATEGORY = Beta
 VERSIONS = 3.0.2-68 3.0.4-68
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the HP TouchPad, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
