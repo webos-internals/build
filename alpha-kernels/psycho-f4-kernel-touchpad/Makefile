@@ -3,8 +3,7 @@ TITLE = F4 Phantom (TouchPad)
 DEVICE = touchpad
 CATEGORY = Alpha
 VERSIONS = 3.0.4-79
-APPINFO_DESCRIPTION = Note that we are waiting on HP to publish the correct source code for the webOS 3.0.4 kernel.  This kernel is built from webOS 3.0.2 source code, and as a result anything using the camera or video does not work correctly.<br>\
-The latest beta kernel from uNiXpSyChO.<br><br>\
+APPINFO_DESCRIPTION = The latest beta kernel from uNiXpSyChO.<br><br>\
 Features:<br> * 1.8GHz<br> * Full-time dual-core<br> * autogroup process scheduling<br> * CFS<br> * BFQ, V(R), SIO<br> * CIFS, NFS, iSCSI, ATA over Ethernet<br> * EXT4<br><br>\
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}

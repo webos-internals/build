@@ -3,8 +3,7 @@ TITLE = UberKernel (TouchPad)
 DEVICE = touchpad
 CATEGORY = Experimental
 VERSIONS = 3.0.4-68
-APPINFO_DESCRIPTION = Note that we are waiting on HP to publish the correct source code for the webOS 3.0.4 kernel.  This kernel is built from webOS 3.0.2 source code, and as a result anything using the camera or video does not work correctly.<br>\
-A collection of all the best kernel improvements for the HP TouchPad, rolled into a single OTA-safe installation package.<br>\
+APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the HP TouchPad, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
 <li>A new 1.5 GHz kernel operating point (enabled by simply removing speed bin limiters). Note that this is not enabled by default (use Govnah to select a 1.5GHz profile).</li>\
