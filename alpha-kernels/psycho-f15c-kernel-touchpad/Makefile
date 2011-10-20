@@ -9,6 +9,7 @@ Features:<br> * 1.9GHz<br> * autogroup process scheduling<br> * CFS<br> * BFQ an
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-80", "log" : [ "rebuild." ] }, \
 { "version" : "${WEBOS_VERSION}-79", "log" : [ "add load polling for power saver (will run 2 cpus based on load). exclude powerd when in power saver. disable power saver when turbo mode enabled and vice versa." ] }, \
 { "version" : "${WEBOS_VERSION}-78", "log" : [ "misc scheduler patches. update to make Govnah happy." ] }, \
 { "version" : "${WEBOS_VERSION}-74", "log" : [ "make BFQ default. add missing NAS protocols." ] }, \
@@ -35,6 +36,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-19", "log" : [ "Initial release. autogroup process scheduling. CPU HW based alignment. deadline tweak." ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-80: rebuild.<br>\
 ${WEBOS_VERSION}-79: add load polling for power saver (will run 2 cpus based on load). exclude powerd when in power saver. disable power saver when turbo mode enabled and vice versa.<br>\
 ${WEBOS_VERSION}-78: misc scheduler patches. update to make Govnah happy.<br>\
 ${WEBOS_VERSION}-74: make BFQ default. add missing NAS protocols.<br>\

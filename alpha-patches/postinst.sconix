@@ -4,15 +4,15 @@
 # These are expected to be set at packaging time
 #
 
-APP_DIR=/media/cryptofs/apps/usr/palm/applications/org.test.patch
+APP_DIR=
 
-FILES_DIR=additional_files
-
-PATCH_NAME=test.patch
+PATCH_NAME=
 
 TWEAKS_NAME=
 
-BSPATCH_FILE=/usr/lib/pulse-0.9.22/modules/module-suspend-on-idle.so
+BSPATCH_FILE=
+
+FILES_DIR=additional_files
 
 PACKAGES_FILE=package_list
 
@@ -27,6 +27,8 @@ IPKG_INFO_DIR=/usr/lib/ipkg/info
 if [ -z ${IPKG_OFFLINE_ROOT} ]; then
   IPKG_OFFLINE_ROOT=/media/cryptofs/apps
 fi
+
+APP_DIR=${IPKG_OFFLINE_ROOT}${APP_DIR#${IPKG_OFFLINE_ROOT}}
 
 PATCH_LOG_FILE=/media/internal/webos-patches.log
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
@@ -97,13 +99,11 @@ installation_failed() {
 }
 
 get_bck_file() {
-  bck_file="${file}.webosinternals.orig"
+  bck_file=`dirname ${file}`"/.webosinternals.orig."`basename ${file}`
 
-#  bck_file=`dirname ${file}`"/.webosinternals.orig."`basename ${file}`
-
-#  if [ -f ${file}.webosinternals.orig ] && [ ! -f ${bck_file} ]; then
-#    bck_file="${file}.webosinternals.orig"
-#  fi
+	if [ ! -f ${bck_file} ]; then
+		bck_file="${file}.webosinternals.orig"
+	fi
 }
 
 get_palm_md5sum() {
@@ -142,7 +142,7 @@ get_palm_md5sum() {
 
         echo ${md5sums_line} >>/var/webosinternals.md5sums
       else
-        echo "File not found in cryptofs lists, checking palm md5sum files" >> ${PATCH_LOG_FILE}
+        echo "File not found in cryptofs lists, checking system md5sum files" >> ${PATCH_LOG_FILE}
 
         md5sums_line=`grep -h "*.${file}$" ${IPKG_INFO_DIR}/*.md5sums`
 
@@ -213,7 +213,7 @@ verify_text_patch() {
     echo "----------------------------------" >> ${PATCH_LOG_FILE}
     echo >> ${PATCH_LOG_FILE}
 
-    FILE_LIST=`${LSDIFF_EXEC} ${APP_DIR}/${PATCH_NAME}`
+    FILE_LIST=" "`${LSDIFF_EXEC} ${APP_DIR}/${PATCH_NAME}`
 
     for file in ${FILE_LIST} ; do
       if [ -f ${file} ]; then
@@ -287,6 +287,7 @@ verify_binary_patch() {
 
         if [ -f ${bck_file} ]; then
           rm -f /var/webosinternals-*
+
           cp ${bck_file} /var/webosinternals-orig
 
           ${BSPATCH_EXEC} /var/webosinternals-orig /var/webosinternals-patched ${APP_DIR}/${BSPATCH_NAME} 2>&1
@@ -375,7 +376,7 @@ verify_additional_files() {
 
 install_text_patch() {
   if [ -f ${APP_DIR}/${PATCH_NAME} ]; then
-    cp -f ${APP_DIR}/${PATCH_NAME} ${PATCH_CONTROL_DIR}/${PATCH_NAME}
+    cp -f ${APP_DIR}/${PATCH_NAME} ${PATCH_CONTROL_DIR}/backup/${PATCH_NAME}
 
     if [ "${patch_already_applied}" != "yes" ]; then
       echo | tee -a ${PATCH_LOG_FILE}
@@ -400,14 +401,31 @@ install_binary_patch() {
 
       file=${BSPATCH_FILE}
 
+      get_bck_file
+
       echo "patching file ${file#/}" | tee -a ${PATCH_LOG_FILE}
 
       rm -f /var/webosinternals-*
+
       cp ${BSPATCH_FILE} /var/webosinternals-orig
 
       ${BSPATCH_EXEC} /var/webosinternals-orig /var/webosinternals-patched ${APP_DIR}/${BSPATCH_NAME} 2>&1 | tee -a ${PATCH_LOG_FILE}
 
-      mv -f /var/webosinternals-patched ${BSPATCH_FILE}
+      cp -f /var/webosinternals-patched ${BSPATCH_FILE}
+
+      if [ "${?}" = "1" ]; then
+        stop `basename ${BSPATCH_FILE}` >/dev/null 2>&1
+        sleep 5
+
+        cp -f /var/webosinternals-patched ${BSPATCH_FILE}
+
+        start `basename ${BSPATCH_FILE}` >/dev/null 2>&1
+      fi
+
+      if [ -x ${bck_file} ]; then
+        chmod 755 ${BSPATCH_FILE}
+      fi
+
       rm -f /var/webosinternals-*
     fi
   fi
@@ -460,10 +478,10 @@ check_ota_update() {
     get_palm_md5sum
 
     if [ -f ${bck_file} ]; then
-      file_md5sum=`md5sum ${file} | awk '{print $1}'`
+      orig_md5sum=`md5sum ${file} | awk '{print $1}'`
 
-      if [ "${file_md5sum}" = "${palm_md5sum}" ]; then
-        echo "File matches current Palm md5sum, assuming OTA" >> ${PATCH_LOG_FILE}
+      if [ "${orig_md5sum}" = "${palm_md5sum}" ]; then
+        echo "File matches current system md5sum, assuming OTA" >> ${PATCH_LOG_FILE}
         echo "  file: ${file}" >> ${PATCH_LOG_FILE}
 
         rm -f ${bck_file}
@@ -602,65 +620,44 @@ if [ ! -d ${APP_DIR} ]; then
 fi
 
 if [ ! -f ${APP_DIR}/${PATCH_NAME} ] && [ ! -f ${APP_DIR}/${BSPATCH_NAME} ] && [ ! -d ${APP_DIR}/${FILES_DIR} ]; then
-  echo "ERROR: Cannot find patch file, bspatch file or additonal_files!" | tee -a ${PATCH_LOG_FILE} 1>&2
+  echo "ERROR: Cannot find patch file, bspatch file or files directory!" | tee -a ${PATCH_LOG_FILE} 1>&2
   do_install_failure
 fi
 
 #
-# Intialize and update the patch control/backup system
+# Intialize and update the patch backup/control system
 #
 
-if [ ! -d ${PATCH_CONTROL_DIR} ]; then
-  rm -rf ${PATCH_CONTROL_DIR}
+if [ ! -d ${PATCH_CONTROL_DIR}/backup ]; then
+  rm -rf ${PATCH_CONTROL_DIR} >/dev/null 2>&1
 
-  mkdir -p ${PATCH_CONTROL_DIR} || do_install_failure
+  mkdir -p ${PATCH_CONTROL_DIR}/backup || do_install_failure
+fi
+
+if [ -f ${PATCH_CONTROL_DIR}/backups ]; then
+	echo "ERROR: Old backup system detected, not supported by aupt-5!"
+	do_install_failure
+fi
+
+if [ -f ${PATCH_CONTROL_DIR}/packages ]; then
+	echo "ERROR: Old control system detected, not supported by aupt-5!"
+	do_install_failure
 fi
 
 if [ ! -f ${PATCH_CONTROL_DIR}/file_list ]; then
   touch ${PATCH_CONTROL_DIR}/file_list || do_install_failure
 fi
 
-if [ ! -f ${PATCH_CONTROL_DIR}/file_md5sums ]; then
-  touch ${PATCH_CONTROL_DIR}/file_md5sums || do_install_failure
-fi
-
 if [ ! -f ${PATCH_CONTROL_DIR}/file_control ]; then
   touch ${PATCH_CONTROL_DIR}/file_control || do_install_failure
 fi
 
+if [ ! -f ${PATCH_CONTROL_DIR}/file_md5sums ]; then
+  touch ${PATCH_CONTROL_DIR}/file_md5sums || do_install_failure
+fi
+
 if [ ! -f ${PATCH_PACKAGES_FILE} ]; then
   touch ${PATCH_PACKAGES_FILE} || do_install_failure
-fi
-
-if [ -f ${PATCH_CONTROL_DIR}/backups ]; then
-  rm -f ${PATCH_CONTROL_DIR}/translated_backups
-
-  cat ${PATCH_CONTROL_DIR}/backups | tr '\0' ' ' > ${PATCH_CONTROL_DIR}/translated_backups
-
-  while read inp ; do
-    patch_technology=`echo ${inp} | awk '{print $(NF)}' | grep aupt`
-
-    if [ -z "${patch_technology}" ]; then
-      file=`echo ${inp} | awk '{print $(NF)}'`
-    else
-      file=`echo ${inp} | awk '{print $(NF-1)}'`
-    fi
-
-    if [ -f ${file} ]; then
-      echo "${file} ${patch_technology}" >> ${PATCH_CONTROL_DIR}/file_list
-    fi
-  done < ${PATCH_CONTROL_DIR}/translated_backups
-
-  rm -f ${PATCH_CONTROL_DIR}/backups
-  rm -f ${PATCH_CONTROL_DIR}/translated_backups
-fi
-
-if [ -f ${PATCH_CONTROL_DIR}/packages ]; then
-  touch ${PATCH_PACKAGES_FILE}
-
-  cat ${PATCH_CONTROL_DIR}/packages >> ${PATCH_PACKAGES_FILE}
-
-  rm -f ${PATCH_CONTROL_DIR}/packages
 fi
 
 rm -f /var/webosinternals.md5sums >/dev/null 2>&1
