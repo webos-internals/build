@@ -81,6 +81,18 @@ build/.built-${VERSION}: build/.unpacked-${VERSION} build/.meta-${META_VERSION} 
 ifneq ("${TWEAKS}", "")
 	cp build/src-${VERSION}/${TWEAKS} build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/
 endif
+	rm -f build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/package_list
+	touch build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/package_list
+	for f in `lsdiff --strip=1 build/src-${VERSION}/${PATCH}` ; do \
+		myvar=`grep -l $$f build/ipkg-info-${WEBOS_VERSION}/*`; \
+		if [ "$$myvar" != "" ]; then \
+			myvar=`basename $$myvar .list`; \
+			grep $$myvar build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/package_list; \
+			if [ $$? -ne 0 ]; then \
+				echo $$myvar >> build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/package_list; \
+			fi; \
+		fi; \
+	done
 ifdef BSPATCH
 ifdef BSFILE
 	if [ -e build/src-${VERSION}/${BSPATCH} ]; then \
@@ -109,6 +121,7 @@ endif
 build/${ARCHITECTURE}/CONTROL/prerm: build/.unpacked-${VERSION}
 	mkdir -p build/${ARCHITECTURE}/CONTROL
 	sed -e 's|^PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' \
+			-e 's|^TWEAKS_NAME=|TWEAKS_NAME=$(shell basename ${TWEAKS})|' \
 			-e 's|^BSPATCH_FILE=|BSPATCH_FILE=${BSFILE}|' \
 			-e 's|^APP_DIR=|APP_DIR=/media/cryptofs/apps/usr/palm/applications/${APP_ID}|' ../prerm${SUFFIX} > build/${ARCHITECTURE}/CONTROL/prerm
 	chmod ugo+x $@
@@ -116,6 +129,7 @@ build/${ARCHITECTURE}/CONTROL/prerm: build/.unpacked-${VERSION}
 build/${ARCHITECTURE}/CONTROL/postinst: build/.unpacked-${VERSION}
 	mkdir -p build/${ARCHITECTURE}/CONTROL
 	sed -e 's|^PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' \
+			-e 's|^TWEAKS_NAME=|TWEAKS_NAME=$(shell basename ${TWEAKS})|' \
 			-e 's|^BSPATCH_FILE=|BSPATCH_FILE=${BSFILE}|' \
 			-e 's|^APP_DIR=|APP_DIR=/media/cryptofs/apps/usr/palm/applications/${APP_ID}|' ../postinst${SUFFIX} > build/${ARCHITECTURE}/CONTROL/postinst
 	chmod ugo+x $@

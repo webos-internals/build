@@ -4,15 +4,15 @@
 # These are expected to be set at packaging time
 #
 
-APP_DIR=/media/cryptofs/apps/usr/palm/applications/org.test.patch
+APP_DIR=
 
-FILES_DIR=additional_files
-
-PATCH_NAME=test.patch
+PATCH_NAME=
 
 TWEAKS_NAME=
 
-BSPATCH_FILE=/usr/lib/pulse-0.9.22/modules/module-suspend-on-idle.so
+BSPATCH_FILE=
+
+FILES_DIR=additional_files
 
 PACKAGES_FILE=package_list
 
@@ -27,6 +27,8 @@ IPKG_INFO_DIR=/usr/lib/ipkg/info
 if [ -z ${IPKG_OFFLINE_ROOT} ]; then
   IPKG_OFFLINE_ROOT=/media/cryptofs/apps
 fi
+
+APP_DIR=${IPKG_OFFLINE_ROOT}${APP_DIR#${IPKG_OFFLINE_ROOT}}
 
 PATCH_LOG_FILE=/media/internal/webos-patches.log
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
@@ -97,13 +99,11 @@ uninstallation_failed() {
 }
 
 get_bck_file() {
-  bck_file="${file}.webosinternals.orig"
+  bck_file=`dirname ${file}`"/.webosinternals.orig."`basename ${file}`
 
-#  bck_file=`dirname ${file}`"/.webosinternals.orig."`basename ${file}`
-
-#  if [ -f ${file}.webosinternals.orig ] && [ ! -f ${bck_file} ]; then
-#    bck_file="${file}.webosinternals.orig"
-#  fi
+	if [ ! -f ${bck_file} ]; then
+		bck_file="${file}.webosinternals.orig"
+	fi
 }
 
 get_palm_md5sum() {
@@ -142,7 +142,7 @@ get_palm_md5sum() {
 
         echo ${md5sums_line} >>/var/webosinternals.md5sums
       else
-        echo "File not found in cryptofs lists, checking palm md5sum files" >> ${PATCH_LOG_FILE}
+        echo "File not found in cryptofs lists, checking system md5sum files" >> ${PATCH_LOG_FILE}
 
         md5sums_line=`grep -h "*.${file}$" ${IPKG_INFO_DIR}/*.md5sums`
 
@@ -207,7 +207,7 @@ check_cryptofs_lists() {
 
 verify_text_patch() {
   if [ -f ${APP_DIR}/${PATCH_NAME} ]; then
-    FILE_LIST=`${LSDIFF_EXEC} ${APP_DIR}/${PATCH_NAME}`
+    FILE_LIST=" "`${LSDIFF_EXEC} ${APP_DIR}/${PATCH_NAME}`
 
     echo >> ${PATCH_LOG_FILE}
     echo "----------------------------------" >> ${PATCH_LOG_FILE}
@@ -326,9 +326,7 @@ verify_additional_files() {
 
 remove_text_patch() {
   if [ -f ${APP_DIR}/${PATCH_NAME} ]; then
-    if [ -f ${PATCH_CONTROL_DIR}/${PATCH_NAME} ]; then
-      rm -f ${PATCH_CONTROL_DIR}/${PATCH_NAME}
-    fi
+    rm -f ${PATCH_CONTROL_DIR}/backup/${PATCH_NAME} >/dev/null 2>&1
 
     if [ "${patch_already_unapplied}" != "yes" ]; then
       echo | tee -a ${PATCH_LOG_FILE}
@@ -383,7 +381,7 @@ remove_additional_files() {
         if [ ! -s ${bck_file} ]; then
           rm -f ${file} 2>&1 | tee -a ${PATCH_LOG_FILE}
         elif [ "${FILES_DIR}" = "files" ]; then
-          mv -f ${bck_file} ${file} 2>&1 | tee -a ${PATCH_LOG_FILE}
+          cp -f ${bck_file} ${file} 2>&1 | tee -a ${PATCH_LOG_FILE}
         fi
       fi
     done
@@ -422,7 +420,7 @@ check_ota_update() {
       if [ -z "${palm_md5sum}" ]; then
         CREATED_LIST="${CREATED_LIST} ${file}"
       elif [ "${palm_md5sum}" = "${file_md5sum}" ]; then
-        echo "File matches current Palm md5sum, assuming OTA" >> ${PATCH_LOG_FILE}
+        echo "File matches current md5sum, assuming OTA" >> ${PATCH_LOG_FILE}
         echo "  file: ${file}" >> ${PATCH_LOG_FILE}
 
         cp -f ${file} ${bck_file}
@@ -465,7 +463,7 @@ clean_backup_files() {
     get_bck_file
 
     if [ -f ${file} ]; then
-      echo "Removing created file or old Palm file" >> ${PATCH_LOG_FILE}
+      echo "Removing created file or old system file" >> ${PATCH_LOG_FILE}
       echo "  file: ${file}" >>${PATCH_LOG_FILE}
 
       rm -f ${file}
@@ -476,7 +474,7 @@ clean_backup_files() {
     get_bck_file
 
     if [ -f ${bck_file} ]; then
-      echo "Restoring unmodified or updated Palm file" >> ${PATCH_LOG_FILE}
+      echo "Restoring unmodified or updated system file" >> ${PATCH_LOG_FILE}
       echo "  file: ${file}" >>${PATCH_LOG_FILE}
 
       mv -f ${bck_file} ${file}
@@ -513,7 +511,7 @@ clean_backup_files() {
           echo "Removing unneeded generated backup file" >>${PATCH_LOG_FILE}
           echo "  file: ${bck_file}" >>${PATCH_LOG_FILE}
         else
-          echo "Removing unneeded backup of original file" >>${PATCH_LOG_FILE}
+          echo "Removing unneeded backup of system file" >>${PATCH_LOG_FILE}
           echo "  file: ${bck_file}" >>${PATCH_LOG_FILE}
         fi
 
@@ -602,7 +600,7 @@ if [ ! -d ${APP_DIR} ]; then
 fi
 
 if [ ! -f ${APP_DIR}/${PATCH_NAME} ] && [ ! -f ${APP_DIR}/${BSPATCH_NAME} ] && [ ! -d ${APP_DIR}/${FILES_DIR} ]; then
-  echo "ERROR: Cannot find patch file, bspatch file or additonal_files!" | tee -a ${PATCH_LOG_FILE} 1>&2
+  echo "ERROR: Cannot find patch file, bspatch file or files directory!" | tee -a ${PATCH_LOG_FILE} 1>&2
   do_install_failure
 fi
 
@@ -633,3 +631,4 @@ clean_backup_files
 do_remove_success
 
 exit 0
+
