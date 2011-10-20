@@ -1,9 +1,10 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = messaging/${NAME}.patch
+TWEAKS =
 TITLE = SMS Vibrate to Two Seconds
 DESCRIPTION = Extends the vibrate time to two second whenever you alerted for a SMS message.
 CATEGORY = Messaging
-VERSIONS = 2.1.0-11
+VERSIONS = 1.4.5-176 2.1.0-11
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
