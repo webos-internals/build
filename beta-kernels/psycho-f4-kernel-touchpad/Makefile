@@ -8,6 +8,7 @@ Features:<br> * 1.8GHz<br> * Full-time dual-core<br> * autogroup process schedul
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-81", "log" : [ "rebuild." ] }, \
 { "version" : "${WEBOS_VERSION}-79", "log" : [ "add load polling for power saver. exclude powerd when in power saver. disable power saver when turbo mode enabled and vice versa." ] }, \
 { "version" : "${WEBOS_VERSION}-78", "log" : [ "update sysfs for Govnah support." ] }, \
 { "version" : "${WEBOS_VERSION}-73", "log" : [ "online or offline cpu when changing sysfs. fix power save logic when enabled/disabled. remove unscalable freqs and voltages in arrays when setting in sysfs. make powersaver do the correct thing. merge override modules." ] }, \
@@ -22,6 +23,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-44", "log" : [ "Initial release. UTF8, ATA over Ethernet added. sysfs to enable or disable turbo_mode (fulltime dualcore)." ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-81: rebuild..<br>\
 ${WEBOS_VERSION}-79: add load polling for power saver. exclude powerd when in power saver. disable power saver when turbo mode enabled and vice versa.<br>\
 ${WEBOS_VERSION}-78: update sysfs for Govnah support.<br>\
 ${WEBOS_VERSION}-73: online or offline cpu when changing sysfs. fix power save logic when enabled/disabled. remove unscalable freqs and voltages in arrays when setting in sysfs. make powersaver do the correct thing. merge override modules.<br>\
