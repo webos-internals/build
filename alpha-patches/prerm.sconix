@@ -276,6 +276,7 @@ verify_binary_patch() {
 
         if [ -f ${bck_file} ]; then
           rm -f /var/webosinternals-*
+
           cp ${bck_file} /var/webosinternals-orig
 
           ${BSPATCH_EXEC} /var/webosinternals-orig /var/webosinternals-patched ${APP_DIR}/${BSPATCH_NAME} 2>&1
@@ -357,6 +358,15 @@ remove_binary_patch() {
 
       if [ -f ${bck_file} ]; then
         cp -f ${bck_file} ${file} 2>&1 | tee -a ${PATCH_LOG_FILE}
+
+        if [ "${?}" = "1" ]; then
+          stop `basename ${file}` >/dev/null 2>&1
+          sleep 5
+
+          cp -f ${bck_file} ${file}
+
+          start `basename ${file}` >/dev/null 2>&1
+        fi
       fi
     fi
   fi

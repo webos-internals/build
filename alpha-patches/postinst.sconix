@@ -287,6 +287,7 @@ verify_binary_patch() {
 
         if [ -f ${bck_file} ]; then
           rm -f /var/webosinternals-*
+
           cp ${bck_file} /var/webosinternals-orig
 
           ${BSPATCH_EXEC} /var/webosinternals-orig /var/webosinternals-patched ${APP_DIR}/${BSPATCH_NAME} 2>&1
@@ -400,14 +401,31 @@ install_binary_patch() {
 
       file=${BSPATCH_FILE}
 
+      get_bck_file
+
       echo "patching file ${file#/}" | tee -a ${PATCH_LOG_FILE}
 
       rm -f /var/webosinternals-*
+
       cp ${BSPATCH_FILE} /var/webosinternals-orig
 
       ${BSPATCH_EXEC} /var/webosinternals-orig /var/webosinternals-patched ${APP_DIR}/${BSPATCH_NAME} 2>&1 | tee -a ${PATCH_LOG_FILE}
 
-      mv -f /var/webosinternals-patched ${BSPATCH_FILE}
+      cp -f /var/webosinternals-patched ${BSPATCH_FILE}
+
+      if [ "${?}" = "1" ]; then
+        stop `basename ${BSPATCH_FILE}` >/dev/null 2>&1
+        sleep 5
+
+        cp -f /var/webosinternals-patched ${BSPATCH_FILE}
+
+        start `basename ${BSPATCH_FILE}` >/dev/null 2>&1
+      fi
+
+      if [ -x ${bck_file} ]; then
+        chmod 755 ${BSPATCH_FILE}
+      fi
+
       rm -f /var/webosinternals-*
     fi
   fi
