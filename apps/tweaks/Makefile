@@ -4,7 +4,7 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.prefs
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.6.1
+VERSION  = 1.6.2
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Tweaks
@@ -12,6 +12,7 @@ ICON	 = http://www.webos-internals.org/images/2/2e/Tweaks-icon.png
 DESCRIPTION = Tweaks for your webOS device.
 MINWEBOSVERSION = 2.0.0
 CHANGELOG = \
+1.6.2: Small fix for the installation of the service.<br>\
 1.6.1: Fixed the black bar in Mojo UI for Pre3.<br>\
 1.6.0: First public release of tweaks with enyo UI.<br>\
 1.5.2: Small update for the tablet user interface.<br>\
