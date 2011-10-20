@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F4 Phantom (TouchPad)
 DEVICE = touchpad
 CATEGORY = Beta
-VERSIONS = 3.0.2-81
+VERSIONS = 3.0.2-79 3.0.4-81
 APPINFO_DESCRIPTION = The latest beta kernel from uNiXpSyChO.<br><br>\
 Features:<br> * 1.8GHz<br> * Full-time dual-core<br> * autogroup process scheduling<br> * CFS<br> * BFQ, V(R), SIO<br> * CIFS, NFS, iSCSI, ATA over Ethernet<br> * EXT4<br><br>\
 For more information, visit ${HOMEPAGE}<br>
