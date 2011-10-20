@@ -262,7 +262,7 @@ ifeq ("${WEBOS_VERSION}", "3.0.4")
 ifeq ("${DEVICE}","touchpad")
 COMPATIBLE_VERSIONS = 3.0.4
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/3.0.4/linuxkernel-${KERNEL_VERSION}.patches.tgz
-KERNEL_SUBMISSION = kernelpatch-3.0.2.txt
+KERNEL_SUBMISSION = kernel-3.0.4.txt
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
 endif

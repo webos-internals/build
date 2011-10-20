@@ -1,10 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = F15C Eagle (TouchPad)
 DEVICE = touchpad
-CATEGORY = Experimental
-VERSIONS = 3.0.2-79 3.0.4-79
-APPINFO_DESCRIPTION = Note that we are waiting on HP to publish the correct source code for the webOS 3.0.4 kernel.  This kernel is built from webOS 3.0.2 source code, and as a result anything using the camera or video does not work correctly.<br>\
-The latest <b>alpha test</b> kernel from uNiXpSyChO.<br><br>\
+CATEGORY = Alpha
+VERSIONS = 3.0.2-79 3.0.4-80
+APPINFO_DESCRIPTION = The latest <b>alpha test</b> kernel from uNiXpSyChO.<br><br>\
 Features:<br> * 1.9GHz<br> * autogroup process scheduling<br> * CFS<br> * BFQ and SIO<br> * EXT4<br> * Various tweaks<br>\
 <br><b>NOTE: CPU core 2 will mostly stay idle. This is by webOS default, NOT a kernel problem. If you want to test this, run a Sunspider benchmark. Do not report CPU core 2 bugs.</b><br><br>\
 For more information, visit ${HOMEPAGE}<br>
