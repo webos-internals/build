@@ -1,14 +1,18 @@
 #!/bin/sh
 
 APPID=org.webosinternals.fonts.xfonts-base
-FONTDIR=misc
-
 APPS=/media/cryptofs/apps
 
 [ -d ${APPS} ] || { echo "Requires webOS 1.3.5 or later" ; exit 1 ; }
 
 APPDIR=${APPS}/usr/palm/applications/${APPID}
 
-rm -rf /usr/share/fonts/X11/${FONTDIR}
+# Link over files, creating folders as needed.
+cd ${APPDIR}
+FILES=`find . -type f`
+for i in $FILES; do
+  mkdir -p `dirname /usr/share/fonts/$i`
+  ln -s ${APPDIR}/$i /usr/share/fonts/$i
+done
 
 exit 0
