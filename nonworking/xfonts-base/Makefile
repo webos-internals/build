@@ -77,7 +77,7 @@ build/.built-${VERSION}: ${FONT_TARGETS}
 	$(foreach font,$(FONTS), \
 		cd build/$(font) && make install DESTDIR=$(INSTALL_PREFIX)$(newline))
 	mkdir -p build/all/usr/palm/applications/${APP_ID}/
-	cp -r ${INSTALL_PREFIX}/usr/share/fonts build/all/usr/palm/applications/${APP_ID}/
+	cp -r ${INSTALL_PREFIX}/usr/share/fonts/* build/all/usr/palm/applications/${APP_ID}/
 	touch $@
 
 clobber::

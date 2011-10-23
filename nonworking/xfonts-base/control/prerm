@@ -8,8 +8,29 @@ APPS=/media/cryptofs/apps
 
 APPDIR=${APPS}/usr/palm/applications/${APPID}
 
-for i in ${APPDIR}/*; do
-  rm /usr/share/fonts/`basename $i`
+# In theory all files in this packages have corresponding
+# symlinks from /usr/share/fonts.
+# Iterate over them, ensuring this is the case.
+# Don't remove files that are somehow from elsewhere.
+cd ${APPDIR}
+for i in ./*; do
+  FILE=/usr/share/fonts/$i
+  TARGETFILE=`readlink -f $FILE`
+  OURS=`readlink -f ${APPDIR}/$i`
+
+  # If the file doesn't exist at all, then ignore it
+  if [ ! -e $TARGETFILE ]; then
+    continue
+  fi
+
+  # Is file symlink to our copy?
+  # If so, remove it.
+  if [ "$TARGETFILE" = "$OURS" ]; then
+    rm -rf $FILE
+  else
+    echo "File $i is not from this package? Ignoring.."
+    # Just let it go.
+    # exit 1
+  fi
 done
 
-exit 0
