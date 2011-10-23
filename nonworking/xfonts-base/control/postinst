@@ -1,6 +1,7 @@
 #!/bin/sh
 
 APPID=org.webosinternals.fonts.xfonts-base
+FONTDIR=misc
 
 APPS=/media/cryptofs/apps
 
@@ -8,6 +9,7 @@ APPS=/media/cryptofs/apps
 
 APPDIR=${APPS}/usr/palm/applications/${APPID}
 
-cd /usr/share/fonts; ln -s ${APPDIR}/* .
+mkdir -p /usr/share/fonts/X11
+cd /usr/share/fonts/X11; ln -s ${APPDIR}/${FONTDIR}
 
 exit 0
