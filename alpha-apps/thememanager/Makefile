@@ -4,7 +4,7 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.srv
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.5.1
+VERSION  = 0.5.5
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/webos-internals/303050-theme-manager.html#post3201074
@@ -12,6 +12,10 @@ ICON	 = http://www.webos-internals.org/images/9/9d/Icon_Theme-Manager.png
 DESCRIPTION = Theme Manager for you device.
 MINWEBOSVERSION = 2.1.0
 CHANGELOG = \
+0.5.5: Small fixes and added support for Boot Logo component.<br>\
+0.5.4: Interface fine tuning for both phones and TouchPad.<br>\
+0.5.3: Few interface fixes when running on TouchPad.<br>\
+0.5.2: Few interface fixes and theme installation fix.<br>\
 0.5.1: Couple small bug and typo fixes.<br>\
 0.5.0: First beta release with many changes.<br>\
 0.2.0: Added support for phones with enyo.<br>\
