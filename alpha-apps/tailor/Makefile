@@ -3,7 +3,7 @@ TITLE    = Tailor
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.0.2
+VERSION  = 0.0.3
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Tailor
@@ -11,11 +11,13 @@ ICON	 = http://www.webos-internals.org/images/a/aa/Tux_Imposter.png
 DESCRIPTION = Tailor allows you to tailor the storage on your device.  This alpha release only supports unmount partition, check fileystem and mount parition.  All other operations are simulated.
 MINWEBOSVERSION = 2.1.0
 CHANGELOG = \
+0.0.3: Highlight selected partition, and update filesystem sizes during simulations.<br>\
 0.0.2: Alpha release to check UI workflows and installation pipecleaning.<br>\
 0.0.1: Initial skeleton.
 
 SCREENSHOTS = [\
-]
+\"http://www.webos-internals.org/images/f/fa/Tailor_ss1.png\", \
+\"http://www.webos-internals.org/images/d/d9/Tailor_ss2.png\" ]
 LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://git.webos-internals.org/applications/tailor.git
