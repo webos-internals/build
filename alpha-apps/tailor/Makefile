@@ -42,14 +42,8 @@ build: build/.built-${VERSION}
 build/.built-${VERSION}: build/arm.built-${VERSION} build/i686.built-${VERSION}
 	touch $@
 
-include ../../support/cross-compile.mk
-
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
-	( cd build/src/src ; \
-	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc \
-	  clobber ${NAME} \
-	)
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
