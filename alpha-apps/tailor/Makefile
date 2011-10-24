@@ -21,7 +21,7 @@ LICENSE  = GPL v2 Open Source
 SRC_GIT = git://git.webos-internals.org/applications/tailor.git
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
+package: ipkgs/${APP_ID}_${VERSION}_all.ipk
 include ../../support/package.mk
 
 include ../../support/download.mk
@@ -39,18 +39,15 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/arm.built-${VERSION} build/i686.built-${VERSION}
-	touch $@
-
-build/%.built-${VERSION}: build/.unpacked-${VERSION}
-	rm -rf build/$*
-	mkdir -p build/$*/usr/palm/applications/${APP_ID}
-	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
-	rm -rf build/$*/usr/palm/applications/${APP_ID}/src
-	mkdir -p build/$*/usr/palm/services/${APP_ID}.node
-	cp -r build/src/node/* build/$*/usr/palm/services/${APP_ID}.node/
-	mkdir -p build/$*/usr/palm/packages/${APP_ID}
-	cp -r build/src/package/* build/$*/usr/palm/packages/${APP_ID}/
+build/.built-${VERSION}: build/.unpacked-${VERSION}
+	rm -rf build/all
+	mkdir -p build/all/usr/palm/applications/${APP_ID}
+	cp -r build/src/* build/all/usr/palm/applications/${APP_ID}/
+	rm -rf build/all/usr/palm/applications/${APP_ID}/src
+	mkdir -p build/all/usr/palm/services/${APP_ID}.node
+	cp -r build/src/node/* build/all/usr/palm/services/${APP_ID}.node/
+	mkdir -p build/all/usr/palm/packages/${APP_ID}
+	cp -r build/src/package/* build/all/usr/palm/packages/${APP_ID}/
 	touch $@
 
 build/%/CONTROL/postinst:
