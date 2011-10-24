@@ -2,12 +2,13 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F4 Phantom (TouchPad)
 DEVICE = touchpad
 CATEGORY = Beta
-VERSIONS = 3.0.2-79 3.0.4-81
+VERSIONS = 3.0.2-79 3.0.4-82
 APPINFO_DESCRIPTION = The latest beta kernel from uNiXpSyChO.<br><br>\
-Features:<br> * 1.8GHz<br> * Full-time dual-core<br> * autogroup process scheduling<br> * CFS<br> * BFQ, V(R), SIO<br> * CIFS, NFS, iSCSI, ATA over Ethernet<br> * EXT4<br><br>\
+Features:<br> * 1.8GHz<br> * Full-time dual-core<br> * CFS<br> * BFQ, V(R), SIO<br> * CIFS, NFS, iSCSI, ATA over Ethernet<br> * EXT4<br><br>\
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-82", "log" : [ "override module cleanup. re-increase video bus bandwidth." ] }, \
 { "version" : "${WEBOS_VERSION}-81", "log" : [ "rebuild." ] }, \
 { "version" : "${WEBOS_VERSION}-79", "log" : [ "add load polling for power saver. exclude powerd when in power saver. disable power saver when turbo mode enabled and vice versa." ] }, \
 { "version" : "${WEBOS_VERSION}-78", "log" : [ "update sysfs for Govnah support." ] }, \
@@ -23,6 +24,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-44", "log" : [ "Initial release. UTF8, ATA over Ethernet added. sysfs to enable or disable turbo_mode (fulltime dualcore)." ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-82: override module cleanup. re-increase video bus bandwidth.<br>\
 ${WEBOS_VERSION}-81: rebuild..<br>\
 ${WEBOS_VERSION}-79: add load polling for power saver. exclude powerd when in power saver. disable power saver when turbo mode enabled and vice versa.<br>\
 ${WEBOS_VERSION}-78: update sysfs for Govnah support.<br>\
@@ -50,11 +52,9 @@ KERNEL_PATCHES = identification/mkcompile_h.patch \
 		 psychobuild/iosched-deadline.patch \
 		 psychobuild/cache-p1.patch \
 		 psychobuild/sched-p1.patch \
-		 psychobuild/clock-p1.patch \
 		 psychobuild/mmc-p1.patch \
 		 psychobuild/mmc-p2.patch \
 		 memory/tmc_mem.patch \
-		 psychobuild/autogroup.patch \
 		 psychobuild/jhash3.patch
 
 TYPE = Kernel
