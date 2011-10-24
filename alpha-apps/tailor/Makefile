@@ -3,7 +3,7 @@ TITLE    = Tailor
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.0.5
+VERSION  = 0.0.6
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Tailor
@@ -11,6 +11,7 @@ ICON	 = http://www.webos-internals.org/images/a/aa/Tux_Imposter.png
 DESCRIPTION = Tailor allows you to tailor the storage on your device.  This alpha release only supports unmount partition, check fileystem and mount parition.  All other operations are simulated.
 MINWEBOSVERSION = 2.1.0
 CHANGELOG = \
+0.0.6: Support different block sizes (Android uses 1KiB instead of 4KiB).<br>\
 0.0.5: Fixed the post-install and pre-remove scripts.<br>\
 0.0.4: Added the ability to unmount items from inside jails.<br>\
 0.0.3: Highlight selected partition, and update filesystem sizes during simulations.<br>\
