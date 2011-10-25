@@ -1,0 +1,178 @@
+#!/bin/sh
+
+PACKAGE=org.webosinternals.emergency-patch-recovery
+
+IPKG_INFO_DIR=/usr/lib/ipkg/info
+
+PATCH_LOG_FILE=/media/internal/webos-patches.log
+PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
+PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
+
+mount -o rw,remount /
+
+if [ ! -e ${PATCH_LOG_FILE} ]; then
+  echo "******* Patch Log Created by EPR $(date) ************" > ${PATCH_LOG_FILE}
+fi
+
+echo "" >> ${PATCH_LOG_FILE}
+echo "------------------------------------------------------" >> ${PATCH_LOG_FILE}
+echo "Emergency Patch Recovery $(date)" >> ${PATCH_LOG_FILE}
+echo "------------------------------------------------------" >> ${PATCH_LOG_FILE}
+
+if [ -z "${IPKG_OFFLINE_ROOT}" ]; then
+  echo "ERROR: IPKG_OFFLINE_ROOT must be supplied to the postinst" | tee -a ${PATCH_LOG_FILE}
+
+  exit 1
+fi
+
+if [ ! -d ${PATCH_CONTROL_DIR} ]; then
+  echo "NOTE: No patches found!" | tee -a ${PATCH_LOG_FILE}
+
+  ipkg -o ${IPKG_OFFLINE_ROOT} remove ${PACKAGE}
+
+  exit 1
+fi
+
+if [ -e ${PATCH_CONTROL_DIR}/packages ]; then
+  touch ${PATCH_PACKAGES_LIST}
+
+  cat ${PATCH_CONTROL_DIR}/packages >> ${PATCH_PACKAGES_LIST}
+
+  rm -f ${PATCH_CONTROL_DIR}/packages
+fi
+
+if [ -e ${PATCH_PACKAGES_LIST} ]; then
+  while read i ; do
+    package=`echo ${i} | awk '{print $1}'`
+    version=`echo ${i} | awk '{print $2}'`
+
+    if [ -z "${version}" ]; then
+      version=aupt-1
+    fi
+
+    echo "" >> ${PATCH_LOG_FILE}
+    echo "------------------------------------------------------" >> ${PATCH_LOG_FILE}
+    echo "Removing package: ${package}" >> ${PATCH_LOG_FILE}
+    echo "Patch technology: ${version}" >> ${PATCH_LOG_FILE}
+    echo "------------------------------------------------------" >> ${PATCH_LOG_FILE}
+    echo "" >> ${PATCH_LOG_FILE}
+    echo "Remove from /var..." >> ${PATCH_LOG_FILE}
+
+    ipkg -o /var --force-depends remove ${package} | tee -a ${PATCH_LOG_FILE}
+
+    echo "" >> ${PATCH_LOG_FILE}
+    echo "Remove from /media/cryptofs/apps..." >> ${PATCH_LOG_FILE}
+
+    ipkg -o /media/cryptofs/apps --force-depends remove ${package} | tee -a ${PATCH_LOG_FILE}
+
+    echo "" >> ${PATCH_LOG_FILE}
+  done < ${PATCH_PACKAGES_LIST}
+fi
+
+if [ -e ${PATCH_CONTROL_DIR}/backups ]; then
+  touch ${PATCH_CONTROL_DIR}/file_list
+
+  rm -f ${PATCH_CONTROL_DIR}/translated_backups
+
+  cat ${PATCH_CONTROL_DIR}/backups | tr '\0' ' ' > ${PATCH_CONTROL_DIR}/translated_backups
+
+  while read i ; do
+    patch_technology=`echo ${i} | awk '{print $(NF)}' | grep aupt`
+
+    if [ -z "${patch_technology}" ]; then
+      file=`echo ${i} | awk '{print $(NF)}'`
+    else
+      file=`echo ${i} | awk '{print $(NF-1)}'`
+    fi
+
+    if [ -e ${file} ]; then
+      echo "${file} ${patch_technology}" >> ${PATCH_CONTROL_DIR}/file_list
+    fi
+  done < ${PATCH_CONTROL_DIR}/translated_backups
+
+  rm -f ${PATCH_CONTROL_DIR}/translated_backups
+
+  rm -f ${PATCH_CONTROL_DIR}/backups
+fi
+
+if [ -e ${PATCH_CONTROL_DIR}/file_list ]; then
+  while read i ; do
+    file=`echo ${i} | awk '{print $1}'`
+    version=`echo ${i} | awk '{print $2}'`
+
+    file_md5sum=`md5sum ${file} | awk '{print $1}'`
+
+    palm_md5sum=`grep -h ${file} ${IPKG_INFO_DIR}/*.md5sums | awk '{print $1}'`
+
+    if [ -z "${palm_md5sum}" ]; then
+      file_line=`grep "^${file#${IPKG_OFFLINE_ROOT}}$" ${IPKG_OFFLINE_ROOT}/${IPKG_INFO_DIR}/*.list`
+
+      if [ ! -z "${file_line}" ]; then
+        list_file=`echo "${file_line}" | cut -d ':' -f 1`
+
+        package=`basename ${list_file} .list`
+
+        control_file=`dirname ${list_file}`/${package}.control
+
+        cur_version=`grep "^Version: " ${control_file} | awk '{print $2}'`
+
+        control_line=`grep "^${package} ${file} " ${PATCH_CONTROL_DIR}/file_control`
+
+        ctl_version=`echo ${control_line} | awk '{print $3}'`
+
+        if [ ! -f ${file}.webosinternals.orig ] || [ "${cur_version}" != "${ctl_version}" ]; then
+          palm_md5sum=`md5sum ${file}`
+        else
+          palm_md5sum=`md5sum ${file}.webosinternals.orig`
+        fi
+      fi
+    fi
+
+    if [ -z "${version}" ]; then
+      version=aupt-1
+    fi
+
+    echo "Checking file: ${file}" >> ${PATCH_LOG_FILE}
+    echo "Patch technology: ${version}" >> ${PATCH_LOG_FILE}
+    echo "  palm md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
+    echo "  file md5sum: ${file_md5sum}" >> ${PATCH_LOG_FILE}
+
+    if [ "${palm_md5sum}" = "${file_md5sum}" ]; then
+      echo "Existing file matches Palm md5sum (maybe due to OTA update)" | tee -a ${PATCH_LOG_FILE}
+      echo "Removing backup file..." | tee -a ${PATCH_LOG_FILE}
+
+      rm -f ${file}.webosinternals.orig
+    else
+      if [ ! -f ${file}.webosinternals.orig ]; then
+        echo "WARNING: Could not find backup file!" | tee -a ${PATCH_LOG_FILE}
+      elif [ ! -s $file.webosinternals.orig ]; then
+        echo "Removing created file..." | tee -a ${PATCH_LOG_FILE}
+
+        rm -f ${file} ${file}.webosinternals.orig
+      else
+        echo "Recovering original file..." | tee -a ${PATCH_LOG_FILE}
+
+        mv -f ${file}.webosinternals.orig ${file}
+      fi
+    fi
+
+    if [ -f ${file}.webosinternals.orig ]; then
+      FAILED_LIST="${FAILED_LIST} ${file}"
+    fi
+  done < ${PATCH_CONTROL_DIR}/file_list
+fi
+
+echo "" >>${PATCH_LOG_FILE}
+echo "DONE" | tee -a ${PATCH_LOG_FILE}
+echo "" >>${PATCH_LOG_FILE}
+
+if [ -z "${FAILED_LIST}" ]; then
+  rm -rf ${PATCH_CONTROL_DIR}
+  rm -f ${PATCH_PACKAGES_LIST}
+else
+  echo "WARNING: Not removed backup file detected!"
+fi
+
+ipkg -o ${IPKG_OFFLINE_ROOT} remove ${PACKAGE}
+
+exit 0

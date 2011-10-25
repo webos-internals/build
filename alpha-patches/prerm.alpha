@@ -24,7 +24,7 @@ VERSION=aupt-5
 
 IPKG_INFO_DIR=/usr/lib/ipkg/info
 
-if [ -z ${IPKG_OFFLINE_ROOT} ]; then
+if [ -z "${IPKG_OFFLINE_ROOT}" ]; then
   IPKG_OFFLINE_ROOT=/media/cryptofs/apps
 fi
 
@@ -52,7 +52,7 @@ if [ -f /media/cryptofs/apps/usr/bin/lsdiff ]; then
   LSDIFF_EXEC=/media/cryptofs/apps/usr/bin/lsdiff
 fi
 
-if [ ! -z ${BSPATCH_FILE} ]; then
+if [ ! -z "${BSPATCH_FILE}" ]; then
   BSPATCH_NAME=`basename ${BSPATCH_FILE}`.bspatch
 fi
 
