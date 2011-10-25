@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (Pre3)
 DEVICE = pre3
-CATEGORY = Experimental
+CATEGORY = Alpha
 VERSIONS = 2.2.0-7 2.2.3-7
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A collection of all the best kernel improvements for the HP Pre3, rolled into a single OTA-safe installation package.<br>\

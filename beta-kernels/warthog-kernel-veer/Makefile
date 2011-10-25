@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (Veer)
 DEVICE = veer
-CATEGORY = Experimental
+CATEGORY = Beta
 VERSIONS = 2.1.1-20 2.1.2-20
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A collection of all the best kernel improvements for the HP Veer, rolled into a single OTA-safe installation package.<br>\

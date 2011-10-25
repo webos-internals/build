@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (Pre2)
 DEVICE = pre2
-CATEGORY = Stable
+CATEGORY = Beta
 VERSIONS = 2.1.0-76
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A collection of all the best kernel improvements for the Palm Pre2, rolled into a single OTA-safe installation package.<br>\

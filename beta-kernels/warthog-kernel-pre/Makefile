@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (Pre/Pre+)
 DEVICE = pre
-CATEGORY = Experimental
+CATEGORY = Beta
 VERSIONS = 1.4.5-140
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A testbed of kernel patches for the Palm Pre/Pre+, rolled into a single OTA-safe installation package.<br>\
