@@ -421,39 +421,41 @@ check_ota_update() {
     if [ -f ${file} ]; then
       get_bck_file
 
-      get_palm_md5sum
+      if [ -f ${bck_file} ]; then
+        get_palm_md5sum
 
-      file_md5sum=`md5sum ${file} | awk '{print $1}'`
+        file_md5sum=`md5sum ${file} | awk '{print $1}'`
 
-      orig_md5sum=`grep -h " ${file} " ${PATCH_CONTROL_DIR}/file_md5sums | awk '{print $3}'`
+        orig_md5sum=`grep -h " ${file} " ${PATCH_CONTROL_DIR}/file_md5sums | awk '{print $3}'`
 
-      if [ -z "${palm_md5sum}" ]; then
-        CREATED_LIST="${CREATED_LIST} ${file}"
-      elif [ "${palm_md5sum}" = "${file_md5sum}" ]; then
-        echo "File matches current md5sum, assuming OTA" >> ${PATCH_LOG_FILE}
+        if [ -z "${palm_md5sum}" ]; then
+          CREATED_LIST="${CREATED_LIST} ${file}"
+        elif [ "${palm_md5sum}" = "${file_md5sum}" ]; then
+          echo "File matches current md5sum, assuming OTA" >> ${PATCH_LOG_FILE}
+          echo "  file: ${file}" >> ${PATCH_LOG_FILE}
+
+          cp -f ${file} ${bck_file}
+
+          FAIL_LIST="${FAIL_LIST# ${file}}"
+
+          RESTORE_LIST="${RESTORE_LIST} ${file}"
+        elif [ "${palm_md5sum}" != "${orig_md5sum}" ]; then
+          echo "The md5sum of file has changed, assuming OTA" >> ${PATCH_LOG_FILE}
+          echo "  palm_md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
+          echo "  orig_md5sum: ${orig_md5sum}" >> ${PATCH_LOG_FILE}
+
+          cp -f ${file} ${bck_file}
+
+          FAIL_LIST="${FAIL_LIST# ${file}}"
+
+          RESTORE_LIST="${RESTORE_LIST} ${file}"
+        fi
+      else
+        echo "File has been completely removed, assuming OTA" >> ${PATCH_LOG_FILE}
         echo "  file: ${file}" >> ${PATCH_LOG_FILE}
 
-        cp -f ${file} ${bck_file}
-
         FAIL_LIST="${FAIL_LIST# ${file}}"
-
-        RESTORE_LIST="${RESTORE_LIST} ${file}"
-      elif [ "${palm_md5sum}" != "${orig_md5sum}" ]; then
-        echo "The md5sum of file has changed, assuming OTA" >> ${PATCH_LOG_FILE}
-        echo "  palm_md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
-        echo "  orig_md5sum: ${orig_md5sum}" >> ${PATCH_LOG_FILE}
-
-        cp -f ${file} ${bck_file}
-
-        FAIL_LIST="${FAIL_LIST# ${file}}"
-
-        RESTORE_LIST="${RESTORE_LIST} ${file}"
       fi
-    else
-      echo "File has been completely removed, assuming OTA" >> ${PATCH_LOG_FILE}
-      echo "  file: ${file}" >> ${PATCH_LOG_FILE}
-
-      FAIL_LIST="${FAIL_LIST# ${file}}"
     fi
   done
 
