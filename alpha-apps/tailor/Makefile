@@ -3,7 +3,7 @@ TITLE    = Tailor
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.0.8
+VERSION  = 0.0.9
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Tailor
@@ -11,6 +11,7 @@ ICON	 = http://www.webos-internals.org/images/3/36/Icons_Tailor.png
 DESCRIPTION = Tailor allows you to tailor the storage on your device.  This alpha release only supports unmount partition, check fileystem, mount parition and resizing of the media paritition (which is a potentially destructive operation).  All other operations are simulated.
 MINWEBOSVERSION = 2.1.0
 CHANGELOG = \
+0.0.9: Added the ability to resize ext3fs partitions. This is a potentially destructive operation. You have been warned.<br>\
 0.0.8: New improved icon.<br>\
 0.0.7: Added the ability to resize the media partition. This is a potentially destructive operation. You have been warned.<br>\
 0.0.6: Support different block sizes (Android uses 1KiB instead of 4KiB).<br>\
