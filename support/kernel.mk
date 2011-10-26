@@ -437,6 +437,22 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	fi
 	touch $@
 
+ifeq (true,false)
+# Special case for 2.2.3 based on 2.2.0 kernel source
+build/.unpacked-2.2.3-%: ${DL_DIR}/linux-${KERNEL_VERSION}-2.2.0-${DEVICE}.tar.gz \
+			    ${DL_DIR}/${NAME}-2.2.3-%.tar.gz
+	rm -rf build/src-2.2.3-$*
+	mkdir -p build/src-2.2.3-$*/patches
+	${TAR} -C build/src-2.2.3-$* -zxf ${DL_DIR}/linux-${KERNEL_VERSION}-2.2.0-${DEVICE}.tar.gz
+	${TAR} -C build/src-2.2.3-$*/patches -zxf ${DL_DIR}/${NAME}-2.2.3-$*.tar.gz
+	if [ -n "${KERNEL_PATCHES}" ] ; then \
+	  ( cd build/src-2.2.3-$*/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
+	  ( cd build/src-2.2.3-$*/patches ; cat ${KERNEL_PATCHES} ) | \
+		patch -d build/src-2.2.3-$*/linux-${KERNEL_VERSION} -p1 ; \
+	fi
+	touch $@
+endif
+
 build/.unpacked-%: ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz \
 			    ${DL_DIR}/${NAME}-%.tar.gz
 	rm -rf build/src-$*
