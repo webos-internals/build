@@ -32,7 +32,7 @@ APP_DIR=${IPKG_OFFLINE_ROOT}${APP_DIR#${IPKG_OFFLINE_ROOT}}
 
 PATCH_LOG_FILE=/media/internal/webos-patches.log
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
-PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
+PATCH_PACKAGES_FILE=/media/internal/.webosinternals.patches.packages
 
 TWEAKS_PREFERENCES_DIR=/media/cryptofs/apps/usr/palm/services/org.webosinternals.tweaks.prefs/preferences
 
@@ -64,7 +64,7 @@ remount_rw() {
   mount -o rw,remount /
 }
 
-do_remove_failure() {
+do_install_failure() {
   echo | tee -a ${PATCH_LOG_FILE}
   echo "*** FAILED ***" | tee -a ${PATCH_LOG_FILE}
   echo | tee -a ${PATCH_LOG_FILE}
@@ -74,7 +74,7 @@ do_remove_failure() {
   exit 1
 }
 
-do_remove_success() {
+do_install_success() {
   echo | tee -a ${PATCH_LOG_FILE}
   echo "*** SUCCESS ***" | tee -a ${PATCH_LOG_FILE}
   echo | tee -a ${PATCH_LOG_FILE}
@@ -84,18 +84,18 @@ do_remove_success() {
   exit 0
 }
 
-uninstallation_failed() {
+installation_failed() {
   echo >> ${PATCH_LOG_FILE}
   echo "----------------------------------" >> ${PATCH_LOG_FILE}
-  echo "Patch removal FAILED!" >> ${PATCH_LOG_FILE}
+  echo "Patch install FAILED!" >> ${PATCH_LOG_FILE}
   echo "----------------------------------" >> ${PATCH_LOG_FILE}
   echo >> ${PATCH_LOG_FILE}
 
   if [ -f ${APP_DIR}/${PATCH_NAME} ]; then
-    ${PATCH_EXEC} -s -R -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} | tee -a ${PATCH_LOG_FILE} 1>&2
+    ${PATCH_EXEC} -f -s -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} | tee -a ${PATCH_LOG_FILE} 1>&2
   fi
 
-  do_remove_failure
+  do_install_failure
 }
 
 get_bck_file() {
@@ -207,7 +207,28 @@ check_cryptofs_lists() {
 
 verify_text_patch() {
   if [ -f ${APP_DIR}/${PATCH_NAME} ]; then
+    echo >> ${PATCH_LOG_FILE}
+    echo "----------------------------------" >> ${PATCH_LOG_FILE}
+    echo "Checking patch files" >> ${PATCH_LOG_FILE}
+    echo "----------------------------------" >> ${PATCH_LOG_FILE}
+    echo >> ${PATCH_LOG_FILE}
+
     FILE_LIST=" "`${LSDIFF_EXEC} ${APP_DIR}/${PATCH_NAME}`
+
+    for file in ${FILE_LIST} ; do
+      if [ -f ${file} ]; then
+        get_palm_md5sum
+
+        if [ -z "${palm_md5sum}" ]; then
+          echo  | tee -a ${PATCH_LOG_FILE} 1>&2
+          echo "ERROR: Failed to find md5sum for the file" | tee -a ${PATCH_LOG_FILE} 1>&2
+          echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE} 1>&2
+          echo  | tee -a ${PATCH_LOG_FILE} 1>&2
+
+          do_install_failure
+        fi
+      fi
+    done
 
     echo >> ${PATCH_LOG_FILE}
     echo "----------------------------------" >> ${PATCH_LOG_FILE}
@@ -215,39 +236,28 @@ verify_text_patch() {
     echo "----------------------------------" >> ${PATCH_LOG_FILE}
     echo >> ${PATCH_LOG_FILE}
 
-    ${PATCH_EXEC} -f -R -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} 2>&1 >> ${PATCH_LOG_FILE}
+    ${PATCH_EXEC} -f -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} 2>&1 >> ${PATCH_LOG_FILE}
 
     if [ ${?} -ne 0 ]; then
       echo >> ${PATCH_LOG_FILE}
       echo "----------------------------------" >> ${PATCH_LOG_FILE}
-      echo "Dry run failed, trying without -R" >> ${PATCH_LOG_FILE}
+      echo "Dry run failed, trying with -R" >> ${PATCH_LOG_FILE}
       echo "----------------------------------" >> ${PATCH_LOG_FILE}
       echo >> ${PATCH_LOG_FILE}
 
-      ${PATCH_EXEC} -f -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} 2>&1 >> ${PATCH_LOG_FILE}
+      ${PATCH_EXEC} -f -R -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} 2>&1 >> ${PATCH_LOG_FILE} || installation_failed
 
-      if [ ${?} -eq 0 ]; then
-        echo | tee -a ${PATCH_LOG_FILE}
-        echo "Interestingly, the patch seems to be already unapplied" | tee -a ${PATCH_LOG_FILE}
-        echo | tee -a ${PATCH_LOG_FILE}
+      echo | tee -a ${PATCH_LOG_FILE}
+      echo "Interestingly, the patch seems to be already applied" | tee -a ${PATCH_LOG_FILE}
+      echo | tee -a ${PATCH_LOG_FILE}
 
-        patch_already_unapplied="yes"
-      else
-        FAIL_LIST=" "`${PATCH_EXEC} -s -f -R -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} 2>&1 | \
-          awk '{print "/"$12}' | sed s:".rej$":"":`
-
-        if [ "${FAIL_LIST}" = "${FILE_LIST}" ]; then
-          patch_already_unapplied="yes"
-        fi
-      fi
+      patch_already_applied="yes"
     fi
   fi
 }
 
 verify_binary_patch() {
   if [ -f ${APP_DIR}/${BSPATCH_NAME} ]; then
-    FILE_LIST="${FILE_LIST} ${BSPATCH_FILE}"
-
     echo >> ${PATCH_LOG_FILE}
     echo "----------------------------------" >> ${PATCH_LOG_FILE}
     echo "Checking binary patch" >> ${PATCH_LOG_FILE}
@@ -262,15 +272,16 @@ verify_binary_patch() {
       file_md5sum=`md5sum ${file} | awk '{print $1}'`
 
       if [ -z "${palm_md5sum}" ]; then
-        FAIL_LIST="${FAIL_LIST} ${file}"
+        echo  | tee -a ${PATCH_LOG_FILE} 1>&2
+        echo "ERROR: Failed to find md5sum for the file" | tee -a ${PATCH_LOG_FILE} 1>&2
+        echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE} 1>&2
+        echo  | tee -a ${PATCH_LOG_FILE} 1>&2
 
-        bspatch_already_unapplied="yes"
-      elif [ "${file_md5sum}" = "${palm_md5sum}" ]; then
-        echo | tee -a ${PATCH_LOG_FILE}
-        echo "Interestingly, the binary file is already unpatched" | tee -a ${PATCH_LOG_FILE}
-        echo | tee -a ${PATCH_LOG_FILE}
+        do_install_failure
+      fi
 
-        bspatch_already_unapplied="yes"
+      if [ "${file_md5sum}" = "${palm_md5sum}" ]; then
+        FILE_LIST="${FILE_LIST} ${file}"
       else
         get_bck_file
 
@@ -286,12 +297,32 @@ verify_binary_patch() {
           rm -f /var/webosinternals-*
         fi
 
-        if [ "${file_md5sum}" != "${tmp_md5sum}" ]; then
-          FAIL_LIST="${FAIL_LIST} ${file}"
+        if [ "${file_md5sum}" = "${tmp_md5sum}" ]; then
+          echo | tee -a ${PATCH_LOG_FILE}
+          echo "Interestingly, the binary file is already patched" | tee -a ${PATCH_LOG_FILE}
+          echo | tee -a ${PATCH_LOG_FILE}
 
-          bspatch_already_unapplied="yes"
+          bspatch_already_applied="yes"
+
+          FILE_LIST="${FILE_LIST} ${file}"
+        else
+          echo  | tee -a ${PATCH_LOG_FILE} 1>&2
+          echo "ERROR: File must be stock to be binary patched" | tee -a ${PATCH_LOG_FILE} 1>&2
+          echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE} 1>&2
+          echo "  md5sum: ${file_md5sum}" | tee -a ${PATCH_LOG_FILE} 1>&2
+          echo "  palm_md5sum: ${palm_md5sum}" | tee -a ${PATCH_LOG_FILE} 1>&2
+          echo  | tee -a ${PATCH_LOG_FILE} 1>&2
+
+          do_install_failure
         fi
       fi
+    else
+      echo  | tee -a ${PATCH_LOG_FILE} 1>&2
+      echo "ERROR: File to be binary patched does not exist" | tee -a ${PATCH_LOG_FILE} 1>&2
+      echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE} 1>&2
+      echo  | tee -a ${PATCH_LOG_FILE} 1>&2
+
+      do_install_failure
     fi
   fi
 }
@@ -307,108 +338,130 @@ verify_additional_files() {
     for i in `find ${APP_DIR}/${FILES_DIR} -type f` ; do
       file=${i#${APP_DIR}/${FILES_DIR}}
 
-      FILE_LIST="${FILE_LIST} ${file}"
-
-      get_palm_md5sum
-
-      if [ "${FILES_DIR}" != "files" ] && [ ! -z "${palm_md5sum}" ]; then
-        FAIL_LIST="${FAIL_LIST} ${file}"
-      fi
-
       if [ ! -f ${file} ]; then
-        echo | tee -a ${PATCH_LOG_FILE}
-        echo "Interestingly, the additional file is already removed" | tee -a ${PATCH_LOG_FILE}
-        echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE}
-        echo | tee -a ${PATCH_LOG_FILE}
+        FILE_LIST="${FILE_LIST} ${file}"
+      else
+        get_palm_md5sum
+
+        tmp_md5sum=`md5sum ${i} | awk '{print $1}'`
+
+        file_md5sum=`md5sum ${file} | awk '{print $1}'`
+
+        if [ "${file_md5sum}" = "${tmp_md5sum}" ]; then
+          echo | tee -a ${PATCH_LOG_FILE}
+          echo "Interestingly, the additional file already exists" | tee -a ${PATCH_LOG_FILE}
+          echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE}
+          echo | tee -a ${PATCH_LOG_FILE}
+
+          FILE_LIST="${FILE_LIST} ${file}"
+        elif [ "${FILES_DIR}" = "files" ] && [ "${file_md5sum}" = "${palm_md5sum}" ]; then
+          echo | tee -a ${PATCH_LOG_FILE}
+          echo "File already exists, but is not additional file" | tee -a ${PATCH_LOG_FILE}
+          echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE}
+          echo | tee -a ${PATCH_LOG_FILE}
+
+          FILE_LIST="${FILE_LIST} ${file}"
+        else
+          echo  | tee -a ${PATCH_LOG_FILE} 1>&2
+          echo "ERROR: Additional file already exists in system" | tee -a ${PATCH_LOG_FILE} 1>&2
+          echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE} 1>&2
+          echo  | tee -a ${PATCH_LOG_FILE} 1>&2
+
+          do_install_failure
+        fi
       fi
     done
   fi
 }
 
-remove_text_patch() {
+install_text_patch() {
   if [ -f ${APP_DIR}/${PATCH_NAME} ]; then
-    rm -f ${PATCH_CONTROL_DIR}/backup/${PATCH_NAME} >/dev/null 2>&1
+    cp -f ${APP_DIR}/${PATCH_NAME} ${PATCH_CONTROL_DIR}/backup/${PATCH_NAME}
 
-    if [ "${patch_already_unapplied}" != "yes" ]; then
+    if [ "${patch_already_applied}" != "yes" ]; then
       echo | tee -a ${PATCH_LOG_FILE}
       echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
-      echo "Unapplying text patch" | tee -a ${PATCH_LOG_FILE}
+      echo "Applying text patch" | tee -a ${PATCH_LOG_FILE}
       echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
       echo | tee -a ${PATCH_LOG_FILE}
 
-      ${PATCH_EXEC} -R -p 1 -d / --no-backup-if-mismatch < ${APP_DIR}/${PATCH_NAME} 2>&1 | tee -a ${PATCH_LOG_FILE}
+      ${PATCH_EXEC} -f -p 1 -d / --no-backup-if-mismatch < ${APP_DIR}/${PATCH_NAME} 2>&1 | tee -a ${PATCH_LOG_FILE}
     fi
   fi
 }
 
-remove_binary_patch() {
+install_binary_patch() {
   if [ -f ${APP_DIR}/${BSPATCH_NAME} ]; then
-    if [ "${bspatch_already_unapplied}" != "yes" ]; then
+    if [ "${bspatch_already_applied}" != "yes" ]; then
       echo | tee -a ${PATCH_LOG_FILE}
       echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
-      echo "Unapplying binary patch" | tee -a ${PATCH_LOG_FILE}
+      echo "Applying binary patch" | tee -a ${PATCH_LOG_FILE}
       echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
       echo | tee -a ${PATCH_LOG_FILE}
 
       file=${BSPATCH_FILE}
 
-      echo "restoring file ${file#/}" | tee -a ${PATCH_LOG_FILE}
-
       get_bck_file
 
-      if [ -f ${bck_file} ]; then
-        cp -f ${bck_file} ${file} 2>&1 | tee -a ${PATCH_LOG_FILE}
+      echo "patching file ${file#/}" | tee -a ${PATCH_LOG_FILE}
 
-        if [ "${?}" = "1" ]; then
-          stop `basename ${file}` >/dev/null 2>&1
-          sleep 5
+      rm -f /var/webosinternals-*
 
-          cp -f ${bck_file} ${file}
+      cp ${BSPATCH_FILE} /var/webosinternals-orig
 
-          start `basename ${file}` >/dev/null 2>&1
-        fi
+      ${BSPATCH_EXEC} /var/webosinternals-orig /var/webosinternals-patched ${APP_DIR}/${BSPATCH_NAME} 2>&1 | tee -a ${PATCH_LOG_FILE}
+
+      cp -f /var/webosinternals-patched ${BSPATCH_FILE}
+
+      if [ "${?}" = "1" ]; then
+        stop `basename ${BSPATCH_FILE}` >/dev/null 2>&1
+        sleep 5
+
+        cp -f /var/webosinternals-patched ${BSPATCH_FILE}
+
+        start `basename ${BSPATCH_FILE}` >/dev/null 2>&1
       fi
+
+      if [ -x ${bck_file} ]; then
+        chmod 755 ${BSPATCH_FILE}
+      fi
+
+      rm -f /var/webosinternals-*
     fi
   fi
 }
 
-remove_additional_files() {
+install_additional_files() {
   if [ -d ${APP_DIR}/${FILES_DIR} ]; then
     echo | tee -a ${PATCH_LOG_FILE}
     echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
-    echo "Removing additional files" | tee -a ${PATCH_LOG_FILE}
+    echo "Installing additional files" | tee -a ${PATCH_LOG_FILE}
     echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
     echo | tee -a ${PATCH_LOG_FILE}
 
     for i in `find ${APP_DIR}/${FILES_DIR} -type f` ; do
       file=${i#${APP_DIR}/${FILES_DIR}}
 
-      get_bck_file
+      echo "installing file ${file#/}" | tee -a ${PATCH_LOG_FILE}
 
-      if [ -f ${bck_file} ]; then
-        if [ ! -s ${bck_file} ]; then
-          echo "removing file ${file#/}" | tee -a ${PATCH_LOG_FILE}
+      mkdir -p `dirname ${file}`
 
-          rm -f ${file} 2>&1 | tee -a ${PATCH_LOG_FILE}
-        elif [ "${FILES_DIR}" = "files" ]; then
-          echo "reverting file ${file#/}" | tee -a ${PATCH_LOG_FILE}
-
-          cp -f ${bck_file} ${file} 2>&1 | tee -a ${PATCH_LOG_FILE}
-        fi
-      fi
+      cp -f ${APP_DIR}/${FILES_DIR}/${file} ${file}
     done
   fi
 }
 
-remove_tweaks_preferences() {
+install_tweaks_preferences() {
   if [ -f ${APP_DIR}/${TWEAKS_NAME} ]; then
     echo | tee -a ${PATCH_LOG_FILE}
     echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
-    echo "Removing tweaks json file" | tee -a ${PATCH_LOG_FILE}
+    echo "Installing tweaks json file" | tee -a ${PATCH_LOG_FILE}
     echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
     echo | tee -a ${PATCH_LOG_FILE}
 
-    rm -f ${TWEAKS_PREFERENCES_DIR}/`basename ${APP_DIR}`.json 2>&1 | tee -a ${PATCH_LOG_FILE}
+    mkdir -p ${TWEAKS_PREFERENCES_DIR} 2>&1 | tee -a ${PATCH_LOG_FILE}
+
+    cp -f ${APP_DIR}/${TWEAKS_NAME} ${TWEAKS_PREFERENCES_DIR}/`basename ${APP_DIR}`.json 2>&1 | tee -a ${PATCH_LOG_FILE}
   fi
 }
 
@@ -420,89 +473,50 @@ check_ota_update() {
   echo >> ${PATCH_LOG_FILE}
 
   for file in ${FILE_LIST} ; do
-    if [ -f ${file} ]; then
-      get_bck_file
-
-      if [ -f ${bck_file} ]; then
-        get_palm_md5sum
-
-        file_md5sum=`md5sum ${file} | awk '{print $1}'`
-
-        orig_md5sum=`grep -h " ${file} " ${PATCH_CONTROL_DIR}/file_md5sums | awk '{print $3}'`
-
-        if [ -z "${palm_md5sum}" ]; then
-          CREATED_LIST="${CREATED_LIST} ${file}"
-        elif [ "${palm_md5sum}" = "${file_md5sum}" ]; then
-          echo "File matches current md5sum, assuming OTA" >> ${PATCH_LOG_FILE}
-          echo "  file: ${file}" >> ${PATCH_LOG_FILE}
-
-          cp -f ${file} ${bck_file}
-
-          FAIL_LIST="${FAIL_LIST# ${file}}"
-
-          RESTORE_LIST="${RESTORE_LIST} ${file}"
-        elif [ "${palm_md5sum}" != "${orig_md5sum}" ]; then
-          echo "The md5sum of file has changed, assuming OTA" >> ${PATCH_LOG_FILE}
-          echo "  palm_md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
-          echo "  orig_md5sum: ${orig_md5sum}" >> ${PATCH_LOG_FILE}
-
-          cp -f ${file} ${bck_file}
-
-          FAIL_LIST="${FAIL_LIST# ${file}}"
-
-          RESTORE_LIST="${RESTORE_LIST} ${file}"
-        fi
-      else
-        echo "File has been completely removed, assuming OTA" >> ${PATCH_LOG_FILE}
-        echo "  file: ${file}" >> ${PATCH_LOG_FILE}
-
-        FAIL_LIST="${FAIL_LIST# ${file}}"
-      fi
-    fi
-  done
-
-  if [ ! -z "${FAIL_LIST}" ]; then
-    uninstallation_failed
-  fi
-}
-
-clean_backup_files() {
-  echo >> ${PATCH_LOG_FILE}
-  echo "----------------------------------" >> ${PATCH_LOG_FILE}
-  echo "Cleaning up backup files" >> ${PATCH_LOG_FILE}
-  echo "----------------------------------" >> ${PATCH_LOG_FILE}
-  echo >> ${PATCH_LOG_FILE}
-
-  for file in ${CREATED_LIST} ; do
-    get_bck_file
-
-    if [ -f ${file} ]; then
-      echo "Removing created file or old system file" >> ${PATCH_LOG_FILE}
-      echo "  file: ${file}" >>${PATCH_LOG_FILE}
-
-      rm -f ${file}
-    fi
-  done
-
-  for file in ${RESTORE_LIST} ; do
-    get_bck_file
-
-    if [ -f ${bck_file} ]; then
-      echo "Restoring unmodified or updated system file" >> ${PATCH_LOG_FILE}
-      echo "  file: ${file}" >>${PATCH_LOG_FILE}
-
-      mv -f ${bck_file} ${file}
-    fi
-  done
-
-  for file in ${FILE_LIST} ; do
-    if [ -f ${file}.rej ]; then
-      rm -f ${file}.rej
-    fi
-
     get_bck_file
 
     get_palm_md5sum
+
+    if [ -f ${bck_file} ]; then
+      file_md5sum=`md5sum ${file} | awk '{print $1}'`
+
+      if [ "${file_md5sum}" = "${palm_md5sum}" ]; then
+        echo "File matches current system md5sum, assuming OTA" >> ${PATCH_LOG_FILE}
+        echo "  file: ${file}" >> ${PATCH_LOG_FILE}
+
+        rm -f ${bck_file}
+      fi
+    fi
+  done
+}
+
+create_backup_files() {
+  echo >> ${PATCH_LOG_FILE}
+  echo "----------------------------------" >> ${PATCH_LOG_FILE}
+  echo "Creating backup files" >> ${PATCH_LOG_FILE}
+  echo "----------------------------------" >> ${PATCH_LOG_FILE}
+  echo >> ${PATCH_LOG_FILE}
+
+  for file in ${FILE_LIST} ; do
+    get_bck_file
+
+    get_palm_md5sum
+
+    if [ ! -f ${bck_file} ]; then
+      if [ ! -f ${file} ]; then
+        echo "Created file, generating empty backup file" >>${PATCH_LOG_FILE}
+        echo "  file: ${file}" >> ${PATCH_LOG_FILE}
+
+        mkdir -p `dirname ${file}`
+
+        touch ${bck_file}
+      else
+        echo "Modified file, backing up the original file" >> ${PATCH_LOG_FILE}
+        echo "  file: ${file}" >> ${PATCH_LOG_FILE}
+
+        cp ${file} ${bck_file}
+      fi
+    fi
 
     if [ ! -f ${file} ]; then
       file_md5sum=""
@@ -517,30 +531,20 @@ clean_backup_files() {
     fi
 
     if [ ! -f ${file} ] && [ ! -s ${bck_file} ] || \
-       [ "${file_md5sum}" = "${orig_md5sum}" ] || \
-       [ "${file_md5sum}" = "${palm_md5sum}" ]
+      [ "${file_md5sum}" = "${palm_md5sum}" ] || \
+      [ "${orig_md5sum}" = "${palm_md5sum}" ]
     then
-      if [ -f ${bck_file} ]; then
-        if [ ! -s ${bck_file} ]; then
-          echo "Removing unneeded generated backup file" >>${PATCH_LOG_FILE}
-          echo "  file: ${bck_file}" >>${PATCH_LOG_FILE}
-        else
-          echo "Removing unneeded backup of system file" >>${PATCH_LOG_FILE}
-          echo "  file: ${bck_file}" >>${PATCH_LOG_FILE}
-        fi
-
-        rm -f ${bck_file}
-      fi
-
       tmpvar=`echo "${file}" | tr '/' '.'`
 
       sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_list
+      echo "${file} ${VERSION}" >> ${PATCH_CONTROL_DIR}/file_list
     fi
 
     if [ ! -z "${cur_version}" ]; then
       tmpvar=`echo "${package} ${file}" | tr '/' '.'`
 
       sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_control
+      echo "${package} ${file} ${cur_version}" >> ${PATCH_CONTROL_DIR}/file_control
     fi
 
     if [ ! -z "${palm_md5sum}" ]; then
@@ -549,10 +553,12 @@ clean_backup_files() {
       tmpvar=`echo "${appid} ${file}" | tr '/' '.'`
 
       sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_md5sums
+      echo "${appid} ${file} ${palm_md5sum}" >> ${PATCH_CONTROL_DIR}/file_md5sums
     fi
   done
 
-  sed -i -e /\^'`basename ${APP_DIR}` ${VERSION}'\$/d ${PATCH_PACKAGES_LIST}
+  sed -i -e /`basename ${APP_DIR}`/d ${PATCH_PACKAGES_FILE}
+  basename "${APP_DIR} ${VERSION}">> ${PATCH_PACKAGES_FILE}
 }
 
 #
@@ -560,14 +566,14 @@ clean_backup_files() {
 #
 
 if [ ! -f ${PATCH_LOG_FILE} ]; then
-  echo "*** Patch Log Created by prerm $(date) ***" > ${PATCH_LOG_FILE}
+  echo "*** Patch Log Created by postinst $(date) ***" > ${PATCH_LOG_FILE}
 fi
 
 remount_rw | tee -a ${PATCH_LOG_FILE} 1>&2
 
 echo  >> ${PATCH_LOG_FILE}
 echo "------------------------------------------------------" >> ${PATCH_LOG_FILE}
-echo "PATCH REMOVAL $(date)" >> ${PATCH_LOG_FILE}
+echo "PATCH INSTALLATION $(date)" >> ${PATCH_LOG_FILE}
 echo "------------------------------------------------------" >> ${PATCH_LOG_FILE}
 echo  >> ${PATCH_LOG_FILE}
 
@@ -618,6 +624,42 @@ if [ ! -f ${APP_DIR}/${PATCH_NAME} ] && [ ! -f ${APP_DIR}/${BSPATCH_NAME} ] && [
   do_install_failure
 fi
 
+#
+# Intialize and update the patch backup/control system
+#
+
+if [ ! -d ${PATCH_CONTROL_DIR}/backup ]; then
+  rm -rf ${PATCH_CONTROL_DIR} >/dev/null 2>&1
+
+  mkdir -p ${PATCH_CONTROL_DIR}/backup || do_install_failure
+fi
+
+if [ -f ${PATCH_CONTROL_DIR}/backups ]; then
+	echo "ERROR: Old backup system detected, not supported by aupt-5!"
+	do_install_failure
+fi
+
+if [ -f ${PATCH_CONTROL_DIR}/packages ]; then
+	echo "ERROR: Old control system detected, not supported by aupt-5!"
+	do_install_failure
+fi
+
+if [ ! -f ${PATCH_CONTROL_DIR}/file_list ]; then
+  touch ${PATCH_CONTROL_DIR}/file_list || do_install_failure
+fi
+
+if [ ! -f ${PATCH_CONTROL_DIR}/file_control ]; then
+  touch ${PATCH_CONTROL_DIR}/file_control || do_install_failure
+fi
+
+if [ ! -f ${PATCH_CONTROL_DIR}/file_md5sums ]; then
+  touch ${PATCH_CONTROL_DIR}/file_md5sums || do_install_failure
+fi
+
+if [ ! -f ${PATCH_PACKAGES_FILE} ]; then
+  touch ${PATCH_PACKAGES_FILE} || do_install_failure
+fi
+
 rm -f /var/webosinternals.md5sums >/dev/null 2>&1
 
 #
@@ -632,17 +674,17 @@ verify_additional_files
 
 check_ota_update
 
-remove_text_patch
+create_backup_files
 
-remove_binary_patch
+install_text_patch
 
-remove_additional_files
+install_binary_patch
 
-remove_tweaks_preferences
+install_additional_files
 
-clean_backup_files
+install_tweaks_preferences
 
-do_remove_success
+do_install_success
 
 exit 0
 
