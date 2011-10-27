@@ -8,7 +8,7 @@ CATEGORY = Utilities
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 HOMEPAGE = http://www.webos-internals.org/wiki/Remove_Android
 ICON = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
-DESCRIPTION = Removes all files related to Android from the /boot partition.  Use the Tailor application to remove the partitions.
+DESCRIPTION = Install this package to remove all files related to Android from the /boot partition.  Use the Tailor application to remove the other Android partitions.
 CHANGELOG = 1.0.0: Initial release.
 
 .PHONY: package
