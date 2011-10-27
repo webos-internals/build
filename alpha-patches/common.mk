@@ -120,18 +120,18 @@ endif
 
 build/${ARCHITECTURE}/CONTROL/prerm: build/.unpacked-${VERSION}
 	mkdir -p build/${ARCHITECTURE}/CONTROL
-	sed -e 's|^PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' \
-			-e 's|^TWEAKS_NAME=|TWEAKS_NAME=$(shell basename ${TWEAKS})|' \
-			-e 's|^BSPATCH_FILE=|BSPATCH_FILE=${BSFILE}|' \
-			-e 's|^APP_DIR=|APP_DIR=/media/cryptofs/apps/usr/palm/applications/${APP_ID}|' ../prerm${SUFFIX} > build/${ARCHITECTURE}/CONTROL/prerm
+	sed -e 's:^PATCH_NAME=$$:PATCH_NAME=$(shell basename ${PATCH}):' \
+			-e 's:^TWEAKS_NAME=$$:TWEAKS_NAME=$(shell basename ${TWEAKS}):' \
+			-e 's:^BSPATCH_FILE=$$:BSPATCH_FILE=${BSFILE}:' \
+			-e 's:^APP_DIR=$$:APP_DIR=/media/cryptofs/apps/usr/palm/applications/${APP_ID}:' ../prerm${SUFFIX} > build/${ARCHITECTURE}/CONTROL/prerm
 	chmod ugo+x $@
 
 build/${ARCHITECTURE}/CONTROL/postinst: build/.unpacked-${VERSION}
 	mkdir -p build/${ARCHITECTURE}/CONTROL
-	sed -e 's|^PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' \
-			-e 's|^TWEAKS_NAME=|TWEAKS_NAME=$(shell basename ${TWEAKS})|' \
-			-e 's|^BSPATCH_FILE=|BSPATCH_FILE=${BSFILE}|' \
-			-e 's|^APP_DIR=|APP_DIR=/media/cryptofs/apps/usr/palm/applications/${APP_ID}|' ../postinst${SUFFIX} > build/${ARCHITECTURE}/CONTROL/postinst
+	sed -e 's:^PATCH_NAME=$$:PATCH_NAME=$(shell basename ${PATCH}):' \
+			-e 's:^TWEAKS_NAME=$$:TWEAKS_NAME=$(shell basename ${TWEAKS}):' \
+			-e 's:^BSPATCH_FILE=$$:BSPATCH_FILE=${BSFILE}:' \
+			-e 's:^APP_DIR=$$:APP_DIR=/media/cryptofs/apps/usr/palm/applications/${APP_ID}:' ../postinst${SUFFIX} > build/${ARCHITECTURE}/CONTROL/postinst
 	chmod ugo+x $@
 endif
 
