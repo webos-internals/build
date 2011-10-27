@@ -1,0 +1,30 @@
+#!/bin/sh
+
+PACKAGE=org.webosinternals.remove-android
+
+# Handle execution as pmPostInstall.script
+if [ -z "$IPKG_OFFLINE_ROOT" ]; then
+    IPKG_OFFLINE_ROOT=/media/cryptofs/apps
+fi
+
+# Make /boot writeable
+mount -o remount,rw /boot
+
+# If a webOS uImage exists, put it back in place
+if [ -e /boot/uImage.webOS ] ; then
+    rm -f /boot/uImage
+    mv /boot/uImage.webOS /boot/uImage
+fi
+
+# Remove other uImage files
+rm -f /boot/uImage.*
+
+# Remove moboot files
+rm -f /boot/moboot.*
+
+# Make /boot read-only again
+mount -o remount,ro /boot
+
+ipkg -o $IPKG_OFFLINE_ROOT remove $PACKAGE
+
+exit 0
