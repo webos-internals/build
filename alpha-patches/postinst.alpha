@@ -385,7 +385,7 @@ install_text_patch() {
       echo "----------------------------------" | tee -a ${PATCH_LOG_FILE}
       echo | tee -a ${PATCH_LOG_FILE}
 
-      ${PATCH_EXEC} -f -p 1 -d / --no-backup-if-mismatch < ${APP_DIR}/${PATCH_NAME} 2>&1 | tee -a ${PATCH_LOG_FILE} || do_install_failure
+      ${PATCH_EXEC} -f -p 1 -d / --no-backup-if-mismatch < ${APP_DIR}/${PATCH_NAME} 2>&1 | tee -a ${PATCH_LOG_FILE}
     fi
   fi
 }
@@ -478,9 +478,9 @@ check_ota_update() {
     get_palm_md5sum
 
     if [ -f ${bck_file} ]; then
-      orig_md5sum=`md5sum ${file} | awk '{print $1}'`
+      file_md5sum=`md5sum ${file} | awk '{print $1}'`
 
-      if [ "${orig_md5sum}" = "${palm_md5sum}" ]; then
+      if [ "${file_md5sum}" = "${palm_md5sum}" ]; then
         echo "File matches current system md5sum, assuming OTA" >> ${PATCH_LOG_FILE}
         echo "  file: ${file}" >> ${PATCH_LOG_FILE}
 
