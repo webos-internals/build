@@ -105,7 +105,7 @@ if [ -e ${PATCH_CONTROL_DIR}/file_list ]; then
     palm_md5sum=`grep -h ${file} ${IPKG_INFO_DIR}/*.md5sums | awk '{print $1}'`
 
     if [ -z "${palm_md5sum}" ]; then
-      file_line=`grep "^${file#${IPKG_OFFLINE_ROOT}}$" ${IPKG_OFFLINE_ROOT}/${IPKG_INFO_DIR}/*.list`
+      file_line=`grep "^${file#/media/cryptofs/apps}$" /media/cryptofs/apps/${IPKG_INFO_DIR}/*.list`
 
       if [ ! -z "${file_line}" ]; then
         list_file=`echo "${file_line}" | cut -d ':' -f 1`
