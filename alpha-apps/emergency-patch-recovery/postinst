@@ -8,8 +8,6 @@ PATCH_LOG_FILE=/media/internal/webos-patches.log
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
 PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
 
-mount -o rw,remount /
-
 if [ ! -e ${PATCH_LOG_FILE} ]; then
   echo "******* Patch Log Created by EPR $(date) ************" > ${PATCH_LOG_FILE}
 fi
@@ -26,11 +24,17 @@ if [ -z "${IPKG_OFFLINE_ROOT}" ]; then
 fi
 
 if [ ! -d ${PATCH_CONTROL_DIR} ]; then
-  echo "WARNING: No patches found!" | tee -a ${PATCH_LOG_FILE}
+  echo "WARNING: No patches found, scanning all files!" | tee -a ${PATCH_LOG_FILE}
 
   mkdir -p ${PATCH_CONTROL_DIR}
 
-  for i in `find / -type f -name '*webosinternals.orig'` ; do
+  for i in `find /etc -type f -name '*.webosinternals.orig'` ; do
+    file=${i%.webosinternals.orig}
+
+    echo "${file} aupt-5" >>${PATCH_CONTROL_DIR}/file_list
+  done
+
+  for i in `find /usr -type f -name '*.webosinternals.orig'` ; do
     file=${i%.webosinternals.orig}
 
     echo "${file} aupt-5" >>${PATCH_CONTROL_DIR}/file_list

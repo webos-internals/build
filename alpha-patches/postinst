@@ -32,7 +32,7 @@ APP_DIR=${IPKG_OFFLINE_ROOT}${APP_DIR#${IPKG_OFFLINE_ROOT}}
 
 PATCH_LOG_FILE=/media/internal/webos-patches.log
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
-PATCH_PACKAGES_FILE=/media/internal/.webosinternals.patches.packages
+PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
 
 TWEAKS_PREFERENCES_DIR=/media/cryptofs/apps/usr/palm/services/org.webosinternals.tweaks.prefs/preferences
 
@@ -557,8 +557,8 @@ create_backup_files() {
     fi
   done
 
-  sed -i -e /`basename ${APP_DIR}`/d ${PATCH_PACKAGES_FILE}
-  basename "${APP_DIR} ${VERSION}">> ${PATCH_PACKAGES_FILE}
+  sed -i -e /`basename ${APP_DIR}`/d ${PATCH_PACKAGES_LIST}
+  basename "${APP_DIR} ${VERSION}">> ${PATCH_PACKAGES_LIST}
 }
 
 #
@@ -656,8 +656,8 @@ if [ ! -f ${PATCH_CONTROL_DIR}/file_md5sums ]; then
   touch ${PATCH_CONTROL_DIR}/file_md5sums || do_install_failure
 fi
 
-if [ ! -f ${PATCH_PACKAGES_FILE} ]; then
-  touch ${PATCH_PACKAGES_FILE} || do_install_failure
+if [ ! -f ${PATCH_PACKAGES_LIST} ]; then
+  touch ${PATCH_PACKAGES_LIST} || do_install_failure
 fi
 
 rm -f /var/webosinternals.md5sums >/dev/null 2>&1
