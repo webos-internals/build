@@ -1,10 +1,10 @@
 TYPE = Linux Application
 NAME = emergency-patch-recovery
-VERSION = 2.1.2
+VERSION = 2.1.3
 TITLE = Emergency Patch Recovery
 MAINTAINER = Eric J Gaudet <emoney_33@yahoo.com>
 DESCRIPTION = --UNINSTALL THEMES FIRST--  Perform 'EPR' on your Pre to restore all backed up files from any patch ipk installations.  Installing this just runs a script to do the patch removals and then removes itself.  WARNING: This is OTA update compatible, but you should run this directly before or directly after you update.  Never run this while a theme is installed.
-CHANGELOG = 2.1.2: Added support for aupt-5 and fixed small bug. <br>2.1.1: Modified to use new file_list for aupt-3. <br>2.1.0: Modified to work with aupt, fixed minor bugs. <br>1.1.7: Add cryptofs check before removal <br>1.1.5: Fixed removal of created files.
+CHANGELOG = 2.1.3: Added support for aupt-5 and fixed small bug. <br>2.1.1: Modified to use new file_list for aupt-3. <br>2.1.0: Modified to work with aupt, fixed minor bugs. <br>1.1.7: Add cryptofs check before removal <br>1.1.5: Fixed removal of created files.
 APP_ID = org.webosinternals.${NAME}
 SIGNER = org.webosinternals
 HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS

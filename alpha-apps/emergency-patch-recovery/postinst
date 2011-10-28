@@ -26,11 +26,15 @@ if [ -z "${IPKG_OFFLINE_ROOT}" ]; then
 fi
 
 if [ ! -d ${PATCH_CONTROL_DIR} ]; then
-  echo "NOTE: No patches found!" | tee -a ${PATCH_LOG_FILE}
+  echo "WARNING: No patches found!" | tee -a ${PATCH_LOG_FILE}
 
-  ipkg -o ${IPKG_OFFLINE_ROOT} remove ${PACKAGE}
+  mkdir -p ${PATCH_CONTROL_DIR}
 
-  exit 1
+  for i in `find / -type f -name '*webosinternals.orig'` ; do
+    file=${i%.webosinternals.orig}
+
+    echo "${file} aupt-5" >>${PATCH_CONTROL_DIR}/file_list
+  done
 fi
 
 if [ -e ${PATCH_CONTROL_DIR}/packages ]; then
@@ -105,7 +109,7 @@ if [ -e ${PATCH_CONTROL_DIR}/file_list ]; then
     palm_md5sum=`grep -h ${file} ${IPKG_INFO_DIR}/*.md5sums | awk '{print $1}'`
 
     if [ -z "${palm_md5sum}" ]; then
-      file_line=`grep "^${file#${IPKG_OFFLINE_ROOT}}$" ${IPKG_OFFLINE_ROOT}/${IPKG_INFO_DIR}/*.list`
+      file_line=`grep "^${file#/media/cryptofs/apps}$" /media/cryptofs/apps/${IPKG_INFO_DIR}/*.list`
 
       if [ ! -z "${file_line}" ]; then
         list_file=`echo "${file_line}" | cut -d ':' -f 1`

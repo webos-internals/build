@@ -26,11 +26,15 @@ if [ -z "${IPKG_OFFLINE_ROOT}" ]; then
 fi
 
 if [ ! -d ${PATCH_CONTROL_DIR} ]; then
-  echo "NOTE: No patches found!" | tee -a ${PATCH_LOG_FILE}
+  echo "WARNING: No patches found!" | tee -a ${PATCH_LOG_FILE}
 
-  ipkg -o ${IPKG_OFFLINE_ROOT} remove ${PACKAGE}
+  mkdir -p ${PATCH_CONTROL_DIR}
 
-  exit 1
+  for i in `find / -type f -name '*webosinternals.orig'` ; do
+    file=${i%.webosinternals.orig}
+
+    echo "${file} aupt-5" >>${PATCH_CONTROL_DIR}/file_list
+  done
 fi
 
 if [ -e ${PATCH_CONTROL_DIR}/packages ]; then
