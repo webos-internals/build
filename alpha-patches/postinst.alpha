@@ -101,76 +101,75 @@ installation_failed() {
 get_bck_file() {
   bck_file=`dirname ${file}`"/.webosinternals.orig."`basename ${file}`
 
-	if [ ! -f ${bck_file} ]; then
-		bck_file="${file}.webosinternals.orig"
-	fi
+  if [ ! -f ${bck_file} ]; then
+    bck_file="${file}.webosinternals.orig"
+  fi
 }
 
 get_palm_md5sum() {
-  cur_version=""
   palm_md5sum=""
+  pkg_version=""
 
-  check_cache_file
+  if [ -f "/var/webosinternals.md5sums" ]; then
+    md5sums_line=`grep "^${file} " /var/webosinternals.md5sums`
+
+    palm_md5sum=`echo ${md5sums_line} | awk '{print $2}'`
+
+    pkg_version=`echo ${md5sums_line} | awk '{print $3}'`
+  fi
+}
+
+find_palm_md5sum() {
+  palm_md5sum=""
+  pkg_version=""
+
+  md5sums_line=""
+
+  echo "Finding md5sum for original file" >> ${PATCH_LOG_FILE}
+  echo "  file: ${file}" >> ${PATCH_LOG_FILE}
+
+  check_packages_file
 
   if [ ! -z "${md5sums_line}" ]; then
     palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
 
-    echo "Found md5sum from the cache file" >> ${PATCH_LOG_FILE}
+    echo "Found md5sum via the packages file" >> ${PATCH_LOG_FILE}
     echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
-  else
-    echo "File not found from cache file, checking packages file" >> ${PATCH_LOG_FILE}
 
-    check_packages_file
+    echo "${file} ${palm_md5sum} ${pkg_version}" >>/var/webosinternals.md5sums
+  else
+    echo "File not found via packages file, checking cryptofs lists" >> ${PATCH_LOG_FILE}
+
+    check_cryptofs_lists
 
     if [ ! -z "${md5sums_line}" ]; then
       palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
 
-      echo "Found md5sum via the packages file" >> ${PATCH_LOG_FILE}
+      echo "Found md5sum from the cryptofs lists" >> ${PATCH_LOG_FILE}
       echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
 
-      echo ${md5sums_line} >>/var/webosinternals.md5sums
+      echo "${file} ${palm_md5sum} ${pkg_version}" >>/var/webosinternals.md5sums
     else
-      echo "File not found via packages file, checking cryptofs lists" >> ${PATCH_LOG_FILE}
+      echo "File not found in cryptofs lists, checking system md5sum files" >> ${PATCH_LOG_FILE}
 
-      check_cryptofs_lists
+      md5sums_line=`grep -h "*.${file}$" ${IPKG_INFO_DIR}/*.md5sums`
 
       if [ ! -z "${md5sums_line}" ]; then
         palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
 
-        echo "Found md5sum from the cryptofs lists" >> ${PATCH_LOG_FILE}
+        echo "Found md5sum from md5sums files" >> ${PATCH_LOG_FILE}
         echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
 
-        echo ${md5sums_line} >>/var/webosinternals.md5sums
-      else
-        echo "File not found in cryptofs lists, checking system md5sum files" >> ${PATCH_LOG_FILE}
-
-        md5sums_line=`grep -h "*.${file}$" ${IPKG_INFO_DIR}/*.md5sums`
-
-        if [ ! -z "${md5sums_line}" ]; then
-          palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
-
-          echo "Found md5sum from md5sums files" >> ${PATCH_LOG_FILE}
-          echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
-
-          echo ${md5sums_line} >>/var/webosinternals.md5sums
-        fi
+        echo "${file} ${palm_md5sum} ${pkg_version}" >>/var/webosinternals.md5sums
       fi
     fi
-  fi
-}
-
-check_cache_file() {
-  md5sums_line=""
-
-  if [ -f "/var/webosinternals.md5sums" ]; then
-    md5sums_line=`grep ${file} /var/webosinternals.md5sums`
   fi
 }
 
 check_packages_file() {
   if [ -f ${APP_DIR}/${PACKAGES_FILE} ]; then
     for p in `cat ${APP_DIR}/${PACKAGES_FILE}` ; do
-      md5sums_line=`grep ${file} ${IPKG_INFO_DIR}/${p}.md5sums`
+      md5sums_line=`grep "*.${file}$" ${IPKG_INFO_DIR}/${p}.md5sums`
 
       if [ ! -z "${md5sums_line}" ]; then
         break;
@@ -191,13 +190,13 @@ check_cryptofs_lists() {
 
     control_file=`dirname ${list_file}`/${package}.control
 
-    cur_version=`grep "^Version: " ${control_file} | awk '{print $2}'`
+    pkg_version=`grep "^Version: " ${control_file} | awk '{print $2}'`
 
     control_line=`grep "^${package} ${file} " ${PATCH_CONTROL_DIR}/file_control`
 
-    ctl_version=`echo ${control_line} | awk '{print $3}'`
+    tmp_version=`echo ${control_line} | awk '{print $3}'`
 
-    if [ ! -f ${bck_file} ] || [ "${cur_version}" != "${ctl_version}" ]; then
+    if [ ! -f ${bck_file} ] || [ "${pkg_version}" != "${tmp_version}" ]; then
       md5sums_line=`md5sum ${file} | awk '{print $1}'`" *.${file}"
     else
       md5sums_line=`md5sum ${bck_file} | awk '{print $1}'`" *.${file}"
@@ -217,7 +216,7 @@ verify_text_patch() {
 
     for file in ${FILE_LIST} ; do
       if [ -f ${file} ]; then
-        get_palm_md5sum
+        find_palm_md5sum
 
         if [ -z "${palm_md5sum}" ]; then
           echo  | tee -a ${PATCH_LOG_FILE} 1>&2
@@ -267,7 +266,7 @@ verify_binary_patch() {
     file=${BSPATCH_FILE}
 
     if [ -f ${file} ]; then
-      get_palm_md5sum
+      find_palm_md5sum
 
       file_md5sum=`md5sum ${file} | awk '{print $1}'`
 
@@ -338,10 +337,10 @@ verify_additional_files() {
     for i in `find ${APP_DIR}/${FILES_DIR} -type f` ; do
       file=${i#${APP_DIR}/${FILES_DIR}}
 
-      if [ ! -f ${file} ]; then
-        FILE_LIST="${FILE_LIST} ${file}"
-      else
-        get_palm_md5sum
+      FILE_LIST="${FILE_LIST} ${file}"
+
+      if [ -f ${file} ]; then
+        find_palm_md5sum
 
         tmp_md5sum=`md5sum ${i} | awk '{print $1}'`
 
@@ -352,16 +351,7 @@ verify_additional_files() {
           echo "Interestingly, the additional file already exists" | tee -a ${PATCH_LOG_FILE}
           echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE}
           echo | tee -a ${PATCH_LOG_FILE}
-
-          FILE_LIST="${FILE_LIST} ${file}"
-        elif [ "${FILES_DIR}" = "files" ] && [ "${file_md5sum}" = "${palm_md5sum}" ]; then
-          echo | tee -a ${PATCH_LOG_FILE}
-          echo "File already exists, but is not additional file" | tee -a ${PATCH_LOG_FILE}
-          echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE}
-          echo | tee -a ${PATCH_LOG_FILE}
-
-          FILE_LIST="${FILE_LIST} ${file}"
-        else
+        elif [ "${FILES_DIR}" != "files" ] || [ "${file_md5sum}" != "${palm_md5sum}" ]; then
           echo  | tee -a ${PATCH_LOG_FILE} 1>&2
           echo "ERROR: Additional file already exists in system" | tee -a ${PATCH_LOG_FILE} 1>&2
           echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE} 1>&2
@@ -540,13 +530,6 @@ create_backup_files() {
       echo "${file} ${VERSION}" >> ${PATCH_CONTROL_DIR}/file_list
     fi
 
-    if [ ! -z "${cur_version}" ]; then
-      tmpvar=`echo "${package} ${file}" | tr '/' '.'`
-
-      sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_control
-      echo "${package} ${file} ${cur_version}" >> ${PATCH_CONTROL_DIR}/file_control
-    fi
-
     if [ ! -z "${palm_md5sum}" ]; then
       appid=`basename ${APP_DIR}`
 
@@ -554,6 +537,13 @@ create_backup_files() {
 
       sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_md5sums
       echo "${appid} ${file} ${palm_md5sum}" >> ${PATCH_CONTROL_DIR}/file_md5sums
+    fi
+
+    if [ ! -z "${pkg_version}" ]; then
+      tmpvar=`echo "${package} ${file}" | tr '/' '.'`
+
+      sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_control
+      echo "${package} ${file} ${pkg_version}" >> ${PATCH_CONTROL_DIR}/file_control
     fi
   done
 
@@ -635,13 +625,13 @@ if [ ! -d ${PATCH_CONTROL_DIR}/backup ]; then
 fi
 
 if [ -f ${PATCH_CONTROL_DIR}/backups ]; then
-	echo "ERROR: Old backup system detected, not supported by aupt-5!"
-	do_install_failure
+  echo "ERROR: Old backup system detected, not supported by aupt-5!"
+  do_install_failure
 fi
 
 if [ -f ${PATCH_CONTROL_DIR}/packages ]; then
-	echo "ERROR: Old control system detected, not supported by aupt-5!"
-	do_install_failure
+  echo "ERROR: Old control system detected, not supported by aupt-5!"
+  do_install_failure
 fi
 
 if [ ! -f ${PATCH_CONTROL_DIR}/file_list ]; then

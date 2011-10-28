@@ -101,76 +101,75 @@ uninstallation_failed() {
 get_bck_file() {
   bck_file=`dirname ${file}`"/.webosinternals.orig."`basename ${file}`
 
-	if [ ! -f ${bck_file} ]; then
-		bck_file="${file}.webosinternals.orig"
-	fi
+  if [ ! -f ${bck_file} ]; then
+    bck_file="${file}.webosinternals.orig"
+  fi
 }
 
 get_palm_md5sum() {
-  cur_version=""
   palm_md5sum=""
+  pkg_version=""
 
-  check_cache_file
+  if [ -f /var/webosinternals.md5sums ]; then
+    md5sums_line=`grep "^${file} " /var/webosinternals.md5sums`
+
+    palm_md5sum=`echo ${md5sums_line} | awk '{print $2}'`
+
+    pkg_version=`echo ${md5sums_line} | awk '{print $3}'`
+  fi
+}
+
+find_palm_md5sum() {
+  palm_md5sum=""
+  pkg_version=""
+
+  md5sums_line=""
+
+  echo "Finding md5sum for original file" >> ${PATCH_LOG_FILE}
+  echo "  file: ${file}" >> ${PATCH_LOG_FILE}
+
+  check_packages_file
 
   if [ ! -z "${md5sums_line}" ]; then
     palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
 
-    echo "Found md5sum from the cache file" >> ${PATCH_LOG_FILE}
+    echo "Found md5sum via the packages file" >> ${PATCH_LOG_FILE}
     echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
-  else
-    echo "File not found from cache file, checking packages file" >> ${PATCH_LOG_FILE}
 
-    check_packages_file
+    echo "${file} ${palm_md5sum} ${pkg_version}" >>/var/webosinternals.md5sums
+  else
+    echo "File not found via packages file, checking cryptofs lists" >> ${PATCH_LOG_FILE}
+
+    check_cryptofs_lists
 
     if [ ! -z "${md5sums_line}" ]; then
       palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
 
-      echo "Found md5sum via the packages file" >> ${PATCH_LOG_FILE}
+      echo "Found md5sum from the cryptofs lists" >> ${PATCH_LOG_FILE}
       echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
 
-      echo ${md5sums_line} >>/var/webosinternals.md5sums
+      echo "${file} ${palm_md5sum} ${pkg_version}" >>/var/webosinternals.md5sums
     else
-      echo "File not found via packages file, checking cryptofs lists" >> ${PATCH_LOG_FILE}
+      echo "File not found in cryptofs lists, checking system md5sum files" >> ${PATCH_LOG_FILE}
 
-      check_cryptofs_lists
+      md5sums_line=`grep -h "*.${file}$" ${IPKG_INFO_DIR}/*.md5sums`
 
       if [ ! -z "${md5sums_line}" ]; then
         palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
 
-        echo "Found md5sum from the cryptofs lists" >> ${PATCH_LOG_FILE}
+        echo "Found md5sum from md5sums files" >> ${PATCH_LOG_FILE}
         echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
 
-        echo ${md5sums_line} >>/var/webosinternals.md5sums
-      else
-        echo "File not found in cryptofs lists, checking system md5sum files" >> ${PATCH_LOG_FILE}
-
-        md5sums_line=`grep -h "*.${file}$" ${IPKG_INFO_DIR}/*.md5sums`
-
-        if [ ! -z "${md5sums_line}" ]; then
-          palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
-
-          echo "Found md5sum from md5sums files" >> ${PATCH_LOG_FILE}
-          echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
-
-          echo ${md5sums_line} >>/var/webosinternals.md5sums
-        fi
+        echo "${file} ${palm_md5sum} ${pkg_version}" >>/var/webosinternals.md5sums
       fi
     fi
-  fi
-}
-
-check_cache_file() {
-  md5sums_line=""
-
-  if [ -f "/var/webosinternals.md5sums" ]; then
-    md5sums_line=`grep ${file} /var/webosinternals.md5sums`
   fi
 }
 
 check_packages_file() {
   if [ -f ${APP_DIR}/${PACKAGES_FILE} ]; then
     for p in `cat ${APP_DIR}/${PACKAGES_FILE}` ; do
-      md5sums_line=`grep ${file} ${IPKG_INFO_DIR}/${p}.md5sums`
+      md5sums_line=`grep "*.${file}$" ${IPKG_INFO_DIR}/${p}.md5sums`
 
       if [ ! -z "${md5sums_line}" ]; then
         break;
@@ -191,13 +190,13 @@ check_cryptofs_lists() {
 
     control_file=`dirname ${list_file}`/${package}.control
 
-    cur_version=`grep "^Version: " ${control_file} | awk '{print $2}'`
+    pkg_version=`grep "^Version: " ${control_file} | awk '{print $2}'`
 
     control_line=`grep "^${package} ${file} " ${PATCH_CONTROL_DIR}/file_control`
 
-    ctl_version=`echo ${control_line} | awk '{print $3}'`
+    tmp_version=`echo ${control_line} | awk '{print $3}'`
 
-    if [ ! -f ${bck_file} ] || [ "${cur_version}" != "${ctl_version}" ]; then
+    if [ ! -f ${bck_file} ] || [ "${pkg_version}" != "${tmp_version}" ]; then
       md5sums_line=`md5sum ${file} | awk '{print $1}'`" *.${file}"
     else
       md5sums_line=`md5sum ${bck_file} | awk '{print $1}'`" *.${file}"
@@ -208,6 +207,10 @@ check_cryptofs_lists() {
 verify_text_patch() {
   if [ -f ${APP_DIR}/${PATCH_NAME} ]; then
     FILE_LIST=" "`${LSDIFF_EXEC} ${APP_DIR}/${PATCH_NAME}`
+
+    for file in ${FILE_LIST} ; do
+      find_palm_md5sum
+    done
 
     echo >> ${PATCH_LOG_FILE}
     echo "----------------------------------" >> ${PATCH_LOG_FILE}
@@ -257,7 +260,7 @@ verify_binary_patch() {
     file=${BSPATCH_FILE}
 
     if [ -f ${file} ]; then
-      get_palm_md5sum
+      find_palm_md5sum
 
       file_md5sum=`md5sum ${file} | awk '{print $1}'`
 
@@ -309,17 +312,21 @@ verify_additional_files() {
 
       FILE_LIST="${FILE_LIST} ${file}"
 
-      get_palm_md5sum
+      get_bck_file
 
-      if [ "${FILES_DIR}" != "files" ] && [ ! -z "${palm_md5sum}" ]; then
-        FAIL_LIST="${FAIL_LIST} ${file}"
-      fi
+      if [ -s ${bck_file} ]; then
+        find_palm_md5sum
 
-      if [ ! -f ${file} ]; then
-        echo | tee -a ${PATCH_LOG_FILE}
-        echo "Interestingly, the additional file is already removed" | tee -a ${PATCH_LOG_FILE}
-        echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE}
-        echo | tee -a ${PATCH_LOG_FILE}
+        if [ "${FILES_DIR}" != "files" ] && [ ! -z "${palm_md5sum}" ]; then
+          FAIL_LIST="${FAIL_LIST} ${file}"
+        fi
+
+        if [ ! -f ${file} ]; then
+          echo | tee -a ${PATCH_LOG_FILE}
+          echo "Interestingly, the additional file is already removed" | tee -a ${PATCH_LOG_FILE}
+          echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE}
+          echo | tee -a ${PATCH_LOG_FILE}
+        fi
       fi
     done
   fi

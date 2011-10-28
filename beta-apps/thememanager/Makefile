@@ -4,7 +4,7 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.srv
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.6.8
+VERSION  = 0.6.9
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/webos-internals/303050-theme-manager.html#post3201074
@@ -12,6 +12,7 @@ ICON	 = http://www.webos-internals.org/images/9/9d/Icon_Theme-Manager.png
 DESCRIPTION = Theme Manager for you device.
 MINWEBOSVERSION = 2.1.0
 CHANGELOG = \
+0.6.9: Fixed third party applications theming which was broken.<br>\
 0.6.8: Couple small bug fixes for user interface and for the service.<br>\
 0.6.7: Fixed a bug in theme applying that could have caused problems.<br>\
 0.6.6: Fixed serious bug that caused theme applying time get long.<br>\
