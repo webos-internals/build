@@ -69,7 +69,7 @@ do_install_failure() {
   echo "*** FAILED ***" | tee -a ${PATCH_LOG_FILE}
   echo | tee -a ${PATCH_LOG_FILE}
 
-  rm -f /var/webosinternals.md5sums >/dev/null 2>&1
+  rm -f /var/webosinternals.cache >/dev/null 2>&1
 
   exit 1
 }
@@ -79,7 +79,7 @@ do_install_success() {
   echo "*** SUCCESS ***" | tee -a ${PATCH_LOG_FILE}
   echo | tee -a ${PATCH_LOG_FILE}
 
-  rm -f /var/webosinternals.md5sums >/dev/null 2>&1
+  rm -f /var/webosinternals.cache >/dev/null 2>&1
 
   exit 0
 }
@@ -108,19 +108,23 @@ get_bck_file() {
 
 get_palm_md5sum() {
   palm_md5sum=""
+  pkg_package=""  
   pkg_version=""
 
-  if [ -f "/var/webosinternals.md5sums" ]; then
-    md5sums_line=`grep "^${file} " /var/webosinternals.md5sums`
+  if [ -f /var/webosinternals.cache ]; then
+    md5sums_line=`grep "^${file} " /var/webosinternals.cache`
 
     palm_md5sum=`echo ${md5sums_line} | awk '{print $2}'`
 
-    pkg_version=`echo ${md5sums_line} | awk '{print $3}'`
+    pkg_package=`echo ${md5sums_line} | awk '{print $3}'`
+
+    pkg_version=`echo ${md5sums_line} | awk '{print $4}'`
   fi
 }
 
 find_palm_md5sum() {
   palm_md5sum=""
+  pkg_package=""
   pkg_version=""
 
   md5sums_line=""
@@ -136,7 +140,7 @@ find_palm_md5sum() {
     echo "Found md5sum via the packages file" >> ${PATCH_LOG_FILE}
     echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
 
-    echo "${file} ${palm_md5sum} ${pkg_version}" >>/var/webosinternals.md5sums
+    echo "${file} ${palm_md5sum} ${pkg_package} ${pkg_version}" >>/var/webosinternals.cache
   else
     echo "File not found via packages file, checking cryptofs lists" >> ${PATCH_LOG_FILE}
 
@@ -148,19 +152,21 @@ find_palm_md5sum() {
       echo "Found md5sum from the cryptofs lists" >> ${PATCH_LOG_FILE}
       echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
 
-      echo "${file} ${palm_md5sum} ${pkg_version}" >>/var/webosinternals.md5sums
+      echo "${file} ${palm_md5sum} ${pkg_package} ${pkg_version}" >>/var/webosinternals.cache
     else
       echo "File not found in cryptofs lists, checking system md5sum files" >> ${PATCH_LOG_FILE}
 
-      md5sums_line=`grep -h "*.${file}$" ${IPKG_INFO_DIR}/*.md5sums`
+      md5sums_line=`grep "*.${file}$" ${IPKG_INFO_DIR}/*.md5sums`
 
       if [ ! -z "${md5sums_line}" ]; then
-        palm_md5sum=`echo ${md5sums_line} | awk '{print $1}'`
+        pkg_package=`echo ${md5sums_line} | cut -d ':' -f 1`
+
+        palm_md5sum=`echo ${md5sums_line} | cut -d ':' -f 2 | awk '{print $1}'`
 
         echo "Found md5sum from md5sums files" >> ${PATCH_LOG_FILE}
         echo "  md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
 
-        echo "${file} ${palm_md5sum} ${pkg_version}" >>/var/webosinternals.md5sums
+        echo "${file} ${palm_md5sum} ${pkg_package} ${pkg_version}" >>/var/webosinternals.cache
       fi
     fi
   fi
@@ -172,6 +178,8 @@ check_packages_file() {
       md5sums_line=`grep "*.${file}$" ${IPKG_INFO_DIR}/${p}.md5sums`
 
       if [ ! -z "${md5sums_line}" ]; then
+        pkg_package="${p}"
+
         break;
       fi
     done
@@ -186,13 +194,13 @@ check_cryptofs_lists() {
 
     list_file=`echo "${file_line}" | cut -d ':' -f 1`
 
-    package=`basename ${list_file} .list`
+    pkg_package=`basename ${list_file} .list`
 
-    control_file=`dirname ${list_file}`/${package}.control
+    control_file=`dirname ${list_file}`/${pkg_package}.control
 
     pkg_version=`grep "^Version: " ${control_file} | awk '{print $2}'`
 
-    control_line=`grep "^${package} ${file} " ${PATCH_CONTROL_DIR}/file_control`
+    control_line=`grep "^${pkg_package} ${file} " ${PATCH_CONTROL_DIR}/file_control`
 
     tmp_version=`echo ${control_line} | awk '{print $3}'`
 
@@ -540,10 +548,10 @@ create_backup_files() {
     fi
 
     if [ ! -z "${pkg_version}" ]; then
-      tmpvar=`echo "${package} ${file}" | tr '/' '.'`
+      tmpvar=`echo "${pkg_package} ${file}" | tr '/' '.'`
 
       sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_control
-      echo "${package} ${file} ${pkg_version}" >> ${PATCH_CONTROL_DIR}/file_control
+      echo "${pkg_package} ${file} ${pkg_version}" >> ${PATCH_CONTROL_DIR}/file_control
     fi
   done
 
@@ -650,7 +658,7 @@ if [ ! -f ${PATCH_PACKAGES_LIST} ]; then
   touch ${PATCH_PACKAGES_LIST} || do_install_failure
 fi
 
-rm -f /var/webosinternals.md5sums >/dev/null 2>&1
+rm -f /var/webosinternals.cache >/dev/null 2>&1
 
 #
 # The main function that controls all the magic stuff
