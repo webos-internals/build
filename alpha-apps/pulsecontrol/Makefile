@@ -5,15 +5,15 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.srv
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.5.0
+VERSION  = 0.6.0
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/webos-internals/301721-pulseaudio-settings.html
 ICON     = http://www.webos-internals.org/images/b/b4/PulseAudioSettings.png
 DESCRIPTION = PulseAudio Settings.
-MINWEBOSVERSION = 3.0.2
-MAXWEBOSVERSION = 3.0.2
+MINWEBOSVERSION = 2.2.0
 CHANGELOG = \
+0.6.0: Fixed metadata so that package shows for Pre3 and TouchPad.<br>\
 0.5.0: Added support for USB audio for TouchPads with custom kernels.<br>\
 0.4.0: Updated to work with the latest required pulseaudio patch.<br>\
 0.3.0: Made the app work in Pre3 and polished the user interface.<br>\
