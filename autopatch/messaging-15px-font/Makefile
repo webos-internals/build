@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = messaging/${NAME}.patch
 TITLE = 15px Font
-DESCRIPTION = Decreases the font size in the Messaging app to 15px. If you have the Left Avatar patch it would only decrease their font size and not yours (won't work with the iPhone Style patch).
+DESCRIPTION = Decreases the font size in the Messaging app to 15px. If you have the Left Avatar patch it would only decrease their font size and not yours (will not work with the iPhone Style patch).
 CATEGORY = Messaging
 VERSIONS = 2.0.0-42 2.0.1-70 2.1.0-39
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
