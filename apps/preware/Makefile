@@ -3,7 +3,7 @@ TITLE	 = Preware
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.8.3
+VERSION  = 1.8.5
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
@@ -11,6 +11,8 @@ ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 MINWEBOSVERSION = 1.4.0
 DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, kernels, services and plugins.<br><b>Requires webOS 1.4.0 or later</b>.
 CHANGELOG = \
+1.8.5: Fixed missing package information bug.<br>\
+1.8.4: Added some additional Second Line preference options.<br>\
 1.8.3: Please read http://testing.preware.org/ if you use the testing feeds.<br>\
 1.8.2: Fixed the removal of obsolete testing feeds.<br>\
 1.8.1: Remove the obsolete testing feeds when adding alpha or beta feeds.<br>\
