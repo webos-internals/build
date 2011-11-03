@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Pre3)
 DEVICE = pre3
 CATEGORY = Stable
-VERSIONS = 2.2.0-5 2.2.3-5
+VERSIONS = 2.2.0-11 2.2.3-11
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre3, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 This package is compatible only with webOS 2.2.0 build 3171 or webOS 2.2.3 - if you have a device with a different build number, you will need to doctor it before installing this package.<br>\
@@ -15,10 +15,12 @@ All additions are controlled by using the Govnah application.<br>\
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-11", "log" : [ "Added CIFS and UTF8 support" ] }, \
 { "version" : "${WEBOS_VERSION}-5", "log" : [ "Added the lowmemnotify threshold calculation modification" ] }, \
 { "version" : "${WEBOS_VERSION}-4", "log" : [ "Initial version" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-11: Added CIFS and UTF8 support.<br>\
 ${WEBOS_VERSION}-5: Added the lowmemnotify threshold calculation modification.<br>\
 ${WEBOS_VERSION}-4: Initial version.
 
@@ -29,6 +31,7 @@ KERNEL_PATCHES = makefiletune/armMakefile.diff \
 		 bfq/bfq-iosched.patch \
 		 identification/mkcompile_h.patch \
 		 compcache/lowmemnotify-total-memory.patch \
+		 filesystems/cifs.patch \
 		 crypto/hw-support-pre3.patch \
 		 crypto/truecrypt-support-pre3.patch
 
