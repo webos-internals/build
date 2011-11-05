@@ -3,7 +3,7 @@ TITLE    = Impostah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.9.13
+VERSION  = 0.9.15
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Impostah
@@ -11,6 +11,8 @@ ICON	 = http://www.webos-internals.org/images/a/aa/Tux_Imposter.png
 DESCRIPTION = Impostah is an app for those who know what do to with it. It does many things, most of which are too complex to explain in this short description.
 MINWEBOSVERSION = 1.4.5
 CHANGELOG = \
+0.9.15: Added the ability to show all your purchased apps.<br>\
+0.9.14: Added the ability to delete all items in a database.<br>\
 0.9.13: Added support for Australian app catalog activation.<br>\
 0.9.12: Modify the device information passed during activation for the Pre 3.<br>\
 0.9.11: Purge cleared overrides.<br>\
