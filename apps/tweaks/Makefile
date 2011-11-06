@@ -4,7 +4,7 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.prefs
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.8.2
+VERSION  = 1.8.5
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Tweaks
@@ -12,6 +12,9 @@ ICON	 = http://www.webos-internals.org/images/2/2e/Tweaks-icon.png
 DESCRIPTION = Tweaks for your webOS device.
 MINWEBOSVERSION = 2.0.0
 CHANGELOG = \
+1.8.5: Cleaned up the code and fixed a small bug.<br>\
+1.8.4: Polished the Enyo UI behavior on phones.<br>\
+1.8.3: Fixed the luna restart menu action.<br>\
 1.8.2: Proper fix for the user interface selection.<br>\
 1.8.1: Fixed to use Mojo UI if Enyo framework is not available.<br>\
 1.8.0: Made enyo the primary UI and added file picker widget.<br>\
