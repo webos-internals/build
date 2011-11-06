@@ -3,7 +3,7 @@ TITLE = A-1 Skyraider (Pre3)
 DEVICE = pre3
 CATEGORY = Alpha
 VERSIONS = 2.2.0-12 2.2.3-12
-PPINFO_DESCRIPTION = The latest alpha kernel from uNiXpSyChO.<br><br>\
+APPINFO_DESCRIPTION = The latest alpha kernel from uNiXpSyChO.<br><br>\
 Features:<br> * 1.9GHz<br> * CIFS, NFS, iSCSI, ATA over Ethernet<br> * More to come...<br><br>\
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
