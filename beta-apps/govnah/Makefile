@@ -3,13 +3,14 @@ TITLE    = Govnah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.2.4
+VERSION  = 1.2.5
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
 DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature, load averages and memory usage.
 CHANGELOG = \
+1.2.5: Added support for the Pre 3 UberKernel and Warthog kernel.<br>\
 1.2.4: Added support for the Pre 3 A-1 Skyraider kernel.<br>\
 1.2.3: Added support for TouchPad webOS 3.0.4 Warthog kernel.<br>\
 1.2.2: Added support for TouchPad webOS 3.0.4 F15C and F4 kernels.<br>\
