@@ -108,8 +108,10 @@ get_bck_file() {
 
 get_palm_md5sum() {
   palm_md5sum=""
-  pkg_package=""  
+  pkg_package=""
   pkg_version=""
+
+  appid=`basename ${APP_DIR}`
 
   if [ -f /var/webosinternals.cache ]; then
     md5sums_line=`grep "^${file} " /var/webosinternals.cache`
@@ -539,8 +541,6 @@ create_backup_files() {
     fi
 
     if [ ! -z "${palm_md5sum}" ]; then
-      appid=`basename ${APP_DIR}`
-
       tmpvar=`echo "${appid} ${file}" | tr '/' '.'`
 
       sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_md5sums
