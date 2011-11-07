@@ -8,6 +8,7 @@ APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the P
 This package is compatible only with webOS 2.2.0 build 3171 or webOS 2.2.3 - if you have a webOS 2.2.0 device with a different build number, you will need to doctor it before installing this package.<br>\
 Current additions include:<ul>\
 <li>New 1.9 GHz overclocking support, including voltage selection, ported to the Pre 3 by uNiXpSyChO.</li>\
+<li>All standard Linux 2.6.32 <a href=http://www.ibm.com/developerworks/linux/library/l-cpufreq-1/index.html>cpufreq governors</a> made available for selection.</li>\
 <li>New BFQ, SIO and V(R) IO schedulers.</li>\
 <li>Modification of the lowmemnotify threshold calculation to take into account free swap space. This reduces the occurrence of the Too Many Cards error.</li>\
 <li>A new <a href=http://lwn.net/Articles/334649/><b>compcache</b> compressed RAM swap kernel module</a> ported to the Palm Pre 3. This effectively increases your available swap space, at the expense of access speed.</li>\
