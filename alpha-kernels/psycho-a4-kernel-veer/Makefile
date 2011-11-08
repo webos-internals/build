@@ -2,16 +2,18 @@ NAME = $(shell basename $(shell pwd))
 TITLE = A-4 Skyhawk (Veer)
 DEVICE = veer
 CATEGORY = Alpha
-VERSIONS = 2.1.2-22
+VERSIONS = 2.1.2-23
 APPINFO_DESCRIPTION = The latest alpha kernel from uNiXpSyChO.<br><br>\
-Features:<br> * 1.4GHz<br> * SIO<br> * CIFS<br> * Voltage manipulation<br> * More to come...<br><br>\
+Features:<br> * 1.4GHz<br> * Screenstate<br> * SIO<br> * CIFS<br> * Voltage manipulation<br> * More to come...<br><br>\
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-23", "log" : [ "add screenstate gov" ] }, \
 { "version" : "${WEBOS_VERSION}-22", "log" : [ "fix voltage setting" ] }, \
 { "version" : "${WEBOS_VERSION}-21", "log" : [ "Initial release" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-23: add screenstate gov<br> \
 ${WEBOS_VERSION}-22: fix voltage setting<br> \
 ${WEBOS_VERSION}-21: Initial release<br>
 
@@ -27,7 +29,8 @@ KERNEL_PATCHES = identification/mkcompile_h.patch \
 		 psychobuild/iosched-sio.patch \
 		 psychobuild/memcpy.patch \
 		 psychobuild/tmc_mem.patch \
-		 psychobuild/override.patch
+		 psychobuild/override.patch \
+		 psychobuild/screenstate.patch
 
 TYPE = Kernel
 

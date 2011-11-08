@@ -108,8 +108,10 @@ get_bck_file() {
 
 get_palm_md5sum() {
   palm_md5sum=""
-  pkg_package=""  
+  pkg_package=""
   pkg_version=""
+
+  appid=`basename ${APP_DIR}`
 
   if [ -f /var/webosinternals.cache ]; then
     md5sums_line=`grep "^${file} " /var/webosinternals.cache`
@@ -443,7 +445,8 @@ check_ota_update() {
 
         file_md5sum=`md5sum ${file} | awk '{print $1}'`
 
-        orig_md5sum=`grep -h " ${file} " ${PATCH_CONTROL_DIR}/file_md5sums | awk '{print $3}'`
+        orig_md5sum=`grep -h "${appid} ${file} " \
+          ${PATCH_CONTROL_DIR}/file_md5sums | awk '{print $3}'`
 
         if [ -z "${palm_md5sum}" ]; then
           CREATED_LIST="${CREATED_LIST} ${file}"
@@ -458,8 +461,7 @@ check_ota_update() {
           RESTORE_LIST="${RESTORE_LIST} ${file}"
         elif [ "${palm_md5sum}" != "${orig_md5sum}" ]; then
           echo "The md5sum of file has changed, assuming OTA" >> ${PATCH_LOG_FILE}
-          echo "  palm_md5sum: ${palm_md5sum}" >> ${PATCH_LOG_FILE}
-          echo "  orig_md5sum: ${orig_md5sum}" >> ${PATCH_LOG_FILE}
+          echo "  file: ${file}" >> ${PATCH_LOG_FILE}
 
           cp -f ${file} ${bck_file}
 
@@ -553,8 +555,6 @@ clean_backup_files() {
     fi
 
     if [ ! -z "${palm_md5sum}" ]; then
-      appid=`basename ${APP_DIR}`
-
       tmpvar=`echo "${appid} ${file}" | tr '/' '.'`
 
       sed -i -e /"^${tmpvar} "/d ${PATCH_CONTROL_DIR}/file_md5sums
