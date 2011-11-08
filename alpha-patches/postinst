@@ -60,16 +60,14 @@ fi
 # Helper functions that do all the needed heavy work
 #
 
-remount_rw() {
-  mount -o rw,remount /
-}
-
 do_install_failure() {
   echo | tee -a ${PATCH_LOG_FILE}
   echo "*** FAILED ***" | tee -a ${PATCH_LOG_FILE}
   echo | tee -a ${PATCH_LOG_FILE}
 
   rm -f /var/webosinternals.cache >/dev/null 2>&1
+
+  mount -o ro,remount / | tee -a ${PATCH_LOG_FILE} 1>&2
 
   exit 1
 }
@@ -81,21 +79,9 @@ do_install_success() {
 
   rm -f /var/webosinternals.cache >/dev/null 2>&1
 
+  mount -o ro,remount / | tee -a ${PATCH_LOG_FILE} 1>&2
+
   exit 0
-}
-
-installation_failed() {
-  echo >> ${PATCH_LOG_FILE}
-  echo "----------------------------------" >> ${PATCH_LOG_FILE}
-  echo "Patch install FAILED!" >> ${PATCH_LOG_FILE}
-  echo "----------------------------------" >> ${PATCH_LOG_FILE}
-  echo >> ${PATCH_LOG_FILE}
-
-  if [ -f ${APP_DIR}/${PATCH_NAME} ]; then
-    ${PATCH_EXEC} -f -s -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} | tee -a ${PATCH_LOG_FILE} 1>&2
-  fi
-
-  do_install_failure
 }
 
 get_bck_file() {
@@ -254,13 +240,17 @@ verify_text_patch() {
       echo "----------------------------------" >> ${PATCH_LOG_FILE}
       echo >> ${PATCH_LOG_FILE}
 
-      ${PATCH_EXEC} -f -R -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} 2>&1 >> ${PATCH_LOG_FILE} || installation_failed
+      ${PATCH_EXEC} -f -R -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} 2>&1 >> ${PATCH_LOG_FILE}
 
-      echo | tee -a ${PATCH_LOG_FILE}
-      echo "Interestingly, the patch seems to be already applied" | tee -a ${PATCH_LOG_FILE}
-      echo | tee -a ${PATCH_LOG_FILE}
+      if [ ${?} -ne 0 ]; then
+        do_install_failure
+      else
+        echo | tee -a ${PATCH_LOG_FILE}
+        echo "Interestingly, the patch seems to be already applied" | tee -a ${PATCH_LOG_FILE}
+        echo | tee -a ${PATCH_LOG_FILE}
 
-      patch_already_applied="yes"
+        patch_already_applied="yes"
+      fi
     fi
   fi
 }
@@ -531,8 +521,7 @@ create_backup_files() {
     fi
 
     if [ ! -f ${file} ] && [ ! -s ${bck_file} ] || \
-      [ "${file_md5sum}" = "${palm_md5sum}" ] || \
-      [ "${orig_md5sum}" = "${palm_md5sum}" ]
+      [ "${file_md5sum}" = "${palm_md5sum}" ] || [ "${orig_md5sum}" = "${palm_md5sum}" ]
     then
       tmpvar=`echo "${file}" | tr '/' '.'`
 
@@ -555,7 +544,8 @@ create_backup_files() {
     fi
   done
 
-  sed -i -e /`basename ${APP_DIR}`/d ${PATCH_PACKAGES_LIST}
+  sed -i -e /'^`basename ${APP_DIR}` '/d ${PATCH_PACKAGES_LIST}
+
   basename "${APP_DIR} ${VERSION}">> ${PATCH_PACKAGES_LIST}
 }
 
@@ -567,7 +557,7 @@ if [ ! -f ${PATCH_LOG_FILE} ]; then
   echo "*** Patch Log Created by postinst $(date) ***" > ${PATCH_LOG_FILE}
 fi
 
-remount_rw | tee -a ${PATCH_LOG_FILE} 1>&2
+mount -o rw,remount / | tee -a ${PATCH_LOG_FILE} 1>&2
 
 echo  >> ${PATCH_LOG_FILE}
 echo "------------------------------------------------------" >> ${PATCH_LOG_FILE}
@@ -621,6 +611,8 @@ if [ ! -f ${APP_DIR}/${PATCH_NAME} ] && [ ! -f ${APP_DIR}/${BSPATCH_NAME} ] && [
   echo "ERROR: Cannot find patch file, bspatch file or files directory!" | tee -a ${PATCH_LOG_FILE} 1>&2
   do_install_failure
 fi
+
+rmdir ${IPKG_OFFLINE_ROOT}/usr/palm/applications/`basename ${APP_DIR}` >/dev/null 2>&1
 
 #
 # Intialize and update the patch backup/control system

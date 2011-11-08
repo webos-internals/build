@@ -60,16 +60,14 @@ fi
 # Helper functions that do all the needed heavy work
 #
 
-remount_rw() {
-  mount -o rw,remount /
-}
-
 do_remove_failure() {
   echo | tee -a ${PATCH_LOG_FILE}
   echo "*** FAILED ***" | tee -a ${PATCH_LOG_FILE}
   echo | tee -a ${PATCH_LOG_FILE}
 
   rm -f /var/webosinternals.cache >/dev/null 2>&1
+
+  mount -o ro,remount / | tee -a ${PATCH_LOG_FILE} 1>&2
 
   exit 1
 }
@@ -81,21 +79,9 @@ do_remove_success() {
 
   rm -f /var/webosinternals.cache >/dev/null 2>&1
 
+  mount -o ro,remount / | tee -a ${PATCH_LOG_FILE} 1>&2
+
   exit 0
-}
-
-uninstallation_failed() {
-  echo >> ${PATCH_LOG_FILE}
-  echo "----------------------------------" >> ${PATCH_LOG_FILE}
-  echo "Patch removal FAILED!" >> ${PATCH_LOG_FILE}
-  echo "----------------------------------" >> ${PATCH_LOG_FILE}
-  echo >> ${PATCH_LOG_FILE}
-
-  if [ -f ${APP_DIR}/${PATCH_NAME} ]; then
-    ${PATCH_EXEC} -s -R -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} | tee -a ${PATCH_LOG_FILE} 1>&2
-  fi
-
-  do_remove_failure
 }
 
 get_bck_file() {
@@ -246,8 +232,7 @@ verify_text_patch() {
 
         patch_already_unapplied="yes"
       else
-        FAIL_LIST=" "`${PATCH_EXEC} -s -f -R -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} 2>&1 | \
-          awk '{print "/"$12}' | sed s:".rej$":"":`
+        FAIL_LIST=" "`${PATCH_EXEC} -s -f -R -p 1 -d / --dry-run < ${APP_DIR}/${PATCH_NAME} 2>&1 | awk '{print "/"$12}' | sed s:".rej$":"":`
 
         if [ "${FAIL_LIST}" = "${FILE_LIST}" ]; then
           patch_already_unapplied="yes"
@@ -445,8 +430,7 @@ check_ota_update() {
 
         file_md5sum=`md5sum ${file} | awk '{print $1}'`
 
-        orig_md5sum=`grep -h "${appid} ${file} " \
-          ${PATCH_CONTROL_DIR}/file_md5sums | awk '{print $3}'`
+        orig_md5sum=`grep -h "${appid} ${file} " ${PATCH_CONTROL_DIR}/file_md5sums | awk '{print $3}'`
 
         if [ -z "${palm_md5sum}" ]; then
           CREATED_LIST="${CREATED_LIST} ${file}"
@@ -479,7 +463,7 @@ check_ota_update() {
   done
 
   if [ ! -z "${FAIL_LIST}" ]; then
-    uninstallation_failed
+    do_remove_failure
   fi
 }
 
@@ -534,8 +518,7 @@ clean_backup_files() {
     fi
 
     if [ ! -f ${file} ] && [ ! -s ${bck_file} ] || \
-       [ "${file_md5sum}" = "${orig_md5sum}" ] || \
-       [ "${file_md5sum}" = "${palm_md5sum}" ]
+       [ "${file_md5sum}" = "${orig_md5sum}" ] || [ "${file_md5sum}" = "${palm_md5sum}" ]
     then
       if [ -f ${bck_file} ]; then
         if [ ! -s ${bck_file} ]; then
@@ -567,7 +550,7 @@ clean_backup_files() {
     fi
   done
 
-  sed -i -e /\^'`basename ${APP_DIR}` ${VERSION}'\$/d ${PATCH_PACKAGES_LIST}
+  sed -i -e /'^`basename ${APP_DIR}` '/d ${PATCH_PACKAGES_LIST}
 }
 
 #
@@ -578,7 +561,7 @@ if [ ! -f ${PATCH_LOG_FILE} ]; then
   echo "*** Patch Log Created by prerm $(date) ***" > ${PATCH_LOG_FILE}
 fi
 
-remount_rw | tee -a ${PATCH_LOG_FILE} 1>&2
+mount -o rw,remount / | tee -a ${PATCH_LOG_FILE} 1>&2
 
 echo  >> ${PATCH_LOG_FILE}
 echo "------------------------------------------------------" >> ${PATCH_LOG_FILE}
