@@ -550,7 +550,7 @@ clean_backup_files() {
     fi
   done
 
-  if [ ${PACKAGES_FILE} = "package_list" ]; then
+  if [ "${PACKAGES_FILE}" = "package_list" ]; then
     sed -i -e /'^`basename ${APP_DIR}` '/d ${PATCH_PACKAGES_LIST}
   fi
 }
