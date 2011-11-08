@@ -4,14 +4,16 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.srv
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.8.1
+VERSION  = 0.8.5
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/webos-internals/303050-theme-manager.html#post3201074
 ICON	 = http://www.webos-internals.org/images/9/9d/Icon_Theme-Manager.png
 DESCRIPTION = Theme Manager for you device.
 MINWEBOSVERSION = 2.1.0
+MAXWEBOSVERSION = 3.9.9
 CHANGELOG = \
+0.8.5: Small fixes/cleanups and support for themes installed by ipk.<br>\
 0.8.1: Fixed patching/replacing of files located in cryptofs.<br>\
 0.8.0: Added searching/filtering of themes and made UI smoother.<br>\
 0.7.0: Logic changes and added list view mode for theme library.<br>\
