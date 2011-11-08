@@ -544,9 +544,11 @@ create_backup_files() {
     fi
   done
 
-  sed -i -e /'^`basename ${APP_DIR}` '/d ${PATCH_PACKAGES_LIST}
+  if [ ${PACKAGES_FILE} = "package_list" ]; then
+    sed -i -e /'^`basename ${APP_DIR}` '/d ${PATCH_PACKAGES_LIST}
 
-  basename "${APP_DIR} ${VERSION}">> ${PATCH_PACKAGES_LIST}
+    basename "${APP_DIR} ${VERSION}">> ${PATCH_PACKAGES_LIST}
+  fi
 }
 
 #
