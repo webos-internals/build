@@ -1,0 +1,8 @@
+description "Ubuntu Oneiric Chroot"
+
+start on org.webosinternals.ubuntu-oneiric-chroot
+
+script
+	/sbin/initctl emit org.webosinternals.xserver "$@"
+	exec /media/cryptofs/apps/usr/palm/applications/org.webosinternals.ubuntu-oneiric-chroot/bin/start-xterm.sh "$@"
+end script
