@@ -67,7 +67,7 @@ do_install_failure() {
 
   rm -f /var/webosinternals.cache >/dev/null 2>&1
 
-  mount -o ro,remount / | tee -a ${PATCH_LOG_FILE} 1>&2
+#  mount -o ro,remount / | tee -a ${PATCH_LOG_FILE} 1>&2
 
   exit 1
 }
@@ -79,7 +79,7 @@ do_install_success() {
 
   rm -f /var/webosinternals.cache >/dev/null 2>&1
 
-  mount -o ro,remount / | tee -a ${PATCH_LOG_FILE} 1>&2
+#  mount -o ro,remount / | tee -a ${PATCH_LOG_FILE} 1>&2
 
   exit 0
 }
@@ -403,16 +403,9 @@ install_binary_patch() {
 
       cp -f /var/webosinternals-patched ${BSPATCH_FILE}
 
-      if [ "${?}" = "1" ]; then
-        stop `basename ${BSPATCH_FILE}` >/dev/null 2>&1
-        sleep 5
-
-        cp -f /var/webosinternals-patched ${BSPATCH_FILE}
-
-        start `basename ${BSPATCH_FILE}` >/dev/null 2>&1
-      fi
-
-      if [ -x ${bck_file} ]; then
+      if [ ${?} -ne 0 ]; then
+        echo "  failed to patch binary file, file in use" | tee -a ${PATCH_LOG_FILE}
+      elif [ -x ${bck_file} ]; then
         chmod 755 ${BSPATCH_FILE}
       fi
 
