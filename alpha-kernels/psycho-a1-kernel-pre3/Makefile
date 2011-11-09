@@ -2,12 +2,13 @@ NAME = $(shell basename $(shell pwd))
 TITLE = A-1 Skyraider (Pre3)
 DEVICE = pre3
 CATEGORY = Alpha
-VERSIONS = 2.2.0-18 2.2.3-18
+VERSIONS = 2.2.0-20 2.2.3-20
 APPINFO_DESCRIPTION = The latest alpha kernel from uNiXpSyChO.<br><br>\
-Features:<br> * 1.9GHz<br> * Screenstate<br> * SIO and V(R)<br> * CIFS, NFS, iSCSI, ATA over Ethernet<br> * More to come...<br><br>\
+Features:<br> * 1.9GHz<br> * Screenstate<br> * ondemand-ng<br> * SIO and V(R)<br> * CIFS, NFS, iSCSI, ATA over Ethernet<br> * More to come...<br><br>\
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-20", "log" : [ "add ondemand-ng gov (ondemand-tickle with screenstate mod)." ] }, \
 { "version" : "${WEBOS_VERSION}-18", "log" : [ "add screenstate gov." ] }, \
 { "version" : "${WEBOS_VERSION}-15", "log" : [ "fix voltage setting." ] }, \
 { "version" : "${WEBOS_VERSION}-14", "log" : [ "add identification for Govnah support." ] }, \
@@ -15,6 +16,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-12", "log" : [ "Initial release" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-20: add ondemand-ng gov (ondemand-tickle with screenstate mod).<br> \
 ${WEBOS_VERSION}-18: add screenstate gov.<br> \
 ${WEBOS_VERSION}-15: fix voltage setting.<br> \
 ${WEBOS_VERSION}-14: add identification for Govnah support.<br> \
@@ -35,7 +37,8 @@ KERNEL_PATCHES = identification/mkcompile_h.patch \
 		 psychobuild/memcpy.patch \
 		 psychobuild/tmc_mem.patch \
 		 psychobuild/override.patch \
-		 psychobuild/screenstate.patch
+		 psychobuild/screenstate.patch \
+		 psychobuild/ondemand-ng.patch
 
 EXTERNAL_MODULES = compcache/compcache-1.0.0
 TYPE = Kernel
