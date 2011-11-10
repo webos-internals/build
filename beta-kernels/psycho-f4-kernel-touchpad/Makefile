@@ -44,8 +44,6 @@ SRC_GIT = git://git.webos-internals.org/kernels/patches.git
 KERNEL_PATCHES = identification/mkcompile_h.patch \
 		 psychobuild/F4.patch \
 		 psychobuild/override.patch \
-		 psychobuild/F4-logo.patch \
-		 psychobuild/fbconsole.patch \
 		 psychobuild/comptune.patch \
 		 psychobuild/cpu_alignment.patch \
 		 psychobuild/iosched-bundle.patch \

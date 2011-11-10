@@ -1,6 +1,6 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = F105 Thunderchief (Pre/Pre+)
-CATEGORY = Experimental
+CATEGORY = Beta
 DEVICE = pre
 VERSIONS = 2.1.0-71 1.4.5-184
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br><br>\

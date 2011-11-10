@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = SR71 Blackbird (Pre2)
 DEVICE = pre2
-CATEGORY = Experimental
+CATEGORY = Beta
 VERSIONS = 2.1.0-68
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br><br>\
 Features:<br> * screenstate-v2 and ondemandtcl<br> * Voltage tweaking<br> * 1.2GHz\

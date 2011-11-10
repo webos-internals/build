@@ -1,6 +1,6 @@
 NAME = $(shell basename $(shell pwd))
 TITLE = F102B Delta Dagger (Pre/Pre+)
-CATEGORY = Experimental
+CATEGORY = Beta
 DEVICE = pre
 VERSIONS = 2.1.0-54 1.4.5-181
 APPINFO_DESCRIPTION = The latest beta kernel from uNiXpSyChO.<br><br>\
