@@ -13,7 +13,7 @@ DESCRIPTION = Theme Manager for you device.
 MINWEBOSVERSION = 2.1.0
 MAXWEBOSVERSION = 3.9.9
 CHANGELOG = \
-0.8.8: Small update for the theme installation scripts.<br>\
+0.8.9: Small update for the theme installation scripts.<br>\
 0.8.5: Small fixes/cleanups and support for themes installed by ipk.<br>\
 0.8.1: Fixed patching/replacing of files located in cryptofs.<br>\
 0.8.0: Added searching/filtering of themes and made UI smoother.<br>\
