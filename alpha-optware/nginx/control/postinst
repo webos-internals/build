@@ -16,8 +16,8 @@ fi
 
 # Symlink files into /opt
 cd ${APPDIR}/opt
-find etc lib sbin var -type d -exec mkdir -p /opt/{} \;
-find etc lib sbin var -type f -exec ln -sf ${APPDIR}/opt/{} /opt/{} \;
+find etc sbin var -type d -exec mkdir -p /opt/{} \;
+find etc sbin var -type f -exec ln -sf ${APPDIR}/opt/{} /opt/{} \;
 
 rm -f /var/palm/event.d/${APPID}
 mkdir -p /var/palm/event.d/
