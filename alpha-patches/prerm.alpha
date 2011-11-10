@@ -67,7 +67,7 @@ do_remove_failure() {
 
   rm -f /var/webosinternals.cache >/dev/null 2>&1
 
-  mount -o ro,remount / | tee -a ${PATCH_LOG_FILE} 1>&2
+#  mount -o ro,remount / | tee -a ${PATCH_LOG_FILE} 1>&2
 
   exit 1
 }
@@ -79,7 +79,7 @@ do_remove_success() {
 
   rm -f /var/webosinternals.cache >/dev/null 2>&1
 
-  mount -o ro,remount / | tee -a ${PATCH_LOG_FILE} 1>&2
+#  mount -o ro,remount / | tee -a ${PATCH_LOG_FILE} 1>&2
 
   exit 0
 }
@@ -313,10 +313,13 @@ verify_additional_files() {
         find_palm_md5sum
 
         if [ "${FILES_DIR}" != "files" ] && [ ! -z "${palm_md5sum}" ]; then
-          FAIL_LIST="${FAIL_LIST} ${file}"
-        fi
+          echo | tee -a ${PATCH_LOG_FILE}
+          echo "Interestingly, the additional file is system file" | tee -a ${PATCH_LOG_FILE}
+          echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE}
+          echo | tee -a ${PATCH_LOG_FILE}
 
-        if [ ! -f ${file} ]; then
+          FAIL_LIST="${FAIL_LIST} ${file}"
+        elif [ ! -f ${file} ]; then
           echo | tee -a ${PATCH_LOG_FILE}
           echo "Interestingly, the additional file is already removed" | tee -a ${PATCH_LOG_FILE}
           echo "  file: ${file}" | tee -a ${PATCH_LOG_FILE}
@@ -339,6 +342,14 @@ remove_text_patch() {
       echo | tee -a ${PATCH_LOG_FILE}
 
       ${PATCH_EXEC} -R -p 1 -d / --no-backup-if-mismatch < ${APP_DIR}/${PATCH_NAME} 2>&1 | tee -a ${PATCH_LOG_FILE}
+
+      if [ ${?} -ne 0 ]; then
+        for file in `${LSDIFF_EXEC} ${APP_DIR}/${PATCH_NAME}` ; do
+          if [ -f ${file}.rej ]; then
+            rm -f ${file}.rej
+          fi
+        done
+      fi
     fi
   fi
 }
@@ -361,13 +372,8 @@ remove_binary_patch() {
       if [ -f ${bck_file} ]; then
         cp -f ${bck_file} ${file} 2>&1 | tee -a ${PATCH_LOG_FILE}
 
-        if [ "${?}" = "1" ]; then
-          stop `basename ${file}` >/dev/null 2>&1
-          sleep 5
-
-          cp -f ${bck_file} ${file}
-
-          start `basename ${file}` >/dev/null 2>&1
+        if [ ${?} -ne 0 ]; then
+          echo "  failed to restore binary file, file in use" | tee -a ${PATCH_LOG_FILE}
         fi
       fi
     fi
@@ -497,10 +503,6 @@ clean_backup_files() {
   done
 
   for file in ${FILE_LIST} ; do
-    if [ -f ${file}.rej ]; then
-      rm -f ${file}.rej
-    fi
-
     get_bck_file
 
     get_palm_md5sum
