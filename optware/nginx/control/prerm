@@ -14,8 +14,8 @@ rm -f /var/palm/event.d/${APPID}
 
 # Remove files from /opt
 cd ${APPDIR}/opt
-find etc lib sbin var -depth -type f -exec rm -f /opt/{} \;
-find etc lib sbin var -depth -type d -exec rmdir /opt/{} \;
+find etc sbin var -depth -type f -exec rm -f /opt/{} \;
+find etc sbin var -depth -type d -exec rmdir /opt/{} \;
 
 # We intentionally do not remove the /media/internal/www/ content.
 

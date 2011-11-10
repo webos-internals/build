@@ -2,12 +2,14 @@ NAME     = openssh
 TITLE	 = OpenSSH
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
-OPT_VER  = 5.3p1-1
-VERSION  = 5.3.1-9
+OPT_VER  = 5.9p1-1
+VERSION  = 5.9.1-2
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:OpenSSH
 TYPE	 = Optware
 DESCRIPTION = OpenSSH is a full-featured SSH server and client, which enables secure root access via wifi only, on port 22, with secure ssh key authentication only (passwords are completely disabled by default).  See the Homepage link for mandatory configuration instructions.
 CHANGELOG = \
+5.9.1-2: Robustified upstart scripts to improve start-up reliability.<br>\
+5.9.1-1: Updated to latest OpenSSH upstream version.<br>\
 5.3.1-9: Only make the rootfs writeable when absolutely necessary.<br>\
 5.3.1-8: Moved upstart script from /etc/event.d/ to /var/palm/event.d/ to handle apps and data erases better.<br>\
 5.3.1-5: Made compatible with the Emergency Service Enabler to survive doctoring.<br>\
