@@ -3,10 +3,14 @@ TITLE	 = Lighty Web Server
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
 OPT_VER  = 1.4.25-1
-VERSION  = 1.4.25-7
+VERSION  = 1.4.25-8
 HOMEPAGE = http://www.lighttpd.net/
 DESCRIPTION = Lighttpd (pronounced 'Lighty') is a web server which has a small memory footprint, effective management of the cpu load, and an advanced feature set.  By default, it is configured to publish the contents of the USB partition on port 80 with read access only and no authentication.  It can be configured with authentication options (including SSL client certificates), and can provide write access using WebDAV if desired.
-CHANGELOG = 1.4.25-6: Added support for the saverestore alias.<br>1.4.25-5: Create the /media/internal/www directory at install time.<br>1.4.25-4: Made compatible with the Emergency Service Enabler to survive doctoring. Moved to /media/internal/www for the directory served by the web server.
+CHANGELOG = \
+1.4.25-8: Robustified upstart scripts to improve start-up reliability.<br>\
+1.4.25-6: Added support for the saverestore alias.<br>\
+1.4.25-5: Create the /media/internal/www directory at install time.<br>\
+1.4.25-4: Made compatible with the Emergency Service Enabler to survive doctoring. Moved to /media/internal/www for the directory served by the web server.
 TYPE	 = Optware
 CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/3/36/Icon_lighttpd.png

@@ -3,10 +3,11 @@ TITLE	 = Nginx Web Server
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
 OPT_VER  = 1.0.2-1
-VERSION  = 1.0.2-4
+VERSION  = 1.0.2-5
 HOMEPAGE = http://nginx.org/
 DESCRIPTION = nginx (pronounced “engine X”) is a lightweight, high-performance Web server/reverse proxy and e-mail (IMAP/POP3) proxy, licensed under a BSD-like license.
 CHANGELOG = \
+1.0.2-5: Robustified upstart scripts to improve start-up reliability.<br>\
 1.0.2-4: Switch to using try_files and to remove firewall access upon stop.<br>\
 1.0.2-3: Remove openssl and zlib dependencies.<br>\
 1.0.2-2: Moved upstart script from /etc/event.d/ to /var/palm/event.d/ to handle apps and data erases better.<br>\
