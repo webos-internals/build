@@ -136,7 +136,7 @@ ifeq ("${WEBOS_VERSION}", "2.2.3")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp223mantaatt-${WEBOS_VERSION}.jar
 endif
 ifeq ("${WEBOS_VERSION}", "2.2.4")
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp223mantaatt-2.2.4.jar
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp223mantaatt-2.2.3.jar
 endif
 endif
 ifeq ("${DEVICE}","veer")
