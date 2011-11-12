@@ -2,14 +2,13 @@ NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Veer)
 DEVICE = veer
 CATEGORY = Beta
-VERSIONS = 2.1.1-25 2.1.2-25
+VERSIONS = 2.1.1-26 2.1.2-26
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the HP Veer, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
 <li>New 1.4 GHz overclocking support, including voltage selection, ported to the Veer by uNiXpSyChO.</li>\
-<li>A new <b>screenstate</b> governor created by uNiXpSyChO specifically for the Veer which runs at a higher speed when the screen is on, and a lower speed when the screen is off.</li>\
-<li>An addition to the standard <b>ondemandtcl</b> governor (known as <b>ondemand-ng</b>) to support <b>screenstate</b> frequency limiting functionality when the screen is off.</li>\
 <li>All standard Linux 2.6.29 <a href=http://www.ibm.com/developerworks/linux/library/l-cpufreq-1/index.html>cpufreq governors</a> made available for selection.</li>\
+<li>An addition to the standard <b>ondemandtcl</b> governor (known as <b>ondemand-ng</b>) to support <b>screenstate</b> frequency limiting functionality when the screen is off.</li>\
 <li>A new SIO IO scheduler.</li>\
 <li>Modification of the lowmemnotify threshold calculation to take into account free swap space. This reduces the occurrence of the Too Many Cards error.</li>\
 <li>Support for kernel crypto modules required by TrueCrypt</li>\
@@ -21,12 +20,14 @@ All additions are disabled by default, and must be enabled by using the Govnah a
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-26", "log" : [ "Removed the stand-alone screenstate governor until we have temperateure and charger sensing" ] }, \
 { "version" : "${WEBOS_VERSION}-25", "log" : [ "Added screenstate support to ondemandtcl (known as ondemand-ng)" ] }, \
 { "version" : "${WEBOS_VERSION}-24", "log" : [ "Added screenstate, SIO, EXT4, NFS, CIFS, iSCSI, ATA over Ethernet" ] }, \
 { "version" : "${WEBOS_VERSION}-19", "log" : [ "Merged basic overclocking from Warthog" ] }, \
 { "version" : "${WEBOS_VERSION}-7", "log" : [ "Initial version" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-26: Removed the stand-alone screenstate governor until we have temperature and charger sensing.<br>\
 ${WEBOS_VERSION}-25: Added screenstate support to ondemandtcl (known as ondemand-ng).<br>\
 ${WEBOS_VERSION}-24: Added screenstate, SIO, EXT4, NFS, CIFS, iSCSI, ATA over Ethernet.<br>\
 ${WEBOS_VERSION}-19: Merged basic overclocking from Warthog.<br>\
