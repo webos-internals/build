@@ -135,6 +135,9 @@ endif
 ifeq ("${WEBOS_VERSION}", "2.2.3")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp223mantaatt-${WEBOS_VERSION}.jar
 endif
+ifeq ("${WEBOS_VERSION}", "2.2.4")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp223mantaatt-${WEBOS_VERSION}.jar
+endif
 endif
 ifeq ("${DEVICE}","veer")
 ifeq ("${WEBOS_VERSION}", "2.1.1")
@@ -152,6 +155,9 @@ ifeq ("${WEBOS_VERSION}", "3.0.2")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp302hstnhwifi-${WEBOS_VERSION}.jar
 endif
 ifeq ("${WEBOS_VERSION}", "3.0.4")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp304hstnhwifi-${WEBOS_VERSION}.jar
+endif
+ifeq ("${WEBOS_VERSION}", "3.0.5")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp304hstnhwifi-${WEBOS_VERSION}.jar
 endif
 endif
