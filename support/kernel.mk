@@ -239,6 +239,17 @@ CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009
 endif
 endif
 
+ifeq ("${WEBOS_VERSION}", "2.2.4")
+ifeq ("${DEVICE}","pre3")
+COMPATIBLE_VERSIONS = 2.2.4
+KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.2.3/linuxkernel-${KERNEL_VERSION}.tar.gz
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/2.2.3/linuxkernel-${KERNEL_VERSION}.patch.tar.gz
+KERNEL_SUBMISSION = kernelpatches-2.2.3.txt
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
+endif
+
 ifeq ("${WEBOS_VERSION}", "3.0.0")
 ifeq ("${DEVICE}","touchpad")
 COMPATIBLE_VERSIONS = 3.0.0
@@ -262,6 +273,16 @@ endif
 ifeq ("${WEBOS_VERSION}", "3.0.4")
 ifeq ("${DEVICE}","touchpad")
 COMPATIBLE_VERSIONS = 3.0.4
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/3.0.4/linuxkernel-${KERNEL_VERSION}.patches.tgz
+KERNEL_SUBMISSION = kernel-3.0.4.txt
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
+endif
+
+ifeq ("${WEBOS_VERSION}", "3.0.5")
+ifeq ("${DEVICE}","touchpad")
+COMPATIBLE_VERSIONS = 3.0.5
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/3.0.4/linuxkernel-${KERNEL_VERSION}.patches.tgz
 KERNEL_SUBMISSION = kernel-3.0.4.txt
 # Override the compiler
@@ -437,21 +458,33 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	fi
 	touch $@
 
-ifeq (true,false)
-# Special case for 2.2.3 based on 2.2.0 kernel source
-build/.unpacked-2.2.3-%: ${DL_DIR}/linux-${KERNEL_VERSION}-2.2.0-${DEVICE}.tar.gz \
-			    ${DL_DIR}/${NAME}-2.2.3-%.tar.gz
-	rm -rf build/src-2.2.3-$*
-	mkdir -p build/src-2.2.3-$*/patches
-	${TAR} -C build/src-2.2.3-$* -zxf ${DL_DIR}/linux-${KERNEL_VERSION}-2.2.0-${DEVICE}.tar.gz
-	${TAR} -C build/src-2.2.3-$*/patches -zxf ${DL_DIR}/${NAME}-2.2.3-$*.tar.gz
+# Special case for 2.2.4 based on 2.2.3 kernel source
+build/.unpacked-2.2.4-%: ${DL_DIR}/linux-${KERNEL_VERSION}-2.2.3-${DEVICE}.tar.gz \
+			    ${DL_DIR}/${NAME}-2.2.4-%.tar.gz
+	rm -rf build/src-2.2.4-$*
+	mkdir -p build/src-2.2.4-$*/patches
+	${TAR} -C build/src-2.2.4-$* -zxf ${DL_DIR}/linux-${KERNEL_VERSION}-2.2.3-${DEVICE}.tar.gz
+	${TAR} -C build/src-2.2.4-$*/patches -zxf ${DL_DIR}/${NAME}-2.2.4-$*.tar.gz
 	if [ -n "${KERNEL_PATCHES}" ] ; then \
-	  ( cd build/src-2.2.3-$*/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
-	  ( cd build/src-2.2.3-$*/patches ; cat ${KERNEL_PATCHES} ) | \
-		patch -d build/src-2.2.3-$*/linux-${KERNEL_VERSION} -p1 ; \
+	  ( cd build/src-2.2.4-$*/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
+	  ( cd build/src-2.2.4-$*/patches ; cat ${KERNEL_PATCHES} ) | \
+		patch -d build/src-2.2.4-$*/linux-${KERNEL_VERSION} -p1 ; \
 	fi
 	touch $@
-endif
+
+# Special case for 3.0.5 based on 3.0.4 kernel source
+build/.unpacked-3.0.5-%: ${DL_DIR}/linux-${KERNEL_VERSION}-3.0.4-${DEVICE}.tar.gz \
+			    ${DL_DIR}/${NAME}-3.0.5-%.tar.gz
+	rm -rf build/src-3.0.5-$*
+	mkdir -p build/src-3.0.5-$*/patches
+	${TAR} -C build/src-3.0.5-$* -zxf ${DL_DIR}/linux-${KERNEL_VERSION}-3.0.4-${DEVICE}.tar.gz
+	${TAR} -C build/src-3.0.5-$*/patches -zxf ${DL_DIR}/${NAME}-3.0.5-$*.tar.gz
+	if [ -n "${KERNEL_PATCHES}" ] ; then \
+	  ( cd build/src-3.0.5-$*/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
+	  ( cd build/src-3.0.5-$*/patches ; cat ${KERNEL_PATCHES} ) | \
+		patch -d build/src-3.0.5-$*/linux-${KERNEL_VERSION} -p1 ; \
+	fi
+	touch $@
 
 build/.unpacked-%: ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz \
 			    ${DL_DIR}/${NAME}-%.tar.gz
