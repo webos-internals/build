@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Veer)
 DEVICE = veer
 CATEGORY = Beta
-VERSIONS = 2.1.1-26 2.1.2-26
+VERSIONS = 2.1.1-27 2.1.2-27
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the HP Veer, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
@@ -20,13 +20,15 @@ All additions are disabled by default, and must be enabled by using the Govnah a
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-26", "log" : [ "Removed the stand-alone screenstate governor until we have temperateure and charger sensing" ] }, \
+{ "version" : "${WEBOS_VERSION}-27", "log" : [ "Fixed voltage modification granularity issues" ] }, \
+{ "version" : "${WEBOS_VERSION}-26", "log" : [ "Removed the stand-alone screenstate governor until we have temperature and charger sensing" ] }, \
 { "version" : "${WEBOS_VERSION}-25", "log" : [ "Added screenstate support to ondemandtcl (known as ondemand-ng)" ] }, \
 { "version" : "${WEBOS_VERSION}-24", "log" : [ "Added screenstate, SIO, EXT4, NFS, CIFS, iSCSI, ATA over Ethernet" ] }, \
 { "version" : "${WEBOS_VERSION}-19", "log" : [ "Merged basic overclocking from Warthog" ] }, \
 { "version" : "${WEBOS_VERSION}-7", "log" : [ "Initial version" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-27: Fixed voltage modification granularity issues.<br>\
 ${WEBOS_VERSION}-26: Removed the stand-alone screenstate governor until we have temperature and charger sensing.<br>\
 ${WEBOS_VERSION}-25: Added screenstate support to ondemandtcl (known as ondemand-ng).<br>\
 ${WEBOS_VERSION}-24: Added screenstate, SIO, EXT4, NFS, CIFS, iSCSI, ATA over Ethernet.<br>\
