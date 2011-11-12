@@ -2,18 +2,20 @@ NAME = $(shell basename $(shell pwd))
 TITLE = A-4 Skyhawk (Veer)
 DEVICE = veer
 CATEGORY = Alpha
-VERSIONS = 2.1.2-25
+VERSIONS = 2.1.1-27 2.1.2-27
 APPINFO_DESCRIPTION = The latest alpha kernel from uNiXpSyChO.<br><br>\
 Features:<br> * 1.4GHz<br> * Screenstate<br> * SIO<br> * CIFS<br> * Voltage manipulation<br> * More to come...<br><br>\
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-27", "log" : [ "fix sysfs hang on vdd set. round off voltage and make sure it is multiple of 25mV." ] }, \
 { "version" : "${WEBOS_VERSION}-25", "log" : [ "add ondemand-ng gov" ] }, \
 { "version" : "${WEBOS_VERSION}-23", "log" : [ "add screenstate gov" ] }, \
 { "version" : "${WEBOS_VERSION}-22", "log" : [ "fix voltage setting" ] }, \
 { "version" : "${WEBOS_VERSION}-21", "log" : [ "Initial release" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-27: fix sysfs hang on vdd set. round off voltage and make sure it is multiple of 25mV.<br> \
 ${WEBOS_VERSION}-25: add ondemand-ng gov<br> \
 ${WEBOS_VERSION}-23: add screenstate gov<br> \
 ${WEBOS_VERSION}-22: fix voltage setting<br> \
