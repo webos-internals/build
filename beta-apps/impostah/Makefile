@@ -3,7 +3,7 @@ TITLE    = Impostah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.9.17
+VERSION  = 0.9.19
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Impostah
@@ -11,6 +11,8 @@ ICON	 = http://www.webos-internals.org/images/a/aa/Tux_Imposter.png
 DESCRIPTION = Impostah is an app for those who know what do to with it. It does many things, most of which are too complex to explain in this short description.
 MINWEBOSVERSION = 1.4.0
 CHANGELOG = \
+0.9.19: Fixed TouchPad 3.0.4 activation issues.<br>\
+0.9.18: Enabled activation scene for 1.4.5 devices.<br>\
 0.9.17: Enabled device profile, palm profile and app catalog information for 1.4.5 devices.<br>\
 0.9.16: Added the ability to display app catalog device and session information.<br>\
 0.9.15: Added the ability to show all your purchased apps.<br>\
