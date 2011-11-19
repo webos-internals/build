@@ -3,13 +3,14 @@ TITLE    = Govnah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.3.7
+VERSION  = 1.3.8
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
 DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature, load averages and memory usage.
 CHANGELOG = \
+1.3.8: Add default warthog Pre 3 profile.<br>\
 1.3.7: Fixed voltage adjustment granularity on Veer and Pre 3.<br>\
 1.3.6: Fixed voltage adjustment on Veer, Pre 3, TouchPad.<br>\
 1.3.3: Reverted an incorrect voltage settings change.<br>\
