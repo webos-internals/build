@@ -2,13 +2,14 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F15C Eagle (TouchPad)
 DEVICE = touchpad
 CATEGORY = Alpha
-VERSIONS = 3.0.2-79 3.0.4-82
+VERSIONS = 3.0.4-89 3.0.5-89
 APPINFO_DESCRIPTION = The latest <b>alpha test</b> kernel from uNiXpSyChO.<br><br>\
 Features:<br> * 1.9GHz<br> * autogroup process scheduling<br> * CFS<br> * BFQ and SIO<br> * EXT4<br> * Various tweaks<br>\
 <br><b>NOTE: CPU core 2 will mostly stay idle. This is by webOS default, NOT a kernel problem. If you want to test this, run a Sunspider benchmark. Do not report CPU core 2 bugs.</b><br><br>\
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-89", "log" : [ "add charger scaleback override (enabled by default)." ] }, \
 { "version" : "${WEBOS_VERSION}-82", "log" : [ "Happy Halloween." ] }, \
 { "version" : "${WEBOS_VERSION}-80", "log" : [ "rebuild." ] }, \
 { "version" : "${WEBOS_VERSION}-79", "log" : [ "add load polling for power saver (will run 2 cpus based on load). exclude powerd when in power saver. disable power saver when turbo mode enabled and vice versa." ] }, \
@@ -37,6 +38,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-19", "log" : [ "Initial release. autogroup process scheduling. CPU HW based alignment. deadline tweak." ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-89: add charger scaleback override (enabled by default)<br>\
 ${WEBOS_VERSION}-82: Happy Halloween.<br>\
 ${WEBOS_VERSION}-80: rebuild.<br>\
 ${WEBOS_VERSION}-79: add load polling for power saver (will run 2 cpus based on load). exclude powerd when in power saver. disable power saver when turbo mode enabled and vice versa.<br>\
@@ -82,11 +84,7 @@ KERNEL_PATCHES = identification/mkcompile_h.patch \
 		 psychobuild/sched-p1.patch \
 		 psychobuild/sched-p2.patch \
 		 psychobuild/cache-p1.patch \
-		 psychobuild/clock-p1.patch \
-		 psychobuild/mmc-p1.patch \
-		 psychobuild/mmc-p2.patch \
 		 psychobuild/jhash3.patch \
-		 psychobuild/sha1.patch \
 		 psychobuild/memcpy.patch \
 		 memory/tmc_mem.patch \
 		 psychobuild/autogroup.patch
