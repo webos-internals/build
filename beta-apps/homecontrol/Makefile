@@ -3,7 +3,7 @@ TITLE    = Home Control
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.6.0
+VERSION  = 0.7.0
 TYPE	 = Application
 CATEGORY = Utilities
 HOMEPAGE = http://forums.precentral.net/enlightened-linux-solutions/305887-app-home-control.html
@@ -12,6 +12,7 @@ DESCRIPTION = Home Control a universal remote control application.<br><br>NOTE: 
 MINWEBOSVERSION = 2.1.0
 MAXWEBOSVERSION = 3.9.9
 CHANGELOG = \
+0.7.0: Again added new features and cleaned up the code.<br>\
 0.6.0: Added lots of new features.<br>\
 0.5.1: Fixed the beta release.<br>\
 0.5.0: Initial beta release.
