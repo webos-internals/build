@@ -1,5 +1,6 @@
 NAME     = supertux
 APP_ID   = org.webosinternals.${NAME}
+MAXWEBOSVERSION = 1.9.9
 SIGNER   = org.webosinternals
 VERSION  = 1.0.3
 DEPENDS  = org.webosinternals.upstartmgr

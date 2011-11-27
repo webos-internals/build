@@ -1,5 +1,5 @@
 NAME     = mjson
-APP_ID	 = mobi.optware.mjson
+APP_ID	 = org.webosinternals.toolchain.mjson
 VERSION  = 1.0-1
 HOMEPAGE = https://sourceforge.net/projects/mjson/
 LICENSE  = LGPL Open Source

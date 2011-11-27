@@ -187,3 +187,56 @@ endif
 
 endif
 
+ifdef SRC_SVN
+
+ifndef NAME
+PREWARE_SANITY += $(error "Please define NAME in your Makefile")
+endif
+
+download: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+
+${DL_DIR}/${NAME}-${VERSION}.tar.gz:
+	rm -f $@
+	$(call PREWARE_SANITY)
+	rm -rf build
+	mkdir build
+	( cd build ; svn checkout ${SRC_SVN} )
+	mkdir -p ${DL_DIR}
+	tar -C build/`basename ${SRC_SVN}` -zcf $@ .
+endif
+
+ifdef SRC_SVN_REV
+
+ifndef NAME
+PREWARE_SANITY += $(error "Please define NAME in your Makefile")
+endif
+
+download: ${DL_DIR}/${NAME}-svn-r${VERSION}.tar.gz
+
+${DL_DIR}/${NAME}-svn-r${VERSION}.tar.gz:
+	rm -f $@
+	$(call PREWARE_SANITY)
+	rm -rf build
+	mkdir build
+	( cd build ; svn checkout -r ${VERSION} ${SRC_SVN_REV} )
+	mkdir -p ${DL_DIR}
+	tar -C build/`basename ${SRC_SVN_REV}` -zcf $@ .
+endif
+
+ifdef SRC_FILE
+
+ifndef LOCAL_FILE
+PREWARE_SANITY += $(error "Please define LOCAL_FILE in your Makefile")
+endif
+
+download: ${DL_DIR}/${LOCAL_FILE}
+
+${DL_DIR}/${LOCAL_FILE}:
+	rm -f $@ $@.tmp
+	$(call PREWARE_SANITY)
+	mkdir -p ${DL_DIR}
+	curl -f -R -L -o $@.tmp ${SRC_FILE}
+	mv $@.tmp $@
+
+endif
+

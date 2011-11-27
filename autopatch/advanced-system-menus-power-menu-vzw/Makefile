@@ -1,9 +1,9 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = advanced/${NAME}.patch
-TITLE = Advanced System Menus - Power Menu (VZW)
+TITLE = Advanced System Menus - Power Menu (ATT/VZW)
 DESCRIPTION = * Requires Advanced System Menus Framework patch to function properly!<br/><br/>Makes power off menu to be configurable. The shown actions can be selected from airplane mode toggle, device sleep toggle, shutdown device action, restart device action and restart luna action.
 CATEGORY = Advanced
-VERSIONS = 2.0.1-50 2.1.0-85
+VERSIONS = 2.1.0-204 2.2.3-71
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS = [ \"http://www.webos-internals.org/images/e/ef/AdvancedSystemMenusPowerMenu.png\",\"http://www.webos-internals.org/images/9/98/AdvancedSystemMenusPowerMenuEdit.png\" ]
 META_SUB_VERSION = 1

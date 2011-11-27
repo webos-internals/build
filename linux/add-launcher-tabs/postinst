@@ -1,0 +1,58 @@
+#!/bin/sh
+
+LAUNCHER3DIR=/var/luna/preferences/launcher3
+INDEXFILE=${LAUNCHER3DIR}/launcher_fixed.msave
+
+GAMESID=`sed -n -e 's|.*_GAMES_{\(.*\)}|\1|p' < ${INDEXFILE}`
+if [ -z "${GAMESID}" ] ; then
+  GAMESID=`uuidgen`
+fi
+  
+GAMESPAGE=${LAUNCHER3DIR}/page_ReorderablePage_GAMES_{${GAMESID}}
+
+HBREWID=`sed -n -e 's|.*_HOMEBREW_{\(.*\)}|\1|p' < ${INDEXFILE}`
+if [ -z "${HBREWID}" ] ; then
+  HBREWID=`uuidgen`
+fi
+HBREWPAGE=${LAUNCHER3DIR}/page_ReorderablePage_HOMEBREW_{${HBREWID}}
+
+SETTINGSID=`sed -n -e 's|.*_SETTINGS_{\(.*\)}|\1|p' < ${INDEXFILE}`
+
+sed -i  -e 's|^num_pages=.*|num_pages=6|' \
+	-e '/^[456]\\/d' \
+	-e '/^size=/d' \
+	${INDEXFILE}
+echo "4\\filepath=${LAUNCHER3DIR}//page_ReorderablePage_GAMES_{${GAMESID}}" >> ${INDEXFILE}
+echo "4\\pageindex=3" >> ${INDEXFILE}
+echo "4\\pagetype=ReorderablePage" >> ${INDEXFILE}
+echo "5\\filepath=${LAUNCHER3DIR}//page_ReorderablePage_HOMEBREW_{${HBREWID}}" >> ${INDEXFILE}
+echo "5\\pageindex=4" >> ${INDEXFILE}
+echo "5\\pagetype=ReorderablePage" >> ${INDEXFILE}
+echo "6\\filepath=${LAUNCHER3DIR}//page_ReorderablePage_SETTINGS_{${SETTINGSID}}" >> ${INDEXFILE}
+echo "6\\pageindex=5" >> ${INDEXFILE}
+echo "6\\pagetype=ReorderablePage" >> ${INDEXFILE}
+echo "size=6" >> ${INDEXFILE}
+
+if [ ! -f ${GAMESPAGE} ] ; then
+  echo "[header]" > ${GAMESPAGE}
+  echo "pagedesignator=games" >> ${GAMESPAGE}
+  echo "pagename=GAMES" >> ${GAMESPAGE}
+  echo "pagetype=ReorderablePage" >> ${GAMESPAGE}
+  echo "pageuid={${GAMESID}}" >> ${GAMESPAGE}
+  echo >> ${GAMESPAGE}
+  echo "[icons]" >> ${GAMESPAGE}
+  echo "size=0" >> ${GAMESPAGE}
+fi
+
+if [ ! -f ${HBREWPAGE} ] ; then
+  echo "[header]" > ${HBREWPAGE}
+  echo "pagedesignator=homebrew" >> ${HBREWPAGE}
+  echo "pagename=HOMEBREW" >> ${HBREWPAGE}
+  echo "pagetype=ReorderablePage" >> ${HBREWPAGE}
+  echo "pageuid={${HBREWID}}" >> ${HBREWPAGE}
+  echo >> ${HBREWPAGE}
+  echo "[icons]" >> ${HBREWPAGE}
+  echo "size=0" >> ${HBREWPAGE}
+fi
+
+exit 0

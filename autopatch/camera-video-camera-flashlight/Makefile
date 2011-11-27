@@ -1,9 +1,10 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = camera/${NAME}.patch
+TWEAKS =
 TITLE = Video Camera Flashlight
 DESCRIPTION = Adds a flashlight toggle in the video recorder of the camera app.
 CATEGORY = Camera
-VERSIONS = 2.0.1-59 2.1.0-12
+VERSIONS = 2.1.0-12 2.2.0-52 2.2.3-46
 ICON = http://www.webos-internals.org/images/c/c5/Icon_WebOSInternals_Patches_Camera.png
 SCREENSHOTS =
 META_SUB_VERSION = 1

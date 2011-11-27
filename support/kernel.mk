@@ -1,3 +1,5 @@
+.NOTPARALLEL:
+
 SIGNER = org.webosinternals
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 ICON = http://www.webos-internals.org/images/9/9e/Icon_WebOSInternals_Kernel.png
@@ -6,30 +8,36 @@ FEED = WebOS Kernels
 LICENSE = GPL v2 Open Source
 ifeq ("${DEVICE}","pre")
 WEBOS_VERSIONS = 1.4.5 2.1.0
+KERNEL_VERSION = 2.6.24
 endif
 ifeq ("${DEVICE}","pixi")
 WEBOS_VERSIONS = 1.4.5
-endif
-ifeq ("${DEVICE}","pre2")
-WEBOS_VERSIONS = 2.0.1 2.1.0
-endif
-ifeq ("${DEVICE}","veer")
-WEBOS_VERSIONS = 2.1.2
-endif
-ifeq ("${DEVICE}","veer")
-KERNEL_VERSION = 2.6.29
-else
 KERNEL_VERSION = 2.6.24
 endif
+ifeq ("${DEVICE}","pre2")
+WEBOS_VERSIONS = 2.1.0
+KERNEL_VERSION = 2.6.24
+endif
+ifeq ("${DEVICE}","veer")
+WEBOS_VERSIONS = 2.1.1 2.1.2
+KERNEL_VERSION = 2.6.29
+endif
+ifeq ("${DEVICE}","touchpad")
+WEBOS_VERSIONS = 3.0.2 3.0.4
+KERNEL_VERSION = 2.6.35
+endif
+ifeq ("${DEVICE}","pre3")
+WEBOS_VERSIONS = 2.2.0 2.2.3
+KERNEL_VERSION = 2.6.32
+endif
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tgz
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
 DL_DIR = ../../downloads
 POSTINSTALLFLAGS = RestartDevice
 POSTUPDATEFLAGS  = RestartDevice
 POSTREMOVEFLAGS  = RestartDevice
 UPSTART_SCRIPT=$(shell basename ${APP_ID} ${SUFFIX})
 
-HEADLESSAPP_VERSION = 0.1.0
+HEADLESSAPP_VERSION = 0.2.0
 
 KERNEL_DISCLAIMER = WebOS Internals provides this program as is without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.  The entire risk as to the quality and performance of this program is with you.  Should this program prove defective, you assume the cost of all necessary servicing, repair or correction.<br>\
 In no event will WebOS Internals or any other party be liable to you for damages, including any general, special, incidental or consequential damages arising out of the use or inability to use this program (including but not limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of this program to operate with any other programs).
@@ -62,36 +70,54 @@ endif
 ifeq ("${DEVICE}","pre")
 CODENAME = castle
 DEFCONFIG = omap_sirloin_3430_defconfig
-KERNEL_TYPE = palm-joplin-3430
+KERNEL_TYPE = 2.6.24-palm-joplin-3430
 DEVICECOMPATIBILITY = [\"Pre\"]
 endif
 ifeq ("${DEVICE}","pixi")
 CODENAME = pixie
 DEFCONFIG = chuck_defconfig
-KERNEL_TYPE = palm-chuck
+KERNEL_TYPE = 2.6.24-palm-chuck
 DEVICECOMPATIBILITY = [\"Pixi\"]
 endif
 ifeq ("${DEVICE}","pre2")
 CODENAME = roadrunner
 DEFCONFIG = omap_sirloin_3630_defconfig
-KERNEL_TYPE = palm-joplin-3430
+KERNEL_TYPE = 2.6.24-palm-joplin-3430
 DEVICECOMPATIBILITY = [\"Pre2\"]
 endif
 ifeq ("${DEVICE}","veer")
 CODENAME = broadway
 DEFCONFIG = shank_defconfig
-KERNEL_TYPE = palm-shank
+KERNEL_TYPE = 2.6.29-palm-shank
 DEVICECOMPATIBILITY = [\"Veer\"]
+endif
+ifeq ("${DEVICE}","touchpad")
+CODENAME = topaz
+DEFCONFIG = tenderloin_defconfig
+KERNEL_TYPE = 2.6.35-palm-tenderloin
+DEVICECOMPATIBILITY = [\"TouchPad\"]
+endif
+ifeq ("${DEVICE}","pre3")
+CODENAME = mantaray
+DEFCONFIG = rib_defconfig
+KERNEL_TYPE = 2.6.32.9-palm-rib
+DEVICECOMPATIBILITY = [\"Pre3\"]
 endif
 
 ifeq ("${DEVICE}","pre")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
+ifeq ("${WEBOS_VERSION}", "1.4.5.1")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp101ewwverizonwireless-${WEBOS_VERSION}.jar
+endif
 ifeq ("${WEBOS_VERSION}", "2.1.0")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp101ueude-wr-${WEBOS_VERSION}.jar
 endif
 endif
 ifeq ("${DEVICE}","pixi")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewweu-wr-${WEBOS_VERSION}.jar
+ifeq ("${WEBOS_VERSION}", "1.4.5.1")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp121ewwverizonwireless-${WEBOS_VERSION}.jar
+endif
 endif
 ifeq ("${DEVICE}","pre2")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp102ueuna-wr-${WEBOS_VERSION}.jar
@@ -102,13 +128,47 @@ ifeq ("${WEBOS_VERSION}", "2.1.0")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp103ueuna-wr-${WEBOS_VERSION}.jar
 endif
 endif
+ifeq ("${DEVICE}","pre3")
+ifeq ("${WEBOS_VERSION}", "2.2.0")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp220manta-wr-${WEBOS_VERSION}.jar
+endif
+ifeq ("${WEBOS_VERSION}", "2.2.3")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp223mantaatt-${WEBOS_VERSION}.jar
+endif
+ifeq ("${WEBOS_VERSION}", "2.2.4")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp223mantaatt-2.2.3.jar
+endif
+endif
 ifeq ("${DEVICE}","veer")
+ifeq ("${WEBOS_VERSION}", "2.1.1")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp160una-wr-${WEBOS_VERSION}.jar
+endif
+ifeq ("${WEBOS_VERSION}", "2.1.2")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp160unaatt-${WEBOS_VERSION}.jar
+endif
+endif
+ifeq ("${DEVICE}","touchpad")
+ifeq ("${WEBOS_VERSION}", "3.0.0")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp300hstnhwifi-${WEBOS_VERSION}.jar
+endif
+ifeq ("${WEBOS_VERSION}", "3.0.2")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp302hstnhwifi-${WEBOS_VERSION}.jar
+endif
+ifeq ("${WEBOS_VERSION}", "3.0.4")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp304hstnhwifi-${WEBOS_VERSION}.jar
+endif
+ifeq ("${WEBOS_VERSION}", "3.0.5")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp304hstnhwifi-3.0.4.jar
+endif
 endif
 COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
 
 ifeq ("${WEBOS_VERSION}", "1.4.5")
-COMPATIBLE_VERSIONS = 1.4.5 | 1.4.5.1
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
+endif
+
+ifeq ("${WEBOS_VERSION}", "1.4.5.1")
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
 endif
 
 ifeq ("${WEBOS_VERSION}", "2.0.0")
@@ -141,6 +201,99 @@ KERNEL_SUBMISSION = linuxkernel-2.6.24.patch
 endif
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
+
+ifeq ("${WEBOS_VERSION}", "2.1.1")
+ifeq ("${DEVICE}","veer")
+COMPATIBLE_VERSIONS = 2.1.1
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
+KERNEL_SUBMISSION = linuxkernel-${KERNEL_VERSION}.patch/kerneldiffs.txt
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
+endif
+
+ifeq ("${WEBOS_VERSION}", "2.1.2")
+ifeq ("${DEVICE}","veer")
+COMPATIBLE_VERSIONS = 2.1.2 | 2.2.1
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
+KERNEL_SUBMISSION = linuxkernel-${KERNEL_VERSION}.patch/kerneldiffs.txt
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
+endif
+
+ifeq ("${WEBOS_VERSION}", "2.2.0")
+ifeq ("${DEVICE}","pre3")
+COMPATIBLE_VERSIONS = 2.2.0
+KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tar.gz
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tar.gz
+KERNEL_SUBMISSION = kernelpatch-2.2.0.txt
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
+endif
+
+ifeq ("${WEBOS_VERSION}", "2.2.3")
+ifeq ("${DEVICE}","pre3")
+COMPATIBLE_VERSIONS = 2.2.3
+KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tar.gz
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tar.gz
+KERNEL_SUBMISSION = kernelpatches-2.2.3.txt
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
+endif
+
+ifeq ("${WEBOS_VERSION}", "2.2.4")
+ifeq ("${DEVICE}","pre3")
+COMPATIBLE_VERSIONS = 2.2.4
+KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.2.3/linuxkernel-${KERNEL_VERSION}.tar.gz
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/2.2.3/linuxkernel-${KERNEL_VERSION}.patch.tar.gz
+KERNEL_SUBMISSION = kernelpatches-2.2.3.txt
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
+endif
+
+ifeq ("${WEBOS_VERSION}", "3.0.0")
+ifeq ("${DEVICE}","touchpad")
+COMPATIBLE_VERSIONS = 3.0.0
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
+KERNEL_SUBMISSION = kernelpatch-3.0.0.txt
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
+endif
+
+ifeq ("${WEBOS_VERSION}", "3.0.2")
+ifeq ("${DEVICE}","touchpad")
+COMPATIBLE_VERSIONS = 3.0.2
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/3.0.2/linuxkernel-${KERNEL_VERSION}.patches.tgz
+KERNEL_SUBMISSION = kernelpatch-3.0.2.txt
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
+endif
+
+ifeq ("${WEBOS_VERSION}", "3.0.4")
+ifeq ("${DEVICE}","touchpad")
+COMPATIBLE_VERSIONS = 3.0.4
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/3.0.4/linuxkernel-${KERNEL_VERSION}.patches.tgz
+KERNEL_SUBMISSION = kernel-3.0.4.txt
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
+endif
+
+ifeq ("${WEBOS_VERSION}", "3.0.5")
+ifeq ("${DEVICE}","touchpad")
+COMPATIBLE_VERSIONS = 3.0.5
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/3.0.4/linuxkernel-${KERNEL_VERSION}.patches.tgz
+KERNEL_SUBMISSION = kernel-3.0.4.txt
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
 endif
 
 .PHONY: package
@@ -215,6 +368,7 @@ endif
 ifdef APPINFO_CHANGELOG
 	echo '"changeLog": ${APPINFO_CHANGELOG},' >> build/arm/usr/palm/applications/${APP_ID}/appinfo.json
 endif
+	echo "\"uiRevision\": 2," >> build/arm/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "\"noWindow\": true" >> build/arm/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "}" >> build/arm/usr/palm/applications/${APP_ID}/appinfo.json
 	touch $@
@@ -267,6 +421,10 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
 		KBUILD_BUILD_COMPILE_BY=v$* KBUILD_BUILD_COMPILE_HOST=${APP_ID} \
 		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
+		${KERNEL_IMAGE} ${KERNEL_MODULES} modules
+	${MAKE} -C build/src-$*/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
+		KBUILD_BUILD_COMPILE_BY=v$* KBUILD_BUILD_COMPILE_HOST=${APP_ID} \
+		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
 		${KERNEL_IMAGE} ${KERNEL_MODULES} modules_install
 	if [ -n "${EXTERNAL_MODULES}" ] ; then \
 	  for module in ${EXTERNAL_MODULES} ; do \
@@ -274,20 +432,24 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	      ${MAKE} -C $(shell pwd)/build/src-$*/patches/$$module ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
 		KERNEL_BUILD_PATH=$(shell pwd)/build/src-$*/linux-${KERNEL_VERSION} DEVICE=${DEVICE} \
 		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
-		modules modules_install ) ; \
+		modules ; \
+	      ${MAKE} -C $(shell pwd)/build/src-$*/patches/$$module ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
+		KERNEL_BUILD_PATH=$(shell pwd)/build/src-$*/linux-${KERNEL_VERSION} DEVICE=${DEVICE} \
+		INSTALL_MOD_PATH=$(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files \
+		modules_install ) ; \
 	  done \
 	fi
-	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/build
-	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/source
-	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/*.bin
-	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_VERSION}-${KERNEL_TYPE}/modules.*
+	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_TYPE}/build
+	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_TYPE}/source
+	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_TYPE}/*.bin
+	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_TYPE}/modules.*
 	if [ -n "${KERNEL_IMAGE}" ]; then \
 		cp build/src-$*/linux-${KERNEL_VERSION}/arch/arm/boot/uImage \
-			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/uImage-2.6.24-${KERNEL_TYPE}; \
+			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/uImage-${KERNEL_TYPE}; \
 		cp build/src-$*/linux-${KERNEL_VERSION}/System.map \
-			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/System.map-2.6.24-${KERNEL_TYPE}; \
+			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/System.map-${KERNEL_TYPE}; \
 		cp build/src-$*/linux-${KERNEL_VERSION}/.config \
-			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/config-2.6.24-${KERNEL_TYPE}; \
+			build/arm/usr/palm/applications/${APP_ID}/additional_files/boot/config-${KERNEL_TYPE}; \
 	fi
 	unzip -p ${WEBOS_DOCTOR} resources/webOS.tar | \
 	${TAR} -O -x -f - ./nova-cust-image-${CODENAME}.rootfs.tar.gz | \
@@ -302,12 +464,40 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	fi
 	touch $@
 
+# Special case for 2.2.4 based on 2.2.3 kernel source
+build/.unpacked-2.2.4-%: ${DL_DIR}/linux-${KERNEL_VERSION}-2.2.3-${DEVICE}.tar.gz \
+			    ${DL_DIR}/${NAME}-2.2.4-%.tar.gz
+	rm -rf build/src-2.2.4-$*
+	mkdir -p build/src-2.2.4-$*/patches
+	${TAR} -C build/src-2.2.4-$* -zxf ${DL_DIR}/linux-${KERNEL_VERSION}-2.2.3-${DEVICE}.tar.gz
+	${TAR} -C build/src-2.2.4-$*/patches -zxf ${DL_DIR}/${NAME}-2.2.4-$*.tar.gz
+	if [ -n "${KERNEL_PATCHES}" ] ; then \
+	  ( cd build/src-2.2.4-$*/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
+	  ( cd build/src-2.2.4-$*/patches ; cat ${KERNEL_PATCHES} ) | \
+		patch -d build/src-2.2.4-$*/linux-${KERNEL_VERSION} -p1 ; \
+	fi
+	touch $@
+
+# Special case for 3.0.5 based on 3.0.4 kernel source
+build/.unpacked-3.0.5-%: ${DL_DIR}/linux-${KERNEL_VERSION}-3.0.4-${DEVICE}.tar.gz \
+			    ${DL_DIR}/${NAME}-3.0.5-%.tar.gz
+	rm -rf build/src-3.0.5-$*
+	mkdir -p build/src-3.0.5-$*/patches
+	${TAR} -C build/src-3.0.5-$* -zxf ${DL_DIR}/linux-${KERNEL_VERSION}-3.0.4-${DEVICE}.tar.gz
+	${TAR} -C build/src-3.0.5-$*/patches -zxf ${DL_DIR}/${NAME}-3.0.5-$*.tar.gz
+	if [ -n "${KERNEL_PATCHES}" ] ; then \
+	  ( cd build/src-3.0.5-$*/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
+	  ( cd build/src-3.0.5-$*/patches ; cat ${KERNEL_PATCHES} ) | \
+		patch -d build/src-3.0.5-$*/linux-${KERNEL_VERSION} -p1 ; \
+	fi
+	touch $@
+
 build/.unpacked-%: ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz \
 			    ${DL_DIR}/${NAME}-%.tar.gz
 	rm -rf build/src-$*
 	mkdir -p build/src-$*/patches
-	${TAR} -C build/src-$* -xf ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz
-	${TAR} -C build/src-$*/patches -xf ${DL_DIR}/${NAME}-$*.tar.gz
+	${TAR} -C build/src-$* -zxf ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz
+	${TAR} -C build/src-$*/patches -zxf ${DL_DIR}/${NAME}-$*.tar.gz
 	if [ -n "${KERNEL_PATCHES}" ] ; then \
 	  ( cd build/src-$*/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
 	  ( cd build/src-$*/patches ; cat ${KERNEL_PATCHES} ) | \
@@ -315,13 +505,12 @@ build/.unpacked-%: ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.
 	fi
 	touch $@
 
-
 ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz: \
 					${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz \
 					${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz
 	rm -rf build/src-${VERSION}
 	mkdir -p build/src-${VERSION}
-	${TAR} -C build/src-${VERSION} -xf ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz
+	${TAR} -C build/src-${VERSION} -zxf ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz
 	zcat ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz | \
 		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 
 	yes '' | \
@@ -340,11 +529,12 @@ ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz:
 
 ifdef KERNEL_SUBMISSION
 ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz:
-	rm -f $@ $@.tmp
+	rm -f $@ $@.tmp1 $@.tmp2
 	mkdir -p ${DL_DIR}
-	curl -f -R -L -o $@.tmp ${KERNEL_PATCH}
-	tar -Oxvf $@.tmp ${KERNEL_SUBMISSION} | gzip -c > $@
-	rm -f $@.tmp
+	curl -f -R -L -o $@.tmp1 ${KERNEL_PATCH}
+	tar -Oxvf $@.tmp1 ${KERNEL_SUBMISSION} | gzip -c > $@.tmp2
+	rm -f $@.tmp1
+	mv $@.tmp2 $@
 else
 ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz:
 	rm -f $@ $@.tmp

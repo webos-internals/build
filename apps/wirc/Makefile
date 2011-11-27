@@ -1,15 +1,17 @@
 NAME     = wirc
 TITLE    = wIRC
 APP_ID   = org.webosinternals.${EXTRAID}${NAME}
-VERSION  = 0.3.13
+VERSION  = 0.4.6
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = Communication
-MAINTAINER = oil, PuffTheMagic, zsoc, egaudet, rwhitby
+MAINTAINER = oil, PuffTheMagic
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WIRC
 ICON     = http://www.webos-internals.org/images/1/10/Icon_WebOSInternals_wIRC.png
 DESCRIPTION = A native webOS IRC client. <b><font color=red>THIS ONLY WORKS with webOS >=1.4.5, and you MUST run the Emergency Fstab Fixer or have corrected your /etc/fstab file by some other method.</font></b>
 CHANGELOG = \
+0.4.6: webOS 3.x support and more bugfixes <br>\
+0.4.0: Tons of fixes and updates and a new theme <br>\
 0.3.11: Get appid from mojo instead of hardcoding it <br>\
 0.3.10: Plugin bug fix and Font Style Preference <br>\
 0.3.9: Add ability to run without SSL support for initial catalog submission <br>\
@@ -34,13 +36,13 @@ ifeq ($(SSL),)
 	SSL=1
 endif
 
-GIT_TAG = v0.3.13
+GIT_TAG = v0.4.6
 SRC_GIT = git://git.webos-internals.org/applications/wIRC.git
 
 D = build/$*/usr/palm/applications/${APP_ID}
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
+package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
 
 include ../../support/package.mk
 
@@ -61,19 +63,19 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/arm.built-${VERSION}
+build/.built-${VERSION}: build/arm.built-${VERSION} build/i686.built-${VERSION}
 	touch $@
 
 include ../../support/cross-compile.mk
+
+#CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src/src/libpdl ; rm -f *.o ; rm -f *.so ; cd .. ; \
 	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc SSL=${SSL}\
 		clobber ${NAME} )
 	mkdir -p ${D}
-	${CROSS_COMPILE_$*}strip --strip-debug build/src/src/wirc
-	${CROSS_COMPILE_$*}strip --strip-debug build/src/src/libssl.so
-	${CROSS_COMPILE_$*}strip --strip-debug build/src/src/libpdl/libpdl.so
+	${CROSS_COMPILE_$*}strip build/src/src/wirc
 	install -m 755 build/src/src/${NAME} ${D}
 	cp -r build/src/* ${D}
 	rm -rf ${D}/src

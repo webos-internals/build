@@ -1,0 +1,10 @@
+description "XApps-XChat-Ubuntu-Natty"
+
+start on org.webosinternals.xapps-xchat-ubuntu-natty
+
+script
+        /sbin/initctl emit org.webosinternals.xserver "$@"
+        exec /media/cryptofs/apps/usr/palm/applications/org.webosinternals.xapps-xchat-ubuntu-natty/bin/start-xterm.sh "$@"
+end script
+
+

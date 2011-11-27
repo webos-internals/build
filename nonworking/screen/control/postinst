@@ -1,0 +1,23 @@
+#!/bin/sh
+
+APPID=mobi.optware.screen
+
+APPS=/media/cryptofs/apps
+
+[ -d ${APPS} ] || { echo "Requires webOS 1.3.5 or later" ; exit 1 ; }
+
+APPDIR=${APPS}/usr/palm/applications/${APPID}
+
+# Remove any legacy upstart script
+if [ -f /etc/event.d/${APPID} ] ; then
+  mount -o remount,rw /
+  rm -f /etc/event.d/${APPID}
+fi
+
+# Symlink files into /opt
+cd ${APPDIR}/opt
+find man share info -type d -exec mkdir -p /opt/{} \;
+find man share info -type f -exec ln -sf ${APPDIR}/opt/{} /opt/{} \;
+
+
+exit 0

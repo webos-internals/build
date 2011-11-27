@@ -1,0 +1,10 @@
+description "XApps-XChat-Debian-Squeze"
+
+start on org.webosinternals.xapps-xchat-debian-squeeze
+
+script
+        /sbin/initctl emit org.webosinternals.xserver "$@"
+        exec /media/cryptofs/apps/usr/palm/applications/org.webosinternals.xapps-xchat-debian-squeeze/bin/start-xterm.sh "$@"
+end script
+
+

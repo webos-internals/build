@@ -1,9 +1,10 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = browser/${NAME}.patch
+TWEAKS =
 TITLE = Fix No Bookmarks Displayed Bug
 DESCRIPTION = Fixes a bug in the bookmark list display -not the opening tiles - that inhibits displaying the bookmarks and sorting and deleting them. Most times happens after a profile restore.
 CATEGORY = Browser
-VERSIONS = 2.0.0-35 2.0.1-62 2.1.0-16
+VERSIONS = 2.1.0-170 2.2.0-29 2.2.3-29
 ICON = http://www.webos-internals.org/images/4/4a/Icon_WebOSInternals_Patches_Browser.png
 SCREENSHOTS =
 META_SUB_VERSION = 1

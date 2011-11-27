@@ -1,7 +1,7 @@
 description "OpenSSH Daemon"
 
-start on stopped finish
-stop on runlevel [!2]
+start on started LunaSysMgr
+stop on started start_update
 
 console none
 

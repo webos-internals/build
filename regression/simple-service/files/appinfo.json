@@ -1,8 +1,0 @@
-{
-	"title": "Simple Service",
-	"id": "org.webosinternals.regression.simple-service",
-	"version": "%VERSION%",
-	"release_date":	"1-Jan-2009",
-	"vendor": "WebOS Internals",
-	"vendor_email":	"support@webos-internals.org",
-}

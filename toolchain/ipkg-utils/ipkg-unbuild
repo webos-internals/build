@@ -32,6 +32,9 @@ for filename in sys.argv[1:]:
     else:
         os.system('cd %s; tar zxf ../%s > /dev/null' % (pkg, filename))
 
-    os.system('tar xzf %s/data.tar.gz -C %s' % (pkg, pkg))
+    if os.path.exists('%s/data.tar.xz' % pkg):
+        os.system('xz -c -d %s/data.tar.xz | tar xf - -C %s' % (pkg, pkg))
+    else:
+        os.system('tar xzf %s/data.tar.gz -C %s' % (pkg, pkg))
     os.system('tar xzf %s/control.tar.gz -C %s/CONTROL' % (pkg, pkg))
-#    os.system('rm -f %s/control.tar.gz %s/data.tar.gz %s/debian-binary' % (pkg, pkg, pkg))
+    os.system('rm -f %s/control.tar.gz %s/data.tar.gz %s/debian-binary' % (pkg, pkg, pkg))

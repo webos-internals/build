@@ -3,7 +3,7 @@ TITLE    = Impostah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.9.1
+VERSION  = 0.9.17
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Impostah
@@ -11,6 +11,22 @@ ICON	 = http://www.webos-internals.org/images/a/aa/Tux_Imposter.png
 DESCRIPTION = Impostah is an app for those who know what do to with it. It does many things, most of which are too complex to explain in this short description.
 MINWEBOSVERSION = 1.4.5
 CHANGELOG = \
+0.9.17: Enabled device profile, palm profile and app catalog information for 1.4.5 devices.<br>\
+0.9.16: Added the ability to display app catalog device and session information.<br>\
+0.9.15: Added the ability to show all your purchased apps.<br>\
+0.9.14: Added the ability to delete all items in a database.<br>\
+0.9.13: Added support for Australian app catalog activation.<br>\
+0.9.12: Modify the device information passed during activation for the Pre 3.<br>\
+0.9.11: Purge cleared overrides.<br>\
+0.9.10: Purge deleted overrides.<br>\
+0.9.9: Handle missing locationHost information correctly.<br>\
+0.9.8: Restart the UpdateDaemon on locationHost change.<br>\
+0.9.7: Fixed an account server URL caching bug.<br>\
+0.9.6: Fixed a profile merging bug.<br>\
+0.9.5: Added the ability to set the locationHost system preference.<br>\
+0.9.4: Added the ability to list all devices registered with your HP webOS account.<br>\
+0.9.3: Added the ability to list all installed app catalog apps.<br>\
+0.9.2: Now useable on devices without a back gesture.<br>\
 0.9.1: Improved the activation scene user interface.<br>\
 0.9.0: Improved the accounts scene user interface.<br>\
 0.8.9: Added the ability to delete accounts.<br>\

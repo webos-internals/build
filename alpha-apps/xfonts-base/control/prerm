@@ -1,0 +1,37 @@
+#!/bin/sh
+
+APPID=org.webosinternals.fonts.xfonts-base
+APPS=/media/cryptofs/apps
+
+[ -d ${APPS} ] || { echo "Requires webOS 1.3.5 or later" ; exit 1 ; }
+
+APPDIR=${APPS}/usr/palm/applications/${APPID}
+
+# In theory all files in this packages have corresponding
+# symlinks from /usr/share/fonts.
+# Iterate over them, ensuring this is the case.
+# Don't remove files that are somehow from elsewhere.
+cd ${APPDIR}
+FILES=`find . -type f`
+for i in $FILES; do
+  FILE=/usr/share/fonts/$i
+  TARGETFILE=`readlink -f $FILE`
+  OURS=`readlink -f ${APPDIR}/$i`
+
+  # If the file doesn't exist at all, then ignore it
+  if [ ! -e $TARGETFILE ]; then
+    continue
+  fi
+
+  # Is file symlink to our copy?
+  # If so, remove it.
+  if [ "$TARGETFILE" = "$OURS" ]; then
+    rm -rf $FILE
+  else
+    echo "File $i is not from this package? Ignoring.."
+    # (Just let it go)
+    # exit 1
+  fi
+done
+
+exit 0

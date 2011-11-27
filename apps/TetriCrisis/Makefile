@@ -1,5 +1,6 @@
 NAME     = tetricrisis
 APP_ID   = org.webosinternals.${NAME}
+MAXWEBOSVERSION = 1.9.9
 SIGNER   = org.webosinternals
 VERSION  = 5.9-1
 DEPENDS  = org.webosinternals.upstartmgr

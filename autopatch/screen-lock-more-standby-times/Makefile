@@ -1,9 +1,10 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = screen-lock/${NAME}.patch
+TWEAKS =
 TITLE = More Standby Times
-DESCRIPTION = This will add more standby times to the Screen & Lock application. New settings will be 15 seconds, 3 minutes, 5 minutes and never. This will not change your standby time automatically. You will have to select the length you desire in the Screen & Lock application.
+DESCRIPTION = For Phone users (1.4.5, 2.1.0): This will add more standby times to the Screen & Lock application. New settings will be 15 seconds, 3 minutes, 5 minutes and never. For TouchPad (3.0.2, 3.0.4): This adds more standby time possibilities in the 'Screen & Lock' preferences: 15 seconds, 30 seconds, 30 minutes, 1 hour, 3 hours, 8 hours, 24 hours.For all devices: This will not change your standby time automatically. You will have to select the length you desire in 'Screen & Lock' in the 'Settings' tab.
 CATEGORY = Screen Lock
-VERSIONS = 1.4.5-141 2.0.0-41 2.0.1-68 2.1.0-33
+VERSIONS = 1.4.5-170 2.1.0-160 3.0.2-53 3.0.4-3
 ICON = http://www.webos-internals.org/images/f/fa/Icon_WebOSInternals_Patches_Screenlock.png
 SCREENSHOTS = [ \"http://www.webos-internals.org/images/4/4f/Longer-standby-times.png\" ]
 META_SUB_VERSION = 1
@@ -12,5 +13,5 @@ include ../common.mk
 
 include ../modifications.mk
 
-MAINTAINER = jcrawford <info@josephcrawford.com>
-HOMEPAGE = http://www.webos-internals.org/wiki/Patch_webOS_Changing_the_%22Turn_off_after_X%22_time
+MAINTAINER = appsotutely <patches@appsotutely.com>
+HOMEPAGE = http://forums.precentral.net/webos-patches/301134-patch-more-standby-times-hd.html

@@ -30,7 +30,7 @@ CATEGORY = Games
 ICON	= http://www.webos-internals.org/images/3/3c/Vba.png
 LICENSE  = GPLv2
 MINWEBOSVERSION = 1.4.5
-DEVICECOMPATIBILITY = [\"Pre\"]
+DEVICECOMPATIBILITY = [\"Pre\", \"Pre2\"]
 SCREENSHOTS = []
 
 SRC_GIT = git://git.webos-internals.org/games/visualboyadvance.git

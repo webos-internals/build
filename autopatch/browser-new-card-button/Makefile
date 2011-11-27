@@ -1,9 +1,10 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = browser/${NAME}.patch
+TWEAKS =
 TITLE = New Card Button
 DESCRIPTION = Adds a new card button in the browser that opens up new browser cards. Works very nicely with the stacks feature of 2.x
 CATEGORY = Browser
-VERSIONS = 2.0.0-26 2.0.1-39 2.1.0-3
+VERSIONS = 2.1.0-3 2.2.0-19 2.2.3-19
 ICON = http://www.webos-internals.org/images/4/4a/Icon_WebOSInternals_Patches_Browser.png
 SCREENSHOTS =
 META_SUB_VERSION = 1

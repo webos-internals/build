@@ -3,14 +3,35 @@ TITLE	 = Preware
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.6.0
+VERSION  = 1.8.5
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
 ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 MINWEBOSVERSION = 1.4.0
-DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, kernels, services and plugins. Preware is also able to access official Palm App Catalog, Web Distribution and Beta Distribution feeds.<br><b>Requires webOS 1.4.0 or later</b>.
+DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, kernels, services and plugins.<br><b>Requires webOS 1.4.0 or later</b>.
 CHANGELOG = \
+1.8.5: Fixed missing package information bug.<br>\
+1.8.4: Added some additional Second Line preference options.<br>\
+1.8.3: Please read http://testing.preware.org/ if you use the testing feeds.<br>\
+1.8.2: Fixed the removal of obsolete testing feeds.<br>\
+1.8.1: Remove the obsolete testing feeds when adding alpha or beta feeds.<br>\
+1.8.0: Disabled support for adding obsolete testing feeds.<br>\
+1.7.7: Enabled support for alpha and beta testing feeds.<br>\
+1.7.6: Larger screenshots on the TouchPad. Pressed states for TouchPad back buttons. Fixed search backspace on TouchPad (all courtesy of chpwn).<br>\
+1.7.5: Fixed list rendering on TouchPad (courtesy of chpwn).<br>\
+1.7.4: Removed catalog feed specific preferences (show only free/show only english).<br>\
+1.7.3: Added support for font packages.<br>\
+1.7.2: Replaced the word phone with the word device in all messages.<br>\
+1.7.1: Fixed fullscreen screenshot resizing on touchpad rotate (courtesy of Appsotutely). Fixed dependent packages spinner location (courtesy of chpwn).<br>\
+1.7.0: Rolled up all the beta release features for a TouchPad-compatible public release.<br>\
+1.6.8: Enabled back tap on header for all devices.<br>\
+1.6.7: Fixed full-screen formatting of ipkg log screen.<br>\
+1.6.6: Preware is now fully compatible with the TouchPad, using the full screen area.<br>\
+1.6.5: Now useable on devices without a back gesture. Set the wget user-agent to Preware when retrieving indexes and packages.<br>\
+1.6.4: Fixed a problem when loading the saved packages list.<br>\
+1.6.3: WebOS Internals has been formally notified by Richard Kerris (HP Vice President of Worldwide Developer Relations) that open access to the webOS app catalog feed (including the beta and web feeds) is no longer available to third party developers or applications. Please direct any questions about this decision (which is final and permanent) to HP, not to WebOS Internals. Removed all HP webOS app catalog feeds from new installations of Preware.<br>\
+1.6.2: Added the clock themes feed (disabled by default).<br>\
 1.6.0: webOS 2.x Just Type integration. Fixed package list ordering bug. Layout fixes for Pixi/Veer.<br>\
 1.5.9: Fixed parse errors resulting from packages with very large descriptions. Fixed problems with updates to app catalog apps.<br>\
 1.5.8: Moved blacklisting to feed load to speed up listing. Suggests a reload after changing the blacklist. Fixed homebrew feed/catalog feed same appid bug.<br>\

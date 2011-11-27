@@ -3,13 +3,42 @@ TITLE    = Govnah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.8.3
+VERSION  = 1.2.3
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
 DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature, load averages and memory usage.
 CHANGELOG = \
+1.2.3: Added support for TouchPad webOS 3.0.4 Warthog kernel.<br>\
+1.2.2: Added support for TouchPad webOS 3.0.4 F15C and F4 kernels.<br>\
+1.2.1: Added support for TouchPad webOS 3.0.4 kernel defaults.<br>\
+1.2.0: Added support for the new TouchPad governors.<br>\
+1.1.1: Added Veer 1.2GHz support.<br>\
+1.1.0: Added recognition of the F4 kernel.<br>\
+1.0.9: Added support for Veer.<br>\
+1.0.8: Added support for System Voltage frequencies on the Pre/Pre+.<br>\
+1.0.7: Added support for UberKernel on the Pre 3.<br>\
+1.0.6: Update for Pre3.<br>\
+1.0.5: Reinstated screenstate3 1100 profile for UberKernel/Pre2.<br>\
+1.0.3: Removed the unused screenstate3 150/1100 profile.<br>\
+1.0.2: Fixed TouchPad exhibition mode graph width.<br>\
+1.0.1: Improved the sampling rate quantisation.<br>\
+1.0.0: Full support for all released webOS devices.<br>\
+0.9.9: Added back button to graph scene for TouchPad.<br>\
+0.9.8: Robustified the dual core handling on reset.<br>\
+0.9.7: Fixed back button in preferences scene.<br>\
+0.9.6: Added dual core support. Removed unimplemented dashboard preference. Removed manual settings preference.<br>\
+0.9.5: Added profile support for IO schedulers.<br>\
+0.9.4: Added support for TouchPad overclocking.<br>\
+0.9.3: Added the missing device stylesheet.<br>\
+0.9.2: Added back buttons for devices without a gesture area.<br>\
+0.9.1: Added the Palm Default profile for the TouchPad.<br>\
+0.9.0: Added support for the TouchPad, using the full screen area. Added CPU high temperature scaleback speed support.<br>\
+0.8.12: Add battery temperature support for Veer and TouchPad<br>\
+0.8.8: Added battery current support for the TouchPad.<br>\
+0.8.6: Added battery current support for the Veer.<br>\
+0.8.5: Added more detail in the help for various settings.<br>\
 0.8.3: Small fix in profile for the Pre AV8B experimental kernel and the Pre F102A stable kernel.<br>\
 0.8.2: Small fix in profile for the Pre 2 SR71 experimental kernel.<br>\
 0.8.1: Only set new voltages if the user actually changes them.<br>\

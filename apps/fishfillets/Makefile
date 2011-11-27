@@ -1,5 +1,6 @@
 NAME     = fishfillets
 APP_ID   = org.webosinternals.${NAME}
+MAXWEBOSVERSION = 1.9.9
 SIGNER   = org.webosinternals
 VERSION  = 0.9.2-2
 DEPENDS  = org.webosinternals.upstartmgr

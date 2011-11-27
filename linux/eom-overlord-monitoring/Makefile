@@ -1,9 +1,9 @@
 TYPE = Linux Application
 NAME = eom-overlord-monitoring
-VERSION = 1.0.3
+VERSION = 1.0.5
 TITLE = EOM Overlord Monitoring
 MAINTAINER = WebOS Internals <support@webos-internals.org>
-DESCRIPTION = By default, Palm uploads multiple logs to ps.palmws.com. This stops that process. If you install this, consider adding the "Muffle System Logging" patch from Preware too. 
+DESCRIPTION = By default, Palm uploads multiple logs to ps.palmws.com. This includes such things as every application you have ever installed, the exact timestamp of every time you open and close an application, the full list of wifi access points that have been in range of your device at any time (even if you didn't use them), etc. This stops that process. If you install this, consider adding the "Muffle System Logging" patch from Preware too. 
 APP_ID = org.webosinternals.${NAME}
 SIGNER = org.webosinternals
 MAINTAINER = WebOS Internals

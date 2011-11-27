@@ -63,3 +63,43 @@ ${DOCTOR_DIR}/webosdoctor-2.1.2.jar:
 	else \
 	  curl -L -o $@ http://palm.cdnetworks.net/rom/veer/p212r0d05132011/attp212rod/webosdoctorp160unaatt.jar; \
 	fi
+
+${DOCTOR_DIR}/webosdoctor-2.2.0.jar:
+	mkdir -p ${DOCTOR_DIR}
+	if [ -e ${DOCTOR_DIR}/webosdoctorp220manta-wr-2.2.0.jar ] ; then \
+	  ln -s webosdoctorp220manta-wr-2.2.0.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/manta/p220r0d08222011/wdmantarow/webosdoctorp220mantawr.jar; \
+	fi
+
+${DOCTOR_DIR}/webosdoctor-2.2.3.jar:
+	mkdir -p ${DOCTOR_DIR}
+	if [ -e ${DOCTOR_DIR}/webosdoctorp223mantaatt-2.2.3.jar ] ; then \
+	  ln -s webosdoctorp223mantaatt-2.2.3.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/manta/p223r0d09272011/wdmantaatt/webosdoctorp223mantaatt.jar; \
+	fi
+
+${DOCTOR_DIR}/webosdoctor-3.0.0.jar:
+	mkdir -p ${DOCTOR_DIR}
+	if [ -e ${DOCTOR_DIR}/webosdoctorp300hstnhwifi-3.0.0.jar ] ; then \
+	  ln -s webosdoctorp300hstnhwifi-3.0.0.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/touchpad/wd300wifi/webosdoctorp300hstnhwifi.jar; \
+	fi
+
+${DOCTOR_DIR}/webosdoctor-3.0.2.jar:
+	mkdir -p ${DOCTOR_DIR}
+	if [ -e ${DOCTOR_DIR}/webosdoctorp302hstnhwifi-3.0.2.jar ] ; then \
+	  ln -s webosdoctorp302hstnhwifi-3.0.2.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/touchpad/p302r0d08012011/wifip302rod/webosdoctorp302hstnhwifi.jar; \
+	fi
+
+${DOCTOR_DIR}/webosdoctor-3.0.4.jar:
+	mkdir -p ${DOCTOR_DIR}
+	if [ -e ${DOCTOR_DIR}/webosdoctorp304hstnhwifi-3.0.4.jar ] ; then \
+	  ln -s webosdoctorp304hstnhwifi-3.0.4.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/touchpad/p304rod10182011/wd304wifi/webosdoctorp304hstnhwifi.jar; \
+	fi

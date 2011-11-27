@@ -2,19 +2,17 @@ NAME     = optware
 TITLE    = Optware Bootstrap
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
-VERSION  = 1.0.0
+# BLDFLAGS = -p // If this is set, you don't see postinst status messages
+VERSION  = 1.6.1
 HOMEPAGE = http://www.webos-internals.org/wiki/Optware
 MAINTAINER = WebOS Internals <support@webos-internals.org>
-DESCRIPTION = This package is used to bootstrap the installation of packages from the Optware feed.
-CHANGELOG = 1.0.0: Made compatible with the Emergency Service Enabler to survive doctoring.
-CHANGELOG += <br>0.2.0: Protect against multiple mounts.
-CHANGELOG += <br>0.1.0: Made the check for webOS 1.3.5 more robust.
-CHANGELOG += <br>0.0.9: Updated again for future webOS compatibility.
-CHANGELOG += <br>0.0.8: Now overrides any manually installed optware profile.
-CHANGELOG += <br>0.0.7: Updated for future webOS compatibility.
-CHANGELOG += <br>0.0.6: Added default profile to set up the path.
-CHANGELOG += <br>0.0.3: Unmount /opt on removal.
-CHANGELOG += <br>0.0.2: Create /var/opt, and bind mount it to /opt - will add more checking for pre-existing mounts later.
+DESCRIPTION = This package is used to bootstrap the installation of packages from the Optware feed.  If you have a dedicated ext3fs partition (you need to meta-doctor your device to get one of these), it will create and use a /media/ext3fs/opt directory.  If you do not have a dedicated ext3fs partition, it will create a 128MB loopback filesystem to store your optware packages.  In either case, the partition is then mounted as /opt on your device, ready to use.
+CHANGELOG = \
+1.6.1: Handle an empty /var/opt directory correctly.<br>\
+1.6.0: Now supports using a dedicated ext3fs partition created using the Meta-Doctor.<br>\
+1.5.2: Moved loopback filesystem file to /media/cryptofs to fix USB mode.<br>\
+1.5.1: Fixed prerm script.<br>\
+1.5.0: Migration to new loopback mounted ext3 filesystem stored on the USB drive.
 TYPE	 = Optware
 CATEGORY = Infrastructure
 ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
@@ -37,10 +35,10 @@ build/.unpacked-${VERSION}:
 build: build/.built-${VERSION}
 
 build/.built-${VERSION}: build/.unpacked-${VERSION}
-	mkdir -p build/all/etc/event.d
-	install -m 644 upstart/${APP_ID} build/all/etc/event.d/${APP_ID}
-	mkdir -p build/all/etc/profile.d
-	install -m 644 profile/${APP_ID} build/all/etc/profile.d/${APP_ID}
+	mkdir -p build/all/usr/palm/applications/${APP_ID}/upstart
+	install -m 644 upstart/${APP_ID} build/all/usr/palm/applications/${APP_ID}/upstart/
+	mkdir -p build/all/usr/palm/applications/${APP_ID}/profile
+	install -m 644 profile/${APP_ID} build/all/usr/palm/applications/${APP_ID}/profile/
 	touch $@
 
 clobber::

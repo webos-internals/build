@@ -1,6 +1,7 @@
 NAME     = zcorder
 TITLE    = zcorder
 APP_ID   = org.webosinternals.${NAME}
+MAXWEBOSVERSION = 1.9.9
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
 VERSION  = 0.6.0

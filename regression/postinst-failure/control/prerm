@@ -1,6 +1,0 @@
-#!/bin/sh
-
-echo "Post-Install Script Failure Prerm Standard Output"
-echo "Post-Install Script Failure Prerm Standard Error" 1>&2
-
-exit 1

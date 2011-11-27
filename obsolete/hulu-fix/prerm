@@ -1,0 +1,12 @@
+#!/bin/sh
+
+APPID=org.webosinternals.hulu-fix
+
+APPS=/media/cryptofs/apps
+
+APPDIR=${APPS}/usr/palm/applications/${APPID}
+
+mount -o remount,rw /
+sed -i 's/LNX 10/WEB 10/' /usr/lib/BrowserServerPlugins/libflashplayer.so
+
+exit 0

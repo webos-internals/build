@@ -1,0 +1,9 @@
+Package: org.preware.app-catalog-announcement
+Version: 1.0.0
+Section: Announcements
+Architecture: all
+Maintainer: WebOS Internals
+Size: 0
+Source: { "LastUpdated":"9999999999", "Title":"App Catalog Announcement", "FullDescription":"WebOS Internals has been formally notified by Richard Kerris (HP Vice President of Worldwide Developer Relations) that open access to the webOS app catalog feed (including the beta and web feeds) is no longer available to third party developers or applications. Please direct any questions about this decision (which is final and permanent) to HP, not to WebOS Internals. To remove this announcement from Preware, simply disable the Palm app catalog feeds in the Manage Feeds page.", "Type":"AppCatalog", "Category":"Announcements", "Feed":"Palm Catalog" }
+Description: App Catalog Announcement
+

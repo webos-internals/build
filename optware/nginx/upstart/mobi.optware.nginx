@@ -1,7 +1,7 @@
 description "Nginx Web Server"
 
-start on stopped finish
-stop on runlevel [!2]
+start on started LunaSysMgr
+stop on started start_update
 
 console none
 
@@ -24,6 +24,14 @@ pre-start script
      # Add firewall rule to allow HTTPS access over WiFi on port 443
      /usr/sbin/iptables -I INPUT -i eth0 -p tcp --dport  80 -j ACCEPT
      /usr/sbin/iptables -I INPUT -i eth0 -p tcp --dport 443 -j ACCEPT
+end script
+
+post-stop script
+     # Remove the "-i eth0" on the following lines to enable access
+     # over the cellular data network (EVDO, etc).
+     # Add firewall rule to allow HTTP access over WiFi on port 80
+     /usr/sbin/iptables -D INPUT -i eth0 -p tcp --dport  80 -j ACCEPT || /bin/true
+     /usr/sbin/iptables -D INPUT -i eth0 -p tcp --dport 443 -j ACCEPT || /bin/true
 end script
 
 # end of file

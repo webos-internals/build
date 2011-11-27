@@ -45,31 +45,24 @@ precentral-index: ipkgs/precentral/Packages
 
 .PHONY: webos-patches-index
 webos-patches-index: ipkgs/webos-patches/1.4.5/Packages \
-		     ipkgs/webos-patches/2.0.0/Packages ipkgs/webos-patches/2.0.1/Packages \
-		     ipkgs/webos-patches/2.1.0/Packages
+		     ipkgs/webos-patches/2.1.0/Packages ipkgs/webos-patches/2.2.0/Packages \
+		     ipkgs/webos-patches/2.2.3/Packages ipkgs/webos-patches/2.2.4/Packages \
+		     ipkgs/webos-patches/3.0.2/Packages ipkgs/webos-patches/3.0.4/Packages \
+		     ipkgs/webos-patches/3.0.5/Packages
 	rm -f ipkgs/webos-patches/1.4.5.1
 	ln -s 1.4.5 ipkgs/webos-patches/1.4.5.1
+	rm -f ipkgs/webos-patches/2.1.1
+	ln -s 2.1.0 ipkgs/webos-patches/2.1.1
 	rm -f ipkgs/webos-patches/2.1.2
 	ln -s 2.1.0 ipkgs/webos-patches/2.1.2
-	rm -f ipkgs/webos-patches/unknown
-	ln -s 2.1.0 ipkgs/webos-patches/unknown
 
 .PHONY: webos-kernels-index
-webos-kernels-index: ipkgs/webos-kernels/1.4.5/Packages \
-		     ipkgs/webos-kernels/2.0.0/Packages ipkgs/webos-kernels/2.0.1/Packages \
-		     ipkgs/webos-kernels/2.1.0/Packages ipkgs/webos-kernels/2.1.2/Packages
-	rm -f ipkgs/webos-kernels/1.4.5.1
-	ln -s 1.4.5 ipkgs/webos-kernels/1.4.5.1
-	rm -f ipkgs/webos-kernels/unknown
-	ln -s 2.1.0 ipkgs/webos-kernels/unknown
-
-.PHONY: legacy-webos-kernels
-legacy-webos-kernels:
-	${MAKE} ipkgs/webos-kernels/1.4.5/Packages
-
-.PHONY: legacy-webos-kernels-testing
-legacy-webos-kernels-testing:
-	${MAKE} KERNDIR="testing-kernels" FEED="WebOS Kernels Testing" ipkgs/webos-kernels/1.4.5/Packages
+webos-kernels-index: ipkgs/webos-kernels/1.4.5/Packages ipkgs/webos-kernels/1.4.5.1/Packages \
+		     ipkgs/webos-kernels/2.1.0/Packages ipkgs/webos-kernels/2.1.1/Packages \
+		     ipkgs/webos-kernels/2.1.2/Packages ipkgs/webos-kernels/2.2.0/Packages \
+		     ipkgs/webos-kernels/2.2.3/Packages ipkgs/webos-kernels/2.2.4/Packages \
+		     ipkgs/webos-kernels/3.0.2/Packages ipkgs/webos-kernels/3.0.4/Packages \
+		     ipkgs/webos-kernels/3.0.5/Packages
 
 .PHONY: webos-internals-index
 webos-internals-index: ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv6/Packages ipkgs/webos-internals/armv7/Packages	
@@ -95,7 +88,7 @@ ipkgs/webos-patches/%/Packages: package-webos-patches
 	rm -rf ipkgs/webos-patches/$*
 	mkdir -p ipkgs/webos-patches/$*
 	( find ${PTCHDIR} -mindepth 2 -maxdepth 2 -type d -name ipkgs -print | \
-	  xargs -I % find % -name "*_$*-*_all.ipk" -print | \
+	  xargs -I % find % -name "*_$*-*_*.ipk" -print | \
 	  xargs -I % rsync -i -a % ipkgs/webos-patches/$* )
 	TAR_OPTIONS=--wildcards \
 	toolchain/ipkg-utils/ipkg-make-index \
@@ -212,17 +205,33 @@ package-feeds: toolchain
 	done
 
 toolchain: toolchain/ipkg-utils/ipkg-make-index \
+	   toolchain/cs09q1armel/build/arm-2009q1 \
 	   toolchain/cs07q3armel/build/arm-2007q3 \
 	   toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu \
+	   staging/usr/include/SDL/SDL.h \
+	   staging/usr/include/PDL.h \
 	   staging/usr/include/mjson/json.h \
 	   staging/usr/include/lunaservice.h \
-	   staging/usr/include/glib.h
+	   staging/usr/include/glib.h \
+	   staging/usr/include/zlib.h \
+	   staging/usr/include/openssl/crypto.h \
+	   staging/usr/include/curl/curl.h \
+	   staging/usr/include/fuse/fuse.h
+
+toolchain/cs09q1armel/build/arm-2009q1:
+	${MAKE} -C toolchain/cs09q1armel unpack
 
 toolchain/cs07q3armel/build/arm-2007q3:
 	${MAKE} -C toolchain/cs07q3armel unpack
 
 toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu:
 	${MAKE} -C toolchain/i686-unknown-linux-gnu unpack
+
+staging/usr/include/SDL/SDL.h:
+	${MAKE} -C toolchain/libsdl stage
+
+staging/usr/include/PDL.h:
+	${MAKE} -C toolchain/libpdl stage
 
 staging/usr/include/mjson/json.h:
 	${MAKE} -C toolchain/mjson stage
@@ -233,36 +242,85 @@ staging/usr/include/lunaservice.h:
 staging/usr/include/glib.h:
 	${MAKE} -C toolchain/glib stage
 
+staging/usr/include/openssl/crypto.h:
+	${MAKE} -C toolchain/openssl stage
+
+staging/usr/include/zlib.h:
+	${MAKE} -C toolchain/zlib stage
+
+staging/usr/include/curl/curl.h:
+	${MAKE} -C toolchain/libcurl stage
+
+staging/usr/include/fuse/fuse.h:
+	${MAKE} -C toolchain/fuse stage
+
 upload:
-	rsync -avr ipkgs/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/
-	rsync -avr ipkgs/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/
-	rsync -avr ipkgs/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/
+	-rsync -avr ipkgs/ preware@ipkg4.preware.org:/home/preware/htdocs/ipkg/feeds/
+	-rsync -avr ipkgs/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/
+	-rsync -avr ipkgs/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/
+	-rsync -avr ipkgs/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/
 
-testing: webos-internals-testing webos-patches-testing webos-kernels-testing optware-testing
+.PHONY: alpha alpha-apps alpha-patches alpha-kernels alpha-optware
+alpha: alpha-apps alpha-patches alpha-kernels alpha-optware
 
-webos-internals-testing:
-	${MAKE} SUBDIRS="testing" FEED="WebOS Internals Testing" webos-internals-index
-	rsync -avr ipkgs/webos-internals/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
-	rsync -avr ipkgs/webos-internals/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
-	rsync -avr ipkgs/webos-internals/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/webos-internals/testing/
+alpha-apps:
+	${MAKE} SUBDIRS="alpha-apps" FEED="WebOS Internals Alpha" webos-internals-index
+	-rsync -avr ipkgs/webos-internals/ preware@ipkg4.preware.org:/home/preware/htdocs/ipkg/alpha/apps/
+	-rsync -avr ipkgs/webos-internals/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/alpha/apps/
+	-rsync -avr ipkgs/webos-internals/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/alpha/apps/
+	-rsync -avr ipkgs/webos-internals/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/alpha/apps/
 
-webos-patches-testing:
-	${MAKE} PTCHDIR="testing-patches" FEED="WebOS Patches Testing" SUFFIX=.testing webos-patches-index
-	rsync -avr ipkgs/webos-patches/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
-	rsync -avr ipkgs/webos-patches/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
-	rsync -avr ipkgs/webos-patches/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/webos-patches/testing/
+alpha-patches:
+	${MAKE} PTCHDIR="alpha-patches" FEED="WebOS Patches Alpha" SUFFIX=.alpha webos-patches-index
+	-rsync -avr ipkgs/webos-patches/ preware@ipkg4.preware.org:/home/preware/htdocs/ipkg/alpha/patches/
+	-rsync -avr ipkgs/webos-patches/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/alpha/patches/
+	-rsync -avr ipkgs/webos-patches/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/alpha/patches/
+	-rsync -avr ipkgs/webos-patches/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/alpha/patches/
 
-webos-kernels-testing:
-	${MAKE} KERNDIR="testing-kernels" FEED="WebOS Kernels Testing" webos-kernels-index
-	rsync -avr ipkgs/webos-kernels/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/webos-kernels/testing/
-	rsync -avr ipkgs/webos-kernels/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/webos-kernels/testing/
-	rsync -avr ipkgs/webos-kernels/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/webos-kernels/testing/
+alpha-kernels:
+	${MAKE} KERNDIR="alpha-kernels" FEED="WebOS Kernels Alpha" webos-kernels-index
+	-rsync -avr ipkgs/webos-kernels/ preware@ipkg4.preware.org:/home/preware/htdocs/ipkg/alpha/kernels/
+	-rsync -avr ipkgs/webos-kernels/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/alpha/kernels/
+	-rsync -avr ipkgs/webos-kernels/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/alpha/kernels/
+	-rsync -avr ipkgs/webos-kernels/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/alpha/kernels/
 
-optware-testing:
-	${MAKE} OPTWDIR="testing-optware" FEED="Optware Testing" optware-index
-	rsync -avr ipkgs/optware/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/feeds/optware/testing/
-	rsync -avr ipkgs/optware/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/optware/testing/
-	rsync -avr ipkgs/optware/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/optware/testing/
+alpha-optware:
+	${MAKE} OPTWDIR="alpha-optware" FEED="Optware Alpha" optware-index
+	-rsync -avr ipkgs/optware/ preware@ipkg4.preware.org:/home/preware/htdocs/ipkg/alpha/optware/
+	-rsync -avr ipkgs/optware/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/alpha/optware/
+	-rsync -avr ipkgs/optware/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/alpha/optware/
+	-rsync -avr ipkgs/optware/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/alpha/optware/
+
+.PHONY: beta beta-apps beta-patches beta-kernels beta-optware
+beta: beta-apps beta-patches beta-kernels beta-optware
+
+beta-apps:
+	${MAKE} SUBDIRS="beta-apps" FEED="WebOS Internals Beta" webos-internals-index
+	-rsync -avr ipkgs/webos-internals/ preware@ipkg4.preware.org:/home/preware/htdocs/ipkg/beta/apps/
+	-rsync -avr ipkgs/webos-internals/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/beta/apps/
+	-rsync -avr ipkgs/webos-internals/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/beta/apps/
+	-rsync -avr ipkgs/webos-internals/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/beta/apps/
+
+beta-patches:
+	${MAKE} PTCHDIR="beta-patches" FEED="WebOS Patches Beta" SUFFIX=.beta webos-patches-index
+	-rsync -avr ipkgs/webos-patches/ preware@ipkg4.preware.org:/home/preware/htdocs/ipkg/beta/patches/
+	-rsync -avr ipkgs/webos-patches/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/beta/patches/
+	-rsync -avr ipkgs/webos-patches/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/beta/patches/
+	-rsync -avr ipkgs/webos-patches/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/beta/patches/
+
+beta-kernels:
+	${MAKE} KERNDIR="beta-kernels" FEED="WebOS Kernels Beta" webos-kernels-index
+	-rsync -avr ipkgs/webos-kernels/ preware@ipkg4.preware.org:/home/preware/htdocs/ipkg/beta/kernels/
+	-rsync -avr ipkgs/webos-kernels/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/beta/kernels/
+	-rsync -avr ipkgs/webos-kernels/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/beta/kernels/
+	-rsync -avr ipkgs/webos-kernels/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/beta/kernels/
+
+beta-optware:
+	${MAKE} OPTWDIR="beta-optware" FEED="Optware Beta" optware-index
+	-rsync -avr ipkgs/optware/ preware@ipkg4.preware.org:/home/preware/htdocs/ipkg/beta/optware/
+	-rsync -avr ipkgs/optware/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/beta/optware/
+	-rsync -avr ipkgs/optware/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/beta/optware/
+	-rsync -avr ipkgs/optware/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/beta/optware/
 
 distclean: clobber
 	find toolchain -mindepth 1 -maxdepth 1 -type d -print | \
@@ -274,11 +332,23 @@ clobber: clean clobber-subdirs clobber-patches clobber-kernels clobber-optware c
 clobber-testing:
 	${MAKE} SUBDIRS="testing" PTCHDIR="testing-patches" KERNDIR="testing-kernels" OPTWDIR="testing-optware" clobber
 
+alpha-clobber:
+	${MAKE} SUBDIRS="alpha-apps" PTCHDIR="alpha-patches" KERNDIR="alpha-kernels" OPTWDIR="alpha-optware" clobber
+
+beta-clobber:
+	${MAKE} SUBDIRS="beta-apps" PTCHDIR="beta-patches" KERNDIR="beta-kernels" OPTWDIR="beta-optware" clobber
+
 clean: clean-subdirs clean-patches clean-kernels clean-optware clean-feeds
 	find . -name "*~" -delete
 
 clean-testing:
 	${MAKE} SUBDIRS="testing" PTCHDIR="testing-patches" KERNDIR="testing-kernels" OPTWDIR="testing-optware" clean
+
+alpha-clean:
+	${MAKE} SUBDIRS="alpha-apps" PTCHDIR="alpha-patches" KERNDIR="alpha-kernels" OPTWDIR="alpha-optware" clean
+
+beta-clean:
+	${MAKE} SUBDIRS="beta-apps" PTCHDIR="beta-patches" KERNDIR="beta-kernels" OPTWDIR="beta-optware" clean
 
 clobber-subdirs:
 	find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print | \

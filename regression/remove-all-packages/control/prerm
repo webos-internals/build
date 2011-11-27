@@ -1,7 +1,0 @@
-#!/bin/sh
-
-for package in `ipkg -o $IPKG_OFFLINE_ROOT list_installed | grep org.webosinternals.regression | awk '{print $1}'` ; do
-  ipkg -o $IPKG_OFFLINE_ROOT remove $package
-done  
-
-exit 0

@@ -3,7 +3,7 @@ TITLE    = Save/Restore
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.3.8
+VERSION  = 1.5.4
 DEPENDS  = org.webosinternals.unzip, org.webosinternals.zip
 TYPE	 = Application
 CATEGORY = System Utilities
@@ -13,6 +13,20 @@ DESCRIPTION = Save/Restore enables saving and restoring application data to and 
 WebOS Internals provides Save/Retore as is without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.  The entire risk as to the quality and performance of Save/Restore is with you.  Should Save/Restore prove defective, you assume the cost of all necessary servicing, repair or correction.<br>\
 In no event will WebOS Internals or any other party be liable to you for damages, including any general, special, incidental or consequential damages arising out of the use or inability to use Save/Restore (including but not limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of Save/Restore to operate with any other programs).
 CHANGELOG = \
+1.5.4: Applications: Launcher (3.0 update), Beyond Ynth, Sparkle HD, Quell HD (all courtesy of Audemars02), Blocked (courtesy of stickb0y).<br>\
+1.5.3: Added AppNote for Robotek HD script to indicate restore only works with the same device.<br>\
+1.5.2: Applications: intervalGym, Jamwam Jog, Power Nap, ZenSearch (all courtesy of irateb), Need For Speed Hot Pursuit (TouchPad) (courtesy of A.Stice), FlightView, Gowalla, Open Table, Robotek HD, Slice It HD, Spare Time, Wall Switch (all courtesy of Audemars02).<br>\
+1.5.1: Applications: Trip Traq - HBLR, Trip Traq - BART, Pane Free, Multi Pane (all courtesy of appsotutely), Clock In, Clock In Trial, Gizmo, BeamOut, Days Gone By, Days To Come (all courtesy of djgardn2), DORK 1 (courtesy of lordbah), FitTrack Trial, MiniSquadron (both courtesy of malpha), Super Ads (courtesy of Audemars02).<br>\
+1.5.0: Applications: SecuStore 2, SecuStore 2 (Trial).<br>\
+1.4.8: Added back buttons for devices with no back gesture.<br>\
+1.4.7: Applications: Angry Birds HD, Angry Birds Rio HD (courtesy of Audemars02).<br>\
+1.4.6: Added support for saving Text Assist entries.<br>\
+1.4.5: Added support for devices with no back gesture.<br>\
+1.4.4: Applications: Add Pad, Convertor, GPS Fix, Grooveshark, Hopper, phnx, Touchnote, Universe Browser, Voice Memos, Voices, WhitePages (all courtesy of Audemars02).<br>\
+1.4.3: Change scrim to Mojo spinner on Main during load.<br>\
+1.4.2: Fixed auto-save and sorting of apps in the save and installed scenes.<br>\
+1.4.0: Now incrementally loads the set of application scripts.<br>\
+1.3.9: Applications: Safe Wallet (courtesy of Audemars02), Koto Player (courtesy of fxspec06), CryptoNotes (courtesy of hboisvert), ToDo Classic (courtesy of hboisvert), FitTrack, Headlines, Slice It (all courtesy of malpha), Kookaroo, LumenCalc, SiteStatusPro (all courtesy of pcimino), Bills Vs Income, Blox, Chemistry Encyclopedia, Click Trainer, Dashboard Utilities, GeoStrings, Marquees ROCK, Music (Remix), Quick Post, Todays Tasks, WikiXplorer, ZIP Code Tools (all courtesy of djgardn2).<br>\
 1.3.8: Applications: Angry Birds Rio, Supersonic. Updated Device Info and Backup scripts in Contrib directory for webOS 2.0 changes.  Added Max webOS 1.4.5 version to Advanced Patches scripts (all courtesy of Audemars02).<br>\
 1.3.6: Applications: Airplanes, Beat Box, BibleZ (pro), BibleZ, Bubbles (free), Buka, Buka (Lite), gpsDashboard Free, gpsDashboard, Helicopter 3D, Hit the dots, Hyperspace Tournament, Labyrinth Lite, Metronome, Navit, Puzzle Paint (Lite), Puzzle Paint, Radiant, Radiant (Lite), Relego, Rhythm News, Solitaire, SuperNES, Wetter.com, World Time (Lite), World Time (Pro), zcorder (all courtesy of pcworld), Brothers In Arms 2 (updated), InterfaceLift, Worms (all courtesy of djgardn2), Go To Demo, Go To Lite, Go To tool (all courtesy of markpowers), Azkend, Heroes of Kalevala, Just Draw (all courtesy of sunmorgus), SiteStatus (courtesy of pcimino).<br>\
 1.3.5: Applications: Done, Count Down Clock, Geocaching for Webos, Astraware Mahjong, ICE - In Case of Emergency, Fling, Amigo, Bahnfahren, Dict.cc Translator, Forums, Free Klondike Solitaire, Glow Hockey, Glow Hockey FREE, Leo Dictionary, Nodoze, Plasma Cannon, Precentral News (unofficial), Premote , Raging Thunder 2, Rockus Racer Expansion Pack, Snake, Space Sheep, Space Sheep Lite, SWR3-Elchradio, Telmap O2 Germany, Znax.<br>\
@@ -70,6 +84,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	rm -rf build/src/bin build/src/*.script
 	chmod ugo+x build/src/scripts/*
 	chmod ugo+x build/src/contrib/*
 	tar -C build/src/scripts -zcf build/src/scripts.tgz .

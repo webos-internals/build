@@ -3,6 +3,7 @@ CLASS    = LEDManager
 APP_ID   = net.vertigostudios.${NAME}
 SIGNER   = net.vertigostudios
 VERSION  = 0.2.3
+MAXWEBOSVERSION = 1.9.9
 HOMEPAGE = http://forums.precentral.net/vertigo-studios/187407-my-flashlight-7-1-a.html
 MAINTAINER = PreGame
 TITLE	 = LED Manager Service

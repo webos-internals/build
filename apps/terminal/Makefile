@@ -1,14 +1,15 @@
 NAME     = terminal
 TITLE	 = Terminal
 APP_ID   = org.webosinternals.${NAME}
+MAXWEBOSVERSION = 1.9.9
 BLDFLAGS = -p
-VERSION  = 0.3.1
+VERSION  = 0.3.2
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Terminal
 ICON	 = http://www.webos-internals.org/images/7/74/Icon_WebOSInternals_Terminal.png
 DESCRIPTION = Command line terminal for webOS.
-CHANGELOG = 0.3.1: Added access to more special keys.<br>0.3.0: Subsumed the Terminal Service Plugin into this package.<br>0.2.3: Added help page for key mappings and detection of the termplugin.
+CHANGELOG = 0.3.2: Added support for paste.<br>0.3.1: Added access to more special keys.<br>0.3.0: Subsumed the Terminal Service Plugin into this package.<br>0.2.3: Added help page for key mappings and detection of the termplugin.
 SCREENSHOTS = [\"http://www.webos-internals.org/images/b/bd/Application_Terminal.jpg\"]
 LICENSE  = GPL v2 Open Source
 POSTINSTALLFLAGS = RestartLuna

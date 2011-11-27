@@ -1,5 +1,6 @@
 NAME     = ntpsync
 APP_ID   = com.webosnerd.${NAME}
+MAXWEBOSVERSION = 1.9.9
 VERSION  = 0.2.0
 HOMEPAGE = http://webosnerd.com/
 MAINTAINER = dallashigh <karl@webosnerd.com>

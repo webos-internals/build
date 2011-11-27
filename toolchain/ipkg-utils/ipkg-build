@@ -107,14 +107,14 @@ You probably want to remove them: " >&2
 	    echo "If you don't know which priority value you should be using, then use \`optional'" >&2
 	fi
 
-	source=`required_field Source`
-	[ "$?" -ne 0 ] && PKG_ERROR=1
-	if [ -z "$source" ]; then
-	    echo "The Source field contain the URL's or filenames of the source code and any patches" 
-	    echo "used to build this package.  Either gnu-style tarballs or Debian source packages "
-	    echo "are acceptable.  Relative filenames may be used if they are distributed in the same"
-	    echo "directory as the .ipk file."
-	fi
+#	source=`required_field Source`
+#	[ "$?" -ne 0 ] && PKG_ERROR=1
+#	if [ -z "$source" ]; then
+#	    echo "The Source field contain the URL's or filenames of the source code and any patches" 
+#	    echo "used to build this package.  Either gnu-style tarballs or Debian source packages "
+#	    echo "are acceptable.  Relative filenames may be used if they are distributed in the same"
+#	    echo "directory as the .ipk file."
+#	fi
 
 	disallowed_filename=`disallowed_field Filename`
 	[ "$?" -ne 0 ] && PKG_ERROR=1

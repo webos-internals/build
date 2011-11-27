@@ -1,0 +1,7 @@
+[
+    {"source": "app/assistants/app-assistant.js"},
+    {
+        "scenes": "change-log",
+        "source": "app/assistants/change-log-assistant.js"
+    }
+]

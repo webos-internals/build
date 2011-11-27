@@ -1,8 +1,0 @@
-{
-	"title": "Application With Dependency",
-	"id": "org.webosinternals.regression.app-with-dependency",
-	"version": "%VERSION%",
-	"release_date":	"1-Jan-2009",
-	"vendor": "WebOS Internals",
-	"vendor_email":	"support@webos-internals.org",
-}

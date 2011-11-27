@@ -20,7 +20,7 @@
 NAME     = arm
 VERSION	 = 2009q1-203-arm-none-linux-gnueabi-i686-pc-linux-gnu
 
-SRC_BZ2  = http://www.codesourcery.com/sgpp/lite/arm/portal/package4571/public/arm-none-linux-gnueabi/${NAME}-${VERSION}.tar.bz2
+SRC_BZ2  = https://sourcery.mentor.com/public/gnu_toolchain/arm-none-linux-gnueabi/${NAME}-${VERSION}.tar.bz2
 include ../../support/download.mk
 
 .PHONY: unpack

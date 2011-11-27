@@ -3,12 +3,12 @@ TITLE    = Navit - Car navigation system
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.5.0.4353-1
+VERSION	 = 0.5.0.4787-2
 TYPE     = Application
 CATEGORY = Utilities
 DESCRIPTION = <p>This package does not include map-data. Please visit \
 	the <a href="http://en.m.webos-internals.org/wiki/Application:Navit">\
-       	Homepage</a> to find out how to obtain and install maps.</p>
+       	Homepage</a> to find out how to obtain and install maps.</p> \
 	<p>You might want to read the \
 	<a href="http://en.m.webos-internals.org/wiki/Application:NavitReleaseNotes\#v${VERSION}">release notes</a> \
 	before updating/installing this package, any noteworthy changes are \
@@ -21,6 +21,28 @@ DESCRIPTION = <p>This package does not include map-data. Please visit \
        	other navigation systems, Navit maps are dynamically generated in real \
        	time from vector data.</p>
 CHANGELOG = \
+	    0.5.0.4787-2: Small OSD fix. <br/> \
+	    0.5.0.4787-1: Update to svn r4787. Small change in house number search. <br/> \
+	    0.5.0.4786-1: Update to svn r4786. Add missing country-flags. <br/> \
+	    0.5.0.4784-1: Update to svn r4784. Enable tunnel-extrapolation by default (see release notes!). <br/> \
+	    0.5.0.4776-2: Update to svn r4776. Adjust OSDs for TouchPad and Pre3. Please report if it breaks older devices. <br/> \
+	    0.5.0.4767-1: Update to svn r4767. Also use the GPS workaround for webOS 2.2. <br/> \
+	    0.5.0.4754-1: Update to svn r4754. Try different approach for GPS-timeout. <br/> \
+	    0.5.0.4718-3: Fix permissions to enable Pre3 support. <br/> \
+	    0.5.0.4718-2: Fix package description. <br/> \
+	    0.5.0.4718-1: Update to svn r4718. Fixed a bug which could cause random crashes. Improved support for tunnel-extrapolation. Workaround for the -1° - 1° GPS bug. See Release-Notes for details. <br/> \
+	    0.5.0.4663-2: Support for Navit Maps 0.0.2-3. <br/> \
+	    0.5.0.4663-1: Update to svn r4663. Extensions to command-line. <br/> \
+	    0.5.0.4657-2: Add support for new invocation method of navit-maps.<br/> \
+	    0.5.0.4657-1: Update to svn r4657.<br/> \
+	    0.5.0.4637-2: Move mapset into separate file, to prepare for the Navit Maps application.<br/> \
+	    0.5.0.4637-1: Update to svn r4637. Did some adjustments to screnn rotation for HP TouchPad. Besides that, way too many changes ... <br/> \
+	    0.5.0.4446-1: Update to svn r4446. Fix back gesture. <br/> \
+	    0.5.0.4442-1: Update to svn r4442. Fix crash on exit. <br/> \
+	    0.5.0.4438-1: Update to svn r4438. Hopefully restabelize. <br/> \
+	    0.5.0.4437-1: Update to svn r4437. <br/> \
+	    0.5.0.4428-1: Update to svn r4428. Make rotation detection less sensitive. <br/> \
+	    0.5.0.4397-1: Update to svn r4397. Re-enable experimental support for screen rotation on WebOS >= 2.0. <br/> \
 	    0.5.0.4353-1: Update to svn r4353. It contains smaller fixes. <br/> \
 	    0.5.0.4254-3: Change jailer-config to fix timezone-issue. <br/> \
 	    0.5.0.4254-2: Fix signal strength display. New stable. <br/> \
@@ -77,7 +99,7 @@ D = build/$*/usr/palm/applications/${APP_ID}
 SRC_GIT = git://git.webos-internals.org/applications/navit.git
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_armv6.ipk
+package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk #ipkgs/${APP_ID}_${VERSION}_armv6.ipk
 include ../../support/package.mk
 
 .PHONY: unpack
@@ -93,7 +115,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 
 .PHONY: build
 build: build/.built-${VERSION}
-build/.built-${VERSION}: build/armv7.built-${VERSION} build/armv6.built-${VERSION}
+build/.built-${VERSION}: build/armv7.built-${VERSION} #build/armv6.built-${VERSION}
 	>$@
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
@@ -111,4 +133,4 @@ build/%/CONTROL/postinst:
 	chmod ugo+x $@
 
 clobber::
-	rm -rf build git
+	rm -rf build ../../downloads/navit-hybrid-hybrid.tar.gz

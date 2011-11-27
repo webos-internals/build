@@ -1,5 +1,6 @@
 NAME     = duke3d
 APP_ID   = org.webosinternals.${NAME}
+MAXWEBOSVERSION = 1.9.9
 SIGNER   = org.webosinternals
 VERSION  = 1.0.10
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Duke3D

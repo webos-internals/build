@@ -1,7 +1,7 @@
 description "OpenVPN Server"
 
-start on stopped finish
-stop on runlevel [!2]
+start on started LunaSysMgr
+stop on started start_update
 
 console none
 
@@ -11,7 +11,7 @@ nice 5
 # Restart the web server if it exits/dies
 respawn
 
-exec /opt/sbin/openvpn -f /opt/etc/openvpn/openvpn.conf
+exec /opt/sbin/openvpn --config /opt/etc/openvpn/openvpn.conf
 
 pre-start script
      # Remove the "-i eth0" on the following lines to enable access
