@@ -2,9 +2,9 @@ NAME = $(shell basename $(shell pwd))
 PATCH = browser/${NAME}.patch
 TWEAKS =
 TITLE = Add Scrollbars to the Browser
-DESCRIPTION = Adds to the browser horizontal and vertical scrollbars that looks like the iOS' scrollbars.
+DESCRIPTION = Adds (to the browser) horizontal and vertical scrollbars that looks like the iOS' scrollbars.
 CATEGORY = Browser
-VERSIONS = 2.1.0-210 2.2.0-83 2.2.3-77
+VERSIONS = 2.1.0-213 2.2.0-88 2.2.3-82
 ICON = http://www.webos-internals.org/images/4/4a/Icon_WebOSInternals_Patches_Browser.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org\",\
