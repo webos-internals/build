@@ -2,13 +2,13 @@ NAME = $(shell basename $(shell pwd))
 TITLE = A-1 Skyraider (Pre3)
 DEVICE = pre3
 CATEGORY = Beta
-VERSIONS = 2.2.0-29 2.2.3-29
+VERSIONS = 2.2.0-30 2.2.3-30
 APPINFO_DESCRIPTION = The latest beta kernel from uNiXpSyChO.<br><br>\
 Features:<br> * 1.9GHz<br> * Screenstate<br> * Lagfree<br> * ondemand-ng<br> * SIO and V(R)<br> * CIFS, NFS, iSCSI, ATA over Ethernet<br> * More to come...<br><br>\
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-29", "log" : [ "add lagfree gov." ] }, \
+{ "version" : "${WEBOS_VERSION}-30", "log" : [ "add lagfree gov." ] }, \
 { "version" : "${WEBOS_VERSION}-23", "log" : [ "fix sysfs hang on vdd set. round off vdd and make sure it is multiple of 25mV." ] }, \
 { "version" : "${WEBOS_VERSION}-21", "log" : [ "keep ondemandtcl name" ] }, \
 { "version" : "${WEBOS_VERSION}-20", "log" : [ "add ondemand-ng gov (ondemand-tickle with screenstate mod)." ] }, \
@@ -19,7 +19,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-12", "log" : [ "Initial release" ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-29: add lagfree gov.<br> \
+${WEBOS_VERSION}-30: add lagfree gov.<br> \
 ${WEBOS_VERSION}-23: fix sysfs hang on vdd set. round off vdd and make sure it is multiple of 25mV.<br> \
 ${WEBOS_VERSION}-21: keep ondemandtcl name<br> \
 ${WEBOS_VERSION}-20: add ondemand-ng gov (ondemand-tickle with screenstate mod).<br> \
