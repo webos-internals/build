@@ -60,6 +60,9 @@ KERNEL_PATCHES = makefiletune/armMakefile.diff \
 
 #		 defconfig/defconfig-nodebug-touchpad.patch \
 #		 warthogbuild/defconfig-slim-touchpad.patch \
+#
+#		 psychobuild/override.patch \
+#		 psychobuild/ondemand-ng.patch \
 
 TYPE = Kernel
 
