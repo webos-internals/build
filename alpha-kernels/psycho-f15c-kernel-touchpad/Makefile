@@ -74,6 +74,7 @@ KERNEL_PATCHES = identification/mkcompile_h.patch \
 		 psychobuild/F15C.patch \
 		 psychobuild/add_avail_freqs.patch \
 		 psychobuild/override.patch \
+		 psychobuild/ondemand-ng.patch \
 		 psychobuild/fbconsole.patch \
 		 psychobuild/F15-logo.patch \
 		 psychobuild/comptune2.patch \
