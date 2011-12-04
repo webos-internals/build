@@ -2,14 +2,14 @@ NAME = $(shell basename $(shell pwd))
 TITLE = SR71 Blackbird (Pre2)
 DEVICE = pre2
 CATEGORY = Beta
-VERSIONS = 2.1.0-80
+VERSIONS = 2.1.0-81
 APPINFO_DESCRIPTION = The latest bleeding-edge totally-experimental kernel from uNiXpSyChO.<br><br>\
 Features:<br> * screenstate-v2 and ondemandtcl<br> * Voltage tweaking<br> * 1.2GHz\
 <br> * Temp Scaling<br> * Low Battery scaleback<br> * No more TMC error!<br><br>\
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-80", "log" : [ "add ondemand-ng (screenstate for ondemand-tickle gov)." ] }, \
+{ "version" : "${WEBOS_VERSION}-81", "log" : [ "add ondemand-ng (screenstate for ondemand-tickle gov)." ] }, \
 { "version" : "${WEBOS_VERSION}-68", "log" : [ "change default temp alarm. code cleanup. fix battery scaleback percent sysfs. re-order locking." ] }, \
 { "version" : "${WEBOS_VERSION}-58", "log" : [ "Allow 1s charger poll. minor changes to defaults." ] }, \
 { "version" : "${WEBOS_VERSION}-49", "log" : [ "remove left in debug code" ] }, \
@@ -20,7 +20,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-9", "log" : [ "Initial version for Pre2." ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-80: add ondemand-ng (screenstate for ondemand-tickle gov).<br>${WEBOS_VERSION}-68: change default temp alarm. code cleanup. fix battery scaleback percent sysfs. re-order locking.<br>${WEBOS_VERSION}-58: Allow 1s charger poll. minor changes to defaults.<br>${WEBOS_VERSION}-49: remove left in debug code<br>${WEBOS_VERSION}-47: use VSEL instead of SR to voltage scale. add VDD2 voltage scaling. show charger polling in seconds and vdemand polling in milliseconds. OMG? users beware!<br>${WEBOS_VERSION}-40: cleanup compiler warnings. screenstate and override fixes.<br>${WEBOS_VERSION}-34: fix unaligned access in voltage array. screenstate fixups. code cleanup. fix sysfs voltage input for voltage array (Govnah will happier).<br>${WEBOS_VERSION}-25: refresh for webOS 2.1.0. add SSv2 and override modules.<br>${WEBOS_VERSION}-9: Initial version for Pre2.<br>
+${WEBOS_VERSION}-81: add ondemand-ng (screenstate for ondemand-tickle gov).<br>${WEBOS_VERSION}-68: change default temp alarm. code cleanup. fix battery scaleback percent sysfs. re-order locking.<br>${WEBOS_VERSION}-58: Allow 1s charger poll. minor changes to defaults.<br>${WEBOS_VERSION}-49: remove left in debug code<br>${WEBOS_VERSION}-47: use VSEL instead of SR to voltage scale. add VDD2 voltage scaling. show charger polling in seconds and vdemand polling in milliseconds. OMG? users beware!<br>${WEBOS_VERSION}-40: cleanup compiler warnings. screenstate and override fixes.<br>${WEBOS_VERSION}-34: fix unaligned access in voltage array. screenstate fixups. code cleanup. fix sysfs voltage input for voltage array (Govnah will happier).<br>${WEBOS_VERSION}-25: refresh for webOS 2.1.0. add SSv2 and override modules.<br>${WEBOS_VERSION}-9: Initial version for Pre2.<br>
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 SRC_GIT = git://git.webos-internals.org/kernels/patches.git
