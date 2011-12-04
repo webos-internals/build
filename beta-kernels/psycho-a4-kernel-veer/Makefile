@@ -36,8 +36,8 @@ KERNEL_PATCHES = identification/mkcompile_h.patch \
 		 psychobuild/memcpy.patch \
 		 psychobuild/tmc_mem.patch \
 		 psychobuild/override.patch \
-		 psychobuild/gov_bundle.patch \
-		 psychobuild/ondemand-ng.patch
+		 psychobuild/ondemand-ng.patch \
+		 psychobuild/gov_bundle.patch
 
 TYPE = Kernel
 
