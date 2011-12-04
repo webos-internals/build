@@ -2,13 +2,14 @@ NAME = $(shell basename $(shell pwd))
 TITLE = F15C Eagle (TouchPad)
 DEVICE = touchpad
 CATEGORY = Alpha
-VERSIONS = 3.0.4-89 3.0.5-89
+VERSIONS = 3.0.4-95 3.0.5-95
 APPINFO_DESCRIPTION = The latest <b>alpha test</b> kernel from uNiXpSyChO.<br><br>\
-Features:<br> * 1.9GHz<br> * autogroup process scheduling<br> * CFS<br> * BFQ and SIO<br> * EXT4<br> * Various tweaks<br>\
+Features:<br> * 1.9GHz<br> * autogroup process scheduling<br> * CFS<br> * Lagfree<br> * BFQ and SIO<br> * EXT4<br> * Various tweaks<br>\
 <br><b>NOTE: CPU core 2 will mostly stay idle. This is by webOS default, NOT a kernel problem. If you want to test this, run a Sunspider benchmark. Do not report CPU core 2 bugs.</b><br><br>\
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-95", "log" : [ "add lagfree gov." ] }, \
 { "version" : "${WEBOS_VERSION}-89", "log" : [ "add charger scaleback override (enabled by default)." ] }, \
 { "version" : "${WEBOS_VERSION}-82", "log" : [ "Happy Halloween." ] }, \
 { "version" : "${WEBOS_VERSION}-80", "log" : [ "rebuild." ] }, \
@@ -38,6 +39,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-19", "log" : [ "Initial release. autogroup process scheduling. CPU HW based alignment. deadline tweak." ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-95: add lagfree gov<br>\
 ${WEBOS_VERSION}-89: add charger scaleback override (enabled by default)<br>\
 ${WEBOS_VERSION}-82: Happy Halloween.<br>\
 ${WEBOS_VERSION}-80: rebuild.<br>\
@@ -87,6 +89,7 @@ KERNEL_PATCHES = identification/mkcompile_h.patch \
 		 psychobuild/jhash3.patch \
 		 psychobuild/memcpy.patch \
 		 memory/tmc_mem.patch \
+		 psychobuild/lagfree.patch \
 		 psychobuild/autogroup.patch
 
 TYPE = Kernel
