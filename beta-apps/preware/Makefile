@@ -3,7 +3,7 @@ TITLE	 = Preware
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.9.3
+VERSION  = 1.9.4
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
@@ -11,7 +11,7 @@ ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 MINWEBOSVERSION = 1.4.0
 DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, kernels, services and plugins.<br><b>Requires webOS 1.4.0 or later</b>.
 CHANGELOG = \
-1.9.3: Added disclaimer when installing apps marked incompatible with current device.<br>\
+1.9.4: Added disclaimer when installing apps marked incompatible with current device.<br>\
 1.9.2: Revamped feed downloading to give better error and status reporting.<br>\
 1.9.1: Fixed device identification of WiFi TouchPads.<br>\
 1.9.0: Added feed display and installation support for App Tuckerbox.<br>\
