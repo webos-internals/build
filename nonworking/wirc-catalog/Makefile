@@ -1,5 +1,5 @@
 EXTRAID = catalog.
-SSL=0
+SSL=1
 include ../../apps/wirc/Makefile
 
 build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
