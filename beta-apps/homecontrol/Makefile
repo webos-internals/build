@@ -3,15 +3,16 @@ TITLE    = Home Control
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.7.5
+VERSION  = 0.7.6
 TYPE	 = Application
 CATEGORY = Utilities
 HOMEPAGE = http://forums.precentral.net/enlightened-linux-solutions/305887-app-home-control.html
 ICON	 = http://www.webos-internals.org/images/8/82/Icon_Home-Control.png
-DESCRIPTION = Home Control a universal remote control application.<br><br>NOTE: This app nees a server application as well which you can find here: http://wee.e-lnx.org/homecontrol/.
+DESCRIPTION = Home Control is an universal remote control application.<br><br>NOTE: Some features needs a server application as well which you can install with node package manager (npm install hc-server). See the official forum thread and wiki for more info.
 MINWEBOSVERSION = 2.1.0
 MAXWEBOSVERSION = 3.9.9
 CHANGELOG = \
+0.7.6: Added new features and fixed all reported bugs.<br>\
 0.7.5: Added new features and fixed all reported bugs.<br>\
 0.7.4: Added new features and fixed all reported bugs.<br>\
 0.7.3: Added new features and fixed all reported bugs.<br>\
