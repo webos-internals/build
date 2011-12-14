@@ -88,6 +88,14 @@ ${DOCTOR_DIR}/webosdoctor-2.2.3.jar:
 	  curl -L -o $@ http://palm.cdnetworks.net/rom/manta/p223r0d09272011/wdmantaatt/webosdoctorp223mantaatt.jar; \
 	fi
 
+${DOCTOR_DIR}/webosdoctor-2.2.4.jar:
+	mkdir -p ${DOCTOR_DIR}
+	if [ -e ${DOCTOR_DIR}/webosdoctorp224pre2-wr-2.2.4.jar ] ; then \
+	  ln -s webosdoctorp224pre2-wr-2.2.4.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/pre2/p224rod12052011/wrep224rod/webosdoctorp224pre2wr.jar; \
+	fi
+
 ${DOCTOR_DIR}/webosdoctor-3.0.0.jar:
 	mkdir -p ${DOCTOR_DIR}
 	if [ -e ${DOCTOR_DIR}/webosdoctorp300hstnhwifi-3.0.0.jar ] ; then \
