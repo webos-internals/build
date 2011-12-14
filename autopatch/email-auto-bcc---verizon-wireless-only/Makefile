@@ -4,7 +4,7 @@ TWEAKS =
 TITLE = Auto BCC - Verizon Wireless only
 DESCRIPTION = Allows input bcc email address in email account profile. The bcc address will be automatically added to outgoing email.Should now work for *all* languages.Note: The bcc address is only filled in of the account you start the e-mail from. If you change the account in header of the compose e-mail scene, the bcc address won't be changed.
 CATEGORY = Email
-VERSIONS = 2.1.0-159
+VERSIONS = 2.1.0-159 2.1.1-22 2.1.2-31
 ICON = http://www.webos-internals.org/images/2/29/Icon_WebOSInternals_Patches_Email.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org\",\

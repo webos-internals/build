@@ -4,7 +4,7 @@ TWEAKS =
 TITLE = Send Memo to Text Message
 DESCRIPTION = This adds the option to Text Message the memo that you have open.
 CATEGORY = Messaging
-VERSIONS = 1.4.5-153 2.0.0-46 2.0.1-76 2.1.0-88
+VERSIONS = 1.4.5-153 2.0.0-46 2.0.1-76 2.1.0-88 2.1.1-22 2.1.2-31
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/0/01/Other-send-memo-to-text-message-1.png\",\

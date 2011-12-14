@@ -4,7 +4,7 @@ TWEAKS =
 TITLE = Alarm Daily Options
 DESCRIPTION = This patch will add Sunday, Monday, Tuesday, Wednesday, etc. to the 'occurs' dropdown list. The alarm will ring on that day every week at the time you specify.
 CATEGORY = Clock
-VERSIONS = 2.0.0-62 2.0.1-91 2.1.0-141
+VERSIONS = 2.0.0-62 2.0.1-91 2.1.0-141 2.1.1-22 2.1.2-31
 ICON = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_Patches_Clock.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/e/e1/Clock-alarm-daily-options-1.png\",\

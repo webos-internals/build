@@ -4,7 +4,7 @@ TWEAKS =
 TITLE = Reverse number lookup GERMAN
 DESCRIPTION = This patch adds an option to the call log to do a reverse lookup of a phone number using dasoertliche.de. This patch is based in James Harris White Pages reverse lookup patch! Thanks James!
 CATEGORY = Phone
-VERSIONS = 1.4.5-157 2.1.0-100
+VERSIONS = 1.4.5-157 2.1.0-100 2.1.1-22 2.1.2-31
 ICON = http://www.webos-internals.org/images/2/2c/Icon_WebOSInternals_Patches_Phone.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/6/6b/Phone-reverse-number-lookup-german-1.png\",\

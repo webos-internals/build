@@ -4,7 +4,7 @@ TWEAKS = google-maps/${NAME}.json
 TITLE = Multilingual Google Maps
 DESCRIPTION = Changes Google Maps defaults to selected language. make sure you load the app twice for the changes to take effect
 CATEGORY = Google Maps
-VERSIONS = 2.1.0-65
+VERSIONS = 2.1.0-65 2.1.1-22 2.1.2-31
 ICON = http://www.webos-internals.org/images/f/f1/Icon_WebOSInternals_Patch_Plus.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/b/b9/Google-maps-multilingual-google-maps-1.png\",\
