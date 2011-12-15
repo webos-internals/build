@@ -2,9 +2,9 @@ NAME = $(shell basename $(shell pwd))
 PATCH = messaging/${NAME}.patch
 TWEAKS =
 TITLE = Long Chinese Messaging Notification Patch
-DESCRIPTION = Fix long Chinese messaging notification cause system hand or reboot issue.
+DESCRIPTION = Fixes the long Chinese messaging notification issue which causes a system hang or reboot.
 CATEGORY = Messaging
-VERSIONS = 1.4.5-183 2.1.0-215 2.1.1-22 2.1.2-31 2.2.0-89 2.2.3-83
+VERSIONS = 1.4.5-186 2.1.0-220 2.1.1-26 2.1.2-34 2.2.0-96 2.2.3-89 2.2.4-
 ICON = http://www.webos-internals.org/images/2/24/Icon_WebOSInternals_Patches_Messaging.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
@@ -13,5 +13,5 @@ include ../common.mk
 
 include ../modifications.mk
 
-MAINTAINER = sz911boy <support@talign.com>
-HOMEPAGE = www.talign.com
+MAINTAINER = 911boy <support@talign.com>
+HOMEPAGE = http://www.talign.com
