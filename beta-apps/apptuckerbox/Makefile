@@ -13,7 +13,16 @@ DESCRIPTION = Your Apps On Your Devices. App Tuckerbox feed access is currently 
 CHANGELOG = \
 1.0.0: First Public Release.
 SCREENSHOTS = [\
-]
+\"http://www.webos-internals.org/images/2/28/Apptuckerbox_ss1.png\",\
+\"http://www.webos-internals.org/images/f/f9/Apptuckerbox_ss2.png\",\
+\"http://www.webos-internals.org/images/c/c6/Apptuckerbox_ss3.png\",\
+\"http://www.webos-internals.org/images/3/37/Apptuckerbox_ss4.png\",\
+\"http://www.webos-internals.org/images/e/ee/Apptuckerbox_ss5.png\",\
+\"http://www.webos-internals.org/images/e/ed/Apptuckerbox_ss6.png\",\
+\"http://www.webos-internals.org/images/9/93/Apptuckerbox_ss7.png\",\
+\"http://www.webos-internals.org/images/7/7a/Apptuckerbox_ss8.png\",\
+\"http://www.webos-internals.org/images/1/1e/Apptuckerbox_ss9.png\",\
+\"http://www.webos-internals.org/images/c/cb/Apptuckerbox_ss10.png\" ]
 
 SRC_GIT = git@git.webos-internals.org:applications/apptuckerbox.git
 
