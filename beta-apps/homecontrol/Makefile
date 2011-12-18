@@ -3,7 +3,7 @@ TITLE    = Home Control
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.7.9
+VERSION  = 0.8.1
 TYPE	 = Application
 CATEGORY = Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:HomeControl
@@ -12,19 +12,8 @@ DESCRIPTION = Home Control is an universal remote control application. Currently
 MINWEBOSVERSION = 2.1.0
 MAXWEBOSVERSION = 3.9.9
 CHANGELOG = \
-0.7.9: Added new features and fixed all reported bugs.<br>\
-0.7.8: Added new features and fixed all reported bugs.<br>\
-0.7.7: Added new features and fixed all reported bugs.<br>\
-0.7.6: Added new features and fixed all reported bugs.<br>\
-0.7.5: Added new features and fixed all reported bugs.<br>\
-0.7.4: Added new features and fixed all reported bugs.<br>\
-0.7.3: Added new features and fixed all reported bugs.<br>\
-0.7.2: Added new features and fixed all reported bugs.<br>\
-0.7.1: Added new features and fixed all reported bugs.<br>\
-0.7.0: Again added new features and cleaned up the code.<br>\
-0.6.0: Added lots of new features.<br>\
-0.5.1: Fixed the beta release.<br>\
-0.5.0: Initial beta release.
+0.8.1: Small user interface fixes and small feature additions.<br>\
+0.8.0: First public release.
 
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/f/fa/Home_control.png\" ]
