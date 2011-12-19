@@ -3,7 +3,7 @@ TITLE	 = App Tuckerbox
 APP_ID   = com.apptuckerbox.register
 SIGNER   = com.apptuckerbox
 BLDFLAGS = -p
-VERSION  = 1.0.0
+VERSION  = 1.0.1
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.apptuckerbox.com
@@ -11,6 +11,7 @@ ICON	 = http://www.webos-internals.org/images/6/65/Icon_Swagman.png
 MINWEBOSVERSION = 1.4.0
 DESCRIPTION = Your Apps On Your Devices. App Tuckerbox feed access is currently only available to qualified beta testers. If you have purchased at least 50 apps you receive automatic qualification. Please ensure your system clock is correct before attempting to register.
 CHANGELOG = \
+1.0.1: Fixed https certificate installation on webOS 1.4.5 devices which was preventing registration.<br>\
 1.0.0: First Public Release.
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/2/28/Apptuckerbox_ss1.png\",\
