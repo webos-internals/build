@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = A-1 Skyraider (Pre3)
 DEVICE = pre3
 CATEGORY = Beta
-VERSIONS = 2.2.0-30 2.2.3-30
+VERSIONS = 2.2.0-30 2.2.3-30 2.2.4-30
 APPINFO_DESCRIPTION = The latest beta kernel from uNiXpSyChO.<br><br>\
 Features:<br> * 1.9GHz<br> * Screenstate<br> * Lagfree<br> * ondemand-ng<br> * SIO and V(R)<br> * CIFS, NFS, iSCSI, ATA over Ethernet<br> * More to come...<br><br>\
 For more information, visit ${HOMEPAGE}<br>
