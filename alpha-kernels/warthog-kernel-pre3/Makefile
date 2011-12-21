@@ -15,13 +15,17 @@ Current additions include:<ul>\
 <li>ext4, CIFS & NFS support</li>\
 <li>iSCSI & ATA over Ethernet network protocol support</li>\
 <li>Top speed of 2.016GHz. Frequencies under 1.401GHz have been undervolted</li>\
+<li>Backported Proportional Rate Reduction for TCP (PRR)</li>\
 <li>Backported TinyRCU</li>\
+<li>Backported TCP slow start boost to 10</li>\
+<li>Lagfree CPU gov (ported by uNiXpSyChO)</li>\
+<li>CPU voltage override by uNiXpSyChO</li>\
 </ul><br>\
 All additions are disabled by default, and must be enabled by using the Govnah application.<br>\
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-39", "log" : [ "Backported TinyRCU. SHA1 update. Compcache update" ] }, \
+{ "version" : "${WEBOS_VERSION}-39", "log" : [ "Backported TinyRCU. SHA1 update. Compcache update. Lagfree gov" ] }, \
 { "version" : "${WEBOS_VERSION}-35", "log" : [ "Backport PRR from Linux 3.2" ] }, \
 { "version" : "${WEBOS_VERSION}-26", "log" : [ "Overclock, undervolt. Ext4, CIFS, NFS, iSCSI & ATA over Ethernet" ] }, \
 { "version" : "${WEBOS_VERSION}-10", "log" : [ "Use Westwood TCP congest algo. slowstart fix" ] }, \
@@ -30,7 +34,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-1", "log" : [ "Initial version" ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-39: Backported TinyRCU. SHA1 update. Compcache update<br>\
+${WEBOS_VERSION}-39: Backported TinyRCU. SHA1 update. Compcache update. Lagfree gov<br>\
 ${WEBOS_VERSION}-35: Backport PRR from Linux 3.2<br>\
 ${WEBOS_VERSION}-26: Overclock, undervolt. Ext4, CIFS, NFS, iSCSI & ATA over Ethernet<br>\
 ${WEBOS_VERSION}-10: Use Westwood TCP congest algo. slowstart fix<br>\
