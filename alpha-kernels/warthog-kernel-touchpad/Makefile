@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (TouchPad)
 DEVICE = touchpad
 CATEGORY = Alpha
-VERSIONS = 3.0.4-91 3.0.5-91
+VERSIONS = 3.0.4-96 3.0.5-96
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A collection of highly experimental kernel improvements for the HP TouchPad, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
@@ -17,7 +17,7 @@ Current additions include:<ul>\
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br><br>
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-91", "log" : [ "Backport PRR from Linux 3.2" ] }, \
+{ "version" : "${WEBOS_VERSION}-96", "log" : [ "Backport PRR from Linux 3.2. SHA1 update" ] }, \
 { "version" : "${WEBOS_VERSION}-88", "log" : [ "Added EXT4, iSCSI and ATA over Ethernet support" ] }, \
 { "version" : "${WEBOS_VERSION}-86", "log" : [ "Use Westwood TCP congest algo. slowstart fix" ] }, \
 { "version" : "${WEBOS_VERSION}-68", "log" : [ "300Hz clock. memcpy. TMC fix. NFS & CIFS" ] }, \
@@ -29,7 +29,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-3", "log" : [ "Initial version" ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-91: Backport PRR from Linux 3.2<br>\
+${WEBOS_VERSION}-96: Backport PRR from Linux 3.2. SHA1 update<br>\
 ${WEBOS_VERSION}-88: Added EXT4, iSCSI and ATA over Ethernet support<br>\
 ${WEBOS_VERSION}-86: Use Westwood TCP congest algo. slowstart fix<br>\
 ${WEBOS_VERSION}-68: 300Hz clock. memcpy. TMC fix. NFS & CIFS<br>\
@@ -46,7 +46,9 @@ KERNEL_PATCHES = makefiletune/armMakefile.diff \
 		 defconfig/defconfig-nodebug-touchpad.patch \
 		 compcache/lowmemnotify-total-memory.patch \
 		 warthogbuild/tp-overclock.patch \
+		 psychobuild/override.patch \
 		 warthogbuild/net-prr.patch \
+		 warthogbuild/sha1.patch \
 		 bfq/bfq-iosched.patch \
 		 warthogbuild/tp-tickskew.patch \
 		 warthogbuild/tp-300hz.patch \
@@ -61,7 +63,6 @@ KERNEL_PATCHES = makefiletune/armMakefile.diff \
 		 filesystems/iscsi.patch filesystems/ataoe.patch \
 		 warthogbuild/ident-touchpad.patch
 
-#		 defconfig/defconfig-nodebug-touchpad.patch \
 #		 warthogbuild/defconfig-slim-touchpad.patch \
 #
 #		 psychobuild/override.patch \
