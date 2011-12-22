@@ -56,6 +56,14 @@ ${DOCTOR_DIR}/webosdoctor-2.1.0.jar:
 	  curl -L -o $@ http://palm.cdnetworks.net/rom/preplus/p210r0d02212011/eudep210rod/webosdoctorp101ueude-wr.jar; \
 	fi
 
+${DOCTOR_DIR}/webosdoctor-2.1.1.jar:
+	mkdir -p ${DOCTOR_DIR}
+	if [ -e ${DOCTOR_DIR}/webosdoctorp160una-wr-2.1.1.jar ] ; then \
+	  ln -s webosdoctorp160una-wr-2.1.1.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/veer/p211r0d06292011/wrp211rod/webosdoctorp160unawr.jar; \
+	fi
+
 ${DOCTOR_DIR}/webosdoctor-2.1.2.jar:
 	mkdir -p ${DOCTOR_DIR}
 	if [ -e ${DOCTOR_DIR}/webosdoctorp160unaatt-2.1.2.jar ] ; then \
@@ -78,6 +86,14 @@ ${DOCTOR_DIR}/webosdoctor-2.2.3.jar:
 	  ln -s webosdoctorp223mantaatt-2.2.3.jar $@ ; \
 	else \
 	  curl -L -o $@ http://palm.cdnetworks.net/rom/manta/p223r0d09272011/wdmantaatt/webosdoctorp223mantaatt.jar; \
+	fi
+
+${DOCTOR_DIR}/webosdoctor-2.2.4.jar:
+	mkdir -p ${DOCTOR_DIR}
+	if [ -e ${DOCTOR_DIR}/webosdoctorp224pre2-wr-2.2.4.jar ] ; then \
+	  ln -s webosdoctorp224pre2-wr-2.2.4.jar $@ ; \
+	else \
+	  curl -L -o $@ http://palm.cdnetworks.net/rom/pre2/p224rod12052011/wrep224rod/webosdoctorp224pre2wr.jar; \
 	fi
 
 ${DOCTOR_DIR}/webosdoctor-3.0.0.jar:

@@ -3,7 +3,7 @@ PATCH = clock/${NAME}.patch
 TITLE = Unhide Time Details
 DESCRIPTION = There is a hidden webos 2.1 app called Time Details. The app itself compares your network time with your device time. It only displays the information, nothing else.
 CATEGORY = Clock
-VERSIONS = 2.1.0-63
+VERSIONS = 2.1.0-63 2.1.1-22 2.1.2-31
 ICON = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_Patches_Clock.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/3/36/Clock-unhide-time-details-1.png\",\

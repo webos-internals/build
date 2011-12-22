@@ -15,7 +15,7 @@ WEBOS_VERSIONS = 1.4.5
 KERNEL_VERSION = 2.6.24
 endif
 ifeq ("${DEVICE}","pre2")
-WEBOS_VERSIONS = 2.1.0
+WEBOS_VERSIONS = 2.1.0 2.2.4
 KERNEL_VERSION = 2.6.24
 endif
 ifeq ("${DEVICE}","veer")
@@ -126,6 +126,9 @@ WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp103ueu-wr-${WEBOS_VERSION}.jar
 endif
 ifeq ("${WEBOS_VERSION}", "2.1.0")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp103ueuna-wr-${WEBOS_VERSION}.jar
+endif
+ifeq ("${WEBOS_VERSION}", "2.2.4")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp224pre2-wr-${WEBOS_VERSION}.jar
 endif
 endif
 ifeq ("${DEVICE}","pre3")
@@ -246,14 +249,20 @@ endif
 endif
 
 ifeq ("${WEBOS_VERSION}", "2.2.4")
+ifeq ("${DEVICE}","pre2")
+COMPATIBLE_VERSIONS = 2.2.4
+KERNEL_SOURCE = 
+KERNEL_PATCH  = 
+KERNEL_SUBMISSION = 
+endif
 ifeq ("${DEVICE}","pre3")
 COMPATIBLE_VERSIONS = 2.2.4
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.2.3/linuxkernel-${KERNEL_VERSION}.tar.gz
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/2.2.3/linuxkernel-${KERNEL_VERSION}.patch.tar.gz
 KERNEL_SUBMISSION = kernelpatches-2.2.3.txt
+endif
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
-endif
 endif
 
 ifeq ("${WEBOS_VERSION}", "3.0.0")
@@ -464,6 +473,7 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 	fi
 	touch $@
 
+ifeq ("${DEVICE}","pre3")
 # Special case for 2.2.4 based on 2.2.3 kernel source
 build/.unpacked-2.2.4-%: ${DL_DIR}/linux-${KERNEL_VERSION}-2.2.3-${DEVICE}.tar.gz \
 			    ${DL_DIR}/${NAME}-2.2.4-%.tar.gz
@@ -477,7 +487,9 @@ build/.unpacked-2.2.4-%: ${DL_DIR}/linux-${KERNEL_VERSION}-2.2.3-${DEVICE}.tar.g
 		patch -d build/src-2.2.4-$*/linux-${KERNEL_VERSION} -p1 ; \
 	fi
 	touch $@
+endif
 
+ifeq ("${DEVICE}","touchpad")
 # Special case for 3.0.5 based on 3.0.4 kernel source
 build/.unpacked-3.0.5-%: ${DL_DIR}/linux-${KERNEL_VERSION}-3.0.4-${DEVICE}.tar.gz \
 			    ${DL_DIR}/${NAME}-3.0.5-%.tar.gz
@@ -491,6 +503,7 @@ build/.unpacked-3.0.5-%: ${DL_DIR}/linux-${KERNEL_VERSION}-3.0.4-${DEVICE}.tar.g
 		patch -d build/src-3.0.5-$*/linux-${KERNEL_VERSION} -p1 ; \
 	fi
 	touch $@
+endif
 
 build/.unpacked-%: ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz \
 			    ${DL_DIR}/${NAME}-%.tar.gz

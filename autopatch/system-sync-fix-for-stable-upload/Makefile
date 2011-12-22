@@ -4,7 +4,7 @@ TWEAKS =
 TITLE = Sync Fix for Stable Upload
 DESCRIPTION = Auto sync will now retry uploading new/updated account data (contacts, calendar etc) in next sync, after previous failure due to reasons like network timeout or something
 CATEGORY = System
-VERSIONS = 2.1.0-210 2.2.0-86 2.2.3-80 3.0.2-77 3.0.4-41
+VERSIONS = 2.1.0-219 2.1.1-22 2.1.2-31 2.2.0-100 2.2.3-93 2.2.4-4 3.0.2-84 3.0.4-47
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
@@ -14,4 +14,4 @@ include ../common.mk
 include ../modifications.mk
 
 MAINTAINER = moo <moo.tinys@gmail.com>
-HOMEPAGE =
+HOMEPAGE = http://www.treo8.com/bbs/thread-272398-1-1.html

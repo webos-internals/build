@@ -4,7 +4,7 @@ TWEAKS = camera/${NAME}.json
 TITLE = Self-Timer and Burst Frames
 DESCRIPTION = Adds self-timer and burst-frames to the camera.
 CATEGORY = Camera
-VERSIONS = 2.1.0-117
+VERSIONS = 2.1.0-117 2.1.1-24 2.1.2-32
 ICON = http://www.webos-internals.org/images/2/2f/Icon_WebOSInternals_Patches_Plus_Camera.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org\",\

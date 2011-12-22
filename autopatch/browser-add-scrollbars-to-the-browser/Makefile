@@ -4,7 +4,7 @@ TWEAKS =
 TITLE = Add Scrollbars to the Browser
 DESCRIPTION = Adds (to the browser) horizontal and vertical scrollbars that looks like the iOS' scrollbars.
 CATEGORY = Browser
-VERSIONS = 2.1.0-213 2.2.0-88 2.2.3-82
+VERSIONS = 2.1.0-222 2.1.1-29 2.1.2-37 2.2.0-99 2.2.3-92 2.2.4-3
 ICON = http://www.webos-internals.org/images/4/4a/Icon_WebOSInternals_Patches_Browser.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org\",\
