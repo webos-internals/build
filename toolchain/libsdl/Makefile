@@ -57,6 +57,19 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	  ./configure \
 	  	--host=${CONFIGURE_HOST_$*} \
 		--disable-static \
+		--disable-video-x11 \
+		--disable-arts \
+		--disable-oss \
+		--disable-assembly \
+		--disable-esd \
+		--disable-nas \
+		--disable-diskaudio \
+		--disable-dummyaudio \
+		--disable-mintaudio \
+		--disable-nasm \
+		--disable-altivec \
+		--disable-ipod \
+		--disable-pth \
 		--enable-shared ;\
 	  ${MAKE} clean all )
 	mkdir -p build/$*/usr/include/SDL
