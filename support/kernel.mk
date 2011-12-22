@@ -139,7 +139,7 @@ ifeq ("${WEBOS_VERSION}", "2.2.3")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp223mantaatt-${WEBOS_VERSION}.jar
 endif
 ifeq ("${WEBOS_VERSION}", "2.2.4")
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp223mantaatt-2.2.3.jar
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp224manta-wr-${WEBOS_VERSION}.jar
 endif
 endif
 ifeq ("${DEVICE}","veer")
@@ -251,15 +251,15 @@ endif
 ifeq ("${WEBOS_VERSION}", "2.2.4")
 ifeq ("${DEVICE}","pre2")
 COMPATIBLE_VERSIONS = 2.2.4
-KERNEL_SOURCE = 
-KERNEL_PATCH  = 
-KERNEL_SUBMISSION = 
+KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tar.gz
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/kernelpatch-${WEBOS_VERSION}-${DEVICE}.tgz
+KERNEL_SUBMISSION = kernel-${WEBOS_VERSION}.txt
 endif
 ifeq ("${DEVICE}","pre3")
 COMPATIBLE_VERSIONS = 2.2.4
-KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.2.3/linuxkernel-${KERNEL_VERSION}.tar.gz
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/2.2.3/linuxkernel-${KERNEL_VERSION}.patch.tar.gz
-KERNEL_SUBMISSION = kernelpatches-2.2.3.txt
+KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tar.gz
+KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/kernelpatch-${WEBOS_VERSION}-${DEVICE}.tgz
+KERNEL_SUBMISSION = kernel-${WEBOS_VERSION}.txt
 endif
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
@@ -472,22 +472,6 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 			 build/arm/usr/palm/applications/${APP_ID}/additional_files/var/palm/event.d/${UPSTART_SCRIPT} ; \
 	fi
 	touch $@
-
-ifeq ("${DEVICE}","pre3")
-# Special case for 2.2.4 based on 2.2.3 kernel source
-build/.unpacked-2.2.4-%: ${DL_DIR}/linux-${KERNEL_VERSION}-2.2.3-${DEVICE}.tar.gz \
-			    ${DL_DIR}/${NAME}-2.2.4-%.tar.gz
-	rm -rf build/src-2.2.4-$*
-	mkdir -p build/src-2.2.4-$*/patches
-	${TAR} -C build/src-2.2.4-$* -zxf ${DL_DIR}/linux-${KERNEL_VERSION}-2.2.3-${DEVICE}.tar.gz
-	${TAR} -C build/src-2.2.4-$*/patches -zxf ${DL_DIR}/${NAME}-2.2.4-$*.tar.gz
-	if [ -n "${KERNEL_PATCHES}" ] ; then \
-	  ( cd build/src-2.2.4-$*/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
-	  ( cd build/src-2.2.4-$*/patches ; cat ${KERNEL_PATCHES} ) | \
-		patch -d build/src-2.2.4-$*/linux-${KERNEL_VERSION} -p1 ; \
-	fi
-	touch $@
-endif
 
 ifeq ("${DEVICE}","touchpad")
 # Special case for 3.0.5 based on 3.0.4 kernel source
