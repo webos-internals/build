@@ -44,8 +44,10 @@ In no event will WebOS Internals or any other party be liable to you for damages
 
 ifeq ($(shell uname -s),Darwin)
 TAR	= gnutar
+ZCAT	= gzcat
 else
 TAR	= tar
+ZCAT	= zcat
 endif
 
 PREWARE_SANITY =
@@ -510,7 +512,7 @@ ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz: \
 	rm -rf build/src-${VERSION}
 	mkdir -p build/src-${VERSION}
 	${TAR} -C build/src-${VERSION} -zxf ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz
-	gzcat ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz | \
+	${ZCAT} ${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-patch-${DEVICE}.gz | \
 		patch -d build/src-${VERSION}/linux-${KERNEL_VERSION} -p1 
 	yes '' | \
 	${MAKE} -C build/src-${VERSION}/linux-${KERNEL_VERSION} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_arm} \
