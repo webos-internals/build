@@ -2,12 +2,13 @@ NAME = $(shell basename $(shell pwd))
 TITLE = A-1 Skyraider (Pre3)
 DEVICE = pre3
 CATEGORY = Beta
-VERSIONS = 2.2.0-30 2.2.3-30 2.2.4-30
+VERSIONS = 2.2.0-42 2.2.3-42 2.2.4-42
 APPINFO_DESCRIPTION = The latest beta kernel from uNiXpSyChO.<br><br>\
 Features:<br> * 1.9GHz<br> * Screenstate<br> * Lagfree<br> * ondemand-ng<br> * SIO and V(R)<br> * CIFS, NFS, iSCSI, ATA over Ethernet<br> * More to come...<br><br>\
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-30", "log" : [ "add SmartassV2 gov." ] }, \
 { "version" : "${WEBOS_VERSION}-30", "log" : [ "add lagfree gov." ] }, \
 { "version" : "${WEBOS_VERSION}-23", "log" : [ "fix sysfs hang on vdd set. round off vdd and make sure it is multiple of 25mV." ] }, \
 { "version" : "${WEBOS_VERSION}-21", "log" : [ "keep ondemandtcl name" ] }, \
@@ -19,6 +20,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-12", "log" : [ "Initial release" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-30: add SmartassV2 gov.<br> \
 ${WEBOS_VERSION}-30: add lagfree gov.<br> \
 ${WEBOS_VERSION}-23: fix sysfs hang on vdd set. round off vdd and make sure it is multiple of 25mV.<br> \
 ${WEBOS_VERSION}-21: keep ondemandtcl name<br> \
@@ -43,7 +45,8 @@ KERNEL_PATCHES = identification/mkcompile_h.patch \
 		 psychobuild/memcpy.patch \
 		 psychobuild/tmc_mem.patch \
 		 psychobuild/override.patch \
-		 psychobuild/gov_bundle.patch \
+		 psychobuild/gov_bundle2.patch \
+		 compcache/compcache.patch \
 		 psychobuild/ondemand-ng.patch
 
 EXTERNAL_MODULES = compcache/compcache-1.0.0
