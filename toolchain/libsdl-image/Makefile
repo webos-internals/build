@@ -1,8 +1,8 @@
-NAME     = libsdl-ttf
-TITLE    = libsdl-ttf
+NAME     = libsdl-image
+TITLE    = libsdl-image
 APP_ID   = org.webosinternals.toolchain.${NAME}
 SRC_VER  = 1.2
-VERSION  = 1.2-1
+VERSION  = 1.2
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 
 SRC_TGZ = http://palm.cdnetworks.net/opensource/1.3.5/${NAME}-${SRC_VER}.tgz
@@ -51,11 +51,10 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	( cd build/src ; \
 	  CC=${CROSS_COMPILE_$*}gcc \
-	  CFLAGS="-I${STAGING_DIR_$*}/usr/include -I${STAGING_DIR_$*}/usr/include/SDL -I${STAGING_DIR_$*}/usr/include/freetype2 -DPALM=1" \
+	  CFLAGS="-I${STAGING_DIR_$*}/usr/include -I${STAGING_DIR_$*}/usr/include/SDL -DPALM=1" \
 	  LDFLAGS="-Wl,--allow-shlib-undefined -L${STAGING_DIR_$*}/usr/lib -lSDL" \
 	  ./configure \
 	  	--host=${CONFIGURE_HOST_$*} \
-		--with-freetype-prefix=${STAGING_DIR_$*}/usr/include/freetype2 \
 		--with-sdl-prefix=${STAGING_DIR_$*}/usr/include/SDL \
 		--disable-sdltest \
 		--disable-static \
