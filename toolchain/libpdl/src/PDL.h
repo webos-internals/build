@@ -21,6 +21,10 @@
 #ifndef LIBPDL_H_
 #define LIBPDL_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "SDL.h"
 
 typedef SDLKey      PDL_key;
@@ -199,5 +203,9 @@ PDL_Err PDL_Vibrate(int periodMS, int durationMS);
 PDL_Err PDL_EnableCompass(PDL_bool activate);
 PDL_Err PDL_GetCompass(PDL_Compass *compass);
 PDL_Err PDL_SetKeyboardState(PDL_bool bVisible);
+    
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* LIBPDL_H_ */
