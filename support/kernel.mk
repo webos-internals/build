@@ -251,13 +251,15 @@ endif
 ifeq ("${WEBOS_VERSION}", "2.2.4")
 ifeq ("${DEVICE}","pre2")
 COMPATIBLE_VERSIONS = 2.2.4
-KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tar.gz
+# KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tar.gz
+KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.1.0/linuxkernel-${KERNEL_VERSION}.tar.gz
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/kernelpatch-${WEBOS_VERSION}-${DEVICE}.tgz
 KERNEL_SUBMISSION = kernel-${WEBOS_VERSION}.txt
 endif
 ifeq ("${DEVICE}","pre3")
 COMPATIBLE_VERSIONS = 2.2.4
-KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tar.gz
+# KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tar.gz
+KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.2.3/linuxkernel-${KERNEL_VERSION}.tar.gz
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/kernelpatch-${WEBOS_VERSION}-${DEVICE}.tgz
 KERNEL_SUBMISSION = kernel-${WEBOS_VERSION}.txt
 endif
