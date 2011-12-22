@@ -1,7 +1,7 @@
 NAME = $(shell basename $(shell pwd))
 PATCH = advanced/${NAME}.patch
 TITLE = Advanced System Prefs - Framework - LEGACY
-DESCRIPTION = NOTE: This is for older versions of WebOS 2.1.0, for most WebOS 2.1.0 versions you need the non LEGACY version of this patch.<br/><br/>Adds support for per contact and unknown contacts notification settings. This patch is required by all of the system prefs patches.
+DESCRIPTION = NOTE: This is for older versions of WebOS 2.1.0, for most WebOS versions you need the non LEGACY version of this patch.<br/><br/>Adds support for per contact and unknown contacts notification settings. This patch is required by all of the system prefs patches.
 CATEGORY = Advanced
 VERSIONS = 2.1.0-90
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
