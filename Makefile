@@ -213,12 +213,10 @@ toolchain: toolchain/ipkg-utils/ipkg-make-index \
 	   staging/usr/include/openssl/crypto.h \
 	   staging/usr/include/curl/curl.h \
 	   sdl
-
 	   #staging/usr/include/fuse/fuse.h
 
 
-sdl:	staging/usr/include/ltdl.h \
-		staging/usr/include/gdbm/gdbm.h \
+sdl:	staging/usr/include/gdbm/gdbm.h \
 		staging/usr/include/alsa/alsa-symbols.h \
 		staging/usr/include/sndfile.h \
 		staging/usr/include/samplerate.h \
@@ -232,7 +230,8 @@ sdl:	staging/usr/include/ltdl.h \
 		staging/usr/include/SDL/SDL_ttf.h \
 		staging/usr/include/GLES/gl.h
 
-#		staging/usr/include/pulse/pulseaudio.h
+		# staging/usr/include/ltdl.h
+		# staging/usr/include/pulse/pulseaudio.h
 
 toolchain/cs09q1armel/build/arm-2009q1:
 	${MAKE} -C toolchain/cs09q1armel unpack
