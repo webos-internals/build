@@ -8,6 +8,8 @@ PATCH_LOG_FILE=/media/internal/webos-patches.log
 PATCH_CONTROL_DIR=/var/usr/lib/.webosinternals.patches
 PATCH_PACKAGES_LIST=/media/internal/.webosinternals.patches.packages
 
+TWEAKS_PREFERENCES_DIR=/media/cryptofs/apps/usr/palm/services/org.webosinternals.tweaks.prefs/preferences
+
 if [ ! -e ${PATCH_LOG_FILE} ]; then
   echo "******* Patch Log Created by EPR $(date) ************" > ${PATCH_LOG_FILE}
 fi
@@ -168,6 +170,16 @@ if [ -e ${PATCH_CONTROL_DIR}/file_list ]; then
       FAILED_LIST="${FAILED_LIST} ${file}"
     fi
   done < ${PATCH_CONTROL_DIR}/file_list
+fi
+
+if [ -d ${TWEAKS_PREFERENCES_DIR} ]; then
+  echo "" >> ${PATCH_LOG_FILE}
+  echo "------------------------------------------------------" >> ${PATCH_LOG_FILE}
+  echo "Cleaning tweaks preferences directory" >> ${PATCH_LOG_FILE}
+  echo "------------------------------------------------------" >> ${PATCH_LOG_FILE}
+  echo "" >> ${PATCH_LOG_FILE}
+
+  rm -f ${TWEAKS_PREFERENCES_DIR}/* >/dev/null 2>&1
 fi
 
 echo "" >>${PATCH_LOG_FILE}
