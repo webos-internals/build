@@ -2,10 +2,9 @@ NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (Pre3)
 DEVICE = pre3
 CATEGORY = Stable
-VERSIONS = 2.2.0-38 2.2.3-38 2.2.4-38
+VERSIONS = 2.2.4-38
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the Palm Pre3, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
-This package is compatible only with webOS 2.2.0 build 3171 or webOS 2.2.3 - if you have a webOS 2.2.0 device with a different build number, you will need to doctor it before installing this package.<br>\
 Current additions include:<ul>\
 <li>New 1.9 GHz overclocking support, including voltage selection, ported to the Pre 3 by uNiXpSyChO.</li>\
 <li>All standard Linux 2.6.32 <a href=http://www.ibm.com/developerworks/linux/library/l-cpufreq-1/index.html>cpufreq governors</a> made available for selection.</li>\
