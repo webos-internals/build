@@ -212,8 +212,10 @@ toolchain: toolchain/ipkg-utils/ipkg-make-index \
 	   staging/usr/include/zlib.h \
 	   staging/usr/include/openssl/crypto.h \
 	   staging/usr/include/curl/curl.h \
-	   sdl \
+	   sdl
+
 	   #staging/usr/include/fuse/fuse.h
+
 
 sdl:	staging/usr/include/ltdl.h \
 		staging/usr/include/gdbm/gdbm.h \
@@ -224,12 +226,13 @@ sdl:	staging/usr/include/ltdl.h \
 		staging/usr/include/ogg/ogg.h \
 		staging/usr/include/speex/speex.h \
 		staging/usr/include/liboil/liboil.h \
-		staging/usr/include/pulse/pulseaudio.h \
 		staging/usr/include/freetype2/ft2build.h \
 		staging/usr/include/SDL/SDL.h \
 		staging/usr/include/SDL/SDL_image.h \
 		staging/usr/include/SDL/SDL_ttf.h \
-		staging/usr/include/GLES/gl.h \
+		staging/usr/include/GLES/gl.h
+
+#		staging/usr/include/pulse/pulseaudio.h
 
 toolchain/cs09q1armel/build/arm-2009q1:
 	${MAKE} -C toolchain/cs09q1armel unpack
@@ -245,37 +248,37 @@ staging/usr/include/GLES/gl.h:
 
 staging/usr/include/sndfile.h:
 	${MAKE} -C toolchain/libsndfile stage
-	
+
 staging/usr/include/samplerate.h:
 	${MAKE} -C toolchain/libsamplerate stage
 
 staging/usr/include/glibconfig.h:
 	${MAKE} -C toolchain/glib stage
-	
+
 staging/usr/include/speex/speex.h:
 	${MAKE} -C toolchain/libspeex stage
-	
+
 staging/usr/include/ogg/ogg.h:
 	${MAKE} -C toolchain/libogg stage
 
 staging/usr/include/liboil/liboil.h:
 	${MAKE} -C toolchain/liboil stage
-	
+
 staging/usr/include/pulse/pulseaudio.h:
 	${MAKE} -C toolchain/pulseaudio stage
-	
+
 staging/usr/include/SDL/SDL.h:
 	${MAKE} -C toolchain/libsdl stage
-	
+
 staging/usr/include/freetype2/ft2build.h:
 	${MAKE} -C toolchain/freetype stage
-	
+
 staging/usr/include/SDL/SDL_image.h :
 	${MAKE} -C toolchain/libsdl-image stage
-	
+
 staging/usr/include/SDL/SDL_ttf.h :
 	${MAKE} -C toolchain/libsdl-ttf stage
-	
+
 staging/usr/include/alsa/alsa-symbols.h:
 	${MAKE} -C toolchain/alsa-lib stage
 
