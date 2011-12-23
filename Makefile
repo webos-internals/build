@@ -217,7 +217,6 @@ toolchain: toolchain/ipkg-utils/ipkg-make-index \
 
 
 sdl:	staging/usr/include/gdbm/gdbm.h \
-		staging/usr/include/sndfile.h \
 		staging/usr/include/samplerate.h \
 		staging/usr/include/glibconfig.h \
 		staging/usr/include/ogg/ogg.h \
@@ -229,6 +228,7 @@ sdl:	staging/usr/include/gdbm/gdbm.h \
 		staging/usr/include/SDL/SDL_ttf.h \
 		staging/usr/include/GLES/gl.h
 
+		# staging/usr/include/sndfile.h
 		# staging/usr/include/alsa/alsa-symbols.h
 		# staging/usr/include/ltdl.h
 		# staging/usr/include/pulse/pulseaudio.h
