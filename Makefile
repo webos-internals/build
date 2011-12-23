@@ -212,10 +212,10 @@ toolchain: toolchain/ipkg-utils/ipkg-make-index \
 	   staging/usr/include/zlib.h \
 	   staging/usr/include/openssl/crypto.h \
 	   staging/usr/include/curl/curl.h \
+	   sdl \
 	   #staging/usr/include/fuse/fuse.h
 
-sdl:	toolchain \
-		staging/usr/include/ltdl.h \
+sdl:	staging/usr/include/ltdl.h \
 		staging/usr/include/gdbm/gdbm.h \
 		staging/usr/include/alsa/alsa-symbols.h \
 		staging/usr/include/sndfile.h \
