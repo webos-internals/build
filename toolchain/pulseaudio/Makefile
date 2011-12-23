@@ -55,6 +55,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	  ./configure \
 	  	--host=${CONFIGURE_HOST_$*} \
 		--enable-ltdl-install=no \
+		--without-x \
 		--disable-rpath \
 		--disable-static \
 		--disable-dbus \

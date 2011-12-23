@@ -42,16 +42,18 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 .PHONY: build
 build: build/.built-${VERSION}
 
-build/.built-${VERSION}: build/armv7.built-${VERSION} #build/armv6.built-${VERSION} build/i686.built-${VERSION}
+build/.built-${VERSION}: build/armv7.built-${VERSION} build/armv6.built-${VERSION} build/i686.built-${VERSION}
 	touch $@
 
 include ../../support/cross-compile.mk
+
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	( cd build/src ; \
 	  CC=${CROSS_COMPILE_$*}gcc \
-	  CFLAGS="-I${STAGING_DIR_$*}/usr/include -I${STAGING_DIR_$*}/usr/include/SDL -I${STAGING_DIR_$*}/usr/include/freetype2 -DPALM=1" \
+	  CFLAGS="-I${STAGING_DIR_$*}/usr/include -I${STAGING_DIR_$*}/usr/include/SDL -I${STAGING_DIR_$*}/usr/include/freetype2 -D_GNU_SOURCE -DPALM=1" \
 	  LDFLAGS="-Wl,--allow-shlib-undefined -L${STAGING_DIR_$*}/usr/lib -lSDL" \
 	  ./configure \
 	  	--host=${CONFIGURE_HOST_$*} \
@@ -59,6 +61,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--with-sdl-prefix=${STAGING_DIR_$*}/usr/include/SDL \
 		--disable-sdltest \
 		--disable-static \
+		--without-x \
 		--enable-shared ;\
 	  ${MAKE} clean all )
 	mkdir -p build/$*/usr/include/SDL

@@ -1,5 +1,5 @@
-NAME     = GLES
-TITLE    = GLES
+NAME     = libGLES_CM
+TITLE    = libGLES_CM
 APP_ID   = org.webosinternals.toolchain.${NAME}
 VERSION  = 1.0
 MAINTAINER = WebOS Internals <support@webos-internals.org>
@@ -16,8 +16,10 @@ build/.staged-${VERSION}: build/armv7.staged-${VERSION} build/armv6.staged-${VER
 	touch $@
 
 build/%.staged-${VERSION} : build/%.built-${VERSION}
-	mkdir -p ../../staging/$*/usr/include/GLES
-	cp -rp src/* ../../staging/$*/usr/include/GLES
+	mkdir -p ../../staging/$*/usr/include
+	cp -rp build/$*/usr/include/* ../../staging/$*/usr/include/
+	mkdir -p ../../staging/$*/usr/lib
+	cp -rp build/$*/usr/lib/* ../../staging/$*/usr/lib/
 	touch $@
 
 include ../../support/cross-compile.mk
@@ -26,7 +28,9 @@ include ../../support/cross-compile.mk
 unpack: build/.unpacked-${VERSION}
 
 build/.unpacked-${VERSION}:
-	mkdir build
+	rm -rf build
+	mkdir -p build/armv6 build/armv7 build/i686
+	cp -rip src build/src
 	touch $@
 
 .PHONY: build
@@ -36,6 +40,13 @@ build/.built-${VERSION}: build/armv7.built-${VERSION} build/armv6.built-${VERSIO
 	touch $@
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
+	rm -rf build/$*
+	( cd build/src ; \
+	  ${MAKE} CC=${CROSS_COMPILE_$*}gcc clobber ${NAME}.so )
+	mkdir -p build/$*/usr/include/GLES
+	cp build/src/*.h build/$*/usr/include/GLES
+	mkdir -p build/$*/usr/lib
+	install -m 755 build/src/libGLES_CM.so build/$*/usr/lib/
 	touch $@
 
 clobber::
