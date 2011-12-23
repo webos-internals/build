@@ -11,3 +11,7 @@ zips
 *.swo
 *.tmp
 .DS_Store
+*.so
+*.o
+*.a
+*.la
