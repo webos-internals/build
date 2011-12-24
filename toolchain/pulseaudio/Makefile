@@ -56,7 +56,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	  LIBSPEEX_CFLAGS="-I${STAGING_DIR_$*}/usr/include/speex" \
 	  LIBOIL_CFLAGS="-I${STAGING_DIR_$*}/usr/include/liboil" \
 	  LIBOIL_LIBS="-L${STAGING_DIR_$*}/usr/lib -loil-0.3" \
-	  CFLAGS="-I${STAGING_DIR_$*}/usr/include -I${STAGING_DIR_$*}/usr/include/gdbm -I${STAGING_DIR_$*}/usr/include/alsa" \
+	  CFLAGS="-I${STAGING_DIR_$*}/usr/include -I${STAGING_DIR_$*}/usr/include/gdbm -I${STAGING_DIR_$*}/usr/include/alsa -I${STAGING_DIR_$*}/usr/include/speex -I${STAGING_DIR_$*}/usr/include/liboil" \
 	  LDFLAGS="-Wl,-rpath-link,${STAGING_DIR_$*}/usr/lib -L${STAGING_DIR_$*}/usr/lib" \
 	  ./configure \
 	  	--host=${CONFIGURE_HOST_$*} \
