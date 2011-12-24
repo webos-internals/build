@@ -61,7 +61,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--disable-flac ; \
 	  ${MAKE} -j1 clean all )
 	mkdir -p build/$*/usr/include
-	install -m 644 build/src/src/sndfile.h build/$*/usr/include/
+	cp build/src/src/sndfile.h build/$*/usr/include/
 	mkdir -p build/$*/usr/lib
 	install -m 755 build/src/src/.libs/*.so* build/$*/usr/lib/
 	touch $@
