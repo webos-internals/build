@@ -2,7 +2,7 @@ NAME     = libtool
 TITLE    = libtool
 APP_ID   = org.webosinternals.toolchain.${NAME}
 SRC_VER  = 1.5.26
-VERSION  = 1.5.26-1
+VERSION  = 1.5.26-2
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 
 SRC_TGZ = http://ftp.gnu.org/gnu/libtool/${NAME}-${SRC_VER}.tar.gz

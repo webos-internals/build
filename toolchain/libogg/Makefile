@@ -2,7 +2,7 @@ NAME     = libogg
 TITLE    = libogg
 APP_ID   = org.webosinternals.toolchain.${NAME}
 SRC_VER  = 1.1.3
-VERSION  = 1.1.3-1
+VERSION  = 1.1.3-2
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 
 SRC_TGZ = http://downloads.xiph.org/releases/ogg/${NAME}-${SRC_VER}.tar.gz

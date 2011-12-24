@@ -2,7 +2,7 @@ NAME     = libsndfile
 TITLE    = libsndfile
 APP_ID   = org.webosinternals.toolchain.${NAME}
 SRC_VER  = 1.0.17
-VERSION  = 1.0.17-1
+VERSION  = 1.0.17-2
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 
 SRC_TGZ = http://palm.cdnetworks.net/opensource/2.1.2/${NAME}-${SRC_VER}.tar.gz

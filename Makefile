@@ -205,7 +205,6 @@ toolchain: toolchain/ipkg-utils/ipkg-make-index \
 	   toolchain/cs09q1armel/build/arm-2009q1 \
 	   toolchain/cs07q3armel/build/arm-2007q3 \
 	   toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu \
-	   staging/usr/include/SDL/SDL.h \
 	   staging/usr/include/PDL.h \
 	   staging/usr/include/mjson/json.h \
 	   staging/usr/include/lunaservice.h \
@@ -226,6 +225,7 @@ sdl:	staging/usr/include/ltdl.h \
 	staging/usr/include/liboil/liboil.h \
 	staging/usr/include/pulse/pulseaudio.h \
 	staging/usr/include/freetype2/ft2build.h \
+	staging/usr/include/SDL/SDL.h \
 	staging/usr/include/SDL/SDL_image.h \
 	staging/usr/include/SDL/SDL_ttf.h \
 	staging/usr/include/GLES/gl.h

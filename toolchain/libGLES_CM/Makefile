@@ -1,7 +1,7 @@
 NAME     = libGLES_CM
 TITLE    = libGLES_CM
 APP_ID   = org.webosinternals.toolchain.${NAME}
-VERSION  = 1.0
+VERSION  = 1.0-2
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 
 .PHONY: package

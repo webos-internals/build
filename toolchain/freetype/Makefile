@@ -2,7 +2,7 @@ NAME     = freetype
 TITLE    = freetype
 APP_ID   = org.webosinternals.toolchain.${NAME}
 SRC_VER  = 2.3.12
-VERSION  = 2.3.12-1
+VERSION  = 2.3.12-2
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 
 SRC_BZ2 = http://palm.cdnetworks.net/opensource/3.0.0/${NAME}-${SRC_VER}.tar.bz2

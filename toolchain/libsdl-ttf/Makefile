@@ -2,7 +2,7 @@ NAME     = libsdl-ttf
 TITLE    = libsdl-ttf
 APP_ID   = org.webosinternals.toolchain.${NAME}
 SRC_VER  = 1.2
-VERSION  = 1.2-1
+VERSION  = 1.2-2
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 
 SRC_TGZ = http://palm.cdnetworks.net/opensource/1.3.5/${NAME}-${SRC_VER}.tgz

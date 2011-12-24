@@ -2,7 +2,7 @@ NAME     = pulseaudio
 TITLE    = pulseaudio
 APP_ID   = org.webosinternals.toolchain.${NAME}
 SRC_VER  = 0.9.14
-VERSION  = 0.9.14-1
+VERSION  = 0.9.14-2
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 
 SRC_TGZ = http://palm.cdnetworks.net/opensource/2.1.2/${NAME}-${SRC_VER}.tgz
