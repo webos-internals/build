@@ -50,7 +50,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	( cd build/src ; \
 	  CC=${CROSS_COMPILE_$*}gcc \
-	  CFLAGS="-I${STAGING_DIR_$*}/usr/include -I${STAGING_DIR_$*}/usr/include/gdbm" \
+	  CFLAGS="-D_GNU_SOURCE -I${STAGING_DIR_$*}/usr/include -I${STAGING_DIR_$*}/usr/include/gdbm" \
 	  LIBLTDL=${STAGING_DIR_$*}/usr/lib \
 	  LDFLAGS=-L${STAGING_DIR_$*}/usr/lib \
 	  ./configure \
@@ -58,6 +58,8 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--enable-ltdl-install=no \
 		--disable-static \
 		--disable-alisp \
+		--disable-mixer \
+		--disable-pcm \
 		--disable-old-symbols \
 		--disable-python ; \
 	  ${MAKE} clean all )
