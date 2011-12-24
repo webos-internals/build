@@ -215,8 +215,9 @@ toolchain: toolchain/ipkg-utils/ipkg-make-index \
 	   staging/usr/include/fuse/fuse.h \
 	   sdl
 
-sdl:	staging/usr/include/ltdl.h \
-	staging/usr/include/gdbm/gdbm.h \
+#staging/usr/include/ltdl.h \
+
+sdl:	staging/usr/include/gdbm/gdbm.h \
 	staging/usr/include/alsa/alsa-symbols.h \
 	staging/usr/include/sndfile.h \
 	staging/usr/include/samplerate.h \
