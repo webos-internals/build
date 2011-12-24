@@ -30,6 +30,10 @@ ifeq ("${DEVICE}","pre3")
 WEBOS_VERSIONS = 2.2.0 2.2.3
 KERNEL_VERSION = 2.6.32
 endif
+ifeq ("${DEVICE}","opal")
+WEBOS_VERSIONS = 3.0.3
+KERNEL_VERSION = 2.6.35
+endif
 KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tgz
 DL_DIR = ../../downloads
 POSTINSTALLFLAGS = RestartDevice
@@ -105,6 +109,12 @@ DEFCONFIG = rib_defconfig
 KERNEL_TYPE = 2.6.32.9-palm-rib
 DEVICECOMPATIBILITY = [\"Pre3\"]
 endif
+ifeq ("${DEVICE}","opal")
+CODENAME = opal
+DEFCONFIG = shortloin_defconfig
+KERNEL_TYPE = 2.6.35-palm-shortloin
+DEVICECOMPATIBILITY = [\"Opal\"]
+endif
 
 ifeq ("${DEVICE}","pre")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp100ueu-wr-${WEBOS_VERSION}.jar
@@ -164,6 +174,11 @@ WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp304hstnhwifi-${WEBOS_VERSION}.jar
 endif
 ifeq ("${WEBOS_VERSION}", "3.0.5")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp304hstnhwifi-3.0.4.jar
+endif
+endif
+ifeq ("${DEVICE}","opal")
+ifeq ("${WEBOS_VERSION}", "3.0.3")
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctoropal3g-wr-${WEBOS_VERSION}.jar
 endif
 endif
 COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
@@ -284,6 +299,16 @@ ifeq ("${DEVICE}","touchpad")
 COMPATIBLE_VERSIONS = 3.0.2
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/3.0.2/linuxkernel-${KERNEL_VERSION}.patches.tgz
 KERNEL_SUBMISSION = kernelpatch-3.0.2.txt
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
+endif
+
+ifeq ("${WEBOS_VERSION}", "3.0.3")
+ifeq ("${DEVICE}","opal")
+COMPATIBLE_VERSIONS = 3.0.3
+KERNEL_GIT = git@github.com:webos-internals/webos-linux-kernel.git
+KERNEL_TAG = opal
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
 endif
@@ -493,6 +518,7 @@ build/.unpacked-3.0.5-%: ${DL_DIR}/linux-${KERNEL_VERSION}-3.0.4-${DEVICE}.tar.g
 	touch $@
 endif
 
+ifdef SRC_GIT
 build/.unpacked-%: ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz \
 			    ${DL_DIR}/${NAME}-%.tar.gz
 	rm -rf build/src-$*
@@ -505,6 +531,27 @@ build/.unpacked-%: ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.
 		patch -d build/src-$*/linux-${KERNEL_VERSION} -p1 ; \
 	fi
 	touch $@
+else
+ifdef KERNEL_GIT
+build/.unpacked-%:
+	rm -rf build/src-${VERSION}
+	mkdir -p build/src-${VERSION}
+	if [ -e ../../webos-linux-kernel ] ; then \
+	  ( cd build/src-${VERSION} ; \
+		git clone --reference ../../../../webos-linux-kernel ${KERNEL_GIT} linux-${KERNEL_VERSION} ) ; \
+	else \
+	  ( cd build/src-${VERSION} ; \
+		git clone ${KERNEL_GIT} linux-${KERNEL_VERSION} ) ; \
+	fi
+	( cd build/src-${VERSION}/linux-${KERNEL_VERSION} ; git checkout ${KERNEL_TAG} )
+else
+build/.unpacked-%: ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz
+	rm -rf build/src-$*
+	mkdir -p build/src-$*
+	${TAR} -C build/src-$* -zxf ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz
+	touch $@
+endif
+endif
 
 ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz: \
 					${DL_DIR}/linuxkernel-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz \
