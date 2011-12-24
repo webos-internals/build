@@ -1,16 +1,17 @@
 NAME     = wterm
 TITLE    = wTerm
 APP_ID   = us.ryanhope.${NAME}
-VERSION  = 0.1.5-1
+VERSION  = 0.1.5-2
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = System Utilities
 MAINTAINER = PuffTheMagic
-HOMEPAGE = http://www.webos-internals.org/wiki/Application:WIRC
-ICON     = http://www.webos-internals.org/images/1/10/Icon_WebOSInternals_wIRC.png
-DESCRIPTION = wTerm is a Enyo PDK/Hybrid Terminal Emulator for the webOS platform.<br> \
-			  <a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VU4L7VTGSR5C2'><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"/></a>
+HOMEPAGE = https://github.com/PuffTheMagic/wTerm
+ICON     = https://github.com/PuffTheMagic/wTerm/raw/master/images/icon-64.png
+DESCRIPTION = wTerm is a Enyo PDK/Hybrid Terminal Emulator for the webOS platform.<br><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VU4L7VTGSR5C2"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"/></a>
 CHANGELOG = \
+0.1.5: Do better on basic vttest's<br> \
+0.1.4: Handle some uncaught CSIs<br> \
 0.1.3: First decent alpha version to play with.
 
 SCREENSHOTS = [\
