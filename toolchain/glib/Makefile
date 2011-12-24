@@ -1,6 +1,6 @@
 NAME     = glib
 APP_ID	 = org.webosinternals.toolchain.glib
-VERSION  = 2.20.4-2
+VERSION  = 2.20.4-1
 LICENSE  = LGPL Open Source
 
 SRC_OPTWARE = ${NAME}_${VERSION}
