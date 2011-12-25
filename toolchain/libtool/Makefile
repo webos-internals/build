@@ -48,7 +48,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src ; \
 	  CC=${CROSS_COMPILE_$*}gcc \
 	  CFLAGS=-I${STAGING_DIR_$*}/usr/include/gdbm \
-	  LDFLAGS=-L-I${STAGING_DIR_$*}/usr/lib \
+	  LDFLAGS=-L${STAGING_DIR_$*}/usr/lib \
 	  ./configure \
 	  	--host=${CONFIGURE_HOST_$*} \
 		--disable-static \
