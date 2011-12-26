@@ -3,7 +3,7 @@ TITLE	 = Preware
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.9.7
+VERSION  = 1.9.10
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
@@ -11,6 +11,9 @@ ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 MINWEBOSVERSION = 1.4.0
 DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, kernels, services and plugins.<br><b>Requires webOS 1.4.0 or later</b>.
 CHANGELOG = \
+1.9.10: Updated German translations (courtesy of DiplPhy).<br>\
+1.9.9: Added Traditional Chinese translations (courtesy of tonyw).<br>\
+1.9.8: Updated German translations (courtesy of DocZet).<br>\
 1.9.7: Added support for secure package downloads.<br>\
 1.9.6: Added support for secure feed downloads.<br>\
 1.9.5: Fixed the window orientation for the blue question mark help items.<br>\
@@ -80,7 +83,7 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/7/75/Preware_ss11.png\" ]
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git://git.webos-internals.org/applications/preware.git
+SRC_GIT = git://github.com/webos-internals/preware.git
 
 IPKGSERVICE = org.webosinternals.ipkgservice
 

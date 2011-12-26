@@ -25,7 +25,7 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/1/1e/Apptuckerbox_ss9.png\",\
 \"http://www.webos-internals.org/images/c/cb/Apptuckerbox_ss10.png\" ]
 
-SRC_GIT = git@git.webos-internals.org:applications/apptuckerbox.git
+SRC_GIT = git://github.com/apptuckerbox/apptuckerbox.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk

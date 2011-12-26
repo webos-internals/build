@@ -83,7 +83,7 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/7/75/Preware_ss11.png\" ]
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git://git.webos-internals.org/applications/preware.git
+SRC_GIT = git://github.com/webos-internals/preware.git
 
 IPKGSERVICE = org.webosinternals.ipkgservice
 
