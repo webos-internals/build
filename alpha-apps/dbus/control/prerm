@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Stop the service if running
+/sbin/stop org.webos-internals.dbus || true
+
+/usr/bin/killall -9 dbus-daemon || true
+
+rm -f /var/palm/event.d/org.webosinternals.dbus
+
+rmdir /var/run/dbus
+
+exit 0
+
