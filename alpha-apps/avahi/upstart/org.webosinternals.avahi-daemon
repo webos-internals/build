@@ -11,4 +11,4 @@ respawn
 
 #pre-start exec mkdir -p /var/run/avahi-daemon
                                   
-exec /media/cryptofs/apps/usr/palm/applications/org.webosinternals.avahi/sbin/avahi-daemon -f /media/crytofs/apps/usr/palm/applications/org.webosinternals.avahi/etc/avahi/avahi-daemon.conf
+exec /media/cryptofs/apps/usr/palm/applications/org.webosinternals.avahi/sbin/avahi-daemon -f /media/cryptofs/apps/usr/palm/applications/org.webosinternals.avahi/etc/avahi/avahi-daemon.conf
