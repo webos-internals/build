@@ -1,18 +1,20 @@
-NAME     = pulsecontrol
+NAME     = pulseaudio-settings
 MAINTAINER = Janne Julkunen <janne.julkunen@e-lnx.org>
 TITLE    = PulseAudio Settings
 APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.srv
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.6.0
+VERSION  = 0.8.0
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/webos-internals/301721-pulseaudio-settings.html
 ICON     = http://www.webos-internals.org/images/b/b4/PulseAudioSettings.png
-DESCRIPTION = PulseAudio Settings.
+DESCRIPTION = PulseAudio settings application enables configuration of PulseAudio.
 MINWEBOSVERSION = 2.2.0
+MAXWEBOSVERSION = 3.0.5
 CHANGELOG = \
+0.8.0: Updated dependency information due to the packaging change.<br>\
 0.6.0: Fixed metadata so that package shows for Pre3 and TouchPad.<br>\
 0.5.0: Added support for USB audio for TouchPads with custom kernels.<br>\
 0.4.0: Updated to work with the latest required pulseaudio patch.<br>\
@@ -21,10 +23,8 @@ CHANGELOG = \
 0.1.0: Initial release.
 SCREENSHOTS = []
 LICENSE  = BSD Open Source License
-POSTINSTALLFLAGS = RestartDevice
-POSTUPDATEFLAGS = RestartDevice
 
-DEPENDS = org.webosinternals.patches.system-enable-pulseaudio-control
+DEPENDS = org.webosinternals.pulseaudio-modules
 
 SRC_GIT = git://git.webos-internals.org/applications/pulsecontrol.git
 
@@ -54,10 +54,6 @@ include ../../support/cross-compile.mk
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
-#	( cd build/src/c-binary ; \
-#	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc CFLAGS=${CFLAGS_$*} \
-#	  clobber papctl \
-#	)
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
 	cp -r build/src/enyo-app/* build/$*/usr/palm/applications/${APP_ID}/
 	mkdir -p build/$*/usr/palm/services/${SRV_ID}
