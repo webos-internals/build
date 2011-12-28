@@ -228,7 +228,8 @@ sdi:	staging/usr/include/ltdl.h \
 	staging/usr/include/SDL/SDL.h \
 	staging/usr/include/SDL/SDL_image.h \
 	staging/usr/include/SDL/SDL_ttf.h \
-	staging/usr/include/GLES/gl.h
+	staging/usr/include/GLES/gl.h \
+	staging/usr/include/expat.h
 
 toolchain/cs09q1armel/build/arm-2009q1:
 	${MAKE} -C toolchain/cs09q1armel unpack
@@ -241,6 +242,9 @@ toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu:
 
 staging/usr/include/GLES/gl.h:
 	${MAKE} -C toolchain/libGLES_CM stage
+
+staging/usr/include/expat.h:
+	${MAKE} -C toolchain/expat stage
 
 staging/usr/include/sndfile.h:
 	${MAKE} -C toolchain/libsndfile stage
