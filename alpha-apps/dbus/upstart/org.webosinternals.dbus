@@ -1,0 +1,14 @@
+# dbus - D-Bus system message bus
+#
+# The D-Bus system message bus allows system daemons and user applications
+# to communicate.
+
+description	"D-Bus system message bus"
+
+start on stopped finish
+
+respawn
+
+pre-start exec mkdir -p /var/run/dbus
+
+exec /media/cryptofs/apps/usr/palm/applications/org.webosinternals.dbus/bin/dbus-daemon --nofork --config-file=/media/cryptofs/apps/usr/palm/applications/org.webosinternals.dbus/etc/dbus-1/system.conf
