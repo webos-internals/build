@@ -35,6 +35,9 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mv build/${NAME}-${SRC_VER} build/src
 	touch $@
 
+.PHONY: stage
+stage: build/.staged-${VERSION}
+
 build/.staged-${VERSION}: build/armv7.staged-${VERSION} build/armv6.staged-${VERSION} build/i686.staged-${VERSION}
 	touch $@
 
