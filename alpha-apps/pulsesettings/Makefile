@@ -1,11 +1,11 @@
 NAME     = pulseaudio-settings
 MAINTAINER = Janne Julkunen <janne.julkunen@e-lnx.org>
 TITLE    = PulseAudio Settings
-APP_ID   = org.webosinternals.${NAME}
-SRV_ID   = org.webosinternals.${NAME}.srv
+APP_ID   = org.webosinternals.pulseaudio.settings
+SRV_ID   = org.webosinternals.pulseaudio.settings.srv
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.8.0
+VERSION  = 0.8.2
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/webos-internals/301721-pulseaudio-settings.html
@@ -14,6 +14,7 @@ DESCRIPTION = PulseAudio settings application enables configuration of PulseAudi
 MINWEBOSVERSION = 2.2.0
 MAXWEBOSVERSION = 3.0.5
 CHANGELOG = \
+0.8.2: Changed the package app id to avoid any conflicts.<br>\
 0.8.0: Updated dependency information due to the packaging change.<br>\
 0.6.0: Fixed metadata so that package shows for Pre3 and TouchPad.<br>\
 0.5.0: Added support for USB audio for TouchPads with custom kernels.<br>\
@@ -26,7 +27,7 @@ LICENSE  = BSD Open Source License
 
 DEPENDS = org.webosinternals.pulseaudio-modules
 
-SRC_GIT = git://git.webos-internals.org/applications/pulsecontrol.git
+SRC_GIT = git@github.com:webos-internals/pulse-settings.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk 
