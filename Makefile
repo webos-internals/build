@@ -214,7 +214,7 @@ toolchain: toolchain/ipkg-utils/ipkg-make-index \
 	   staging/usr/include/curl/curl.h \
 	   staging/usr/include/fuse/fuse.h
 
-sdi:	staging/usr/include/ltdl.h \
+sdl:	staging/usr/include/ltdl.h \
 	staging/usr/include/gdbm/gdbm.h \
 	staging/usr/include/alsa/alsa-symbols.h \
 	staging/usr/include/sndfile.h \
