@@ -229,8 +229,20 @@ sdl:	staging/usr/include/ltdl.h \
 	staging/usr/include/SDL/SDL_image.h \
 	staging/usr/include/SDL/SDL_ttf.h \
 	staging/usr/include/GLES/gl.h \
-	staging/usr/include/expat.h
 
+pulse:	staging/usr/include/expat.h \
+	staging/usr/include/glibconfig.h \
+	staging/usr/include/gdbm/gdbm.h \
+	staging/usr/include/dbus-1.0/dbus/dbus.h \
+	staging/usr/include/libdaemon/daemon.h \
+	staging/usr/include/alsa/alsa-symbols.h \
+	staging/usr/include/speex/speex.h \
+	staging/usr/include/liboil/liboil.h \
+	staging/usr/include/sndfile.h \
+	staging/usr/include/samplerate.h \
+	staging/usr/include/avahi-core/core.h \
+	staging/usr/include/ltdl.h
+	
 toolchain/cs09q1armel/build/arm-2009q1:
 	${MAKE} -C toolchain/cs09q1armel unpack
 
@@ -311,6 +323,15 @@ staging/usr/include/curl/curl.h:
 
 staging/usr/include/fuse/fuse.h:
 	${MAKE} -C toolchain/fuse stage
+
+staging/usr/include/dbus-1.0/dbus/dbus.h:
+	${MAKE} -C toolchain/dbus stage
+
+staging/usr/include/libdaemon/daemon.h:
+	${MAKE} -C toolchain/libdaemon stage
+
+staging/usr/include/avahi-core/core.h:
+	${MAKE} -C toolchain/avahi stage
 
 upload:
 	-rsync -avr ipkgs/ preware@ipkg4.preware.org:/home/preware/htdocs/ipkg/feeds/

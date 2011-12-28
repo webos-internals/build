@@ -2,11 +2,11 @@ NAME     = libdaemon
 TITLE    = libdaemon
 SRC_VER  = 0.14
 VERSION  = 0.14-1
-APP_ID   = org.webosinternals.${TITLE}
+APP_ID   = org.webosinternals.toolchain.${TITLE}
 HOMEPAGE = http://0pointer.de/lennart/projects/libdaemon
 MAINTAINER = Will Rea <will.rea@gmail.com>
 DESCRIPTION = Lightweight C library that eases the writing of UNIX daemons
-TYPE	 = Linux Library
+TYPE	 = Linux Application
 CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/a/ae/Icon_WebOSInternals_Base_Patch.png
 LICENSE  = LGPL v2.1 Open Source
@@ -20,15 +20,27 @@ include ../../support/package.mk
 
 include ../../support/download.mk
 
+.PHONY: stage
+stage: build/.staged-${VERSION}
+
+build/.staged-${VERSION}: build/armv7.staged-${VERSION} build/armv6.staged-${VERSION} build/i686.staged-${VERSION}
+	touch $@
+
+build/%.staged-${VERSION} : build/%.built-${VERSION}
+	mkdir -p ../../staging/$*/usr/include
+	cp -rp build/$*/usr/include/* ../../staging/$*/usr/include/
+	mkdir -p ../../staging/$*/usr/lib
+	cp -rp build/$*/usr/lib/* ../../staging/$*/usr/lib/
+	touch $@
+
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
 
 build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/armv6 build/armv7 build/i686
-	tar -C build -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	tar -C build -z -x -f $<
 	mv build/${NAME}-${SRC_VER} build/src
-	mkdir build/src/alpha-apps
 	touch $@
 
 .PHONY: build
@@ -47,8 +59,9 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	./configure --prefix=/usr --disable-lynx --host=${CONFIGURE_HOST_$*}; \
 	${MAKE} clean all)
 
-	mkdir -p build/$*/usr/palm/applications/${APP_ID}/lib
-	install -m 755 build/src/libdaemon/.libs/{*.so*,*.a} build/$*/usr/palm/applications/${APP_ID}/lib
+	mkdir -p build/$*/usr/{lib,include/libdaemon}
+	install -m 755 build/src/libdaemon/.libs/{*.so*,*.a} build/$*/usr/lib
+	install -m 644 build/src/libdaemon/*.h build/$*/usr/include/libdaemon
 	touch $@
 
 clobber::
