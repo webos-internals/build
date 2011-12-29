@@ -2,7 +2,7 @@ NAME     = wterm
 TITLE    = wTerm
 APP_ID   = us.ryanhope.${NAME}
 SRC_VER  = 0.1.7
-VERSION  = ${SRC_VER}-1
+VERSION  = ${SRC_VER}-2
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = System Utilities
@@ -18,6 +18,7 @@ CHANGELOG = \
 0.1.3: First decent alpha version to play with.
 
 SCREENSHOTS = [\
+\"http://ompldr.org/vYnl6Mw/wterm_2011-29-12_152014.png\",\
 \"http://ompldr.org/vYnV4MQ/wterm_2011-21-12_205004.png\",\
 ]
 LICENSE  = GPL v2 Open Source
