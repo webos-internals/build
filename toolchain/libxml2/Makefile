@@ -54,7 +54,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	${MAKE} clean all)
 	mkdir -p build/$*/usr/{lib,include/libxml2/libxml}
 	install -m 755 build/src/.libs/{*.so*,*.a} build/$*/usr/lib
-	install -m 644 build/src/include/*.h build/$*/usr/include/libxml2/libxml
+	install -m 644 build/src/include/libxml/*.h build/$*/usr/include/libxml2/libxml
 	touch $@
 
 clobber::
