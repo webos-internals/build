@@ -1,5 +1,6 @@
 NAME     = homecontrol
 TITLE    = Home Control
+MAINTAINER = sconix
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
@@ -21,7 +22,7 @@ SCREENSHOTS = [\
 
 LICENSE  = BSD Open Source License
 
-SRC_GIT = git@github.com/sconix/homecontrol.git
+SRC_GIT = git://github.com/${MAINTAINER}/${NAME}.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
