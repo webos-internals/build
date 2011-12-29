@@ -1,8 +1,8 @@
 NAME     = wterm
 TITLE    = wTerm
 APP_ID   = us.ryanhope.${NAME}
-SRC_VER  = 0.1.6
-VERSION  = ${SRC_VER}
+SRC_VER  = 0.1.7
+VERSION  = ${SRC_VER}-2
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = System Utilities
@@ -11,11 +11,14 @@ HOMEPAGE = https://github.com/PuffTheMagic/wTerm
 ICON     = https://github.com/PuffTheMagic/wTerm/raw/master/images/icon-64.png
 DESCRIPTION = wTerm is a Enyo PDK/Hybrid Terminal Emulator for the webOS platform.<br><br><a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VU4L7VTGSR5C2'><img src='http://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif'/></a><br>
 CHANGELOG = \
+0.1.7: Fix the pipe and plus keys<br> \
+0.1.6: Tinkering<br> \
 0.1.5: Do better on basic vttest's<br> \
 0.1.4: Handle some uncaught CSIs<br> \
 0.1.3: First decent alpha version to play with.
 
 SCREENSHOTS = [\
+\"http://ompldr.org/vYnl6Mw/wterm_2011-29-12_152014.png\",\
 \"http://ompldr.org/vYnV4MQ/wterm_2011-21-12_205004.png\",\
 ]
 LICENSE  = GPL v2 Open Source
