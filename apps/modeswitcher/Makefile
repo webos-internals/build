@@ -57,7 +57,7 @@ LICENSE  = BSD Open Source License
 POSTINSTALLFLAGS = RestartDevice
 POSTUPDATEFLAGS = RestartDevice
 
-SRC_GIT = git://git.webos-internals.org/applications/modeswitcher.git
+SRC_GIT = git://github.com/sconix/modeswitcher.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk 

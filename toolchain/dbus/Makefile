@@ -67,7 +67,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--with-system-pid-file="/var/run/dbus.pid" \
 		--with-dbus-user=root \
 		--disable-console-owner-file \
-		--without-x \
+		--without-x --with-xml=libxml \
 		--host=${CONFIGURE_HOST_$*}; \
 	${MAKE} clean all && make DESTDIR=${installpkgdir} install )
 	rm -r build/$*/usr/{bin,libexec}

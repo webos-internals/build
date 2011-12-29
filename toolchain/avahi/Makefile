@@ -70,7 +70,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
 		--with-avahi-priv-access-group=nogroup --with-avahi-user=nobody --with-avahi-group=nogroup \
 		--with-autoipd-user=nogroup --with-autoipd-group=nogroup \
-		--with-xml=expat --disable-monodoc --disable-stack-protector \
+		--with-xml=libxml --disable-monodoc --disable-stack-protector \
 		--disable-python --disable-mono --with-distro=none --enable-compat-libdns_sd \
 		--disable-qt3 --disable-qt4 --disable-gtk --disable-gtk3 \
 		--disable-manpages --disable-xmltoman --host=${CONFIGURE_HOST_$*}; \

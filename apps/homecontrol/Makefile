@@ -47,13 +47,14 @@ build/.built-${VERSION}: build/all.built-${VERSION}
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
+	grep -r "org.e.lnx.wee" build/src/* | grep -v "^Binary" | cut -d ':' -f 1 | sort | uniq >build/list
+	while read file ; do \
+		sed -i s/"org.e.lnx.wee"/"org.webosinternals"/ $$file ; \
+	done < build/list
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
 	cp -r build/src/enyo-app/* build/$*/usr/palm/applications/${APP_ID}/
-	sed -i s/"org.e.lnx.wee"/"org.webosinternals"/ build/$*/usr/palm/applications/${APP_ID}/appinfo.json
-	sed -i s/"org.e.lnx.wee"/"org.webosinternals"/ build/$*/usr/palm/applications/${APP_ID}/source/extensions/UPnPController.js
 	mkdir -p build/$*/usr/palm/packages/${APP_ID}
 	cp -r build/src/package/* build/$*/usr/palm/packages/${APP_ID}/
-	sed -i s/"org.e.lnx.wee"/"org.webosinternals"/ build/$*/usr/palm/packages/${APP_ID}/packageinfo.json
 	touch $@
 
 clobber::
