@@ -1,8 +1,8 @@
 NAME     = wterm
 TITLE    = wTerm
 APP_ID   = us.ryanhope.${NAME}
-SRC_VER  = 0.1.5
-VERSION  = ${SRC_VER}-3
+SRC_VER  = 0.1.6
+VERSION  = ${SRC_VER}
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = System Utilities
@@ -55,9 +55,10 @@ include ../../support/cross-compile.mk
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	echo "CXX=${CROSS_COMPILE_$*}g++" > build/src/Makefile.inc
+	echo "CC=${CROSS_COMPILE_$*}gcc" >> build/src/Makefile.inc
 	echo "MARCH_TUNE=-O2 -march=armv7-a -mcpu=cortex-a8 -mfpu=neon -mfloat-abi=softfp" >> build/src/Makefile.inc
 	echo "ROOT=${STAGING_DIR_$*}/usr" >> build/src/Makefile.inc
-	cd build/src; ${MAKE} clean wterm DEVICE=1
+	cd build/src; ${MAKE} clean wterm
 	mkdir -p ${D}
 	${CROSS_COMPILE_$*}strip build/src/${NAME}
 	install -m 755 build/src/${NAME} ${D}
