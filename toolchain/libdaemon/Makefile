@@ -59,9 +59,10 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	./configure --prefix=/usr --disable-lynx --host=${CONFIGURE_HOST_$*}; \
 	${MAKE} clean all)
 
-	mkdir -p build/$*/usr/{lib,include/libdaemon}
+	mkdir -p build/$*/usr/{lib/pkgconfig,include/libdaemon}
 	install -m 755 build/src/libdaemon/.libs/{*.so*,*.a} build/$*/usr/lib
 	install -m 644 build/src/libdaemon/*.h build/$*/usr/include/libdaemon
+	install -m 644 build/src/pkgconfig/libdaemon.pc build/$*/usr/lib/pkgconfig
 	touch $@
 
 clobber::
