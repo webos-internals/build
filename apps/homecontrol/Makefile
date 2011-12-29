@@ -3,7 +3,7 @@ TITLE    = Home Control
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.8.1
+VERSION  = 0.8.2
 TYPE	 = Application
 CATEGORY = Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:HomeControl
@@ -12,6 +12,7 @@ DESCRIPTION = Home Control is an universal remote control application. Currently
 MINWEBOSVERSION = 2.1.0
 MAXWEBOSVERSION = 3.9.9
 CHANGELOG = \
+0.8.2: Fixed the startup server discovery spinner.<br>\
 0.8.1: Fixed small bug in manual adding of servers.<br>\
 0.8.0: First public release.
 
@@ -20,7 +21,7 @@ SCREENSHOTS = [\
 
 LICENSE  = BSD Open Source License
 
-SRC_GIT = git://git.webos-internals.org/applications/homecontrol.git
+SRC_GIT = git@github.com:sconix/homecontrol.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
@@ -48,9 +49,11 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
 	cp -r build/src/enyo-app/* build/$*/usr/palm/applications/${APP_ID}/
+	sed -i s/"org.e.lnx.wee"/"org.webosinternals"/ build/$*/usr/palm/applications/${APP_ID}/appinfo.json
+	sed -i s/"org.e.lnx.wee"/"org.webosinternals"/ build/$*/usr/palm/applications/${APP_ID}/source/extensions/UPnPController.js
 	mkdir -p build/$*/usr/palm/packages/${APP_ID}
 	cp -r build/src/package/* build/$*/usr/palm/packages/${APP_ID}/
-	rm -rf build/$*/usr/palm/applications/${APP_ID}/package
+	sed -i s/"org.e.lnx.wee"/"org.webosinternals"/ build/$*/usr/palm/packages/${APP_ID}/packageinfo.json
 	touch $@
 
 clobber::
