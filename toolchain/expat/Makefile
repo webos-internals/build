@@ -53,11 +53,11 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
                 --disable-static \
                 --disable-nls ; \
 		${MAKE} clean all )
-	mkdir -p build/$*/usr/include/liboil
+	mkdir -p build/$*/usr/include
 	install -m 644 build/src/lib/expat*.h build/$*/usr/include
 	mkdir -p build/$*/usr/lib
 	install -m 755 build/src/.libs/*.so* build/$*/usr/lib/
 	touch $@
 
 clobber::
-	rm -rf build ${STAGING_DIR}/usr/lib/lib${NAME}.so*
+	rm -rf build
