@@ -47,10 +47,15 @@ build/.built-${VERSION}: build/all.built-${VERSION}
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
-	grep -r "org.e.lnx.wee" build/src/* | grep -v "^Binary" | cut -d ':' -f 1 | sort | uniq >build/list
+	find ./build/src -name org.e.lnx.wee* >build/list-mv
+	while read file ; do \
+		new=`echo $$file | sed s/"org.e.lnx.wee"/"org.webosinternals"/` ; \
+		mv $$file $$new ; \
+	done < build/list-mv
+	grep -r "org.e.lnx.wee" build/src/* | grep -v "^Binary" | cut -d ':' -f 1 | sort | uniq >build/list-sed
 	while read file ; do \
 		sed -i s/"org.e.lnx.wee"/"org.webosinternals"/ $$file ; \
-	done < build/list
+	done < build/list-sed
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
 	cp -r build/src/enyo-app/* build/$*/usr/palm/applications/${APP_ID}/
 	mkdir -p build/$*/usr/palm/packages/${APP_ID}
