@@ -52,7 +52,8 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	LDFLAGS="-L${STAGING_DIR_$*}/usr/lib" \
 	./configure --prefix=/usr --host=${CONFIGURE_HOST_$*}; \
 	${MAKE} clean all)
-	mkdir -p build/$*/usr/{lib,include/libxml2/libxml}
+	mkdir -p build/$*/usr/lib
+	mkdir -p build/$*/usr/include/libxml2/libxml
 	install -m 755 build/src/.libs/*.a build/$*/usr/lib
 	install -m 755 build/src/.libs/*.so* build/$*/usr/lib
 	install -m 644 build/src/include/libxml/*.h build/$*/usr/include/libxml2/libxml
