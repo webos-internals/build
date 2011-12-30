@@ -6,15 +6,8 @@ APP_ID   = org.webosinternals.toolchain.${TITLE}
 HOMEPAGE = http://avahi.org
 MAINTAINER = Will Rea <will.rea@gmail.com>
 DESCRIPTION = A multicast/unicast DNS-SD framework
-TYPE	 = Linux Daemon
-CATEGORY = Utilities
-ICON	 = http://www.webos-internals.org/images/a/ae/Icon_WebOSInternals_Base_Patch.png
 LICENSE  = LGPL v2.1 Open Source
 DEPENDS  = 
-POSTINSTALLFLAGS = RestartDevice
-POSTUPDATEFLAGS = RestartDevice
-CHANGELOG = \
-0.6.30-1 Intital Release
 
 SRC_TGZ = http://avahi.org/download/avahi-${SRC_VER}.tar.gz
 
@@ -67,22 +60,21 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		-Wl,-R/media/cryptofs/apps/usr/palm/applications/org.webosinternals.avahi/lib \
 		-L${STAGING_DIR_$*}/usr/lib,-rpath-link,${STAGING_DIR_$*}/usr/lib -L${STAGING_DIR_$*}/usr/lib" \
 	PKG_CONFIG_PATH="${STAGING_DIR_$*}/usr/lib/pkgconfig" \
+	DBUS_LIBS="-L${STAGING_DIR_$*}/usr/lib" \
+	DBUS_CFLAGS="-I${STAGING_DIR_$*}/usr/include/dbus-1.0" \
+	GLIB20_LIBS="-L${STAGING_DIR_$*}/usr/lib" \
+	GLIB20_CFLAGS="-I${STAGING_DIR_$*}/usr/include/glib-2.0" \
+	GOBJECT_CFLAGS="-I${STAGING_DIR_$*}/usr/include/glib-2.0" \
+	GOBJECT_LIBS="-L${STAGING_DIR_$*}/usr/lib" \
 	./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
 		--with-avahi-priv-access-group=nogroup --with-avahi-user=nobody --with-avahi-group=nogroup \
 		--with-autoipd-user=nogroup --with-autoipd-group=nogroup \
-		--with-xml=libxml --disable-monodoc --disable-stack-protector \
+		--with-xml=expat --disable-monodoc --disable-stack-protector \
 		--disable-python --disable-mono --with-distro=none --enable-compat-libdns_sd \
 		--disable-qt3 --disable-qt4 --disable-gtk --disable-gtk3 \
 		--disable-manpages --disable-xmltoman --host=${CONFIGURE_HOST_$*}; \
-	${MAKE} && make DESTDIR=${installpkgdir} install )
-	rm -r build/$*/etc
-	# Symlinks seemed to disappear when installed on device, lets just make them actual files instead
-	rm build/$*/usr/lib/libavahi-common.so.3 \
-		build/$*/usr/lib/libavahi-client.so.3 build/$*/usr/lib/libavahi-core.so.7
-	cp build/$*/usr/lib/libavahi-common.so.3.* build/$*/usr/lib/libavahi-common.so.3
-	cp build/$*/usr/lib/libavahi-client.so.3.* build/$*/usr/lib/libavahi-client.so.3
-	cp build/$*/usr/lib/libavahi-core.so.7.* build/$*/usr/lib/libavahi-core.so.7
-
+	PATH="${STAGING_DIR_$*}/usr/bin:${PATH}" ${MAKE} V=1 )
+	rm -r build/$*/usr/bin
 	touch $@
 
 clobber::

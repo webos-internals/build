@@ -24,4 +24,6 @@ build/%.staged-${VERSION} : build/%.built-${VERSION}
 	cp -rp build/$*/usr/palm/applications/${APP_ID}/opt/lib/glib-2.0/include/* ../../staging/$*/usr/include/
 	mkdir -p ../../staging/$*/usr/lib
 	cp -rp build/$*/usr/palm/applications/${APP_ID}/opt/lib/* ../../staging/$*/usr/lib/
+	mkdir -p ../../staging/$*/usr/bin
+	cp -rp build/$*/usr/palm/applications/${APP_ID}/opt/bin/* ../../staging/$*/usr/bin
 	touch $@

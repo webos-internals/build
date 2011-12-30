@@ -27,7 +27,7 @@ build/.staged-${VERSION}: build/armv7.staged-${VERSION} build/armv6.staged-${VER
 	touch $@
 
 build/%.staged-${VERSION} : build/%.built-${VERSION}
-	mkdir -p ../../staging/$*/usr/include
+	mkdir -p ../../staging/$*/usr/include/libdaemon
 	cp -rp build/$*/usr/include/* ../../staging/$*/usr/include/
 	mkdir -p ../../staging/$*/usr/lib
 	cp -rp build/$*/usr/lib/* ../../staging/$*/usr/lib/
@@ -56,6 +56,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	CC="${CROSS_COMPILE_$*}gcc" \
 	CFLAGS="-I${STAGING_DIR_$*}/usr/include" \
 	LDFLAGS="-L${STAGING_DIR_$*}/usr/lib" \
+	ac_cv_func_setpgrp_void=yes \
 	./configure --prefix=/usr --disable-lynx --host=${CONFIGURE_HOST_$*}; \
 	${MAKE} clean all)
 	mkdir -p build/$*/usr/lib/pkgconfig

@@ -231,12 +231,13 @@ sdl:	staging/usr/include/ltdl.h \
 	staging/usr/include/SDL/SDL_ttf.h \
 	staging/usr/include/GLES/gl.h \
 
-pulse:	staging/usr/include/libxml2/threads.h \
+pulse:	staging/usr/include/libxml2/libxml/threads.h \
 	staging/usr/include/glibconfig.h \
 	staging/usr/include/gdbm/gdbm.h \
 	staging/usr/include/dbus-1.0/dbus/dbus.h \
 	staging/usr/include/libdaemon/daemon.h \
 	staging/usr/include/alsa/alsa-symbols.h \
+	staging/usr/include/ogg/ogg.h \
 	staging/usr/include/speex/speex.h \
 	staging/usr/include/liboil/liboil.h \
 	staging/usr/include/sndfile.h \
@@ -256,7 +257,7 @@ toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu:
 staging/usr/include/GLES/gl.h:
 	${MAKE} -C toolchain/libGLES_CM stage
 
-staging/usr/include/libxml2/threads.h:
+staging/usr/include/libxml2/libxml/threads.h:
 	${MAKE} -C toolchain/libxml2 stage
 
 staging/usr/include/sndfile.h:
