@@ -70,26 +70,12 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--without-x --with-xml=expat \
 		--host=${CONFIGURE_HOST_$*}; \
 	${MAKE} clean all )
-	mkdir -p build/$*/usr/lib
-	mkdir -p build/$*/usr/include
-	install -m 755 build/src/dbus/.libs/*-1.a build/$*/usr/lib
+	mkdir -p build/$*/usr/lib/pkgconfig
+	mkdir -p build/$*/usr/include/dbus
+	install -m 755 build/src/dbus/.libs/*.a build/$*/usr/lib
 	install -m 755 build/src/dbus/.libs/*.so* build/$*/usr/lib
-	install -m 644 build/src/dbus/dbus-address.h build/$*/usr/include
-	install -m 644 build/src/dbus/dbus-bus.h build/$*/usr/include
-	install -m 644 build/src/dbus/dbus-connection.h build/$*/usr/include
-	install -m 644 build/src/dbus/dbus-errors.h build/$*/usr/include
-	install -m 644 build/src/dbus/dbus.h build/$*/usr/include
-	install -m 644 build/src/dbus/dbus-macros.h build/$*/usr/include
-	install -m 644 build/src/dbus/dbus-memory.h build/$*/usr/include
-	install -m 644 build/src/dbus/dbus-message.h build/$*/usr/include
-	install -m 644 build/src/dbus/dbus-misc.h build/$*/usr/include
-	install -m 644 build/src/dbus/dbus-pending-call.h build/$*/usr/include
-	install -m 644 build/src/dbus/dbus-protocol.h build/$*/usr/include
-	install -m 644 build/src/dbus/dbus-server.h build/$*/usr/include
-	install -m 644 build/src/dbus/dbus-shared.h build/$*/usr/include
-	install -m 644 build/src/dbus/dbus-signature.h build/$*/usr/include
-	install -m 644 build/src/dbus/dbus-threads.h build/$*/usr/include
-	install -m 644 build/src/dbus/dbus-types.h build/$*/usr/include
+	install -m 755 build/src/dbus-1.pc build/$*/usr/lib/pkgconfig
+	install -m 644 build/src/dbus/*.h build/$*/usr/include/dbus
 	touch $@
 
 clobber::

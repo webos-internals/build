@@ -60,12 +60,12 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		-Wl,-R/media/cryptofs/apps/usr/palm/applications/org.webosinternals.avahi/lib \
 		-L${STAGING_DIR_$*}/usr/lib,-rpath-link,${STAGING_DIR_$*}/usr/lib -L${STAGING_DIR_$*}/usr/lib" \
 	PKG_CONFIG_PATH="${STAGING_DIR_$*}/usr/lib/pkgconfig" \
-	DBUS_LIBS="-L${STAGING_DIR_$*}/usr/lib" \
+	DBUS_LIBS="-L${STAGING_DIR_$*}/usr/lib -ldbus-1" \
 	DBUS_CFLAGS="-I${STAGING_DIR_$*}/usr/include/dbus-1.0" \
-	GLIB20_LIBS="-L${STAGING_DIR_$*}/usr/lib" \
+	GLIB20_LIBS="-L${STAGING_DIR_$*}/usr/lib -lglib-2.0" \
 	GLIB20_CFLAGS="-I${STAGING_DIR_$*}/usr/include/glib-2.0" \
 	GOBJECT_CFLAGS="-I${STAGING_DIR_$*}/usr/include/glib-2.0" \
-	GOBJECT_LIBS="-L${STAGING_DIR_$*}/usr/lib" \
+	GOBJECT_LIBS="-L${STAGING_DIR_$*}/usr/lib -lgobject-2.0" \
 	./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
 		--with-avahi-priv-access-group=nogroup --with-avahi-user=nobody --with-avahi-group=nogroup \
 		--with-autoipd-user=nogroup --with-autoipd-group=nogroup \
