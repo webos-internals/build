@@ -61,7 +61,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	CC="${CROSS_COMPILE_$*}gcc" \
 	LDFLAGS="-Wl,-L${STAGING_DIR_$*}/usr/lib,-rpath-link,${STAGING_DIR_$*}/usr/lib -L${STAGING_DIR_$*}/usr/lib" \
 	CFLAGS="-I${STAGING_DIR_$*}/usr/include" \
-	LIBXML_CFLAGS="-I${STAGIN_DIR_$*}/usr/include" LIBXML_LIBS="-L${STAGING_DIR_$*}/usr/lib/libxml2 -lxml2 -lz" \
+	LIBXML_CFLAGS="-I${STAGING_DIR_$*}/usr/include/libxml2" LIBXML_LIBS="-L${STAGING_DIR_$*}/usr/lib -lxml2 -lz" \
 	PKG_CONFIG_PATH="${STAGING_DIR_$*}/usr/lib/pkgconfig" \
 	./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --with-dbus-user=root \
 		--with-system-socket="/var/run/dbus/system_bus_socket" \
@@ -71,9 +71,26 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--without-x --with-xml=libxml \
 		--host=${CONFIGURE_HOST_$*}; \
 	${MAKE} clean all )
-	rm -r build/$*/usr/bin
-	rm -r build/$*/libexec
-
+	mkdir -p build/$*/usr/lib
+	mkdir -p build/$*/usr/include
+	install -m 755 build/src/dbus/.libs/*-1.a build/$*/usr/lib
+	install -m 755 build/src/dbus/.libs/*.so* build/$*/usr/lib
+	install -m 644 build/src/dbus/dbus-address.h build/$*/usr/include
+	install -m 644 build/src/dbus/dbus-bus.h build/$*/usr/include
+	install -m 644 build/src/dbus/dbus-connection.h build/$*/usr/include
+	install -m 644 build/src/dbus/dbus-errors.h build/$*/usr/include
+	install -m 644 build/src/dbus/dbus.h build/$*/usr/include
+	install -m 644 build/src/dbus/dbus-macros.h build/$*/usr/include
+	install -m 644 build/src/dbus/dbus-memory.h build/$*/usr/include
+	install -m 644 build/src/dbus/dbus-message.h build/$*/usr/include
+	install -m 644 build/src/dbus/dbus-misc.h build/$*/usr/include
+	install -m 644 build/src/dbus/dbus-pending-call.h build/$*/usr/include
+	install -m 644 build/src/dbus/dbus-protocol.h build/$*/usr/include
+	install -m 644 build/src/dbus/dbus-server.h build/$*/usr/include
+	install -m 644 build/src/dbus/dbus-shared.h build/$*/usr/include
+	install -m 644 build/src/dbus/dbus-signature.h build/$*/usr/include
+	install -m 644 build/src/dbus/dbus-threads.h build/$*/usr/include
+	install -m 644 build/src/dbus/dbus-types.h build/$*/usr/include
 	touch $@
 
 clobber::
