@@ -1,9 +1,10 @@
 NAME     = homecontrol
 TITLE    = Home Control
+MAINTAINER = sconix
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.8.1
+VERSION  = 0.8.2
 TYPE	 = Application
 CATEGORY = Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:HomeControl
@@ -12,6 +13,7 @@ DESCRIPTION = Home Control is an universal remote control application. Currently
 MINWEBOSVERSION = 2.1.0
 MAXWEBOSVERSION = 3.9.9
 CHANGELOG = \
+0.8.2: Fixed the startup server discovery spinner.<br>\
 0.8.1: Fixed small bug in manual adding of servers.<br>\
 0.8.0: First public release.
 
@@ -20,7 +22,7 @@ SCREENSHOTS = [\
 
 LICENSE  = BSD Open Source License
 
-SRC_GIT = git://git.webos-internals.org/applications/homecontrol.git
+SRC_GIT = git://github.com/${MAINTAINER}/${NAME}.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
@@ -46,11 +48,19 @@ build/.built-${VERSION}: build/all.built-${VERSION}
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
+	find ./build/src -name org.e.lnx.wee* >build/list-mv
+	while read file ; do \
+		new=`echo $$file | sed s/"org.e.lnx.wee"/"org.webosinternals"/` ; \
+		mv $$file $$new ; \
+	done < build/list-mv
+	grep -r "org.e.lnx.wee" build/src/* | grep -v "^Binary" | cut -d ':' -f 1 | sort | uniq >build/list-sed
+	while read file ; do \
+		sed -i s/"org.e.lnx.wee"/"org.webosinternals"/ $$file ; \
+	done < build/list-sed
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
 	cp -r build/src/enyo-app/* build/$*/usr/palm/applications/${APP_ID}/
 	mkdir -p build/$*/usr/palm/packages/${APP_ID}
 	cp -r build/src/package/* build/$*/usr/palm/packages/${APP_ID}/
-	rm -rf build/$*/usr/palm/applications/${APP_ID}/package
 	touch $@
 
 clobber::

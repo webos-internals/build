@@ -1,17 +1,11 @@
-NAME     = libdaemon
-TITLE    = libdaemon
-SRC_VER  = 0.14
-VERSION  = 0.14-1
+NAME     = libxml2
+TITLE    = libxml2
+SRC_VER  = 2.7.2
+VERSION  = 2.7.2-1
 APP_ID   = org.webosinternals.toolchain.${TITLE}
-HOMEPAGE = http://0pointer.de/lennart/projects/libdaemon
-MAINTAINER = Will Rea <will.rea@gmail.com>
-DESCRIPTION = Lightweight C library that eases the writing of UNIX daemons
-TYPE	 = Linux Application
-CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/a/ae/Icon_WebOSInternals_Base_Patch.png
-LICENSE  = LGPL v2.1 Open Source
 
-SRC_TGZ = http://0pointer.de/lennart/projects/libdaemon/libdaemon-${SRC_VER}.tar.gz
+SRC_TGZ = ftp://xmlsoft.org/libxml2/libxml2-2.7.2.tar.gz
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_armv6.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
@@ -39,7 +33,7 @@ unpack: build/.unpacked-${VERSION}
 build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/armv6 build/armv7 build/i686
-	tar -C build -z -x -f $<
+	tar -C build -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mv build/${NAME}-${SRC_VER} build/src
 	touch $@
 
@@ -53,17 +47,16 @@ include ../../support/cross-compile.mk
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src ; \
-	CC="${CROSS_COMPILE_$*}gcc" \
+	CC="${CROSS_COMPILE_$*}gcc" LDSHARED="${CROSS_COMPILE_$*}gcc" \
 	CFLAGS="-I${STAGING_DIR_$*}/usr/include" \
 	LDFLAGS="-L${STAGING_DIR_$*}/usr/lib" \
-	./configure --prefix=/usr --disable-lynx --host=${CONFIGURE_HOST_$*}; \
+	./configure --prefix=/usr --host=${CONFIGURE_HOST_$*}; \
 	${MAKE} clean all)
-	mkdir -p build/$*/usr/lib/pkgconfig
-	mkdir -p build/$*/include/libdaemon
-	install -m 755 build/src/libdaemon/.libs/*.a build/$*/usr/lib
-	install -m 755 build/src/libdaemon/.libs/*.so* build/$*/usr/lib
-	install -m 644 build/src/libdaemon/*.h build/$*/usr/include/libdaemon
-	install -m 644 build/src/pkgconfig/libdaemon.pc build/$*/usr/lib/pkgconfig
+	mkdir -p build/$*/usr/lib
+	mkdir -p build/$*/usr/include/libxml2/libxml
+	install -m 755 build/src/.libs/*.a build/$*/usr/lib
+	install -m 755 build/src/.libs/*.so* build/$*/usr/lib
+	install -m 644 build/src/include/libxml/*.h build/$*/usr/include/libxml2/libxml
 	touch $@
 
 clobber::

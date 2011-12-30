@@ -36,7 +36,7 @@ build/.staged-${VERSION}: build/armv7.staged-${VERSION}
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
 
-build/.unpacked-${VERSION}: ${DL_DIR}/pulseaudio-${VERSION}.tar.gz
+build/.unpacked-${VERSION}: ${DL_DIR}/pulseaudio-${SRC_VER}.tar.gz
 	rm -rf build
 	mkdir -p build/armv7
 	tar -C build -z -x -f $<

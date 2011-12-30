@@ -43,7 +43,7 @@ SCREENSHOTS = [\
 
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git@github.com:webos-internals/theme-manager.git
+SRC_GIT = git://github.com/webos-internals/theme-manager.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk

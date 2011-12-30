@@ -3,9 +3,10 @@ MAINTAINER = Janne Julkunen <janne.julkunen@e-lnx.org>
 TITLE    = Mode Switcher
 APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.srv
+SYS_ID   = org.webosinternals.${NAME}.sys
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 2.5.4
+VERSION  = 2.5.5
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/showthread.php?p=2935803&posted=1#post2919102
@@ -57,7 +58,7 @@ LICENSE  = BSD Open Source License
 POSTINSTALLFLAGS = RestartDevice
 POSTUPDATEFLAGS = RestartDevice
 
-SRC_GIT = git://git.webos-internals.org/applications/modeswitcher.git
+SRC_GIT = git://github.com/sconix/modeswitcher.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk 
@@ -86,26 +87,28 @@ include ../../support/cross-compile.mk
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
-	( cd build/src/c-service ; \
-	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc CFLAGS=${CFLAGS_$*} \
-	  clobber impersonate \
-	)
+#	( cd build/src/impersonate ; \
+#	  ${MAKE} STAGING_DIR=${STAGING_DIR_$*} CC=${CROSS_COMPILE_$*}gcc CFLAGS=${CFLAGS_$*} \
+#	  clobber impersonate \
+#	)
+	find ./build/src -name org.e.lnx.wee* >build/list-mv
+	while read file ; do \
+		new=`echo $$file | sed s/"org.e.lnx.wee"/"org.webosinternals"/` ; \
+		mv $$file $$new ; \
+	done < build/list-mv
+	grep -r "org.e.lnx.wee" ./build/src/* | grep -v "^Binary" | cut -d ':' -f 1 | sort | uniq >build/list-sed
+	while read file ; do \
+		sed -i s/"org.e.lnx.wee"/"org.webosinternals"/ $$file ; \
+	done < build/list-sed
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
-	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
+	cp -r build/src/mojo-app/* build/$*/usr/palm/applications/${APP_ID}/
 	mkdir -p build/$*/usr/palm/services/${SRV_ID}
 	cp -r build/src/node-service/* build/$*/usr/palm/services/${SRV_ID}/
-	rm -rf build/$*/usr/palm/applications/${APP_ID}/node-service
-	rm -rf build/$*/usr/palm/applications/${APP_ID}/c-service
-	mkdir -p build/$*/usr/palm/applications/${APP_ID}/bin
-	mkdir -p build/$*/usr/palm/applications/${APP_ID}/cfg
-	cp build/src/c-service/*.json build/$*/usr/palm/applications/${APP_ID}/cfg/
-	cp build/src/c-service/*.service build/$*/usr/palm/applications/${APP_ID}/cfg/
-	cp build/src/node-service/*.json build/$*/usr/palm/applications/${APP_ID}/cfg/
-	cp build/src/node-service/*.service build/$*/usr/palm/applications/${APP_ID}/cfg/
-	install -m 755 build/src/c-service/impersonate build/$*/usr/palm/applications/${APP_ID}/bin/
+	mkdir -p build/$*/usr/palm/services/${SYS_ID}
+	cp -r build/src/impersonate/org* build/$*/usr/palm/services/${SYS_ID}/
+	install -m 755 build/src/impersonate/impersonate build/$*/usr/palm/services/${SYS_ID}/
 	mkdir -p build/$*/usr/palm/packages/${APP_ID}
 	cp -r build/src/package/* build/$*/usr/palm/packages/${APP_ID}/
-	rm -rf build/$*/usr/palm/applications/${APP_ID}/package
 	touch $@
 
 build/%/CONTROL/postinst:

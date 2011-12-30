@@ -1,8 +1,8 @@
 NAME     = wterm
 TITLE    = wTerm
 APP_ID   = us.ryanhope.${NAME}
-SRC_VER  = 0.1.5
-VERSION  = ${SRC_VER}-3
+SRC_VER  = 0.1.8
+VERSION  = ${SRC_VER}-1
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = System Utilities
@@ -11,11 +11,15 @@ HOMEPAGE = https://github.com/PuffTheMagic/wTerm
 ICON     = https://github.com/PuffTheMagic/wTerm/raw/master/images/icon-64.png
 DESCRIPTION = wTerm is a Enyo PDK/Hybrid Terminal Emulator for the webOS platform.<br><br><a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VU4L7VTGSR5C2'><img src='http://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif'/></a><br>
 CHANGELOG = \
+0.1.8: Function keys now work, implement support for insert/delete line, delete characters<br> \
+0.1.7: Fix the pipe and plus keys<br> \
+0.1.6: Tinkering<br> \
 0.1.5: Do better on basic vttest's<br> \
 0.1.4: Handle some uncaught CSIs<br> \
 0.1.3: First decent alpha version to play with.
 
 SCREENSHOTS = [\
+\"http://ompldr.org/vYnl6Mw/wterm_2011-29-12_152014.png\",\
 \"http://ompldr.org/vYnV4MQ/wterm_2011-21-12_205004.png\",\
 ]
 LICENSE  = GPL v2 Open Source
@@ -55,9 +59,10 @@ include ../../support/cross-compile.mk
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	echo "CXX=${CROSS_COMPILE_$*}g++" > build/src/Makefile.inc
+	echo "CC=${CROSS_COMPILE_$*}gcc" >> build/src/Makefile.inc
 	echo "MARCH_TUNE=-O2 -march=armv7-a -mcpu=cortex-a8 -mfpu=neon -mfloat-abi=softfp" >> build/src/Makefile.inc
 	echo "ROOT=${STAGING_DIR_$*}/usr" >> build/src/Makefile.inc
-	cd build/src; ${MAKE} clean wterm DEVICE=1
+	cd build/src; ${MAKE} clean wterm
 	mkdir -p ${D}
 	${CROSS_COMPILE_$*}strip build/src/${NAME}
 	install -m 755 build/src/${NAME} ${D}

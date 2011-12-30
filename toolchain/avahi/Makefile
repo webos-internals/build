@@ -59,7 +59,7 @@ installpkgdir=${PWD}/build/$*
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src ; \
-	CC="${CROSS_COMPILE_$*}gcc";\
+	CC="${CROSS_COMPILE_$*}gcc" \
 	CFLAGS="-I${STAGING_DIR_$*}/usr/include -I${STAGING_DIR_$*}/usr/include/gdbm -I${STAGING_DIR_$*}/usr/include/glib-2.0 \
 		-I${STAGING_DIR_$*}/usr/include/dbus-1.0" \
 	LDFLAGS="-Wl,-R/usr/lib -Wl,-R/lib -Wl,-R/media/cryptofs/apps/usr/palm/applications/org.webosinternals.libdaemon/lib \
@@ -70,13 +70,12 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
 		--with-avahi-priv-access-group=nogroup --with-avahi-user=nobody --with-avahi-group=nogroup \
 		--with-autoipd-user=nogroup --with-autoipd-group=nogroup \
-		--with-xml=expat --disable-monodoc --disable-stack-protector \
+		--with-xml=libxml --disable-monodoc --disable-stack-protector \
 		--disable-python --disable-mono --with-distro=none --enable-compat-libdns_sd \
 		--disable-qt3 --disable-qt4 --disable-gtk --disable-gtk3 \
 		--disable-manpages --disable-xmltoman --host=${CONFIGURE_HOST_$*}; \
 	${MAKE} && make DESTDIR=${installpkgdir} install )
 	rm -r build/$*/etc
-
 	# Symlinks seemed to disappear when installed on device, lets just make them actual files instead
 	rm build/$*/usr/lib/libavahi-common.so.3 \
 		build/$*/usr/lib/libavahi-client.so.3 build/$*/usr/lib/libavahi-core.so.7

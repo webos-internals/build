@@ -58,7 +58,7 @@ installpkgdir=${PWD}/build/$*
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src ; \
-	CC=${CROSS_COMPILE_$*}gcc;\
+	CC="${CROSS_COMPILE_$*}gcc" \
 	LDFLAGS="-Wl,-L${STAGING_DIR_$*}/usr/lib,-rpath-link,${STAGING_DIR_$*}/usr/lib -L${STAGING_DIR_$*}/usr/lib" \
 	CFLAGS="-I${STAGING_DIR_$*}/usr/include" \
 	PKG_CONFIG_PATH="${STAGING_DIR_$*}/usr/lib/pkgconfig" \
@@ -67,11 +67,11 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--with-system-pid-file="/var/run/dbus.pid" \
 		--with-dbus-user=root \
 		--disable-console-owner-file \
-		--without-x \
+		--without-x --with-xml=libxml \
 		--host=${CONFIGURE_HOST_$*}; \
 	${MAKE} clean all && make DESTDIR=${installpkgdir} install )
-	rm -r build/$*/usr/{bin,libexec}
-
+	rm -r build/$*/usr/bin
+	rm -f build/$*/libexec
 	rm build/$*/usr/lib/libdbus-1.so.3
 	cp build/$*/usr/lib/libdbus-1.so.3.5.8 \
 		build/$*/usr/lib/libdbus-1.so.3
