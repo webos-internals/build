@@ -231,7 +231,7 @@ sdl:	staging/usr/include/ltdl.h \
 	staging/usr/include/SDL/SDL_ttf.h \
 	staging/usr/include/GLES/gl.h \
 
-pulse:	staging/usr/include/libxml2/libxml/threads.h \
+pulse:	staging/usr/include/expat.h \
 	staging/usr/include/glibconfig.h \
 	staging/usr/include/gdbm/gdbm.h \
 	staging/usr/include/dbus-1.0/dbus/dbus.h \
@@ -257,8 +257,8 @@ toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu:
 staging/usr/include/GLES/gl.h:
 	${MAKE} -C toolchain/libGLES_CM stage
 
-staging/usr/include/libxml2/libxml/threads.h:
-	${MAKE} -C toolchain/libxml2 stage
+staging/usr/include/expat.h:
+	${MAKE} -C toolchain/expat stage
 
 staging/usr/include/sndfile.h:
 	${MAKE} -C toolchain/libsndfile stage

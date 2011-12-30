@@ -60,7 +60,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	./configure --prefix=/usr --disable-lynx --host=${CONFIGURE_HOST_$*}; \
 	${MAKE} clean all)
 	mkdir -p build/$*/usr/lib/pkgconfig
-	mkdir -p build/$*/include/libdaemon
+	mkdir -p build/$*/usr/include/libdaemon
 	install -m 755 build/src/libdaemon/.libs/*.a build/$*/usr/lib
 	install -m 755 build/src/libdaemon/.libs/*.so* build/$*/usr/lib
 	install -m 644 build/src/libdaemon/*.h build/$*/usr/include/libdaemon

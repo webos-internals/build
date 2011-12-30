@@ -46,9 +46,9 @@ include ../../support/cross-compile.mk
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	( cd build/src ; \
-	  CC=${CROSS_COMPILE_$*}gcc \
-	  CFLAGS=-I${STAGING_DIR_$*}/usr/include \
-	  LDFLAGS=-L${STAGING_DIR_$*}/usr/lib \
+	  CC="${CROSS_COMPILE_$*}gcc" \
+	  CFLAGS="-I${STAGING_DIR_$*}/usr/include" \
+	  LDFLAGS="-L${STAGING_DIR_$*}/usr/lib" \
 	  ./configure --host=${CONFIGURE_HOST_$*} \
                 --disable-static \
                 --disable-nls ; \

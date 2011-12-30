@@ -61,14 +61,13 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	CC="${CROSS_COMPILE_$*}gcc" \
 	LDFLAGS="-Wl,-L${STAGING_DIR_$*}/usr/lib,-rpath-link,${STAGING_DIR_$*}/usr/lib -L${STAGING_DIR_$*}/usr/lib" \
 	CFLAGS="-I${STAGING_DIR_$*}/usr/include" \
-	LIBXML_CFLAGS="-I${STAGING_DIR_$*}/usr/include/libxml2" LIBXML_LIBS="-L${STAGING_DIR_$*}/usr/lib -lxml2 -lz" \
 	PKG_CONFIG_PATH="${STAGING_DIR_$*}/usr/lib/pkgconfig" \
 	./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --with-dbus-user=root \
 		--with-system-socket="/var/run/dbus/system_bus_socket" \
 		--with-system-pid-file="/var/run/dbus.pid" \
 		--with-dbus-user=root \
 		--disable-console-owner-file \
-		--without-x --with-xml=libxml \
+		--without-x --with-xml=expat \
 		--host=${CONFIGURE_HOST_$*}; \
 	${MAKE} clean all )
 	mkdir -p build/$*/usr/lib
