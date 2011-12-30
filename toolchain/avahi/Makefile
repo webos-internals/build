@@ -76,7 +76,6 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--disable-manpages --disable-xmltoman --host=${CONFIGURE_HOST_$*}; \
 	${MAKE} && make DESTDIR=${installpkgdir} install )
 	rm -r build/$*/etc
-
 	# Symlinks seemed to disappear when installed on device, lets just make them actual files instead
 	rm build/$*/usr/lib/libavahi-common.so.3 \
 		build/$*/usr/lib/libavahi-client.so.3 build/$*/usr/lib/libavahi-core.so.7
