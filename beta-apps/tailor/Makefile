@@ -29,7 +29,7 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/d/d9/Tailor_ss2.png\" ]
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git://git.webos-internals.org/applications/tailor.git
+SRC_GIT = git://github.com/rwhitby/tailor.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
