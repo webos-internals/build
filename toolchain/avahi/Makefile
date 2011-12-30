@@ -59,7 +59,7 @@ installpkgdir=${PWD}/build/$*
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src ; \
-	CC="${CROSS_COMPILE_$*}gcc";\
+	CC="${CROSS_COMPILE_$*}gcc" \
 	CFLAGS="-I${STAGING_DIR_$*}/usr/include -I${STAGING_DIR_$*}/usr/include/gdbm -I${STAGING_DIR_$*}/usr/include/glib-2.0 \
 		-I${STAGING_DIR_$*}/usr/include/dbus-1.0" \
 	LDFLAGS="-Wl,-R/usr/lib -Wl,-R/lib -Wl,-R/media/cryptofs/apps/usr/palm/applications/org.webosinternals.libdaemon/lib \
