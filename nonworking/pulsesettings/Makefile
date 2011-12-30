@@ -27,7 +27,7 @@ LICENSE  = BSD Open Source License
 
 DEPENDS = org.webosinternals.pulseaudio-modules
 
-SRC_GIT = git@github.com:webos-internals/pulse-settings.git
+SRC_GIT = git://github.com/webos-internals/pulse-settings.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk 

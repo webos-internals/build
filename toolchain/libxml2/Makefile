@@ -47,14 +47,14 @@ include ../../support/cross-compile.mk
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src ; \
-	CC=${CROSS_COMPILE_$*}gcc;\
+	CC="${CROSS_COMPILE_$*}gcc" LDSHARED="${CROSS_COMPILE_$*}gcc" \
 	CFLAGS="-I${STAGING_DIR_$*}/usr/include" \
 	LDFLAGS="-L${STAGING_DIR_$*}/usr/lib" \
-	./configure --prefix=/usr --with-zlib=${STAGING_DIR_$*}/usr \
-		--host=${CONFIGURE_HOST_$*}; \
+	./configure --prefix=/usr --host=${CONFIGURE_HOST_$*}; \
 	${MAKE} clean all)
 	mkdir -p build/$*/usr/{lib,include/libxml2/libxml}
-	install -m 755 build/src/.libs/{*.so*,*.a} build/$*/usr/lib
+	install -m 755 build/src/.libs/*.a build/$*/usr/lib
+	install -m 755 build/src/.libs/*.so* build/$*/usr/lib
 	install -m 644 build/src/include/libxml/*.h build/$*/usr/include/libxml2/libxml
 	touch $@
 

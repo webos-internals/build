@@ -40,7 +40,7 @@ SCREENSHOTS = [\
 
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git@github.com:webos-internals/tweaks.git
+SRC_GIT = git://github.com/webos-internals/tweaks.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
