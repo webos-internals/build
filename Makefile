@@ -213,8 +213,7 @@ toolchain: toolchain/ipkg-utils/ipkg-make-index \
 	   staging/usr/include/openssl/crypto.h \
 	   staging/usr/include/curl/curl.h \
 	   staging/usr/include/fuse/fuse.h \
-	   sdl \
-	   pulse
+	   sdl
 
 sdl:	staging/usr/include/ltdl.h \
 	staging/usr/include/gdbm/gdbm.h \
