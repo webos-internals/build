@@ -45,7 +45,7 @@ installpkgdir=${PWD}/build/$*
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src ; \
-	CC=${CROSS_COMPILE_$*}gcc;\
+	CC="${CROSS_COMPILE_$*}gcc" \
 	LDFLAGS="-Wl,-L${STAGING_DIR_$*}/usr/lib,-rpath-link,${STAGING_DIR_$*}/usr/lib -L${STAGING_DIR_$*}/usr/lib" \
 	CFLAGS="-I${STAGING_DIR_$*}/usr/include" \
 	PKG_CONFIG_PATH="${STAGING_DIR_$*}/usr/lib/pkgconfig" \
