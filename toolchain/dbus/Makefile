@@ -71,11 +71,11 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--host=${CONFIGURE_HOST_$*}; \
 	${MAKE} clean all )
 	mkdir -p build/$*/usr/lib/pkgconfig
-	mkdir -p build/$*/usr/include/dbus
+	mkdir -p build/$*/usr/include/dbus-1/dbus
 	install -m 755 build/src/dbus/.libs/*.a build/$*/usr/lib
 	install -m 755 build/src/dbus/.libs/*.so* build/$*/usr/lib
 	install -m 755 build/src/dbus-1.pc build/$*/usr/lib/pkgconfig
-	install -m 644 build/src/dbus/*.h build/$*/usr/include/dbus
+	install -m 644 build/src/dbus/*.h build/$*/usr/include/dbus-1/dbus
 	touch $@
 
 clobber::
