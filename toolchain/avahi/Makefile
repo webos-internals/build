@@ -72,7 +72,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--disable-python --disable-mono --with-distro=none --enable-compat-libdns_sd \
 		--disable-qt3 --disable-qt4 --disable-gtk --disable-gtk3 \
 		--disable-manpages --disable-xmltoman --host=${CONFIGURE_HOST_$*}; \
-	${MAKE})
+	${MAKE} )
 	mkdir -p build/$*/usr/lib
 	mkdir -p build/$*/usr/include/avahi-client
 	install -m 644 build/src/avahi-client/client.h build/$*/usr/include/avahi-client
@@ -109,6 +109,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	install -m 755 build/src/avahi-gobject/.libs/libavahi-gobject.a build/$*/usr/lib
 	mkdir build/$*/usr/lib/pkgconfig
 	install -m 644 build/src/*.pc build/$*/usr/lib/pkgconfig
+	( cd build/src ; ${MAKE} clean )
 	touch $@
 
 clobber::
