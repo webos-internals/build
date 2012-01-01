@@ -36,7 +36,7 @@ build/.staged-${VERSION}: build/armv7.staged-${VERSION}
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
 
-build/.unpacked-${VERSION}: ${DL_DIR}/pulseaudio-${SRC_VER}.tar.gz
+build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/armv7
 	tar -C build -z -x -f $<
@@ -62,25 +62,36 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	  ln -s ${STAGING_DIR_$*}/usr/lib/libltdl.* libltdl ;\
 	  sed -i 's/--ldtl//' bootstrap.sh ;\
 	  sed -i 's/man po/man/' Makefile.am ;\
-	  CC=${CROSS_COMPILE_$*}gcc \
+	  CC="${CROSS_COMPILE_$*}gcc" \
 	  CFLAGS="-march=armv7-a -I${STAGING_DIR_$*}/usr/include -I${STAGING_DIR_$*}/usr/include/gdbm -I${STAGING_DIR_$*}/usr/include/alsa -I${STAGING_DIR_$*}/usr/include/dbus-1.0" \
 	  LDFLAGS="-Wl,-R/media/cryptofs/apps/usr/palm/applications/org.webosinternals.avahi/lib \
 		-Wl,-R/media/cryptofs/apps/usr/palm/applications/org.webosinternals.pulseaudio-modules \
 		-Wl,-R/usr/lib/pulse-0.9.22 \
 		-Wl,-R/media/cryptofs/apps/usr/palm/applications/org.webosinternals.dbus/lib \
 		-L${STAGING_DIR_$*}/usr/lib,-rpath-link,${STAGING_DIR_$*}/usr/lib -L${STAGING_DIR_$*}/usr/lib" \
+	  LIBS="-lsndfile" \
 	  PKG_CONFIG_PATH="${STAGING_DIR_$*}/usr/lib/pkgconfig" \
 	  DBUS_CFLAGS="-I${STAGING_DIR_$*}/usr/include/dbus-1.0" \
 	  GLIB20_CFLAGS="-I${STAGING_DIR_$*}/usr/include/glib-2.0" \
-	  LIBSPEEX_CFLAGS="-I${STAGING_DIR_$*}/usr/include" \
+	  LIBSNDFILE_CFLAGS="-I${STAGING_DIR_$*}/usr/include" \
+	  LIBSNDFILE_LIBS="-L${STAGING_DIR_$*}/usr/lib -lsndfile" \
+	  LIBSPEEX_LIBS="-L${STAGING_DIR_$*}/usr/lib -lspeex -lspeexdsp" \
+	  LIBSPEEX_CFLAGS="-I${STAGING_DIR_$*}/usr/include/speex" \
+	  LIBOIL_CFLAGS="-I${STAGING_DIR_$*}/usr/include/liboil" \
+	  LIBOIL_LIBS="-L${STAGING_DIR_$*}/usr/lib -loil-0.3" \
 	  lt_cv_path_NM="/usr/bin/nm" \
 	  ./bootstrap.sh --prefix=/usr --disable-manpages --host=${CONFIGURE_HOST_$*} ;\
-	  ${MAKE} all )
+	  ${MAKE} V=1 all )
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/modules
-	install -m 755 build/src/src/.libs/module-{raop,zeroconf,rtp}*.so build/$*/usr/palm/applications/${APP_ID}/modules
+	install -m 755 build/src/src/.libs/module-raop*.so build/$*/usr/palm/applications/${APP_ID}/modules
+	install -m 755 build/src/src/.libs/module-zeroconf*.so build/$*/usr/palm/applications/${APP_ID}/modules
+	install -m 755 build/src/src/.libs/module-rtp*.so build/$*/usr/palm/applications/${APP_ID}/modules
 	install -m 755 build/src/src/.libs/module-palm-policy.so build/$*/usr/palm/applications/${APP_ID}/modules
-	install -m 755 build/src/src/.libs/{module-native-protocol-tcp.so,module-tunnel-sink.so} build/$*/usr/palm/applications/${APP_ID}/modules
-	install -m 755 build/src/src/.libs/{libavahi-wrap.so,librtp.so,libraop.so} build/$*/usr/palm/applications/${APP_ID}
+	install -m 755 build/src/src/.libs/module-native-protocol-tcp.so build/$*/usr/palm/applications/${APP_ID}/modules
+	install -m 755 build/src/src/.libs/module-tunnel-sink.so build/$*/usr/palm/applications/${APP_ID}/modules
+	install -m 755 build/src/src/.libs/libavahi-wrap.so build/$*/usr/palm/applications/${APP_ID}
+	install -m 755 build/src/src/.libs/librtp.so build/$*/usr/palm/applications/${APP_ID}
+	install -m 755 build/src/src/.libs/libraop.so build/$*/usr/palm/applications/${APP_ID}
 	touch $@
 
 clobber::

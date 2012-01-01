@@ -49,6 +49,8 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	LDFLAGS="-Wl,-L${STAGING_DIR_$*}/usr/lib,-rpath-link,${STAGING_DIR_$*}/usr/lib -L${STAGING_DIR_$*}/usr/lib" \
 	CFLAGS="-I${STAGING_DIR_$*}/usr/include" \
 	PKG_CONFIG_PATH="${STAGING_DIR_$*}/usr/lib/pkgconfig" \
+	GLIB_CFLAGS="-I${STAGING_DIR_$*}/usr/include/glib-2.0" \
+	GLIB_LIBS="-L${STAGING_DIR_$*}/usr/lib -lglib-2.0" \
 	./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --with-dbus-user=root \
 		--with-system-socket="/var/run/dbus/system_bus_socket" \
 		--with-system-pid-file="/var/run/dbus.pid" \
@@ -57,17 +59,20 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--without-x \
 		--host=${CONFIGURE_HOST_$*}; \
 	${MAKE} clean all && make DESTDIR=${installpkgdir} install )
-	rm -r build/$*/{usr/include,usr/lib/pkgconfig,usr/lib/*.la,var}
+	rm -r build/$*/usr/include
+	rm -r build/$*/usr/lib/pkgconfig
+	rm -r build/$*/usr/lib/*.la
+	rm -r build/$*/var
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
-
 	sed -i 's|/usr|/media/cryptofs/apps/usr/palm/applications/${APP_ID}|' build/$*/etc/dbus-1/system.conf
-
 	rm build/$*/usr/lib/libdbus-1.so.3
 	cp build/$*/usr/lib/libdbus-1.so.3.5.8 \
 		build/$*/usr/lib/libdbus-1.so.3
-
-	mv build/$*/usr/{bin,lib,libexec,share} build/$*/etc build/$*/usr/palm/applications/${APP_ID}
-
+	mv build/$*/etc build/$*/usr/palm/applications/${APP_ID}
+	mv build/$*/usr/bin build/$*/usr/palm/applications/${APP_ID}
+	mv build/$*/usr/lib build/$*/usr/palm/applications/${APP_ID}
+	mv build/$*/usr/libexec build/$*/usr/palm/applications/${APP_ID}
+	mv build/$*/usr/share build/$*/usr/palm/applications/${APP_ID}
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/upstart
 	install -m 664 upstart/org.webosinternals.dbus build/$*/usr/palm/applications/${APP_ID}/upstart
 	touch $@

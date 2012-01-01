@@ -62,6 +62,8 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	LDFLAGS="-Wl,-L${STAGING_DIR_$*}/usr/lib,-rpath-link,${STAGING_DIR_$*}/usr/lib -L${STAGING_DIR_$*}/usr/lib" \
 	CFLAGS="-I${STAGING_DIR_$*}/usr/include" \
 	PKG_CONFIG_PATH="${STAGING_DIR_$*}/usr/lib/pkgconfig" \
+	GLIB_CFLAGS="-I${STAGING_DIR_$*}/usr/include/glib-2.0" \
+	GLIB_LIBS="-L${STAGING_DIR_$*}/usr/lib -lglib-2.0" \
 	./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --with-dbus-user=root \
 		--with-system-socket="/var/run/dbus/system_bus_socket" \
 		--with-system-pid-file="/var/run/dbus.pid" \

@@ -49,7 +49,7 @@ include ../../support/cross-compile.mk
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	( cd build/src ; \
-	  CC=${CROSS_COMPILE_$*}gcc \
+	  CC="${CROSS_COMPILE_$*}gcc" \
 	  LIBSNDFILE_CFLAGS="-I${STAGING_DIR_$*}/usr/include" \
 	  LIBSNDFILE_LIBS="-L${STAGING_DIR_$*}/usr/lib -lsndfile" \
 	  LIBSPEEX_LIBS="-L${STAGING_DIR_$*}/usr/lib -lspeex -lspeexdsp" \

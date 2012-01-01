@@ -46,9 +46,9 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	LDFLAGS="-L${STAGING_DIR_$*}/usr/lib" \
 	./configure --prefix=/usr --disable-lynx --host=${CONFIGURE_HOST_$*}; \
 	${MAKE} clean all)
-
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/lib
-	install -m 755 build/src/libdaemon/.libs/{*.so*,*.a} build/$*/usr/palm/applications/${APP_ID}/lib
+	install -m 755 build/src/libdaemon/.libs/*.a build/$*/usr/palm/applications/${APP_ID}/lib
+	install -m 755 build/src/libdaemon/.libs/*.so* build/$*/usr/palm/applications/${APP_ID}/lib
 	touch $@
 
 clobber::

@@ -33,5 +33,4 @@ build/%.staged-${VERSION} : build/%.built-${VERSION}
 	sed -i 's|/opt|/usr|' ../../staging/$*/usr/lib/pkgconfig/gmodule-no-export-2.0.pc
 	sed -i 's|/opt|/usr|' ../../staging/$*/usr/lib/pkgconfig/gobject-2.0.pc
 	sed -i 's|/opt|/usr|' ../../staging/$*/usr/lib/pkgconfig/gthread-2.0.pc
-	rm -f ../../staging/$*/usr/lib/*2.0.la
 	touch $@
