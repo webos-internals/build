@@ -1,7 +1,7 @@
 NAME     = wterm
 TITLE    = wTerm
 APP_ID   = us.ryanhope.${NAME}
-SRC_VER  = 0.1.8
+SRC_VER  = 0.1.9
 VERSION  = ${SRC_VER}-1
 TYPE     = Application
 BLDFLAGS = -p
@@ -11,6 +11,7 @@ HOMEPAGE = https://github.com/PuffTheMagic/wTerm
 ICON     = https://github.com/PuffTheMagic/wTerm/raw/master/images/icon-64.png
 DESCRIPTION = wTerm is a Enyo PDK/Hybrid Terminal Emulator for the webOS platform.<br><br><a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VU4L7VTGSR5C2'><img src='http://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif'/></a><br>
 CHANGELOG = \
+0.1.9: Customizable font size, show/hide cursor support, set/clear tab stops<br> \
 0.1.8: Function keys now work, implement support for insert/delete line, delete characters<br> \
 0.1.7: Fix the pipe and plus keys<br> \
 0.1.6: Tinkering<br> \
