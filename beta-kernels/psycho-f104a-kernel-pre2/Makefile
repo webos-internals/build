@@ -24,7 +24,7 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
 
 TYPE = Kernel
 
-KERNEL_GIT = git@github.com:uNiXpSyChO/webos-warbird-kernel.git
+KERNEL_GIT = git://github.com/uNiXpSyChO/webos-warbird-kernel.git
 KERNEL_TAG = v${VERSION}
 
 include ../../support/kernel.mk
