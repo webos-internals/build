@@ -1,7 +1,7 @@
 NAME     = dbus
 TITLE    = dbus
 SRC_VER  = 1.4.16
-VERSION  = 1.4.16-1
+VERSION  = 1.4.16-2
 APP_ID   = org.webosinternals.toolchain.${NAME}
 HOMEPAGE = http://dbus.freedesktop.org
 MAINTAINER = Will Rea <will.rea@gmail.com>
@@ -68,6 +68,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--with-system-socket="/var/run/dbus/system_bus_socket" \
 		--with-system-pid-file="/var/run/dbus.pid" \
 		--with-dbus-user=root \
+		--disable-tests \
 		--disable-console-owner-file \
 		--without-x --with-xml=expat \
 		--host=${CONFIGURE_HOST_$*}; \

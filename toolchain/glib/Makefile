@@ -1,6 +1,6 @@
 NAME     = glib
 APP_ID	 = org.webosinternals.toolchain.glib
-VERSION  = 2.20.4-1
+VERSION  = 2.20.4-2
 LICENSE  = LGPL Open Source
 
 SRC_OPTWARE = ${NAME}_${VERSION}
@@ -33,4 +33,5 @@ build/%.staged-${VERSION} : build/%.built-${VERSION}
 	sed -i 's|/opt|/usr|' ../../staging/$*/usr/lib/pkgconfig/gmodule-no-export-2.0.pc
 	sed -i 's|/opt|/usr|' ../../staging/$*/usr/lib/pkgconfig/gobject-2.0.pc
 	sed -i 's|/opt|/usr|' ../../staging/$*/usr/lib/pkgconfig/gthread-2.0.pc
+	rm -f ../../staging/$*/usr/lib/*2.0.la >/dev/null 2>&1
 	touch $@
