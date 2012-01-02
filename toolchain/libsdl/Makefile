@@ -66,6 +66,8 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--disable-diskaudio \
 		--disable-dummyaudio \
 		--disable-mintaudio \
+                --disable-video-directfb \
+                --disable-video-fbcon \
 		--disable-nasm \
 		--disable-altivec \
 		--disable-ipod \
