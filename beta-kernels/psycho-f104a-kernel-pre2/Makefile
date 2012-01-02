@@ -5,7 +5,7 @@ DEVICE = pre2
 #VERSIONS = 2.1.0-87 2.2.4-87
 VERSIONS = 2.2.4-88
 APPINFO_DESCRIPTION = The latest experimental kernel from uNiXpSyChO.<br><br>\
-Features:<br> * Screenstate v3<br> * Lagfree<br> * 1.1GHz<br> * More Tweaks<br><br>\
+Features:<br> * Screenstate v3<br> * Lagfree<br> * 1.2GHz<br> * More Tweaks<br><br>\
 For more information, visit ${HOMEPAGE}<br>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}<br>
 APPINFO_CHANGELOG = [ \
