@@ -17,7 +17,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-SUBDIRS = apps services linux
+APPDIRS = apps services linux
 KERNDIR = kernels
 PTCHDIR = autopatch
 OPTWDIR = optware
@@ -64,15 +64,15 @@ webos-kernels-index: ipkgs/webos-kernels/1.4.5/Packages ipkgs/webos-kernels/1.4.
 .PHONY: webos-internals-index
 webos-internals-index: ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv6/Packages ipkgs/webos-internals/armv7/Packages	
 
-ipkgs/webos-internals/%/Packages: package-subdirs
+ipkgs/webos-internals/%/Packages: package-appdirs
 	rm -rf ipkgs/webos-internals/$*
 	mkdir -p ipkgs/webos-internals/$*
 	if [ "$*" = "i686" -o "$*" = "all" ] ; then \
-	  ( find ${SUBDIRS} -mindepth 2 -maxdepth 2 -type d -name ipkgs -print | \
+	  ( find ${APPDIRS} -mindepth 2 -maxdepth 2 -type d -name ipkgs -print | \
 	    xargs -I % find % -name "*_$*.ipk" -print | \
 	    xargs -I % rsync -i -a % ipkgs/webos-internals/$* ) ; \
 	else \
-	  ( find ${SUBDIRS} -mindepth 2 -maxdepth 2 -type d -name ipkgs -print | \
+	  ( find ${APPDIRS} -mindepth 2 -maxdepth 2 -type d -name ipkgs -print | \
 	    xargs -I % find % \( -name "*_$*.ipk" -o -name "*_arm.ipk" \) -print | \
 	    xargs -I % rsync -i -a % ipkgs/webos-internals/$* ) ; \
 	fi	
@@ -154,10 +154,10 @@ ipkgs/%/Packages: package-feeds
 	rm -f ipkgs/$*/Packages.orig*
 	gzip -c ipkgs/$*/Packages > ipkgs/$*/Packages.gz
 
-package: package-subdirs package-webos-patches package-webos-kernels package-optware package-feeds
+package: package-appdirs package-webos-patches package-webos-kernels package-optware package-feeds
 
-package-subdirs: toolchain
-	for f in `find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print` ; do \
+package-appdirs: toolchain
+	for f in `find ${APPDIRS} -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package ; \
 	  else \
@@ -346,7 +346,7 @@ upload:
 alpha: alpha-apps alpha-patches alpha-kernels alpha-optware
 
 alpha-apps:
-	${MAKE} SUBDIRS="alpha-apps" FEED="WebOS Internals Alpha" webos-internals-index
+	${MAKE} APPDIRS="alpha-apps" FEED="WebOS Internals Alpha" webos-internals-index
 	-rsync -avr ipkgs/webos-internals/ preware@ipkg4.preware.org:/home/preware/htdocs/ipkg/alpha/apps/
 	#-rsync -avr ipkgs/webos-internals/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/alpha/apps/
 	-rsync -avr ipkgs/webos-internals/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/alpha/apps/
@@ -377,7 +377,7 @@ alpha-optware:
 beta: beta-apps beta-patches beta-kernels beta-optware
 
 beta-apps:
-	${MAKE} SUBDIRS="beta-apps" FEED="WebOS Internals Beta" webos-internals-index
+	${MAKE} APPDIRS="beta-apps" FEED="WebOS Internals Beta" webos-internals-index
 	-rsync -avr ipkgs/webos-internals/ preware@ipkg4.preware.org:/home/preware/htdocs/ipkg/beta/apps/
 	#-rsync -avr ipkgs/webos-internals/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/beta/apps/
 	-rsync -avr ipkgs/webos-internals/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/beta/apps/
@@ -408,36 +408,36 @@ distclean: clobber
 	find toolchain -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
 
-clobber: clean clobber-subdirs clobber-patches clobber-kernels clobber-optware clobber-feeds
+clobber: clean clobber-appdirs clobber-patches clobber-kernels clobber-optware clobber-feeds
 	rm -rf ipkgs
 
 clobber-testing:
-	${MAKE} SUBDIRS="testing" PTCHDIR="testing-patches" KERNDIR="testing-kernels" OPTWDIR="testing-optware" clobber
+	${MAKE} APPDIRS="testing" PTCHDIR="testing-patches" KERNDIR="testing-kernels" OPTWDIR="testing-optware" clobber
 
 alpha-clobber:
-	${MAKE} SUBDIRS="alpha-apps" PTCHDIR="alpha-patches" KERNDIR="alpha-kernels" OPTWDIR="alpha-optware" clobber
+	${MAKE} APPDIRS="alpha-apps" PTCHDIR="alpha-patches" KERNDIR="alpha-kernels" OPTWDIR="alpha-optware" clobber
 
 beta-clobber:
-	${MAKE} SUBDIRS="beta-apps" PTCHDIR="beta-patches" KERNDIR="beta-kernels" OPTWDIR="beta-optware" clobber
+	${MAKE} APPDIRS="beta-apps" PTCHDIR="beta-patches" KERNDIR="beta-kernels" OPTWDIR="beta-optware" clobber
 
-clean: clean-subdirs clean-patches clean-kernels clean-optware clean-feeds
+clean: clean-appdirs clean-patches clean-kernels clean-optware clean-feeds
 	find . -name "*~" -delete
 
 clean-testing:
-	${MAKE} SUBDIRS="testing" PTCHDIR="testing-patches" KERNDIR="testing-kernels" OPTWDIR="testing-optware" clean
+	${MAKE} APPDIRS="testing" PTCHDIR="testing-patches" KERNDIR="testing-kernels" OPTWDIR="testing-optware" clean
 
 alpha-clean:
-	${MAKE} SUBDIRS="alpha-apps" PTCHDIR="alpha-patches" KERNDIR="alpha-kernels" OPTWDIR="alpha-optware" clean
+	${MAKE} APPDIRS="alpha-apps" PTCHDIR="alpha-patches" KERNDIR="alpha-kernels" OPTWDIR="alpha-optware" clean
 
 beta-clean:
-	${MAKE} SUBDIRS="beta-apps" PTCHDIR="beta-patches" KERNDIR="beta-kernels" OPTWDIR="beta-optware" clean
+	${MAKE} APPDIRS="beta-apps" PTCHDIR="beta-patches" KERNDIR="beta-kernels" OPTWDIR="beta-optware" clean
 
-clobber-subdirs:
-	find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print | \
+clobber-appdirs:
+	find ${APPDIRS} -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
 
-clean-subdirs:
-	find ${SUBDIRS} -mindepth 1 -maxdepth 1 -type d -print | \
+clean-appdirs:
+	find ${APPDIRS} -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clean
 
 clobber-kernels:
