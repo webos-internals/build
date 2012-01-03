@@ -334,8 +334,7 @@ CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009
 endif
 endif
 
-.PHONY: package
-.PHONY: head
+.PHONY: package build unpack
 
 ifneq ("${VERSIONS}", "")
 package: 
@@ -345,12 +344,24 @@ package:
 	for v in ${VERSIONS} ; do \
 		VERSION=$${v} ${MAKE} VERSIONS= WEBOS_VERSION=`echo $${v} | cut -d- -f1` package ; \
 	done
-head: 
+
+build: 
 	for v in ${VERSIONS} ; do \
-	 	VERSION=$${v} ${MAKE} VERSIONS= WEBOS_VERSION=`echo $${v} | cut -d- -f1` head ; \
+		VERSION=$${v} ${MAKE} VERSIONS= WEBOS_VERSION=`echo $${v} | cut -d- -f1` build ; \
+	done
+
+unpack: 
+	for v in ${VERSIONS} ; do \
+		VERSION=$${v} ${MAKE} VERSIONS= WEBOS_VERSION=`echo $${v} | cut -d- -f1` unpack ; \
 	done
 else
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
+
+build: build/.built-${VERSION}
+.PRECIOUS: build/.built-${VERSION}
+
+unpack: build/.unpacked-${VERSION}
+.PRECIOUS: build/.unpacked-${VERSION}
 endif
 
 ifneq ("${DUMMY_VERSION}", "")
@@ -381,12 +392,6 @@ include ../../support/download.mk
 include ../../support/doctors.mk
 
 include ../../support/headlessapp.mk
-
-.PHONY: unpack
-unpack: build/.unpacked-${VERSION}
-
-.PHONY: build
-build: build/.built-${VERSION}
 
 build/.built-${VERSION}: build/arm.built-${VERSION} ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
 	${TAR} -C build/arm/usr/palm/applications/${APP_ID} -xvf ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
@@ -534,16 +539,18 @@ build/.unpacked-%: ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.
 else
 ifdef KERNEL_GIT
 build/.unpacked-%:
+	if [ ! -e git ] ; then \
+	  git clone --mirror -n ${KERNEL_GIT} git ; \
+	elif [ -L git ] ; then \
+	  true ; \
+	else \
+	  ( cd git ; git fetch -u -t ) ; \
+	fi
 	rm -rf build/src-${VERSION}
 	mkdir -p build/src-${VERSION}
-	if [ -e ../../webos-linux-kernel ] ; then \
-	  ( cd build/src-${VERSION} ; \
-		git clone --reference ../../../../webos-linux-kernel ${KERNEL_GIT} linux-${KERNEL_VERSION} ) ; \
-	else \
-	  ( cd build/src-${VERSION} ; \
-		git clone ${KERNEL_GIT} linux-${KERNEL_VERSION} ) ; \
-	fi
+	( cd build/src-${VERSION} ; git clone -l ../../git linux-${KERNEL_VERSION} )
 	( cd build/src-${VERSION}/linux-${KERNEL_VERSION} ; git checkout ${KERNEL_TAG} )
+	touch $@
 else
 build/.unpacked-%: ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz
 	rm -rf build/src-$*
