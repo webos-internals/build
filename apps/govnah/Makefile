@@ -3,13 +3,26 @@ TITLE    = Govnah
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.2.3
+VERSION  = 1.3.8
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Govnah
 ICON	 = http://www.webos-internals.org/images/5/59/Icon_WebOSInternals_Govnah.png
 DESCRIPTION = Govnah is an application for controlling your CPU performance characteristics.  It also displays and graphs the true internal CPU temperature, load averages and memory usage.
 CHANGELOG = \
+1.3.8: Add default warthog Pre 3 profile.<br>\
+1.3.7: Fixed voltage adjustment granularity on Veer and Pre 3.<br>\
+1.3.6: Fixed voltage adjustment on Veer, Pre 3, TouchPad.<br>\
+1.3.3: Reverted an incorrect voltage settings change.<br>\
+1.3.2: Added support for the ondemand-ng TouchPad kernels.<br>\
+1.3.1: Added support for the ondemand-ng Veer kernels.<br>\
+1.3.0: Fixed a major bug in profile saving.<br>\
+1.2.9: Added help text for ondemand-ng parameters.<br>\
+1.2.8: Added support for ondemandtcl with screenstate (known as ondemand-ng).<br>\
+1.2.7: Added support for the new Veer 1.4GHz UberKernel.<br>\
+1.2.6: Added support for the Veer A-4 Skyhawk kernel.<br>\
+1.2.5: Added support for the Pre 3 UberKernel and Warthog kernel.<br>\
+1.2.4: Added support for the Pre 3 A-1 Skyraider kernel.<br>\
 1.2.3: Added support for TouchPad webOS 3.0.4 Warthog kernel.<br>\
 1.2.2: Added support for TouchPad webOS 3.0.4 F15C and F4 kernels.<br>\
 1.2.1: Added support for TouchPad webOS 3.0.4 kernel defaults.<br>\
