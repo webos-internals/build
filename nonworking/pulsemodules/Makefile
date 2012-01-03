@@ -65,7 +65,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	  LDFLAGS="-Wl,-rpath-link,${STAGING_DIR_$*}/usr/lib -L${STAGING_DIR_$*}/usr/lib" \
 	  PKG_CONFIG_PATH="${STAGING_DIR_$*}/usr/lib/pkgconfig" \
 	  DBUS_CFLAGS="-I${STAGING_DIR_$*}/usr/include/dbus-1.0" \
-	  DBUS_LIBS="-L${STAGING_DIR_$*}/usr/lib -ldbus-1.0" \
+	  DBUS_LIBS="-L${STAGING_DIR_$*}/usr/lib -ldbus-1" \
 	  GLIB20_CFLAGS="-I${STAGING_DIR_$*}/usr/include/glib-2.0" \
 	  GLIB20_LIBS="-L${STAGING_DIR_$*}/usr/lib -lglib-2.0" \
 	  LIBSNDFILE_CFLAGS="-I${STAGING_DIR_$*}/usr/include" \
