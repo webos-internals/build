@@ -101,7 +101,7 @@ SCREENSHOTS = [\
 ]
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git://git.webos-internals.org/applications/govnah.git
+SRC_GIT = git://github.com/webos-internals/govnah.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
