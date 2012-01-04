@@ -1,11 +1,11 @@
 NAME     = libsndfile
 TITLE    = libsndfile
 APP_ID   = org.webosinternals.toolchain.${NAME}
-SRC_VER  = 1.0.17
-VERSION  = 1.0.17-2
+SRC_VER  = 1.0.21
+VERSION  = 1.0.21-1
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 
-SRC_TGZ = http://palm.cdnetworks.net/opensource/2.1.2/${NAME}-${SRC_VER}.tar.gz
+SRC_TGZ = http://palm.cdnetworks.net/opensource/3.0.0/${NAME}-${SRC_VER}.tar.gz
 
 .PHONY: package
 package: build/.built-${VERSION}
@@ -33,10 +33,6 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mkdir -p build/armv6 build/armv7 build/i686
 	tar -C build -z -x -f $<
 	mv build/${NAME}-${SRC_VER} build/src
-	${MAKE} SRC_FILE=http://palm.cdnetworks.net/opensource/2.1.2/${NAME}-${SRC_VER}-patches.tgz \
-		LOCAL_FILE=${NAME}-${VERSION}-patches.tgz download
-	#tar -x -f ${DL_DIR}/${NAME}-${VERSION}-patches.tgz -O \
-		libsndfile1-remove-examples_1.0.17.patch | patch -d build/src -p1
 	touch $@
 
 .PHONY: build
