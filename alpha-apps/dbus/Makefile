@@ -45,6 +45,7 @@ include ../../support/cross-compile.mk
 INSTALL_PREFIX=$(PWD)/build/install
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
+	-rm -rf ${INSTALL_PREFIX}
 	( cd build/src ; \
 	CC="${CROSS_COMPILE_$*}gcc" \
 	LDFLAGS="-Wl,-L${STAGING_DIR_$*}/usr/lib,-rpath-link,${STAGING_DIR_$*}/usr/lib -L${STAGING_DIR_$*}/usr/lib" \
