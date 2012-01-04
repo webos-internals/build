@@ -1,8 +1,8 @@
 NAME     = libtool
 TITLE    = libtool
 APP_ID   = org.webosinternals.toolchain.${NAME}
-SRC_VER  = 1.5.26
-VERSION  = 1.5.26-2
+SRC_VER  = 2.4
+VERSION  = 2.4-1
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 
 SRC_TGZ = http://ftp.gnu.org/gnu/libtool/${NAME}-${SRC_VER}.tar.gz
@@ -54,8 +54,11 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--disable-static \
 		--disable-nls ; \
 	  ${MAKE} clean all )
-	mkdir -p build/$*/usr/include
+	mkdir -p build/$*/usr/include/libltdl
 	install -m 644 build/src/libltdl/ltdl.h build/$*/usr/include/
+	install -m 644 build/src/libltdl/libltdl/lt_dlloader.h build/$*/usr/include/libltdl
+	install -m 644 build/src/libltdl/libltdl/lt_error.h build/$*/usr/include/libltdl
+	install -m 644 build/src/libltdl/libltdl/lt_system.h build/$*/usr/include/libltdl
 	mkdir -p build/$*/usr/lib
 	install -m 755 build/src/libltdl/.libs/*.so* build/$*/usr/lib/
 	install -m 755 build/src/libltdl/.libs/*.la* build/$*/usr/lib/
