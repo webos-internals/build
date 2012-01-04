@@ -42,7 +42,8 @@ build/.built-${VERSION}: build/armv7.built-${VERSION}
 	touch $@
 
 include ../../support/cross-compile.mk
-installpkgdir=${PWD}/build/$*
+
+INSTALL_PREFIX=$(shell pwd)/build/$*
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src ; \
@@ -69,7 +70,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--disable-python --disable-mono --with-distro=none --enable-compat-libdns_sd \
 		--disable-qt3 --disable-qt4 --disable-gtk --disable-gtk3 \
 		--disable-manpages --disable-xmltoman --host=${CONFIGURE_HOST_$*}; \
-	${MAKE} && make DESTDIR=${installpkgdir} install )
+	${MAKE} && make DESTDIR=${INSTALL_PREFIX} install )
 	# Cleanup
 	rm -r build/$*/usr/share/applications
 	rm -r build/$*/usr/share/locale
