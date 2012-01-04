@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (TouchPad)
 DEVICE = touchpad
 CATEGORY = Beta
-VERSIONS = 3.0.2-89 3.0.4-89 3.0.5-89
+VERSIONS = 3.0.2-89 3.0.4-89
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the HP TouchPad, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
@@ -43,7 +43,6 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
 
 KERNEL_GIT = git://github.com/rwhitby/webos-uber-kernel.git
 KERNEL_TAG = uber-${VERSION}
-KERNEL_TAG = touchpad
 
 TYPE = Kernel
 
