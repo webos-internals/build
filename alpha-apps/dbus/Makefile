@@ -41,7 +41,8 @@ build/.built-${VERSION}: build/armv7.built-${VERSION}
 	touch $@
 
 include ../../support/cross-compile.mk
-installpkgdir=${PWD}/build/$*
+
+INSTALL_PREFIX=$(PWD)/build/install
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src ; \
@@ -58,21 +59,21 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--disable-console-owner-file \
 		--without-x \
 		--host=${CONFIGURE_HOST_$*}; \
-	${MAKE} clean all && make DESTDIR=${installpkgdir} install )
-#	rm -r build/$*/usr/include
-#	rm -r build/$*/usr/lib/pkgconfig
-	rm -r build/$*/usr/lib/*.la
-	rm -r build/$*/var
+	${MAKE} clean all && make DESTDIR=${INSTALL_PREFIX} install )
+	rm -r ${INSTALL_PREFIX}/usr/include
+	rm -r ${INSTALL_PREFIX}/usr/lib/pkgconfig
+	rm -r ${INSTALL_PREFIX}/usr/lib/*.la
+	rm -r ${INSTALL_PREFIX}/var
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
-	sed -i 's|/usr|/media/cryptofs/apps/usr/palm/applications/${APP_ID}|' build/$*/etc/dbus-1/system.conf
-	rm build/$*/usr/lib/libdbus-1.so.3
-	cp build/$*/usr/lib/libdbus-1.so.3.5.8 \
-		build/$*/usr/lib/libdbus-1.so.3
-	mv build/$*/etc build/$*/usr/palm/applications/${APP_ID}
-	mv build/$*/usr/bin build/$*/usr/palm/applications/${APP_ID}
-	mv build/$*/usr/lib build/$*/usr/palm/applications/${APP_ID}
-	mv build/$*/usr/libexec build/$*/usr/palm/applications/${APP_ID}
-	mv build/$*/usr/share build/$*/usr/palm/applications/${APP_ID}
+	sed -i 's|/usr|/media/cryptofs/apps/usr/palm/applications/${APP_ID}|' ${INSTALL_PREFIX}/etc/dbus-1/system.conf
+	rm ${INSTALL_PREFIX}/usr/lib/libdbus-1.so.3
+	cp ${INSTALL_PREFIX}/usr/lib/libdbus-1.so.3.5.8 \
+		${INSTALL_PREFIX}/usr/lib/libdbus-1.so.3
+	mv ${INSTALL_PREFIX}/etc build/$*/usr/palm/applications/${APP_ID}
+	mv ${INSTALL_PREFIX}/usr/bin build/$*/usr/palm/applications/${APP_ID}
+	mv ${INSTALL_PREFIX}/usr/lib build/$*/usr/palm/applications/${APP_ID}
+	mv ${INSTALL_PREFIX}/usr/libexec build/$*/usr/palm/applications/${APP_ID}
+	mv ${INSTALL_PREFIX}/usr/share build/$*/usr/palm/applications/${APP_ID}
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/upstart
 	install -m 664 upstart/org.webosinternals.dbus build/$*/usr/palm/applications/${APP_ID}/upstart
 	touch $@
