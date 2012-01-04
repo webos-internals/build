@@ -212,6 +212,7 @@ endif
 
 ifeq ("${WEBOS_VERSION}", "2.1.0")
 ifeq ("${DEVICE}","pre")
+COMPATIBLE_VERSIONS = 2.1.0 | 2.2.4
 KERNEL_PATCH = http://palm.cdnetworks.net/opensource/2.1.0/linuxkernel-2.6.24.preplus.2-1-0.patch.tgz
 KERNEL_SUBMISSION = linuxkernel-2.6.24.patch
 endif
