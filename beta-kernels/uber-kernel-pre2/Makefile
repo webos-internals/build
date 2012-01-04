@@ -42,4 +42,6 @@ KERNEL_TAG = uber-${VERSION}
 
 TYPE = Kernel
 
+EXTRA_MODULES = kernel/extra/ramzswap.ko kernel/extra/xvmalloc.ko
+
 include ../../support/kernel.mk

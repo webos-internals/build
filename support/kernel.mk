@@ -482,6 +482,12 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 		modules_install ) ; \
 	  done \
 	fi
+	if [ -n "${EXTRA_MODULES}" ] ; then \
+	  for module in ${EXTRA_MODULES} ; do \
+	    ( cd $(shell pwd)/build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_TYPE} ; \
+	      mkdir -p ./extra ; mv $$module ./extra/ ) ; \
+	  done ; \
+	fi
 	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_TYPE}/build
 	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_TYPE}/source
 	rm -f build/arm/usr/palm/applications/${APP_ID}/additional_files/lib/modules/${KERNEL_TYPE}/*.bin
