@@ -60,7 +60,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--host=${CONFIGURE_HOST_$*}; \
 	${MAKE} clean all && make DESTDIR=${installpkgdir} install )
 #	rm -r build/$*/usr/include
-	rm -r build/$*/usr/lib/pkgconfig
+#	rm -r build/$*/usr/lib/pkgconfig
 	rm -r build/$*/usr/lib/*.la
 	rm -r build/$*/var
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
