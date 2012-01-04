@@ -28,7 +28,6 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mkdir -p build/armv6 build/armv7 build/i686
 	tar -C build -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mv build/${NAME}-${SRC_VER} build/src
-	mkdir build/src/alpha-apps
 	touch $@
 
 .PHONY: build
@@ -41,9 +40,10 @@ include ../../support/cross-compile.mk
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src ; \
-	CC=${CROSS_COMPILE_$*}gcc;\
+	CC="${CROSS_COMPILE_$*}gcc" \
 	CFLAGS="-I${STAGING_DIR_$*}/usr/include" \
 	LDFLAGS="-L${STAGING_DIR_$*}/usr/lib" \
+	ac_cv_func_setpgrp_void=yes \
 	./configure --prefix=/usr --disable-lynx --host=${CONFIGURE_HOST_$*}; \
 	${MAKE} clean all)
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/lib
