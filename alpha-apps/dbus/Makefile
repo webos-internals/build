@@ -1,7 +1,7 @@
 NAME     = dbus
 TITLE    = dbus
 SRC_VER  = 1.4.16
-VERSION  = 1.4.16-1
+VERSION  = 1.4.16-2
 APP_ID   = org.webosinternals.${NAME}
 HOMEPAGE = http://dbus.freedesktop.org
 MAINTAINER = Will Rea <will.rea@gmail.com>
@@ -12,6 +12,7 @@ ICON	 = http://www.webos-internals.org/images/a/ae/Icon_WebOSInternals_Base_Patc
 LICENSE  = GPL v2 / AFL 2.1
 MINWEBOSVERSION = 2.0
 CHANGELOG = \
+1.4.16-2 Fixed packaging \
 1.4.16-1 Initial Release
 
 SRC_TGZ = http://dbus.freedesktop.org/releases/dbus/dbus-${SRC_VER}.tar.gz
@@ -42,10 +43,9 @@ build/.built-${VERSION}: build/armv7.built-${VERSION}
 
 include ../../support/cross-compile.mk
 
-INSTALL_PREFIX=$(PWD)/build/install
+INSTALL_PREFIX=$(shell pwd)/build/$*
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
-	-rm -rf ${INSTALL_PREFIX}
 	( cd build/src ; \
 	CC="${CROSS_COMPILE_$*}gcc" \
 	LDFLAGS="-Wl,-L${STAGING_DIR_$*}/usr/lib,-rpath-link,${STAGING_DIR_$*}/usr/lib -L${STAGING_DIR_$*}/usr/lib" \
@@ -61,20 +61,20 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--without-x \
 		--host=${CONFIGURE_HOST_$*}; \
 	${MAKE} clean all && make DESTDIR=${INSTALL_PREFIX} install )
-	rm -r ${INSTALL_PREFIX}/usr/include
-	rm -r ${INSTALL_PREFIX}/usr/lib/pkgconfig
-	rm -r ${INSTALL_PREFIX}/usr/lib/*.la
-	rm -r ${INSTALL_PREFIX}/var
+	rm -r build/$*/usr/include
+	rm -r build/$*/usr/lib/pkgconfig
+	rm -r build/$*/usr/lib/*.la
+	rm -r build/$*/var
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
-	sed -i 's|/usr|/media/cryptofs/apps/usr/palm/applications/${APP_ID}|' ${INSTALL_PREFIX}/etc/dbus-1/system.conf
-	rm ${INSTALL_PREFIX}/usr/lib/libdbus-1.so.3
-	cp ${INSTALL_PREFIX}/usr/lib/libdbus-1.so.3.5.8 \
-		${INSTALL_PREFIX}/usr/lib/libdbus-1.so.3
-	mv ${INSTALL_PREFIX}/etc build/$*/usr/palm/applications/${APP_ID}
-	mv ${INSTALL_PREFIX}/usr/bin build/$*/usr/palm/applications/${APP_ID}
-	mv ${INSTALL_PREFIX}/usr/lib build/$*/usr/palm/applications/${APP_ID}
-	mv ${INSTALL_PREFIX}/usr/libexec build/$*/usr/palm/applications/${APP_ID}
-	mv ${INSTALL_PREFIX}/usr/share build/$*/usr/palm/applications/${APP_ID}
+	sed -i 's|/usr|/media/cryptofs/apps/usr/palm/applications/${APP_ID}|' build/$*/etc/dbus-1/system.conf
+	rm build/$*/usr/lib/libdbus-1.so.3
+	cp build/$*/usr/lib/libdbus-1.so.3.5.8 \
+		build/$*/usr/lib/libdbus-1.so.3
+	mv build/$*/etc build/$*/usr/palm/applications/${APP_ID}
+	mv build/$*/usr/bin build/$*/usr/palm/applications/${APP_ID}
+	mv build/$*/usr/lib build/$*/usr/palm/applications/${APP_ID}
+	mv build/$*/usr/libexec build/$*/usr/palm/applications/${APP_ID}
+	mv build/$*/usr/share build/$*/usr/palm/applications/${APP_ID}
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/upstart
 	install -m 664 upstart/org.webosinternals.dbus build/$*/usr/palm/applications/${APP_ID}/upstart
 	touch $@
