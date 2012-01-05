@@ -1,7 +1,7 @@
 NAME     = avahi
 TITLE    = avahi
 SRC_VER  = 0.6.30
-VERSION  = 0.6.30-1
+VERSION  = 0.6.30-2
 APP_ID   = org.webosinternals.${TITLE}
 HOMEPAGE = http://avahi.org
 MAINTAINER = Will Rea <will.rea@gmail.com>
@@ -14,6 +14,7 @@ DEPENDS  = org.webosinternals.libdaemon org.webosinternals.dbus
 POSTINSTALLFLAGS = RestartDevice
 POSTUPDATEFLAGS = RestartDevice
 CHANGELOG = \
+0.6.30-2 Fixed packaging \
 0.6.30-1 Intital Release
 
 SRC_TGZ = http://avahi.org/download/avahi-${SRC_VER}.tar.gz
@@ -45,9 +46,6 @@ include ../../support/cross-compile.mk
 
 INSTALL_PREFIX=$(shell pwd)/build/$*
 
-LIBC_PATH_armv7 = $(shell cd ../.. ; pwd)/toolchain/cs07q3armel/build/arm-2007q3/arm-none-linux-gnueabi/libc/usr/lib
-LIBC_PATH_i686  = $(shell cd ../.. ; pwd)/toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu/i686-unknown-linux-gnu/sys-root/usr/lib
-
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src ; \
 	CC="${CROSS_COMPILE_$*}gcc" \
@@ -58,7 +56,6 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		-Wl,-R/media/cryptofs/apps/usr/palm/applications/org.webosinternals.avahi/lib \
 		-L${STAGING_DIR_$*}/usr/lib,-rpath-link,${STAGING_DIR_$*}/usr/lib -L${STAGING_DIR_$*}/usr/lib" \
 	PKG_CONFIG_PATH="${STAGING_DIR_$*}/usr/lib/pkgconfig" \
-	PTHREAD_LIBS="-L${LIBC_PATH_$*} -lpthread" \
 	DBUS_CFLAGS="-I${STAGING_DIR_$*}/usr/include/dbus-1.0" \
 	DBUS_LIBS="-L${STAGING_DIR_$*}/usr/lib -ldbus-1" \
 	GLIB20_CFLAGS="-I${STAGING_DIR_$*}/usr/include/glib-2.0" \
