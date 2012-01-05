@@ -83,7 +83,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	  AVAHI_LIBS="-L${STAGING_DIR_$*}/usr/lib -lavahi-common -lavahi-client" \
 	  OPENSSL_CFLAGS="-I${STAGING_DIR_$*}/usr/include" \
 	  OPENSSL_LIBS="-L${STAGING_DIR_$*}/usr/lib -lssl -lcrypto" \
-	  ./bootstrap.sh --prefix=/usr --enable-ltdl-install=no --disable-manpages --host=${CONFIGURE_HOST_$*} ;\
+	  ./bootstrap.sh --prefix=/usr --enable-ltdl-install=yes --disable-manpages --host=${CONFIGURE_HOST_$*} ;\
 	  ${MAKE} all )
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}/modules
 	install -m 755 build/src/src/.libs/module-raop*.so build/$*/usr/palm/applications/${APP_ID}/modules
