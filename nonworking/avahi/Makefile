@@ -42,7 +42,11 @@ build/.built-${VERSION}: build/armv7.built-${VERSION}
 	touch $@
 
 include ../../support/cross-compile.mk
-installpkgdir=${PWD}/build/$*
+
+INSTALL_PREFIX=$(shell pwd)/build/$*
+
+LIBC_PATH_armv7 = $(shell cd ../.. ; pwd)/toolchain/cs07q3armel/build/arm-2007q3/arm-none-linux-gnueabi/libc/usr/lib
+LIBC_PATH_i686  = $(shell cd ../.. ; pwd)/toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu/i686-unknown-linux-gnu/sys-root/usr/lib
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src ; \
@@ -54,6 +58,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		-Wl,-R/media/cryptofs/apps/usr/palm/applications/org.webosinternals.avahi/lib \
 		-L${STAGING_DIR_$*}/usr/lib,-rpath-link,${STAGING_DIR_$*}/usr/lib -L${STAGING_DIR_$*}/usr/lib" \
 	PKG_CONFIG_PATH="${STAGING_DIR_$*}/usr/lib/pkgconfig" \
+	PTHREAD_LIBS="-L${LIBC_PATH_$*} -lpthread" \
 	DBUS_CFLAGS="-I${STAGING_DIR_$*}/usr/include/dbus-1.0" \
 	DBUS_LIBS="-L${STAGING_DIR_$*}/usr/lib -ldbus-1" \
 	GLIB20_CFLAGS="-I${STAGING_DIR_$*}/usr/include/glib-2.0" \
@@ -68,8 +73,9 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--with-xml=expat --disable-monodoc --disable-stack-protector \
 		--disable-python --disable-mono --with-distro=none --enable-compat-libdns_sd \
 		--disable-qt3 --disable-qt4 --disable-gtk --disable-gtk3 \
-		--disable-manpages --disable-xmltoman --host=${CONFIGURE_HOST_$*}; \
-	${MAKE} && make DESTDIR=${installpkgdir} install )
+		--disable-manpages --disable-xmltoman --enable-fast-install \
+		--with-sysroot=${INSTALL_PREFIX} --host=${CONFIGURE_HOST_$*}; \
+	${MAKE} clean all && make DESTDIR=${INSTALL_PREFIX} install )
 	# Cleanup
 	rm -r build/$*/usr/share/applications
 	rm -r build/$*/usr/share/locale

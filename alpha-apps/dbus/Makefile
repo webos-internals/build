@@ -1,7 +1,7 @@
 NAME     = dbus
 TITLE    = dbus
 SRC_VER  = 1.4.16
-VERSION  = 1.4.16-1
+VERSION  = 1.4.16-2
 APP_ID   = org.webosinternals.${NAME}
 HOMEPAGE = http://dbus.freedesktop.org
 MAINTAINER = Will Rea <will.rea@gmail.com>
@@ -12,6 +12,7 @@ ICON	 = http://www.webos-internals.org/images/a/ae/Icon_WebOSInternals_Base_Patc
 LICENSE  = GPL v2 / AFL 2.1
 MINWEBOSVERSION = 2.0
 CHANGELOG = \
+1.4.16-2 Fixed packaging \
 1.4.16-1 Initial Release
 
 SRC_TGZ = http://dbus.freedesktop.org/releases/dbus/dbus-${SRC_VER}.tar.gz
@@ -41,7 +42,8 @@ build/.built-${VERSION}: build/armv7.built-${VERSION}
 	touch $@
 
 include ../../support/cross-compile.mk
-installpkgdir=${PWD}/build/$*
+
+INSTALL_PREFIX=$(shell pwd)/build/$*
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	( cd build/src ; \
@@ -56,9 +58,10 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--with-system-pid-file="/var/run/dbus.pid" \
 		--with-dbus-user=root \
 		--disable-console-owner-file \
+		--enable-fast-install \
 		--without-x \
 		--host=${CONFIGURE_HOST_$*}; \
-	${MAKE} clean all && make DESTDIR=${installpkgdir} install )
+	${MAKE} clean all && make DESTDIR=${INSTALL_PREFIX} install )
 	rm -r build/$*/usr/include
 	rm -r build/$*/usr/lib/pkgconfig
 	rm -r build/$*/usr/lib/*.la
