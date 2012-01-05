@@ -58,6 +58,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--with-system-pid-file="/var/run/dbus.pid" \
 		--with-dbus-user=root \
 		--disable-console-owner-file \
+		--enable-fast-install \
 		--without-x \
 		--host=${CONFIGURE_HOST_$*}; \
 	${MAKE} clean all && make DESTDIR=${INSTALL_PREFIX} install )

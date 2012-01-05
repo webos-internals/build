@@ -75,7 +75,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--disable-qt3 --disable-qt4 --disable-gtk --disable-gtk3 \
 		--disable-manpages --disable-xmltoman --enable-fast-install \
 		--host=${CONFIGURE_HOST_$*}; \
-	${MAKE} && make DESTDIR=${INSTALL_PREFIX} install )
+	${MAKE} clean all && make DESTDIR=${INSTALL_PREFIX} install )
 	# Cleanup
 	rm -r build/$*/usr/share/applications
 	rm -r build/$*/usr/share/locale
