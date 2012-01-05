@@ -74,7 +74,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--disable-python --disable-mono --with-distro=none --enable-compat-libdns_sd \
 		--disable-qt3 --disable-qt4 --disable-gtk --disable-gtk3 \
 		--disable-manpages --disable-xmltoman --enable-fast-install \
-		--host=${CONFIGURE_HOST_$*}; \
+		--with-sysroot=${INSTALL_PREFIX} --host=${CONFIGURE_HOST_$*}; \
 	${MAKE} clean all && make DESTDIR=${INSTALL_PREFIX} install )
 	# Cleanup
 	rm -r build/$*/usr/share/applications
