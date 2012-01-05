@@ -122,7 +122,7 @@ ifeq ("${WEBOS_VERSION}", "1.4.5.1")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp101ewwverizonwireless-${WEBOS_VERSION}.jar
 endif
 ifeq ("${WEBOS_VERSION}", "2.1.0")
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp101ueude-wr-${WEBOS_VERSION}.jar
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp101ueu-wr-${WEBOS_VERSION}.jar
 endif
 endif
 ifeq ("${DEVICE}","pixi")
