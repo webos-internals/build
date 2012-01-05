@@ -73,7 +73,8 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--with-xml=expat --disable-monodoc --disable-stack-protector \
 		--disable-python --disable-mono --with-distro=none --enable-compat-libdns_sd \
 		--disable-qt3 --disable-qt4 --disable-gtk --disable-gtk3 \
-		--disable-manpages --disable-xmltoman --host=${CONFIGURE_HOST_$*}; \
+		--disable-manpages --disable-xmltoman --with-sysroot=${INSTALL_PREFIX} \
+		--host=${CONFIGURE_HOST_$*}; \
 	${MAKE} && make DESTDIR=${INSTALL_PREFIX} install )
 	# Cleanup
 	rm -r build/$*/usr/share/applications
