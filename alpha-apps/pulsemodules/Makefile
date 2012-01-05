@@ -57,12 +57,12 @@ build/.built-${VERSION}: build/armv7.built-${VERSION} #build/i686.built-${VERSIO
 include ../../support/cross-compile.mk
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
-	-rm -rf libltdl
-	-mkdir libltdl
-	-ln -s ${STAGING_DIR_$*}/usr/lib/libltdl.la libltdl/libltdl.la
-	-ln -s ${STAGING_DIR_$*}/usr/lib/libltdl.so libltdl/libltdl.so
-	-ln -s ${STAGING_DIR_$*}/usr/lib/libltdl.s0.7 libltdl/libltdl.so.7
-	-ln -s ${STAGING_DIR_$*}/usr/lib/libltdl.s0.7.3.0 libltdl/libltdl.so.7.3.0
+	-rm -rf build/src/libltdl
+	-mkdir build/src/libltdl
+	-ln -s ${STAGING_DIR_$*}/usr/lib/libltdl.la build/src/libltdl/libltdl.la
+	-ln -s ${STAGING_DIR_$*}/usr/lib/libltdl.so build/src/libltdl/libltdl.so
+	-ln -s ${STAGING_DIR_$*}/usr/lib/libltdl.s0.7 build/src/libltdl/libltdl.so.7
+	-ln -s ${STAGING_DIR_$*}/usr/lib/libltdl.s0.7.3.0 build/src/libltdl/libltdl.so.7.3.0
 	( cd build/src ;\
 	  sed -i 's/man po/man/' Makefile.am ; \
 	  CC="${CROSS_COMPILE_$*}gcc" \
