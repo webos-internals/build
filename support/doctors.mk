@@ -22,9 +22,9 @@ ${DOCTOR_DIR}/webosdoctorp102ueuna-wr-2.0.1.jar:
 	mkdir -p ${DOCTOR_DIR}
 	curl -L -o $@ http://palm.cdnetworks.net/rom/pre2/p201r0d11242010/wrep201rod/webosdoctorp102ueuna-wr.jar
 
-${DOCTOR_DIR}/webosdoctorp101ueude-wr-2.1.0.jar:
+${DOCTOR_DIR}/webosdoctorp101ueu-wr-2.1.0.jar:
 	mkdir -p ${DOCTOR_DIR}
-	curl -L -o $@ http://palm.cdnetworks.net/rom/preplus/p210r0d02212011/eudep210rod/webosdoctorp101ueude-wr.jar
+	curl -L -o $@ http://palm.cdnetworks.net/rom/preplus/p210r0d03142011/eudep210rod/webosdoctorp101ueu-wr.jar
 
 ${DOCTOR_DIR}/webosdoctorp103ueuna-wr-2.1.0.jar:
 	mkdir -p ${DOCTOR_DIR}
