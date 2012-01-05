@@ -11,7 +11,7 @@ HOMEPAGE = https://github.com/PuffTheMagic/wTerm
 ICON     = https://github.com/PuffTheMagic/wTerm/raw/master/images/icon-64.png
 DESCRIPTION = wTerm is a Enyo PDK/Hybrid Terminal Emulator for the webOS platform.<br><br><a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VU4L7VTGSR5C2'><img src='http://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif'/></a><br>
 CHANGELOG = \
-0.2.2: Predefined color schemes, font size and colors change on the fly<br> \
+0.2.2: Predefined color schemes, font size and colors change on the fly, term size changes properly when vkb is toggled<br> \
 0.2.1: Customizable colors, new prefs popup, implement DECREQTPARM<br> \
 0.2.0: Toggle VKB visibility, support box drawing charset (for mc)<br> \
 0.1.9: Customizable font size, show/hide cursor support, set/clear tab stops<br> \
