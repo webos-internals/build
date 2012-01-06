@@ -1,7 +1,7 @@
 NAME     = avahi
 TITLE    = avahi
 SRC_VER  = 0.6.30
-VERSION  = 0.6.30-2
+VERSION  = 0.6.30-3
 APP_ID   = org.webosinternals.${TITLE}
 HOMEPAGE = http://avahi.org
 MAINTAINER = Will Rea <will.rea@gmail.com>
@@ -10,12 +10,14 @@ TYPE	 = Linux Daemon
 CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/a/ae/Icon_WebOSInternals_Base_Patch.png
 LICENSE  = LGPL v2.1 Open Source
-DEPENDS  = org.webosinternals.libdaemon org.webosinternals.dbus
 POSTINSTALLFLAGS = RestartDevice
 POSTUPDATEFLAGS = RestartDevice
 CHANGELOG = \
+0.6.30-3 Fixed dependencies \
 0.6.30-2 Fixed packaging \
 0.6.30-1 Intital Release
+
+DEPENDS  = org.webosinternals.libdaemon org.webosinternals.dbus
 
 SRC_TGZ = http://avahi.org/download/avahi-${SRC_VER}.tar.gz
 
