@@ -2,7 +2,7 @@ NAME     = pulseaudio-modules
 TITLE    = Additional PulseAudio Modules
 APP_ID   = org.webosinternals.${NAME}
 SRC_VER  = 0.9.22
-VERSION  = 0.9.22-2
+VERSION  = 0.9.22-3
 MAINTAINER = Will Rea <will.rea@gmail.com>
 HOMEPAGE = http://pulseaudio.org
 TYPE     = Linux Library
@@ -13,12 +13,13 @@ LICENSE  = GPL v2 Open Source
 MINWEBOSVERSION = 2.2.0
 MAXWEBOSVERSION = 3.0.5
 CHANGELOG = \
+0.9.22-3 Properly fixed dependencies \
 0.9.22-2 Fixed dependencies \
 0.9.22-1 Initial Release
 POSTINSTALLFLAGS = RestartDevice
 POSTUPDATEFLAGS = RestartDevice
 
-DEPENDS  = org.webosinternals.avahi org.webosinternals.dbus org.webosinternals.libdaemon
+DEPENDS  = org.webosinternals.avahi, org.webosinternals.dbus, org.webosinternals.libdaemon
 
 SRC_TGZ = http://freedesktop.org/software/pulseaudio/releases/pulseaudio-${SRC_VER}.tar.gz
 
