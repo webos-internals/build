@@ -4,7 +4,7 @@ MAINTAINER = sconix
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.8.2
+VERSION  = 0.8.3
 TYPE	 = Application
 CATEGORY = Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:HomeControl
@@ -13,6 +13,7 @@ DESCRIPTION = Home Control is an universal remote control application. Currently
 MINWEBOSVERSION = 2.1.0
 MAXWEBOSVERSION = 3.9.9
 CHANGELOG = \
+0.8.3: Small bug fix and changes for TouchPad user interface.<br>\
 0.8.2: Fixed the startup server discovery spinner.<br>\
 0.8.1: Fixed small bug in manual adding of servers.<br>\
 0.8.0: First public release.
