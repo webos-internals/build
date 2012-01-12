@@ -173,7 +173,7 @@ ifeq ("${WEBOS_VERSION}", "3.0.4")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp304hstnhwifi-${WEBOS_VERSION}.jar
 endif
 ifeq ("${WEBOS_VERSION}", "3.0.5")
-WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp304hstnhwifi-3.0.4.jar
+WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp305hstnhwifi-${WEBOS_VERSION}.jar
 endif
 endif
 ifeq ("${DEVICE}","opal")
