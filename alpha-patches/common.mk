@@ -120,12 +120,12 @@ endif
 
 build/${ARCHITECTURE}/CONTROL/prerm: build/.unpacked-${VERSION}
 	mkdir -p build/${ARCHITECTURE}/CONTROL
-	sed -e 's:^APP_DIR=$$:APP_DIR=/media/cryptofs/apps/usr/palm/applications/${APP_ID}:' ../prerm${SUFFIX} > build/${ARCHITECTURE}/CONTROL/prerm
+	sed -e 's:^APP_ID=$$:APP_ID=${APP_ID}:' ../prerm${SUFFIX} > build/${ARCHITECTURE}/CONTROL/prerm
 	chmod ugo+x $@
 
 build/${ARCHITECTURE}/CONTROL/postinst: build/.unpacked-${VERSION}
 	mkdir -p build/${ARCHITECTURE}/CONTROL
-	sed -e 's:^APP_DIR=$$:APP_DIR=/media/cryptofs/apps/usr/palm/applications/${APP_ID}:' ../postinst${SUFFIX} > build/${ARCHITECTURE}/CONTROL/postinst
+	sed -e 's:^APP_ID=$$:APP_ID=${APP_ID}:' ../postinst${SUFFIX} > build/${ARCHITECTURE}/CONTROL/postinst
 	chmod ugo+x $@
 endif
 
