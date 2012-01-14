@@ -12,7 +12,7 @@ MAINTAINER = WebOS Internals <support@webos-internals.org>
 CATEGORY = Utilities
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 
-SRC_GIT = git@github.com:webos-internals/ausmt.git
+SRC_GIT = git://github.com/webos-internals/ausmt.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
