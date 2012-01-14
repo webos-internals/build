@@ -3,7 +3,7 @@ APP_ID = org.webosinternals.patches.${NAME}
 SIGNER = org.webosinternals
 HOMEPAGE = http://www.webos-internals.org/wiki/Portal:Patches_to_webOS
 MAINTAINER = WebOS Internals <support@webos-internals.org>
-DEPENDS = org.webosinternals.patch, org.webosinternals.lsdiff
+DEPENDS = org.webosinternals.ausmt, org.webosinternals.patch, org.webosinternals.lsdiff
 FEED = WebOS Patches
 LICENSE = MIT License Open Source
 META_GLOBAL_VERSION = 4
@@ -77,61 +77,55 @@ build/.built-extra-${VERSION}:
 build/.built-${VERSION}: build/.unpacked-${VERSION} build/.meta-${META_VERSION} build/ipkg-info-${WEBOS_VERSION}
 	rm -rf build/${ARCHITECTURE}
 	mkdir -p build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}
-	install -m 644 build/src-${VERSION}/${PATCH} build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/
+	install -m 644 build/src-${VERSION}/${PATCH} build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/unified_diff.patch
 ifneq ("${TWEAKS}", "")
-	cp build/src-${VERSION}/${TWEAKS} build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/
+	cp build/src-${VERSION}/${TWEAKS} build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/tweaks_prefs.json
 endif
-	rm -f build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/package_list
-	touch build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/package_list
+	rm -f build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/package_cache.list
+	touch build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/package_cache.list
 	for f in `lsdiff --strip=1 build/src-${VERSION}/${PATCH}` ; do \
 		myvar=`grep -l $$f build/ipkg-info-${WEBOS_VERSION}/*`; \
 		if [ "$$myvar" != "" ]; then \
 			myvar=`basename $$myvar .list`; \
-			grep $$myvar build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/package_list; \
+			grep $$myvar build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/package_cache.list; \
 			if [ $$? -ne 0 ]; then \
-				echo $$myvar >> build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/package_list; \
+				echo $$myvar >> build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/package_cache.list; \
 			fi; \
 		fi; \
 	done
 ifdef BSPATCH
 ifdef BSFILE
 	if [ -e build/src-${VERSION}/${BSPATCH} ]; then \
-		mkdir -p build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}; \
-		cp build/src-${VERSION}/${BSPATCH} build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/$(shell basename ${BSFILE}).bspatch; \
+		mkdir -p build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/$(shell dirname ${BSFILE}); \
+		cp build/src-${VERSION}/${BSPATCH} build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/$(shell dirname ${BSFILE})/$(shell basename ${BSFILE}).bspatch; \
 	fi
 endif
 endif
 ifdef FILES
 	if [ -e build/src-${VERSION}/${FILES} ]; then \
-		mkdir -p build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/additional_files; \
-		tar -C build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/additional_files -xzf build/src-${VERSION}/${FILES}; \
+		mkdir -p build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/files_additional; \
+		tar -C build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/files_additional -xzf build/src-${VERSION}/${FILES}; \
 	fi
 else
 	if [ -e additional_files.tar.gz ]; then \
-		mkdir -p build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/additional_files; \
-		tar -C build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/additional_files -xzf additional_files.tar.gz; \
+		mkdir -p build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/files_additional; \
+		tar -C build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/files_additional -xzf additional_files.tar.gz; \
 	fi
 endif
 	if [ -d build/src-${VERSION}/additional_files ]; then \
-		cp -r build/src-${VERSION}/additional_files build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/; \
+		cp -r build/src-${VERSION}/additional_files build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/files_additional; \
 	fi
 	${MAKE} build/.built-extra-${VERSION}
 	touch $@
 
 build/${ARCHITECTURE}/CONTROL/prerm: build/.unpacked-${VERSION}
 	mkdir -p build/${ARCHITECTURE}/CONTROL
-	sed -e 's:^PATCH_NAME=$$:PATCH_NAME=$(shell basename ${PATCH}):' \
-			-e 's:^TWEAKS_NAME=$$:TWEAKS_NAME=$(shell basename ${TWEAKS}):' \
-			-e 's:^BSPATCH_FILE=$$:BSPATCH_FILE=${BSFILE}:' \
-			-e 's:^APP_DIR=$$:APP_DIR=/media/cryptofs/apps/usr/palm/applications/${APP_ID}:' ../prerm${SUFFIX} > build/${ARCHITECTURE}/CONTROL/prerm
+	sed -e 's:^APP_DIR=$$:APP_DIR=/media/cryptofs/apps/usr/palm/applications/${APP_ID}:' ../prerm${SUFFIX} > build/${ARCHITECTURE}/CONTROL/prerm
 	chmod ugo+x $@
 
 build/${ARCHITECTURE}/CONTROL/postinst: build/.unpacked-${VERSION}
 	mkdir -p build/${ARCHITECTURE}/CONTROL
-	sed -e 's:^PATCH_NAME=$$:PATCH_NAME=$(shell basename ${PATCH}):' \
-			-e 's:^TWEAKS_NAME=$$:TWEAKS_NAME=$(shell basename ${TWEAKS}):' \
-			-e 's:^BSPATCH_FILE=$$:BSPATCH_FILE=${BSFILE}:' \
-			-e 's:^APP_DIR=$$:APP_DIR=/media/cryptofs/apps/usr/palm/applications/${APP_ID}:' ../postinst${SUFFIX} > build/${ARCHITECTURE}/CONTROL/postinst
+	sed -e 's:^APP_DIR=$$:APP_DIR=/media/cryptofs/apps/usr/palm/applications/${APP_ID}:' ../postinst${SUFFIX} > build/${ARCHITECTURE}/CONTROL/postinst
 	chmod ugo+x $@
 endif
 
