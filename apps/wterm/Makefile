@@ -71,7 +71,7 @@ include ../../support/cross-compile.mk
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	echo "CXX=${CROSS_COMPILE_$*}g++" > build/src/Makefile.inc
 	echo "CC=${CROSS_COMPILE_$*}gcc" >> build/src/Makefile.inc
-	echo "MARCH_TUNE=-O2 -march=armv7-a -mcpu=cortex-a8 -mfpu=neon -mfloat-abi=softfp" >> build/src/Makefile.inc
+	echo "MARCH_TUNE=-O2 -march=armv7-a -mcpu=cortex-a8 -mfpu=neon -mfloat-abi=softfp -DLOGLEVEL=0" >> build/src/Makefile.inc
 	echo "ROOT=${STAGING_DIR_$*}/usr" >> build/src/Makefile.inc
 	cd build/src; ${MAKE} clean wterm
 	mkdir -p ${D}
