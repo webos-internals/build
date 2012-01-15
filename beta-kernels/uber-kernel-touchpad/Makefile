@@ -21,7 +21,7 @@ All additions are controlled by using the Govnah application.<br>\
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-93", "log" : [ "Remove /boot/udpate-image file left over from OTA update" ] }, \
+{ "version" : "${WEBOS_VERSION}-93", "log" : [ "Remove /boot/update-image file left over from OTA update" ] }, \
 { "version" : "${WEBOS_VERSION}-92", "log" : [ "Added USB Audio support" ] }, \
 { "version" : "${WEBOS_VERSION}-91", "log" : [ "Forward ported to webOS 3.0.5 kernel" ] }, \
 { "version" : "${WEBOS_VERSION}-89", "log" : [ "Added 1.8 GHz overclocking support" ] }, \
