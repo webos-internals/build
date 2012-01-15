@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = UberKernel (TouchPad)
 DEVICE = touchpad
 CATEGORY = Beta
-VERSIONS = 3.0.2-91 3.0.4-91 3.0.5-91
+VERSIONS = 3.0.2-92 3.0.4-92 3.0.5-92
 APPINFO_DESCRIPTION = A collection of all the best kernel improvements for the HP TouchPad, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
 Current additions include:<ul>\
@@ -15,11 +15,13 @@ Current additions include:<ul>\
 <li>Support for EXT4 filesystems.</li>\
 <li>Support for NFS and CIFS (Samba) network filesystems.</li>\
 <li>Support for iSCSI and ATA over Ethernet storage network protocols.</li>\
+<li>Support for USB Audio.</li>\
 </ul><br>\
 All additions are controlled by using the Govnah application.<br>\
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-92", "log" : [ "Added USB Audio support" ] }, \
 { "version" : "${WEBOS_VERSION}-91", "log" : [ "Forward ported to webOS 3.0.5 kernel" ] }, \
 { "version" : "${WEBOS_VERSION}-89", "log" : [ "Added 1.8 GHz overclocking support" ] }, \
 { "version" : "${WEBOS_VERSION}-88", "log" : [ "Added EXT4, iSCSI and ATA over Ethernet support", "Added BFQ, SIO and V(R) I/O schedulers" ] }, \
@@ -31,6 +33,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-8", "log" : [ "Initial version" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-92: Added USB Audio support.<br>\
 ${WEBOS_VERSION}-91: Forward ported to webOS 3.0.5 kernel.<br>\
 ${WEBOS_VERSION}-89: Added 1.8 GHz overclocking support.<br>\
 ${WEBOS_VERSION}-88: Added EXT4, iSCSI and ATA over Ethernet support. Added BFQ, SIO and V(R) I/O schedulers. <br>\
