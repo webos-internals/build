@@ -1,8 +1,8 @@
 NAME     = wterm
 TITLE    = wTerm
 APP_ID   = us.ryanhope.${NAME}
-SRC_VER  = 0.3.0
-VERSION  = ${SRC_VER}-3
+SRC_VER  = 0.3.1
+VERSION  = ${SRC_VER}-1
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = System Utilities
@@ -11,6 +11,7 @@ HOMEPAGE = https://github.com/PuffTheMagic/wTerm
 ICON     = https://github.com/PuffTheMagic/wTerm/raw/master/images/icon-64.png
 DESCRIPTION = wTerm is a Enyo PDK/Hybrid Terminal Emulator for the webOS platform.<br><br><a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VU4L7VTGSR5C2'><img src='http://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif'/></a><br>
 CHANGELOG = \
+0.3.1: VKB changes, better handling of Bt keyboard<br> \
 0.3.0: Lots of font improvements, lots of new escape codes processed, lots of fixes to broken escape code processing, fix cursor bugs, obey rotation lock, remove debug output for releases<br> \
 0.2.6: HUGE performance increase<br> \
 0.2.5: Fixes idle CPU usage, some rendering optimizations, no more bright backgrounds for bold foreground<br> \
