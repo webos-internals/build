@@ -122,6 +122,9 @@ fi
 echo "Disabling Palm diagnostics reporting ..."
 chmod -x /usr/bin/uploadd
 
+echo "Removing left-over OTA update files ..."
+rm -f /boot/update-uimage
+
 # Copy all the files to the target locations
 echo "Installing replacement kernel files ..."
 for file in `find boot lib/modules -type f -print` ; do
