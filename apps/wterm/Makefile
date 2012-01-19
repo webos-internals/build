@@ -1,7 +1,7 @@
 NAME     = wterm
 TITLE    = wTerm
 APP_ID   = us.ryanhope.${NAME}
-SRC_VER  = 0.3.1
+SRC_VER  = 0.3.2
 VERSION  = ${SRC_VER}-1
 TYPE     = Application
 BLDFLAGS = -p
@@ -11,6 +11,7 @@ HOMEPAGE = https://github.com/PuffTheMagic/wTerm
 ICON     = https://github.com/PuffTheMagic/wTerm/raw/master/images/icon-64.png
 DESCRIPTION = wTerm is a Enyo PDK/Hybrid Terminal Emulator for the webOS platform.<br><br><a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VU4L7VTGSR5C2'><img src='http://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif'/></a><br>
 CHANGELOG = \
+0.3.2: More keyboard fixes/improvements, use less cpu when screen is not in focus, support multiple cards<br> \
 0.3.1: VKB changes, better handling of Bt keyboard<br> \
 0.3.0: Lots of font improvements, lots of new escape codes processed, lots of fixes to broken escape code processing, fix cursor bugs, obey rotation lock, remove debug output for releases<br> \
 0.2.6: HUGE performance increase<br> \
@@ -29,10 +30,10 @@ CHANGELOG = \
 0.1.3: First decent alpha version to play with.
 
 SCREENSHOTS = [\
-\"http://ompldr.org/vYzIzNw/wterm_2012-04-01_151716.png\",\
-\"http://ompldr.org/vYnl6Mw/wterm_2011-29-12_152014.png\",\
-\"http://ompldr.org/vYnV4MQ/wterm_2011-21-12_205004.png\",\
-\"http://ompldr.org/vYzEwcQ/wterm_2012-02-01_183109.png\",\
+\"https://github.com/PuffTheMagic/wTerm/raw/master/screenshots/htop.png\",\
+\"https://github.com/PuffTheMagic/wTerm/raw/master/screenshots/irssi.png\",\
+\"https://github.com/PuffTheMagic/wTerm/raw/master/screenshots/midnight_commander.png\",\
+\"https://github.com/PuffTheMagic/wTerm/raw/master/screenshots/vim.png\",\
 ]
 LICENSE  = GPL v3 Open Source
 MINWEBOSVERSION = 3.0.0
