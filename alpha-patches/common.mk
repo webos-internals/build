@@ -7,7 +7,6 @@ DEPENDS = org.webosinternals.ausmt, org.webosinternals.patch, org.webosinternals
 FEED = WebOS Patches
 LICENSE = MIT License Open Source
 META_GLOBAL_VERSION = 4
-WEBOS_VERSIONS = 1.4.5 2.0.0 2.0.1 2.1.0
 POSTINSTALLFLAGS = RestartLuna
 POSTUPDATEFLAGS  = RestartLuna
 POSTREMOVEFLAGS  = RestartLuna
@@ -24,9 +23,6 @@ endif
 .PHONY: package
 ifneq ("${VERSIONS}", "")
 package:
-	for v in ${WEBOS_VERSIONS} ; do \
-	  VERSION=$${v}-0 ${MAKE} VERSIONS= DUMMY_VERSION=0 package ; \
-	done; \
 	for v in ${VERSIONS} ; do \
 	  VERSION=$${v} ${MAKE} VERSIONS= package ; \
 	done
@@ -40,29 +36,12 @@ endif
 
 WEBOS_VERSION:=$(shell echo ${VERSION} | cut -d- -f1)
 
-ifneq ("${DUMMY_VERSION}", "")
-DESCRIPTION=This package is not currently available for WebOS ${WEBOS_VERSION}.  This package may be installed as a placeholder to notify you when an update is available.  NOTE: This is simply an empty package placeholder, it will not affect your device in any way.
-CATEGORY=Unavailable
-VISIBILITY=Installed
-SRC_GIT=
-DEPENDS=
-POSTINSTALLFLAGS=
-POSTUPDATEFLAGS=
-POSTREMOVEFLAGS=
-endif
-
 ifneq ("${WEBOS_VERSION}", "3.0.5")
 DEPENDS = org.webosinternals.patch, org.webosinternals.lsdiff
 endif
 
 include ../../support/package.mk
 
-ifneq ("${DUMMY_VERSION}", "")
-build/.built-%:
-	rm -rf build/${ARCHITECTURE}
-	mkdir -p build/${ARCHITECTURE}
-	touch $@
-else
 include ../../support/download.mk
 include ../../support/ipkg-info.mk
 
@@ -184,7 +163,6 @@ else
 	sed -e 's:^APP_ID=$$:APP_ID=${APP_ID}:' ../postinst.ausmt > build/${ARCHITECTURE}/CONTROL/postinst
 endif
 	chmod ugo+x $@
-endif
 
 .PHONY: clobber
 clobber::
