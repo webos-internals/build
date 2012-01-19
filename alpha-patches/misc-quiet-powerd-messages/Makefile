@@ -1,0 +1,17 @@
+NAME = $(shell basename $(shell pwd))
+PATCH = misc/${NAME}.patch
+TWEAKS =
+TITLE = Quiet powerd Messages
+DESCRIPTION = This will silence the powerd messages. The powerd messages are the sleep/wake messages sent to ssh/terminal when the device sleeps or wakes.
+CATEGORY = Misc
+VERSIONS = 3.0.5-3
+ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
+SCREENSHOTS =
+META_SUB_VERSION = 2
+
+include ../common.mk
+
+include ../modifications.mk
+
+MAINTAINER = Leslie Michael Orchard <l.m.orchard@pobox.com>
+HOMEPAGE =

@@ -165,7 +165,7 @@ package-appdirs: toolchain
 	  fi; \
 	done
 
-package-webos-patches: toolchain
+package-webos-patches:
 	for f in `find ${PTCHDIR} -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package ; \
