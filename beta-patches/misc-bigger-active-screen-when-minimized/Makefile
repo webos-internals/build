@@ -4,7 +4,7 @@ TWEAKS =
 TITLE = Bigger Active Screen when minimized
 DESCRIPTION = This patch gives the Touchpad a bigger active card size when apps are minimized. It also makes the cards closer together to fit more on the screen.
 CATEGORY = Misc
-VERSIONS = 3.0.5-3
+VERSIONS = 3.0.5-4
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org\",\
