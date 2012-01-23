@@ -36,10 +36,6 @@ endif
 
 WEBOS_VERSION:=$(shell echo ${VERSION} | cut -d- -f1)
 
-ifneq ("${WEBOS_VERSION}", "3.0.5")
-DEPENDS = org.webosinternals.patch, org.webosinternals.lsdiff
-endif
-
 include ../../support/package.mk
 
 include ../../support/download.mk
@@ -60,32 +56,10 @@ build/.built-extra-${VERSION}:
 build/.built-${VERSION}: build/.unpacked-${VERSION} build/.meta-${META_VERSION} build/ipkg-info-${WEBOS_VERSION}
 	rm -rf build/${ARCHITECTURE}
 	mkdir -p build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}
-ifneq ("${WEBOS_VERSION}", "3.0.5")
-	install -m 644 build/src-${VERSION}/${PATCH} build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/
-else
 	install -m 644 build/src-${VERSION}/${PATCH} build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/unified_diff.patch
-endif
 ifneq ("${TWEAKS}", "")
-ifneq ("${WEBOS_VERSION}", "3.0.5")
-	cp build/src-${VERSION}/${TWEAKS} build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/
-else
 	cp build/src-${VERSION}/${TWEAKS} build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/tweaks_prefs.json
 endif
-endif
-ifneq ("${WEBOS_VERSION}", "3.0.5")
-	rm -f build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/package_list
-	touch build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/package_list
-	for f in `lsdiff --strip=1 build/src-${VERSION}/${PATCH}` ; do \
-		myvar=`grep -l $$f build/ipkg-info-${WEBOS_VERSION}/*`; \
-		if [ "$$myvar" != "" ]; then \
-			myvar=`basename $$myvar .list`; \
-			grep $$myvar build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/package_list; \
-			if [ $$? -ne 0 ]; then \
-				echo $$myvar >> build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/package_list; \
-			fi; \
-		fi; \
-	done
-else
 	rm -f build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/package_cache.list
 	touch build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/package_cache.list
 	for f in `lsdiff --strip=1 build/src-${VERSION}/${PATCH}` ; do \
@@ -98,7 +72,6 @@ else
 			fi; \
 		fi; \
 	done
-endif
 ifdef BSPATCH
 ifdef BSFILE
 	if [ -e build/src-${VERSION}/${BSPATCH} ]; then \
@@ -108,22 +81,9 @@ ifdef BSFILE
 endif
 endif
 ifdef FILES
-ifneq ("${WEBOS_VERSION}", "3.0.5")
-	if [ -e build/src-${VERSION}/${FILES} ]; then \
-		mkdir -p build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/additional_files; \
-		tar -C build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/additional_files -xzf build/src-${VERSION}/${FILES}; \
-	fi
-else
 	if [ -e build/src-${VERSION}/${FILES} ]; then \
 		mkdir -p build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/files_additional; \
 		tar -C build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/files_additional -xzf build/src-${VERSION}/${FILES}; \
-	fi
-endif
-else
-ifneq ("${WEBOS_VERSION}", "3.0.5")
-	if [ -e additional_files.tar.gz ]; then \
-		mkdir -p build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/additional_files; \
-		tar -C build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/additional_files -xzf additional_files.tar.gz; \
 	fi
 else
 	if [ -e additional_files.tar.gz ]; then \
@@ -131,37 +91,20 @@ else
 		tar -C build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/files_additional -xzf additional_files.tar.gz; \
 	fi
 endif
-endif
-ifneq ("${WEBOS_VERSION}", "3.0.5")
-	if [ -d build/src-${VERSION}/additional_files ]; then \
-		cp -r build/src-${VERSION}/additional_files build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/; \
-	fi
-else
 	if [ -d build/src-${VERSION}/additional_files ]; then \
 		cp -r build/src-${VERSION}/additional_files build/${ARCHITECTURE}/usr/palm/applications/${APP_ID}/files_additional; \
 	fi
-endif
 	${MAKE} build/.built-extra-${VERSION}
 	touch $@
 
 build/${ARCHITECTURE}/CONTROL/prerm: build/.unpacked-${VERSION}
 	mkdir -p build/${ARCHITECTURE}/CONTROL
-ifneq ("${WEBOS_VERSION}", "3.0.5")
-	sed -e 's|PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' \
-			-e 's|APP_DIR=|APP_DIR=/media/cryptofs/apps/usr/palm/applications/${APP_ID}|' ../prerm > build/${ARCHITECTURE}/CONTROL/prerm
-else
 	sed -e 's:^APP_ID=$$:APP_ID=${APP_ID}:' ../prerm.ausmt > build/${ARCHITECTURE}/CONTROL/prerm
-endif
 	chmod ugo+x $@
 
 build/${ARCHITECTURE}/CONTROL/postinst: build/.unpacked-${VERSION}
 	mkdir -p build/${ARCHITECTURE}/CONTROL
-ifneq ("${WEBOS_VERSION}", "3.0.5")
-	sed -e 's|PATCH_NAME=|PATCH_NAME=$(shell basename ${PATCH})|' \
-			-e 's|APP_DIR=|APP_DIR=/media/cryptofs/apps/usr/palm/applications/${APP_ID}|' ../postinst > build/${ARCHITECTURE}/CONTROL/postinst
-else
 	sed -e 's:^APP_ID=$$:APP_ID=${APP_ID}:' ../postinst.ausmt > build/${ARCHITECTURE}/CONTROL/postinst
-endif
 	chmod ugo+x $@
 
 .PHONY: clobber
