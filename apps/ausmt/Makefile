@@ -1,10 +1,10 @@
 TYPE = Linux Application
 NAME = ausmt
-VERSION = 1.1.2
+VERSION = 1.1.3
 TITLE = AUSMT Scripts
 MAINTAINER = Janne Julkunen <scorpio.iix@gmail.com>
 DESCRIPTION = AUSMT makes updating patches and themes safe even after OTA update. There still might be certain corner cases that can cause problems after OTA update, so if you want to avoid all problems its still recommended to uninstall patches and theme before OTA update.
-CHANGELOG = 1.1.2: Small fix for logging.<br>1.1.1: Important bug fix release.<br>1.0.0: Initial release.
+CHANGELOG = 1.1.3: Included the recovery script.<br>1.1.2: Small fix for logging.<br>1.1.1: Important bug fix release.<br>1.0.0: Initial release.
 APP_ID = org.webosinternals.${NAME}
 SIGNER = org.webosinternals
 HOMEPAGE = http://www.webos-internals.org/wiki/Auto-Update_System_Modification_Technology
@@ -34,6 +34,7 @@ build: build/.built-${VERSION}
 build/.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/all
 	mkdir -p build/all/usr/bin
+	install -m 755 build/src/ausmt/ausmt-cleanup build/all/usr/bin/
 	install -m 755 build/src/ausmt/ausmt-install build/all/usr/bin/
 	install -m 755 build/src/ausmt/ausmt-remove build/all/usr/bin/
 	touch $@
