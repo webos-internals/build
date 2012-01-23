@@ -4,7 +4,7 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.srv
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.9.2
+VERSION  = 0.9.5
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/webos-internals/303050-theme-manager.html#post3201074
@@ -13,6 +13,7 @@ DESCRIPTION = Theme Manager for you device.
 MINWEBOSVERSION = 2.1.0
 MAXWEBOSVERSION = 3.9.9
 CHANGELOG = \
+0.9.5: Moved to using AUSMT for theme installation.<br>\
 0.9.2: Added skipping of invalid theme directories.<br>\
 0.9.1: Allowed patching of index.html files.<br>\
 0.9.0: Fixed a bug in theme scan that caused weird problems.<br>\
@@ -36,14 +37,14 @@ CHANGELOG = \
 0.2.0: Added support for phones with enyo.<br>\
 0.1.2: Initial alpha release.
 
-DEPENDS = org.webosinternals.patch, org.webosinternals.lsdiff, org.webosinternals.unzip
+DEPENDS = org.webosinternals.ausmt, org.webosinternals.patch, org.webosinternals.lsdiff, org.webosinternals.unzip
 
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/b/b9/Theme_manager.png\" ]
 
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git@github.com:webos-internals/theme-manager.git
+SRC_GIT = git://github.com/webos-internals/theme-manager.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
