@@ -12,6 +12,7 @@ MAINTAINER = WebOS Internals <support@webos-internals.org>
 CATEGORY = Utilities
 ICON = http://www.webos-internals.org/images/4/4f/Epr.png
 POSTINSTALLFLAGS = RestartDevice
+DEPENDS = org.webosinternals.ausmt
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk

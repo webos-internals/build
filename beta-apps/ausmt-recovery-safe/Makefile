@@ -1,9 +1,9 @@
 TYPE = Linux Application
-NAME = ausmt-recovery-basic
+NAME = ausmt-recovery-safe
 VERSION = 1.0.0
-TITLE = AUSMT Recovery - Basic
+TITLE = AUSMT Recovery - Safe
 MAINTAINER = Janne Julkunen <scorpio.iix@gmail.com>
-DESCRIPTION = Perform AUSMT recovery on your device to restore all backed up files from any patch/theme ipk installations. You should first see if this version will fix your situation, if not then run the Full version. This will leave all tweaks preferences as they are. Installing this just runs a script to do the patch removals and then removes itself. WARNING: This is OTA update compatible, but you should run this directly before or directly after your update.
+DESCRIPTION = Perform AUSMT recovery on your device to restore all backed up files from any patch/theme ipk installations. This is the safest recovery option which means that it can leave unnecessery backup files behind, but should make manual recovery possible if something unexpected has happened to the system. Installing this just runs a script to do the patch removals and then removes itself. WARNING: This is OTA update compatible, but you should run this directly before or directly after your update.
 CHANGELOG = 1.0.0: Initial release.
 APP_ID = org.webosinternals.${NAME}
 SIGNER = org.webosinternals
