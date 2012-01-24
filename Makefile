@@ -214,7 +214,8 @@ toolchain: toolchain/ipkg-utils/ipkg-make-index \
 	   staging/usr/include/curl/curl.h \
 	   staging/usr/include/fuse/fuse.h \
 	   sdl \
-	   pulse
+	   pulse \
+	   ncurses
 
 sdl:	staging/usr/include/ltdl.h \
 	staging/usr/include/gdbm/gdbm.h \
@@ -245,6 +246,11 @@ pulse:	staging/usr/include/expat.h \
 	staging/usr/include/samplerate.h \
 	staging/usr/include/avahi-core/core.h \
 	staging/usr/include/ltdl.h
+
+ncurses:	staging/usr/include/ncurses/ncurses.h \
+		staging/usr/include/ncursesw/ncurses.h \
+		staging/usr/lib/libncurses.so \
+		staging/usr/lib/libncursesw.so
 	
 toolchain/cs09q1armel/build/arm-2009q1:
 	${MAKE} -C toolchain/cs09q1armel unpack
@@ -335,6 +341,18 @@ staging/usr/include/libdaemon/daemon.h:
 
 staging/usr/include/avahi-core/core.h:
 	${MAKE} -C toolchain/avahi stage
+
+staging/usr/include/ncurses/ncurses.h:
+	${MAKE} -C toolchain/ncurses-dev stage
+
+staging/usr/include/ncursesw/ncurses.h:
+	${MAKE} -C toolchain/ncursesw-dev stage
+
+staging/usr/lib/libncurses.so:
+	${MAKE} -C toolchain/ncurses stage
+
+staging/usr/lib/libncursesw.so:
+	${MAKE} -C toolchain/ncursesw stage
 
 upload:
 	-rsync -avr ipkgs/ preware@ipkg4.preware.org:/home/preware/htdocs/ipkg/feeds/
