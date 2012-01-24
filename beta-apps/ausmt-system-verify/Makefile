@@ -1,9 +1,9 @@
 TYPE = Linux Application
-NAME = ausmt-recovery-basic
+NAME = ausmt-system-verify
 VERSION = 1.0.0
-TITLE = AUSMT Recovery - Basic
+TITLE = AUSMT System Verification
 MAINTAINER = Janne Julkunen <scorpio.iix@gmail.com>
-DESCRIPTION = Perform AUSMT recovery on your device to restore all backed up files from any patch/theme ipk installations. You should first see if this version will fix your situation, if not then run the Full version. This will leave all tweaks preferences as they are. Installing this just runs a script to do the patch removals and then removes itself. WARNING: This is OTA update compatible, but you should run this directly before or directly after your update.
+DESCRIPTION = Verifies that applied theme and all patch packages are installed with supported patch technologies and that all files are stock or modified by AUSMT.
 CHANGELOG = 1.0.0: Initial release.
 APP_ID = org.webosinternals.${NAME}
 SIGNER = org.webosinternals
@@ -11,13 +11,12 @@ HOMEPAGE = http://www.webos-internals.org/wiki/Auto-Update_System_Modification_T
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 CATEGORY = Utilities
 ICON = http://www.webos-internals.org/images/4/4f/Epr.png
-POSTINSTALLFLAGS = RestartDevice
-DEPENDS = org.webosinternals.ausmt
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
 include ../../support/package.mk
 include ../../support/download.mk
+
 
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
