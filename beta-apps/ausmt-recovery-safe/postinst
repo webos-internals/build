@@ -1,0 +1,13 @@
+#!/bin/sh
+
+PACKAGE=org.webosinternals.ausmt-recovery-safe
+
+if [ -z ${IPKG_OFFLINE_ROOT} ]; then
+  IPKG_OFFLINE_ROOT=/media/cryptofs/apps
+fi
+
+/media/cryptofs/apps/usr/bin/ausmt-cleanup safe
+
+ipkg -o ${IPKG_OFFLINE_ROOT} remove ${PACKAGE}
+
+exit 0
