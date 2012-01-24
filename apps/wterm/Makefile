@@ -2,7 +2,7 @@ NAME     = wterm
 TITLE    = wTerm
 APP_ID   = us.ryanhope.${NAME}
 SRC_VER  = 0.3.4
-VERSION  = ${SRC_VER}-1
+VERSION  = ${SRC_VER}-2
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = System Utilities
@@ -43,7 +43,7 @@ SCREENSHOTS = [\
 LICENSE  = GPL v3 Open Source
 MINWEBOSVERSION = 3.0.0
 
-GIT_TAG = v${SRC_VER}
+GIT_TAG = v${SRC_VER}.1
 SRC_GIT = git://github.com/${MAINTAINER}/${TITLE}.git
 
 D = build/$*/usr/palm/applications/${APP_ID}
