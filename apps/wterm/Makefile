@@ -11,7 +11,7 @@ HOMEPAGE = https://github.com/PuffTheMagic/wTerm
 ICON     = https://github.com/PuffTheMagic/wTerm/raw/master/images/icon-64.png
 DESCRIPTION = wTerm is a Enyo PDK/Hybrid Terminal Emulator for the webOS platform.<br><br><a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VU4L7VTGSR5C2'><img src='http://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif'/></a><br>
 CHANGELOG = \
-0.3.4: Security fixes (defaults to non-root user), key repeat, Dvorak and German vkb layouts, just type action, multiple instances/cards, custom exec commands, auto relaunch, new escape code parser<br> \
+0.3.4: Security fixes (defaults to non-root user), key repeat, Dvorak and German vkb layouts, just type action, multiple instances/cards, custom exec commands, auto relaunch, rendering improvements, new escape code parser<br> \
 0.3.3: Fix emacs crash<br>\
 0.3.2: More keyboard fixes/improvements, use less cpu when screen is not in focus, support multiple cards<br> \
 0.3.1: VKB changes, better handling of Bt keyboard<br> \
