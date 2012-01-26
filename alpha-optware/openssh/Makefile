@@ -17,7 +17,7 @@ CHANGELOG = \
 5.3.1-3: Added default profile to set up ssh-agent.<br>5.3.1-2: Updated for future webOS compatibility.
 CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/8/86/Icon_WebOSInternals_OpenSSH.png
-DEPENDS  = mobi.optware.openssl, mobi.optware.zlib, mobi.optware.ipkg-opt
+DEPENDS  = mobi.optware.ipkg-opt
 
 SRC_OPTWARE = ${NAME}_${OPT_VER}
 
