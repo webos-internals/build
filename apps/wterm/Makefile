@@ -2,7 +2,7 @@ NAME     = wterm
 TITLE    = wTerm
 APP_ID   = us.ryanhope.${NAME}
 SRC_VER  = 0.3.5
-VERSION  = ${SRC_VER}-1
+VERSION  = ${SRC_VER}-2
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = System Utilities
@@ -39,7 +39,7 @@ SCREENSHOTS = [\
 \"https://github.com/PuffTheMagic/wTerm/raw/master/screenshots/vim.png\",\
 \"https://github.com/PuffTheMagic/wTerm/raw/master/screenshots/emacs.png\",\
 \"https://github.com/PuffTheMagic/wTerm/raw/master/screenshots/stack_of_wterms.png\",\
-\"https://github.com/PuffTheMagic/wTerm/raw/master/screenshots/just_type.png\",\
+\"https://github.com/PuffTheMagic/wTerm/raw/master/screenshots/just_type.png\"\
 ]
 LICENSE  = GPL v3 Open Source
 MINWEBOSVERSION = 3.0.0
@@ -88,6 +88,9 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	${CROSS_COMPILE_$*}strip build/src/${NAME}
 	install -m 755 build/src/${NAME} ${D}
 	rm -rf build/src/src/plugin
+	rm -rf build/src/src/vttest
+	rm -rf build/src/src/cmatrix
+	rm -rf build/src/screenshots
 	cp -r build/src/* ${D}
 	touch $@
 	
