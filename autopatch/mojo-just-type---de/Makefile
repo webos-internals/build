@@ -4,7 +4,7 @@ TWEAKS =
 TITLE = Just Type - DE
 DESCRIPTION = Changes 'Einfach lostippen...' to 'Just type...' for german Pre3
 CATEGORY = Mojo
-VERSIONS = 2.2.0-33 2.2.3-33 2.2.4-29 3.0.2-40 3.0.4-3
+VERSIONS = 2.2.0-33 2.2.3-33 2.2.4-29 3.0.2-40 3.0.4-3 3.0.5-4
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org\",\
