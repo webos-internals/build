@@ -232,6 +232,7 @@ sdl:	staging/usr/include/ltdl.h \
 	staging/usr/include/SDL/SDL_image.h \
 	staging/usr/include/SDL/SDL_ttf.h \
 	staging/usr/include/GLES/gl.h \
+	staging/usr/include/GLES2/gl2.h \
 
 pulse:	staging/usr/include/expat.h \
 	staging/usr/include/glibconfig.h \
@@ -263,6 +264,9 @@ toolchain/i686-unknown-linux-gnu/build/i686-unknown-linux-gnu:
 
 staging/usr/include/GLES/gl.h:
 	${MAKE} -C toolchain/libGLES_CM stage
+
+staging/usr/include/GLES2/gl2.h:
+	${MAKE} -C toolchain/libGLES2 stage
 
 staging/usr/include/expat.h:
 	${MAKE} -C toolchain/expat stage
