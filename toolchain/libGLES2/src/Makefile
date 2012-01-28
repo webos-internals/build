@@ -21,8 +21,8 @@ endif
 CPPFLAGS := -g -DVERSION=\"${VERSION}\" -I${STAGING_DIR}/usr/include/glib-2.0 -I${STAGING_DIR}/usr/lib/glib-2.0/include -I${STAGING_DIR}/usr/include
 LDFLAGS  := -g -L${STAGING_DIR}/usr/lib -llunaservice -lmjson -lglib-2.0 -lpthread
 
-LIBRARY=libGLES2.so
-OBJECTS=libGLES2.o
+LIBRARY=libGLESv2.so
+OBJECTS=libGLESv2.o
 
 $(LIBRARY): $(OBJECTS)
 	$(CC) $(CFLAGS) -shared -Wl,-soname,$(LIBRARY) $(OBJECTS) -o $(LIBRARY) $(INCLUDES) $(LIBS)

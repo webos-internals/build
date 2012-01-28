@@ -1,5 +1,5 @@
-NAME     = libGLES2
-TITLE    = libGLES2
+NAME     = libGLESv2
+TITLE    = libGLESv2
 APP_ID   = org.webosinternals.toolchain.${NAME}
 VERSION  = 1.0-1
 MAINTAINER = WebOS Internals <support@webos-internals.org>
@@ -46,7 +46,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	mkdir -p build/$*/usr/include/GLES2
 	cp build/src/*.h build/$*/usr/include/GLES2
 	mkdir -p build/$*/usr/lib
-	install -m 755 build/src/libGLES2.so build/$*/usr/lib/
+	install -m 755 build/src/libGLESv2.so build/$*/usr/lib/
 	touch $@
 
 clobber::

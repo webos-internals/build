@@ -266,7 +266,7 @@ staging/usr/include/GLES/gl.h:
 	${MAKE} -C toolchain/libGLES_CM stage
 
 staging/usr/include/GLES2/gl2.h:
-	${MAKE} -C toolchain/libGLES2 stage
+	${MAKE} -C toolchain/libGLESv2 stage
 
 staging/usr/include/expat.h:
 	${MAKE} -C toolchain/expat stage
