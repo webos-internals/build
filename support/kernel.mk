@@ -27,7 +27,7 @@ WEBOS_VERSIONS = 3.0.2 3.0.4
 KERNEL_VERSION = 2.6.35
 endif
 ifeq ("${DEVICE}","pre3")
-WEBOS_VERSIONS = 2.2.0 2.2.3
+WEBOS_VERSIONS = 2.2.0 2.2.3 2.2.4
 KERNEL_VERSION = 2.6.32
 endif
 ifeq ("${DEVICE}","opal")
@@ -276,8 +276,7 @@ KERNEL_SUBMISSION = kernel-${WEBOS_VERSION}.txt
 endif
 ifeq ("${DEVICE}","pre3")
 COMPATIBLE_VERSIONS = 2.2.4
-# KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tar.gz
-KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.2.3/linuxkernel-${KERNEL_VERSION}.tar.gz
+KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tar.gz
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/kernelpatch-${WEBOS_VERSION}-${DEVICE}.tgz
 KERNEL_SUBMISSION = kernel-${WEBOS_VERSION}.txt
 endif
