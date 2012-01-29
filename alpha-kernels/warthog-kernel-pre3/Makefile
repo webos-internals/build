@@ -2,11 +2,11 @@ NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (Pre3)
 DEVICE = pre3
 CATEGORY = Alpha
-VERSIONS = 2.2.3-42 2.2.4-42
+VERSIONS = 2.2.4-45
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A collection of all the best kernel improvements for the HP Pre3, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
-This package is compatible only with webOS 2.2.0 build 3171 or webOS 2.2.3 - if you have a webOS 2.2.0 device with a different build number, you will need to doctor it before installing this package.<br>\
+This package is compatible only with webOS 2.2.4.<br>\
 Current additions include:<ul>\
 <li>New overclocking support ported to the Pre 3 by uNiXpSyChO.</li>\
 <li>Support for kernel crypto modules required by TrueCrypt</li>\
@@ -25,6 +25,7 @@ All additions are disabled by default, and must be enabled by using the Govnah a
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
+{ "version" : "${WEBOS_VERSION}-45", "log" : [ "Switch to github" ] }, \
 { "version" : "${WEBOS_VERSION}-42", "log" : [ "Backported TinyRCU. SHA1 update. Compcache update. Lagfree gov" ] }, \
 { "version" : "${WEBOS_VERSION}-35", "log" : [ "Backport PRR from Linux 3.2" ] }, \
 { "version" : "${WEBOS_VERSION}-26", "log" : [ "Overclock, undervolt. Ext4, CIFS, NFS, iSCSI & ATA over Ethernet" ] }, \
@@ -34,6 +35,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-1", "log" : [ "Initial version" ] }, \
 ]
 CHANGELOG = \
+${WEBOS_VERSION}-45: Switch to github<br>\
 ${WEBOS_VERSION}-42: Backported TinyRCU. SHA1 update. Compcache update. Lagfree gov<br>\
 ${WEBOS_VERSION}-35: Backport PRR from Linux 3.2<br>\
 ${WEBOS_VERSION}-26: Overclock, undervolt. Ext4, CIFS, NFS, iSCSI & ATA over Ethernet<br>\
@@ -43,37 +45,12 @@ ${WEBOS_VERSION}-4: Fix tick skew. BFQ as default IO scheduler. 300Hz. compcache
 ${WEBOS_VERSION}-1: Initial version.
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
-SRC_GIT = git://git.webos-internals.org/kernels/patches.git
-KERNEL_PATCHES = makefiletune/armMakefile.diff \
- 		 defconfig/defconfig-nodebug-pre3.patch \
- 		 compcache/lowmemnotify-total-memory.patch \
- 		 compcache/compcache.patch \
-		 warthogbuild/pre3-overclock.patch \
-		 psychobuild/override.patch \
-		 psychobuild/gov_bundle.patch \
-		 psychobuild/ondemand-ng.patch \
- 		 bfq/bfq-iosched.patch \
- 		 warthogbuild/pre3-tickskew.patch \
- 		 warthogbuild/pre3-300hz.patch \
- 		 warthogbuild/pre3-slowstart.patch \
- 		 warthogbuild/pre3-tinyrcu.patch \
- 		 warthogbuild/net-prr.patch \
- 		 warthogbuild/sha1.patch \
- 		 psychobuild/cpu_alignment.patch \
- 		 psychobuild/cpu_alignment-p2.patch \
- 		 psychobuild/memcpy.patch \
- 		 warthogbuild/defconfig-feat-pre3.patch \
- 		 identification/mkcompile_h.patch \
- 		 filesystems/ext4.patch filesystems/nfs.patch filesystems/cifs.patch \
-		 filesystems/iscsi.patch filesystems/ataoe.patch \
- 		 warthogbuild/ident-pre3.patch \
- 		 crypto/hw-support-pre3.patch \
- 		 crypto/truecrypt-support-pre3.patch
+
+KERNEL_GIT = git://github.com/codecrumb/webos-warthog-kernel.git
+KERNEL_TAG = warthog-${VERSION}
 
 # 		 warthogbuild/defconfig-slim-pre3.patch \
-# 		 defconfig/defconfig-nodebug-pre3.patch \
 
-EXTERNAL_MODULES = compcache/compcache-1.0.0
 TYPE = Kernel
 
 include ../../support/kernel.mk
