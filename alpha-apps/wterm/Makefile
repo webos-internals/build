@@ -85,7 +85,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	echo "CC=${CROSS_COMPILE_$*}gcc" >> build/src/Makefile.inc
 	echo "MARCH_TUNE=-O2 -march=armv7-a -mcpu=cortex-a8 -mfpu=neon -mfloat-abi=softfp -DLOGLEVEL=0" >> build/src/Makefile.inc
 	echo "ROOT=${STAGING_DIR_$*}/usr" >> build/src/Makefile.inc
-	cd build/src; ${MAKE} clean; mkdir bin; ${MAKE}
+	cd build/src; ${MAKE} clean; mkdir bin; ${MAKE} bins
 	mkdir -p ${D}
 	${CROSS_COMPILE_$*}strip build/src/${NAME}
 	install -m 755 build/src/${NAME} ${D}
