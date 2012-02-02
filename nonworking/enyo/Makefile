@@ -3,11 +3,11 @@ TITLE	 = Enyo 1.0
 APP_ID   = org.webosinternals.enyo
 BLDFLAGS = -p
 VERSION  = 1.0.0
-TYPE	 = Application
-CATEGORY = System Utilities
+TYPE	 = Linux Application
+CATEGORY = Frameworks
 HOMEPAGE = http://enyojs.org
 ICON	 = http://www.webos-internals.org/images/0/06/Enyo.png
-DESCRIPTION = Enyo
+DESCRIPTION = Enyo 1.0 (for installation on legacy devices). Note that this package will not overwrite an existing Enyo installation on your device. See https://github.com/enyojs/enyo-1.0/ for more information.
 CHANGELOG = 1.0.0: Open Source Enyo 1.0 Release
 LICENSE  = Apache 2.0 Open Source
 
@@ -36,21 +36,9 @@ build/.built-${VERSION}: build/all.built-${VERSION}
 	touch $@
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
-	mkdir -p build/$*/usr/palm/applications/${APP_ID}
-	( cd build/src/framework ; tar cf - . ) | ( cd build/$*/usr/palm/applications/${APP_ID} ; tar xvf - )
-	#touch $@
-
-build/%/CONTROL/postinst: postinst
-	rm -f $@
-	mkdir -p build/$*/CONTROL
-	install -m 0775 postinst build/$*/CONTROL
-	chmod ugo+x $@
-
-build/%/CONTROL/prerm: prerm
-	rm -f $@
-	mkdir -p build/$*/CONTROL
-	install -m 0775 prerm build/$*/CONTROL
-	chmod ugo+x $@
+	mkdir -p build/$*/usr/palm/applications/${APP_ID}/framework
+	( cd build/src ; tar cf - framework ) | ( cd build/$*/usr/palm/applications/${APP_ID} ; tar xvf - )
+	touch $@
 
 .PHONY: clobber
 clobber::
