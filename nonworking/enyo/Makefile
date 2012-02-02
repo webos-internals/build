@@ -1,6 +1,7 @@
 NAME     = enyo
 TITLE	 = Enyo 1.0
 APP_ID   = org.webosinternals.enyo
+BLDFLAGS = -p
 VERSION  = 1.0.0
 TYPE	 = Application
 CATEGORY = System Utilities
