@@ -1,0 +1,22 @@
+#!/bin/sh                                                                                       
+
+APPID="org.webosinternals.enyo"
+
+# Handle execution as pmPostInstall.script
+if [ -z "$IPKG_OFFLINE_ROOT" ]; then
+  IPKG_OFFLINE_ROOT=/media/cryptofs/apps
+  mount -o remount,rw /
+fi
+
+APPS=/media/cryptofs/apps
+
+[ -d $APPS ] || { echo "Requires webOS 1.3.5 or later" ; exit 1 ; }
+
+if [ ! -d /usr/palm/frameworks/enyo/0.10/framework ] ; then
+  mkdir -p /usr/palm/frameworks/enyo/0.10/framework
+  ln -s 0.10 /usr/palm/frameworks/enyo/1.0
+  ( cd ${APPS}/usr/palm/applications/${APPID} ; tar cf - . ) | \
+  ( cd /usr/palm/frameworks/enyo/0.10/framework ; tar xvf - )
+fi
+
+exit 0

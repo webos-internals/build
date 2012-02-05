@@ -2,7 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = WarthogKernel (Pre3)
 DEVICE = pre3
 CATEGORY = Alpha
-VERSIONS = 2.2.4-47
+VERSIONS = 2.2.4-50
 APPINFO_DESCRIPTION = In the jungle, the mighty jungle, the lion sleeps tonight. Oh wait... <br><br>\
 A collection of all the best kernel improvements for the HP Pre3, rolled into a single OTA-safe installation package.<br>\
 <b>Note that usage of this package is very likely to <a href=http://developer.palm.com/blog/2010/03/a-statement-on-the-overclocking-patches/>void your warranty</a> if things go wrong.</b><br>\
@@ -25,7 +25,7 @@ All additions are disabled by default, and must be enabled by using the Govnah a
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 APPINFO_CHANGELOG = [ \
-{ "version" : "${WEBOS_VERSION}-47", "log" : [ "Switch to github. Add VR and SIO schedulers." ] }, \
+{ "version" : "${WEBOS_VERSION}-50", "log" : [ "Switch to github. Add VR and SIO schedulers." ] }, \
 { "version" : "${WEBOS_VERSION}-42", "log" : [ "Backported TinyRCU. SHA1 update. Compcache update. Lagfree gov" ] }, \
 { "version" : "${WEBOS_VERSION}-35", "log" : [ "Backport PRR from Linux 3.2" ] }, \
 { "version" : "${WEBOS_VERSION}-26", "log" : [ "Overclock, undervolt. Ext4, CIFS, NFS, iSCSI & ATA over Ethernet" ] }, \
@@ -35,7 +35,7 @@ APPINFO_CHANGELOG = [ \
 { "version" : "${WEBOS_VERSION}-1", "log" : [ "Initial version" ] }, \
 ]
 CHANGELOG = \
-${WEBOS_VERSION}-47: Switch to github. Add VR and SIO schedulers.<br>\
+${WEBOS_VERSION}-50: Switch to github. Add VR and SIO schedulers.<br>\
 ${WEBOS_VERSION}-42: Backported TinyRCU. SHA1 update. Compcache update. Lagfree gov<br>\
 ${WEBOS_VERSION}-35: Backport PRR from Linux 3.2<br>\
 ${WEBOS_VERSION}-26: Overclock, undervolt. Ext4, CIFS, NFS, iSCSI & ATA over Ethernet<br>\
