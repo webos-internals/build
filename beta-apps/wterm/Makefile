@@ -45,6 +45,7 @@ SCREENSHOTS = [\
 ]
 LICENSE  = GPL v3 Open Source
 MINWEBOSVERSION = 2.1
+DeviceCompatibility = ["Pre3","TouchPad"]
 
 GIT_TAG = v${SRC_VER}
 SRC_GIT = git://github.com/${MAINTAINER}/${TITLE}.git
