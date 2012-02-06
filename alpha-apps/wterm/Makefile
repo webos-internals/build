@@ -2,7 +2,7 @@ NAME     = wterm
 TITLE    = wTerm
 APP_ID   = us.ryanhope.${NAME}
 SRC_VER  = 0.3.999
-VERSION  = ${SRC_VER}-1
+VERSION  = ${SRC_VER}-2
 TYPE     = Application
 BLDFLAGS = -p
 CATEGORY = System Utilities
@@ -11,7 +11,7 @@ HOMEPAGE = https://github.com/PuffTheMagic/wTerm
 ICON     = https://github.com/PuffTheMagic/wTerm/raw/master/images/icon-64.png
 DESCRIPTION = wTerm is a Enyo PDK/Hybrid Terminal Emulator for the webOS platform.<br><br><a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VU4L7VTGSR5C2'><img src='http://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif'/></a><br>
 CHANGELOG = \
-0.4.0: Performance increases, less CPU usage, scroll-back buffer, automate non-root user setup, add exhibition mode support, limit just-type actions to non-root user, support for some phones, rotation/resize fixes, more escape code support<br> \
+0.4.0: Performance increases, less CPU usage, scroll-back buffer, automate non-root user setup, add exhibition mode support, limit just-type actions to non-root user, support for some phones, rotation/resize fixes, more escape code support, vkb click sounds, audible bell, paste<br> \
 0.3.5: Store last vkb state in prefs, UTF-8 support, new French keyboard, switch to headless app, add exhibition mode support (defaults to cmatrix)<br> \
 0.3.4: Security fixes (defaults to non-root user), key repeat, Dvorak and German vkb layouts, just type action, multiple instances/cards, custom exec commands, auto relaunch, rendering improvements, new escape code parser<br> \
 0.3.3: Fix emacs crash<br>\
