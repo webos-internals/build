@@ -4,7 +4,7 @@ TWEAKS =
 TITLE = No Auto Refresh After Idle
 DESCRIPTION = Disables the annoying browser feature that reloads the page every time you are away from it for a while.
 CATEGORY = Browser
-VERSIONS = 2.1.0-99 2.1.1-22 2.1.2-31 2.2.4-40
+VERSIONS = 2.1.0-99 2.1.1-22 2.1.2-31 2.2.4-40 3.0.5-15
 ICON = http://www.webos-internals.org/images/4/4a/Icon_WebOSInternals_Patches_Browser.png
 SCREENSHOTS =
 META_SUB_VERSION = 1
@@ -13,5 +13,5 @@ include ../common.mk
 
 include ../modifications.mk
 
-MAINTAINER = Herrie <webos-internals.org@herrie.org>
+MAINTAINER = Herrie <webos-internals.org@herrie.org>, ShiftyAxel
 HOMEPAGE = http://forums.precentral.net/webos-patches/283272-browser-no-refresh-after-idle-webos-2-1-a.html
