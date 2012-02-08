@@ -83,3 +83,5 @@ PDL_Err PDL_SetKeyboardState(PDL_bool bVisible){return 0;}
 int SDL_WaitEvent(SDL_Event *event) {return 0;}
 int SDL_Init(Uint32 flags) {return 0;}
 void SDL_Quit(void) {}
+
+const char *PDL_GetError(void) {return 0;}

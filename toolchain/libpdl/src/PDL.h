@@ -203,6 +203,8 @@ PDL_Err PDL_Vibrate(int periodMS, int durationMS);
 PDL_Err PDL_EnableCompass(PDL_bool activate);
 PDL_Err PDL_GetCompass(PDL_Compass *compass);
 PDL_Err PDL_SetKeyboardState(PDL_bool bVisible);
+
+const char *PDL_GetError(void);
     
 #ifdef __cplusplus
 }

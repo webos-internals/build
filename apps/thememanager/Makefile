@@ -4,7 +4,7 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.srv
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.9.6
+VERSION  = 1.0.0
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/webos-internals/303050-theme-manager.html#post3201074
@@ -13,6 +13,8 @@ DESCRIPTION = Theme Manager for you device.
 MINWEBOSVERSION = 2.1.0
 MAXWEBOSVERSION = 3.9.9
 CHANGELOG = \
+1.0.0: First public release of Theme Manager.<br>\
+0.9.9: Allowed patching of json translation files.<br>\
 0.9.6: Added missing dependency to AUSMT and error message fixes.<br>\
 0.9.5: Moved to using AUSMT for theme installation.<br>\
 0.9.2: Added skipping of invalid theme directories.<br>\
