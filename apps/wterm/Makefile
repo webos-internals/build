@@ -108,3 +108,4 @@ build/%/CONTROL/postinst:
 
 clobber::
 	rm -rf build
+	rm -rf git
