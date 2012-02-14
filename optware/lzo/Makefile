@@ -3,10 +3,12 @@ TITLE	 = lzo
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
 OPT_VER  = 2.03-1
-VERSION  = 2.03-1
+VERSION  = 2.03-2
 HOMEPAGE = http://www.oberhumer.com/opensource/lzo/
 DESCRIPTION = LZO is a data compression library which is suitable for real-time operations (it favours speed over compression ratio).
-CHANGELOG = 2.03-1: Updated to match ipkg feeds
+CHANGELOG = \
+2.03-2: Fixed symlinks to shared library.<br>\
+2.03-1: Updated to match ipkg feeds.
 TYPE	 = Optware
 CATEGORY = Libraries
 ICON	 = http://www.webos-internals.org/images/d/d9/Icon_WebOSInternals_ZLib.png
@@ -25,6 +27,6 @@ build/%.built-${VERSION} : build/%.unpacked-${VERSION}
 	rm -rf build/$*/usr/palm/applications/${APP_ID}/opt/include
 	rm -f build/$*/usr/palm/applications/${APP_ID}/opt/lib/*.a
 	rm -f build/$*/usr/palm/applications/${APP_ID}/opt/lib/*.la
-	rm -f build/$*/usr/palm/applications/${APP_ID}/opt/lib/liblzo.so
-	rm -f build/$*/usr/palm/applications/${APP_ID}/opt/lib/liblzo.so.1
+	rm -f build/$*/usr/palm/applications/${APP_ID}/opt/lib/liblzo2.so
+	rm -f build/$*/usr/palm/applications/${APP_ID}/opt/lib/liblzo2.so.2
 	touch $@
