@@ -53,6 +53,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	  CFLAGS="-I${STAGING_DIR_$*}/usr/include" \
 	  LDFLAGS="-Wl,-rpath-link,${STAGING_DIR_$*}/usr/lib -L${STAGING_DIR_$*}/usr/lib" \
 	  ./configure \
+		--disable-kernel-module \
 	  	--host=${CONFIGURE_HOST_$*} \
 		--prefix=${STAGING_DIR_$*}/usr \
 		--exec-prefix=${STAGING_DIR_$*}/usr; \
