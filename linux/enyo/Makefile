@@ -8,7 +8,7 @@ CATEGORY = Frameworks
 HOMEPAGE = http://enyojs.org
 ICON	 = http://www.webos-internals.org/images/0/06/Enyo.png
 DESCRIPTION = Enyo 1.0 (for installation on legacy devices). Note that this package will not overwrite an existing Enyo installation on your device. See https://github.com/enyojs/enyo-1.0/ for more information.
-CHANGELOG = 1.0.0: Open Source Enyo 1.0 Release
+CHANGELOG = 1.0.1: Fixed path in postinst script<br />1.0.0: Open Source Enyo 1.0 Release
 LICENSE  = Apache 2.0 Open Source
 
 SRC_GIT = git://github.com/enyojs/enyo-1.0.git
