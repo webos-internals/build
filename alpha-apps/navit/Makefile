@@ -3,7 +3,7 @@ TITLE    = Navit - Car navigation system
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.5.0.5010-1
+VERSION	 = 0.5.0.5031-0.1
 TYPE     = Application
 CATEGORY = Utilities
 DESCRIPTION = <p><strong>This is an alpha release. It may have all sorts of malfunctions. \
@@ -23,6 +23,8 @@ DESCRIPTION = <p><strong>This is an alpha release. It may have all sorts of malf
        	other navigation systems, Navit maps are dynamically generated in real \
        	time from vector data.</p>
 CHANGELOG = \
+	    0.5.0.5031-1: Update to svn r5031. <br/> \
+	    0.5.0.5013-1: Update to svn r5013. Further improvements to bluetooth gps code. <br/> \
 	    0.5.0.5010-1: Update to svn r5010. Add basic support for bluetooth GPS receivers. Adds some GUI tweaks.<br/> \
 	    0.5.0.4936-2: Update to svn r4936. Add 'Former Destinations' to menu. Finally fix building of ARMv6 (I.e. this version should start in Pixi, don't know if it's working). <br/> \
 	    0.5.0.4787-2: Small OSD fix. <br/> \
