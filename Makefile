@@ -49,7 +49,7 @@ webos-patches-index: ipkgs/webos-patches/1.4.5/Packages \
 		     ipkgs/webos-patches/2.1.2/Packages ipkgs/webos-patches/2.2.0/Packages \
 		     ipkgs/webos-patches/2.2.3/Packages ipkgs/webos-patches/2.2.4/Packages \
 		     ipkgs/webos-patches/3.0.2/Packages ipkgs/webos-patches/3.0.4/Packages \
-		     ipkgs/webos-patches/3.0.5/Packages
+		     ipkgs/webos-patches/3.0.5/Packages ipkgs/webos-patches/3.0.6/Packages
 	rm -f ipkgs/webos-patches/1.4.5.1
 	ln -s 1.4.5 ipkgs/webos-patches/1.4.5.1
 
@@ -59,7 +59,7 @@ webos-kernels-index: ipkgs/webos-kernels/1.4.5/Packages ipkgs/webos-kernels/1.4.
 		     ipkgs/webos-kernels/2.1.2/Packages ipkgs/webos-kernels/2.2.0/Packages \
 		     ipkgs/webos-kernels/2.2.3/Packages ipkgs/webos-kernels/2.2.4/Packages \
 		     ipkgs/webos-kernels/3.0.2/Packages ipkgs/webos-kernels/3.0.4/Packages \
-		     ipkgs/webos-kernels/3.0.5/Packages
+		     ipkgs/webos-kernels/3.0.5/Packages ipkgs/webos-kernels/3.0.6/Packages
 
 .PHONY: webos-internals-index
 webos-internals-index: ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv6/Packages ipkgs/webos-internals/armv7/Packages	
@@ -252,7 +252,7 @@ ncurses:	staging/usr/include/ncurses/ncurses.h \
 		staging/usr/include/ncursesw/ncurses.h \
 		staging/usr/lib/libncurses.so \
 		staging/usr/lib/libncursesw.so
-	
+
 toolchain/cs09q1armel/build/arm-2009q1:
 	${MAKE} -C toolchain/cs09q1armel unpack
 
