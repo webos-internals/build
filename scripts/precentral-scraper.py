@@ -35,6 +35,7 @@ class PackageHandler(ContentHandler):
 
         if (name == "title") :
             self.title = self.data
+            sys.stderr.write("Found  " + self.title + "\n")
             self.json += "\"Title\":\"%s\", " % self.data
 
         if (name == "version") :
@@ -78,6 +79,8 @@ class PackageHandler(ContentHandler):
             if (self.title == "Preware"): return
             if (self.title == "AutoCorrect Edit"): return
             if (self.title == "Pre Backup Utility"): return
+            if (self.title == "Zip Codes"): return
+            if (self.title == "ZIP Code Tools"): return
             if (self.type  == "Patch"): return
 
             regexp = re.compile("^(.*)/([^/]+(.ipk|.zip))")
