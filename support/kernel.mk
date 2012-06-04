@@ -175,6 +175,10 @@ endif
 ifeq ("${WEBOS_VERSION}", "3.0.5")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp305hstnhwifi-${WEBOS_VERSION}.jar
 endif
+# QA 3.0.6 build uses the same kernel as 3.0.5
+ifeq ("${WEBOS_VERSION}", "3.0.6")
+WEBOS_DOCTOR = Doctor_Is_Not_Available_Yet
+endif
 endif
 ifeq ("${DEVICE}","opal")
 ifeq ("${WEBOS_VERSION}", "3.0.3")
