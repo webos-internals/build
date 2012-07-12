@@ -11,7 +11,7 @@ TYPE	= Application
 DESCRIPTION = Fish Fillets NG is strictly a puzzle game. The goal in every of the seventy levels is always the same: find a safe way out. The fish utter witty remarks about their surroundings, the various inhabitants of their underwater realm quarrel among themselves or comment on the efforts of your fish. The whole game is accompanied by quiet, comforting music.
 CHANGELOG = 0.9.2: initial public test release
 CATEGORY = Games
-ICON	= http://www.daemon.de/idisk/palmpre/fishfillet-icon.png
+ICON	= http://i.imgur.com/Tj4Oe.png
 LICENSE  = GPL
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/6/6b/Fishfillets-level.png\",\
