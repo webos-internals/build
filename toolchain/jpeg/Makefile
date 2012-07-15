@@ -5,7 +5,7 @@ SRC_VER  = 6.2
 VERSION  = 6.2-1
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 
-SRC_TGZ = http://palm.cdnetworks.net/opensource/3.0.0/jpegsrc.v6b.tar.gz
+SRC_TGZ = http://downloads.help.palm.com/opensource/3.0.0/jpegsrc.v6b.tar.gz
 
 .PHONY: package
 package: build/.built-${VERSION}
@@ -33,7 +33,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mkdir -p build/armv6 build/armv7 build/i686
 	tar -C build -z -x -f $<
 	mv build/jpeg-6b build/src
-	${MAKE} SRC_FILE=http://palm.cdnetworks.net/opensource/3.0.0/jpegsrc.v6b-patches.tgz \
+	${MAKE} SRC_FILE=http://downloads.help.palm.com/opensource/3.0.0/jpegsrc.v6b-patches.tgz \
 		LOCAL_FILE=${NAME}-${VERSION}-patches.tgz download
 	tar -x -f ${DL_DIR}/${NAME}-${VERSION}-patches.tgz -O \
 		debian.patch ldflags.patch paths.patch | patch -d build/src -p1

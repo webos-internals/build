@@ -5,7 +5,7 @@ SRC_VER  = 2.7.2
 VERSION  = 2.7.2
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 
-SRC_TGZ = http://palm.cdnetworks.net/opensource/1.4.5/${NAME}-${VERSION}.tar.gz
+SRC_TGZ = http://downloads.help.palm.com/opensource/1.4.5/${NAME}-${VERSION}.tar.gz
 
 .PHONY: package
 package: build/.built-${VERSION}
@@ -33,7 +33,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mkdir -p build/armv6 build/armv7 build/i686
 	tar -C build -z -x -f $<
 	mv build/${NAME}-${SRC_VER} build/src
-	${MAKE} SRC_FILE=http://palm.cdnetworks.net/opensource/1.4.5/${NAME}-${VERSION}-patches.tgz \
+	${MAKE} SRC_FILE=http://downloads.help.palm.com/opensource/1.4.5/${NAME}-${VERSION}-patches.tgz \
 		LOCAL_FILE=${NAME}-${VERSION}-patches.tgz download
 	cd build/src; tar -O -x -f ../../${DL_DIR}/${NAME}-${VERSION}-patches.tgz | patch -p1
 	touch $@
