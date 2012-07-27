@@ -4,14 +4,15 @@ APP_ID   = org.webosinternals.${NAME}
 SRV_ID   = org.webosinternals.${NAME}.prefs
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 3.0.0
+VERSION  = 3.0.1
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Tweaks
 ICON	 = http://www.webos-internals.org/images/2/2e/Tweaks-icon.png
 DESCRIPTION = Tweaks for your webOS device.
-MINWEBOSVERSION = 3.0.0
+MINWEBOSVERSION = 2.0.0
 CHANGELOG = \
+3.0.1: Put Mojo back, finalized Luna support.<br>\
 3.0.0: Removed Mojo code and added LunaSysMgr Preferences support.<br>\
 1.8.5: Cleaned up the code and fixed a small bug.<br>\
 1.8.4: Polished the Enyo UI behavior on phones.<br>\
