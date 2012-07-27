@@ -4,7 +4,7 @@ TWEAKS =
 TITLE = ImageView Hi-Res Zoom
 DESCRIPTION = Lets you more fully zoom into large-size photos in any application that uses the Mojo ImageView widget, like slideshow apps Slide RSS and Slide Master.
 CATEGORY = System
-VERSIONS = 1.4.5-193 2.1.0-239 2.1.1-45 2.1.2-54 2.2.4- 3.0.2-94 3.0.4-63 3.0.5-8
+VERSIONS = 1.4.5-193 2.1.0-239 2.1.1-45 2.1.2-54 3.0.2-94 3.0.4-63 3.0.5-8
 ICON = http://www.webos-internals.org/images/f/f9/Icon_WebOSInternals_Patch.png
 SCREENSHOTS = [\
 \"http://www.webos-internals.org\",\
