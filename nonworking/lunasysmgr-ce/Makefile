@@ -2,7 +2,7 @@ NAME = lunasysmgrce
 TITLE = LunaSysMgr CE
 APP_ID   = org.webosports.${NAME}
 SIGNER   = org.webosports
-VERSION  = 3.0.5-ce
+VERSION  = 3.0.5
 TYPE	 = OS Application
 CATEGORY = GUI
 HOMEPAGE = http://www.webos-ports.org/
@@ -15,7 +15,7 @@ This will not get you back to "Stock" 3.0.5 of webOS.
 CHANGELOG = \
 3.0.5-ce: Initial testing release.
 APPINFO_CHANGELOG = [ \
-{ "version" : "3.0.5-ce",  "log" : [ "Initial testing release" ] } \
+{ "version" : "3.0.5",  "log" : [ "Initial testing release" ] } \
 ]
 LICENSE  = Apache 2.0 
 
@@ -38,7 +38,6 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src
 	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	rm -f build/src/*/share/X11/xkb/xkbcomp
 	touch $@
 
 .PHONY: build
