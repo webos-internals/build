@@ -1,0 +1,59 @@
+#!/bin/sh                                                                                       
+
+PID=
+FORCE_REMOVE=
+UPSTART_SCRIPT=
+
+APPS=/media/cryptofs/apps
+
+[ -d ${APPS} ] || { echo "Requires webOS 1.3.5 or later" ; exit 1 ; }
+
+SRCDIR=${APPS}/usr/palm/applications/${PID}/additional_files
+
+VERSION=`grep PRODUCT_VERSION_STRING /etc/palm-build-info | sed -e 's/.* webOS \([0-9.]*\).*/\1/'`
+
+cd ${SRCDIR}
+
+error=0
+
+# Remove any additional LunaSysMgr binaries
+rm -f /usr/bin/LunaSysMgr.install
+
+case "${VERSION}" in
+    %COMPATIBLE_VERSIONS% )
+    echo "LunaSysMgr confirmed to be compatible with this webOS version"
+    ;;
+    * )
+    echo "The webOS version has changed, leaving LunaSysMgr as-is"
+    exit 0
+    ;;
+esac
+
+[ -f ${APPS}/usr/palm/applications/${PID}/backup.tar.gz ] || \
+  { echo "Fatal error occurred, unable to locate tarball" ; exit 1 ; }
+
+# Make sure all the target directories exist and are writeable
+for dir in usr/bin etc/event ; do
+  mkdir -p /$dir			|| { echo "Error creating /$dir"			; error=1 ; }
+  [ -d /$dir ]				|| { echo "Unable to create /$dir"			; error=1 ; }
+  rm -f /$dir/.webosinternals.org ]	|| { echo "Error removing /$dir/.webosinternals.org"	; error=1 ; }
+  [ ! -f /$dir/.webosinternals.org ]	|| { echo "Unable to remove /$dir/.webosinternals.org"	; error=1 ; }
+  touch /$dir/.webosinternals.org ]	|| { echo "Error touching /$dir/.webosinternals.org"	; error=1 ; }
+  [ -f /$dir/.webosinternals.org ]	|| { echo "Unable to touch /$dir/.webosinternals.org"	; error=1 ; }
+  rm -f /$dir/.webosinternals.org ]	|| { echo "Error removing /$dir/.webosinternals.org"	; error=1 ; }
+  [ ! -f /$dir/.webosinternals.org ]	|| { echo "Unable to remove /$dir/.webosinternals.org"	; error=1 ; }
+done
+
+if [ "${error}" = "1" ] ; then
+  echo "Fatal error occurred, not extracting files"
+  exit 1
+fi
+
+# Extract all the files to the target locations
+tar -C / -zxf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || \
+  { echo "Fatal error occurred, unable to extract tarball" ; exit 1 ; }
+
+tar -C / -zdf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || \
+  { echo "Fatal error occurred, unable to verify tarball extraction" ; exit 1 ; }
+
+exit 0
