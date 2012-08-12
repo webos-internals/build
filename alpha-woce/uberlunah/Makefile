@@ -4,7 +4,16 @@ DEVICE = touchpad
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 CATEGORY = User Interface
 VERSIONS = 4.0.0-1
-APPINFO_DESCRIPTION = .
+APPINFO_DESCRIPTION = A collection of all the best LunaSysMgr improvements for the HP TouchPad, rolled into a single convenient installation package.<br>\
+Current additions include:<ul>\
+<li>App switching bezel gestures.</li>\
+<li>Lower minimum brightness for better night-time reading.</li>\
+<li>A status bar search button.</li>\
+<li>More responsive gesture detection.</li>\
+<li>Additional keyboard layout for US Dvorak.</li>\
+<li>Other various user interface refinements and improvements.</li>\
+</ul><br>\
+All additions are controlled by using the Tweaks application.<br>.
 APPINFO_CHANGELOG = [ \
 { "version" : "${VERSION}", "log" : [ "Initial public release" ] } \
 ]
