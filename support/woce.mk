@@ -7,12 +7,12 @@ DEPENDS =
 FEED = WebOS Ports
 LICENSE = Apache Open Source
 ifeq ("${DEVICE}","touchpad")
-WEBOS_VERSIONS = 3.0.5
+WEBOS_VERSION = 3.0.5
 endif
 DL_DIR = ../../downloads
-POSTINSTALLFLAGS = RestartDevice
-POSTUPDATEFLAGS  = RestartDevice
-POSTREMOVEFLAGS  = RestartDevice
+POSTINSTALLFLAGS = RestartLuna
+POSTUPDATEFLAGS  = RestartLuna
+POSTREMOVEFLAGS  = RestartLuna
 UPSTART_SCRIPT=LunaSysMgr
 
 HEADLESSAPP_VERSION = 0.2.0
@@ -35,8 +35,6 @@ PREWARE_SANITY += $(error "Please define TYPE as OS Application or OS Daemon in 
 endif
 endif
 
-WEBOS_VERSION:=$(shell echo ${VERSION} | cut -d- -f1)
-
 APP_ID = org.webosports.${NAME}
 
 ifeq ("${DEVICE}","touchpad")
@@ -55,21 +53,18 @@ COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
 
 ifneq ("${VERSIONS}", "")
 package: 
-	for v in ${WEBOS_VERSIONS} ; do \
-		VERSION=$${v}-0 ${MAKE} VERSIONS= WEBOS_VERSION=$${v} DUMMY_VERSION=0 package ; \
-	done; \
 	for v in ${VERSIONS} ; do \
-		VERSION=$${v} ${MAKE} VERSIONS= WEBOS_VERSION=`echo $${v} | cut -d- -f1` package ; \
+		VERSION=$${v} ${MAKE} VERSIONS= package ; \
 	done
 
 build: 
 	for v in ${VERSIONS} ; do \
-		VERSION=$${v} ${MAKE} VERSIONS= WEBOS_VERSION=`echo $${v} | cut -d- -f1` build ; \
+		VERSION=$${v} ${MAKE} VERSIONS= build ; \
 	done
 
 unpack: 
 	for v in ${VERSIONS} ; do \
-		VERSION=$${v} ${MAKE} VERSIONS= WEBOS_VERSION=`echo $${v} | cut -d- -f1` unpack ; \
+		VERSION=$${v} ${MAKE} VERSIONS= unpack ; \
 	done
 else
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk

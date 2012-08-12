@@ -43,7 +43,7 @@ if [ "${FORCE_INSTALL}" != "1" ] ; then
     echo "Verifying no existing modifications to target files ..."
     for file in usr/bin/LunaSysMgr ; do
 	md5sum1="`grep    -e \*./$file$ ${SRCDIR}/md5sums                   | awk '{print $1}'`"
-	md5sum2="`grep -h -e \*./$file$ /usr/lib/ipkg/info/lunasysmgr-*.md5sums | awk '{print $1}'`"
+	md5sum2="`grep -h -e \*./$file$ /usr/lib/ipkg/info/luna-sysmgr.md5sums | awk '{print $1}'`"
 	[ ! -f "/$file" ] || \
 	    [ "`md5sum /$file | awk '{print $1}'`" = "$md5sum1" ] || \
 	    [ "`md5sum /$file | awk '{print $1}'`" = "$md5sum2" ] || \
@@ -110,6 +110,19 @@ if [ -n "${UPSTART_SCRIPT}" ] ; then
     [ ! -f /$file ] || [ -w /$file ]	|| { echo "Unable to write to /$file"			; error=1 ; }
 fi
 
+# Make sure the tweaks files are writeable
+if [ -d ${SRCDIR}/tweaks ] ; then
+	echo "Verifying ability to create tweaks files ..."
+	dir=media/cryptofs/apps/usr/palm/services/org.webosinternals.tweaks.prefs/preferences
+	mkdir -p /$dir						|| { echo "Error creating /$dir"						; error=1 ; }
+	rm -f /$dir/.webosinternals.org ]	|| { echo "Error removing /$dir/.webosinternals.org"	; error=1 ; }
+	[ ! -f /$dir/.webosinternals.org ]	|| { echo "Unable to remove /$dir/.webosinternals.org"	; error=1 ; }
+	touch /$dir/.webosinternals.org ]	|| { echo "Error touching /$dir/.webosinternals.org"	; error=1 ; }
+	[ -f /$dir/.webosinternals.org ]	|| { echo "Unable to touch /$dir/.webosinternals.org"	; error=1 ; }
+	rm -f /$dir/.webosinternals.org ]	|| { echo "Error removing /$dir/.webosinternals.org"	; error=1 ; }
+	[ ! -f /$dir/.webosinternals.org ]	|| { echo "Unable to remove /$dir/.webosinternals.org"	; error=1 ; }
+fi
+
 if [ "${error}" = "1" ] ; then
     echo "Fatal error occurred, not installing files"
     exit 1
@@ -132,9 +145,22 @@ if [ -n "${UPSTART_SCRIPT}" ] ; then
     file=etc/event.d/LunaSysMgr
     rm -f /$file			|| { echo "Error removing /$file"			; error=1 ; }
     [ ! -f /$file ]			|| { echo "Unable to remove /$file"			; error=1 ; }
-    cp ${SRCDIR}/$file /$file		|| { echo "Error installing /$file"			; error=1 ; }
-    [ -f /$file ]			|| { echo "Unable to install /$file"			; error=1 ; }
-    cmp ${SRCDIR}/$file /$file		|| { echo "Unable to verify /$file"			; error=1 ; }
+    cp ${SRCDIR}/$file /$file		|| { echo "Error installing /$file"	; error=1 ; }
+    [ -f /$file ]			|| { echo "Unable to install /$file"		; error=1 ; }
+    cmp ${SRCDIR}/$file /$file		|| { echo "Unable to verify /$file"	; error=1 ; }
+fi
+
+# Copy the tweaks files to the target location
+if [ -d ${SRCDIR}/tweaks ] ; then
+	echo "Installing Tweaks files ..."
+	dir=media/cryptofs/apps/usr/palm/services/org.webosinternals.tweaks.prefs/preferences
+	for file in `cd tweaks ; find . -type f -print` ; do
+		rm -f /$dir/$file						|| { echo "Error removing /$dir/$file"		; error=1 ; }
+		[ ! -f /$dir/$file ]					|| { echo "Unable to remove /$dir/$file"	; error=1 ; }
+		cp ${SRCDIR}/tweaks/$file /$dir/$file	|| { echo "Error installing /$dir/$file"	; error=1 ; }
+		[ -f /$dir/$file ]						|| { echo "Unable to install /$dir/$file"	; error=1 ; }
+		cmp ${SRCDIR}/tweaks/$file /$dir/$file	|| { echo "Unable to verify /$dir/$file"	; error=1 ; }
+	done
 fi
 
 if [ "${error}" = "1" ] ; then
@@ -150,5 +176,13 @@ if [ "${error}" = "1" ] ; then
 fi
 
 echo "Replacement LunaSysMgr successfully installed"
+
+if [ "${FORCE_INSTALL}" = "1" ] ; then
+    echo "Removing WebOS Ports LunaSysMgr package"
+    /usr/bin/ipkg -o ${APPS} remove org.webosports.palm-lunasysmgr
+    /usr/bin/ipkg -o ${APPS} remove org.webosports.uberlunah
+    rm -rf ${APPS}/usr/palm/applications/org.webosports.palm-lunasysmgr
+    rm -rf ${APPS}/usr/palm/applications/org.webosports.uberlunah
+fi
 
 exit 0
