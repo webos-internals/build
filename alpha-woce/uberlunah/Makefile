@@ -3,19 +3,23 @@ TITLE = UberLunah
 DEVICE = touchpad
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 CATEGORY = User Interface
-VERSIONS = 4.0.0-1
+VERSIONS = 4.1.0
 APPINFO_DESCRIPTION = A collection of all the best LunaSysMgr improvements for the HP TouchPad, rolled into a single convenient installation package.<br><br>\
 Current additions include:<ul>\
 <li>App switching bezel gestures.</li>\
+<li>Tabbed card support.</li>\
+<li>Infinite card cycling.</li>\
+<li>Maximizable edge cards.</li>\
 <li>Lower minimum brightness for better night-time reading.</li>\
 <li>A status bar search button.</li>\
 <li>More responsive gesture detection.</li>\
-<li>Additional keyboard layout for US Dvorak.</li>\
 <li>Other various user interface refinements and improvements.</li>\
 </ul>\
-All additions are controlled by using the Tweaks application.<br><br>
+All additions are controlled by using the Tweaks application.<br>\
+You need to remove your PIN code before installing this package, and all your saved passwords will need to be entered again.<br>
 APPINFO_CHANGELOG = [ \
-{ "version" : "${VERSION}", "log" : [ "Initial public release" ] } \
+{ "version" : "4.1.0", "log" : [ "Added some more features" ] }, \
+{ "version" : "4.0.0", "log" : [ "Initial public release" ] } \
 ]
 
 HOMEPAGE = http://www.webos-ports.org

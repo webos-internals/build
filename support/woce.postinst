@@ -32,6 +32,11 @@ case "${VERSION}" in
 	;;
 esac
 
+if [ -f /var/luna/data/.passcode ] ; then
+    echo "Remove your PIN code before installing this package"
+    exit 1
+fi
+
 if [ "${FORCE_INSTALL}" = "1" ] ; then
     echo "Forcing unconditional overwrite of all LunaSysMgr files"
     # Remove any additional LunaSysMgr files

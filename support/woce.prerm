@@ -60,8 +60,8 @@ tar -C / -zdf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || \
 echo "Removing Tweaks files ..."
 dir=media/cryptofs/apps/usr/palm/services/org.webosinternals.tweaks.prefs/preferences
 for file in `cd tweaks ; find . -type f -print` ; do
-	rm -f /$dir/$file						|| { echo "Error removing /$dir/$file"		; error=1 ; }
-	[ ! -f /$dir/$file ]					|| { echo "Unable to remove /$dir/$file"	; error=1 ; }
+	rm -f /$dir/$file	|| { echo "Error removing /$dir/$file"		; error=1 ; }
+	[ ! -f /$dir/$file ]	|| { echo "Unable to remove /$dir/$file"	; error=1 ; }
 done
 
 exit 0

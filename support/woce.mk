@@ -10,9 +10,9 @@ ifeq ("${DEVICE}","touchpad")
 WEBOS_VERSION = 3.0.5
 endif
 DL_DIR = ../../downloads
-POSTINSTALLFLAGS = RestartLuna
-POSTUPDATEFLAGS  = RestartLuna
-POSTREMOVEFLAGS  = RestartLuna
+POSTINSTALLFLAGS = RestartDevice
+POSTUPDATEFLAGS  = RestartDevice
+POSTREMOVEFLAGS  = RestartDevice
 UPSTART_SCRIPT=LunaSysMgr
 
 HEADLESSAPP_VERSION = 0.2.0
