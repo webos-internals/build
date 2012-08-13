@@ -3,7 +3,7 @@ TITLE	 = Preware
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 1.9.10
+VERSION  = 1.9.12
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
@@ -11,6 +11,7 @@ ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 MINWEBOSVERSION = 1.4.0
 DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, kernels, services and plugins.<br><b>Requires webOS 1.4.0 or later</b>.
 CHANGELOG = \
+1.9.12: Added support for WebOS Community Edition (WOCE) feeds by the WebOS Ports team from WebOS Internals.<br>\
 1.9.10: Updated German translations (courtesy of DiplPhy).<br>\
 1.9.9: Added Traditional Chinese translations (courtesy of tonyw).<br>\
 1.9.8: Updated German translations (courtesy of DocZet).<br>\
