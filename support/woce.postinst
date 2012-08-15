@@ -46,7 +46,7 @@ fi
 if [ "${FORCE_INSTALL}" != "1" ] ; then
   # Make sure all existing target files are in virgin condition
     echo "Verifying no existing modifications to target files ..."
-    for file in usr/bin/LunaSysMgr ; do
+    for file in usr/bin/LunaSysMgr etc/palm/lunaAnimations.conf ; do
 	md5sum1="`grep    -e \*./$file$ ${SRCDIR}/md5sums                   | awk '{print $1}'`"
 	md5sum2="`grep -h -e \*./$file$ /usr/lib/ipkg/info/luna-sysmgr.md5sums | awk '{print $1}'`"
 	[ ! -f "/$file" ] || \
@@ -57,13 +57,13 @@ if [ "${FORCE_INSTALL}" != "1" ] ; then
 fi
 
 if [ "${error}" = "1" ] ; then
-    echo "Device LunaSysMgr is not in factory condition, refusing to install replacement"
+    echo "Device LunaSysMgr files are not in factory condition, refusing to install replacement"
     exit 1
 fi
 
-# Make a backup of all LunaSysMgr file
-echo "Creating backup of existing LunaSysMgr file ..."
-tar -C / -zcf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz /usr/bin/LunaSysMgr || error=1
+# Make a backup of all LunaSysMgr files
+echo "Creating backup of existing LunaSysMgr files ..."
+tar -C / -zcf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz /usr/bin/LunaSysMgr /etc/palm/lunaAnimations.conf || error=1
 
 if [ "${error}" = "1" ] ; then
     echo "Fatal error occurred, unable to create backup tarball"
@@ -71,7 +71,7 @@ if [ "${error}" = "1" ] ; then
 fi
 
 # Verify the backup of all files that are about to be modified
-echo "Verifying backup of existing LunaSysMgr file ..."
+echo "Verifying backup of existing LunaSysMgr files ..."
 tar -C / -zdf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || error=1
 
 if [ "${error}" = "1" ] ; then
@@ -81,7 +81,7 @@ fi
 
 # Make sure all the target directories exist and are writeable
 echo "Verifying ability to write to target directories ..."
-for dir in usr/bin ; do
+for dir in usr/bin etc/palm ; do
     mkdir -p /$dir			|| { echo "Error creating /$dir"			; error=1 ; }
     [ -d /$dir ]			|| { echo "Unable to create /$dir"			; error=1 ; }
     rm -f /$dir/.webosinternals.org ]	|| { echo "Error removing /$dir/.webosinternals.org"	; error=1 ; }
@@ -94,7 +94,7 @@ done
 
 # Make sure all the target files are readable and writeable
 echo "Verifying ability to write to target files ..."
-for file in usr/bin/LunaSysMgr ; do
+for file in usr/bin/LunaSysMgr etc/palm/lunaAnimations.conf ; do
     [ -r ${SRCDIR}/$file ]		|| { echo "Unable to read from ${SRCDIR}/$file"		; error=1 ; }
     [ ! -f /$file ] || [ -w /$file ]	|| { echo "Unable to write to /$file"			; error=1 ; }
 done
@@ -144,6 +144,15 @@ for file in usr/bin/LunaSysMgr ; do
     cmp ${SRCDIR}/$file /$file.install	|| { echo "Unable to verify /$file"			; error=1 ; }
 done
 
+echo "Installing replacement lunaAnimations.conf file ..."
+for file in etc/palm/lunaAnimations.conf ; do
+    rm -f /$file				|| { echo "Error removing /$file"			; error=1 ; }
+    [ ! -f /$file ]				|| { echo "Unable to remove /$file"			; error=1 ; }
+    cp ${SRCDIR}/$file /$file	|| { echo "Error installing /$file"			; error=1 ; }
+    [ -f /$file ]				|| { echo "Unable to install /$file"		; error=1 ; }
+    cmp ${SRCDIR}/$file /$file	|| { echo "Unable to verify /$file"			; error=1 ; }
+done
+
 # Copy the upstart script to the target location
 if [ -n "${UPSTART_SCRIPT}" ] ; then
     echo "Installing LunaSysMgr upstart script ..."
@@ -186,8 +195,10 @@ if [ "${FORCE_INSTALL}" = "1" ] ; then
     echo "Removing WebOS Ports LunaSysMgr package"
     /usr/bin/ipkg -o ${APPS} remove org.webosports.palm-lunasysmgr
     /usr/bin/ipkg -o ${APPS} remove org.webosports.uberlunah
+    /usr/bin/ipkg -o ${APPS} remove org.webosports.lunace
     rm -rf ${APPS}/usr/palm/applications/org.webosports.palm-lunasysmgr
     rm -rf ${APPS}/usr/palm/applications/org.webosports.uberlunah
+    rm -rf ${APPS}/usr/palm/applications/org.webosports.lunace
 fi
 
 exit 0
