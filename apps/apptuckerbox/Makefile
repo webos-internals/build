@@ -3,7 +3,7 @@ TITLE	 = App Tuckerbox
 APP_ID   = com.apptuckerbox.register
 SIGNER   = com.apptuckerbox
 BLDFLAGS = -p
-VERSION  = 1.0.2
+VERSION  = 1.0.3
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.apptuckerbox.com
@@ -11,6 +11,7 @@ ICON	 = http://www.webos-internals.org/images/6/65/Icon_Swagman.png
 MINWEBOSVERSION = 1.4.0
 DESCRIPTION = Your Apps On Your Devices. Please ensure your system clock is correct before attempting to register. Loading the full palm-catalog feed on a Pre- or Pixi- with their limited memory will fail.
 CHANGELOG = \
+1.0.3: Added support for app catalog locales.<br>\
 1.0.2: Stable Release.<br>\
 1.0.1: Fixed https certificate installation on webOS 1.4.5 devices which was preventing registration.<br>\
 1.0.0: First Public Release.
