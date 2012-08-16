@@ -2,7 +2,7 @@
 
 PID=
 FORCE_INSTALL=
-UPSTART_SCRIPT=%UPSTART_SCRIPT%
+FILES="usr/bin/LunaSysMgr etc/palm/lunaAnimations.conf etc/event.d/LunaSysMgr"
 
 # Handle execution as pmPostInstall.script
 if [ -z "$IPKG_OFFLINE_ROOT" ]; then
@@ -39,14 +39,12 @@ fi
 
 if [ "${FORCE_INSTALL}" = "1" ] ; then
     echo "Forcing unconditional overwrite of all LunaSysMgr files"
-    # Remove any additional LunaSysMgr files
-    rm -rf /usr/bin/LunaSysMgr.install
 fi
 
 if [ "${FORCE_INSTALL}" != "1" ] ; then
   # Make sure all existing target files are in virgin condition
     echo "Verifying no existing modifications to target files ..."
-    for file in usr/bin/LunaSysMgr etc/palm/lunaAnimations.conf ; do
+    for file in ${FILES} ; do
 	md5sum1="`grep    -e \*./$file$ ${SRCDIR}/md5sums                   | awk '{print $1}'`"
 	md5sum2="`grep -h -e \*./$file$ /usr/lib/ipkg/info/luna-sysmgr.md5sums | awk '{print $1}'`"
 	[ ! -f "/$file" ] || \
@@ -63,7 +61,7 @@ fi
 
 # Make a backup of all LunaSysMgr files
 echo "Creating backup of existing LunaSysMgr files ..."
-tar -C / -zcf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz /usr/bin/LunaSysMgr /etc/palm/lunaAnimations.conf || error=1
+tar -C / -zcf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz ${FILES} || error=1
 
 if [ "${error}" = "1" ] ; then
     echo "Fatal error occurred, unable to create backup tarball"
@@ -81,7 +79,7 @@ fi
 
 # Make sure all the target directories exist and are writeable
 echo "Verifying ability to write to target directories ..."
-for dir in usr/bin etc/palm ; do
+for dir in usr/bin etc/palm etc/event.d ; do
     mkdir -p /$dir			|| { echo "Error creating /$dir"			; error=1 ; }
     [ -d /$dir ]			|| { echo "Unable to create /$dir"			; error=1 ; }
     rm -f /$dir/.webosinternals.org ]	|| { echo "Error removing /$dir/.webosinternals.org"	; error=1 ; }
@@ -94,26 +92,10 @@ done
 
 # Make sure all the target files are readable and writeable
 echo "Verifying ability to write to target files ..."
-for file in usr/bin/LunaSysMgr etc/palm/lunaAnimations.conf ; do
+for file in ${FILES} ; do
     [ -r ${SRCDIR}/$file ]		|| { echo "Unable to read from ${SRCDIR}/$file"		; error=1 ; }
     [ ! -f /$file ] || [ -w /$file ]	|| { echo "Unable to write to /$file"			; error=1 ; }
 done
-
-# Make sure the upstart script is writeable
-if [ -n "${UPSTART_SCRIPT}" ] ; then
-    echo "Verifying ability to create upstart script ..."
-    dir=etc/event.d
-    mkdir -p /$dir			|| { echo "Error creating /$dir"			; error=1 ; }
-    rm -f /$dir/.webosinternals.org ]	|| { echo "Error removing /$dir/.webosinternals.org"	; error=1 ; }
-    [ ! -f /$dir/.webosinternals.org ]	|| { echo "Unable to remove /$dir/.webosinternals.org"	; error=1 ; }
-    touch /$dir/.webosinternals.org ]	|| { echo "Error touching /$dir/.webosinternals.org"	; error=1 ; }
-    [ -f /$dir/.webosinternals.org ]	|| { echo "Unable to touch /$dir/.webosinternals.org"	; error=1 ; }
-    rm -f /$dir/.webosinternals.org ]	|| { echo "Error removing /$dir/.webosinternals.org"	; error=1 ; }
-    [ ! -f /$dir/.webosinternals.org ]	|| { echo "Unable to remove /$dir/.webosinternals.org"	; error=1 ; }
-    file=$dir/LunaSysMgr
-    [ -r ${SRCDIR}/$file ]		|| { echo "Unable to read from ${SRCDIR}/$file"		; error=1 ; }
-    [ ! -f /$file ] || [ -w /$file ]	|| { echo "Unable to write to /$file"			; error=1 ; }
-fi
 
 # Make sure the tweaks files are writeable
 if [ -d ${SRCDIR}/tweaks ] ; then
@@ -136,33 +118,23 @@ fi
 echo "Disabling Palm diagnostics reporting ..."
 chmod -x /usr/bin/uploadd
 
-# Copy all the files to the target locations
-echo "Installing replacement LunaSysMgr file ..."
+# Move aside running executables
+echo "Moving aside existing LunaSysMgr file ..."
 for file in usr/bin/LunaSysMgr ; do
-    cp ${SRCDIR}/$file /$file.install	|| { echo "Error installing /$file"			; error=1 ; }
-    [ -f /$file.install ]				|| { echo "Unable to install /$file"		; error=1 ; }
-    cmp ${SRCDIR}/$file /$file.install	|| { echo "Unable to verify /$file"			; error=1 ; }
+	if [ ! -f /$file.old ] ; then
+		mv /$file /$file.old	|| { echo "Error moving aside /$file, reboot required"		; error=1 ; }
+		[ -f /$file.old ]		|| { echo "Unable to move aside /$file, reboot required"	; error=1 ; }
+	fi
 done
 
-echo "Installing replacement lunaAnimations.conf file ..."
-for file in etc/palm/lunaAnimations.conf ; do
+echo "Installing replacement files ..."
+for file in ${FILES} ; do
     rm -f /$file				|| { echo "Error removing /$file"			; error=1 ; }
     [ ! -f /$file ]				|| { echo "Unable to remove /$file"			; error=1 ; }
     cp ${SRCDIR}/$file /$file	|| { echo "Error installing /$file"			; error=1 ; }
     [ -f /$file ]				|| { echo "Unable to install /$file"		; error=1 ; }
     cmp ${SRCDIR}/$file /$file	|| { echo "Unable to verify /$file"			; error=1 ; }
 done
-
-# Copy the upstart script to the target location
-if [ -n "${UPSTART_SCRIPT}" ] ; then
-    echo "Installing LunaSysMgr upstart script ..."
-    file=etc/event.d/LunaSysMgr
-    rm -f /$file			|| { echo "Error removing /$file"			; error=1 ; }
-    [ ! -f /$file ]			|| { echo "Unable to remove /$file"			; error=1 ; }
-    cp ${SRCDIR}/$file /$file		|| { echo "Error installing /$file"	; error=1 ; }
-    [ -f /$file ]			|| { echo "Unable to install /$file"		; error=1 ; }
-    cmp ${SRCDIR}/$file /$file		|| { echo "Unable to verify /$file"	; error=1 ; }
-fi
 
 # Copy the tweaks files to the target location
 if [ -d ${SRCDIR}/tweaks ] ; then
@@ -179,8 +151,6 @@ fi
 
 if [ "${error}" = "1" ] ; then
     echo "Fatal error occurred, restoring original files"
-    # Remove any additional LunaSysMgr binaries
-    rm -f /usr/bin/LunaSysMgr.install
     tar -C / -zxf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || \
 	{ echo "Fatal error occurred, unable to extract tarball" ; exit 1 ; }
     tar -C / -zdf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || \
@@ -200,5 +170,14 @@ if [ "${FORCE_INSTALL}" = "1" ] ; then
     rm -rf ${APPS}/usr/palm/applications/org.webosports.uberlunah
     rm -rf ${APPS}/usr/palm/applications/org.webosports.lunace
 fi
+
+# Remove moved aside running executable
+echo "Removing moved aside LunaSysMgr file ..."
+for file in usr/bin/LunaSysMgr.old ; do
+	if [ -f /$file ] ; then
+		rm -f /$file	|| { echo "Error removing /$file, reboot required"		; exit 1 ; }
+		[ ! -f /$file ]	|| { echo "Unable to remove /$file, reboot required"	; exit 1 ; }
+	fi
+done
 
 exit 0

@@ -29,6 +29,11 @@ case "${VERSION}" in
     ;;
 esac
 
+if [ -f /var/luna/data/.passcode ] ; then
+    echo "Remove your PIN code before removing this package"
+    exit 1
+fi
+
 [ -f ${APPS}/usr/palm/applications/${PID}/backup.tar.gz ] || \
   { echo "Fatal error occurred, unable to locate tarball" ; exit 1 ; }
 
@@ -49,6 +54,16 @@ if [ "${error}" = "1" ] ; then
   exit 1
 fi
 
+# Move aside running executables
+echo "Moving aside existing LunaSysMgr file ..."
+for file in usr/bin/LunaSysMgr ; do
+	if [ ! -f /$file.old ] ; then
+		mv /$file /$file.old	|| { echo "Error moving aside /$file, reboot required"		; exit 1 ; }
+		[ -f /$file.old ]		|| { echo "Unable to move aside /$file, reboot required"	; exit 1 ; }
+	fi
+done
+
+echo "Restoring original LunaSysMgr files ..."
 # Extract all the files to the target locations
 tar -C / -zxf ${APPS}/usr/palm/applications/${PID}/backup.tar.gz || \
   { echo "Fatal error occurred, unable to extract tarball" ; exit 1 ; }

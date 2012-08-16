@@ -20,11 +20,18 @@ pre-start script
 		echo "" > /var/luna/preferences/sysmgr-args
 	fi
 
-	if [ -e /usr/bin/LunaSysMgr.install ]
-	then
+	if [ -e /usr/bin/LunaSysMgr.install ] ; then
 		mount -o remount,rw /
 		mv /usr/bin/LunaSysMgr.install /usr/bin/LunaSysMgr
 		mount -o remount,ro /
+	fi
+
+	if [ -e /usr/bin/LunaSysMgr.old ] ; then
+		if [ -f /usr/bin/LunaSysMgr ] ; then
+			mount -o remount,rw /
+			rm -f /usr/bin/LunaSysMgr.old
+			mount -o remount,ro /
+		fi
 	fi
 
 end script
