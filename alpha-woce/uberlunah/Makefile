@@ -3,7 +3,7 @@ TITLE = LunaCE (formerly UberLunah)
 DEVICE = touchpad
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 CATEGORY = User Interface
-VERSIONS = 4.3.2
+VERSIONS = 4.3.4
 APPINFO_DESCRIPTION = A collection of all the best LunaSysMgr improvements for the HP TouchPad, rolled into a single convenient installation package.<br><br>\
 Current additions include:<ul>\
 <li>App switching bezel gestures.</li>\
@@ -12,12 +12,15 @@ Current additions include:<ul>\
 <li>Maximizable edge cards.</li>\
 <li>Lower minimum brightness for better night-time reading.</li>\
 <li>A status bar search button.</li>\
+<li>Show the device name instead of HP webOS.</li>\
 <li>More responsive gesture detection.</li>\
 <li>Other various user interface refinements and improvements.</li>\
 </ul>\
 All additions are controlled by using the Tweaks application.<br>\
 You need to remove your PIN code before installing this package, and all your saved passwords will need to be entered again.<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "4.3.4", "log" : [ "Fixed compatibility between Tabbed Cards and Fluid Gestures" ] }, \
+{ "version" : "4.3.3", "log" : [ "Restored fluid upswipe functionality" ] }, \
 { "version" : "4.3.2", "log" : [ "Disabled fluid gesture upswipe due to conflict" ] }, \
 { "version" : "4.3.1", "log" : [ "New fluid gesture detection system" ] }, \
 { "version" : "4.2.0", "log" : [ "Fixed input focus issue" ] }, \
