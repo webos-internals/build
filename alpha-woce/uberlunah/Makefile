@@ -3,7 +3,7 @@ TITLE = LunaCE (formerly UberLunah)
 DEVICE = touchpad
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 CATEGORY = User Interface
-VERSIONS = 4.3.4
+VERSIONS = 4.3.5
 APPINFO_DESCRIPTION = A collection of all the best LunaSysMgr improvements for the HP TouchPad, rolled into a single convenient installation package.<br><br>\
 Current additions include:<ul>\
 <li>App switching bezel gestures.</li>\
@@ -19,6 +19,7 @@ Current additions include:<ul>\
 All additions are controlled by using the Tweaks application.<br>\
 You need to remove your PIN code before installing this package, and all your saved passwords will need to be entered again.<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "4.3.5", "log" : [ "Fixes various bugs introduced in 4.3.x" ] }, \
 { "version" : "4.3.4", "log" : [ "Fixed compatibility between Tabbed Cards and Fluid Gestures" ] }, \
 { "version" : "4.3.3", "log" : [ "Restored fluid upswipe functionality" ] }, \
 { "version" : "4.3.2", "log" : [ "Disabled fluid gesture upswipe due to conflict" ] }, \
