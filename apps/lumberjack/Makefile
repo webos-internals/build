@@ -32,7 +32,7 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/f/f6/Lumberjack_ss7.png\" ]
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git://git.webos-internals.org/applications/lumberjack.git
+SRC_GIT = git://github.com/webos-internals/lumberjack.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
