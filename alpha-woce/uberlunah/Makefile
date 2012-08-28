@@ -1,5 +1,5 @@
 NAME = $(shell basename $(shell pwd))
-TITLE = LunaCE (formerly UberLunah)
+TITLE = LunaCE
 DEVICE = touchpad
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 CATEGORY = User Interface
@@ -14,7 +14,7 @@ Current additions include:<ul>\
 <li>A status bar search button.</li>\
 <li>Show the device name instead of HP webOS.</li>\
 <li>Additional keyboard layouts.</li>\
-<li>Ability to remove the Tap Ripple.<li>\
+<li>Ability to remove the Tap Ripple.</li>\
 <li>More responsive gesture detection.</li>\
 <li>Other various user interface refinements and improvements.</li>\
 </ul>\
