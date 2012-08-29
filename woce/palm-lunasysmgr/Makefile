@@ -5,7 +5,7 @@ DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 CATEGORY = Recovery
 FORCE_INSTALL = 1
 BLDFLAGS = -p
-VERSIONS = 3.0.5-3
+VERSION = 3.0.5-3
 APPINFO_DESCRIPTION = Use this package to reinstall the official webOS ${WEBOS_VERSION} LunaSysMgr from Palm.<br>\
 This package will refuse to operate on a device with an incompatible webOS version.<br>\
 Note that only LunaSysMgr files are restored, and they will be forcibly overwritten regardless of current state.  No other files are modified in any way.<br>\

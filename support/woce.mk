@@ -51,22 +51,6 @@ COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
 
 .PHONY: package build unpack
 
-ifneq ("${VERSIONS}", "")
-package: 
-	for v in ${VERSIONS} ; do \
-		VERSION=$${v} ${MAKE} VERSIONS= package ; \
-	done
-
-build: 
-	for v in ${VERSIONS} ; do \
-		VERSION=$${v} ${MAKE} VERSIONS= build ; \
-	done
-
-unpack: 
-	for v in ${VERSIONS} ; do \
-		VERSION=$${v} ${MAKE} VERSIONS= unpack ; \
-	done
-else
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk
 
 build: build/.built-${VERSION}
@@ -74,7 +58,6 @@ build: build/.built-${VERSION}
 
 unpack: build/.unpacked-${VERSION}
 .PRECIOUS: build/.unpacked-${VERSION}
-endif
 
 ifneq ("${DUMMY_VERSION}", "")
 
