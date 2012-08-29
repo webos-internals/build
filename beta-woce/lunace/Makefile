@@ -5,6 +5,7 @@ DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 CATEGORY = User Interface
 VERSION = 4.5.0
 APPINFO_DESCRIPTION = A collection of all the best LunaSysMgr improvements for the HP TouchPad, rolled into a single convenient installation package.<br><br>\
+To upgrade from the alpha versions (<= 4.4.2) of LunaCE to the beta version (4.5.0) of LunaCE you need to first remove the existing LunaCE package manually, as the package id has changed.<br><br>\
 Current additions include:<ul>\
 <li>App switching bezel gestures.</li>\
 <li>Tabbed card support.</li>\
