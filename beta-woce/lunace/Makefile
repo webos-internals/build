@@ -3,7 +3,7 @@ TITLE = LunaCE
 DEVICE = touchpad
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 CATEGORY = User Interface
-VERSION = 4.5.0
+VERSION = 4.5.1
 APPINFO_DESCRIPTION = A collection of all the best LunaSysMgr improvements for the HP TouchPad, rolled into a single convenient installation package.<br><br>\
 To upgrade from the alpha versions (<= 4.4.2) of LunaCE to the beta version (4.5.0) of LunaCE you need to first remove the existing LunaCE package manually, as the package id has changed.<br><br>\
 Current additions include:<ul>\
@@ -22,6 +22,7 @@ Current additions include:<ul>\
 All additions are controlled by using the Tweaks application.<br>\
 You need to remove your PIN code before installing this package, and all your saved passwords will need to be entered again.<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "4.5.1", "log" : [ "Additional keyboard layouts and fixes, large improvements to Fluid Gestures." ] }, \
 { "version" : "4.5.0", "log" : [ "Fixed missing Mojo encryption functions" ] }, \
 { "version" : "4.4.2", "log" : [ "Added the Tap Ripple tweak", "Added Dynamic Dashboard height API", "New keyboard layouts", "Various bug fixes" ] }, \
 { "version" : "4.3.5", "log" : [ "Fixes various bugs introduced in 4.3.x" ] }, \
@@ -60,7 +61,7 @@ build/arm.built-${VERSION}: build/.unpacked-${VERSION} ${WEBOS_DOCTOR}
 	mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/usr/bin
 	cp build/src/bin/LunaSysMgr build/arm/usr/palm/applications/${APP_ID}/additional_files/usr/bin/LunaSysMgr
 	mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/etc/palm
-	cp configs/lunaAnimations.conf build/arm/usr/palm/applications/${APP_ID}/additional_files/etc/palm/lunaAnimations.conf
+	cp build/src/configs/lunaAnimations.conf build/arm/usr/palm/applications/${APP_ID}/additional_files/etc/palm/lunaAnimations.conf
 	mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/tweaks
 	cp build/src/tweaks/* build/arm/usr/palm/applications/${APP_ID}/additional_files/tweaks
 	touch $@
