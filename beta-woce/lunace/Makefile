@@ -16,7 +16,9 @@ Current additions include:<ul>\
 <li>Show the device name instead of HP webOS.</li>\
 <li>Additional keyboard layouts.</li>\
 <li>Ability to remove the Tap Ripple.</li>\
-<li>More responsive gesture detection.</li>\
+<li>Additional gesture detection engines.</li>\
+<li>New APIs for developers.</li>\
+<li>(See <a href="http://webos-ports.org/wiki/LunaCE_APIs">LunaCE APIs</a> for details.)</li>\
 <li>Other various user interface refinements and improvements.</li>\
 </ul>\
 All additions are controlled by using the Tweaks application.<br>\
