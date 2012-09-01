@@ -3,7 +3,7 @@ TITLE = LunaCE
 DEVICE = touchpad
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 CATEGORY = User Interface
-VERSION = 4.5.1
+VERSION = 4.5.2
 APPINFO_DESCRIPTION = A collection of all the best LunaSysMgr improvements for the HP TouchPad, rolled into a single convenient installation package.<br><br>\
 To upgrade from the alpha versions (<= 4.4.2) of LunaCE to the beta version (4.5.0) of LunaCE you need to first remove the existing LunaCE package manually, as the package id has changed.<br><br>\
 Current additions include:<ul>\
@@ -23,6 +23,7 @@ Current additions include:<ul>\
 All additions are controlled by using the Tweaks application.<br>\
 You need to remove your PIN code before installing this package, and all your saved passwords will need to be entered again.<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "4.5.2", "log" : [ "Fixed Fluid Gestures behaviour in portrait orientations." ] }, \
 { "version" : "4.5.1", "log" : [ "Additional keyboard layouts and fixes, large improvements to Fluid Gestures." ] }, \
 { "version" : "4.5.0", "log" : [ "Fixed missing Mojo encryption functions" ] }, \
 { "version" : "4.4.2", "log" : [ "Added the Tap Ripple tweak", "Added Dynamic Dashboard height API", "New keyboard layouts", "Various bug fixes" ] }, \
