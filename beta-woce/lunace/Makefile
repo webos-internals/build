@@ -17,7 +17,7 @@ Current additions include:<ul>\
 <li>Additional keyboard layouts.</li>\
 <li>Ability to remove the Tap Ripple.</li>\
 <li>Additional gesture detection engines.</li>\
-<li>New APIs for developers. (See <a href="http://webos-ports.org/wiki/LunaCE_APIs">LunaCE APIs</a> for details.)</li>\
+<li>New APIs for developers. (See <a href=http://webos-ports.org/wiki/LunaCE_APIs>LunaCE APIs</a> for details.)</li>\
 <li>Other various user interface refinements and improvements.</li>\
 </ul>\
 All additions are controlled by using the Tweaks application.<br>\
