@@ -3,7 +3,7 @@ TITLE = LunaCE
 DEVICE = touchpad
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 CATEGORY = User Interface
-VERSION = 4.7.0
+VERSION = 4.8.0
 APPINFO_DESCRIPTION = A collection of all the best LunaSysMgr improvements for the HP TouchPad, rolled into a single convenient installation package.<br><br>\
 To upgrade from the alpha versions (<= 4.4.2) of LunaCE to the beta version (>= 4.5.0) of LunaCE you need to first remove the existing LunaCE package manually, as the package id has changed.<br><br>\
 Current additions include:<ul>\
@@ -18,11 +18,15 @@ Current additions include:<ul>\
 <li>Ability to remove the Tap Ripple.</li>\
 <li>Additional gesture detection engines.</li>\
 <li>New APIs for developers. (See <a href=http://webos-ports.org/wiki/LunaCE_APIs>LunaCE APIs</a> for details.)</li>\
+<li>Card view Control Gestures.</li>\
 <li>Other various user interface refinements and improvements.</li>\
 </ul>\
 All additions are controlled by using the Tweaks application.<br>\
 You need to remove your PIN code before installing this package, and all your saved passwords will need to be entered again.<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "4.8.0", "log" : [ "Card Zoom Gestures" ] }, \
+{ "version" : "4.7.5", "log" : [ "Return of the Minicards" ] }, \
+{ "version" : "4.7.3", "log" : [ "Bugfixes to Spread Gestures, Infinite Card Cycling and Dynamic Dash Notifications" ] }, \
 { "version" : "4.7.0", "log" : [ "Added Spread Gesture for Stacks, number rows on dk/no/se keyboards are now full-width" ] }, \
 { "version" : "4.6.0", "log" : [ "Added Custom Carrier String and QWERTZ umlaut keys" ] }, \
 { "version" : "4.5.2", "log" : [ "Fixed Fluid Gestures behaviour in portrait orientations" ] }, \
@@ -41,6 +45,9 @@ APPINFO_CHANGELOG = [ \
 ]
 
 CHANGELOG = \
+4.8.0: Card Zoom Gestures<br />\
+4.7.5: Return of the Minicards<br />\
+4.7.3: Bugfixes to Spread Gestures, Infinite Card Cycling and Dynamic Dash Notifications<br />\
 4.7.0: Added Spread Gesture for Stacks, number rows on dk/no/se keyboards are now full-width<br />\
 4.6.0: Added Custom Carrier String and QWERTZ umlaut keys<br />\
 4.5.2: Fixed Fluid Gestures behaviour in portrait orientations<br />\
