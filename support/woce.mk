@@ -2,7 +2,7 @@
 
 SIGNER = org.webosinternals
 MAINTAINER = WebOS Ports
-ICON = http://www.webos-internals.org/images/2/2c/LunaCommunityEdition.png
+ICON = http://www.webos-internals.org/images/c/cb/LunaCE.png
 DEPENDS = 
 FEED = WebOS Ports
 LICENSE = Apache Open Source
