@@ -2,7 +2,6 @@
 
 SIGNER = org.webosinternals
 MAINTAINER = WebOS Ports
-ICON = http://www.webos-internals.org/images/2/2c/LunaCommunityEdition.png
 DEPENDS = 
 FEED = WebOS Ports
 LICENSE = Apache Open Source
@@ -91,7 +90,6 @@ include ../../support/headlessapp.mk
 build/.built-${VERSION}: build/arm.built-${VERSION} ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
 	${TAR} -C build/arm/usr/palm/applications/${APP_ID} -xvf ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz
 	rm -rf build/arm/usr/palm/applications/${APP_ID}/.git
-	cp ../../support/woce.png build/arm/usr/palm/applications/${APP_ID}/icon.png
 	echo "{" > build/arm/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "\"title\": \"${TITLE}\"," >> build/arm/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "\"id\": \"${APP_ID}\"," >> build/arm/usr/palm/applications/${APP_ID}/appinfo.json

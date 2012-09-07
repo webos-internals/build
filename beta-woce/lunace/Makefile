@@ -2,6 +2,7 @@ NAME = $(shell basename $(shell pwd))
 TITLE = LunaCE
 DEVICE = touchpad
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
+ICON = http://www.webos-internals.org/images/c/cb/LunaCE.png
 CATEGORY = User Interface
 VERSION = 4.9.0
 APPINFO_DESCRIPTION = A collection of all the best LunaSysMgr improvements for the HP TouchPad, rolled into a single convenient installation package.<br><br>\
@@ -100,4 +101,5 @@ build/arm.built-${VERSION}: build/.unpacked-${VERSION} ${WEBOS_DOCTOR}
 	cp build/src/configs/lunaAnimations.conf build/arm/usr/palm/applications/${APP_ID}/additional_files/etc/palm/lunaAnimations.conf
 	mkdir -p build/arm/usr/palm/applications/${APP_ID}/additional_files/tweaks
 	cp build/src/tweaks/* build/arm/usr/palm/applications/${APP_ID}/additional_files/tweaks
+	cp icon.png build/arm/usr/palm/applications/${APP_ID}/icon.png
 	touch $@
