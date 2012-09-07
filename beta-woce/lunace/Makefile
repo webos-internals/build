@@ -3,7 +3,7 @@ TITLE = LunaCE
 DEVICE = touchpad
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 CATEGORY = User Interface
-VERSION = 4.8.0
+VERSION = 4.9.0
 APPINFO_DESCRIPTION = A collection of all the best LunaSysMgr improvements for the HP TouchPad, rolled into a single convenient installation package.<br><br>\
 To upgrade from the alpha versions (<= 4.4.2) of LunaCE to the beta version (>= 4.5.0) of LunaCE you need to first remove the existing LunaCE package manually, as the package id has changed.<br><br>\
 Current additions include:<ul>\
@@ -16,14 +16,17 @@ Current additions include:<ul>\
 <li>Show the device name instead of HP webOS.</li>\
 <li>Additional keyboard layouts.</li>\
 <li>Ability to remove the Tap Ripple.</li>\
-<li>Additional gesture detection engines.</li>\
+<li>Swipe, Slide and Fluid gesture engines.</li>\
 <li>New APIs for developers. (See <a href=http://webos-ports.org/wiki/LunaCE_APIs>LunaCE APIs</a> for details.)</li>\
-<li>Card view Control Gestures.</li>\
+<li>Zoom and Spread Gestures for Cards and Stacks.</li>\
+<li>webOS 1.x-style Mini Cards.</li>\
+<li>Reimplimented Wave Launcher</li>\
 <li>Other various user interface refinements and improvements.</li>\
 </ul>\
 All additions are controlled by using the Tweaks application.<br>\
 You need to remove your PIN code before installing this package, and all your saved passwords will need to be entered again.<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "4.9.0", "log" : [ "Wave Launcher, Improved Card View Navigation, Bugfixes" ] }, \
 { "version" : "4.8.0", "log" : [ "Card Zoom Gestures" ] }, \
 { "version" : "4.7.5", "log" : [ "Return of the Minicards" ] }, \
 { "version" : "4.7.3", "log" : [ "Bugfixes to Spread Gestures, Infinite Card Cycling and Dynamic Dash Notifications" ] }, \
@@ -45,6 +48,7 @@ APPINFO_CHANGELOG = [ \
 ]
 
 CHANGELOG = \
+4.9.0: Wave Launcher, Improved Card View Navigation, Bugfixes<br />\
 4.8.0: Card Zoom Gestures<br />\
 4.7.5: Return of the Minicards<br />\
 4.7.3: Bugfixes to Spread Gestures, Infinite Card Cycling and Dynamic Dash Notifications<br />\
