@@ -50,7 +50,7 @@ APPINFO_CHANGELOG = [ \
 ]
 
 CHANGELOG = \
-4.9.5: Bugfixes, Wave Launcher is now triggered by an upward slide on the left/right screen edge<br />
+4.9.5: Bugfixes, Wave Launcher is now triggered by an upward slide on the left/right screen edge<br />\
 4.9.0: Wave Launcher, Improved Card View Navigation, Bugfixes<br />\
 4.8.0: Card Zoom Gestures<br />\
 4.7.5: Return of the Minicards<br />\
