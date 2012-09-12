@@ -4,7 +4,7 @@ DEVICE = touchpad
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 ICON = http://www.webos-internals.org/images/c/cb/LunaCE.png
 CATEGORY = User Interface
-VERSION = 4.9.0
+VERSION = 4.9.5
 APPINFO_DESCRIPTION = A collection of all the best LunaSysMgr improvements for the HP TouchPad, rolled into a single convenient installation package.<br><br>\
 To upgrade from the alpha versions (<= 4.4.2) of LunaCE to the beta version (>= 4.5.0) of LunaCE you need to first remove the existing LunaCE package manually, as the package id has changed.<br><br>\
 Current additions include:<ul>\
@@ -27,6 +27,7 @@ Current additions include:<ul>\
 All additions are controlled by using the Tweaks application.<br>\
 You need to remove your PIN code before installing this package, and all your saved passwords will need to be entered again.<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "4.9.5", "log" : [ "Bugfixes, Wave Launcher is now triggered by an upward slide on the left/right screen edge" ] }, \
 { "version" : "4.9.0", "log" : [ "Wave Launcher, Improved Card View Navigation, Bugfixes" ] }, \
 { "version" : "4.8.0", "log" : [ "Card Zoom Gestures" ] }, \
 { "version" : "4.7.5", "log" : [ "Return of the Minicards" ] }, \
@@ -49,6 +50,7 @@ APPINFO_CHANGELOG = [ \
 ]
 
 CHANGELOG = \
+4.9.5: Bugfixes, Wave Launcher is now triggered by an upward slide on the left/right screen edge<br />
 4.9.0: Wave Launcher, Improved Card View Navigation, Bugfixes<br />\
 4.8.0: Card Zoom Gestures<br />\
 4.7.5: Return of the Minicards<br />\
