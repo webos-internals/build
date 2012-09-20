@@ -4,7 +4,7 @@ DEVICE = touchpad
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 ICON = http://www.webos-internals.org/images/4/47/LunaCE-A.png
 CATEGORY = User Interface
-VERSION = 4.9.7
+VERSION = 4.9.8
 APPINFO_DESCRIPTION = A collection of all the best LunaSysMgr improvements for the HP TouchPad, rolled into a single convenient installation package.<br><br>\
 To upgrade from the alpha versions (<= 4.4.2) of LunaCE to the beta version (>= 4.5.0) of LunaCE you need to first remove the existing LunaCE package manually, as the package id has changed.<br><br>\
 Current additions include:<ul>\
@@ -29,6 +29,7 @@ Current additions include:<ul>\
 All additions are controlled by using the Tweaks application.<br>\
 You need to remove your PIN code before installing this package, and all your saved passwords will need to be entered again.<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "4.9.8", "log" : [ "Bugfixes & Optimizations to Tabbed Cards, more responsive press-and-hold power menu" ] }, \
 { "version" : "4.9.7", "log" : [ "Bugfixes, Ctrl+Tab & Ctrl+Arrows for card navigation" ] }, \
 { "version" : "4.9.6", "log" : [ "Bugfixes, Trackball added to Virtual Keyboard" ] }, \
 { "version" : "4.9.5", "log" : [ "Bugfixes, Wave Launcher is now triggered by an upward slide on the left/right screen edge" ] }, \
@@ -54,6 +55,7 @@ APPINFO_CHANGELOG = [ \
 ]
 
 CHANGELOG = \
+4.9.8: Bugfixes & Optimizations to Tabbed Cards, more responsive press-and-hold power menu<br />\
 4.9.7: Bugfixes, Ctrl+Tab & Ctrl+Arrows for card navigation<br />\
 4.9.6: Bugfixes, Trackball added to Virtual Keyboard<br />\
 4.9.5: Bugfixes, Wave Launcher is now triggered by an upward slide on the left/right screen edge<br />\
