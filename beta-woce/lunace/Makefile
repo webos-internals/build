@@ -4,7 +4,7 @@ DEVICE = touchpad
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br>${KERNEL_DISCLAIMER}
 ICON = http://www.webos-internals.org/images/4/47/LunaCE-A.png
 CATEGORY = User Interface
-VERSION = 4.9.5
+VERSION = 5.0.0
 APPINFO_DESCRIPTION = A collection of all the best LunaSysMgr improvements for the HP TouchPad, rolled into a single convenient installation package.<br><br>\
 To upgrade from the alpha versions (<= 4.4.2) of LunaCE to the beta version (>= 4.5.0) of LunaCE you need to first remove the existing LunaCE package manually, as the package id has changed.<br><br>\
 Current additions include:<ul>\
@@ -22,11 +22,19 @@ Current additions include:<ul>\
 <li>Zoom and Spread Gestures for Cards and Stacks.</li>\
 <li>webOS 1.x-style Mini Cards.</li>\
 <li>Reimplimented Wave Launcher</li>\
+<li>Virtual Trackball for text selection</li>\
+<li>Bluetooth keyboard shortcuts for new features</li>\
 <li>Other various user interface refinements and improvements.</li>\
 </ul>\
 All additions are controlled by using the Tweaks application.<br>\
 You need to remove your PIN code before installing this package, and all your saved passwords will need to be entered again.<br>
 APPINFO_CHANGELOG = [ \
+{ "version" : "5.0.0", "log" : [ "Added Gesture Deadzone Tweak." ] }, \
+{ "version" : "4.9.10", "log" : [ "Switch from Ctrl to Meta (Win/Cmd/Card) for keyboard shortcuts, Meta+1-6 Wave Launcher shortcut." ] }, \
+{ "version" : "4.9.9", "log" : [ "Bugfixes to Keyboard Shortcuts and Carrier String" ] }, \
+{ "version" : "4.9.8", "log" : [ "Bugfixes & Optimizations to Tabbed Cards, more responsive press-and-hold power menu" ] }, \
+{ "version" : "4.9.7", "log" : [ "Bugfixes, Ctrl+Tab & Ctrl+Arrows for card navigation" ] }, \
+{ "version" : "4.9.6", "log" : [ "Bugfixes, Trackball added to Virtual Keyboard" ] }, \
 { "version" : "4.9.5", "log" : [ "Bugfixes, Wave Launcher is now triggered by an upward slide on the left/right screen edge" ] }, \
 { "version" : "4.9.0", "log" : [ "Wave Launcher, Improved Card View Navigation, Bugfixes" ] }, \
 { "version" : "4.8.0", "log" : [ "Card Zoom Gestures" ] }, \
@@ -50,6 +58,12 @@ APPINFO_CHANGELOG = [ \
 ]
 
 CHANGELOG = \
+5.0.0: Added Gesture Deadzone Tweak.<br />\
+4.9.10: Switch from Ctrl to Meta (Win/Cmd/Card) for keyboard shortcuts, Meta+1-6 Wave Launcher shortcut.<br />\
+4.9.9: Bugfixes to Keyboard Shortcuts and Carrier String<br />\
+4.9.8: Bugfixes & Optimizations to Tabbed Cards, more responsive press-and-hold power menu<br />\
+4.9.7: Bugfixes, Ctrl+Tab & Ctrl+Arrows for card navigation<br />\
+4.9.6: Bugfixes, Trackball added to Virtual Keyboard<br />\
 4.9.5: Bugfixes, Wave Launcher is now triggered by an upward slide on the left/right screen edge<br />\
 4.9.0: Wave Launcher, Improved Card View Navigation, Bugfixes<br />\
 4.8.0: Card Zoom Gestures<br />\
