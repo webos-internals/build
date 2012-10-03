@@ -10,8 +10,8 @@ DESCRIPTION = <p><strong>This is a beta release. It is not thoroughly tested and
 	<p>This package does not include map-data. Please visit \
 	the <a href="http://en.m.webos-internals.org/wiki/Application:Navit">\
        	Homepage</a> to find out how to obtain and install maps.</p> \
-	<p>You might want to read the \
-	<a href="http://forums.webosnation.com/navit/">release thread</a> \
+	<p>You might want to refer to the \
+	<a href="http://forums.webosnation.com/navit/319053-navit-release-thread.html">release thread</a> \
 	before updating/installing this package, any noteworthy changes are \
 	documented there.</p> \
 	<p>Navit is an open source (GPL) car navigation software for Linux systems. \
