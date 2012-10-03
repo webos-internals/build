@@ -3,7 +3,7 @@ TITLE    = Navit - Car navigation system
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.5.0.5149-1
+VERSION	 = 0.5.0.5243-1
 TYPE     = Application
 CATEGORY = Utilities
 DESCRIPTION = <p><strong>This is a beta release. It is not thoroughly tested and may malfunction.</strong></p>\
@@ -11,7 +11,7 @@ DESCRIPTION = <p><strong>This is a beta release. It is not thoroughly tested and
 	the <a href="http://en.m.webos-internals.org/wiki/Application:Navit">\
        	Homepage</a> to find out how to obtain and install maps.</p> \
 	<p>You might want to read the \
-	<a href="http://en.m.webos-internals.org/wiki/Application:NavitReleaseNotes\#v${VERSION}">release notes</a> \
+	<a href="http://forums.webosnation.com/navit/">release thread</a> \
 	before updating/installing this package, any noteworthy changes are \
 	documented there.</p> \
 	<p>Navit is an open source (GPL) car navigation software for Linux systems. \
@@ -22,6 +22,7 @@ DESCRIPTION = <p><strong>This is a beta release. It is not thoroughly tested and
        	other navigation systems, Navit maps are dynamically generated in real \
        	time from vector data.</p>
 CHANGELOG = \
+	    0.5.0.5243-1: Update to svn r5243. Adjust some layouts to remove clutter. Sync vehicle profiles with original Navit sources. <br/> \
 	    0.5.0.5149-1: Update to svn r5149. Should improve stability. <br/> \
 	    0.5.0.5126-1: Update to svn r5126. Ports OSD-changes from Pre3 to other devices. <br/> \
 	    0.5.0.5031-1: Update to svn r5031. <br/> \
