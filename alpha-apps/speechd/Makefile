@@ -23,7 +23,8 @@ CHANGELOG = \
 	    0.7.1-1: Fade music while talking.<br/>\
 	    0.7.1: Initial release.
 APPINFO_CHANGELOG = [ \
-{ "version" : "0.7.1-12", "log" : [ "Add JS service" ] }, \
+{ "version" : "0.7.1-13", "log" : [ "Add JS service" ] }, \
+{ "version" : "0.7.1-11", "log" : [ "Re-enable support for Pixi" ] }, \
 { "version" : "0.7.1-10", "log" : [ "Try to make this work on Pre3" ] }, \
 { "version" : "0.7.1-6", "log" : [ "Add support for sk_SK.utf8" ] }, \
 { "version" : "0.7.1-5", "log" : [ "Fixed issue which prevented proper upgrading" ] }, \
