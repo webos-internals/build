@@ -34,7 +34,7 @@ ifeq ("${DEVICE}","opal")
 WEBOS_VERSIONS = 3.0.3
 KERNEL_VERSION = 2.6.35
 endif
-KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tgz
+KERNEL_SOURCE = http://downloads.help.palm.com/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tgz
 DL_DIR = ../../downloads
 POSTINSTALLFLAGS = RestartDevice
 POSTUPDATEFLAGS  = RestartDevice
