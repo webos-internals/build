@@ -188,16 +188,16 @@ endif
 COMPATIBLE_VERSIONS = ${WEBOS_VERSION}
 
 ifeq ("${WEBOS_VERSION}", "1.4.5")
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
+KERNEL_PATCH  = http://downloads.help.palm.com/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
 endif
 
 ifeq ("${WEBOS_VERSION}", "1.4.5.1")
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
+KERNEL_PATCH  = http://downloads.help.palm.com/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}-patch\(${DEVICE}\).gz
 endif
 
 ifeq ("${WEBOS_VERSION}", "2.0.0")
 ifeq ("${DEVICE}","pre2")
-KERNEL_PATCH = http://palm.cdnetworks.net/opensource/2.0.0/kernel_patches.tar.gz
+KERNEL_PATCH = http://downloads.help.palm.com/opensource/2.0.0/kernel_patches.tar.gz
 KERNEL_SUBMISSION = patch-submission-48
 endif
 # Override the compiler
@@ -206,8 +206,8 @@ endif
 
 ifeq ("${WEBOS_VERSION}", "2.0.1")
 ifeq ("${DEVICE}","pre2")
-KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.0.0/linuxkernel-${KERNEL_VERSION}.tgz
-KERNEL_PATCH = http://palm.cdnetworks.net/opensource/2.0.0/kernel_patches.tar.gz
+KERNEL_SOURCE = http://downloads.help.palm.com/opensource/2.0.0/linuxkernel-${KERNEL_VERSION}.tgz
+KERNEL_PATCH = http://downloads.help.palm.com/opensource/2.0.0/kernel_patches.tar.gz
 KERNEL_SUBMISSION = patch-submission-54
 endif
 # Override the compiler
@@ -217,11 +217,11 @@ endif
 ifeq ("${WEBOS_VERSION}", "2.1.0")
 ifeq ("${DEVICE}","pre")
 COMPATIBLE_VERSIONS = 2.1.0 | 2.2.4
-KERNEL_PATCH = http://palm.cdnetworks.net/opensource/2.1.0/linuxkernel-2.6.24.preplus.2-1-0.patch.tgz
+KERNEL_PATCH = http://downloads.help.palm.com/opensource/2.1.0/linuxkernel-2.6.24.preplus.2-1-0.patch.tgz
 KERNEL_SUBMISSION = linuxkernel-2.6.24.patch
 endif
 ifeq ("${DEVICE}","pre2")
-KERNEL_PATCH = http://palm.cdnetworks.net/opensource/2.1.0/linuxkernel-2.6.24.pre2.2-1-0.patch.tgz
+KERNEL_PATCH = http://downloads.help.palm.com/opensource/2.1.0/linuxkernel-2.6.24.pre2.2-1-0.patch.tgz
 KERNEL_SUBMISSION = linuxkernel-2.6.24.patch
 endif
 # Override the compiler
@@ -231,7 +231,7 @@ endif
 ifeq ("${WEBOS_VERSION}", "2.1.1")
 ifeq ("${DEVICE}","veer")
 COMPATIBLE_VERSIONS = 2.1.1
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
+KERNEL_PATCH  = http://downloads.help.palm.com/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
 KERNEL_SUBMISSION = linuxkernel-${KERNEL_VERSION}.patch/kerneldiffs.txt
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
@@ -241,7 +241,7 @@ endif
 ifeq ("${WEBOS_VERSION}", "2.1.2")
 ifeq ("${DEVICE}","veer")
 COMPATIBLE_VERSIONS = 2.1.2 | 2.2.1
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
+KERNEL_PATCH  = http://downloads.help.palm.com/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
 KERNEL_SUBMISSION = linuxkernel-${KERNEL_VERSION}.patch/kerneldiffs.txt
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
@@ -251,8 +251,8 @@ endif
 ifeq ("${WEBOS_VERSION}", "2.2.0")
 ifeq ("${DEVICE}","pre3")
 COMPATIBLE_VERSIONS = 2.2.0
-KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tar.gz
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tar.gz
+KERNEL_SOURCE = http://downloads.help.palm.com/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tar.gz
+KERNEL_PATCH  = http://downloads.help.palm.com/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tar.gz
 KERNEL_SUBMISSION = kernelpatch-2.2.0.txt
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
@@ -262,8 +262,8 @@ endif
 ifeq ("${WEBOS_VERSION}", "2.2.3")
 ifeq ("${DEVICE}","pre3")
 COMPATIBLE_VERSIONS = 2.2.3
-KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tar.gz
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tar.gz
+KERNEL_SOURCE = http://downloads.help.palm.com/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tar.gz
+KERNEL_PATCH  = http://downloads.help.palm.com/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tar.gz
 KERNEL_SUBMISSION = kernelpatches-2.2.3.txt
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
@@ -273,15 +273,15 @@ endif
 ifeq ("${WEBOS_VERSION}", "2.2.4")
 ifeq ("${DEVICE}","pre2")
 COMPATIBLE_VERSIONS = 2.2.4
-# KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tar.gz
-KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/2.1.0/linuxkernel-${KERNEL_VERSION}.tar.gz
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/kernelpatch-${WEBOS_VERSION}-${DEVICE}.tgz
+# KERNEL_SOURCE = http://downloads.help.palm.com/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tar.gz
+KERNEL_SOURCE = http://downloads.help.palm.com/opensource/2.1.0/linuxkernel-${KERNEL_VERSION}.tar.gz
+KERNEL_PATCH  = http://downloads.help.palm.com/opensource/${WEBOS_VERSION}/kernelpatch-${WEBOS_VERSION}-${DEVICE}.tgz
 KERNEL_SUBMISSION = kernel-${WEBOS_VERSION}.txt
 endif
 ifeq ("${DEVICE}","pre3")
 COMPATIBLE_VERSIONS = 2.2.4
-KERNEL_SOURCE = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tar.gz
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/kernelpatch-${WEBOS_VERSION}-${DEVICE}.tgz
+KERNEL_SOURCE = http://downloads.help.palm.com/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.tar.gz
+KERNEL_PATCH  = http://downloads.help.palm.com/opensource/${WEBOS_VERSION}/kernelpatch-${WEBOS_VERSION}-${DEVICE}.tgz
 KERNEL_SUBMISSION = kernel-${WEBOS_VERSION}.txt
 endif
 # Override the compiler
@@ -291,7 +291,7 @@ endif
 ifeq ("${WEBOS_VERSION}", "3.0.0")
 ifeq ("${DEVICE}","touchpad")
 COMPATIBLE_VERSIONS = 3.0.0
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
+KERNEL_PATCH  = http://downloads.help.palm.com/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tgz
 KERNEL_SUBMISSION = kernelpatch-3.0.0.txt
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
@@ -301,7 +301,7 @@ endif
 ifeq ("${WEBOS_VERSION}", "3.0.2")
 ifeq ("${DEVICE}","touchpad")
 COMPATIBLE_VERSIONS = 3.0.2
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/3.0.2/linuxkernel-${KERNEL_VERSION}.patches.tgz
+KERNEL_PATCH  = http://downloads.help.palm.com/opensource/3.0.2/linuxkernel-${KERNEL_VERSION}.patches.tgz
 KERNEL_SUBMISSION = kernelpatch-3.0.2.txt
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
@@ -321,7 +321,7 @@ endif
 ifeq ("${WEBOS_VERSION}", "3.0.4")
 ifeq ("${DEVICE}","touchpad")
 COMPATIBLE_VERSIONS = 3.0.4
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/3.0.4/linuxkernel-${KERNEL_VERSION}.patches.tgz
+KERNEL_PATCH  = http://downloads.help.palm.com/opensource/3.0.4/linuxkernel-${KERNEL_VERSION}.patches.tgz
 KERNEL_SUBMISSION = kernel-3.0.4.txt
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
@@ -331,7 +331,7 @@ endif
 ifeq ("${WEBOS_VERSION}", "3.0.5")
 ifeq ("${DEVICE}","touchpad")
 COMPATIBLE_VERSIONS = 3.0.5
-KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tar.gz
+KERNEL_PATCH  = http://downloads.help.palm.com/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tar.gz
 KERNEL_SUBMISSION = kernel-3.0.5.txt
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
