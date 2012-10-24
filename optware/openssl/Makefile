@@ -5,7 +5,7 @@ SIGNER   = mobi.optware
 OPT_VER  = 0.9.8v-2
 VERSION  = 0.9.8.1-2
 CHANGELOG = \
-0.9.8.1-2: Updated to match feeds.
+0.9.8.1-2: Updated to match feeds.<br>\
 0.9.8.1-1: Updated to match feeds.
 HOMEPAGE = http://www.openssl.org/
 TYPE	 = Optware
