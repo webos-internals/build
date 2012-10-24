@@ -175,6 +175,10 @@ endif
 ifeq ("${WEBOS_VERSION}", "3.0.5")
 WEBOS_DOCTOR = ${DOCTOR_DIR}/webosdoctorp305hstnhwifi-${WEBOS_VERSION}.jar
 endif
+# QA 3.0.6 build uses the same kernel as 3.0.5
+ifeq ("${WEBOS_VERSION}", "3.0.6")
+WEBOS_DOCTOR = Doctor_Is_Not_Available_Yet
+endif
 endif
 ifeq ("${DEVICE}","opal")
 ifeq ("${WEBOS_VERSION}", "3.0.3")
@@ -329,6 +333,14 @@ ifeq ("${DEVICE}","touchpad")
 COMPATIBLE_VERSIONS = 3.0.5
 KERNEL_PATCH  = http://palm.cdnetworks.net/opensource/${WEBOS_VERSION}/linuxkernel-${KERNEL_VERSION}.patch.tar.gz
 KERNEL_SUBMISSION = kernel-3.0.5.txt
+# Override the compiler
+CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
+endif
+endif
+
+ifeq ("${WEBOS_VERSION}", "3.0.6")
+ifeq ("${DEVICE}","touchpad")
+COMPATIBLE_VERSIONS = 3.0.6
 # Override the compiler
 CROSS_COMPILE_arm = $(shell cd ../.. ; pwd)/toolchain/cs09q1armel/build/arm-2009q1/bin/arm-none-linux-gnueabi-
 endif
@@ -512,22 +524,6 @@ build/arm.built-%: build/.unpacked-% ${WEBOS_DOCTOR}
 			 build/arm/usr/palm/applications/${APP_ID}/additional_files/var/palm/event.d/${UPSTART_SCRIPT} ; \
 	fi
 	touch $@
-
-ifeq ("${DEVICE}","touchpad")
-# Special case for 3.0.6 based on 3.0.5 kernel source
-build/.unpacked-3.0.6-%: ${DL_DIR}/linux-${KERNEL_VERSION}-3.0.5-${DEVICE}.tar.gz \
-			    ${DL_DIR}/${NAME}-3.0.6-%.tar.gz
-	rm -rf build/src-3.0.6-$*
-	mkdir -p build/src-3.0.6-$*/patches
-	${TAR} -C build/src-3.0.6-$* -zxf ${DL_DIR}/linux-${KERNEL_VERSION}-3.0.5-${DEVICE}.tar.gz
-	${TAR} -C build/src-3.0.6-$*/patches -zxf ${DL_DIR}/${NAME}-3.0.6-$*.tar.gz
-	if [ -n "${KERNEL_PATCHES}" ] ; then \
-	  ( cd build/src-3.0.6-$*/patches ; cat ${KERNEL_PATCHES} > /dev/null ) || exit ; \
-	  ( cd build/src-3.0.6-$*/patches ; cat ${KERNEL_PATCHES} ) | \
-		patch -d build/src-3.0.6-$*/linux-${KERNEL_VERSION} -p1 ; \
-	fi
-	touch $@
-endif
 
 ifdef SRC_GIT
 build/.unpacked-%: ${DL_DIR}/linux-${KERNEL_VERSION}-${WEBOS_VERSION}-${DEVICE}.tar.gz \

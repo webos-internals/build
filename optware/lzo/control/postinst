@@ -6,7 +6,7 @@ APPID=mobi.optware.lzo
 cd $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt
 find lib -type d -exec mkdir -p /opt/{} \;
 find lib -type f -exec ln -sf $IPKG_OFFLINE_ROOT/usr/palm/applications/$APPID/opt/{} /opt/{} \;
-ln -sf liblzo.so.1.0.0 /opt/lib/liblzo.so
-ln -sf liblzo.so.1.0.0 /opt/lib/liblzo.so.1
+ln -sf liblzo2.so.2.0.0 /opt/lib/liblzo2.so
+ln -sf liblzo2.so.2.0.0 /opt/lib/liblzo.so.2
 
 exit 0

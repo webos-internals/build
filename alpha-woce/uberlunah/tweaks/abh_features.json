@@ -1,0 +1,17 @@
+[
+   {
+    "category": "luna",
+    "prefs": [        
+        {
+          "group": "cards",
+          "restart": "none",
+          "prefserv": "infiniteCardCyclingEnabled",
+          "label": "Infinite Card Cycling",
+          "help": "Enable cycling back around from the first/last cards.",
+          "key": "infinitecardscycle_features",
+          "type": "ToggleButton",
+          "value": false,
+        }]
+  }
+]
+

@@ -21,6 +21,7 @@ APPDIRS = apps services linux
 KERNDIR = kernels
 PTCHDIR = autopatch
 OPTWDIR = optware
+WOCEDIR = woce
 
 .PHONY: index package toolchain upload clobber clean
 
@@ -31,7 +32,8 @@ index:  webos-internals-index \
 	webos-kernels-index \
 	optware-index \
 	precentral-index \
-	palm-index
+	palm-index \
+	woce-index
 
 .PHONY: optware-index
 optware-index: ipkgs/optware/all/Packages ipkgs/optware/i686/Packages ipkgs/optware/armv6/Packages ipkgs/optware/armv7/Packages
@@ -49,7 +51,7 @@ webos-patches-index: ipkgs/webos-patches/1.4.5/Packages \
 		     ipkgs/webos-patches/2.1.2/Packages ipkgs/webos-patches/2.2.0/Packages \
 		     ipkgs/webos-patches/2.2.3/Packages ipkgs/webos-patches/2.2.4/Packages \
 		     ipkgs/webos-patches/3.0.2/Packages ipkgs/webos-patches/3.0.4/Packages \
-		     ipkgs/webos-patches/3.0.5/Packages
+		     ipkgs/webos-patches/3.0.5/Packages ipkgs/webos-patches/3.0.6/Packages
 	rm -f ipkgs/webos-patches/1.4.5.1
 	ln -s 1.4.5 ipkgs/webos-patches/1.4.5.1
 
@@ -59,7 +61,10 @@ webos-kernels-index: ipkgs/webos-kernels/1.4.5/Packages ipkgs/webos-kernels/1.4.
 		     ipkgs/webos-kernels/2.1.2/Packages ipkgs/webos-kernels/2.2.0/Packages \
 		     ipkgs/webos-kernels/2.2.3/Packages ipkgs/webos-kernels/2.2.4/Packages \
 		     ipkgs/webos-kernels/3.0.2/Packages ipkgs/webos-kernels/3.0.4/Packages \
-		     ipkgs/webos-kernels/3.0.5/Packages
+		     ipkgs/webos-kernels/3.0.5/Packages ipkgs/webos-kernels/3.0.6/Packages
+
+.PHONY: woce-index
+woce-index: ipkgs/woce/Packages
 
 .PHONY: webos-internals-index
 webos-internals-index: ipkgs/webos-internals/all/Packages ipkgs/webos-internals/i686/Packages ipkgs/webos-internals/armv6/Packages ipkgs/webos-internals/armv7/Packages	
@@ -120,6 +125,17 @@ ipkgs/optware/%/Packages: package-optware
 		-v -p ipkgs/optware/$*/Packages ipkgs/optware/$*
 	gzip -c ipkgs/optware/$*/Packages > ipkgs/optware/$*/Packages.gz
 
+ipkgs/woce/Packages: package-woce
+	rm -rf ipkgs/woce
+	mkdir -p ipkgs/woce
+	( find ${WOCEDIR} -mindepth 2 -maxdepth 2 -type d -name ipkgs -print | \
+	  xargs -I % find % -name "*.ipk" -print | \
+	  xargs -I % rsync -i -a % ipkgs/woce ) ; \
+	TAR_OPTIONS=--wildcards \
+	toolchain/ipkg-utils/ipkg-make-index \
+		-v -p ipkgs/woce/Packages ipkgs/woce
+	gzip -c ipkgs/woce/Packages > ipkgs/woce/Packages.gz
+
 ipkgs/palm-%/Packages: package-feeds
 	rm -rf ipkgs/palm-$*
 	mkdir -p ipkgs/palm-$*
@@ -154,7 +170,7 @@ ipkgs/%/Packages: package-feeds
 	rm -f ipkgs/$*/Packages.orig*
 	gzip -c ipkgs/$*/Packages > ipkgs/$*/Packages.gz
 
-package: package-appdirs package-webos-patches package-webos-kernels package-optware package-feeds
+package: package-appdirs package-webos-patches package-webos-kernels package-optware package-woce package-feeds
 
 package-appdirs: toolchain
 	for f in `find ${APPDIRS} -mindepth 1 -maxdepth 1 -type d -print` ; do \
@@ -185,6 +201,15 @@ package-webos-kernels: toolchain
 
 package-optware: toolchain
 	for f in `find ${OPTWDIR} -mindepth 1 -maxdepth 1 -type d -print` ; do \
+	  if [ -e $$f/Makefile ]; then \
+	    ${MAKE} -C $$f package ; \
+	  else \
+	    rm -rf $$f ; \
+	  fi; \
+	done
+
+package-woce: # toolchain
+	for f in `find ${WOCEDIR} -mindepth 1 -maxdepth 1 -type d -print` ; do \
 	  if [ -e $$f/Makefile ]; then \
 	    ${MAKE} -C $$f package ; \
 	  else \
@@ -252,7 +277,7 @@ ncurses:	staging/usr/include/ncurses/ncurses.h \
 		staging/usr/include/ncursesw/ncurses.h \
 		staging/usr/lib/libncurses.so \
 		staging/usr/lib/libncursesw.so
-	
+
 toolchain/cs09q1armel/build/arm-2009q1:
 	${MAKE} -C toolchain/cs09q1armel unpack
 
@@ -364,8 +389,8 @@ upload:
 	-rsync -avr ipkgs/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/feeds/
 	-rsync -avr ipkgs/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/feeds/
 
-.PHONY: alpha alpha-apps alpha-patches alpha-kernels alpha-optware
-alpha: alpha-apps alpha-patches alpha-kernels alpha-optware
+.PHONY: alpha alpha-apps alpha-patches alpha-kernels alpha-optware alpha-woce
+alpha: alpha-apps alpha-patches alpha-kernels alpha-optware alpha-woce
 
 alpha-apps:
 	${MAKE} APPDIRS="alpha-apps" FEED="WebOS Internals Alpha" webos-internals-index
@@ -395,8 +420,15 @@ alpha-optware:
 	-rsync -avr ipkgs/optware/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/alpha/optware/
 	-rsync -avr ipkgs/optware/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/alpha/optware/
 
-.PHONY: beta beta-apps beta-patches beta-kernels beta-optware
-beta: beta-apps beta-patches beta-kernels beta-optware
+alpha-woce:
+	${MAKE} WOCEDIR="alpha-woce" FEED="WOCE Alpha" woce-index
+	-rsync -avr ipkgs/woce/ preware@ipkg4.preware.org:/home/preware/htdocs/ipkg/alpha/woce/
+	#-rsync -avr ipkgs/woce/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/alpha/woce/
+	-rsync -avr ipkgs/woce/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/alpha/woce/
+	-rsync -avr ipkgs/woce/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/alpha/woce/
+
+.PHONY: beta beta-apps beta-patches beta-kernels beta-optware beta-woce
+beta: beta-apps beta-patches beta-kernels beta-optware beta-woce
 
 beta-apps:
 	${MAKE} APPDIRS="beta-apps" FEED="WebOS Internals Beta" webos-internals-index
@@ -426,33 +458,34 @@ beta-optware:
 	-rsync -avr ipkgs/optware/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/beta/optware/
 	-rsync -avr ipkgs/optware/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/beta/optware/
 
+beta-woce:
+	${MAKE} WOCEDIR="beta-woce" FEED="WOCE Beta" woce-index
+	-rsync -avr ipkgs/woce/ preware@ipkg4.preware.org:/home/preware/htdocs/ipkg/beta/woce/
+	#-rsync -avr ipkgs/woce/ preware@ipkg3.preware.org:/home/preware/htdocs/ipkg/beta/woce/
+	-rsync -avr ipkgs/woce/ preware@ipkg2.preware.org:/home/preware/htdocs/ipkg/beta/woce/
+	-rsync -avr ipkgs/woce/ preware@ipkg1.preware.org:/home/preware/htdocs/ipkg/beta/woce/
+
 distclean: clobber
 	find toolchain -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clobber
 
-clobber: clean clobber-appdirs clobber-patches clobber-kernels clobber-optware clobber-feeds
+clobber: clean clobber-appdirs clobber-patches clobber-kernels clobber-optware clobber-woce clobber-feeds
 	rm -rf ipkgs
 
-clobber-testing:
-	${MAKE} APPDIRS="testing" PTCHDIR="testing-patches" KERNDIR="testing-kernels" OPTWDIR="testing-optware" clobber
-
 alpha-clobber:
-	${MAKE} APPDIRS="alpha-apps" PTCHDIR="alpha-patches" KERNDIR="alpha-kernels" OPTWDIR="alpha-optware" clobber
+	${MAKE} APPDIRS="alpha-apps" PTCHDIR="alpha-patches" KERNDIR="alpha-kernels" OPTWDIR="alpha-optware" WOCEDIR="alpha-woce" clobber
 
 beta-clobber:
-	${MAKE} APPDIRS="beta-apps" PTCHDIR="beta-patches" KERNDIR="beta-kernels" OPTWDIR="beta-optware" clobber
+	${MAKE} APPDIRS="beta-apps" PTCHDIR="beta-patches" KERNDIR="beta-kernels" OPTWDIR="beta-optware" WOCEDIR="beta-woce" clobber
 
-clean: clean-appdirs clean-patches clean-kernels clean-optware clean-feeds
+clean: clean-appdirs clean-patches clean-kernels clean-optware clean-woce clean-feeds
 	find . -name "*~" -delete
 
-clean-testing:
-	${MAKE} APPDIRS="testing" PTCHDIR="testing-patches" KERNDIR="testing-kernels" OPTWDIR="testing-optware" clean
-
 alpha-clean:
-	${MAKE} APPDIRS="alpha-apps" PTCHDIR="alpha-patches" KERNDIR="alpha-kernels" OPTWDIR="alpha-optware" clean
+	${MAKE} APPDIRS="alpha-apps" PTCHDIR="alpha-patches" KERNDIR="alpha-kernels" OPTWDIR="alpha-optware" WOCEDIR="alpha-woce" clean
 
 beta-clean:
-	${MAKE} APPDIRS="beta-apps" PTCHDIR="beta-patches" KERNDIR="beta-kernels" OPTWDIR="beta-optware" clean
+	${MAKE} APPDIRS="beta-apps" PTCHDIR="beta-patches" KERNDIR="beta-kernels" OPTWDIR="beta-optware" WOCEDIR="beta-woce" clean
 
 clobber-appdirs:
 	find ${APPDIRS} -mindepth 1 -maxdepth 1 -type d -print | \
@@ -484,6 +517,14 @@ clobber-optware:
 
 clean-optware:
 	find ${OPTWDIR} -mindepth 1 -maxdepth 1 -type d -print | \
+	xargs -I % ${MAKE} -C % clean
+
+clobber-woce:
+	find ${WOCEDIR} -mindepth 1 -maxdepth 1 -type d -print | \
+	xargs -I % ${MAKE} -C % clobber
+
+clean-woce:
+	find ${WOCEDIR} -mindepth 1 -maxdepth 1 -type d -print | \
 	xargs -I % ${MAKE} -C % clean
 
 clobber-feeds:

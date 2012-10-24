@@ -1,0 +1,16 @@
+[
+   {
+    "category": "luna",
+    "prefs": [        
+        {
+          "group": "cards",
+          "restart": "none",
+          "prefserv": "sysUiEnableMaximizeEdges",
+          "label": "Tap-to-Maximize Edge Cards",
+          "help": "Enables maximizing the left/right cards with a tap in card view.",
+          "key": "maximizeEdges",
+          "type": "ToggleButton",
+          "value": false,
+        }]
+  }
+]

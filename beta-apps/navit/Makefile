@@ -3,10 +3,11 @@ TITLE    = Navit - Car navigation system
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.5.0.4787-1
+VERSION	 = 0.5.0.5149-1
 TYPE     = Application
 CATEGORY = Utilities
-DESCRIPTION = <p>This package does not include map-data. Please visit \
+DESCRIPTION = <p><strong>This is a beta release. It is not thoroughly tested and may malfunction.</strong></p>\
+	<p>This package does not include map-data. Please visit \
 	the <a href="http://en.m.webos-internals.org/wiki/Application:Navit">\
        	Homepage</a> to find out how to obtain and install maps.</p> \
 	<p>You might want to read the \
@@ -21,6 +22,13 @@ DESCRIPTION = <p>This package does not include map-data. Please visit \
        	other navigation systems, Navit maps are dynamically generated in real \
        	time from vector data.</p>
 CHANGELOG = \
+	    0.5.0.5149-1: Update to svn r5149. Should improve stability. <br/> \
+	    0.5.0.5126-1: Update to svn r5126. Ports OSD-changes from Pre3 to other devices. <br/> \
+	    0.5.0.5031-1: Update to svn r5031. <br/> \
+	    0.5.0.5013-1: Update to svn r5013. Further improvements to bluetooth gps code. <br/> \
+	    0.5.0.5010-1: Update to svn r5010. Add basic support for bluetooth GPS receivers. Adds some GUI tweaks.<br/> \
+	    0.5.0.4936-2: Update to svn r4936. Add 'Former Destinations' to menu. Finally fix building of ARMv6 (I.e. this version should start in Pixi, don't know if it's working). <br/> \
+	    0.5.0.4787-2: Small OSD fix. <br/> \
 	    0.5.0.4787-1: Update to svn r4787. Small change in house number search. <br/> \
 	    0.5.0.4786-1: Update to svn r4786. Add missing country-flags. <br/> \
 	    0.5.0.4784-1: Update to svn r4784. Enable tunnel-extrapolation by default (see release notes!). <br/> \
@@ -98,7 +106,7 @@ D = build/$*/usr/palm/applications/${APP_ID}
 SRC_GIT = git://git.webos-internals.org/applications/navit.git
 
 .PHONY: package
-package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk #ipkgs/${APP_ID}_${VERSION}_armv6.ipk
+package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_armv6.ipk
 include ../../support/package.mk
 
 .PHONY: unpack
@@ -114,7 +122,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 
 .PHONY: build
 build: build/.built-${VERSION}
-build/.built-${VERSION}: build/armv7.built-${VERSION} #build/armv6.built-${VERSION}
+build/.built-${VERSION}: build/armv7.built-${VERSION} build/armv6.built-${VERSION}
 	>$@
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}

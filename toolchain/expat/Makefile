@@ -5,7 +5,7 @@ SRC_VER  = 1.95.8
 VERSION  = 1.95.8-1
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 
-SRC_TGZ = http://palm.cdnetworks.net/opensource/2.2.4/${NAME}-${SRC_VER}.tar.gz
+SRC_TGZ = http://downloads.help.palm.com/opensource/2.2.4/${NAME}-${SRC_VER}.tar.gz
 
 .PHONY: package
 package: build/.built-${VERSION}

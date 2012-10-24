@@ -1,0 +1,38 @@
+[
+  {
+    "category": "luna",
+    "prefs":
+	[
+		{
+			"group": "gestures",	
+			"restart": "none",
+			"prefserv": "sysUiGestureDetection",
+			"label": "Gesture Detection",
+			"help": "Swipe- Trigger gestures after releasing the finger during a high-velocity swipe. Slide - Trigger gestures on finger move of 15px instead of on finger release. Fluid - Gestures track the user's finger for a more fluid user experience.",
+			"key": "gestureDetection",
+			"type": "ListSelector",
+			"value": 0,
+			"choices": [ {
+				"label": "Swipe",
+				"value": 0
+			}, {
+				"label": "Slide",
+				"value": 1
+			}, {
+				"label": "Fluid",
+				"value": 2
+			} ]
+		},
+		{
+			"group": "gestures",
+			"restart": "none",
+			"prefserv": "sysUiEnableAppSwitchGestures",
+			"label": "Enable Side Bezel Gestures",
+			"help": "Enable/Disable gestures from the left/right bezels.",
+			"key": "slideAppSwitchGestures",
+			"type": "ToggleButton",
+			"value": false
+		}
+	]
+  }
+]
