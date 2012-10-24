@@ -2,9 +2,11 @@ NAME     = openssl
 TITLE	 = OpenSSL
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
-OPT_VER  = 0.9.8p-1
-VERSION  = 0.9.8.1-1
-CHANGELOG = 0.9.8.1-1: Updated to match feeds.
+OPT_VER  = 0.9.8v-2
+VERSION  = 0.9.8.1-2
+CHANGELOG = \
+0.9.8.1-2: Updated to match feeds.
+0.9.8.1-1: Updated to match feeds.
 HOMEPAGE = http://www.openssl.org/
 TYPE	 = Optware
 CATEGORY = Libraries
