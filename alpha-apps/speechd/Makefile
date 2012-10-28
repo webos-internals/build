@@ -83,7 +83,7 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION} ${DL_DIR}/headlessapp-${HEA
 ifdef APPINFO_CHANGELOG
 	echo '"changeLog": ${APPINFO_CHANGELOG},' >> ${D}/appinfo.json
 endif
-	echo "\"noWindow\": true" >> ${D}/appinfo.json
+	echo "\"noWindow\": true," >> ${D}/appinfo.json
 	echo "\"uiRevision\": 2" >> ${D}/appinfo.json
 	echo "}" >> ${D}/appinfo.json
 	#
