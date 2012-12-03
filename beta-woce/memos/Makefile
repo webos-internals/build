@@ -8,7 +8,7 @@ TYPE	 = Application
 CATEGORY = Productivity
 HOMEPAGE = http://www.webos-ports.org/wiki/Application:Ports
 ICON	 = http://www.webos-internals.org/images/8/85/Memos.png
-MINWEBOSVERSION = 3.0.5
+MINWEBOSVERSION = 2.0.0
 DESCRIPTION = An Full re-write of the Memos app for OpenWebOS and webOS 3.0.5.
 CHANGELOG = \
 1.0.2: More fun with submodules<br>\
