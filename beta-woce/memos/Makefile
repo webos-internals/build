@@ -3,7 +3,7 @@ TITLE	 = memos
 APP_ID   = org.webosports.app.${NAME}
 SIGNER   = org.webosports
 BLDFLAGS = -p
-VERSION  = 1.0.0
+VERSION  = 1.0.2
 TYPE	 = Application
 CATEGORY = Productivity
 HOMEPAGE = http://www.webos-ports.org/wiki/Application:Ports
@@ -11,8 +11,11 @@ ICON	 = http://www.webos-internals.org/images/8/85/Memos.png
 MINWEBOSVERSION = 3.0.5
 DESCRIPTION = An Full re-write of the Memos app for OpenWebOS and webOS 3.0.5.
 CHANGELOG = \
-<br>1.0.0: First public release.
-LICENSE  = GPL v2 Open Source
+1.0.2: More fun with submodules<br>\
+1.0.1: Fix errors with submodules<br>\
+1.0.0: First public release.
+
+LICENSE  = Apache 2.0 Open Source
 
 SRC_GIT = git://github.com/webOS-ports/org.webosports.app.memos.git 
 
@@ -28,7 +31,10 @@ unpack: build/.unpacked-${VERSION}
 build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src
-	tar -C build/src -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	mkdir -p build/src-predeploy
+	tar -C build/src-predeploy -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	cd build/src-predeploy && node enyo/tools/deploy.js
+	cp -r build/src-predeploy/deploy/org.webosports.app.${NAME}/. build/src
 	rm -rf build/src/bin build/src/*.script
 	touch $@
 
