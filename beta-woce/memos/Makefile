@@ -1,5 +1,5 @@
 NAME     = memos
-TITLE	 = memos
+TITLE	 = Memos
 APP_ID   = org.webosports.app.${NAME}
 SIGNER   = org.webosports
 BLDFLAGS = -p
@@ -51,7 +51,21 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
 	mkdir -p build/$*/usr/palm/packages/${APP_ID}
+	echo "{" > build/$*/usr/palm/applications/${APP_ID}/appinfo.json
+	echo "\"title\": \"${TITLE}\"," >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
+	echo "\"id\": \"${APP_ID}\"," >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
+	echo "\"version\": \"${VERSION}\"," >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
+	echo "\"vendor\": \"WebOS Ports\"," >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
+	echo "\"vendor_url\": \"${HOMEPAGE}\","  >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
+	echo "\"type\": \"web\"," >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
+	echo "\"main\": \"index.html\"," >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
+	echo "\"icon\": \"icon.png\"," >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
+	echo '"uiRevision": "2",' >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
+	echo "}" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	touch $@
+
+build/%/CONTROL/control:
+
 
 clobber::
 	rm -rf build
