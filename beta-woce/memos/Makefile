@@ -45,7 +45,6 @@ build: build/.built-${VERSION}
 build/.built-${VERSION}: build/all.built-${VERSION}
 	touch $@
 
-include ../../support/cross-compile.mk
 
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
@@ -64,9 +63,6 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	echo '"uiRevision": "2",' >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	echo "}" >> build/$*/usr/palm/applications/${APP_ID}/appinfo.json
 	touch $@
-
-build/%/CONTROL/control:
-
 
 clobber::
 	rm -rf build
