@@ -2,7 +2,6 @@ NAME     = memos
 TITLE	 = Memos
 APP_ID   = org.webosports.app.${NAME}
 SIGNER   = org.webosports
-BLDFLAGS = -p
 VERSION  = 1.0.2
 TYPE	 = Application
 CATEGORY = Productivity
