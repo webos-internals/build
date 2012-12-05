@@ -2,7 +2,7 @@ NAME     = memos
 TITLE	 = OWO Memos
 APP_ID   = org.webosports.app.${NAME}
 SIGNER   = org.webosports
-VERSION  = 1.0.4
+VERSION  = 1.0.5
 TYPE	 = Application
 CATEGORY = Productivity
 HOMEPAGE = http://www.webos-ports.org/wiki/Application:Ports
@@ -29,15 +29,7 @@ include ../../support/download.mk
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
 
-build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	rm -rf build
-	mkdir -p build/src
-	mkdir -p build/src-predeploy
-	tar -C build/src-predeploy -xf ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	cd build/src-predeploy && node enyo/tools/deploy.js
-	cp -r build/src-predeploy/deploy/org.webosports.app.${NAME}/. build/src
-	rm -rf build/src/bin build/src/*.script
-	touch $@
+include ../../support/bootplate-deploy.mk
 
 .PHONY: build
 build: build/.built-${VERSION}
