@@ -1,15 +1,17 @@
 NAME     = memos
-TITLE	 = Memos
+TITLE	 = OWO Memos
 APP_ID   = org.webosports.app.${NAME}
 SIGNER   = org.webosports
-VERSION  = 1.0.2
+VERSION  = 1.0.4
 TYPE	 = Application
 CATEGORY = Productivity
 HOMEPAGE = http://www.webos-ports.org/wiki/Application:Ports
 ICON	 = http://www.webos-internals.org/images/8/85/Memos.png
 MINWEBOSVERSION = 2.0.0
-DESCRIPTION = An Full re-write of the Memos app for OpenWebOS and webOS 2.x.x up.
+DESCRIPTION = A complete rewrite of the webOS Memos app in Enyo 2, for OpenWebOS and webOS 2.x or greater.\
 CHANGELOG = \
+1.0.4: Add ports-lib header, layout and library updates<br>\
+1.0.3: Backend library updates<br>\
 1.0.2: More fun with submodules<br>\
 1.0.1: Fix errors with submodules<br>\
 1.0.0: First public release.
