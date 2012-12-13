@@ -3,7 +3,7 @@ TITLE    = Navit - Car navigation system
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION	 = 0.5.0.5243-2
+VERSION	 = 0.5.0.5287-1
 TYPE     = Application
 CATEGORY = Utilities
 #DESCRIPTION = <p><strong>This is a beta release. It is not thoroughly tested and may malfunction.</strong></p>
@@ -22,6 +22,7 @@ DESCRIPTION = <p>This package does not include map-data. Please visit \
        	other navigation systems, Navit maps are dynamically generated in real \
        	time from vector data.</p>
 CHANGELOG = \
+	    0.5.0.5287-1: Update to svn r5287. Various stability fixes. <br/> \
 	    0.5.0.5243-2: Fix missing buttons on TP, Pre(+) &amp; Pre2. <br/> \
 	    0.5.0.5243-1: Update to svn r5243. Adjust some layouts to remove clutter. Sync vehicle profiles with original Navit sources. <br/> \
 	    0.5.0.5149-1: Update to svn r5149. Should improve stability. <br/> \
