@@ -32,9 +32,9 @@ include ../../support/download.mk
 
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
-	${MAKE} SRC_FILE=https://raw.github.com/phonegap/phonegap/d2b10d925c858c270a4dbfab6d23f6311fe8d77f/lib/webos/lib/cordova.webos.js \
-LOCAL_FILE=cordova.js download
 build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
+	${MAKE}	SRC_FILE=https://raw.github.com/phonegap/phonegap/d2b10d925c858c270a4dbfab6d23f6311fe8d77f/lib/webos/lib/cordova.webos.js \
+	LOCAL_FILE=cordova-${NAME}-${VERSION}.js download
 	rm -rf build
 	mkdir -p build/src
 	mkdir -p build/src-predeploy
@@ -49,7 +49,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	cp -rf build/src-predeploy/dbus build/src/
 	cp -rf build/src-predeploy/src build/src/
 	cp build/src-predeploy/appinfo.json build/src/
-	cp ${DL_DIR}/cordova.js build/src/
+	cp ${DL_DIR}/cordova-${NAME}-${VERSION}.js build/src/cordova.js
 	sed -i.orig \
 		-e 's/"title": ".*"/"title": "${TITLE}"/g' \
 		-e 's/"id": ".*"/"id": "${APP_ID}"/g' \
