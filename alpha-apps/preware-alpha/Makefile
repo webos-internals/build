@@ -3,27 +3,21 @@ TITLE	 = Preware Alpha
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 2.2
+VERSION  = 2.0.1
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
 ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 DESCRIPTION = <b>This is the experimental alpha testing version of Preware.<br>You probably do not want to install this version.</b><br>The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, services and plugins.  Preware is also able to access official Palm App Catalog feeds.<br><b>Requires webOS 1.3.5 or later.</b>
-CHANGELOG = 2.0: Preware Enyo2 Re-Write.
+CHANGELOG = \
+2.0.1: First Bug Fixes and packaging fixes.<br>\
+2.0: Preware Enyo2 Re-Write.
 SCREENSHOTS = [\
-\"http://www.webos-internals.org/images/3/36/Preware_ss1.png\",\
-\"http://www.webos-internals.org/images/9/97/Preware_ss2.png\",\
-\"http://www.webos-internals.org/images/6/6f/Preware_ss2a.png\",\
-\"http://www.webos-internals.org/images/e/e6/Preware_ss2b.png\",\
-\"http://www.webos-internals.org/images/8/8a/Preware_ss3.png\",\
-\"http://www.webos-internals.org/images/a/a1/Preware_ss4.png\",\
-\"http://www.webos-internals.org/images/2/28/Preware_ss5.png\",\
-\"http://www.webos-internals.org/images/e/e1/Preware_ss6.png\",\
-\"http://www.webos-internals.org/images/5/55/Preware_ss7.png\",\
-\"http://www.webos-internals.org/images/9/94/Preware_ss8.png\",\
-\"http://www.webos-internals.org/images/e/ea/Preware_ss9.png\",\
-\"http://www.webos-internals.org/images/b/bc/Preware_ss10.png\",\
-\"http://www.webos-internals.org/images/7/75/Preware_ss11.png\" ]
+\"http://www.webos-internals.org/images/a/aa/Preware_Alpha_ss4.png\",\
+\"http://www.webos-internals.org/images/d/da/Preware_Alpha_ss3.png\",\
+\"http://www.webos-internals.org/images/c/c3/Preware_Alpha_ss2.png\",\
+\"http://www.webos-internals.org/images/c/c3/Preware_Alpha_ss1.png\",\
+\"http://www.webos-internals.org/images/c/c3/Preware_Alpha_ss5.png\" ]
 LICENSE  = GPL v2 Open Source
 
 SRC_GIT = git://github.com/webOS-ports/preware.git
@@ -38,6 +32,8 @@ include ../../support/download.mk
 
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
+	${MAKE} SRC_FILE=https://raw.github.com/phonegap/phonegap/d2b10d925c858c270a4dbfab6d23f6311fe8d77f/lib/webos/lib/cordova.webos.js \
+LOCAL_FILE=cordova.js download
 build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	rm -rf build
 	mkdir -p build/src
@@ -53,7 +49,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	cp -rf build/src-predeploy/dbus build/src/
 	cp -rf build/src-predeploy/src build/src/
 	cp build/src-predeploy/appinfo.json build/src/
-	wget -O build/src/cordova.js https://raw.github.com/phonegap/phonegap/master/lib/webos/lib/cordova.webos.js
+	cp ${DL_DIR}/cordova.js build/src/
 	sed -i.orig \
 		-e 's/"title": ".*"/"title": "${TITLE}"/g' \
 		-e 's/"id": ".*"/"id": "${APP_ID}"/g' \
