@@ -3,15 +3,14 @@ TITLE	 = Preware Alpha
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 2.0.1
+VERSION  = 2.0.0
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
 ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 DESCRIPTION = <b>This is the experimental alpha testing version of Preware.<br>You probably do not want to install this version.</b><br>The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, services and plugins.  Preware is also able to access official Palm App Catalog feeds.<br><b>Requires webOS 1.3.5 or later.</b>
 CHANGELOG = \
-2.0.1: First Bug Fixes and packaging fixes.<br>\
-2.0: Preware Enyo2 Re-Write.
+2.0.0: Preware Enyo2 re-write.
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/a/aa/Preware_Alpha_ss4.png\",\
 \"http://www.webos-internals.org/images/d/da/Preware_Alpha_ss3.png\",\
@@ -24,6 +23,7 @@ SRC_GIT = git://github.com/webOS-ports/preware.git
 
 IPKGSERVICE = org.webosinternals.ipkgservice
 
+CORDOVA_COMMIT = d2b10d925c858c270a4dbfab6d23f6311fe8d77f
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
 include ../../support/package.mk
@@ -33,7 +33,7 @@ include ../../support/download.mk
 .PHONY: unpack
 unpack: build/.unpacked-${VERSION}
 build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
-	${MAKE}	SRC_FILE=https://raw.github.com/phonegap/phonegap/d2b10d925c858c270a4dbfab6d23f6311fe8d77f/lib/webos/lib/cordova.webos.js \
+	${MAKE}	SRC_FILE=https://raw.github.com/phonegap/phonegap/${CORDOVA_COMMIT}/lib/webos/lib/cordova.webos.js \
 	LOCAL_FILE=cordova-${NAME}-${VERSION}.js download
 	rm -rf build
 	mkdir -p build/src
