@@ -3,13 +3,14 @@ TITLE	 = Preware Alpha
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 2.0.0
+VERSION  = 2.0.1
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Preware
 ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 DESCRIPTION = <b>This is the experimental alpha testing version of Preware.<br>You probably do not want to install this version.</b><br>The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, services and plugins.  Preware is also able to access official Palm App Catalog feeds.<br><b>Requires webOS 1.3.5 or later.</b>
 CHANGELOG = \
+2.0.1: Fix issue with ipkgservice being overwritten with an OpenEmbedded based opkg based service in some cases. \
 2.0.0: Preware Enyo2 re-write.
 SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/a/aa/Preware_Alpha_ss4.png\",\
