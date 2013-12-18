@@ -18,9 +18,9 @@
 #
 
 NAME     = precentral
-HOMEPAGE = http://www.precentral.net/homebrew-apps/
+HOMEPAGE = http://www.webosnation.com/homebrew-apps/
 
-SRC_XML = http://www.precentral.net/precentral-ipkg-feed.xml
+SRC_XML = http://www.webosnation.com/ipkg-feed.xml
 
 .PHONY: package
 package: build/.built
