@@ -11,7 +11,7 @@ ICON	 = http://www.webos-internals.org/images/e/e4/Icon_Preware.png
 MINWEBOSVERSION = 1.4.0
 DESCRIPTION = The revolutionary webOS on-device installer capable of installing advanced homebrew applications, themes, patches, kernels, services and plugins.<br><b>Requires webOS 1.4.0 or later</b>.
 CHANGELOG = \
-1.9.14: Added PivotCE Preware feed and enabled it by default
+1.9.14: Added PivotCE Preware feed and enabled it by default<br>\
 1.9.13: Moved package feeds to ipkg.preware.net. Updated birthday icon to remove the year number.<br>\
 1.9.12: Added support for WebOS Community Edition (WOCE) feeds by the WebOS Ports team from WebOS Internals.<br>\
 1.9.10: Updated German translations (courtesy of DiplPhy).<br>\
