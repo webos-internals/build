@@ -1,6 +1,6 @@
 NAME     = ncurses-dev
 APP_ID	 = org.webosinternals.toolchain.${NAME}
-VERSION  = 5.7-1
+VERSION  = 5.7-3
 LICENSE  = LGPL Open Source
 
 SRC_OPTWARE = ${NAME}_${VERSION}
