@@ -83,7 +83,8 @@ build/%.built-${VERSION}: build/.unpacked-${VERSION}
 		--disable-hal \
 		--disable-bluez \
 		--disable-udev \
-		--disable-polkit ; \
+		--disable-polkit \
+		--disable-gtk2 ; \
 	  ${MAKE} clean all )
 	mkdir -p build/$*/usr/include/pulse
 	install -m 644 build/src/src/pulse/*.h build/$*/usr/include/pulse/
