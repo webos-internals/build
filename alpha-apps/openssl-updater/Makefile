@@ -3,15 +3,15 @@ TITLE	 = OpenSSL Updater
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.9.8-1
+VERSION  = 0.9.8-2
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = https://github.com/tgaillar/OpenSSL-Updater/wiki
 ICON	 = https://github.com/tgaillar/OpenSSL-Updater/raw/master/icon_splash.png
-MINWEBOSVERSION = 1.4.0
-MAXWEBOSVERSION = 1.5.0
+MINWEBOSVERSION = 2.0.0
 DESCRIPTION = Update system-installed OpenSSL, directly patching the binaries (not to be confused with the optware version that gets installed in /opt).<br><br>Simply uninstall this application to return your device to its original, unpatched state.<br><br><b>A system reboot is required after installation/removal, as running programs will see their OpenSSL dynamic libraries change (and most certainly crash). This is automagically performed by the end of the installation process.</b><br>
 CHANGELOG = \
+0.9.8-2: Original OpenSSL release for webOS 2.x/3.x devices (OpenSSL 0.9.8k 25 Mar 2009), only to demonstrate absence of (never published) HP/Palm patch, needed at least so mojomail-eas can validate certificates (Exchange Active Sync)<br>\
 0.9.8-1: Original OpenSSL release for webOS 1.4.x devices (OpenSSL 0.9.8j 07 Jan 2009), for future investigation work in case of missing/unpublished Palm patch
 SCREENSHOTS = [\
 \"https://github.com/tgaillar/OpenSSL-Updater/raw/master/icon_splash.png\",\
