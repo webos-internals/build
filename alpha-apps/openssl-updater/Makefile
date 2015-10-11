@@ -3,7 +3,7 @@ TITLE	 = OpenSSL Updater
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 0.9.8-3
+VERSION  = 0.9.8-4
 TYPE	 = Application
 CATEGORY = System Utilities
 HOMEPAGE = https://github.com/tgaillar/OpenSSL-Updater/wiki
@@ -11,6 +11,7 @@ ICON	 = https://github.com/tgaillar/OpenSSL-Updater/raw/master/icon_splash.png
 MINWEBOSVERSION = 2.0.0
 DESCRIPTION = Update system-installed OpenSSL, directly patching the binaries (not to be confused with the optware version that gets installed in /opt).<br><br>Simply uninstall this application to return your device to its original, unpatched state.<br><br><b>A system reboot is required after installation/removal, as running programs will see their OpenSSL dynamic libraries change (and most certainly crash). This is automagically performed by the end of the installation process.</b><br>
 CHANGELOG = \
+0.9.8-4: Latest OpenSSL release (OpenSSL 0.9.8zg 11 Jun 2015) with sha256WithRSAEncryption digest capability (needed for GMAIL and a few others so Root CA can be digested -- again!), libssl updated with reverse-engineered patch to match (one of never published) HP/Palm patch (at least for mojomail-eas so it can validate certificates)<br>\
 0.9.8-3: Original OpenSSL release for webOS 2.x/3.x devices (OpenSSL 0.9.8k 25 Mar 2009) with libssl reverse-engineered patch to match (one of never published) HP/Palm delivered version, a proof-of-concept to demonstrate mojomail-eas can validate certificates (Exchange Active Sync)<br>\
 0.9.8-2: Original OpenSSL release for webOS 2.x/3.x devices (OpenSSL 0.9.8k 25 Mar 2009), only to demonstrate absence of (never published) HP/Palm patch, needed at least so mojomail-eas can validate certificates (Exchange Active Sync)<br>\
 0.9.8-1: Original OpenSSL release for webOS 1.4.x devices (OpenSSL 0.9.8j 07 Jan 2009), for future investigation work in case of missing/unpublished Palm patch
@@ -67,7 +68,7 @@ include ../../support/cross-compile.mk
 build/%.built-${VERSION}: build/.unpacked-${VERSION}
 	rm -rf build/$*
 	( cd build/src/src ; \
-	  ${MAKE} realclean stage ARCH="$*" STAGING_DIR=${STAGING_DIR_$*} CROSS_COMPILE=${CROSS_COMPILE_$*} ; \
+	  ${MAKE} realclean stage ARCH="$*" STAGING_DIR=${STAGING_DIR_$*} CROSS_COMPILE=${CROSS_COMPILE_$*} CC="${CROSS_COMPILE_$*}gcc" ; \
 	)
 	mkdir -p build/$*/usr/palm/applications/${APP_ID}
 	cp -r build/src/* build/$*/usr/palm/applications/${APP_ID}/
