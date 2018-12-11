@@ -1,8 +1,8 @@
 NAME     = libsndfile
 TITLE    = libsndfile
 APP_ID   = org.webosinternals.toolchain.${NAME}
-SRC_VER  = 1.0.21
-VERSION  = 1.0.21-1
+SRC_VER  = 1.0.17
+VERSION  = 1.0.17-1
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 
 SRC_TGZ = http://sources.nslu2-linux.org/sources/webos-sources/opensource/3.0.0/${NAME}-${SRC_VER}.tar.gz
