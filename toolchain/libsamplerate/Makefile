@@ -5,7 +5,7 @@ SRC_VER  = 0.1.7
 VERSION  = 0.1.7-1
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 
-SRC_TGZ = http://downloads.help.palm.com/opensource/2.1.2/${NAME}-${SRC_VER}.tar.gz
+SRC_TGZ = http://sources.nslu2-linux.org/sources/webos-sources/opensource/2.1.2/${NAME}-${SRC_VER}.tar.gz
 
 .PHONY: package
 package: build/.built-${VERSION}
@@ -33,7 +33,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.gz
 	mkdir -p build/armv6 build/armv7 build/i686
 	tar -C build -z -x -f $<
 	mv build/${NAME}-${SRC_VER} build/src
-	${MAKE} SRC_FILE=http://downloads.help.palm.com/opensource/2.1.2/${NAME}-${SRC_VER}-patches.tgz \
+	${MAKE} SRC_FILE=http://sources.nslu2-linux.org/sources/webos-sources/opensource/2.1.2/${NAME}-${SRC_VER}-patches.tgz \
 		LOCAL_FILE=${NAME}-${VERSION}-patches.tgz download
 	tar -x -f ${DL_DIR}/${NAME}-${VERSION}-patches.tgz -O \
 		rc_sinc.patch | patch -d build/src -p1

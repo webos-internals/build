@@ -15,5 +15,5 @@ ${DOCTOR_DIR}/webosdoctor-1.4.0.jar:
 	if [ -e ${DOCTOR_DIR}/webosdoctorp100ewwsprint-1.4.0.jar ] ; then \
 	  ln -s webosdoctorp100ewwsprint-1.4.0.jar $@ ; \
 	else \
-	  curl -L -o $@ http://downloads.help.palm.com/rom/pre/p14r0d02252010/sr1ntp140rod/webosdoctorp100ewwsprint.jar; \
+	  curl -L --header 'Host: downloads.help.palm.com' -o $@ http://195.22.200.42/webosdoctor/rom/pre/p14r0d02252010/sr1ntp140rod/webosdoctorp100ewwsprint.jar; \
 	fi
