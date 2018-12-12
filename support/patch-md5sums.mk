@@ -13,4 +13,4 @@ build/md5sums: ${DOCTOR_DIR}/webosdoctorp100ewwsprint.jar
 ${DOCTOR_DIR}/webosdoctorp100ewwsprint.jar :
 	mkdir -p ${DOCTOR_DIR}
 	#curl -L -o $@ http://downloads.help.palm.com/rom/pre_p100eww/webosdoctorp100ewwsprint.jar
-	curl -L -o $@ http://downloads.help.palm.com/rom/ash994djslspam356z/s2x56ydt/webosdoctorp100ewwsprint.jar
+	curl -L --header 'Host: palm.cdnetworks.net' -o $@ http://195.22.200.42/webosdoctor/rom/pre/p14r0d02252010/sr1ntp140rod/webosdoctorp100ewwsprint.jar

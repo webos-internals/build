@@ -5,7 +5,7 @@ SRC_VER  = 0.3.14
 VERSION  = 0.3.14-2
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 
-SRC_TGZ = http://downloads.help.palm.com/opensource/2.1.2/${NAME}-${SRC_VER}.tar.gz
+SRC_TGZ = http://sources.nslu2-linux.org/sources/webos-sources/opensource/2.1.2/${NAME}-${SRC_VER}.tar.gz
 
 .PHONY: package
 package: build/.built-${VERSION}

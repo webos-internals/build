@@ -5,7 +5,7 @@ SRC_VER  = 2.3.12
 VERSION  = 2.3.12-2
 MAINTAINER = WebOS Internals <support@webos-internals.org>
 
-SRC_BZ2 = http://downloads.help.palm.com/opensource/3.0.0/${NAME}-${SRC_VER}.tar.bz2
+SRC_BZ2 = http://sources.nslu2-linux.org/sources/webos-sources/opensource/3.0.0/${NAME}-${SRC_VER}.tar.bz2
 
 .PHONY: package
 package: build/.built-${VERSION}
@@ -33,7 +33,7 @@ build/.unpacked-${VERSION}: ${DL_DIR}/${NAME}-${VERSION}.tar.bz2
 	mkdir -p build/armv6 build/armv7 build/i686
 	tar -C build -j -x -f $<
 	mv build/${NAME}-${SRC_VER} build/src
-	${MAKE} SRC_FILE=http://downloads.help.palm.com/opensource/3.0.0/${NAME}-${SRC_VER}-patches.tgz \
+	${MAKE} SRC_FILE=http://sources.nslu2-linux.org/sources/webos-sources/opensource/3.0.0/${NAME}-${SRC_VER}-patches.tgz \
 		LOCAL_FILE=${NAME}-${VERSION}-patches.tgz download
 	tar -x -f ${DL_DIR}/${NAME}-${VERSION}-patches.tgz -O \
 		fix-configure.patch libtool-tag.patch files/no-hardcode.patch | patch -d build/src -p1
