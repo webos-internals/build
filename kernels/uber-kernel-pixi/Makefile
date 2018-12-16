@@ -13,7 +13,7 @@ Current additions include:<ul>\
 <li>Additions to the USB mass storage driver for XBox 360 compatibility.  Note that your USB drive may be reformatted when you plug it into an XBox 360.</li>\
 <li>Support for kernel crypto modules required by TrueCrypt</li>\
 <li>Userspace Input device required by KeyBoss and the Virtual Keyboard for keypad input control.</li>\
-<li>Support for controlling the adjacent key filter in the keypad driver. Use KeyBoss to control this parameter.</li>
+<li>Support for controlling the adjacent key filter in the keypad driver. Use KeyBoss to control this parameter.</li>\
 </ul><br>\
 All additions are disabled by default, and must be enabled by using the Govnah application.<br>\
 For more information, visit <a href=${HOMEPAGE}>${HOMEPAGE}</a>
