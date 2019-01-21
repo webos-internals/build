@@ -13,7 +13,7 @@ CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/a/ae/Icon_WebOSInternals_Base_Patch.png
 LICENSE  = GPL v2 Open Source
 
-SRC_TGZ = http://ftp.debian.org/debian/pool/main/p/patch/patch_${SRC_VER}.orig.tar.gz
+SRC_TGZ = https://cloudfront.debian.net/debian-archive/debian/pool/main/p/patch/patch_${SRC_VER}.orig.tar.gz
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv6.ipk ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
