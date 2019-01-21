@@ -13,7 +13,7 @@ CATEGORY = Utilities
 ICON	 = http://www.webos-internals.org/images/a/ae/Icon_WebOSInternals_Base_Patch.png
 LICENSE  = MIT Open Source
 
-SRC_TGZ = ftp://invisible-island.net/diffstat/diffstat-${SRC_VER}.tgz
+SRC_TGZ = ftp://ftp.invisible-island.net/diffstat/diffstat-${SRC_VER}.tgz
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv6.ipk ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk
