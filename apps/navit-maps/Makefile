@@ -27,7 +27,7 @@ MINWEBOSVERSION = 1.4.5
 
 D = build/$*/usr/palm/applications/${APP_ID}
 
-SRC_GIT = git://git.webos-internals.org/applications/navit.git
+SRC_GIT = git://github.com/wosigh/navit.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk

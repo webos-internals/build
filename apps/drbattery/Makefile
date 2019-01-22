@@ -17,7 +17,7 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/8/8c/Drbattery_calibrate.png\" ]
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git://git.webos-internals.org/applications/drbattery.git
+SRC_GIT = git://github.com/wosigh/drbattery.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk

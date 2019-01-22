@@ -19,7 +19,7 @@ SCREENSHOTS = [\
 \"http://i.imgur.com/Zxs8O.png\",\
 \"http://i.imgur.com/ciCev.png\" ]
 
-SRC_GIT = git://git.webos-internals.org/applications/tiddlywiki.git
+SRC_GIT = git://github.com/wosigh/tiddlywiki.git
 
 
 .PHONY: package

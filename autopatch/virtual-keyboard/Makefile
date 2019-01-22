@@ -33,7 +33,7 @@ include ../common.mk
 DEPENDS := $(DEPENDS), org.webosinternals.vkb-default-themes-config
 
 ifeq ("${DUMMY_VERSION}", "")
-SRC_GIT = git://git.webos-internals.org/patches/virtual-keyboard.git
+SRC_GIT = git://github.com/wosigh/virtual-keyboard.git
 
 include ../../support/download.mk
 

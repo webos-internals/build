@@ -21,7 +21,7 @@ SERVICEFILES = build/src/${APP_ID}.service
 PACKAGEPATH := $(subst .,/,${APP_ID})
 CLASSFILES := $(addsuffix .class,$(addprefix ${PACKAGEPATH}/,${CLASSES}))
 
-SRC_GIT = git://git.webos-internals.org/services/wolservice.git
+SRC_GIT = git://github.com/wosigh/wolservice.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk

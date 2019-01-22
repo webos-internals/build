@@ -16,7 +16,7 @@ POSTINSTALLFLAGS = RestartLuna
 POSTUPDATEFLAGS  = RestartLuna
 POSTREMOVEFLAGS  = RestartLuna
 
-SRC_GIT = git://git.webos-internals.org/applications/terminal.git
+SRC_GIT = git://github.com/wosigh/terminal.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk

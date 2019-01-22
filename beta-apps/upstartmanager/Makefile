@@ -14,7 +14,7 @@ ICON	= http://www.webos-internals.org/images/2/28/Icon_WebOSInternals_Base.png
 LICENSE  = BSD (NCSA/UofI) Open Source
 SCREENSHOTS = [\"http://www.webos-internals.org/images/9/99/Upstartmanager_screencap.png\"]
 
-SRC_GIT = git://git.webos-internals.org/applications/upstartmanager.git
+SRC_GIT = git://github.com/wosigh/upstartmanager.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk

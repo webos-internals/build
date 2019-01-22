@@ -1,4 +1,4 @@
-HEADLESSAPP_SOURCE = git://git.webos-internals.org/applications/headlessapp.git
+HEADLESSAPP_SOURCE = git://github.com/wosigh/headlessapp.git
 
 ${DL_DIR}/headlessapp-${HEADLESSAPP_VERSION}.tar.gz:
 	rm -f $@

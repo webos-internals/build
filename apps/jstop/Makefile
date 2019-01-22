@@ -12,7 +12,7 @@ ICON	= http://www.webos-internals.org/images/c/c5/Icon_WebOSInternals_ProcessMon
 LICENSE  = BSD (NCSA/UofI) Open Source
 SCREENSHOTS = [\"http://www.webos-internals.org/images/3/32/Jstop.png\"]
 
-SRC_GIT = git://git.webos-internals.org/applications/jstop.git
+SRC_GIT = git://github.com/wosigh/jstop.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk

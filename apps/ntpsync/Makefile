@@ -12,7 +12,7 @@ CATEGORY = System Utilities
 ICON	= http://webosnerd.com/images/ntpsync.png
 LICENSE  = GPL v3 Open Source
 
-SRC_GIT = git://git.webos-internals.org/applications/ntpsync.git
+SRC_GIT = git://github.com/wosigh/ntpsync.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk

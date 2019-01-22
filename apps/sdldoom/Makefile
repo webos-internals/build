@@ -18,7 +18,7 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/f/f0/Doom-in-a-card.png\" \
  ]
 
-SRC_GIT = git://git.webos-internals.org/games/sdldoom.git
+SRC_GIT = git://github.com/wosigh/sdldoom.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk

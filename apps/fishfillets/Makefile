@@ -20,7 +20,7 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/c/c9/Fishfillets-credits.png\",\
 \"http://www.webos-internals.org/images/8/86/Fishfillets-Keyboard-320.png\" ]
 
-SRC_GIT = git://git.webos-internals.org/games/fishfillets.git
+SRC_GIT = git://github.com/wosigh/fishfillets.git
 
 
 .PHONY: package

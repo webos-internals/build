@@ -17,7 +17,7 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/6/66/Quake_Ogre.png\"\
  ]
 
-SRC_GIT = git://git.webos-internals.org/games/sdlquake.git
+SRC_GIT = git://github.com/wosigh/sdlquake.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk

@@ -18,7 +18,7 @@ SCREENSHOTS = [\
 \"http://www.thebitguru.com/site_media/uploads/attachments/244_0.6.0_new_target.png\",\
 \"http://www.thebitguru.com/site_media/uploads/attachments/245_0.6.0_about.png\" ]
 
-SRC_GIT = git://git.webos-internals.org/applications/wolui.git
+SRC_GIT = git://github.com/wosigh/wolui.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk

@@ -12,7 +12,7 @@ ICON	= http://www.webos-internals.org/images/3/32/Ompload.png
 LICENSE  = GPL-3
 SCREENSHOTS = [\"http://www.webos-internals.org/images/0/09/Ompload-screenshot.png\"]
 
-SRC_GIT = git://git.webos-internals.org/applications/ompload.git
+SRC_GIT = git://github.com/wosigh/ompload.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk

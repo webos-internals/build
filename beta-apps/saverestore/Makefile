@@ -76,7 +76,7 @@ SCREENSHOTS = [\
  ]
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git://git.webos-internals.org/applications/saverestore.git
+SRC_GIT = git://github.com/wosigh/saverestore.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk

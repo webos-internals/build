@@ -19,7 +19,7 @@ CHANGELOG = \
 0.0.6 Fix postinst to work on webos 2.x <br>\
 0.0.5 Fixed the slow loading; terminus should now start instantly.
 
-SRC_GIT = git://git.webos-internals.org/applications/terminus.git
+SRC_GIT = git://github.com/wosigh/terminus.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk

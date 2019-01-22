@@ -17,7 +17,7 @@ SCREENSHOTS = [\
 
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git://git.webos-internals.org/applications/myflashlight.git
+SRC_GIT = git://github.com/wosigh/myflashlight.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk

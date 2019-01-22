@@ -14,7 +14,7 @@ SCREENSHOTS = [\"http://i.imgur.com/yvj32.png\",\
 \"http://i.imgur.com/4k9no.png\"]
 LICENSE  = BSD Open Source License
 
-SRC_GIT = git://git.webos-internals.org/applications/netstat.git
+SRC_GIT = git://github.com/wosigh/netstat.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
