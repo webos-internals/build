@@ -36,7 +36,7 @@ ${WEBOS_VERSION}-19: Merged basic overclocking from Warthog.<br>\
 ${WEBOS_VERSION}-7: Initial version.
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
-SRC_GIT = git://git.webos-internals.org/kernels/patches.git
+SRC_GIT = git://github.com/wosigh/patches.git
 
 KERNEL_PATCHES = makefiletune/armMakefile.diff identification/mkcompile_h.patch \
 		 overclocking/acpuclock-veer.patch psychobuild/override.patch \

@@ -8,7 +8,7 @@ Features:<br> * Dynamic voltage scaling at full speed<br> * 1GHz<br> * Overtemp 
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br>
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
-SRC_GIT = git://git.webos-internals.org/kernels/patches.git
+SRC_GIT = git://github.com/wosigh/patches.git
 
 ifeq ($(findstring 1.4.5,${WEBOS_VERSION}),1.4.5)
 

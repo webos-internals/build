@@ -24,7 +24,7 @@ ${WEBOS_VERSION}-22: fix voltage setting<br> \
 ${WEBOS_VERSION}-21: Initial release<br>
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
-SRC_GIT = git://git.webos-internals.org/kernels/patches.git
+SRC_GIT = git://github.com/wosigh/patches.git
 
 KERNEL_PATCHES = identification/mkcompile_h.patch \
 		 psychobuild/comptune.patch \

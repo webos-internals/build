@@ -43,7 +43,7 @@ ${WEBOS_VERSION}-4: Fix tick skew. BFQ as default IO scheduler. 300Hz. compcache
 ${WEBOS_VERSION}-1: Initial version.
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
-SRC_GIT = git://git.webos-internals.org/kernels/patches.git
+SRC_GIT = git://github.com/wosigh/patches.git
 KERNEL_PATCHES = makefiletune/armMakefile.diff \
  		 defconfig/defconfig-nodebug-pre3.patch \
  		 compcache/lowmemnotify-total-memory.patch \

@@ -9,7 +9,7 @@ For more information, visit ${HOMEPAGE}<br><br>\
 <br><br>Features:<br> * 1.2GHz<br> * Ondemand Tickle gov<br> * Painfully fast!<br><br>
 DESCRIPTION = <br>${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
-SRC_GIT = git://git.webos-internals.org/kernels/patches.git
+SRC_GIT = git://github.com/wosigh/patches.git
 
 ifeq (${WEBOS_VERSION},1.4.5)
 APPINFO_CHANGELOG = [ \

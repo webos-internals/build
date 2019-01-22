@@ -53,7 +53,7 @@ ${WEBOS_VERSION}-43: Updated with latest postinst and prerm OTA safety measures.
 ${WEBOS_VERSION}-40: First Pixi custom kernel
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
-SRC_GIT = git://git.webos-internals.org/kernels/patches.git
+SRC_GIT = git://github.com/wosigh/patches.git
 KERNEL_PATCHES = warthogbuild/pixi-acpuclock.patch \
 		 overclocking/pixi-freq-table.patch overclocking/pixi-freq-set.patch \
 		 compcache/compcache.patch compcache/lowmemnotify-total-memory.patch \

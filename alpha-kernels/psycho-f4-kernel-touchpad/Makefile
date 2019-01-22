@@ -36,7 +36,7 @@ ${WEBOS_VERSION}-45: fix silly mistake for override module loading.<br>\
 ${WEBOS_VERSION}-44: Initial release. UTF8, ATA over Ethernet added. sysfs to enable or disable turbo_mode (fulltime dualcore).<br>
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
-SRC_GIT = git://git.webos-internals.org/kernels/patches.git
+SRC_GIT = git://github.com/wosigh/patches.git
 KERNEL_PATCHES = identification/mkcompile_h.patch \
 		 psychobuild/F4.patch \
 		 psychobuild/override.patch \

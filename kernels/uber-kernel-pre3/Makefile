@@ -44,7 +44,7 @@ ${WEBOS_VERSION}-5: Added the lowmemnotify threshold calculation modification.<b
 ${WEBOS_VERSION}-4: Initial version.
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
-SRC_GIT = git://git.webos-internals.org/kernels/patches.git
+SRC_GIT = git://github.com/wosigh/patches.git
 
 KERNEL_PATCHES = makefiletune/armMakefile.diff identification/mkcompile_h.patch \
 		 overclocking/acpuclock-pre3.patch psychobuild/override.patch \
