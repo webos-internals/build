@@ -49,7 +49,7 @@ ${WEBOS_VERSION}-43: Updated with latest postinst and prerm OTA safety measures.
 ${WEBOS_VERSION}-40: First Pixi custom kernel
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
-SRC_GIT = git://github.com/wosigh/patches.git
+SRC_GIT = git://github.com/webos-internals/kernel-patches.git
 KERNEL_PATCHES = overclocking/pixi-acpuclock.patch \
 		 overclocking/pixi-freq-table.patch overclocking/pixi-freq-set.patch \
 		 makefiletune/armMakefile.diff \

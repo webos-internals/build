@@ -34,7 +34,7 @@ ${WEBOS_VERSION}-3: Added temperature sensor.<br>\
 ${WEBOS_VERSION}-2: Initial version.
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
-SRC_GIT = git://github.com/wosigh/patches.git
+SRC_GIT = git://github.com/webos-internals/kernel-patches.git
 
 KERNEL_PATCHES = overclocking/600-1000-1100-pre2.patch overclocking/defconfig-standard-pre2.patch \
 		 sensors/omap34xx_temp.patch sensors/defconfig-safe.patch \

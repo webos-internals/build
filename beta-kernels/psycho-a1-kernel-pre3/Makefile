@@ -32,7 +32,7 @@ ${WEBOS_VERSION}-13: add SIO and VR schedulers. add CPU-based alignment handling
 ${WEBOS_VERSION}-12: Initial release<br>
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
-SRC_GIT = git://github.com/wosigh/patches.git
+SRC_GIT = git://github.com/webos-internals/kernel-patches.git
 
 KERNEL_PATCHES = identification/mkcompile_h.patch \
 		 psychobuild/comptune.patch \
