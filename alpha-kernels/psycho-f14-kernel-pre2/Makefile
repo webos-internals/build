@@ -17,7 +17,7 @@ CHANGELOG = \
 ${WEBOS_VERSION}-38: boot lower OPP. make temp scaling more aggressive. move LCD on/off code to proper place. dont override policy->min when scaling.<br>${WEBOS_VERSION}-23: try a new lowmem hack.<br>${WEBOS_VERSION}-22: rebuild for webOS 2.1.0.<br>
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
-SRC_GIT = git://github.com/wosigh/patches.git
+SRC_GIT = git://github.com/webos-internals/kernel-patches.git
 KERNEL_PATCHES = psychobuild/F14.patch \
 		 sensors/omap34xx_temp.patch \
 		 makefiletune/armMakefile.diff \

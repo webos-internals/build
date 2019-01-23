@@ -9,7 +9,7 @@ Features:<br> * screenstate V2<br> * Dynamic voltage scaling<br> * 800MHz\
 For more information, visit ${HOMEPAGE}
 DESCRIPTION = ${APPINFO_DESCRIPTION}<br><br>${KERNEL_DISCLAIMER}<br>
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
-SRC_GIT = git://github.com/wosigh/patches.git
+SRC_GIT = git://github.com/webos-internals/kernel-patches.git
 
 ifeq (${WEBOS_VERSION},1.4.5)
 APPINFO_CHANGELOG = [ \

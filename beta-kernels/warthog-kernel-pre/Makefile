@@ -75,7 +75,7 @@ ${WEBOS_VERSION}-16: Improved screenstate transition detection.<br>\
 ${WEBOS_VERSION}-13: Initial public release
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
-SRC_GIT = git://github.com/wosigh/patches.git
+SRC_GIT = git://github.com/webos-internals/kernel-patches.git
 KERNEL_PATCHES = warthogbuild/opp5-720-opp6-800-opp7-1050.patch overclocking/defconfig-standard.patch \
 		 sensors/sensors_temp_omap34xx.patch sensors/webos-${WEBOS_VERSION}/defconfig-safe.patch \
 		 screenstate/screenstate.patch \

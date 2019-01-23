@@ -88,7 +88,7 @@ ${WEBOS_VERSION}-6: Initial version for webOS 2.1.0 on Pre/Pre+.
 endif
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:UberKernel
-SRC_GIT = git://github.com/wosigh/patches.git
+SRC_GIT = git://github.com/webos-internals/kernel-patches.git
 ifeq (${WEBOS_1.4.5},1)
 KERNEL_PATCHES = overclocking/600-720-800-1000-min-opp5.patch overclocking/defconfig-standard.patch \
 		 sensors/sensors_temp_omap34xx.patch sensors/defconfig-safe.patch \

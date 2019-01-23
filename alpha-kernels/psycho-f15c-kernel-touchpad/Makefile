@@ -69,7 +69,7 @@ ${WEBOS_VERSION}-26: rebuild for 3.0.2. add BFQ. increase freq to a stable 1.728
 ${WEBOS_VERSION}-19: Initial release. autogroup process scheduling. CPU HW based alignment. deadline tweak.<br>
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PsychoKernel
-SRC_GIT = git://github.com/wosigh/patches.git
+SRC_GIT = git://github.com/webos-internals/kernel-patches.git
 KERNEL_PATCHES = identification/mkcompile_h.patch \
 		 psychobuild/F15C.patch \
 		 psychobuild/add_avail_freqs.patch \

@@ -26,7 +26,7 @@ ${WEBOS_VERSION}-8: Forward port old defconfigs.<br>\
 ${WEBOS_VERSION}-3: Initial version.
 
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:WarthogKernel
-SRC_GIT = git://github.com/wosigh/patches.git
+SRC_GIT = git://github.com/webos-internals/kernel-patches.git
 KERNEL_PATCHES = makefiletune/armMakefile.diff \
 		 warthogbuild/veer-overclock.patch \
 		 warthogbuild/veer-300hz.patch \
