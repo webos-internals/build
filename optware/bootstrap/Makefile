@@ -17,7 +17,7 @@ TYPE	 = Optware
 CATEGORY = Infrastructure
 ICON	 = http://www.webos-internals.org/images/8/8d/Icon_WebOSInternals_WebOSInternals.png
 LICENSE  = GPL v2 Open Source
-SOURCE	 = git://git.webos-internals.org/preware/build.git
+SOURCE	 = git://github.com/webos-internals/build.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
