@@ -2,11 +2,12 @@ NAME     = lighttpd
 TITLE	 = Lighty Web Server
 APP_ID   = mobi.optware.${NAME}
 SIGNER   = mobi.optware
-OPT_VER  = 1.4.29-1
-VERSION  = 1.4.29-1
+OPT_VER  = 1.4.32-1
+VERSION  = 1.4.32-1
 HOMEPAGE = http://www.lighttpd.net/
 DESCRIPTION = Lighttpd (pronounced 'Lighty') is a web server which has a small memory footprint, effective management of the cpu load, and an advanced feature set.  By default, it is configured to publish the contents of the USB partition on port 80 with read access only and no authentication.  It can be configured with authentication options (including SSL client certificates), and can provide write access using WebDAV if desired.
 CHANGELOG = \
+1.4.32-1: Fix to make things build again
 1.4.29-1: Robustified upstart scripts to improve start-up reliability.<br>\
 1.4.25-6: Added support for the saverestore alias.<br>\
 1.4.25-5: Create the /media/internal/www directory at install time.<br>\
