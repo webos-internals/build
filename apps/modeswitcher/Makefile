@@ -6,7 +6,7 @@ SRV_ID   = org.webosinternals.${NAME}.srv
 SYS_ID   = org.webosinternals.${NAME}.sys
 SIGNER   = org.webosinternals
 BLDFLAGS = -p
-VERSION  = 2.5.4
+VERSION  = 2.5.5
 TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://forums.precentral.net/showthread.php?p=2935803&posted=1#post2919102
@@ -15,6 +15,7 @@ DESCRIPTION = Mode Switcher.
 MINWEBOSVERSION = 2.0.0
 MAXWEBOSVERSION = 2.9.9
 CHANGELOG = \
+2.5.5: Fixed one bug when used on 2.2.4, more fixes coming.<br>\
 2.5.4: Fixed bug in mode executing and trigger processing.<br>\
 2.5.3: More fixes for modes export/import, should work now.<br>\
 2.5.2: Fixed modes importing to work on all webOS versions.<br>\
