@@ -388,6 +388,12 @@ upload:
 	#-rsync -avr ipkgs/ preware@ipkg3.preware.net:/home/preware/htdocs/ipkg/feeds/
 	-rsync -avr ipkgs/ preware@ipkg2.preware.net:/home/preware/htdocs/ipkg/feeds/
 	-rsync -avr ipkgs/ preware@ipkg1.preware.net:/home/preware/htdocs/ipkg/feeds/
+	
+upload-test:
+	-rsync -avr ipkgs/ preware@ipkg4.preware.net:/home/preware/htdocs/ipkg/feeds/test/
+	#-rsync -avr ipkgs/ preware@ipkg3.preware.net:/home/preware/htdocs/ipkg/feeds/
+	-rsync -avr ipkgs/ preware@ipkg2.preware.net:/home/preware/htdocs/ipkg/feeds/test/
+	-rsync -avr ipkgs/ preware@ipkg1.preware.net:/home/preware/htdocs/ipkg/feeds/test/
 
 .PHONY: alpha alpha-apps alpha-patches alpha-kernels alpha-optware alpha-woce
 alpha: alpha-apps alpha-patches alpha-kernels alpha-optware alpha-woce
