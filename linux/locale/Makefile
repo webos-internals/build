@@ -18,7 +18,7 @@ LOCALES = cs_CZ.utf8 de_DE.utf8 en_CA.utf8 en_GB.utf8 en_US.utf8 es_MX.utf8 \
 
 D = build/$*/usr/palm/applications/${APP_ID}
 
-SRC_GIT = git://github.com/wosigh/locale.git
+SRC_GIT = git://github.com/webos-internals/locale.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk

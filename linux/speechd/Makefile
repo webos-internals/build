@@ -43,7 +43,7 @@ D = build/$*/usr/palm/applications/${APP_ID}
 S = build/$*/usr/palm/services/${SERVICE_ID}
 P = build/$*/usr/palm/packages/${APP_ID}
 
-SRC_GIT = git://github.com/wosigh/speechd.git
+SRC_GIT = git://github.com/webos-internals/speechd.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_armv6.ipk

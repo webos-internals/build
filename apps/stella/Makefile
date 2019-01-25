@@ -19,7 +19,7 @@ SCREENSHOTS = [\"http://www.webos-internals.org/images/2/22/Romlauncher.png\",\
                \"http://www.webos-internals.org/images/2/2c/Mario_Bros._(1983)_(Atari).png\",\
                \"http://www.webos-internals.org/images/6/6a/Quadrun_(1983)_(Atari)_(Prototype).png\"]
 
-SRC_GIT = git://github.com/wosigh/stella.git
+SRC_GIT = git://github.com/webos-internals/stella.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk

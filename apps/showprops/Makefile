@@ -11,7 +11,7 @@ ICON	= http://www.webos-internals.org/images/2/2e/Icon_WebOSInternals_SaveRestor
 LICENSE  = GPL v2 Open Source
 SCREENSHOTS = []
 
-SRC_GIT = git://github.com/wosigh/showprops.git
+SRC_GIT = git://github.com/webos-internals/showprops.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk

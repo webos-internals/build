@@ -18,7 +18,7 @@ SCREENSHOTS = [\
  ]
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git://github.com/wosigh/zcorder.git
+SRC_GIT = git://github.com/webos-internals/zcorder.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_armv6.ipk

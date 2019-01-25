@@ -23,7 +23,7 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/b/b1/Duke3d_game2.png\"\
  ]
 
-SRC_GIT = git://github.com/wosigh/duke3d.git
+SRC_GIT = git://github.com/webos-internals/duke3d.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk

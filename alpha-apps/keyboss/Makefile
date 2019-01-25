@@ -36,7 +36,7 @@ SCREENSHOTS =
 LICENSE     = GPL v2 Open Source
 MAINTAINER  = Eric Gaudet <emoney_33@yahoo.com>
 
-SRC_GIT     = git://github.com/wosigh/keyboss.git
+SRC_GIT     = git://github.com/webos-internals/keyboss.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk

@@ -13,7 +13,7 @@ ICON	= http://www.webos-internals.org/wiki/Image:Icon_WebOSInternals_Base_Plugin
 LICENSE  = GPL
 SCREENSHOTS =
 
-SRC_GIT = git://github.com/wosigh/gsmwav.git
+SRC_GIT = git://github.com/webos-internals/gsmwav.git
 GIT_TAG = v1.2
 
 .PHONY: package

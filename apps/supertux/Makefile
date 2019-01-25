@@ -18,7 +18,7 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/4/42/Supertux2.png\"\
 ]
 
-SRC_GIT = git://github.com/wosigh/supertux.git
+SRC_GIT = git://github.com/webos-internals/supertux.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk

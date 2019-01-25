@@ -21,7 +21,7 @@ CATEGORY = Games
 ICON	= http://www.webos-internals.org/images/7/75/Icon_Tetris.png
 LICENSE  = GPL
 
-SRC_GIT = git://github.com/wosigh/TetriCrisis.git
+SRC_GIT = git://github.com/webos-internals/TetriCrisis.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk

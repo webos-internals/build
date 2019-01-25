@@ -14,7 +14,7 @@ ICON	= http://www.webos-internals.org/images/b/bd/Icon_WebOSInternals_StopLight.
 LICENSE  = GPL v2 Open Source
 SCREENSHOTS = [\"http://www.webos-internals.org/images/e/e4/LunaManager.png\"]
 
-SRC_GIT = git://github.com/wosigh/lunamanager.git
+SRC_GIT = git://github.com/webos-internals/lunamanager.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk
