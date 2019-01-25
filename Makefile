@@ -392,11 +392,18 @@ upload:
 	-rsync -avr ipkgs/ preware@ipkg.preware.net:/home/preware/htdocs/ipkg/feeds/
 	
 upload-test:
-	#-rsync -avr ipkgs/ preware@ipkg4.preware.net:/home/preware/htdocs/ipkg/feeds/test/
-	#-rsync -avr ipkgs/ preware@ipkg3.preware.net:/home/preware/htdocs/ipkg/feeds/
-	#-rsync -avr ipkgs/ preware@ipkg2.preware.net:/home/preware/htdocs/ipkg/feeds/test/
-	#-rsync -avr ipkgs/ preware@ipkg1.preware.net:/home/preware/htdocs/ipkg/feeds/test/
 	-rsync -avr ipkgs/ preware@ipkg.preware.net:/home/preware/htdocs/ipkg/feeds/test/
+	-rsync -avr ipkgs/webos-internals/ preware@ipkg.preware.net:/home/preware/htdocs/ipkg/test/alpha/apps/
+	-rsync -avr ipkgs/webos-patches/ preware@ipkg.preware.net:/home/preware/htdocs/ipkg/test/alpha/patches/
+	-rsync -avr ipkgs/webos-kernels/ preware@ipkg.preware.net:/home/preware/htdocs/ipkg/test/alpha/kernels/
+	-rsync -avr ipkgs/optware/ preware@ipkg.preware.net:/home/preware/htdocs/ipkg/test/alpha/optware/
+	-rsync -avr ipkgs/woce/ preware@ipkg.preware.net:/home/preware/htdocs/ipkg/test/alpha/woce/
+	-rsync -avr ipkgs/webos-internals/ preware@ipkg.preware.net:/home/preware/htdocs/ipkg/test/beta/apps/
+	-rsync -avr ipkgs/webos-patches/ preware@ipkg.preware.net:/home/preware/htdocs/ipkg/test/beta/patches/
+	-rsync -avr ipkgs/webos-kernels/ preware@ipkg.preware.net:/home/preware/htdocs/ipkg/test/beta/kernels/
+	-rsync -avr ipkgs/optware/ preware@ipkg.preware.net:/home/preware/htdocs/ipkg/test/beta/optware/
+	-rsync -avr ipkgs/woce/ preware@ipkg.preware.net:/home/preware/htdocs/ipkg/test/beta/woce/
+
 
 .PHONY: alpha alpha-apps alpha-patches alpha-kernels alpha-optware alpha-woce
 alpha: alpha-apps alpha-patches alpha-kernels alpha-optware alpha-woce
@@ -408,6 +415,7 @@ alpha-apps:
 	#-rsync -avr ipkgs/webos-internals/ preware@ipkg2.preware.net:/home/preware/htdocs/ipkg/alpha/apps/
 	#-rsync -avr ipkgs/webos-internals/ preware@ipkg1.preware.net:/home/preware/htdocs/ipkg/alpha/apps/
 	-rsync -avr ipkgs/webos-internals/ preware@ipkg.preware.net:/home/preware/htdocs/ipkg/alpha/apps/
+	
 
 alpha-patches:
 	${MAKE} PTCHDIR="alpha-patches" FEED="WebOS Patches Alpha" SUFFIX=.alpha webos-patches-index
