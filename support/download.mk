@@ -72,7 +72,7 @@ ${DL_DIR}/${NAME}-feed.xml:
 	rm -f $@ $@.tmp
 	mkdir -p ${DL_DIR}
 	touch $@.tmp
-	curl -f -R -L -o $@.tmp ${SRC_XML}
+	curl -f -R -L -o $@.tmp ${SRC_XML} -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
 	mv $@.tmp $@
 
 endif
@@ -89,7 +89,7 @@ ${DL_DIR}/${NAME}-${VERSION}.tar.gz:
 	rm -f $@ $@.tmp
 	$(call PREWARE_SANITY)
 	mkdir -p ${DL_DIR}
-	curl -f -R -L -o $@.tmp ${SRC_TGZ}
+	curl -f -R -L -o $@.tmp ${SRC_TGZ} -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
 	mv $@.tmp $@
 
 endif
@@ -106,7 +106,7 @@ ${DL_DIR}/${NAME}-${VERSION}.tar.bz2:
 	rm -f $@ $@.tmp
 	$(call PREWARE_SANITY)
 	mkdir -p ${DL_DIR}
-	curl -f -R -L -o $@.tmp ${SRC_BZ2}
+	curl -f -R -L -o $@.tmp ${SRC_BZ2} -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
 	mv $@.tmp $@
 
 endif
@@ -123,7 +123,7 @@ ${DL_DIR}/${NAME}-${VERSION}.zip:
 	rm -f $@ $@.tmp
 	$(call PREWARE_SANITY)
 	mkdir -p ${DL_DIR}
-	curl -f -R -L -o $@.tmp ${SRC_ZIP}
+	curl -f -R -L -o $@.tmp ${SRC_ZIP} -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
 	mv $@.tmp $@
 
 endif
@@ -140,7 +140,7 @@ ${DL_DIR}/${APP_ID}_${VERSION}_all.ipk:
 	rm -f $@ $@.tmp
 	$(call PREWARE_SANITY)
 	mkdir -p ${DL_DIR}
-	curl -f -R -L -o $@.tmp ${SRC_IPKG}
+	curl -f -R -L -o $@.tmp ${SRC_IPKG} -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
 	mv $@.tmp $@
 
 endif
