@@ -23,7 +23,7 @@ MINWEBOSVERSION = 1.4.5
 DEVICECOMPATIBILITY = [\"Pre\"]
 SCREENSHOTS = []
 
-SRC_GIT = git://git.webos-internals.org/games/snes9x.git
+SRC_GIT = git://github.com/webos-internals/snes9x.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk

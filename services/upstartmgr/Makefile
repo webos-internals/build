@@ -13,7 +13,7 @@ CATEGORY = Luna
 ICON	= http://www.webos-internals.org/images/b/bc/Icon_WebOSInternals_UpstartService.png
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git://github.com/wosigh/upstartmgr.git
+SRC_GIT = git://github.com/webos-internals/upstartmgr.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv6.ipk ipkgs/${APP_ID}_${VERSION}_armv7.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk

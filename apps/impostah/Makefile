@@ -98,7 +98,7 @@ SCREENSHOTS = [\
 \"http://www.webos-internals.org/images/5/5e/Impostah_ss7.png\" ]
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git://github.com/wosigh/impostah.git
+SRC_GIT = git://github.com/webos-internals/impostah.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk ipkgs/${APP_ID}_${VERSION}_i686.ipk

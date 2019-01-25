@@ -16,7 +16,7 @@ CHANGELOG = \
 1.5.0: First public release.
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git://github.com/wosigh/hello.git
+SRC_GIT = git://github.com/webos-internals/hello.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_arm.ipk

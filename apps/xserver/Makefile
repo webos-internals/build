@@ -55,7 +55,7 @@ APPINFO_CHANGELOG = [ \
 ]
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git://github.com/wosigh/xserver.git
+SRC_GIT = git://github.com/webos-internals/xserver.git
 
 include ../../support/download.mk
 

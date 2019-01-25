@@ -33,7 +33,7 @@ MINWEBOSVERSION = 1.4.5
 DEVICECOMPATIBILITY = [\"Pre\", \"Pre2\"]
 SCREENSHOTS = []
 
-SRC_GIT = git://github.com/wosigh/visualboyadvance.git
+SRC_GIT = git://github.com/webos-internals/visualboyadvance.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk
