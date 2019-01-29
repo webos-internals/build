@@ -5,13 +5,13 @@ BLDFLAGS = -p
 VERSION  = 1.0.0
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:DevToolbox
 MAINTAINER = PuffTheMagic
-TYPE	= Application
+TYPE     = Application
 DESCRIPTION = Dev Toolbox
 CATEGORY = System Utilities
-ICON	= http://www.webos-internals.org/images/b/bd/Icon_WebOSInternals_WeboOSInternals.png
+ICON     = http://www.webos-internals.org/images/b/bd/Icon_WebOSInternals_WeboOSInternals.png
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git://git.webos-internals.org/applications/devtoolbox.git
+SRC_GIT = git://github.com/webos-internals/devtoolbox.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk

@@ -1,18 +1,18 @@
 NAME     = pulseaudiorestarter
-TITLE	 = PulseAudio Restarter
+TITLE    = PulseAudio Restarter
 APP_ID   = com.foxtailsoftware.${NAME}
 BLDFLAGS = -p
 VERSION  = 1.0.0
-TYPE	 = Application
+TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:PulseAudioRestarter
-ICON	 = http://www.webos-internals.org/images/9/9e/Icon_PulseAudioRestarter.png
+ICON     = http://www.webos-internals.org/images/9/9e/Icon_PulseAudioRestarter.png
 DESCRIPTION = Restarts the pulseaudio daemon.
 CHANGELOG = \
 1.0.0: First public release.
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git://git.webos-internals.org/applications/pulseaudiorestarter.git
+SRC_GIT = git://github.com/wosigh/pulseaudiorestarter.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk

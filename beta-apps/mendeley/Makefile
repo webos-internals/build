@@ -14,7 +14,7 @@ SCREENSHOTS = [\"http://www.webos-internals.org/images/e/e3/Mendeley1.png\"]
 LICENSE  = GPL v2 Open Source
 MINWEBOSVERSION = 3.0.0
 
-SRC_GIT = git://git.webos-internals.org/enyo/mendeley.git
+SRC_GIT = git://github.com/wosigh/mendeley.git
 
 D = build/$*/usr/palm/applications/${APP_ID}
 
