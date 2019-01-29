@@ -7,10 +7,10 @@ BLDFLAGS = -p
 BASEVER  = 0.0.27
 GIT_TAG  = v${BASEVER}
 VERSION  = ${BASEVER}
-TYPE	 = Application
+TYPE     = Application
 CATEGORY = Development
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:Tide
-ICON	 = http://www.webos-internals.org/images/0/02/Icon-64.png
+ICON     = http://www.webos-internals.org/images/0/02/Icon-64.png
 DESCRIPTION = A code editor (and soon more) for your TouchPad.
 MINWEBOSVERSION = 3.0.0
 
@@ -61,7 +61,7 @@ SCREENSHOTS = [\
 
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git://git.webos-internals.org/enyo/editah.git
+SRC_GIT = git://github.com/wosigh/tide.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_all.ipk

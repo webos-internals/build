@@ -22,7 +22,7 @@ CATEGORY = Games
 ICON	= http://www.webos-internals.org/images/6/6e/Icon_SpaceInvaders.png
 LICENSE  = GPL
 
-SRC_GIT = git://git.webos-internals.org/games/Classic_Invaders.git
+SRC_GIT = git://github.com/webos-internals/Classic_Invaders.git
 
 .PHONY: package
 package: ipkgs/${APP_ID}_${VERSION}_armv7.ipk

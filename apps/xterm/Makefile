@@ -1,12 +1,12 @@
-NAME = xterm
-TITLE = XTerm
+NAME     = xterm
+TITLE    = XTerm
 APP_ID   = org.webosinternals.${NAME}
 SIGNER   = org.webosinternals
 VERSION  = 0.9.7
-TYPE	 = Application
+TYPE     = Application
 CATEGORY = System Utilities
 HOMEPAGE = http://www.webos-internals.org/wiki/Application:X
-ICON	 = http://www.webos-internals.org/images/a/a5/X.png
+ICON     = http://www.webos-internals.org/images/a/a5/X.png
 MAINTAINER = WebOS Internals
 DESCRIPTION = ${APPINFO_DESCRIPTION}
 APPINFO_DESCRIPTION = XTerm is used to provide a Linux command-line interface on webOS.<br>\
@@ -37,7 +37,7 @@ APPINFO_CHANGELOG = [ \
 ]
 LICENSE  = GPL v2 Open Source
 
-SRC_GIT = git://git.webos-internals.org/x11/xterm.git
+SRC_GIT = git://github.com/webos-internals/xterm.git
 
 include ../../support/download.mk
 
