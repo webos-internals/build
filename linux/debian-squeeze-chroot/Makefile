@@ -62,7 +62,7 @@ build/${NAME}.tgz:
 	if [ -f ${NAME}.tgz ] ; then \
 	  ln -s ../${NAME}.tgz build/${NAME}.tgz ; \
 	else \
-	  ( cd build ; ../rootstock --no-root --fqdn ${NAME} --dist squeeze --mirror http://ftp.us.debian.org/debian/ --components main contrib) ; \
+	  ( cd build ; ../rootstock --no-root --fqdn ${NAME} --dist squeeze --mirror http://archive.debian.org/debian/ --components main contrib) ; \
 	  mv build/armel-rootfs*.tgz build/${NAME}.tgz ; \
 	fi
 
