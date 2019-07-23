@@ -117,7 +117,7 @@ class PackageHandler(ContentHandler):
 
                 if (not os.path.exists(sys.argv[2] + "/" + self.filename)) :
                     sys.stderr.write("Fetching: " + self.filename + "\n")
-                    os.system("curl -R -L -f -o " + sys.argv[2] + "/" + self.filename + " " + self.url)
+                    os.system("curl -R -L -f -o " + sys.argv[2] + "/" + '"' + self.filename + '"' + " " + '"' + self.url + '"')
 
                 files[self.filename] = 1
 
